@@ -1,0 +1,86 @@
+@use '../../mixins/foundation/breakpoints' as bp;
+
+// -------------------------------------------------------------------------- //
+//                                MIXIN: FLEX                                 //
+// -------------------------------------------------------------------------- //
+//
+// Creates a flexible container with configurable flexbox properties.
+// Ideal for static (non-responsive) layouts.
+//
+// @param {String} $direction - Flex direction (default: row)
+// @param {String} $justify - Justify content (default: flex-start)
+// @param {String} $align - Align items (default: stretch)
+// @param {String} $wrap - Flex wrap (default: nowrap)
+// @param {Length|Null} $gap - Gap between items (optional)
+//
+// @example
+//   .container {
+//     @include flex(row, space-between, center, wrap, $spacing-m);
+//   }
+// -------------------------------------------------------------------------- //
+
+@mixin flex(
+  $direction: row,
+  $justify: flex-start,
+  $align: stretch,
+  $wrap: nowrap,
+  $gap: null
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+ 
+
+// -------------------------------------------------------------------------- //
+//                            MIXIN: FLEX RESPONSIVE                          //
+// -------------------------------------------------------------------------- //
+
+// @param {String} $direction - Flex direction (default: row)
+// @param {String} $justify - Justify content (default: flex-start)
+// @param {String} $align - Align items (default: stretch)
+// @param {String} $wrap - Flex wrap (default: nowrap)
+// @param {Length|Null} $gap - Gap between items (optional)
+// @param {String} $breakpoint - Breakpoint key from your scale (default: 'm')
+// @param {String} $mobile-direction - Direction below breakpoint (default: column)
+// @param {String} $mobile-align - Align below breakpoint (default: center)
+// @param {String} $mobile-text-align - Text alignment below breakpoint (default: center)
+//
+// @example
+//   .header {
+//     @include flex-responsive(row, space-between, center, nowrap, $spacing-m);
+//   }
+// -------------------------------------------------------------------------- //
+@mixin flex-responsive(
+  $direction: row,
+  $justify: flex-start,
+  $align: stretch,
+  $wrap: nowrap,
+  $gap: null,
+  $breakpoint: 'm',
+  $mobile-direction: column,
+  $mobile-align: center,
+  $mobile-text-align: center
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+
+  @if $gap != null {
+    gap: $gap;
+  }
+
+  @include bp.bp-down($breakpoint) {
+    flex-direction: $mobile-direction;
+    align-items: $mobile-align;
+    text-align: $mobile-text-align;
+  }
+}

@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use '../../variables/foundation/core' as core;
+
+// ============================================================================ //
+//                      FUNCTIONS: FOUNDATION - CORE                            //
+// ============================================================================ //
+
+/// Get a core unit value
+/// @param {String} $unit - Unit name ('space', 'font', 'line-height', 'border', 'duration')
+/// @return {Number} Unit value
+/// @example core-unit('space') => 8px
+/// @example core-unit('font') => 16px
+@function core-unit($unit) {
+  @if map.has-key(core.$core-units, $unit) {
+    @return map.get(core.$core-units, $unit);
+  }
+  @error "Core unit '#{$unit}' not found. Available: #{map.keys(core.$core-units)}";
+}
+
+/// Get all available core unit names
+/// @return {List} List of core unit names
+@function core-unit-names() {
+  @return map.keys(core.$core-units);
+}
+
+/// Check if a core unit exists
+/// @param {String} $unit - Unit name to check
+/// @return {Boolean} True if unit exists
+@function core-unit-exists($unit) {
+  @return map.has-key(core.$core-units, $unit);
+}
+
+/// Get base spatial unit directly
+/// @return {Number} Base unit value (8px default)
+@function base-unit() {
+  @return core.$base-unit;
+}
+
+/// Get base font size directly
+/// @return {Number} Base font size (16px default)
+@function base-font-size() {
+  @return core.$base-font-size;
+}
+
+/// Get base duration directly
+/// @return {Number} Base duration (100ms default)
+@function base-duration() {
+  @return core.$base-duration;
+}
+
+/// Get typography scale ratio
+/// @return {Number} Typography scale ratio (1.2 default)
+@function type-ratio() {
+  @return core.$typography-scale-ratio;
+}

@@ -1,0 +1,73 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+@use 'core' as *;
+@use 'spacing-scale' as spacing;
+@use 'sizing-scale' as sizing;
+
+// ========================================================================== //
+//                        FOUNDATION: IMAGE SCALE                             //
+// ========================================================================== //
+
+// -------------------------------------------
+// IMAGE BASE UNIT                                
+// -------------------------------------------
+
+$image-base-unit: 1px !default;
+
+// -------------------------------------------
+// IMAGE WIDTH SCALE                               
+// -------------------------------------------
+
+$image-width-scale: (
+  'xs': units.rem(152),      // 9.5rem    (152px)
+  's': units.rem(203),       // 12.6875rem (203px)
+  'sm': units.rem(250),      // 15.625rem  (250px)
+  'm': units.rem(338),       // 21.125rem  (338px)
+  'l': units.rem(474),       // 29.625rem  (474px)
+  'xl': units.rem(600),      // 37.5rem    (600px)
+  '2xl': units.rem(778),     // 48.625rem  (778px)
+  'display': units.rem(778), // 48.625rem  (778px) 
+) !default;
+
+// -------------------------------------------
+// IMAGE HEIGHT SCALE                               
+// -------------------------------------------
+
+$image-height-scale: (
+  'xs': units.rem(90),       // 5.625rem   (90px)
+  's': units.rem(120),       // 7.5rem     (120px)
+  'm': units.rem(200),       // 12.5rem    (200px)
+  'l': units.rem(280),       // 17.5rem    (280px)
+  'xl': units.rem(460),      // 28.75rem   (460px)
+  'display': units.rem(460), // 28.75rem   (460px) 
+) !default;
+
+// -------------------------------------------
+// AVATAR SIZE SCALE                               
+// -------------------------------------------
+
+$avatar-size-scale: (
+  'xs': map.get(spacing.$spacing-scale, 8),   // 2rem    (32px)
+  's': map.get(spacing.$spacing-scale, 10),   // 2.5rem  (40px)
+  'm': map.get(spacing.$spacing-scale, 14),   // 3.5rem  (56px)
+  'l': map.get(spacing.$spacing-scale, 20),   // 5rem    (80px)
+  'xl': map.get(spacing.$spacing-scale, 30),  // 7.5rem  (120px)
+  '2xl': map.get(spacing.$spacing-scale, 40), // 10rem   (160px)
+) !default;
+
+// -------------------------------------------
+// THUMBNAIL SIZE SCALE                               
+// -------------------------------------------
+
+$thumbnail-size-scale: (
+  'xs': map.get(sizing.$sizing-scale, 64),   // 4rem   (64px)
+  's': map.get(sizing.$sizing-scale, 80),    // 5rem   (80px)
+  'm': map.get(sizing.$sizing-scale, 120),   // 7.5rem (120px)
+  'l': map.get(sizing.$sizing-scale, 160),   // 10rem  (160px)
+  'xl': map.get(sizing.$sizing-scale, 200),  // 12.5rem (200px)
+) !default;
+
+// -------------------------------------------
+// DEFAULT FONTAWESOME ICON SIZE                               
+// -------------------------------------------
+$fa-base: 1.5em;

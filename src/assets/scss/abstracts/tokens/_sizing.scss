@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../variables/foundation/sizing-scale' as scale;
+@use '../variables/semantics/sizing' as semantics;
+
+@mixin generate-sizing-tokens() {
+  
+  /* ========================================================================== */
+  /*                               TOKENS: SIZING                               */
+  /* ========================================================================== */
+
+  /* -------------------------------------------------------------------------- */
+  /*                           SIZING: CORE SCALE                               */
+  /* -------------------------------------------------------------------------- */
+  /* Pixel-perfect sizing system (1px base) for fixed dimensions */
+
+  @each $size, $value in scale.$sizing-scale {
+    --size-#{$size}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          SIZING: COMPONENTS                                */
+  /* -------------------------------------------------------------------------- */
+
+  /* Checkbox Sizes */
+  @each $key, $value in semantics.$checkbox-sizes {
+    --size-checkbox-#{$key}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                              SIZING: LEGACY                                */
+  /* -------------------------------------------------------------------------- */
+  /* Maintained for backward compatibility with existing components */
+
+  --sizing-base: #{scale.$sizing-base-unit};
+}

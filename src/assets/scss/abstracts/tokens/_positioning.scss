@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../variables/semantics/positioning' as pos;
+
+@mixin generate-positioning-tokens() {
+  /* ========================================================================== */
+  /*                            TOKENS: POSITIONING                             */
+  /* ========================================================================== */
+
+  /* -------------------------------------------------------------------------- */
+  /*                            POSITIONING: NUMERIC                            */
+  /* -------------------------------------------------------------------------- */
+
+  @each $key, $value in pos.$position-scale {
+    --position-#{$key}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          POSITIONING: PERCENTAGE                           */
+  /* -------------------------------------------------------------------------- */
+
+  @each $key, $value in pos.$position-percentages {
+    --position-#{$key}-percent: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                             POSITIONING: INSET                             */
+  /* -------------------------------------------------------------------------- */
+
+  --inset-none: #{pos.$inset-none};
+  --inset-xs: #{pos.$inset-xs};
+  --inset-sm: #{pos.$inset-sm};
+  --inset-md: #{pos.$inset-md};
+  --inset-lg: #{pos.$inset-lg};
+  --inset-xl: #{pos.$inset-xl};
+}

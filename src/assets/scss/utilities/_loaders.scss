@@ -1,0 +1,649 @@
+@use '../abstracts' as *;
+
+/* ========================================================================== */
+/*                            UTILITIES: LOADERS                              */
+/* ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/*                        UTILITIES: LOADERS - PLANE                          */
+/* -------------------------------------------------------------------------- */
+
+.loader-plane {
+  // Layout
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  
+  // Default size using spacing tokens (40px)
+  width: var(--spacing-10);
+  height: var(--spacing-10);
+
+  // Target the SVG path directly with OutSystems structure
+  .osui-inline-svg {
+    svg {
+      width: 100%;
+      height: 100%;
+      
+      path {
+        // Stroke configuration
+        fill: none;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        
+        // Animation setup
+        stroke-dasharray: 425.59;
+        stroke-dashoffset: 425.59;
+        
+        // Apply animation using motion tokens
+        animation: dash var(--motion-slow-reveal-duration) linear infinite;
+        
+        // Default stroke color (neutral)
+        stroke: var(--color-neutral-9);
+      }
+    }
+  }
+
+  // Size variants
+  &--small {
+    width: var(--spacing-6);    // 24px
+    height: var(--spacing-6);
+    
+    .osui-inline-svg svg path {
+      stroke-width: 7;
+    }
+  }
+
+  &--medium {
+    width: var(--spacing-10);   // 40px (default)
+    height: var(--spacing-10);
+    
+    .osui-inline-svg svg path {
+      stroke-width: 7;
+    }
+  }
+
+  &--large {
+    width: var(--spacing-20);   // 80px
+    height: var(--spacing-20);
+    
+    .osui-inline-svg svg path {
+      stroke-width: 4;  // Thinner stroke for large size
+    }
+  }
+
+  &--xl {
+    width: var(--spacing-24);   // 96px
+    height: var(--spacing-24);
+    
+    .osui-inline-svg svg path {
+      stroke-width: 3;  // Even thinner for XL
+    }
+  }
+
+  // Responsive variants
+  &--responsive-small {
+    @include bp-down(xs) {
+      width: var(--spacing-6);
+      height: var(--spacing-6);
+    }
+  }
+
+  &--responsive-medium {
+    width: var(--spacing-6);      // Small on mobile (24px)
+    height: var(--spacing-6);
+    
+    @include bp-up(m) {
+      width: var(--spacing-10);   // Medium on tablet+ (40px)
+      height: var(--spacing-10);
+    }
+  }
+
+  &--responsive-large {
+    width: var(--spacing-10);     // Medium on mobile (40px)
+    height: var(--spacing-10);
+    
+    @include bp-up(l) {
+      width: var(--spacing-20);   // Large on desktop+ (80px)
+      height: var(--spacing-20);
+      
+      .osui-inline-svg svg path {
+        stroke-width: 4;
+      }
+    }
+  }
+
+  // Color variants
+  &--primary {
+    .osui-inline-svg svg path {
+      stroke: var(--color-brand-primary);
+    }
+  }
+
+  &--primary-electric {
+    .osui-inline-svg svg path {
+      stroke: var(--color-brand-primary-electric);
+    }
+  }
+
+  &--secondary {
+    .osui-inline-svg svg path {
+      stroke: var(--color-brand-secondary);
+    }
+  }
+
+  &--tertiary {
+    .osui-inline-svg svg path {
+      stroke: var(--color-brand-tertiary);
+    }
+  }
+
+  &--white {
+    .osui-inline-svg svg path {
+      stroke: var(--color-neutral-0);
+    }
+  }
+
+  &--black {
+    .osui-inline-svg svg path {
+      stroke: var(--color-neutral-10);
+    }
+  }
+
+  &--success {
+    .osui-inline-svg svg path {
+      stroke: var(--color-feedback-success);
+    }
+  }
+
+  &--danger {
+    .osui-inline-svg svg path {
+      stroke: var(--color-feedback-danger);
+    }
+  }
+
+  &--warning {
+    .osui-inline-svg svg path {
+      stroke: var(--color-feedback-warning);
+    }
+  }
+
+  &--info {
+    .osui-inline-svg svg path {
+      stroke: var(--color-feedback-info);
+    }
+  }
+
+  &--accent {
+    .osui-inline-svg svg path {
+      stroke: var(--color-accent);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                      UTILITIES: LOADERS - CONTAINERS                       */
+/* -------------------------------------------------------------------------- */
+
+// Loading container with label
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  
+  &__label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-subtle);
+    animation: pulse var(--motion-slow-reveal-duration) 
+               var(--easing-ease-in-out) infinite;
+  }
+  
+  // Size variants
+  &--small {
+    gap: var(--spacing-2);
+    
+    .loader-container__label {
+      font-size: var(--font-size-2xs);
+    }
+  }
+  
+  &--large {
+    gap: var(--spacing-6);
+    
+    .loader-container__label {
+      font-size: var(--font-size-s);
+    }
+  }
+}
+
+// Inline loader (for buttons, etc.)
+.loader-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  
+  .loader-plane,
+  .loader-spinner,
+  .loader-pulse {
+    width: var(--spacing-4);    // 16px for inline use
+    height: var(--spacing-4);
+  }
+  
+  // Size variant
+  &--small {
+    gap: var(--spacing-1);
+    
+    .loader-plane,
+    .loader-spinner,
+    .loader-pulse {
+      width: var(--spacing-3);
+      height: var(--spacing-3);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                       UTILITIES: LOADERS - SPINNER                         */
+/* -------------------------------------------------------------------------- */
+
+.loader-spinner {
+  width: var(--spacing-10);
+  height: var(--spacing-10);
+  border: 3px solid var(--color-neutral-3);
+  border-top-color: var(--color-brand-primary);
+  border-radius: var(--radius-full);
+  animation: rotate var(--motion-slow-reveal-duration) linear infinite;
+  
+  // Size variants
+  &--small {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    border-width: 2px;
+  }
+  
+  &--large {
+    width: var(--spacing-20);
+    height: var(--spacing-20);
+    border-width: 4px;
+  }
+  
+  &--xl {
+    width: var(--spacing-24);
+    height: var(--spacing-24);
+    border-width: 5px;
+  }
+  
+  // Color variants
+  &--primary {
+    border-top-color: var(--color-brand-primary);
+  }
+  
+  &--success {
+    border-top-color: var(--color-feedback-success);
+  }
+  
+  &--danger {
+    border-top-color: var(--color-feedback-danger);
+  }
+  
+  &--warning {
+    border-top-color: var(--color-feedback-warning);
+  }
+  
+  &--info {
+    border-top-color: var(--color-feedback-info);
+  }
+  
+  &--white {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-neutral-0);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                        UTILITIES: LOADERS - DOTS                           */
+/* -------------------------------------------------------------------------- */
+
+.loader-dots {
+  display: flex;
+  gap: var(--spacing-2);
+  
+  &__dot {
+    width: var(--spacing-2);
+    height: var(--spacing-2);
+    background-color: var(--color-brand-primary);
+    border-radius: var(--radius-full);
+    animation: bounce var(--motion-bounce-duration) 
+               var(--motion-bounce-easing) infinite;
+    
+    &:nth-child(2) {
+      animation-delay: var(--delay-short);
+    }
+    
+    &:nth-child(3) {
+      animation-delay: var(--delay-base);
+    }
+  }
+  
+  // Size variants
+  &--small {
+    gap: var(--spacing-1);
+    
+    .loader-dots__dot {
+      width: var(--spacing-1);
+      height: var(--spacing-1);
+    }
+  }
+  
+  &--large {
+    gap: var(--spacing-3);
+    
+    .loader-dots__dot {
+      width: var(--spacing-3);
+      height: var(--spacing-3);
+    }
+  }
+  
+  &--xl {
+    gap: var(--spacing-4);
+    
+    .loader-dots__dot {
+      width: var(--spacing-4);
+      height: var(--spacing-4);
+    }
+  }
+  
+  // Color variants
+  &--success {
+    .loader-dots__dot {
+      background-color: var(--color-feedback-success);
+    }
+  }
+  
+  &--danger {
+    .loader-dots__dot {
+      background-color: var(--color-feedback-danger);
+    }
+  }
+  
+  &--warning {
+    .loader-dots__dot {
+      background-color: var(--color-feedback-warning);
+    }
+  }
+  
+  &--info {
+    .loader-dots__dot {
+      background-color: var(--color-feedback-info);
+    }
+  }
+  
+  &--white {
+    .loader-dots__dot {
+      background-color: var(--color-neutral-0);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                        UTILITIES: LOADERS - PULSE                          */
+/* -------------------------------------------------------------------------- */
+
+.loader-pulse {
+  width: var(--spacing-10);
+  height: var(--spacing-10);
+  background-color: var(--color-brand-primary);
+  border-radius: var(--radius-full);
+  animation: pulse var(--motion-slow-reveal-duration) 
+             var(--easing-ease-in-out) infinite;
+  
+  // Size variants
+  &--small {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+  }
+  
+  &--large {
+    width: var(--spacing-20);
+    height: var(--spacing-20);
+  }
+  
+  &--xl {
+    width: var(--spacing-24);
+    height: var(--spacing-24);
+  }
+  
+  // Color variants
+  &--success {
+    background-color: var(--color-feedback-success);
+  }
+  
+  &--danger {
+    background-color: var(--color-feedback-danger);
+  }
+  
+  &--warning {
+    background-color: var(--color-feedback-warning);
+  }
+  
+  &--info {
+    background-color: var(--color-feedback-info);
+  }
+  
+  &--white {
+    background-color: var(--color-neutral-0);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                       UTILITIES: LOADERS - PROGRESS                        */
+/* -------------------------------------------------------------------------- */
+
+.loader-progress {
+  width: 100%;
+  height: var(--spacing-1);
+  background-color: var(--color-neutral-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  
+  &__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 40%;
+    background-color: var(--color-brand-primary);
+    border-radius: var(--radius-full);
+    animation: progress var(--motion-transition-screen-duration) 
+               var(--motion-transition-screen-easing) infinite;
+  }
+  
+  // Size variants
+  &--small {
+    height: 2px;
+  }
+  
+  &--medium {
+    height: var(--spacing-1);
+  }
+  
+  &--large {
+    height: var(--spacing-2);
+  }
+  
+  &--xl {
+    height: var(--spacing-3);
+  }
+  
+  // Color variants
+  &--success {
+    .loader-progress__bar {
+      background-color: var(--color-feedback-success);
+    }
+  }
+  
+  &--danger {
+    .loader-progress__bar {
+      background-color: var(--color-feedback-danger);
+    }
+  }
+  
+  &--warning {
+    .loader-progress__bar {
+      background-color: var(--color-feedback-warning);
+    }
+  }
+  
+  &--info {
+    .loader-progress__bar {
+      background-color: var(--color-feedback-info);
+    }
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                       UTILITIES: LOADERS - SKELETON                        */
+/* -------------------------------------------------------------------------- */
+
+.loader-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-2) 0%,
+    var(--color-neutral-3) 50%,
+    var(--color-neutral-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading var(--motion-slow-reveal-duration) 
+             var(--easing-ease-in-out) infinite;
+  border-radius: var(--radius-s);
+  
+  // Shape variants
+  &--text {
+    height: 1em;
+    width: 100%;
+  }
+  
+  &--title {
+    height: 1.5em;
+    width: 60%;
+    margin-bottom: var(--spacing-2);
+  }
+  
+  &--heading {
+    height: 2em;
+    width: 40%;
+    margin-bottom: var(--spacing-3);
+  }
+  
+  &--avatar {
+    width: var(--spacing-10);
+    height: var(--spacing-10);
+    border-radius: var(--radius-full);
+  }
+  
+  &--avatar-small {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    border-radius: var(--radius-full);
+  }
+  
+  &--avatar-large {
+    width: var(--spacing-16);
+    height: var(--spacing-16);
+    border-radius: var(--radius-full);
+  }
+  
+  &--thumbnail {
+    width: 100%;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+  }
+  
+  &--thumbnail-square {
+    width: 100%;
+    padding-bottom: 100%; // 1:1 aspect ratio
+  }
+  
+  &--button {
+    width: 120px;
+    height: var(--spacing-10);
+  }
+  
+  &--button-small {
+    width: 90px;
+    height: var(--spacing-8);
+  }
+  
+  &--button-large {
+    width: 150px;
+    height: var(--spacing-12);
+  }
+  
+  &--card {
+    width: 100%;
+    height: var(--spacing-48);
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                    UTILITIES: LOADERS - RESPONSIVE                         */
+/* -------------------------------------------------------------------------- */
+
+// Adjust loader sizes based on viewport
+.loader-responsive {
+  // Base: small on mobile
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  
+  // Medium on tablets
+  @include bp-up(m) {
+    width: var(--spacing-10);
+    height: var(--spacing-10);
+  }
+  
+  // Large on desktops
+  @include bp-up(l) {
+    width: var(--spacing-20);
+    height: var(--spacing-20);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                   UTILITIES: LOADERS - ACCESSIBILITY                       */
+/* -------------------------------------------------------------------------- */
+
+// Respect reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .loader-plane,
+  .loader-spinner,
+  .loader-dots__dot,
+  .loader-pulse,
+  .loader-progress__bar,
+  .loader-skeleton {
+    animation-duration: calc(var(--motion-slow-reveal-duration) * 2);
+  }
+}

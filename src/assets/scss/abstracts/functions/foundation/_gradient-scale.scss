@@ -1,0 +1,155 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use '../../variables/foundation/gradient-scale' as scale;
+
+// ============================================================================ //
+//                   FUNCTIONS: FOUNDATION - GRADIENT SCALE                     //
+// ============================================================================ //
+
+/// Get gradient direction value
+/// @param {String} $direction - Direction name
+/// @return {String} CSS gradient direction value
+/// @example gradient-direction('to-right') => to right
+@function gradient-direction($direction) {
+  @if map.has-key(scale.$gradient-directions, $direction) {
+    @return map.get(scale.$gradient-directions, $direction);
+  }
+  @error "Gradient direction '#{$direction}' not found. Available: #{map.keys(scale.$gradient-directions)}";
+}
+
+/// Get gradient stop position
+/// @param {String|Number} $stop - Stop key or custom value
+/// @return {Number} Percentage value
+/// @example gradient-stop('50') => 50%
+@function gradient-stop($stop) {
+  @if map.has-key(scale.$gradient-stops, $stop) {
+    @return map.get(scale.$gradient-stops, $stop);
+  }
+  @else if meta.type-of($stop) == 'number' {
+    @return $stop;
+  }
+  @error "Gradient stop '#{$stop}' not found. Available: #{map.keys(scale.$gradient-stops)}";
+}
+
+/// Get radial gradient position
+/// @param {String} $position - Position name
+/// @return {String} CSS position value
+@function radial-position($position) {
+  @if map.has-key(scale.$radial-positions, $position) {
+    @return map.get(scale.$radial-positions, $position);
+  }
+  @error "Radial position '#{$position}' not found. Available: #{map.keys(scale.$radial-positions)}";
+}
+
+/// Get radial gradient size
+/// @param {String} $size - Size keyword
+/// @return {String} CSS size value
+@function radial-size($size) {
+  @if map.has-key(scale.$radial-sizes, $size) {
+    @return map.get(scale.$radial-sizes, $size);
+  }
+  @error "Radial size '#{$size}' not found. Available: #{map.keys(scale.$radial-sizes)}";
+}
+
+/// Get gradient pattern configuration
+/// @param {String} $pattern - Pattern name
+/// @return {Map} Pattern configuration
+@function gradient-pattern($pattern) {
+  @if map.has-key(scale.$gradient-patterns, $pattern) {
+    @return map.get(scale.$gradient-patterns, $pattern);
+  }
+  @error "Gradient pattern '#{$pattern}' not found. Available: #{map.keys(scale.$gradient-patterns)}";
+}
+
+/// Build a simple two-color linear gradient
+/// @param {Color} $color-start - Starting color
+/// @param {Color} $color-end - Ending color
+/// @param {String} $direction - Gradient direction (default: 'to-bottom')
+/// @return {String} Complete gradient CSS value
+/// @example gradient-linear(#fff, #000, 'to-right')
+@function gradient-linear($color-start, $color-end, $direction: 'to-bottom') {
+  $dir: gradient-direction($direction);
+  @return linear-gradient($dir, $color-start, $color-end);
+}
+
+/// Build a linear gradient with custom stops
+/// @param {String} $direction - Gradient direction
+/// @param {List} $color-stops - List of color-stop pairs (color, position)
+/// @return {String} Complete gradient CSS value
+/// @example gradient-linear-stops('to-right', (#fff 0%, #000 100%))
+@function gradient-linear-stops($direction, $color-stops) {
+  $dir: gradient-direction($direction);
+  @return linear-gradient($dir, $color-stops...);
+}
+
+/// Build a radial gradient
+/// @param {Color} $color-start - Starting color
+/// @param {Color} $color-end - Ending color
+/// @param {String} $position - Gradient position (default: 'center')
+/// @param {String} $size - Gradient size (default: 'farthest-corner')
+/// @return {String} Complete radial gradient CSS value
+@function gradient-radial($color-start, $color-end, $position: 'center', $size: 'farthest-corner') {
+  $pos: radial-position($position);
+  $sz: radial-size($size);
+  @return radial-gradient(circle $sz at $pos, $color-start, $color-end);
+}
+
+/// Build a conic gradient
+/// @param {List} $color-stops - List of color-stop pairs
+/// @param {String} $position - Gradient position (default: 'center')
+/// @return {String} Complete conic gradient CSS value
+@function gradient-conic($color-stops, $position: 'center') {
+  $pos: radial-position($position);
+  @return conic-gradient(from 0deg at $pos, $color-stops...);
+}
+
+/// Create an overlay gradient (for image overlays)
+/// @param {Color} $color - Overlay color
+/// @param {Number} $opacity-start - Starting opacity (0-1)
+/// @param {Number} $opacity-end - Ending opacity (0-1)
+/// @param {String} $direction - Direction (default: 'to-bottom')
+/// @return {String} Overlay gradient
+/// @example gradient-overlay(#000, 0.6, 0, 'to-bottom')
+@function gradient-overlay($color, $opacity-start, $opacity-end, $direction: 'to-bottom') {
+  $dir: gradient-direction($direction);
+  $color-start: rgba($color, $opacity-start);
+  $color-end: rgba($color, $opacity-end);
+  @return linear-gradient($dir, $color-start 0%, $color-end 100%);
+}
+
+/// Create a shimmer gradient (for loading states)
+/// @param {Color} $base - Base color
+/// @param {Color} $highlight - Highlight color
+/// @return {String} Shimmer gradient
+@function gradient-shimmer($base, $highlight) {
+  @return linear-gradient(
+    90deg,
+    $base 0%,
+    $highlight 50%,
+    $base 100%
+  );
+}
+
+/// Create a glass border gradient (for glassmorphism)
+/// @param {Color} $color - Border gradient color (usually white)
+/// @param {Number} $opacity-top - Top opacity (default: 0.6)
+/// @param {Number} $opacity-bottom - Bottom opacity (default: 0.2)
+/// @return {String} Glass border gradient
+@function gradient-glass-border($color: #fff, $opacity-top: 0.6, $opacity-bottom: 0.2) {
+  @return linear-gradient(
+    135deg,
+    rgba($color, $opacity-top) 0%,
+    rgba($color, $opacity-bottom) 100%
+  );
+}
+
+/// Get animation distance value
+/// @param {String} $animation - Animation type
+/// @return {Number} Distance value
+@function gradient-animation-distance($animation) {
+  @if map.has-key(scale.$gradient-animation-distance, $animation) {
+    @return map.get(scale.$gradient-animation-distance, $animation);
+  }
+  @error "Gradient animation '#{$animation}' not found";
+}

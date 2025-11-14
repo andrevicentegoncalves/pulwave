@@ -1,0 +1,93 @@
+@use 'sass:map';
+@use '../../variables/foundation/opacity-scale' as scale;
+
+// ============================================================================ //
+//                          SEMANTICS: OPACITY PRESETS                          //
+// ============================================================================ //
+
+$opacity-semantic: (
+  // -------------------------------------------
+  // Interaction States
+  // -------------------------------------------
+  'disabled': map.get(scale.$opacity-scale, 40),        // 0.4 - Disabled elements
+  'hover': map.get(scale.$opacity-scale, 10),           // 0.1 - Hover state overlay
+  'active': map.get(scale.$opacity-scale, 15),          // 0.15 - Active/pressed state
+  'inactive': map.get(scale.$opacity-scale, 50),        // 0.5 - Inactive but visible
+  'focus': map.get(scale.$opacity-scale, 15),           // 0.15 - Focus state indicator
+  
+  // -------------------------------------------
+  // Visual Hierarchy
+  // -------------------------------------------
+  'subtle': map.get(scale.$opacity-scale, 60),          // 0.6 - De-emphasized content
+  'muted': map.get(scale.$opacity-scale, 70),           // 0.7 - Secondary content
+  'faded': map.get(scale.$opacity-scale, 40),           // 0.4 - Heavily de-emphasized
+  'ghost': map.get(scale.$opacity-scale, 10),           // 0.1 - Barely visible
+  
+  // -------------------------------------------
+  // Overlays & Backdrops
+  // -------------------------------------------
+  'overlay-light': map.get(scale.$opacity-scale, 40),   // 0.4 - Light overlay
+  'overlay-medium': map.get(scale.$opacity-scale, 60),  // 0.6 - Medium overlay
+  'overlay-dark': map.get(scale.$opacity-scale, 80),    // 0.8 - Heavy overlay
+  'backdrop': map.get(scale.$opacity-scale, 50),        // 0.5 - Modal backdrop
+  
+  // -------------------------------------------
+  // Glass/Blur Effects (Glassmorphism)
+  // -------------------------------------------
+  'glass-light': map.get(scale.$opacity-scale, 70),     // 0.7 - Light glass effect
+  'glass-medium': map.get(scale.$opacity-scale, 80),    // 0.8 - Medium glass effect
+  'glass-dark': map.get(scale.$opacity-scale, 90),      // 0.9 - Heavy glass effect
+  
+  // -------------------------------------------
+  // Absolute Values
+  // -------------------------------------------
+  'full': map.get(scale.$opacity-scale, 100),           // 1.0 - Fully opaque
+  'none': map.get(scale.$opacity-scale, 0),             // 0.0 - Fully transparent
+  
+  // -------------------------------------------
+  // Additional Common Use Cases
+  // -------------------------------------------
+  'transparent': map.get(scale.$opacity-scale, 0),      // 0 - Alias for none
+  'invisible': map.get(scale.$opacity-scale, 0),        // 0 - Alias for none
+  'visible': map.get(scale.$opacity-scale, 100),        // 1 - Alias for full
+  'opaque': map.get(scale.$opacity-scale, 100),         // 1 - Alias for full
+  
+  // Hover variants (for different intensities)
+  'hover-light': map.get(scale.$opacity-scale, 5),      // 0.05 - Very subtle hover
+  'hover-medium': map.get(scale.$opacity-scale, 10),    // 0.1 - Normal hover
+  'hover-strong': map.get(scale.$opacity-scale, 15),    // 0.15 - Strong hover
+  
+  // Secondary content
+  'secondary': map.get(scale.$opacity-scale, 70),       // 0.7 - Secondary text/icons
+  'placeholder': map.get(scale.$opacity-scale, 50),     // 0.5 - Placeholder text
+  
+  // Loading states
+  'skeleton-base': map.get(scale.$opacity-scale, 15),   // 0.15 - Skeleton screen base
+  'skeleton-shine': map.get(scale.$opacity-scale, 20),  // 0.2 - Skeleton shimmer
+  
+  // Modal overlays (specific cases)
+  'overlay-modal': map.get(scale.$opacity-scale, 50),   // 0.5 - Standard modal backdrop
+) !default;
+
+// -------------------------------------------
+// LEGACY TOKENS (Backward Compatibility)
+// -------------------------------------------
+
+$legacy-opacity-tokens: (
+  // Old banner overlay
+  'banner-overlay-opacity': map.get($opacity-semantic, 'overlay-light'),  // 0.4
+  
+  // Old size-based naming (s, m, l, xl)
+  'opacity-s': map.get(scale.$opacity-scale, 40),   // 0.4 (40%)
+  'opacity-m': map.get(scale.$opacity-scale, 60),   // 0.6 (60%)
+  'opacity-l': map.get(scale.$opacity-scale, 80),   // 0.8 (80%)
+  'opacity-xl': map.get(scale.$opacity-scale, 90),  // 0.9 (90%)
+  'opaque': map.get(scale.$opacity-scale, 100),     // 1.0 (100%)
+  
+  // Old alpha prefixes
+  'alpha-disabled': map.get($opacity-semantic, 'disabled'),  // 0.4
+  'alpha-hover': map.get($opacity-semantic, 'hover'),        // 0.1
+  'alpha-active': map.get($opacity-semantic, 'active'),      // 0.15
+  'alpha-subtle': map.get($opacity-semantic, 'subtle'),      // 0.6
+  'alpha-ghost': map.get($opacity-semantic, 'ghost'),        // 0.1
+) !default;

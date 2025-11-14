@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+@use 'core' as *;
+@use 'sizing-scale' as sizing;
+
+// ========================================================================== //
+//                        FOUNDATION: BORDER SCALE                            //
+// ========================================================================== //
+
+//-------------------------------------------
+// BORDER WIDTH SCALE
+//-------------------------------------------
+
+$border-width-scale: (
+  'none': 0,
+  '2xs': units.rem(0.5px),   // 0.5px - Hairline borders, ultra-subtle dividers
+  'xs': sizing.$sizing-1,    // 1px   - Subtle dividers, minimal borders
+  's': sizing.$sizing-2,     // 2px   - Default borders, standard thickness
+  'm': sizing.$sizing-3,     // 3px   - Emphasized borders, focus states
+  'l': sizing.$sizing-4,     // 4px   - Heavy borders, strong emphasis
+  'xl': sizing.$sizing-6,    // 6px   - Extra heavy borders, rare use
+) !default;
+
+// -------------------------------------------
+// BORDER STYLE OPTIONS
+// -------------------------------------------
+
+$border-style-options: (
+  'none': none,
+  'solid': solid,
+  'dashed': dashed,
+  'dotted': dotted,
+  'double': double,
+  'groove': groove,
+  'ridge': ridge,
+  'inset': inset,
+  'outset': outset,
+  'hidden': hidden,
+) !default;

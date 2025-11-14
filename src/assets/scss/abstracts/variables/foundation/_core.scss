@@ -1,0 +1,60 @@
+@use 'sass:map';
+
+// ============================================================================ //
+//                           FOUNDATION: CORE UNITS                             //
+// ============================================================================ //
+// The atomic primitives that everything else derives from
+
+// -------------------------------------------
+// BASE UNITS - Single source of truth
+// -------------------------------------------
+
+/// Base spatial unit - all spacing derives from this
+/// @type Number
+$base-unit: 8px !default;
+
+/// Base font size - root typography reference
+/// @type Number
+$base-font-size: 16px !default;
+
+/// Base line height ratio - typography vertical rhythm
+/// @type Number
+$base-line-height: 1.5 !default;
+
+/// Base border width - stroke reference
+/// @type Number
+$base-border-width: 1px !default;
+
+/// Base duration - animation timing reference
+/// @type Number
+$base-duration: 100ms !default;
+
+// -------------------------------------------
+// MATHEMATICAL RATIOS - Scale generators
+// -------------------------------------------
+
+/// Typography scale ratios (type scales)
+$scale-ratio-minor-second: 1.067 !default;   // 15:16
+$scale-ratio-major-second: 1.125 !default;   // 8:9
+$scale-ratio-minor-third: 1.2 !default;      // 5:6
+$scale-ratio-major-third: 1.25 !default;     // 4:5
+$scale-ratio-perfect-fourth: 1.333 !default; // 3:4
+$scale-ratio-augmented-fourth: 1.414 !default; // 1:√2
+$scale-ratio-perfect-fifth: 1.5 !default;    // 2:3
+$scale-ratio-golden: 1.618 !default;         // 1:φ (golden ratio)
+
+/// Selected type scale ratio for this project
+/// @type Number
+$typography-scale-ratio: $scale-ratio-minor-third !default;
+
+// -------------------------------------------
+// CORE UNITS MAP - Programmatic access
+// -------------------------------------------
+
+$core-units: (
+  'space': $base-unit,
+  'font': $base-font-size,
+  'line-height': $base-line-height,
+  'border': $base-border-width,
+  'duration': $base-duration,
+) !default;

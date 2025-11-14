@@ -1,0 +1,72 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+
+// ========================================================================== //
+//                    VARIABLES: FOUNDATION - GRID SCALE                      //
+// ========================================================================== //
+
+// -------------------------------------------
+// GRID SCALE: COLUMNS
+// -------------------------------------------
+
+$grid-scale-columns: (
+  'xs': 4,
+  's': 4,
+  'm': 8,
+  'l': 12,
+  'xl': 12,
+  '2xl': 12,
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: GUTTERS
+// -------------------------------------------
+
+$grid-scale-gutters: (
+  'xs': units.rem(16),       // 1rem (16px)
+  's': units.rem(16),       // 1rem (16px)
+  'm': units.rem(16),       // 1rem (16px)
+  'l': units.rem(24),       // 1.5rem (24px)
+  'xl': units.rem(24),       // 1.5rem (24px)
+  '2xl': units.rem(32),      // 2rem (32px)
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: MARGINS
+// -------------------------------------------
+
+$grid-scale-margins: (
+  'xs': units.rem(16),       // 1rem (16px)
+  's': units.rem(16),       // 1rem (16px)
+  'm': units.rem(24),       // 1.5rem (24px)
+  'l': units.rem(24),       // 1.5rem (24px)
+  'xl': 0,                   // 0 - full bleed for fixed container
+  '2xl': units.rem(32),      // 2rem (32px) - fluid layout with margins
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: MAX WIDTHS
+// -------------------------------------------
+
+$grid-scale-max-widths: (
+  'xs': 100%,
+  's': 100%,
+  'm': 100%,
+  'l': 100%,
+  'xl': units.rem(1280),     // 80rem (1280px) - Fixed centered container
+  '2xl': 100%,               // Fluid for ultra-wide screens
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: TYPES
+// -------------------------------------------
+
+$grid-scale-types: (
+  'xs': 'fluid',
+  's': 'fluid',
+  'm': 'fluid',
+  'l': 'fluid',
+  'xl': 'fixed',
+  '2xl': 'fluid',
+) !default;
+

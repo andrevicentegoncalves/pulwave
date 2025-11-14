@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use '../variables/colors/theme-mapping' as colors;
+@use '../variables/foundation/border-scale' as border;
+@use '../variables/foundation/radius-scale' as radius;
+
+@mixin generate-border-tokens() {
+  
+    /* ========================================================================== */
+    /*                              TOKENS: BORDERS                               */
+    /* ========================================================================== */
+
+    /* Border Width */
+    @each $size, $value in border.$border-width-scale {
+      --border-width-#{$size}: #{$value};
+    }
+
+    /* Border Style */
+    @each $style, $value in border.$border-style-options {
+      --border-style-#{$style}: #{$value};
+    }
+
+    /* Border Radius */
+    @each $size, $value in radius.$radius-scale {
+      --border-radius-#{$size}: #{$value};
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                               BORDER: LEGACY                               */
+    /* -------------------------------------------------------------------------- */
+    /* Maintained for backward compatibility */     
+
+    --border-size-none: 0px;
+    --border-size-xs: 0.5px;
+    --border-size-s: 1px;
+    --border-width-selected: 3px;
+    --border-width: 0.3px;
+    --border-style: solid;
+    --border-radius-soft: 4px;
+    --border-radius-extra-soft: 15px;
+}
+  

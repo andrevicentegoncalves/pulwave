@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+/* ==========================================================================*/
+/*                           UTILITY CLASSES:: ICONS                         */
+/* ==========================================================================*/
+
+//-------------------------------------------
+// GENERATED UTILITIES (from icon-scale)
+//-------------------------------------------
+// Auto-generated icon size and context utilities
+@include generate-icon-utilities();
+
+//-------------------------------------------
+// BASE ICON UTILITIES
+//-------------------------------------------
+
+.icon {
+  // Base styling
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  flex-shrink: 0;
+
+  // Alignment variants
+  &-align {
+    &-top { vertical-align: top; }
+    &-middle { vertical-align: middle; }
+    &-bottom { vertical-align: bottom; }
+    &-baseline { vertical-align: baseline; }
+  }
+
+  // Spacing with text
+  &-gap {
+    &-tight { margin-right: var(--icon-gap-tight); }
+    &-default { margin-right: var(--icon-gap-default); }
+    &-comfortable { margin-right: var(--icon-gap-comfortable); }
+    
+    // Left spacing
+    &-left {
+      &-tight { margin-left: var(--icon-gap-tight); }
+      &-default { margin-left: var(--icon-gap-default); }
+      &-comfortable { margin-left: var(--icon-gap-comfortable); }
+    }
+  }
+
+  // Color inheritance
+  &-inherit {
+    color: inherit;
+  }
+
+  // Container variants
+  &-circle {
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-square {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

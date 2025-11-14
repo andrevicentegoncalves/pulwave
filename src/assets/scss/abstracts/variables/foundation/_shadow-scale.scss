@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use 'core' as *;
+@use 'sizing-scale' as sizing;
+
+// ========================================================================== //
+//                         FOUNDATION: SHADOW SCALE                           //
+// ========================================================================== //
+
+// -------------------------------------------
+// SHADOW COLOR BASE
+// -------------------------------------------
+
+$shadow-color-base: #000000 !default;
+
+// -------------------------------------------
+// SHADOW COMPONENTS 
+// -------------------------------------------
+
+$shadow-components: (
+  // Elevation 1 (xs) - Subtle lift, minimal depth
+  // Use: Hover states, slightly raised cards
+  'xs': (
+    'offset-x': sizing.$sizing-0,     // 0px
+    'offset-y': sizing.$sizing-1,     // 1px
+    'blur': sizing.$sizing-4,         // 4px
+    'spread': sizing.$sizing-0,       // 0px
+    'opacity': 0.1,
+  ),
+  
+  // Elevation 2 (s) - Cards at rest, subtle depth
+  // Use: Default card elevation, list items
+  's': (
+    'offset-x': sizing.$sizing-0,     // 0px
+    'offset-y': sizing.$sizing-2,     // 2px
+    'blur': sizing.$sizing-8,         // 8px
+    'spread': sizing.$sizing-0,       // 0px
+    'opacity': 0.12,
+  ),
+  
+  // Elevation 3 (m) - Raised cards, moderate depth
+  // Use: Active cards, raised panels, sticky headers
+  'm': (
+    'offset-x': sizing.$sizing-0,     // 0px
+    'offset-y': sizing.$sizing-8,     // 8px
+    'blur': sizing.$sizing-16,        // 16px
+    'spread': sizing.$sizing-0,       // 0px
+    'opacity': 0.15,
+  ),
+  
+  // Elevation 4 (l) - Dropdowns, popovers, significant depth
+  // Use: Dropdown menus, tooltips, floating action buttons
+  'l': (
+    'offset-x': sizing.$sizing-0,     // 0px
+    'offset-y': sizing.$sizing-16,    // 16px
+    'blur': sizing.$sizing-32,        // 32px
+    'spread': sizing.$sizing-0,       // 0px
+    'opacity': 0.18,
+  ),
+) !default;
+
+// -------------------------------------------
+// SHADOW ALIASES
+// -------------------------------------------
+
+$shadow-xs: map.get($shadow-components, 'xs') !default;
+$shadow-s: map.get($shadow-components, 's') !default;
+$shadow-m: map.get($shadow-components, 'm') !default;
+$shadow-l: map.get($shadow-components, 'l') !default;

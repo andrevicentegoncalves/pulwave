@@ -1,0 +1,139 @@
+@use 'sass:map';
+@use '../variables/semantics/grid' as semantics;
+
+@mixin generate-grid-tokens() {
+
+  /* ========================================================================== */
+  /*                                 TOKENS: GRID                               */
+  /* ========================================================================== */
+
+   /* -------------------------------------------
+      GRID TOKENS: XS (Extra Small)
+      Breakpoint: 320px - 639px | Columns: 4 | Type: Fluid
+      ------------------------------------------- */
+   
+   --grid-xs-columns: #{semantics.$grid-xs-columns};
+   --grid-xs-gutter: #{semantics.$grid-xs-gutter};
+   --grid-xs-margin: #{semantics.$grid-xs-margin};
+   --grid-xs-max-width: #{semantics.$grid-xs-max-width};
+   --grid-xs-type: #{semantics.$grid-xs-type};
+
+   /* -------------------------------------------
+      GRID TOKENS: SM (Small)
+      Breakpoint: 640px - 767px | Columns: 4 | Type: Fluid
+      ------------------------------------------- */
+   
+   --grid-s-columns: #{semantics.$grid-s-columns};
+   --grid-s-gutter: #{semantics.$grid-s-gutter};
+   --grid-s-margin: #{semantics.$grid-s-margin};
+   --grid-s-max-width: #{semantics.$grid-s-max-width};
+   --grid-s-type: #{semantics.$grid-s-type};
+
+   /* -------------------------------------------
+      GRID TOKENS: MD (Medium)
+      Breakpoint: 768px - 1023px | Columns: 8 | Type: Fluid
+      ------------------------------------------- */
+   
+   --grid-m-columns: #{semantics.$grid-m-columns};
+   --grid-m-gutter: #{semantics.$grid-m-gutter};
+   --grid-m-margin: #{semantics.$grid-m-margin};
+   --grid-m-max-width: #{semantics.$grid-m-max-width};
+   --grid-m-type: #{semantics.$grid-m-type};
+
+   /* -------------------------------------------
+      GRID TOKENS: LG (Large)
+      Breakpoint: 1024px - 1279px | Columns: 12 | Type: Fluid
+      ------------------------------------------- */
+   
+   --grid-l-columns: #{semantics.$grid-l-columns};
+   --grid-l-gutter: #{semantics.$grid-l-gutter};
+   --grid-l-margin: #{semantics.$grid-l-margin};
+   --grid-l-max-width: #{semantics.$grid-l-max-width};
+   --grid-l-type: #{semantics.$grid-l-type};
+
+   /* -------------------------------------------
+      GRID TOKENS: XL (Extra Large)
+      Breakpoint: 1280px+ | Columns: 12 | Type: Fixed
+      ------------------------------------------- */
+   
+   --grid-xl-columns: #{semantics.$grid-xl-columns};
+   --grid-xl-gutter: #{semantics.$grid-xl-gutter};
+   --grid-xl-margin: #{semantics.$grid-xl-margin};
+   --grid-xl-max-width: #{semantics.$grid-xl-max-width};
+   --grid-xl-type: #{semantics.$grid-xl-type};
+   
+   /* -------------------------------------------
+      GRID TOKENS: 2XL (2X Large)
+      Breakpoint: 1920px+ | Columns: 12 | Type: Fluid
+      ------------------------------------------- */
+   
+   --grid-2xl-columns: #{semantics.$grid-2xl-columns};
+   --grid-2xl-gutter: #{semantics.$grid-2xl-gutter};
+   --grid-2xl-margin: #{semantics.$grid-2xl-margin};
+   --grid-2xl-max-width: #{semantics.$grid-2xl-max-width};
+   --grid-2xl-type: #{semantics.$grid-2xl-type};
+
+   /* ACTIVE GRID TOKENS (Mobile-First Default) */
+   --grid-columns: var(--grid-xs-columns);
+   --grid-gutter: var(--grid-xs-gutter);
+   --grid-margin: var(--grid-xs-margin);
+   --grid-max-width: var(--grid-xs-max-width);
+   --grid-type: var(--grid-xs-type);
+   --grid-column-width: var(--grid-xs-column-width);
+   --grid-content-width: var(--grid-xs-content-width);
+   --grid-active-breakpoint: 'xs';
+
+   /* SEMANTIC GRID ALIASES */
+   --container-max-width: var(--grid-max-width);
+   --container-padding: var(--grid-margin);
+   --grid-gap: var(--grid-gutter);
+   --column-gap: var(--grid-gutter);
+   --row-gap: var(--grid-gutter);
+   --content-max-width: var(--grid-content-width);
+   --safe-area-inline: var(--grid-margin);
+
+   /* CSS GRID TEMPLATE TOKENS */
+   --grid-template-columns: repeat(var(--grid-columns), 1fr);
+   --grid-template-columns-auto: repeat(auto-fit, minmax(var(--grid-column-width), 1fr));
+   --grid-span-full: 1 / -1;
+   --grid-span-half: span calc(var(--grid-columns) / 2);
+   --grid-span-third: span calc(var(--grid-columns) / 3);
+   --grid-span-quarter: span calc(var(--grid-columns) / 4);
+   --grid-cols-1: repeat(1, 1fr);
+   --grid-cols-2: repeat(2, 1fr);
+   --grid-cols-3: repeat(3, 1fr);
+   --grid-cols-4: repeat(4, 1fr);
+   --grid-cols-6: repeat(6, 1fr);
+   --grid-cols-8: repeat(8, 1fr);
+   --grid-cols-12: repeat(12, 1fr);
+
+   /* FLEXBOX GRID TOKENS */
+   --flex-basis-full: 100%;
+   --flex-basis-half: calc((100% - var(--grid-gutter)) / 2);
+   --flex-basis-third: calc((100% - (var(--grid-gutter) * 2)) / 3);
+   --flex-basis-quarter: calc((100% - (var(--grid-gutter) * 3)) / 4);
+   --flex-gap: var(--grid-gutter);
+
+   /* SUBGRID TOKENS */
+   --subgrid-columns: subgrid;
+   --subgrid-rows: subgrid;
+
+   /* CONTAINER QUERY TOKENS */
+   --container-type: inline-size;
+   --container-query-xs: 320px;
+   --container-query-s: 640px;
+   --container-query-m: 768px;
+   --container-query-l: 1024px;
+   --container-query-xl: 1280px;
+   --container-query-2xl: 1920px;
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 GRID: LEGACY                               */
+    /* -------------------------------------------------------------------------- */
+    /* Maintained for backward compatibility */     
+
+   --grid-columns: 12;
+   --grid-columns-standard: 4;
+   --grid-gap: 25px;
+   --grid-gutter-width: 30px;
+}

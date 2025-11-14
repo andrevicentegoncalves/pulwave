@@ -1,0 +1,156 @@
+@use "sass:list";
+@use '../flags' as flags;
+
+// Import all token modules (alphabetical order)
+@use 'aspect-ratio';
+@use 'borders';
+@use 'breakpoints';
+@use 'colors';
+@use 'container';
+@use 'cursor';
+@use 'focus';
+@use 'grid';
+@use 'icons';
+@use 'images';
+@use 'layout';
+@use 'motion';
+@use 'opacity';
+@use 'shadows';
+@use 'sizing';
+@use 'spacing';
+@use 'timing';
+@use 'transform';
+@use 'typography';
+@use 'z-index';
+@use 'positioning';
+@use 'blur';
+@use 'gradient';
+@use 'transition';
+
+
+// ============================================================================ //
+//                                 TOKENS: INDEX                                //
+// ============================================================================ //
+
+@mixin generate-tokens($categories: 'all') {
+    
+    // Aspect Ratio  
+    @if $categories == 'all' or list.index($categories, 'aspect-ratio') {
+        @include aspect-ratio.generate-aspect-ratio-tokens();
+    }
+
+    // Borders
+    @if $categories == 'all' or list.index($categories, 'borders') {
+        @include borders.generate-border-tokens();
+    }
+
+    // Blur
+    @if $categories == 'all' or list.index($categories, 'blur') {
+        @include blur.generate-blur-tokens();
+    }
+
+    // Breakpoints  
+    @if $categories == 'all' or list.index($categories, 'breakpoints') {
+        @include breakpoints.generate-breakpoints-tokens();
+    }
+    
+    // Colors 
+    @if $categories == 'all' or list.index($categories, 'colors') {
+        @include colors.generate-color-tokens();
+    }
+
+    // Container  
+    @if $categories == 'all' or list.index($categories, 'container') {
+        @include container.generate-container-tokens();
+    }
+
+    // Cursor  
+    @if $categories == 'all' or list.index($categories, 'cursor') {
+        @include cursor.generate-cursor-tokens();
+    }
+
+    // Focus 
+    @if $categories == 'all' or list.index($categories, 'focus') {
+        @include focus.generate-focus-tokens();
+    }
+
+    // Gradient
+    @if $categories == 'all' or list.index($categories, 'gradient') {
+        @include gradient.generate-gradient-tokens();
+    }
+
+    // Grid
+    @if $categories == 'all' or list.index($categories, 'grid') {
+        @include grid.generate-grid-tokens();
+    }
+
+    // Icons
+    @if $categories == 'all' or list.index($categories, 'icons') {
+        @include icons.generate-icon-tokens();
+    }
+
+    // Positioning
+    @if $categories == 'all' or list.index($categories, 'positioning') {
+        @include positioning.generate-positioning-tokens();
+    }
+    
+    // Images
+    @if $categories == 'all' or list.index($categories, 'images') {
+        @include images.generate-image-tokens();
+    }
+
+    // Layout
+    @if $categories == 'all' or list.index($categories, 'layout') {
+        @include layout.generate-layout-tokens();
+    }
+
+    // Motion (Animation Presets)
+    @if $categories == 'all' or list.index($categories, 'motion') {
+        @include motion.generate-motion-tokens();
+    }
+
+    // Opacity 
+    @if $categories == 'all' or list.index($categories, 'opacity') {
+        @include opacity.generate-opacity-tokens();
+    }
+
+    // Shadow/Elevation
+    @if $categories == 'all' or list.index($categories, 'shadows') {
+        @include shadows.generate-shadow-tokens();
+    }
+
+    // Sizing 
+    @if $categories == 'all' or list.index($categories, 'sizing') {
+        @include sizing.generate-sizing-tokens();
+    }
+
+    // Spacing 
+    @if $categories == 'all' or list.index($categories, 'spacing') {
+        @include spacing.generate-spacing-tokens();
+    }
+
+    // Timing (Duration, Easing, Delay)
+    @if $categories == 'all' or list.index($categories, 'timing') {
+        @include timing.generate-timing-tokens();
+    }
+
+    // Transform 
+    @if $categories == 'all' or list.index($categories, 'transform') {
+        @include transform.generate-transform-tokens();
+    }
+
+    // Transitions 
+    @if $categories == 'all' or list.index($categories, 'transition') {
+        @include transition.generate-transition-tokens();
+    }
+
+    // Typography 
+    @if $categories == 'all' or list.index($categories, 'typography') {
+        @include typography.generate-typography-tokens();
+    }
+
+    // Z-Index 
+    @if $categories == 'all' or list.index($categories, 'z-index') {
+        @include z-index.generate-z-index-tokens();
+    }
+}

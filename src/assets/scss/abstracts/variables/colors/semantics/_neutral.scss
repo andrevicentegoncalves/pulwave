@@ -1,0 +1,30 @@
+@use '../../../functions/colors/primitives-system' as primitives;
+
+// ============================================================================= //
+//                     VARIABLES: COLOR SEMANTICS - NEUTRAL                      //
+// ============================================================================= //
+
+// ---------------------------------------------------------------------------//
+// NEUTRAL SCALE 
+// ---------------------------------------------------------------------------//
+
+$color-neutral-0:   primitives.get-color('neutral', 0) !default;
+$color-neutral-50:  primitives.get-color('neutral', 50) !default;
+$color-neutral-100: primitives.get-color('neutral', 100) !default;
+$color-neutral-200: primitives.get-color('neutral', 200) !default;
+$color-neutral-300: primitives.get-color('neutral', 300) !default;
+$color-neutral-400: primitives.get-color('neutral', 400) !default;
+$color-neutral-500: primitives.get-color('neutral', 500) !default;
+$color-neutral-600: primitives.get-color('neutral', 600) !default;
+$color-neutral-700: primitives.get-color('neutral', 700) !default;
+$color-neutral-800: primitives.get-color('neutral', 800) !default;
+$color-neutral-900: primitives.get-color('neutral', 900) !default;
+$color-neutral-950: primitives.get-color('neutral', 950) !default;
+
+// ---------------------------------------------------------------------------//
+// SEMANTIC ALIASES
+// ---------------------------------------------------------------------------//
+
+$color-neutral-default: $color-neutral-900 !default;
+$color-neutral-subtle: $color-neutral-700 !default;
+$color-neutral-subdued: $color-neutral-400 !default;

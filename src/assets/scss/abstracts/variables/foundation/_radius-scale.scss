@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use 'core' as *;
+@use 'sizing-scale' as sizing;
+
+// ========================================================================== //
+//                      FOUNDATION: BORDER RADIUS SYSTEM                      //
+// ========================================================================== //
+
+// -------------------------------------------
+// RADIUS SCALE
+// -------------------------------------------
+
+$radius-scale: (
+  'none': 0,
+  '2xs': sizing.$sizing-2,      // 2px    - Minimal rounding, subtle corners
+  'xs': sizing.$sizing-4,       // 4px    - Subtle rounding, small elements
+  's': sizing.$sizing-8,        // 8px    - Default rounding, standard components
+  'm': sizing.$sizing-16,       // 16px   - Medium rounding, cards, modals
+  'l': sizing.$sizing-24,       // 24px   - Large rounding, prominent elements
+  'xl': sizing.$sizing-32,      // 32px   - Extra large rounding, hero sections
+  '2xl': sizing.$sizing-48,     // 48px   - Maximum rounding, special cases
+  'round': sizing.$sizing-1000, // 1000px - Full circle/pill shape
+) !default;

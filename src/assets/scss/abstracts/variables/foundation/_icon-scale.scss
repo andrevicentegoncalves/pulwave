@@ -1,0 +1,72 @@
+@use 'sass:map';
+@use 'core' as *;
+@use 'sizing-scale' as sizing;
+
+// ========================================================================== //
+//                          FOUNDATION: ICON SCALE                            //
+// ========================================================================== //
+
+// -------------------------------------------
+// ICON SIZE SCALE
+// -------------------------------------------
+
+$icon-size-scale: (
+  'xs': sizing.$sizing-16,   // 16px - Small icons, inline text icons
+  's': sizing.$sizing-20,    // 20px - Default icons, list items
+  'm': sizing.$sizing-24,    // 24px - Standard icons, buttons
+  'l': sizing.$sizing-32,    // 32px - Large icons, headers
+  'xl': sizing.$sizing-48,   // 48px - Extra large icons, hero sections
+) !default;
+
+// -------------------------------------------
+// ICON SIZE ALIASES
+// -------------------------------------------
+
+$icon-size-xs: map.get($icon-size-scale, 'xs') !default;   // 16px
+$icon-size-s: map.get($icon-size-scale, 's') !default;     // 20px
+$icon-size-m: map.get($icon-size-scale, 'm') !default;     // 24px
+$icon-size-l: map.get($icon-size-scale, 'l') !default;     // 32px
+$icon-size-xl: map.get($icon-size-scale, 'xl') !default;   // 48px
+
+// Default icon size (most common)
+$icon-size-base: $icon-size-m !default;  // 24px
+
+// -------------------------------------------
+// CONTEXT-SPECIFIC ICON SIZES
+// -------------------------------------------
+
+$icon-context: (
+  // Typography alignment
+  'inline-text': $icon-size-xs,        // 16px - Inline with body text
+  'heading': $icon-size-l,             // 32px - Next to headings
+  
+  // Component-specific
+  'button-small': $icon-size-xs,       // 16px - Small buttons
+  'button-default': $icon-size-s,      // 20px - Default buttons
+  'button-large': $icon-size-m,        // 24px - Large buttons
+  
+  'input': $icon-size-s,               // 20px - Input fields
+  'list-item': $icon-size-s,           // 20px - List item icons
+  'navigation': $icon-size-m,          // 24px - Nav menu icons
+  'toolbar': $icon-size-m,             // 24px - Toolbar icons
+  
+  // Avatar/Profile
+  'avatar-small': $icon-size-m,        // 24px - Small avatar
+  'avatar-default': $icon-size-l,      // 32px - Default avatar
+  'avatar-large': $icon-size-xl,       // 48px - Large avatar
+  
+  // Decorative
+  'hero': $icon-size-xl,               // 48px - Hero section icons
+  'feature': $icon-size-l,             // 32px - Feature icons
+  'badge': $icon-size-xs,              // 16px - Badge icons
+) !default;
+
+// -------------------------------------------
+// ICON SPACING HELPERS
+// -------------------------------------------
+
+$icon-text-gap: (
+  'tight': 0.25rem,    // 4px  - Compact layouts
+  'default': 0.5rem,   // 8px  - Standard spacing
+  'comfortable': 0.75rem, // 12px - Relaxed spacing
+) !default;

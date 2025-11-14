@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use '../../variables/foundation/image-scale' as scale;
+
+// ========================================================================== //
+//                      GENERATOR: IMAGE UTILITIES                            //
+// ========================================================================== //
+
+@mixin generate-image-utilities {
+
+  // -------------------------------------------
+  // SIZE UTILITIES (Width + Height)
+  // -------------------------------------------
+  @each $size, $value in scale.$image-width-scale {
+    @if map.has-key(scale.$image-height-scale, $size) {
+      .image-size-#{$size} {
+        width: var(--image-width-#{$size});
+        height: var(--image-height-#{$size});
+      }
+    }
+  }
+
+  // -------------------------------------------
+  // WIDTH UTILITIES
+  // -------------------------------------------
+  @each $size, $value in scale.$image-width-scale {
+    .image-width-#{$size} {
+      width: var(--image-width-#{$size});
+    }
+  }
+
+  // -------------------------------------------
+  // HEIGHT UTILITIES
+  // -------------------------------------------
+  @each $size, $value in scale.$image-height-scale {
+    .image-height-#{$size} {
+      height: var(--image-height-#{$size});
+    }
+  }
+
+  // -------------------------------------------
+  // MAX-WIDTH UTILITIES
+  // -------------------------------------------
+  @each $size, $value in scale.$image-width-scale {
+    .image-max-width-#{$size} {
+      max-width: var(--image-width-#{$size});
+    }
+  }
+
+  // -------------------------------------------
+  // AVATAR UTILITIES
+  // -------------------------------------------
+  @each $size, $value in scale.$avatar-size-scale {
+    .avatar-#{$size} {
+      width: var(--avatar-size-#{$size});
+      height: var(--avatar-size-#{$size});
+    }
+  }
+
+  // -------------------------------------------
+  // THUMBNAIL UTILITIES
+  // -------------------------------------------
+  @each $size, $value in scale.$thumbnail-size-scale {
+    .thumbnail-#{$size} {
+      width: var(--thumbnail-size-#{$size});
+      height: var(--thumbnail-size-#{$size});
+    }
+  }
+}

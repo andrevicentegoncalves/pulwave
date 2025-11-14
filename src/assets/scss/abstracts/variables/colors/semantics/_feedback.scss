@@ -1,0 +1,71 @@
+@use '../../../functions/colors/primitives-system' as primitives;
+@use 'neutral' as neutral;
+
+// ============================================================================= //
+//                     VARIABLES: COLOR SEMANTICS - FEEDBACK                     //
+// ============================================================================= //
+
+// ---------------------------------------------------------------------------//
+// SUCCESS
+// ---------------------------------------------------------------------------//
+
+$color-success: primitives.get-color('success', 500) !default;
+$color-success-hover: primitives.get-color('success', 600) !default;
+$color-success-active: primitives.get-color('success', 700) !default;
+$color-success-subtle: primitives.get-color('success', 50) !default;
+$color-success-subtle-dark: primitives.get-color('success', 900) !default;
+
+// ---------------------------------------------------------------------------//
+// WARNING
+// ---------------------------------------------------------------------------//
+
+$color-warning: primitives.get-color('warning', 500) !default;
+$color-warning-hover: primitives.get-color('warning', 600) !default;
+$color-warning-active: primitives.get-color('warning', 700) !default;
+$color-warning-subtle: primitives.get-color('warning', 50) !default;
+$color-warning-subtle-dark: primitives.get-color('warning', 900) !default;
+
+// ---------------------------------------------------------------------------//
+// INFO
+// ---------------------------------------------------------------------------//
+
+$color-info: primitives.get-color('info', 500) !default;
+$color-info-hover: primitives.get-color('info', 600) !default;
+$color-info-active: primitives.get-color('info', 700) !default;
+$color-info-subtle: primitives.get-color('info', 50) !default;
+$color-info-subtle-dark: primitives.get-color('info', 900) !default;
+
+// ---------------------------------------------------------------------------//
+// ERROR
+// ---------------------------------------------------------------------------//
+
+$color-error: primitives.get-color('error', 500) !default;
+$color-error-hover: primitives.get-color('error', 600) !default;
+$color-error-active: primitives.get-color('error', 700) !default;
+$color-error-subtle: primitives.get-color('error', 50) !default;
+$color-error-subtle-dark: primitives.get-color('error', 900) !default;
+
+// ---------------------------------------------------------------------------//
+// ON-FEEDBACK COLORS (text on full color backgrounds)
+// ---------------------------------------------------------------------------//
+
+$color-on-success: neutral.$color-neutral-0 !default;
+$color-on-warning: neutral.$color-neutral-900 !default;
+$color-on-info: neutral.$color-neutral-0 !default;
+$color-on-error: neutral.$color-neutral-0 !default;
+
+// ---------------------------------------------------------------------------//
+// ON-SUBTLE FEEDBACK (text on subtle backgrounds)
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-on-success-subtle: primitives.get-color('success', 800) !default;
+$color-on-warning-subtle: primitives.get-color('warning', 800) !default;
+$color-on-info-subtle: primitives.get-color('info', 800) !default;
+$color-on-error-subtle: primitives.get-color('error', 800) !default;
+
+// Dark Mode
+$color-on-success-subtle-dark: primitives.get-color('success', 100) !default;
+$color-on-warning-subtle-dark: primitives.get-color('warning', 100) !default;
+$color-on-info-subtle-dark: primitives.get-color('info', 100) !default;
+$color-on-error-subtle-dark: primitives.get-color('error', 100) !default;

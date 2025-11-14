@@ -1,0 +1,41 @@
+@use 'spacing-scale' as spacing;
+
+// ============================================================================ //
+//                 VARIABLES: FOUNDATION - POSITIONING SCALE                    //
+// ============================================================================ //
+
+// ---------------------------------------------------------------------------- //
+// POSITIONING VALUES
+// ---------------------------------------------------------------------------- //
+// Positioning uses the same scale as spacing for consistency
+
+$position-0: spacing.$spacing-0;       // 0
+$position-1: spacing.$spacing-1;       // 0.25rem (4px)
+$position-2: spacing.$spacing-2;       // 0.5rem (8px)
+$position-3: spacing.$spacing-3;       // 0.75rem (12px)
+$position-4: spacing.$spacing-4;       // 1rem (16px)
+$position-6: spacing.$spacing-6;       // 1.5rem (24px)
+$position-8: spacing.$spacing-8;       // 2rem (32px)
+$position-10: spacing.$spacing-10;     // 2.5rem (40px)
+$position-12: spacing.$spacing-12;     // 3rem (48px)
+$position-16: spacing.$spacing-16;     // 4rem (64px)
+$position-20: spacing.$spacing-20;     // 5rem (80px)
+$position-24: spacing.$spacing-24;     // 6rem (96px)
+$position-32: spacing.$spacing-32;     // 8rem (128px)
+$position-40: spacing.$spacing-40;     // 10rem (160px)
+$position-48: spacing.$spacing-48;     // 12rem (192px)
+$position-64: spacing.$spacing-64;     // 16rem (256px)
+
+// ---------------------------------------------------------------------------- //
+// POSITIONING-SPECIFIC VALUES
+// ---------------------------------------------------------------------------- //
+
+// Percentage-based positioning
+$position-0-percent: 0%;
+$position-25-percent: 25%;
+$position-50-percent: 50%;
+$position-75-percent: 75%;
+$position-100-percent: 100%;
+
+// Auto positioning
+$position-auto: auto;

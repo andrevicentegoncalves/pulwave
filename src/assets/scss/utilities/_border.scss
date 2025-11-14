@@ -1,0 +1,58 @@
+@use '../abstracts/mixins/helpers/borders' as *;
+@use '../abstracts/variables/foundation/border-scale' as border;
+@use '../abstracts/variables/foundation/radius-scale' as radius;
+
+/* ==========================================================================*/
+/*                          UTILITY CLASSES: BORDERS                         */
+/* ==========================================================================*/
+
+// Border width utilities for all sides
+@each $key, $value in border.$border-width-scale {
+  .border-#{$key} {
+    @include border($key);
+  }
+}
+
+// Border width utilities per side
+@each $side in (top, right, bottom, left) {
+  @each $key, $value in border.$border-width-scale {
+    .border-#{$side}-#{$key} {
+      @include border-side($side, $key);
+    }
+  }
+}
+
+// Border none utility
+.border-none {
+  @include border-none;
+}
+
+// Border style utilities
+@each $style, $value in border.$border-style-options {
+  .border-style-#{$style} {
+    border-style: var(--border-style-#{$style});
+  }
+}
+
+// Border radius utilities
+@each $size, $value in radius.$radius-scale {
+  .border-radius-#{$size} {
+    @include border-radius($size);
+  }
+
+  .border-radius-top-#{$size} {
+    @include border-radius-top($size);
+  }
+
+  .border-radius-bottom-#{$size} {
+    @include border-radius-bottom($size);
+  }
+
+  .border-radius-left-#{$size} {
+    @include border-radius-left($size);
+  }
+
+  .border-radius-right-#{$size} {
+    @include border-radius-right($size);
+  }
+}

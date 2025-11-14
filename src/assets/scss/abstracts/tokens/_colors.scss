@@ -1,0 +1,106 @@
+@use 'sass:map';
+@use 'sass:string';
+
+@use '../../abstracts/variables/colors/theme-mapping' as theme;
+@use '../flags' as flags;
+
+@mixin generate-color-tokens() {
+    
+    /* ========================================================================== */
+    /*                                TOKENS: COLORS                              */
+    /* ========================================================================== */
+    
+    // Set color-scheme based on dark mode configuration
+    @if flags.$is_dark_mode_auto or flags.$is_dark_mode_forced {
+        color-scheme: light dark; 
+    } @else {
+        color-scheme: light;  
+    }
+    
+    // Default theme tokens (Light) - applies when no data-theme attribute
+    @each $token-name, $theme-map in theme.$theme-mappings {
+        $light-color: map.get($theme-map, 'light');
+        @if $light-color {
+            // Check if token starts with 'border-'
+            @if string.index($token-name, 'border-') == 1 {
+                --#{$token-name}: #{$light-color};  // No prefix for borders
+            } @else {
+                --color-#{$token-name}: #{$light-color};  // Add color- prefix for others
+            }
+        }
+    }
+    
+    /* -------------------------------------------------------------------------- */
+    /*                                COLOR: LEGACY                               */
+    /* -------------------------------------------------------------------------- */
+    /* Maintained for backward compatibility */     
+    
+    --color-primary-light: #F1F9EC;
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-danger-light: #f7dddb;
+    --color-danger-extra-light: #ffecec;
+    --color-warning: #ffc107;
+    --color-warning-light: #FEFBCD;
+    --color-info: #17a2b8;
+    --color-info-light: #add8e6;
+    --color-info-extra-light: #e5f5fc;
+    --color-light: #f8f9fa;
+    --color-dark: #272b30;
+    --color-footer-section: #2C2C2C;
+    --border-color: hsl(97, 48%, 51%);
+
+    // ----------------------------------------
+    // DARK MODE
+    // ----------------------------------------
+
+    @if flags.$is_dark_mode_forced {
+        
+        &[data-theme="dark"] {
+            color-scheme: dark;
+            
+            @each $token-name, $theme-map in theme.$theme-mappings {
+                $dark-color: map.get($theme-map, 'dark');
+                @if $dark-color {
+                    --color-#{$token-name}: #{$dark-color};
+                }
+            }
+        }
+    }
+    
+    @else if flags.$is_dark_mode_auto {
+        
+        @media (prefers-color-scheme: dark) {
+            color-scheme: dark;
+            
+            @each $token-name, $theme-map in theme.$theme-mappings {
+                $dark-color: map.get($theme-map, 'dark');
+                @if $dark-color {
+                    --color-#{$token-name}: #{$dark-color};
+                }
+            }
+        }
+    }
+    
+    // ----------------------------------------
+    // SMOOTH TRANSITIONS FOR THEME CHANGES
+    // ----------------------------------------
+    
+    * {
+        transition: 
+            background-color 200ms ease,
+            border-color 200ms ease,
+            color 200ms ease,
+            fill 200ms ease,
+            stroke 200ms ease,
+            box-shadow 200ms ease;
+    }
+
+    // Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+}

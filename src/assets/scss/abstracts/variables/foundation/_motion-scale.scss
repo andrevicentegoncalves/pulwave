@@ -1,0 +1,134 @@
+@use 'sass:map';
+@use 'core' as *;
+@use 'timing-scale' as timing;
+
+// ========================================================================== //
+//                        FOUNDATION: MOTION SCALE                            //
+// ========================================================================== //
+
+// -------------------------------------------
+// MOTION PRESETS 
+// -------------------------------------------
+
+$motion-presets: (
+  // Entrances
+  'enter-screen': (
+    'duration': 300ms,
+    'easing': map.get(timing.$easing-scale, 'decelerate'),
+    'type': 'enter',
+  ),
+  'enter-element': (
+    'duration': 200ms,
+    'easing': map.get(timing.$easing-scale, 'decelerate'),
+    'type': 'enter',
+  ),
+  'enter-subtle': (
+    'duration': 150ms,
+    'easing': map.get(timing.$easing-scale, 'ease-out'),
+    'type': 'enter',
+  ),
+  
+  // Exits
+  'exit-screen': (
+    'duration': 200ms,
+    'easing': map.get(timing.$easing-scale, 'accelerate'),
+    'type': 'exit',
+  ),
+  'exit-element': (
+    'duration': 150ms,
+    'easing': map.get(timing.$easing-scale, 'accelerate'),
+    'type': 'exit',
+  ),
+  'exit-subtle': (
+    'duration': 100ms,
+    'easing': map.get(timing.$easing-scale, 'ease-in'),
+    'type': 'exit',
+  ),
+  
+  // Transitions
+  'transition-screen': (
+    'duration': 400ms,
+    'easing': map.get(timing.$easing-scale, 'standard'),
+    'type': 'transition',
+  ),
+  'transition-element': (
+    'duration': 250ms,
+    'easing': map.get(timing.$easing-scale, 'standard'),
+    'type': 'transition',
+  ),
+  
+  // Micro-interactions
+  'hover': (
+    'duration': 150ms,
+    'easing': map.get(timing.$easing-scale, 'ease-out'),
+    'type': 'interaction',
+  ),
+  'press': (
+    'duration': 100ms,
+    'easing': map.get(timing.$easing-scale, 'ease-in'),
+    'type': 'interaction',
+  ),
+  'focus': (
+    'duration': 150ms,
+    'easing': map.get(timing.$easing-scale, 'ease-out'),
+    'type': 'interaction',
+  ),
+  
+  // Special effects
+  'expand': (
+    'duration': 300ms,
+    'easing': map.get(timing.$easing-scale, 'spring'),
+    'type': 'special',
+  ),
+  'collapse': (
+    'duration': 250ms,
+    'easing': map.get(timing.$easing-scale, 'ease-in-out'),
+    'type': 'special',
+  ),
+  'bounce': (
+    'duration': 600ms,
+    'easing': map.get(timing.$easing-scale, 'bounce'),
+    'type': 'special',
+  ),
+  'slow-reveal': (
+    'duration': 800ms,
+    'easing': map.get(timing.$easing-scale, 'gentle'),
+    'type': 'special',
+  ),
+) !default;
+
+// -------------------------------------------
+// ANIMATION PROPERTIES
+// -------------------------------------------
+
+$animation-properties: (
+  // Transform properties
+  'transform': transform,
+  'translate': transform,
+  'scale': transform,
+  'rotate': transform,
+  
+  // Opacity
+  'opacity': opacity,
+  'fade': opacity,
+  
+  // Color
+  'color': color,
+  'background': background-color,
+  'border-color': border-color,
+  
+  // Layout
+  'width': width,
+  'height': height,
+  'max-width': max-width,
+  'max-height': max-height,
+  
+  // Positioning
+  'top': top,
+  'right': right,
+  'bottom': bottom,
+  'left': left,
+  
+  // All
+  'all': all,
+) !default;

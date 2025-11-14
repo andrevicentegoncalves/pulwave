@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use '../foundation/positioning-scale' as position;
+
+// ============================================================================ //
+//                       VARIABLES: SEMANTICS - POSITIONING                     //
+// ============================================================================ //
+
+// ---------------------------------------------------------------------------- //
+// SEMANTIC POSITIONING MAPS
+// ---------------------------------------------------------------------------- //
+
+$position-scale: (
+  '0': position.$position-0,
+  '1': position.$position-1,
+  '2': position.$position-2,
+  '3': position.$position-3,
+  '4': position.$position-4,
+  '6': position.$position-6,
+  '8': position.$position-8,
+  '10': position.$position-10,
+  '12': position.$position-12,
+  '16': position.$position-16,
+  '20': position.$position-20,
+  '24': position.$position-24,
+  '32': position.$position-32,
+  '40': position.$position-40,
+  '48': position.$position-48,
+  '64': position.$position-64,
+) !default;
+
+$position-percentages: (
+  '0': position.$position-0-percent,
+  '25': position.$position-25-percent,
+  '50': position.$position-50-percent,
+  '75': position.$position-75-percent,
+  '100': position.$position-100-percent,
+) !default;
+
+// ---------------------------------------------------------------------------- //
+// SEMANTIC POSITIONING TOKENS 
+// ---------------------------------------------------------------------------- //
+
+// Inset positioning (for absolute/fixed elements)
+$inset-none: position.$position-0 !default;
+$inset-xs: position.$position-1 !default;
+$inset-sm: position.$position-2 !default;
+$inset-md: position.$position-4 !default;
+$inset-lg: position.$position-6 !default;
+$inset-xl: position.$position-8 !default;
+
+// Legacy directional positioning (all set to 0)
+$position-top-none: position.$position-0 !default;
+$position-right-none: position.$position-0 !default;
+$position-bottom-none: position.$position-0 !default;
+$position-left-none: position.$position-0 !default;

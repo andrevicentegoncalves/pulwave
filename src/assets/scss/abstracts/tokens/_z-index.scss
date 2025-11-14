@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../variables/foundation/z-index-scale' as scale;
+
+@mixin generate-z-index-tokens() {
+
+  /* ========================================================================== */
+  /*                              TOKENS: Z-INDEX                               */
+  /* ========================================================================== */
+
+  // Base layer
+  --z-index-base: #{map.get(scale.$z-index-layers, 'base')};
+  --z-index-below: #{map.get(scale.$z-index-layers, 'below')};
+  
+  // Content layers
+  --z-index-content: #{map.get(scale.$z-index-layers, 'content')};
+  --z-index-dropdown: #{map.get(scale.$z-index-layers, 'dropdown')};
+  --z-index-sticky: #{map.get(scale.$z-index-layers, 'sticky')};
+  --z-index-fixed: #{map.get(scale.$z-index-layers, 'fixed')};
+  
+  // Overlay layers
+  --z-index-modal-overlay: #{map.get(scale.$z-index-layers, 'modal-overlay')};
+  --z-index-modal: #{map.get(scale.$z-index-layers, 'modal')};
+  --z-index-popover: #{map.get(scale.$z-index-layers, 'popover')};
+  --z-index-tooltip: #{map.get(scale.$z-index-layers, 'tooltip')};
+  
+  // Maximum layer
+  --z-index-max: #{map.get(scale.$z-index-layers, 'max')};
+
+  /* -------------------------------------------------------------------------- */
+  /*                               TIMING: LEGACY                               */
+  /* -------------------------------------------------------------------------- */
+  /* Maintained for backward compatibility */     
+
+  --z-index-modal-backdrop: var(--z-index-modal-overlay);
+}

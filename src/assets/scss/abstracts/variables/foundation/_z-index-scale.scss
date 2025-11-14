@@ -1,0 +1,33 @@
+@use 'sass:map';
+
+// ========================================================================== //
+//                   VARIABLES: FOUNDATION - Z-INDEX SCALE                    //
+// ========================================================================== //
+
+$z-index-content: (
+  'below': -1,
+  'base': 0,
+  'content': 1,
+  'hover': 1,
+  'active': 2,
+  'focus': 3,
+  'raised': 10,
+  'elevated': 100,
+) !default;
+
+$z-index-overlay: (
+  'dropdown': 1000,
+  'sticky': 1020,
+  'fixed': 1030,
+  'modal-overlay': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'tooltip': 1070,
+  'notification': 1080,
+  'alert': 1090,
+  'skip-link': 9998,
+  'debug': 9999,
+  'max': 10000,
+) !default;
+
+$z-index-layers: map.merge($z-index-content, $z-index-overlay) !default;

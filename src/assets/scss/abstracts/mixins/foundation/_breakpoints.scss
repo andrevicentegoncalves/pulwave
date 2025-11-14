@@ -1,0 +1,106 @@
+@use 'sass:map';
+@use '../../functions/foundation/breakpoints-scale' as bp-fn;
+
+
+// ========================================================================== //
+//                    MIXINS: BREAKPOINTS (FOUNDATION)                        //
+// ========================================================================== //
+// Mobile-first responsive breakpoint mixins
+// These provide the core functionality for responsive design
+// ========================================================================== //
+
+// ========================================================================== //
+//                    MIXIN: BREAKPOINT UP (Mobile-First)                     //
+// ========================================================================== //
+// Applies styles from the specified breakpoint and up
+// Mobile-first approach - the modern standard
+//
+// @param {String} $breakpoint - Breakpoint name (xs, s, m, l, xl, 2xl)
+//
+// @example
+//   .element {
+//     width: 100%;  // Mobile default
+//     
+//     @include bp-up(m) {
+//       width: 50%;  // Tablet and up
+//     }
+//   }
+// ========================================================================== //
+
+@mixin bp-up($breakpoint) {
+  // XS is mobile-first default, no media query needed
+  @if $breakpoint == 'xs' {
+    @content;
+  } @else {
+    @media #{bp-fn.breakpoint-up($breakpoint)} {
+      @content;
+    }
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: BREAKPOINT DOWN                                  //
+// ========================================================================== //
+// Applies styles up to the maximum of the specified breakpoint
+// Use sparingly - prefer mobile-first bp-up()
+//
+// @param {String} $breakpoint - Breakpoint name (xs, s, m, l)
+// Note: XL and 2XL don't have max values (they're open-ended)
+//
+// @example
+//   .element {
+//     @include bp-down(m) {
+//       display: none;  // Hide on tablet and below
+//     }
+//   }
+// ========================================================================== //
+
+@mixin bp-down($breakpoint) {
+  @media #{bp-fn.breakpoint-down($breakpoint)} {
+    @content;
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: BREAKPOINT ONLY                                  //
+// ========================================================================== //
+// Applies styles only within a specific breakpoint range
+// Useful for targeting a single viewport size
+//
+// @param {String} $breakpoint - Breakpoint name
+//
+// @example
+//   .element {
+//     @include bp-only(m) {
+//       background: blue;  // Only on tablets
+//     }
+//   }
+// ========================================================================== //
+
+@mixin bp-only($breakpoint) {
+  @media #{bp-fn.breakpoint-only($breakpoint)} {
+    @content;
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: BREAKPOINT BETWEEN                               //
+// ========================================================================== //
+// Applies styles within a range of breakpoints
+//
+// @param {String} $lower - Lower breakpoint
+// @param {String} $upper - Upper breakpoint
+//
+// @example
+//   .element {
+//     @include bp-between(s, l) {
+//       padding: 2rem;  // Small to large only
+//     }
+//   }
+// ========================================================================== //
+
+@mixin bp-between($lower, $upper) {
+  @media #{bp-fn.breakpoint-between($lower, $upper)} {
+    @content;
+  }
+}

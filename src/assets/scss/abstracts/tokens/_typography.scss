@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use '../functions/foundation/unit-conversion' as units;
+@use '../mixins/foundation/typography' as *;
+@use '../variables/foundation/typography-scale' as foundation;
+@use '../variables/semantics/typography' as semantics;
+
+@mixin generate-typography-tokens() {
+
+/* ============================================================================ */
+/*                             TOKENS: TYPOGRAPHY                               */
+/* ============================================================================ */
+
+  /* Font Family Scale */
+  @each $name, $value in foundation.$font-family-scale {
+    --font-family-#{$name}: #{$value};
+  }
+
+  /* Font Size Scale - Desktop */
+  @each $size, $value in foundation.$font-size-desktop {
+    --font-size-#{$size}: #{$value};
+  }
+
+  /* Font Size Scale - Phone (for responsive tokens) */
+  @each $size, $value in foundation.$font-size-phone {
+    --font-size-#{$size}-phone: #{$value};
+  }
+
+  /* Font Weight Scale (100-900) */
+  @each $name, $value in foundation.$font-weight-scale {
+    --font-weight-#{$name}: #{$value};
+  }
+
+  /* Numeric Weight Aliases (100, 200, 300...) */
+  @each $name, $value in foundation.$font-weight-scale {
+    --font-weight-#{$value}: #{$value};
+  }
+
+  /* Line Height Scale */
+  @each $name, $value in foundation.$line-height-scale {
+    --line-height-#{$name}: #{$value};
+  }
+
+  /* Letter Spacing Scale */
+  @each $name, $value in foundation.$letter-spacing-scale {
+    --letter-spacing-#{$name}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                       TYPOGRAPHYY: SEMANTIC PRESETS                        */
+  /* -------------------------------------------------------------------------- */
+
+  @include generate-semantic-tokens('body', semantics.$typography-body);
+  @include generate-semantic-tokens('title', semantics.$typography-title);
+  @include generate-semantic-tokens('headline', semantics.$typography-headline);
+  @include generate-semantic-tokens('caption', semantics.$typography-caption);
+  @include generate-semantic-tokens('label', semantics.$typography-label);
+  @include generate-semantic-tokens('action', semantics.$typography-action);
+  @include generate-semantic-tokens('eyebrow', semantics.$typography-eyebrow);
+  @include generate-semantic-tokens('price', semantics.$typography-price);
+
+  /* -------------------------------------------------------------------------- */
+  /*                            TYPOGRAPHYY: LEGACY                             */
+  /* -------------------------------------------------------------------------- */
+  /* Maintained for backward compatibility */            
+
+  /* Font Sizes  */
+  --font-size-xxxs: #{units.rem(5)};  
+  --font-size-xxs: #{units.rem(11)};   
+  --font-size-xs: #{units.rem(12)};    
+  --font-size-s: #{map.get(foundation.$font-size-desktop, '7xs')};      
+  --font-size-base: #{map.get(foundation.$font-size-desktop, '6xs')};  
+  --font-size-m: #{map.get(foundation.$font-size-desktop, '3xs')};      
+  --font-size-l: #{map.get(foundation.$font-size-desktop, '2xs')};      
+  --font-size-xl: #{map.get(foundation.$font-size-desktop, 's')};      
+
+  /* Font Family */
+  --font-family-base: #{map.get(foundation.$font-family-scale, 'sans')};
+
+  /* Truncaiton */
+  --truncate-width: 100%;
+}

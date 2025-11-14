@@ -1,0 +1,138 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+@use 'core' as *;
+
+// ========================================================================== //
+//                        FOUNDATION: SPACING SCALE                           //
+// ========================================================================== //
+ 
+// -------------------------------------------
+// SPACING BASE UNIT                                
+// -------------------------------------------
+
+/// Base unit for all spacing calculations (4px grid system)
+/// @type Number
+$spacing-base-unit: 4px !default;
+
+// -------------------------------------------
+// CORE SPACING SCALE                               
+// -------------------------------------------
+/// Based on 4px base unit with 16px = 1rem conversion
+
+$spacing-scale: (
+  // Base
+  0: 0,
+  
+  // Small 
+  1: units.rem($spacing-base-unit * 1),      // 4px  → 0.25rem
+  2: units.rem($spacing-base-unit * 2),      // 8px  → 0.5rem
+  3: units.rem($spacing-base-unit * 3),      // 12px → 0.75rem
+  4: units.rem($spacing-base-unit * 4),      // 16px → 1rem
+  6: units.rem($spacing-base-unit * 6),      // 24px → 1.5rem
+  8: units.rem($spacing-base-unit * 8),      // 32px → 2rem
+  10: units.rem($spacing-base-unit * 10),    // 40px → 2.5rem
+  12: units.rem($spacing-base-unit * 12),    // 48px → 3rem
+  
+  // Medium 
+  14: units.rem($spacing-base-unit * 14),    // 56px  → 3.5rem
+  16: units.rem($spacing-base-unit * 16),    // 64px  → 4rem
+  18: units.rem($spacing-base-unit * 18),    // 72px  → 4.5rem
+  20: units.rem($spacing-base-unit * 20),    // 80px  → 5rem
+  24: units.rem($spacing-base-unit * 24),    // 96px  → 6rem
+  28: units.rem($spacing-base-unit * 28),    // 112px → 7rem
+  32: units.rem($spacing-base-unit * 32),    // 128px → 8rem
+  
+  // Large 
+  36: units.rem($spacing-base-unit * 36),    // 144px → 9rem
+  40: units.rem($spacing-base-unit * 40),    // 160px → 10rem
+  44: units.rem($spacing-base-unit * 44),    // 176px → 11rem
+  48: units.rem($spacing-base-unit * 48),    // 192px → 12rem
+  52: units.rem($spacing-base-unit * 52),    // 208px → 13rem
+  56: units.rem($spacing-base-unit * 56),    // 224px → 14rem
+  60: units.rem($spacing-base-unit * 60),    // 240px → 15rem
+  64: units.rem($spacing-base-unit * 64),    // 256px → 16rem
+  
+  // Extra Large
+  72: units.rem($spacing-base-unit * 72),    // 288px → 18rem
+  80: units.rem($spacing-base-unit * 80),    // 320px → 20rem
+  88: units.rem($spacing-base-unit * 88),    // 352px → 22rem
+  96: units.rem($spacing-base-unit * 96),    // 384px → 24rem
+  104: units.rem($spacing-base-unit * 104),  // 416px → 26rem
+  112: units.rem($spacing-base-unit * 112),  // 448px → 28rem
+  144: units.rem($spacing-base-unit * 144),  // 576px → 36rem
+) !default;
+
+// -------------------------------------------
+// NUMERIC SEMANTIC ALIASES                           
+// -------------------------------------------
+
+$spacing-0: map.get($spacing-scale, 0) !default;      // 0
+$spacing-1: map.get($spacing-scale, 1) !default;      // 0.25rem  (4px)
+$spacing-2: map.get($spacing-scale, 2) !default;      // 0.5rem   (8px)
+$spacing-3: map.get($spacing-scale, 3) !default;      // 0.75rem  (12px)
+$spacing-4: map.get($spacing-scale, 4) !default;      // 1rem     (16px)
+$spacing-6: map.get($spacing-scale, 6) !default;      // 1.5rem   (24px)
+$spacing-8: map.get($spacing-scale, 8) !default;      // 2rem     (32px)
+$spacing-10: map.get($spacing-scale, 10) !default;    // 2.5rem   (40px)
+$spacing-12: map.get($spacing-scale, 12) !default;    // 3rem     (48px)
+$spacing-14: map.get($spacing-scale, 14) !default;    // 3.5rem   (56px)
+$spacing-16: map.get($spacing-scale, 16) !default;    // 4rem     (64px)
+$spacing-18: map.get($spacing-scale, 18) !default;    // 4.5rem   (72px)
+$spacing-20: map.get($spacing-scale, 20) !default;    // 5rem     (80px)
+$spacing-24: map.get($spacing-scale, 24) !default;    // 6rem     (96px)
+$spacing-28: map.get($spacing-scale, 28) !default;    // 7rem     (112px)
+$spacing-32: map.get($spacing-scale, 32) !default;    // 8rem     (128px)
+$spacing-36: map.get($spacing-scale, 36) !default;    // 9rem     (144px)
+$spacing-40: map.get($spacing-scale, 40) !default;    // 10rem    (160px)
+$spacing-44: map.get($spacing-scale, 44) !default;    // 11rem    (176px)
+$spacing-48: map.get($spacing-scale, 48) !default;    // 12rem    (192px)
+$spacing-52: map.get($spacing-scale, 52) !default;    // 13rem    (208px)
+$spacing-56: map.get($spacing-scale, 56) !default;    // 14rem    (224px)
+$spacing-60: map.get($spacing-scale, 60) !default;    // 15rem    (240px)
+$spacing-64: map.get($spacing-scale, 64) !default;    // 16rem    (256px)
+$spacing-72: map.get($spacing-scale, 72) !default;    // 18rem    (288px)
+$spacing-80: map.get($spacing-scale, 80) !default;    // 20rem    (320px)
+$spacing-88: map.get($spacing-scale, 88) !default;    // 22rem    (352px)
+$spacing-96: map.get($spacing-scale, 96) !default;    // 24rem    (384px)
+$spacing-104: map.get($spacing-scale, 104) !default;  // 26rem    (416px)
+$spacing-112: map.get($spacing-scale, 112) !default;  // 28rem    (448px)
+$spacing-144: map.get($spacing-scale, 144) !default;  // 36rem    (576px)
+
+// -------------------------------------------
+// SEMANTIC MAPS                                      
+// -------------------------------------------
+
+$spacing-numeric: (
+  '0': $spacing-0,
+  '1': $spacing-1,
+  '2': $spacing-2,
+  '3': $spacing-3,
+  '4': $spacing-4,
+  '6': $spacing-6,
+  '8': $spacing-8,
+  '10': $spacing-10,
+  '12': $spacing-12,
+  '14': $spacing-14,
+  '16': $spacing-16,
+  '18': $spacing-18,
+  '20': $spacing-20,
+  '24': $spacing-24,
+  '28': $spacing-28,
+  '32': $spacing-32,
+  '36': $spacing-36,
+  '40': $spacing-40,
+  '44': $spacing-44,
+  '48': $spacing-48,
+  '52': $spacing-52,
+  '56': $spacing-56,
+  '60': $spacing-60,
+  '64': $spacing-64,
+  '72': $spacing-72,
+  '80': $spacing-80,
+  '88': $spacing-88,
+  '96': $spacing-96,
+  '104': $spacing-104,
+  '112': $spacing-112,
+  '144': $spacing-144,
+) !default;
+

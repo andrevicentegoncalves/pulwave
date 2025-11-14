@@ -1,0 +1,171 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../variables/foundation/transform-scale' as scale;
+
+// ============================================================================ //
+//                  FUNCTIONS: FOUNDATION - TRANSFORM SCALE                     //
+// ============================================================================ //
+
+/// Get scale value
+/// @param {String|Number} $size - Scale key or custom value
+/// @return {Number} Scale value
+/// @example transform-scale('110') => 1.1
+@function transform-scale($size) {
+  @if map.has-key(scale.$scale-scale, $size) {
+    @return map.get(scale.$scale-scale, $size);
+  }
+  @else if type-of($size) == 'number' {
+    @return $size;
+  }
+  @error "Scale value '#{$size}' not found. Available: #{map.keys(scale.$scale-scale)}";
+}
+
+/// Get rotate value
+/// @param {String|Number} $angle - Rotate key or custom angle
+/// @return {Number} Rotation angle
+/// @example transform-rotate('90') => 90deg
+@function transform-rotate($angle) {
+  @if map.has-key(scale.$rotate-scale, $angle) {
+    @return map.get(scale.$rotate-scale, $angle);
+  }
+  @else if type-of($angle) == 'number' {
+    @return $angle;
+  }
+  @error "Rotate value '#{$angle}' not found. Available: #{map.keys(scale.$rotate-scale)}";
+}
+
+/// Get translate value
+/// @param {String|Number} $distance - Translate key or custom value
+/// @return {Number} Translation distance
+/// @example transform-translate('2') => 16px
+@function transform-translate($distance) {
+  @if map.has-key(scale.$translate-scale, $distance) {
+    @return map.get(scale.$translate-scale, $distance);
+  }
+  @else if type-of($distance) == 'number' {
+    @return $distance;
+  }
+  @error "Translate value '#{$distance}' not found. Available: #{map.keys(scale.$translate-scale)}";
+}
+
+/// Get skew value
+/// @param {String|Number} $angle - Skew key or custom angle
+/// @return {Number} Skew angle
+@function transform-skew($angle) {
+  @if map.has-key(scale.$skew-scale, $angle) {
+    @return map.get(scale.$skew-scale, $angle);
+  }
+  @else if type-of($angle) == 'number' {
+    @return $angle;
+  }
+  @error "Skew value '#{$angle}' not found. Available: #{map.keys(scale.$skew-scale)}";
+}
+
+/// Get transform origin value
+/// @param {String} $position - Origin position name
+/// @return {String} Transform origin value
+@function transform-origin($position) {
+  @if map.has-key(scale.$transform-origins, $position) {
+    @return map.get(scale.$transform-origins, $position);
+  }
+  @error "Transform origin '#{$position}' not found. Available: #{map.keys(scale.$transform-origins)}";
+}
+
+/// Get transform preset configuration
+/// @param {String} $preset - Preset name
+/// @return {Map} Transform configuration
+@function transform-preset($preset) {
+  @if map.has-key(scale.$transform-presets, $preset) {
+    @return map.get(scale.$transform-presets, $preset);
+  }
+  @error "Transform preset '#{$preset}' not found. Available: #{map.keys(scale.$transform-presets)}";
+}
+
+/// Get perspective value
+/// @param {String} $size - Perspective size
+/// @return {Number|String} Perspective value
+@function perspective($size) {
+  @if map.has-key(scale.$perspective-scale, $size) {
+    @return map.get(scale.$perspective-scale, $size);
+  }
+  @error "Perspective size '#{$size}' not found. Available: #{map.keys(scale.$perspective-scale)}";
+}
+
+/// Build a complete transform string from preset
+/// @param {String} $preset - Preset name
+/// @return {String} Complete transform CSS value
+/// @example transform-build('hover-lift') => scale(1.05) translateY(-4px)
+@function transform-build($preset) {
+  $config: transform-preset($preset);
+  $transforms: ();
+  
+  // Scale
+  @if map.has-key($config, 'scale') {
+    $transforms: list.append($transforms, scale(map.get($config, 'scale')), space);
+  }
+  @if map.has-key($config, 'scale-x') {
+    $transforms: list.append($transforms, scaleX(map.get($config, 'scale-x')), space);
+  }
+  @if map.has-key($config, 'scale-y') {
+    $transforms: list.append($transforms, scaleY(map.get($config, 'scale-y')), space);
+  }
+  
+  // Rotate
+  @if map.has-key($config, 'rotate') {
+    $transforms: list.append($transforms, rotate(map.get($config, 'rotate')), space);
+  }
+  @if map.has-key($config, 'rotate-x') {
+    $transforms: list.append($transforms, rotateX(map.get($config, 'rotate-x')), space);
+  }
+  @if map.has-key($config, 'rotate-y') {
+    $transforms: list.append($transforms, rotateY(map.get($config, 'rotate-y')), space);
+  }
+  
+  // Translate
+  @if map.has-key($config, 'translate-x') and map.has-key($config, 'translate-y') {
+    $transforms: list.append($transforms, 
+      translate(map.get($config, 'translate-x'), map.get($config, 'translate-y')), space);
+  }
+  @else if map.has-key($config, 'translate-x') {
+    $transforms: list.append($transforms, translateX(map.get($config, 'translate-x')), space);
+  }
+  @else if map.has-key($config, 'translate-y') {
+    $transforms: list.append($transforms, translateY(map.get($config, 'translate-y')), space);
+  }
+  
+  // Skew
+  @if map.has-key($config, 'skew-x') {
+    $transforms: list.append($transforms, skewX(map.get($config, 'skew-x')), space);
+  }
+  @if map.has-key($config, 'skew-y') {
+    $transforms: list.append($transforms, skewY(map.get($config, 'skew-y')), space);
+  }
+  
+  @return $transforms;
+}
+
+/// Build a simple scale transform
+/// @param {String|Number} $scale - Scale value
+/// @return {String} CSS transform value
+@function transform-scale-css($scale) {
+  $value: transform-scale($scale);
+  @return scale($value);
+}
+
+/// Build a simple rotate transform
+/// @param {String|Number} $angle - Rotation angle
+/// @return {String} CSS transform value
+@function transform-rotate-css($angle) {
+  $value: transform-rotate($angle);
+  @return rotate($value);
+}
+
+/// Build a translate transform
+/// @param {String|Number} $x - X-axis translation
+/// @param {String|Number} $y - Y-axis translation (optional)
+/// @return {String} CSS transform value
+@function transform-translate-css($x, $y: 0) {
+  $x-value: transform-translate($x);
+  $y-value: if($y == 0, 0, transform-translate($y));
+  @return translate($x-value, $y-value);
+}

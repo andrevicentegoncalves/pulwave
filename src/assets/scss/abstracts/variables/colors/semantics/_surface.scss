@@ -1,0 +1,91 @@
+@use 'neutral' as neutral;
+
+// ============================================================================= //
+//                      VARIABLES: COLOR SEMANTICS - SURFACE                     //
+// ============================================================================= //
+
+// ---------------------------------------------------------------------------//
+// BASE SURFACE COLORS
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-default: neutral.$color-neutral-0 !default;
+$color-surface-subtle: neutral.$color-neutral-50 !default;
+$color-surface-strong: neutral.$color-neutral-100 !default;
+$color-surface-disabled: neutral.$color-neutral-100 !default;
+
+// Dark Mode
+$color-surface-default-dark: neutral.$color-neutral-900 !default;
+$color-surface-subtle-dark: neutral.$color-neutral-850 !default;
+$color-surface-strong-dark: neutral.$color-neutral-800 !default;
+$color-surface-disabled-dark: neutral.$color-neutral-800 !default;
+
+// ---------------------------------------------------------------------------//
+// INTERACTIVE SURFACE STATES
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-hover: neutral.$color-neutral-50 !default;
+$color-surface-pressed: neutral.$color-neutral-100 !default;
+$color-surface-selected: neutral.$color-neutral-150 !default;
+
+// Dark Mode
+$color-surface-hover-dark: neutral.$color-neutral-850 !default;
+$color-surface-pressed-dark: neutral.$color-neutral-800 !default;
+$color-surface-selected-dark: neutral.$color-neutral-750 !default;
+
+// ---------------------------------------------------------------------------//
+// ON-SURFACE COLORS (text on surfaces)
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-on-surface-default: neutral.$color-neutral-900 !default;
+$color-on-surface-subtle: neutral.$color-neutral-700 !default;
+$color-on-surface-strong: neutral.$color-neutral-900 !default;
+$color-on-surface-disabled: neutral.$color-neutral-400 !default;
+
+// Dark Mode
+$color-on-surface-default-dark: neutral.$color-neutral-50 !default;
+$color-on-surface-subtle-dark: neutral.$color-neutral-400 !default;
+$color-on-surface-strong-dark: neutral.$color-neutral-0 !default;
+$color-on-surface-disabled-dark: neutral.$color-neutral-600 !default;
+
+// ---------------------------------------------------------------------------//
+// INVERSE SURFACE COLORS
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-inverse-default: neutral.$color-neutral-900 !default;
+$color-surface-inverse-subtle: neutral.$color-neutral-800 !default;
+$color-surface-inverse-disabled: neutral.$color-neutral-600 !default;
+
+// Dark Mode
+$color-surface-inverse-default-dark: neutral.$color-neutral-0 !default;
+$color-surface-inverse-subtle-dark: neutral.$color-neutral-100 !default;
+$color-surface-inverse-disabled-dark: neutral.$color-neutral-400 !default;
+
+// ---------------------------------------------------------------------------//
+// INTERACTIVE INVERSE SURFACE STATES
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-inverse-hover: neutral.$color-neutral-850 !default;
+$color-surface-inverse-pressed: neutral.$color-neutral-800 !default;
+
+// Dark Mode
+$color-surface-inverse-hover-dark: neutral.$color-neutral-50 !default;
+$color-surface-inverse-pressed-dark: neutral.$color-neutral-100 !default;
+
+// ---------------------------------------------------------------------------//
+// ON-SURFACE INVERSE COLORS (text on inverse surfaces)
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-on-surface-inverse-default: neutral.$color-neutral-0 !default;
+$color-on-surface-inverse-subtle: neutral.$color-neutral-100 !default;
+$color-on-surface-inverse-disabled: neutral.$color-neutral-400 !default;
+
+// Dark Mode
+$color-on-surface-inverse-default-dark: neutral.$color-neutral-900 !default;
+$color-on-surface-inverse-subtle-dark: neutral.$color-neutral-800 !default;
+$color-on-surface-inverse-disabled-dark: neutral.$color-neutral-600 !default;

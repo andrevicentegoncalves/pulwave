@@ -1,0 +1,55 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables/colors/theme-mapping' as theme;
+
+/* ========================================================================== */
+/*                            UTILITY CLASSES: COLOR                          */
+/* ========================================================================== */
+
+//-------------------------------------------
+// TEXT COLOR UTILITIES
+//-------------------------------------------
+
+@include generate-text-colors(theme.$theme-mappings);
+
+//-------------------------------------------
+// BACKGROUND COLOR UTILITIES
+//-------------------------------------------
+
+@include generate-background-colors(theme.$theme-mappings);
+
+//-------------------------------------------
+// BORDER COLOR UTILITIES
+//-------------------------------------------
+
+@include generate-border-colors(theme.$theme-mappings, 'border-color', true);
+
+//-------------------------------------------
+// COLOR COMBINATIONS (BADGES & TIERS)
+//-------------------------------------------
+
+@include generate-color-combos();
+
+//-------------------------------------------
+// SPECIAL UTILITIES
+//-------------------------------------------
+
+// Link styling with states
+.link-no-decoration {
+  color: var(--link-default);
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--link-hover);
+    text-decoration: none;
+  }
+  
+  &:focus {
+    color: var(--link-default);
+    text-decoration: none;
+  }
+  
+  &:visited {
+    color: var(--link-visited);
+    text-decoration: none;
+  }
+}

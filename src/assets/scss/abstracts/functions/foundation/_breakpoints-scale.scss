@@ -1,0 +1,151 @@
+@use 'sass:map';
+@use '../../variables/semantics/breakpoints' as semantics;
+
+// ========================================================================== //
+//                      FUNCTIONS: BREAKPOINT SYSTEM                          //
+// ========================================================================== //
+
+// ========================================================================== //
+//                    FUNCTION: GET BREAKPOINT VALUE                          //
+// ========================================================================== //
+// Retrieves the breakpoint value for a given size
+//
+// @param {String} $breakpoint - Breakpoint name (xs, s, m, l, xl, 2xl)
+// @return {Number} Breakpoint value in pixels
+//
+// @example
+//   $tablet: breakpoint-get('m');  // Returns: 768px
+//   $desktop: breakpoint-get('l'); // Returns: 1024px
+// ========================================================================== //
+
+@function breakpoint-get($breakpoint) {
+  // Map short names to semantic variable names
+  $bp-map: (
+    'xs': semantics.$breakpoint-xs,
+    's': semantics.$breakpoint-s,
+    'm': semantics.$breakpoint-m,
+    'l': semantics.$breakpoint-l,
+    'xl': semantics.$breakpoint-xl,
+    '2xl': semantics.$breakpoint-2xl
+  );
+  
+  @if not map.has-key($bp-map, $breakpoint) {
+    @error "Breakpoint '#{$breakpoint}' not found. Available: xs, s, m, l, xl, 2xl";
+  }
+  
+  @return map.get($bp-map, $breakpoint);
+}
+
+// ========================================================================== //
+//                    FUNCTION: GET BREAKPOINT MAX VALUE                      //
+// ========================================================================== //
+// Retrieves the maximum breakpoint value for a given size
+//
+// @param {String} $breakpoint - Breakpoint name (xs, s, m, l)
+// @return {Number} Maximum breakpoint value in pixels
+//
+// @example
+//   $mobile-max: breakpoint-max('xs'); // Returns: 639px
+//   $tablet-max: breakpoint-max('m');  // Returns: 1023px
+// ========================================================================== //
+
+@function breakpoint-max($breakpoint) {
+  // Map short names to semantic variable names
+  $bp-map: (
+    'xs': semantics.$breakpoint-xs-max,
+    's': semantics.$breakpoint-s-max,
+    'm': semantics.$breakpoint-m-max,
+    'l': semantics.$breakpoint-l-max
+  );
+  
+  @if not map.has-key($bp-map, $breakpoint) {
+    @error "Max breakpoint '#{$breakpoint}' not found. Available: xs, s, m, l";
+  }
+  
+  @return map.get($bp-map, $breakpoint);
+}
+
+// ========================================================================== //
+//                    FUNCTION: BREAKPOINT UP                                 //
+// ========================================================================== //
+// Generates a min-width media query for the given breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {String} Media query string
+//
+// @example
+//   @media #{breakpoint-up('m')} {
+//     // Styles for tablet and up
+//   }
+// ========================================================================== //
+
+@function breakpoint-up($breakpoint) {
+  $value: breakpoint-get($breakpoint);
+  @return 'screen and (min-width: #{$value})';
+}
+
+// ========================================================================== //
+//                    FUNCTION: BREAKPOINT DOWN                               //
+// ========================================================================== //
+// Generates a max-width media query for the given breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {String} Media query string
+//
+// @example
+//   @media #{breakpoint-down('m')} {
+//     // Styles for tablet and down
+//   }
+// ========================================================================== //
+
+@function breakpoint-down($breakpoint) {
+  $value: breakpoint-max($breakpoint);
+  @return 'screen and (max-width: #{$value})';
+}
+
+// ========================================================================== //
+//                    FUNCTION: BREAKPOINT BETWEEN                            //
+// ========================================================================== //
+// Generates a media query for a range between two breakpoints
+//
+// @param {String} $lower - Lower breakpoint name
+// @param {String} $upper - Upper breakpoint name
+// @return {String} Media query string
+//
+// @example
+//   @media #{breakpoint-between('s', 'l')} {
+//     // Styles for small to large only
+//   }
+// ========================================================================== //
+
+@function breakpoint-between($lower, $upper) {
+  $min: breakpoint-get($lower);
+  $max: breakpoint-max($upper);
+  @return 'screen and (min-width: #{$min}) and (max-width: #{$max})';
+}
+
+// ========================================================================== //
+//                    FUNCTION: BREAKPOINT ONLY                               //
+// ========================================================================== //
+// Generates a media query for a specific breakpoint range only
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {String} Media query string
+//
+// @example
+//   @media #{breakpoint-only('m')} {
+//     // Styles for tablet only (768px - 1023px)
+//   }
+// ========================================================================== //
+
+@function breakpoint-only($breakpoint) {
+  $min: breakpoint-get($breakpoint);
+  
+  // XL and 2XL don't have max values (they're open-ended)
+  @if $breakpoint == 'xl' or $breakpoint == '2xl' {
+    @return 'screen and (min-width: #{$min})';
+  }
+  
+  $max: breakpoint-max($breakpoint);
+  @return 'screen and (min-width: #{$min}) and (max-width: #{$max})';
+}

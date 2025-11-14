@@ -1,0 +1,67 @@
+@use 'sass:map';
+
+// ============================================================================= //
+//                    VARIABLES: COLOR PRIMITIVES - DEFAULT                      //
+// ============================================================================= //
+
+// Default theme color configuration
+// Based on Real Estate Design System - Material Design 3 conventions
+// Defines hue and saturation for each color family
+// Lightness is derived from base scale or custom overrides
+
+$color-config: (
+  // Brand colors - Real Estate theme
+  'primary': (hue: 160, saturation: 94%),      // Dark Emerald (#059669) - RGB(5, 150, 105)
+  'secondary': (hue: 45, saturation: 88%),     // Mustard Yellow (#E6B017)
+  'tertiary': (hue: 160, saturation: 50%),     // Teal variant
+  
+  // Feedback colors - Material Design 3 semantic
+  'success': (hue: 142, saturation: 76%),      // Green (#10B981)
+  'warning': (hue: 38, saturation: 92%),       // Amber (#F59E0B)
+  'error': (hue: 0, saturation: 84%),          // Red (#EF4444) - renamed from danger
+  'info': (hue: 217, saturation: 91%),         // Blue (#3B82F6)
+  
+  // System colors
+  'accent': (hue: 217, saturation: 91%),       // Info blue for accents
+  'neutral': (hue: 215, saturation: 16%)       // Slate gray scale
+) !default;
+
+// Custom lightness overrides for specific families/weights
+// Only override when base scale doesn't meet brand requirements
+// Uses standard 12-weight scale: 0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+
+$custom-lightness: (
+  // Neutral uses custom scale matching Real Estate Design System
+  // Based on Tailwind Slate scale for consistency
+  'neutral': (
+    0: 100%,     // White
+    50: 99%,     // #F8FAFC
+    100: 98%,    // #F1F5F9
+    200: 94%,    // #E2E8F0
+    300: 87%,    // #CBD5E1
+    400: 70%,    // #94A3B8
+    500: 50%,    // #64748B
+    600: 35%,    // #475569
+    700: 25%,    // #334155
+    800: 17%,    // #1E293B
+    900: 10%,    // #0F172A
+    950: 4%      // #020617
+  ),
+  
+  // Primary (Emerald) adjustments for Real Estate brand
+  'primary': (
+    500: 30%,    // #059669 - Main brand color - RGB(5, 150, 105)
+  ),
+
+  // Success adjustments for better readability
+  'success': (
+    500: 36%,    // Darker green for better contrast
+    600: 30%,    // Even darker for text on light backgrounds
+  ),
+
+  // Error adjustments for better readability
+  'error': (
+    500: 45%,    // Darker red for better contrast
+    600: 38%,    // Even darker for text on light backgrounds
+  ),
+) !default;

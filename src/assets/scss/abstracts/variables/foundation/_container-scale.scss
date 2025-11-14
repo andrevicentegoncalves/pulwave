@@ -1,0 +1,101 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+@use 'core' as *;
+
+// ========================================================================== //
+//                       FOUNDATION: CONTAINER SCALE                          //
+// ========================================================================== //
+
+// -------------------------------------------
+// CONTAINER WIDTH SCALE
+// -------------------------------------------
+
+$container-scale: (
+  // Breakpoint-based containers
+  'xs': units.rem(320),      // 320px - Mobile
+  'sm': units.rem(640),      // 640px - Small devices
+  'md': units.rem(768),      // 768px - Tablet
+  'lg': units.rem(1024),     // 1024px - Laptop
+  'xl': units.rem(1280),     // 1280px - Desktop
+  '2xl': units.rem(1536),    // 1536px - Large desktop
+  '3xl': units.rem(1920),    // 1920px - Ultra-wide
+  
+  // Semantic containers
+  'content': units.rem(640),  // 640px - Readable content
+  'prose': 65ch,              // 65ch - Optimal reading line length
+  'narrow': units.rem(480),   // 480px - Narrow content (forms)
+  'wide': units.rem(1440),    // 1440px - Wide content
+  
+  // Special
+  'full': 100%,               // Full width
+  'screen': 100vw,            // Full viewport width
+) !default;
+
+// -------------------------------------------
+// CONTAINER ALIASES
+// -------------------------------------------
+
+$container-xs: map.get($container-scale, 'xs') !default;
+$container-sm: map.get($container-scale, 'sm') !default;
+$container-md: map.get($container-scale, 'md') !default;
+$container-lg: map.get($container-scale, 'lg') !default;
+$container-xl: map.get($container-scale, 'xl') !default;
+$container-2xl: map.get($container-scale, '2xl') !default;
+$container-3xl: map.get($container-scale, '3xl') !default;
+
+$container-content: map.get($container-scale, 'content') !default;
+$container-prose: map.get($container-scale, 'prose') !default;
+$container-full: map.get($container-scale, 'full') !default;
+
+// Default container
+$container-base: $container-xl !default;
+
+// -------------------------------------------
+// CONTAINER PADDING SCALE
+// -------------------------------------------
+
+$container-padding-scale: (
+  'xs': units.rem(16),       // 16px - Mobile
+  'sm': units.rem(24),       // 24px - Tablet
+  'md': units.rem(32),       // 32px - Desktop
+  'lg': units.rem(48),       // 48px - Large screens
+  'xl': units.rem(64),       // 64px - Extra large
+) !default;
+
+// -------------------------------------------
+// CONTAINER CONTEXT PRESETS
+// -------------------------------------------
+
+$container-presets: (
+  // Page containers
+  'page': (
+    'max-width': $container-xl,
+    'padding-x': map.get($container-padding-scale, 'md'),
+    'padding-y': map.get($container-padding-scale, 'lg'),
+    'margin-x': auto,
+  ),
+  
+  // Content containers
+  'article': (
+    'max-width': $container-content,
+    'padding-x': map.get($container-padding-scale, 'sm'),
+    'padding-y': map.get($container-padding-scale, 'md'),
+    'margin-x': auto,
+  ),
+  
+  // Section containers
+  'section': (
+    'max-width': $container-2xl,
+    'padding-x': map.get($container-padding-scale, 'md'),
+    'padding-y': map.get($container-padding-scale, 'xl'),
+    'margin-x': auto,
+  ),
+  
+  // Narrow containers (forms, modals)
+  'narrow': (
+    'max-width': map.get($container-scale, 'narrow'),
+    'padding-x': map.get($container-padding-scale, 'sm'),
+    'padding-y': map.get($container-padding-scale, 'sm'),
+    'margin-x': auto,
+  ),
+) !default;

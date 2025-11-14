@@ -1,0 +1,38 @@
+@use 'sass:map';
+@use '../variables/foundation/aspect-ratio-scale' as scale;
+
+@mixin generate-aspect-ratio-tokens() {
+
+    /* ========================================================================== */
+    /*                             TOKENS: ASPECT RATIO                           */
+    /* ========================================================================== */
+
+    /* Standard ratios */
+    --aspect-ratio-square: #{map.get(scale.$aspect-ratio-scale, 'square')};
+    --aspect-ratio-landscape: #{map.get(scale.$aspect-ratio-scale, 'landscape')};
+    --aspect-ratio-widescreen: #{map.get(scale.$aspect-ratio-scale, 'widescreen')};
+    --aspect-ratio-ultrawide: #{map.get(scale.$aspect-ratio-scale, 'ultrawide')};
+    --aspect-ratio-portrait: #{map.get(scale.$aspect-ratio-scale, 'portrait')};
+    --aspect-ratio-photo: #{map.get(scale.$aspect-ratio-scale, 'photo')};
+
+    /* Social media ratios */
+    --aspect-ratio-video: #{map.get(scale.$aspect-ratio-scale, 'video')};
+    --aspect-ratio-story: #{map.get(scale.$aspect-ratio-scale, 'story')};
+    --aspect-ratio-twitter-card: #{map.get(scale.$aspect-ratio-scale, 'twitter-card')};
+    --aspect-ratio-facebook-cover: #{map.get(scale.$aspect-ratio-scale, 'facebook-cover')};
+    --aspect-ratio-instagram-post: #{map.get(scale.$aspect-ratio-scale, 'instagram-post')};
+    --aspect-ratio-youtube-thumbnail: #{map.get(scale.$aspect-ratio-scale, 'youtube-thumbnail')};
+
+    /* Design ratios */
+    --aspect-ratio-golden: #{map.get(scale.$aspect-ratio-scale, 'golden')};
+    --aspect-ratio-silver: #{map.get(scale.$aspect-ratio-scale, 'silver')};
+
+    /* Cinema & Entertainment */
+    --aspect-ratio-cinema: #{map.get(scale.$aspect-ratio-scale, 'cinema')};
+    --aspect-ratio-imax: #{map.get(scale.$aspect-ratio-scale, 'imax')};
+
+    /* Responsive ratios */
+    --aspect-ratio-mobile-hero: #{map.get(scale.$aspect-ratio-responsive, 'mobile-hero')};
+    --aspect-ratio-tablet-hero: #{map.get(scale.$aspect-ratio-responsive, 'tablet-hero')};
+    --aspect-ratio-desktop-hero: #{map.get(scale.$aspect-ratio-responsive, 'desktop-hero')};
+}

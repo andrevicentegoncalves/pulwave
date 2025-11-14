@@ -1,0 +1,192 @@
+@use 'sass:map';
+@use 'sass:string';
+
+// ========================================================================== //
+//                         MIXINS: COLOR GENERATORS                           //
+// ========================================================================== //
+// Generate utility classes from design tokens
+
+/// Generate text color utility classes
+/// @param {Map} $theme-mappings - Color token mappings
+@mixin generate-text-colors($theme-mappings) {
+  @each $token-name, $values in $theme-mappings {
+    $should-generate: false;
+    
+    // Generate for text, link, and on-* tokens
+    @if string.index($token-name, 'text-') == 1 or
+       string.index($token-name, 'on-') == 1 or
+       string.index($token-name, 'link-') == 1 or
+       string.index($token-name, 'primary') == 1 or
+       string.index($token-name, 'secondary') == 1 or
+       string.index($token-name, 'tertiary') == 1 or
+       string.index($token-name, 'feedback-') == 1 or
+       string.index($token-name, 'tier-') == 1 {
+      $should-generate: true;
+    }
+    
+    // Exclude background, surface, border, and skeleton tokens
+    @if string.index($token-name, 'background-') or
+       string.index($token-name, 'surface-') or
+       string.index($token-name, 'border-color-') or
+       string.index($token-name, 'skeleton-') or
+       string.index($token-name, 'footer') {
+      $should-generate: false;
+    }
+    
+    @if $should-generate {
+      .text-color-#{$token-name} {
+        color: var(--#{$token-name});
+      }
+    }
+  }
+}
+
+/// Generate background color utility classes
+/// @param {Map} $theme-mappings - Color token mappings
+@mixin generate-background-colors($theme-mappings) {
+  @each $token-name, $values in $theme-mappings {
+    $should-generate: false;
+    
+    // Only generate backgrounds for these prefixes
+    @if string.index($token-name, 'background-') == 1 or
+       string.index($token-name, 'surface-') == 1 or
+       string.index($token-name, 'feedback-') == 1 or
+       string.index($token-name, 'tier-') == 1 or
+       string.index($token-name, 'primary') == 1 or
+       string.index($token-name, 'secondary') == 1 or
+       string.index($token-name, 'tertiary') == 1 or
+       string.index($token-name, 'neutral-') == 1 or
+       string.index($token-name, 'skeleton-') == 1 or
+       string.index($token-name, 'footer') == 1 {
+      $should-generate: true;
+    }
+    
+    // Exclude specific patterns
+    @if string.index($token-name, 'on-') or
+       string.index($token-name, 'border-color-') or
+       string.index($token-name, 'text-') or
+       string.index($token-name, 'link-') or
+       string.index($token-name, 'focus-ring') {
+      $should-generate: false;
+    }
+    
+    @if $should-generate {
+      .background-color-#{$token-name} {
+        background-color: var(--#{$token-name});
+      }
+    }
+  }
+}
+
+/// Generate border color utility classes
+/// @param {Map} $theme-mappings - Color token mappings
+@mixin generate-border-colors($theme-mappings, $prefix: 'border-color', $important: false) {
+    @each $token-name, $values in $theme-mappings {
+      // Only include tokens that start with "border-color-"
+      @if string.index($token-name, 'border-color-') == 1 {
+        // Remove 'border-color-' prefix (13 characters)
+        $suffix: string.slice($token-name, 14);
+        .#{$prefix}-#{$suffix} {
+          @if $important {
+            border-color: var(--#{$token-name}) !important;
+          } @else {
+            border-color: var(--#{$token-name});
+          }
+        }
+      }
+    }
+  }
+
+/// Generate badge and tier color combinations
+@mixin generate-color-combos() {
+  // Feedback badges
+  .badge {
+    &-success {
+      color: var(--on-feedback);
+      background-color: var(--feedback-success);
+    }
+    
+    &-info {
+      color: var(--on-feedback);
+      background-color: var(--feedback-info);
+    }
+    
+    &-warning {
+      color: var(--on-feedback);
+      background-color: var(--feedback-warning);
+    }
+    
+    &-danger {
+      color: var(--on-feedback-danger);
+      background-color: var(--feedback-danger);
+    }
+  }
+  
+  // Tier badges
+  .tier {
+    &-miles {
+      color: var(--on-tier);
+      background-color: var(--tier-miles);
+    }
+    
+    &-gold {
+      color: var(--on-tier);
+      background-color: var(--tier-gold);
+    }
+    
+    &-silver {
+      color: var(--on-tier);
+      background-color: var(--tier-silver);
+    }
+    
+    &-navigator {
+      color: var(--on-tier-navigator);
+      background-color: var(--tier-navigator);
+    }
+  }
+}
+
+/// Generate legacy color utilities for backward compatibility
+@mixin generate-legacy-colors() {
+  /* LEGACY COLOR UTILITIES - DEPRECATED - DO NOT USE IN NEW CODE */
+  
+  .color-primary {
+    color: var(--color-primary);
+  }
+  
+  .color-success {
+    color: var(--color-success);
+  }
+  
+  .color-danger {
+    color: var(--color-danger);
+  }
+  
+  .color-warning {
+    color: var(--color-warning);
+  }
+  
+  .color-info {
+    color: var(--color-info);
+  }
+  
+  .background-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .background-success {
+    background-color: var(--color-success);
+  }
+  
+  .background-danger {
+    background-color: var(--color-danger);
+  }
+  
+  .background-warning {
+    background-color: var(--color-warning);
+  }
+  
+  .background-info {
+    background-color: var(--color-info);
+  }
+}

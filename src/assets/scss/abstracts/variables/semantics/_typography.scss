@@ -1,0 +1,381 @@
+@use 'sass:map';
+@use '../foundation/typography-scale' as scale;
+@use '../../functions/foundation/unit-conversion' as fn;
+
+// ============================================================================ //
+//                       SEMANTICS: TYPOGRAPHY PRESETS                          //
+// ============================================================================ //
+
+$typography-headline: (
+  '3xl': (
+    'size-desktop': map.get(scale.$font-size-desktop, '3xl'),          // 136px
+    'size-phone': map.get(scale.$font-size-phone, '3xl'),              // 76px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1 (100%)
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),          // 700
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),      // 500
+    'text-transform': map.get(scale.$text-transform-scale, 'none'),    // none
+  ),
+  '2xl': (
+    'size-desktop': map.get(scale.$font-size-desktop, '2xl'),          // 112px
+    'size-phone': map.get(scale.$font-size-phone, '2xl'),              // 68px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'xl': (
+    'size-desktop': map.get(scale.$font-size-desktop, 'xl'),           // 96px
+    'size-phone': map.get(scale.$font-size-phone, 'xl'),               // 60px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'l': (
+    'size-desktop': map.get(scale.$font-size-desktop, 'l'),            // 72px
+    'size-phone': map.get(scale.$font-size-phone, 'l'),                // 52px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'm': (
+    'size-desktop': map.get(scale.$font-size-desktop, 'm'),            // 64px
+    'size-phone': map.get(scale.$font-size-phone, 'm'),                // 48px
+    'line-height': map.get(scale.$line-height-scale, 'tight'),         // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  's': (
+    'size-desktop': map.get(scale.$font-size-desktop, 's'),            // 48px
+    'size-phone': map.get(scale.$font-size-phone, 's'),                // 36px
+    'line-height': map.get(scale.$line-height-scale, 'tight'),         // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'xs': (
+    'size-desktop': map.get(scale.$font-size-desktop, 'xs'),           // 40px
+    'size-phone': map.get(scale.$font-size-phone, 'xs'),               // 28px
+    'line-height': map.get(scale.$line-height-scale, 'tight'),         // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  '2xs': (
+    'size-desktop': map.get(scale.$font-size-desktop, '2xs'),          // 32px
+    'size-phone': map.get(scale.$font-size-phone, '2xs'),              // 24px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'), 
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  '3xs': (
+    'size-desktop': map.get(scale.$font-size-desktop, '3xs'),          // 24px
+    'size-phone': map.get(scale.$font-size-phone, '3xs'),              // 20px
+    'line-height': map.get(scale.$line-height-scale, 'none'),          // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tighter'), // -4px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+) !default;
+
+$typography-title: (
+  '3xl': (
+    'size-desktop': 72px,
+    'size-phone': 56px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  '2xl': (
+    'size-desktop': 64px,
+    'size-phone': 48px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'xl': (
+    'size-desktop': 48px,
+    'size-phone': 40px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'l': (
+    'size-desktop': 40px,
+    'size-phone': 34px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'm': (
+    'size-desktop': 32px,
+    'size-phone': 30px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  's': (
+    'size-desktop': 28px,
+    'size-phone': 26px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'xs': (
+    'size-desktop': 24px,
+    'size-phone': 22px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  '2xs': (
+    'size-desktop': 18px,
+    'size-phone': 18px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  '3xs': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'tight'),// -2px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+) !default;
+
+$typography-body: (
+  'xl': (
+    'size-desktop': 20px,
+    'size-phone': 20px,
+    'line-height': map.get(scale.$line-height-scale, 'normal'),     // 1.4
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-light': map.get(scale.$font-weight-scale, 'light'),     // 300
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'), // 400
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'), // 600
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),       // 700
+  ),
+  'l': (
+    'size-desktop': 18px,
+    'size-phone': 18px,
+    'line-height': map.get(scale.$line-height-scale, 'normal'),     // 1.4
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-light': map.get(scale.$font-weight-scale, 'light'),
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  'm': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'base'),       // 1.5 ⭐ Most common
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-light': map.get(scale.$font-weight-scale, 'light'),
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  's': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'base'),       // 1.5
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  '2xs': (
+    'size-desktop': 11px,
+    'size-phone': 11px,
+    'line-height': map.get(scale.$line-height-scale, 'base'),       // 1.5
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+) !default;
+
+$typography-caption: (
+  'm': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'normal'),     // 1.4
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-light': map.get(scale.$font-weight-scale, 'light'),
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  's': (
+    'size-desktop': 13px,
+    'size-phone': 13px,
+    'line-height': map.get(scale.$line-height-scale, 'base'),       // 1.5
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  '2xs': (
+    'size-desktop': 11px,
+    'size-phone': 11px,
+    'line-height': map.get(scale.$line-height-scale, 'base'),       // 1.5
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-semi-bold': map.get(scale.$font-weight-scale, 'semi-bold'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+) !default;
+
+$typography-label: (
+  'm': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'normal'),     // 1.4
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'wide'), // 1%
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  's': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'normal'),     // 1.4
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'wide'), // 1%
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+) !default;
+
+$typography-action: (
+  'button-l': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'button-m': (
+    'size-desktop': 15px,
+    'size-phone': 15px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'button-s': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+  'link-navigation': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+  ),
+  'link-hyperlink': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'snug'),       // 1.2
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'snug'), // -1px
+    'weight-regular': map.get(scale.$font-weight-scale, 'regular'),
+  ),
+) !default;
+
+$typography-eyebrow: (
+  'l': (
+    'size-desktop': 18px,
+    'size-phone': 18px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'wider'),// 5%
+    'text-transform': map.get(scale.$text-transform-scale, 'uppercase'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  'm': (
+    'size-desktop': 16px,
+    'size-phone': 16px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'wider'),// 5%
+    'text-transform': map.get(scale.$text-transform-scale, 'uppercase'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  's': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'tight'),      // 1.1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'wider'),// 5%
+    'text-transform': map.get(scale.$text-transform-scale, 'uppercase'),
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+) !default;
+
+$typography-price: (
+  'xl': (
+    'size-desktop': 60px,
+    'size-phone': 44px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  'l': (
+    'size-desktop': 40px,
+    'size-phone': 36px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  'm': (
+    'size-desktop': 32px,
+    'size-phone': 28px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  's': (
+    'size-desktop': 24px,
+    'size-phone': 20px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  'xs': (
+    'size-desktop': 18px,
+    'size-phone': 18px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-bold': map.get(scale.$font-weight-scale, 'bold'),
+  ),
+  '2xs': (
+    'size-desktop': 14px,
+    'size-phone': 14px,
+    'line-height': map.get(scale.$line-height-scale, 'none'),       // 1
+    'letter-spacing': map.get(scale.$letter-spacing-scale, 'normal'), // 0px
+    'weight-medium': map.get(scale.$font-weight-scale, 'medium'),
+  ),
+) !default;
+
+// -------------------------------------------
+// LEGACY
+// -------------------------------------------
+
+$font-family-base: 'Arial', sans-serif;
+$font-size-xxxs: fn.rem(5);
+$font-size-xxs: fn.rem(10);
+$font-size-xs: fn.rem(12);
+$font-size-s: fn.rem(14);
+$font-size-base: fn.rem(16);
+$font-size-m: fn.rem(24);
+$font-size-l: fn.rem(32);
+$font-size-xl: fn.rem(48);
+$line-height-base: 1.5;
+$truncate-width: 100%;
