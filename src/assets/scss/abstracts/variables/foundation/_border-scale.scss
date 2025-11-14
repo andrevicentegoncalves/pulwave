@@ -1,7 +1,5 @@
 @use 'sass:map';
-@use '../../functions/foundation/unit-conversion' as units;
 @use 'core' as *;
-@use 'sizing-scale' as sizing;
 
 // ========================================================================== //
 //                        FOUNDATION: BORDER SCALE                            //
@@ -13,12 +11,12 @@
 
 $border-width-scale: (
   'none': 0,
-  '2xs': units.rem(0.5px),   // 0.5px - Hairline borders, ultra-subtle dividers
-  'xs': sizing.$sizing-1,    // 1px   - Subtle dividers, minimal borders
-  's': sizing.$sizing-2,     // 2px   - Default borders, standard thickness
-  'm': sizing.$sizing-3,     // 3px   - Emphasized borders, focus states
-  'l': sizing.$sizing-4,     // 4px   - Heavy borders, strong emphasis
-  'xl': sizing.$sizing-6,    // 6px   - Extra heavy borders, rare use
+  '2xs': map.get($scale, 0.25),  // 1px - Hairline borders
+  'xs': map.get($scale, 0.5),    // 2px - Subtle dividers
+  's': map.get($scale, 1),       // 4px - Default borders ⭐
+  'm': map.get($scale, 1.5),     // 6px - Emphasized borders (if needed)
+  'l': map.get($scale, 2),       // 8px - Heavy borders
+  'xl': map.get($scale, 3),      // 12px - Extra heavy borders
 ) !default;
 
 // -------------------------------------------
@@ -31,9 +29,4 @@ $border-style-options: (
   'dashed': dashed,
   'dotted': dotted,
   'double': double,
-  'groove': groove,
-  'ridge': ridge,
-  'inset': inset,
-  'outset': outset,
-  'hidden': hidden,
 ) !default;

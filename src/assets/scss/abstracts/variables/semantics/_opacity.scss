@@ -68,26 +68,3 @@ $opacity-semantic: (
   // Modal overlays (specific cases)
   'overlay-modal': map.get(scale.$opacity-scale, 50),   // 0.5 - Standard modal backdrop
 ) !default;
-
-// -------------------------------------------
-// LEGACY TOKENS (Backward Compatibility)
-// -------------------------------------------
-
-$legacy-opacity-tokens: (
-  // Old banner overlay
-  'banner-overlay-opacity': map.get($opacity-semantic, 'overlay-light'),  // 0.4
-  
-  // Old size-based naming (s, m, l, xl)
-  'opacity-s': map.get(scale.$opacity-scale, 40),   // 0.4 (40%)
-  'opacity-m': map.get(scale.$opacity-scale, 60),   // 0.6 (60%)
-  'opacity-l': map.get(scale.$opacity-scale, 80),   // 0.8 (80%)
-  'opacity-xl': map.get(scale.$opacity-scale, 90),  // 0.9 (90%)
-  'opaque': map.get(scale.$opacity-scale, 100),     // 1.0 (100%)
-  
-  // Old alpha prefixes
-  'alpha-disabled': map.get($opacity-semantic, 'disabled'),  // 0.4
-  'alpha-hover': map.get($opacity-semantic, 'hover'),        // 0.1
-  'alpha-active': map.get($opacity-semantic, 'active'),      // 0.15
-  'alpha-subtle': map.get($opacity-semantic, 'subtle'),      // 0.6
-  'alpha-ghost': map.get($opacity-semantic, 'ghost'),        // 0.1
-) !default;

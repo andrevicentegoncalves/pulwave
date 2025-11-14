@@ -25,11 +25,4 @@
   
   // Maximum layer
   --z-index-max: #{map.get(scale.$z-index-layers, 'max')};
-
-  /* -------------------------------------------------------------------------- */
-  /*                               TIMING: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */     
-
-  --z-index-modal-backdrop: var(--z-index-modal-overlay);
 }

@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use 'core' as *;
-@use 'sizing-scale' as sizing;
 
 // ========================================================================== //
 //                      FOUNDATION: BORDER RADIUS SYSTEM                      //
@@ -12,12 +11,27 @@
 
 $radius-scale: (
   'none': 0,
-  '2xs': sizing.$sizing-2,      // 2px    - Minimal rounding, subtle corners
-  'xs': sizing.$sizing-4,       // 4px    - Subtle rounding, small elements
-  's': sizing.$sizing-8,        // 8px    - Default rounding, standard components
-  'm': sizing.$sizing-16,       // 16px   - Medium rounding, cards, modals
-  'l': sizing.$sizing-24,       // 24px   - Large rounding, prominent elements
-  'xl': sizing.$sizing-32,      // 32px   - Extra large rounding, hero sections
-  '2xl': sizing.$sizing-48,     // 48px   - Maximum rounding, special cases
-  'round': sizing.$sizing-1000, // 1000px - Full circle/pill shape
+  '2xs': map.get($scale, 0.5),   // 2px  - Minimal rounding
+  'xs': map.get($scale, 1),      // 4px  - Subtle rounding
+  's': map.get($scale, 2),       // 8px  - Default rounding ⭐
+  'm': map.get($scale, 4),       // 16px - Medium rounding
+  'l': map.get($scale, 6),       // 24px - Large rounding
+  'xl': map.get($scale, 8),      // 32px - Extra large rounding
+  '2xl': map.get($scale, 12),    // 48px - Maximum rounding
+  'round': 9999px,               // Full circle/pill shape
 ) !default;
+
+// -------------------------------------------
+// RADIUS ALIASES
+// -------------------------------------------
+
+$radius-none: map.get($radius-scale, 'none') !default;
+$radius-xs: map.get($radius-scale, 'xs') !default;
+$radius-s: map.get($radius-scale, 's') !default;
+$radius-m: map.get($radius-scale, 'm') !default;
+$radius-l: map.get($radius-scale, 'l') !default;
+$radius-xl: map.get($radius-scale, 'xl') !default;
+$radius-round: map.get($radius-scale, 'round') !default;
+
+// Default radius
+$radius-base: $radius-s !default;  // 8px

@@ -3,11 +3,11 @@
 // ============================================================================= //
 
 @use 'sass:map';
-@use '../flags' as flags;
-@use '../variables/colors/factory' as factory;
+@use '../../flags' as flags;
+@use 'factory' as factory;
 
 // Import the forwarded primitives with correct prefixes
-@use '../variables/colors/primitives' as primitives;
+@use '../../variables/colors/primitives' as primitives;
 
 // ============================================================================= //
 //                     PUBLIC API: GET COLOR                                     //

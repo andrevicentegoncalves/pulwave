@@ -32,12 +32,3 @@ $transition-semantic: (
   'tooltip': all 150ms map.get(timing.$easing-scale, 'ease-out'),
   'dropdown': all 200ms map.get(timing.$easing-scale, 'decelerate'),
 ) !default;
-
-// -------------------------------------------
-// LEGACY COMPATIBILITY
-// -------------------------------------------
-// Keep for backward compatibility with existing code
-
-$transition-base: map.get($transition-semantic, 'base');      // all 200ms ease-in-out
-$transition-fast: map.get($transition-semantic, 'fast');      // all 150ms ease-out
-$transition-smooth: map.get($transition-semantic, 'smooth');  // all 300ms standard

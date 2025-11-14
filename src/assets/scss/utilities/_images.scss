@@ -38,30 +38,3 @@
     }
   }
 }
-
-//-------------------------------------------
-// LEGACY UTILITIES (DEPRECATED)
-//-------------------------------------------
-// Maintained for backward compatibility
-// TODO: Migrate to token-based sizes in v2.0
-
-.image {
-  // Legacy: Fixed pixel sizes
-  &-size {
-    &-40 { width: 40px; }
-    &-60 { width: 60px; }
-    &-80 { width: 80px; }
-    &-100 { width: 100px; }
-    &-120 { width: 120px; }
-  }
-
-  // App-Specific Images
-  &-star-alliance {
-    width: var(--image-star-alliance);
-  }
-
-  &-captcha {
-    width: var(--image-width-captcha);
-    height: var(--image-height-captcha);
-  }
-}

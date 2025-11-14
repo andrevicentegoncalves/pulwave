@@ -95,12 +95,4 @@
   /* Tilt Effects */
   --transform-tilt-left: rotate(var(--rotate--3));
   --transform-tilt-right: rotate(var(--rotate-3));
-
-  /* -------------------------------------------------------------------------- */
-  /*                            TRANSFORM: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-
-  --transform-scale-base: #{map.get(scale.$transform-scale, '100')};
-  --transform-rotate-base: #{map.get(scale.$rotate-scale, '0')};
 }

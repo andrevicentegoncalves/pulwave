@@ -57,25 +57,4 @@
   @include generate-semantic-tokens('action', semantics.$typography-action);
   @include generate-semantic-tokens('eyebrow', semantics.$typography-eyebrow);
   @include generate-semantic-tokens('price', semantics.$typography-price);
-
-  /* -------------------------------------------------------------------------- */
-  /*                            TYPOGRAPHYY: LEGACY                             */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */            
-
-  /* Font Sizes  */
-  --font-size-xxxs: #{units.rem(5)};  
-  --font-size-xxs: #{units.rem(11)};   
-  --font-size-xs: #{units.rem(12)};    
-  --font-size-s: #{map.get(foundation.$font-size-desktop, '7xs')};      
-  --font-size-base: #{map.get(foundation.$font-size-desktop, '6xs')};  
-  --font-size-m: #{map.get(foundation.$font-size-desktop, '3xs')};      
-  --font-size-l: #{map.get(foundation.$font-size-desktop, '2xs')};      
-  --font-size-xl: #{map.get(foundation.$font-size-desktop, 's')};      
-
-  /* Font Family */
-  --font-family-base: #{map.get(foundation.$font-family-scale, 'sans')};
-
-  /* Truncaiton */
-  --truncate-width: 100%;
 }

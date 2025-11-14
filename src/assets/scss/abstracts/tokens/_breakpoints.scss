@@ -24,15 +24,4 @@
   --breakpoint-s-max: #{semantics.$breakpoint-s-max};
   --breakpoint-m-max: #{semantics.$breakpoint-m-max};
   --breakpoint-l-max: #{semantics.$breakpoint-l-max};
-
-  /* -------------------------------------------------------------------------- */
-  /*                             BREAKPOINTS: LEGACY                            */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */     
-
-  --breakpoint-phone: 480px;
-  --breakpoint-phone-horizontal: 767px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-tablet-horizontal: 1024px;
-  --breakpoint-desktop: 1200px;
   }

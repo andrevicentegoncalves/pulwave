@@ -1,32 +1,22 @@
 @use 'sass:map';
-@use '../../functions/foundation/unit-conversion' as units;
 @use 'core' as *;
-@use 'spacing-scale' as spacing;
-@use 'sizing-scale' as sizing;
 
 // ========================================================================== //
 //                        FOUNDATION: IMAGE SCALE                             //
 // ========================================================================== //
 
 // -------------------------------------------
-// IMAGE BASE UNIT                                
-// -------------------------------------------
-
-$image-base-unit: 1px !default;
-
-// -------------------------------------------
 // IMAGE WIDTH SCALE                               
 // -------------------------------------------
 
 $image-width-scale: (
-  'xs': units.rem(152),      // 9.5rem    (152px)
-  's': units.rem(203),       // 12.6875rem (203px)
-  'sm': units.rem(250),      // 15.625rem  (250px)
-  'm': units.rem(338),       // 21.125rem  (338px)
-  'l': units.rem(474),       // 29.625rem  (474px)
-  'xl': units.rem(600),      // 37.5rem    (600px)
-  '2xl': units.rem(778),     // 48.625rem  (778px)
-  'display': units.rem(778), // 48.625rem  (778px) 
+  'xs': map.get($scale, 36),   // 144px
+  's': map.get($scale, 48),    // 192px
+  'sm': map.get($scale, 64),   // 256px
+  'm': map.get($scale, 80),    // 320px
+  'l': map.get($scale, 112),   // 448px
+  'xl': map.get($scale, 144),  // 576px
+  '2xl': map.get($scale, 192), // 768px
 ) !default;
 
 // -------------------------------------------
@@ -34,12 +24,11 @@ $image-width-scale: (
 // -------------------------------------------
 
 $image-height-scale: (
-  'xs': units.rem(90),       // 5.625rem   (90px)
-  's': units.rem(120),       // 7.5rem     (120px)
-  'm': units.rem(200),       // 12.5rem    (200px)
-  'l': units.rem(280),       // 17.5rem    (280px)
-  'xl': units.rem(460),      // 28.75rem   (460px)
-  'display': units.rem(460), // 28.75rem   (460px) 
+  'xs': map.get($scale, 20),   // 80px
+  's': map.get($scale, 28),    // 112px
+  'm': map.get($scale, 48),    // 192px
+  'l': map.get($scale, 64),    // 256px
+  'xl': map.get($scale, 96),   // 384px
 ) !default;
 
 // -------------------------------------------
@@ -47,12 +36,12 @@ $image-height-scale: (
 // -------------------------------------------
 
 $avatar-size-scale: (
-  'xs': map.get(spacing.$spacing-scale, 8),   // 2rem    (32px)
-  's': map.get(spacing.$spacing-scale, 10),   // 2.5rem  (40px)
-  'm': map.get(spacing.$spacing-scale, 14),   // 3.5rem  (56px)
-  'l': map.get(spacing.$spacing-scale, 20),   // 5rem    (80px)
-  'xl': map.get(spacing.$spacing-scale, 30),  // 7.5rem  (120px)
-  '2xl': map.get(spacing.$spacing-scale, 40), // 10rem   (160px)
+  'xs': map.get($scale, 8),    // 32px
+  's': map.get($scale, 10),    // 40px
+  'm': map.get($scale, 12),    // 48px
+  'l': map.get($scale, 16),    // 64px
+  'xl': map.get($scale, 24),   // 96px
+  '2xl': map.get($scale, 32),  // 128px
 ) !default;
 
 // -------------------------------------------
@@ -60,14 +49,9 @@ $avatar-size-scale: (
 // -------------------------------------------
 
 $thumbnail-size-scale: (
-  'xs': map.get(sizing.$sizing-scale, 64),   // 4rem   (64px)
-  's': map.get(sizing.$sizing-scale, 80),    // 5rem   (80px)
-  'm': map.get(sizing.$sizing-scale, 120),   // 7.5rem (120px)
-  'l': map.get(sizing.$sizing-scale, 160),   // 10rem  (160px)
-  'xl': map.get(sizing.$sizing-scale, 200),  // 12.5rem (200px)
+  'xs': map.get($scale, 16),   // 64px
+  's': map.get($scale, 20),    // 80px
+  'm': map.get($scale, 30),    // 120px
+  'l': map.get($scale, 40),    // 160px
+  'xl': map.get($scale, 50),   // 200px
 ) !default;
-
-// -------------------------------------------
-// DEFAULT FONTAWESOME ICON SIZE                               
-// -------------------------------------------
-$fa-base: 1.5em;

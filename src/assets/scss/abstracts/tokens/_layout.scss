@@ -1,27 +1,6 @@
 @use 'sass:map';
-@use '../flags' as flags;
 
 @mixin generate-layout-tokens() {
 
-    @if flags.$is_main {
-        & {
-            /* ========================================================================== */
-            /*                               TOKENS: LAYOUT                               */
-            /* ========================================================================== */
-            --login-form-width: 27rem; 
-        }
-    }
 
-    --layout-max-width: 90rem;            /* 1440px */
-    --layout-half-max-width: 45rem;       /* 720px */
-    --popup-max-width: 40.625rem;         /* 650px */
-
-    /* Dimensions */
-    --banner-height: 25rem; /* Banner height */
-    --banner-height-phone: 19.3125rem; /* Mobile banner */
-    --bottom-tab-width: 170px; /* Tab width */
-    --bottom-tab-height: 60px; /* Tab height */
-
-    --breadcrumbs-image-height: var(--space-xl);
-    --breadcrumbs-image-height-mobile: var(--space-l);
 } 

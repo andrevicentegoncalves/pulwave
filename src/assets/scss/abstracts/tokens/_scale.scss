@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use '../variables/foundation/core' as scale;
+
+@mixin generate-scale-tokens() {
+
+  /* ========================================================================== */
+  /*                              TOKENS: scale                               */
+  /* ========================================================================== */
+  
+  --scale-0: #{map.get(scale.$scale, '0')};
+  --scale-1: #{map.get(scale.$scale, '1')};
+  --scale-2: #{map.get(scale.$scale, '2')};
+  --scale-3: #{map.get(scale.$scale, '3')};
+  --scale-4: #{map.get(scale.$scale, '4')};
+  --scale-6: #{map.get(scale.$scale, '6')};
+  --scale-8: #{map.get(scale.$scale, '8')};
+  --scale-10: #{map.get(scale.$scale, '10')};
+  --scale-12: #{map.get(scale.$scale, '12')};
+  --scale-14: #{map.get(scale.$scale, '14')};
+  --scale-16: #{map.get(scale.$scale, '16')};
+  --scale-18: #{map.get(scale.$scale, '18')};
+  --scale-20: #{map.get(scale.$scale, '20')};
+  --scale-24: #{map.get(scale.$scale, '24')};
+  --scale-28: #{map.get(scale.$scale, '28')};
+  --scale-32: #{map.get(scale.$scale, '32')};
+  --scale-36: #{map.get(scale.$scale, '36')};
+  --scale-40: #{map.get(scale.$scale, '40')};
+  --scale-44: #{map.get(scale.$scale, '44')};
+  --scale-48: #{map.get(scale.$scale, '48')};
+  --scale-52: #{map.get(scale.$scale, '52')};
+  --scale-56: #{map.get(scale.$scale, '56')};
+  --scale-60: #{map.get(scale.$scale, '60')};
+  --scale-64: #{map.get(scale.$scale, '64')};
+  --scale-72: #{map.get(scale.$scale, '72')};
+  --scale-80: #{map.get(scale.$scale, '80')};
+  --scale-88: #{map.get(scale.$scale, '88')};
+  --scale-96: #{map.get(scale.$scale, '96')};
+  --scale-104: #{map.get(scale.$scale, '104')};
+  --scale-112: #{map.get(scale.$scale, '112')};
+  --scale-144: #{map.get(scale.$scale, '144')};
+}

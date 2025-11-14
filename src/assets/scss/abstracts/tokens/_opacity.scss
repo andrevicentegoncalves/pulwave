@@ -25,15 +25,4 @@
   --opacity-glass-dark: #{map.get(semantics.$opacity-semantic, 'glass-dark')};
   --opacity-full: #{map.get(semantics.$opacity-semantic, 'full')};
   --opacity-none: #{map.get(semantics.$opacity-semantic, 'none')};
-
-  /* -------------------------------------------------------------------------- */
-  /*                              OPACITY: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */   
-
-  --alpha-disabled: #{map.get(semantics.$legacy-opacity-tokens, 'alpha-disabled')};
-  --alpha-hover: #{map.get(semantics.$legacy-opacity-tokens, 'alpha-hover')};
-  --alpha-active: #{map.get(semantics.$legacy-opacity-tokens, 'alpha-active')};
-  --alpha-subtle: #{map.get(semantics.$legacy-opacity-tokens, 'alpha-subtle')};
-  --alpha-ghost: #{map.get(semantics.$legacy-opacity-tokens, 'alpha-ghost')};
 }

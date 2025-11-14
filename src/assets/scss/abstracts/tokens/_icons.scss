@@ -12,20 +12,4 @@
     @each $size, $value in scale.$icon-size-scale {
     --icon-size-#{$size}: #{$value};
     }
-
-    /* -------------------------------------------------------------------------- */
-    /*                         ICONS: SPECIFIC FONT FAMILIES                      */
-    /* -------------------------------------------------------------------------- */
-    /* Icon Font Family */
-    --icon-font-family: 'MegasisIconsFont';             
-
-    /* -------------------------------------------------------------------------- */
-    /*                                 ICONS: LEGACY                              */
-    /* -------------------------------------------------------------------------- */
-    /* Maintained for backward compatibility */            
-
-    --fa-base: #{scale.$icon-size-base};
-
-    /* Default Icon Size */
-    --icon-size-base: #{map.get(scale.$icon-size-scale, 'm')};
 }

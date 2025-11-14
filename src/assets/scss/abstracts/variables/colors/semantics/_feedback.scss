@@ -15,15 +15,32 @@ $color-success-active: primitives.get-color('success', 700) !default;
 $color-success-subtle: primitives.get-color('success', 50) !default;
 $color-success-subtle-dark: primitives.get-color('success', 900) !default;
 
+// Badge variants - same hue, different lightness
+$color-success-badge-heavy: primitives.get-color('success', 700) !default;
+$color-success-badge-medium-bg: primitives.get-color('success', 200) !default;
+$color-success-badge-medium-text: primitives.get-color('success', 700) !default;
+$color-success-badge-light-bg: primitives.get-color('success', 950) !default;
+$color-success-badge-light-text: primitives.get-color('success', 700) !default;
+
 // ---------------------------------------------------------------------------//
-// WARNING
+// WARNING - Bright Yellow (hsl 45, 100%, 55%)
 // ---------------------------------------------------------------------------//
 
-$color-warning: primitives.get-color('warning', 500) !default;
+$color-warning: primitives.get-color('warning', 500) !default;      
 $color-warning-hover: primitives.get-color('warning', 600) !default;
 $color-warning-active: primitives.get-color('warning', 700) !default;
 $color-warning-subtle: primitives.get-color('warning', 50) !default;
 $color-warning-subtle-dark: primitives.get-color('warning', 900) !default;
+
+// Warning text color for bright yellow backgrounds
+$color-warning-text: primitives.get-color('warning', 900) !default;  
+
+// Badge variants - same hue, different lightness
+$color-warning-badge-heavy: primitives.get-color('warning', 700) !default;
+$color-warning-badge-medium-bg: primitives.get-color('warning', 200) !default;
+$color-warning-badge-medium-text: primitives.get-color('warning', 800) !default;
+$color-warning-badge-light-bg: primitives.get-color('warning', 950) !default;
+$color-warning-badge-light-text: primitives.get-color('warning', 700) !default;
 
 // ---------------------------------------------------------------------------//
 // INFO
@@ -35,6 +52,13 @@ $color-info-active: primitives.get-color('info', 700) !default;
 $color-info-subtle: primitives.get-color('info', 50) !default;
 $color-info-subtle-dark: primitives.get-color('info', 900) !default;
 
+// Badge variants - same hue, different lightness
+$color-info-badge-heavy: primitives.get-color('info', 700) !default;
+$color-info-badge-medium-bg: primitives.get-color('info', 200) !default;
+$color-info-badge-medium-text: primitives.get-color('info', 800) !default;
+$color-info-badge-light-bg: primitives.get-color('info', 950) !default;
+$color-info-badge-light-text: primitives.get-color('info', 700) !default;
+
 // ---------------------------------------------------------------------------//
 // ERROR
 // ---------------------------------------------------------------------------//
@@ -45,12 +69,19 @@ $color-error-active: primitives.get-color('error', 700) !default;
 $color-error-subtle: primitives.get-color('error', 50) !default;
 $color-error-subtle-dark: primitives.get-color('error', 900) !default;
 
+// Badge variants - same hue, different lightness
+$color-error-badge-heavy: primitives.get-color('error', 700) !default;
+$color-error-badge-medium-bg: primitives.get-color('error', 200) !default;
+$color-error-badge-medium-text: primitives.get-color('error', 800) !default;
+$color-error-badge-light-bg: primitives.get-color('error', 950) !default;
+$color-error-badge-light-text: primitives.get-color('error', 700) !default;
+
 // ---------------------------------------------------------------------------//
 // ON-FEEDBACK COLORS (text on full color backgrounds)
 // ---------------------------------------------------------------------------//
 
 $color-on-success: neutral.$color-neutral-0 !default;
-$color-on-warning: neutral.$color-neutral-900 !default;
+$color-on-warning: primitives.get-color('warning', 900) !default;  
 $color-on-info: neutral.$color-neutral-0 !default;
 $color-on-error: neutral.$color-neutral-0 !default;
 

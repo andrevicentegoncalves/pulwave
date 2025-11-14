@@ -16,8 +16,7 @@
 @use 'motion';
 @use 'opacity';
 @use 'shadows';
-@use 'sizing';
-@use 'spacing';
+@use 'scale';
 @use 'timing';
 @use 'transform';
 @use 'typography';
@@ -119,14 +118,9 @@
         @include shadows.generate-shadow-tokens();
     }
 
-    // Sizing 
-    @if $categories == 'all' or list.index($categories, 'sizing') {
-        @include sizing.generate-sizing-tokens();
-    }
-
-    // Spacing 
-    @if $categories == 'all' or list.index($categories, 'spacing') {
-        @include spacing.generate-spacing-tokens();
+    // Scale 
+    @if $categories == 'all' or list.index($categories, 'scale') {
+        @include scale.generate-scale-tokens();
     }
 
     // Timing (Duration, Easing, Delay)

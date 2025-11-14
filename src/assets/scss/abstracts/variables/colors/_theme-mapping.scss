@@ -13,10 +13,6 @@ $theme-mappings: (
   // ---------------------------------------------------------------------------//
   
   // Base brand colors
-  'primary-electric': (
-    'light': semantics.$color-brand-primary-electric,
-    'dark': semantics.$color-brand-primary-electric,
-  ),
   'primary': (
     'light': semantics.$color-brand-primary,
     'dark': semantics.$color-brand-primary,
@@ -32,24 +28,6 @@ $theme-mappings: (
   'tertiary': (
     'light': semantics.$color-brand-tertiary,
     'dark': semantics.$color-brand-tertiary,
-  ),
-
-  // Primary Electric interaction states
-  'primary-electric-hover': (
-    'light': semantics.$color-brand-primary-electric-hover,
-    'dark': semantics.$color-brand-primary-electric-hover,
-  ),
-  'primary-electric-active': (
-    'light': semantics.$color-brand-primary-electric-active,
-    'dark': semantics.$color-brand-primary-electric-active,
-  ),
-  'primary-electric-pressed': (
-    'light': semantics.$color-brand-primary-electric-pressed,
-    'dark': semantics.$color-brand-primary-electric-pressed,
-  ),
-  'primary-electric-disabled': (
-    'light': semantics.$color-brand-primary-electric-disabled,
-    'dark': semantics.$color-brand-primary-electric-disabled,
   ),
 
   // Primary interaction states
@@ -107,10 +85,6 @@ $theme-mappings: (
   ),
 
   // On-brand colors
-  'on-primary-electric': (
-    'light': semantics.$color-on-brand-primary-electric,
-    'dark': semantics.$color-on-brand-primary-electric,
-  ),
   'on-primary': (
     'light': semantics.$color-on-brand-primary,
     'dark': semantics.$color-on-brand-primary,
@@ -311,34 +285,6 @@ $theme-mappings: (
   ),
 
   // ---------------------------------------------------------------------------//
-  // ACCENT COLORS
-  // ---------------------------------------------------------------------------//
-  'accent': (
-    'light': semantics.$color-accent,
-    'dark': semantics.$color-accent,
-  ),
-  'accent-subtle': (
-    'light': semantics.$color-accent-subtle,
-    'dark': semantics.$color-accent-subtle,
-  ),
-  'accent-hover': (
-    'light': semantics.$color-accent-hover,
-    'dark': semantics.$color-accent-hover,
-  ),
-  'accent-active': (
-    'light': semantics.$color-accent-active,
-    'dark': semantics.$color-accent-active,
-  ),
-  'accent-pressed': (
-    'light': semantics.$color-accent-pressed,
-    'dark': semantics.$color-accent-pressed,
-  ),
-  'accent-disabled': (
-    'light': semantics.$color-accent-disabled,
-    'dark': semantics.$color-accent-disabled,
-  ),
-
-  // ---------------------------------------------------------------------------//
   // SURFACE COLORS
   // ---------------------------------------------------------------------------//
   'surface-default': (
@@ -431,73 +377,69 @@ $theme-mappings: (
   // ---------------------------------------------------------------------------//
   
   // Base borders
-  'border-color-default': (
+  'border-default': (
     'light': semantics.$color-border-default,
     'dark': semantics.$color-border-default-dark,
   ),
-  'border-color-subtle': (
+  'border-subtle': (
     'light': semantics.$color-border-subtle,
     'dark': semantics.$color-border-subtle-dark,
   ),
-  'border-color-strong': (
+  'border-strong': (
     'light': semantics.$color-border-strong,
     'dark': semantics.$color-border-strong-dark,
   ),
 
   // Brand borders
-  'border-color-primary-electric': (
-    'light': semantics.$color-border-primary-electric,
-    'dark': semantics.$color-border-primary-electric,
-  ),
-  'border-color-primary': (
+  'border-primary': (
     'light': semantics.$color-border-primary,
     'dark': semantics.$color-border-primary,
   ),
-  'border-color-secondary': (
+  'border-secondary': (
     'light': semantics.$color-border-secondary,
     'dark': semantics.$color-border-secondary,
   ),
-  'border-color-tertiary': (
+  'border-tertiary': (
     'light': semantics.$color-border-tertiary,
     'dark': semantics.$color-border-tertiary,
   ),
 
   // Interactive state borders
-  'border-color-hover': (
+  'border-hover': (
     'light': semantics.$color-border-hover,
     'dark': semantics.$color-border-hover-dark,
   ),
-  'border-color-active': (
+  'border-active': (
     'light': semantics.$color-border-active,
     'dark': semantics.$color-border-active-dark,
   ),
-  'border-color-focus': (
+  'border-focus': (
     'light': semantics.$color-border-focus,
     'dark': semantics.$color-border-focus-dark,
   ),
-  'border-color-selected': (
+  'border-selected': (
     'light': semantics.$color-border-selected,
     'dark': semantics.$color-border-selected-dark,
   ),
-  'border-color-disabled': (
+  'border-disabled': (
     'light': semantics.$color-border-disabled,
     'dark': semantics.$color-border-disabled-dark,
   ),
 
   // Feedback borders
-  'border-color-error': (
+  'border-error': (
     'light': semantics.$color-border-error,
     'dark': semantics.$color-border-error,
   ),
-  'border-color-success': (
+  'border-success': (
     'light': semantics.$color-border-success,
     'dark': semantics.$color-border-success,
   ),
-  'border-color-warning': (
+  'border-warning': (
     'light': semantics.$color-border-warning,
     'dark': semantics.$color-border-warning,
   ),
-  'border-color-info': (
+  'border-info': (
     'light': semantics.$color-border-info,
     'dark': semantics.$color-border-info,
   ),

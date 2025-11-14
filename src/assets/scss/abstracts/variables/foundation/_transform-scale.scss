@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use 'core' as *;
-@use 'spacing-scale' as spacing;
 
 // ========================================================================== //
 //                       FOUNDATION: TRANSFORM SCALE                          //
@@ -9,7 +8,6 @@
 // -------------------------------------------
 // SCALE TRANSFORMATIONS
 // -------------------------------------------
-/// Scale transformation values for zoom/resize effects
 
 $transform-scale: (
   '0': 0,           // Completely collapsed
@@ -30,80 +28,79 @@ $transform-scale: (
 // SCALE ALIASES
 // -------------------------------------------
 
-$scale-none: map.get($transform-scale, '100') !default;        // 1 (no scale)
-$scale-shrink-sm: map.get($transform-scale, '95') !default;    // 0.95
-$scale-shrink: map.get($transform-scale, '90') !default;       // 0.9
-$scale-grow-sm: map.get($transform-scale, '105') !default;     // 1.05
-$scale-grow: map.get($transform-scale, '110') !default;        // 1.1
-$scale-grow-lg: map.get($transform-scale, '125') !default;     // 1.25
+$scale-none: map.get($transform-scale, '100') !default;
+$scale-shrink-sm: map.get($transform-scale, '95') !default;
+$scale-shrink: map.get($transform-scale, '90') !default;
+$scale-grow-sm: map.get($transform-scale, '105') !default;
+$scale-grow: map.get($transform-scale, '110') !default;
+$scale-grow-lg: map.get($transform-scale, '125') !default;
 
 // -------------------------------------------
 // ROTATE TRANSFORMATIONS
 // -------------------------------------------
-/// Rotation angles for spin and orientation effects
 
 $rotate-scale: (
   '0': 0deg,
-  '1': 1deg,        // Subtle tilt
-  '2': 2deg,        // Small tilt
-  '3': 3deg,        // Noticeable tilt
-  '6': 6deg,        // Moderate tilt
-  '12': 12deg,      // Strong tilt
-  '45': 45deg,      // Diagonal
-  '90': 90deg,      // Quarter turn
-  '180': 180deg,    // Half turn (flip)
-  '270': 270deg,    // Three-quarter turn
-  '360': 360deg,    // Full rotation
-  '-1': -1deg,      // Negative subtle tilt
-  '-2': -2deg,      // Negative small tilt
-  '-3': -3deg,      // Negative noticeable tilt
-  '-6': -6deg,      // Negative moderate tilt
-  '-12': -12deg,    // Negative strong tilt
-  '-45': -45deg,    // Negative diagonal
-  '-90': -90deg,    // Negative quarter turn
-  '-180': -180deg,  // Negative half turn
+  '1': 1deg,
+  '2': 2deg,
+  '3': 3deg,
+  '6': 6deg,
+  '12': 12deg,
+  '45': 45deg,
+  '90': 90deg,
+  '180': 180deg,
+  '270': 270deg,
+  '360': 360deg,
+  '-1': -1deg,
+  '-2': -2deg,
+  '-3': -3deg,
+  '-6': -6deg,
+  '-12': -12deg,
+  '-45': -45deg,
+  '-90': -90deg,
+  '-180': -180deg,
 ) !default;
 
 // -------------------------------------------
 // ROTATE ALIASES
 // -------------------------------------------
 
-$rotate-none: map.get($rotate-scale, '0') !default;        // 0deg
-$rotate-quarter: map.get($rotate-scale, '90') !default;    // 90deg
-$rotate-half: map.get($rotate-scale, '180') !default;      // 180deg
-$rotate-full: map.get($rotate-scale, '360') !default;      // 360deg
+$rotate-none: map.get($rotate-scale, '0') !default;
+$rotate-quarter: map.get($rotate-scale, '90') !default;
+$rotate-half: map.get($rotate-scale, '180') !default;
+$rotate-full: map.get($rotate-scale, '360') !default;
 
 // -------------------------------------------
 // TRANSLATE TRANSFORMATIONS
 // -------------------------------------------
 
 $translate-scale: (
-  // Using spacing scale for consistent movement
+  // Using unified scale for consistent movement
   '0': 0,
-  '1': map.get(spacing.$spacing-scale, 1),           // 4px
-  '2': map.get(spacing.$spacing-scale, 2),           // 8px
-  '3': map.get(spacing.$spacing-scale, 3),           // 12px
-  '4': map.get(spacing.$spacing-scale, 4),           // 16px
-  '6': map.get(spacing.$spacing-scale, 6),           // 24px
-  '8': map.get(spacing.$spacing-scale, 8),           // 32px
-  '12': map.get(spacing.$spacing-scale, 12),         // 48px
-  '16': map.get(spacing.$spacing-scale, 16),         // 64px
-  '24': map.get(spacing.$spacing-scale, 24),         // 96px
+  '1': map.get($scale, 1),      // 4px
+  '2': map.get($scale, 2),      // 8px
+  '3': map.get($scale, 3),      // 12px
+  '4': map.get($scale, 4),      // 16px
+  '6': map.get($scale, 6),      // 24px
+  '8': map.get($scale, 8),      // 32px
+  '12': map.get($scale, 12),    // 48px
+  '16': map.get($scale, 16),    // 64px
+  '24': map.get($scale, 24),    // 96px
   
-  // Percentage-based (using - instead of /)
+  // Percentage-based
   'quarter': 25%,
   'half': 50%,
   'three-quarters': 75%,
   'full': 100%,
   
-  // Negative values (multiply by -1 in Sass, not CSS)
-  '-1': map.get(spacing.$spacing-scale, 1) * -1,    // -4px
-  '-2': map.get(spacing.$spacing-scale, 2) * -1,    // -8px
-  '-3': map.get(spacing.$spacing-scale, 3) * -1,    // -12px
-  '-4': map.get(spacing.$spacing-scale, 4) * -1,    // -16px
-  '-6': map.get(spacing.$spacing-scale, 6) * -1,    // -24px
-  '-8': map.get(spacing.$spacing-scale, 8) * -1,    // -32px
-  '-12': map.get(spacing.$spacing-scale, 12) * -1,  // -48px
+  // Negative values
+  '-1': map.get($scale, 1) * -1,
+  '-2': map.get($scale, 2) * -1,
+  '-3': map.get($scale, 3) * -1,
+  '-4': map.get($scale, 4) * -1,
+  '-6': map.get($scale, 6) * -1,
+  '-8': map.get($scale, 8) * -1,
+  '-12': map.get($scale, 12) * -1,
   
   // Negative percentages
   '-quarter': -25%,
@@ -115,7 +112,6 @@ $translate-scale: (
 // -------------------------------------------
 // SKEW TRANSFORMATIONS
 // -------------------------------------------
-/// Skew angles for perspective effects
 
 $skew-scale: (
   '0': 0deg,
@@ -134,7 +130,6 @@ $skew-scale: (
 // -------------------------------------------
 // TRANSFORM ORIGIN POSITIONS
 // -------------------------------------------
-/// Transform origin points for rotation and scaling
 
 $transform-origins: (
   'center': center,
@@ -155,83 +150,82 @@ $transform-origins: (
 $transform-presets: (
   // Hover effects
   'hover-lift': (
-    'scale': map.get($transform-scale, '105'),                        // 1.05
-    'translate-y': map.get(spacing.$spacing-scale, 1) * -1,          // -4px
+    'scale': map.get($transform-scale, '105'),
+    'translate-y': map.get($scale, 1) * -1,  // -4px
   ),
   'hover-grow': (
-    'scale': map.get($transform-scale, '110'),              // 1.1
+    'scale': map.get($transform-scale, '110'),
   ),
   'hover-shrink': (
-    'scale': map.get($transform-scale, '95'),               // 0.95
+    'scale': map.get($transform-scale, '95'),
   ),
   
   // Press/Active effects
   'press-down': (
-    'scale': map.get($transform-scale, '95'),               // 0.95
-    'translate-y': map.get(spacing.$spacing-scale, 1),      // 4px
+    'scale': map.get($transform-scale, '95'),
+    'translate-y': map.get($scale, 1),  // 4px
   ),
   'press-shrink': (
-    'scale': map.get($transform-scale, '90'),               // 0.9
+    'scale': map.get($transform-scale, '90'),
   ),
   
   // Loading/Spin animations
   'spin': (
-    'rotate': map.get($rotate-scale, '360'),            // 360deg
+    'rotate': map.get($rotate-scale, '360'),
   ),
   'spin-reverse': (
-    'rotate': map.get($rotate-scale, '-180'),           // -180deg
+    'rotate': map.get($rotate-scale, '-180'),
   ),
   
   // Entrance animations
   'enter-fade-up': (
-    'translate-y': map.get(spacing.$spacing-scale, 2),       // 8px
-    'scale': map.get($transform-scale, '95'),                 // 0.95
+    'translate-y': map.get($scale, 2),  // 8px
+    'scale': map.get($transform-scale, '95'),
   ),
   'enter-fade-down': (
-    'translate-y': map.get(spacing.$spacing-scale, 2) * -1,  // -8px
-    'scale': map.get($transform-scale, '95'),                 // 0.95
+    'translate-y': map.get($scale, 2) * -1,  // -8px
+    'scale': map.get($transform-scale, '95'),
   ),
   'enter-scale': (
-    'scale': map.get($transform-scale, '90'),               // 0.9
+    'scale': map.get($transform-scale, '90'),
   ),
   
   // Exit animations
   'exit-fade-up': (
-    'translate-y': map.get(spacing.$spacing-scale, 2) * -1,  // -8px
-    'scale': map.get($transform-scale, '95'),                 // 0.95
+    'translate-y': map.get($scale, 2) * -1,  // -8px
+    'scale': map.get($transform-scale, '95'),
   ),
   'exit-fade-down': (
-    'translate-y': map.get(spacing.$spacing-scale, 2),       // 8px
-    'scale': map.get($transform-scale, '95'),                 // 0.95
+    'translate-y': map.get($scale, 2),  // 8px
+    'scale': map.get($transform-scale, '95'),
   ),
   
   // Flip effects
   'flip-horizontal': (
-    'rotate-y': map.get($rotate-scale, '180'),          // 180deg
+    'rotate-y': map.get($rotate-scale, '180'),
   ),
   'flip-vertical': (
-    'rotate-x': map.get($rotate-scale, '180'),          // 180deg
+    'rotate-x': map.get($rotate-scale, '180'),
   ),
   
   // Perspective tilt
   'tilt-left': (
-    'rotate': map.get($rotate-scale, '-3'),             // -3deg
+    'rotate': map.get($rotate-scale, '-3'),
   ),
   'tilt-right': (
-    'rotate': map.get($rotate-scale, '3'),              // 3deg
+    'rotate': map.get($rotate-scale, '3'),
   ),
 ) !default;
 
 // -------------------------------------------
 // 3D TRANSFORM PERSPECTIVE
 // -------------------------------------------
-/// Perspective values for 3D transformations
 
 $perspective-scale: (
   'none': none,
-  'xs': 500px,      // Subtle 3D effect
-  's': 750px,       // Light 3D effect
-  'm': 1000px,      // Standard 3D effect
-  'l': 1500px,      // Strong 3D effect
-  'xl': 2000px,     // Extreme 3D effect
+  'xs': 500px,
+  's': 750px,
+  'm': 1000px,
+  'l': 1500px,
+  'xl': 2000px,
 ) !default;

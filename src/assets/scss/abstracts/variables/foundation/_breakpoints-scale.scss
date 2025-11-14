@@ -1,14 +1,17 @@
+@use 'sass:map';
+@use 'core' as *;
+
 // ========================================================================== //
 //                 FOUNDATION: BREAKPOINTS SCALE                              //
 // ========================================================================== //
 
 $breakpoints-scale: (
-  'xs': 320px,
-  's': 640px,
-  'm': 768px,
-  'l': 1024px,
-  'xl': 1280px,
-  '2xl': 1920px,
+  'sm': map.get($scale, 160),   // 640px  - Small devices
+  'md': map.get($scale, 192),   // 768px  - Tablets
+  'lg': map.get($scale, 256),   // 1024px - Laptops
+  'xl': map.get($scale, 320),   // 1280px - Desktops
+  '2xl': map.get($scale, 384),  // 1536px - Large desktops
+  '3xl': map.get($scale, 480),  // 1920px - Ultra-wide
 ) !default;
 
 // -------------------------------------------
@@ -16,19 +19,9 @@ $breakpoints-scale: (
 // -------------------------------------------
 
 $breakpoints-max: (
-  'xs': 639px,
-  's': 767px,
-  'm': 1023px,
-  'l': 1279px,
+  'sm': 767px,   // 768px - 1
+  'md': 1023px,  // 1024px - 1
+  'lg': 1279px,  // 1280px - 1
+  'xl': 1535px,  // 1536px - 1
+  '2xl': 1919px, // 1920px - 1
 ) !default;
-
-// -------------------------------------------
-// LEGACY: DEPRECATED
-// -------------------------------------------
-
-$breakpoint-phone: 480px;
-$breakpoint-phone-horizontal: 767px;
-$breakpoint-tablet: 768px;
-$breakpoint-tablet-horizontal: 1024px;
-$breakpoint-desktop: 1200px;
-

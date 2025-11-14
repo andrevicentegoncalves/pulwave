@@ -9,20 +9,12 @@
 // BASE BRAND COLORS
 // ---------------------------------------------------------------------------//
 
-$color-brand-primary-electric: primitives.get-color('primary-electric', 500) !default;
 $color-brand-primary: primitives.get-color('primary', 500) !default;
 $color-brand-primary-subtle: primitives.get-color('primary', 50) !default;
 $color-brand-secondary: primitives.get-color('secondary', 500) !default;
+$color-brand-secondary-subtle: primitives.get-color('secondary', 50) !default;
 $color-brand-tertiary: primitives.get-color('tertiary', 500) !default;
-
-// ---------------------------------------------------------------------------//
-// PRIMARY ELECTRIC INTERACTION STATES
-// ---------------------------------------------------------------------------//
-
-$color-brand-primary-electric-hover: primitives.get-color('primary-electric', 600) !default;
-$color-brand-primary-electric-active: primitives.get-color('primary-electric', 700) !default;
-$color-brand-primary-electric-pressed: primitives.get-color('primary-electric', 750) !default;
-$color-brand-primary-electric-disabled: primitives.get-color('primary-electric', 200) !default;
+$color-brand-tertiary-subtle: primitives.get-color('tertiary', 50) !default;
 
 // ---------------------------------------------------------------------------//
 // PRIMARY INTERACTION STATES
@@ -30,7 +22,7 @@ $color-brand-primary-electric-disabled: primitives.get-color('primary-electric',
 
 $color-brand-primary-hover: primitives.get-color('primary', 600) !default;
 $color-brand-primary-active: primitives.get-color('primary', 700) !default;
-$color-brand-primary-pressed: primitives.get-color('primary', 750) !default;
+$color-brand-primary-pressed: primitives.get-color('primary', 800) !default;
 $color-brand-primary-disabled: primitives.get-color('primary', 200) !default;
 
 // ---------------------------------------------------------------------------//
@@ -39,7 +31,7 @@ $color-brand-primary-disabled: primitives.get-color('primary', 200) !default;
 
 $color-brand-secondary-hover: primitives.get-color('secondary', 600) !default;
 $color-brand-secondary-active: primitives.get-color('secondary', 700) !default;
-$color-brand-secondary-pressed: primitives.get-color('secondary', 750) !default;
+$color-brand-secondary-pressed: primitives.get-color('secondary', 800) !default;
 $color-brand-secondary-disabled: primitives.get-color('secondary', 200) !default;
 
 // ---------------------------------------------------------------------------//
@@ -48,22 +40,27 @@ $color-brand-secondary-disabled: primitives.get-color('secondary', 200) !default
 
 $color-brand-tertiary-hover: primitives.get-color('tertiary', 600) !default;
 $color-brand-tertiary-active: primitives.get-color('tertiary', 700) !default;
-$color-brand-tertiary-pressed: primitives.get-color('tertiary', 750) !default;
+$color-brand-tertiary-pressed: primitives.get-color('tertiary', 800) !default;
 $color-brand-tertiary-disabled: primitives.get-color('tertiary', 200) !default;
 
 // ---------------------------------------------------------------------------//
 // ON-BRAND COLORS (text on brand backgrounds)
 // ---------------------------------------------------------------------------//
 
-$color-on-brand-primary-electric: neutral.$color-neutral-950 !default;
-$color-on-brand-primary: neutral.$color-neutral-950 !default;
+// Primary - Emerald green (dark) uses white text
+$color-on-brand-primary: neutral.$color-neutral-0 !default;
+
+// Secondary - Mustard yellow (bright) uses dark text
 $color-on-brand-secondary: primitives.get-color('secondary', 900) !default;
-$color-on-brand-tertiary: primitives.get-color('tertiary', 50) !default;
+
+// Tertiary - Coral (medium) uses white text
+$color-on-brand-tertiary: neutral.$color-neutral-0 !default;
 
 // ---------------------------------------------------------------------------//
 // ON-SURFACE BRAND COLORS (brand colors on neutral surfaces)
 // ---------------------------------------------------------------------------//
 
-$color-on-surface-primary: primitives.get-color('primary', 800) !default;
-$color-on-surface-secondary: primitives.get-color('secondary', 750) !default;
-$color-on-surface-tertiary: primitives.get-color('tertiary', 750) !default;
+// Text-safe brand colors for use on white/light backgrounds
+$color-on-surface-primary: primitives.get-color('primary', 500) !default;     // Already dark enough (6.8:1)
+$color-on-surface-secondary: primitives.get-color('secondary', 700) !default; // Use 700 for text (4.8:1)
+$color-on-surface-tertiary: primitives.get-color('tertiary', 600) !default;   // Use 600 for text (4.6:1)

@@ -33,12 +33,4 @@
     @each $name, $value in timing.$delay-scale {
         --delay-#{$name}: #{$value};
     }
-
-    /* -------------------------------------------------------------------------- */
-    /*                               TIMING: LEGACY                               */
-    /* -------------------------------------------------------------------------- */
-    /* Maintained for backward compatibility */            
-
-    --transition-base: all 0.2s ease-in-out;
-    --animation-duration: 0.3s;
 }

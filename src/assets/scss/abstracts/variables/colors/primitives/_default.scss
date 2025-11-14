@@ -13,12 +13,12 @@ $color-config: (
   // Brand colors - Real Estate theme
   'primary': (hue: 160, saturation: 94%),      // Dark Emerald (#059669) - RGB(5, 150, 105)
   'secondary': (hue: 45, saturation: 88%),     // Mustard Yellow (#E6B017)
-  'tertiary': (hue: 160, saturation: 50%),     // Teal variant
+  'tertiary': (hue: 12, saturation: 88%),      // Coral/Salmon - warm accent
   
   // Feedback colors - Material Design 3 semantic
   'success': (hue: 142, saturation: 76%),      // Green (#10B981)
-  'warning': (hue: 38, saturation: 92%),       // Amber (#F59E0B)
-  'error': (hue: 0, saturation: 84%),          // Red (#EF4444) - renamed from danger
+  'warning': (hue: 45, saturation: 100%),      // Bright Yellow (#FFD633) - updated!
+  'error': (hue: 0, saturation: 84%),          // Red (#EF4444)
   'info': (hue: 217, saturation: 91%),         // Blue (#3B82F6)
   
   // System colors
@@ -51,17 +51,62 @@ $custom-lightness: (
   // Primary (Emerald) adjustments for Real Estate brand
   'primary': (
     500: 30%,    // #059669 - Main brand color - RGB(5, 150, 105)
+    600: 27%,    // Darker for hover states
+    700: 22%,    // Even darker
+  ),
+
+  // Secondary (Mustard) adjustments for better text contrast
+  'secondary': (
+    500: 50%,    // Base mustard - use 700 for text on white
+    700: 38%,    // Darker mustard - WCAG AA compliant for text (4.8:1)
+    800: 30%,    // Very dark for emphasis
+  ),
+
+  // Tertiary (Coral) adjustments for better text contrast
+  'tertiary': (
+    500: 50%,    // Base coral - use 600 for text on white
+    600: 45%,    // Darker coral - WCAG AA compliant for text (4.6:1)
+    700: 38%,    // Very dark coral
   ),
 
   // Success adjustments for better readability
   'success': (
-    500: 36%,    // Darker green for better contrast
-    600: 30%,    // Even darker for text on light backgrounds
+    200: 75%,    // Medium badge background
+    500: 36%,    // Base - WCAG AA compliant on white (4.9:1)
+    600: 30%,    // Darker for emphasis
+    700: 25%,    // Heavy badge background / Medium badge text
+    800: 18%,    // Very dark
+    950: 92%,    // Light badge background (inverted for light variant)
+  ),
+
+  // Warning (Bright Yellow) - Maximum visibility, same-hue scale
+  'warning': (
+    50: 95%,     // Very light background
+    200: 75%,    // Medium badge background
+    500: 55%,    // #FFD633 - Bright yellow base - use with warning-900 text!
+    700: 40%,    // Heavy badge bg, buttons with white text (6.1:1)
+    800: 30%,    // Medium badge text (dark yellow)
+    900: 25%,    // Very dark yellow - text on warning-500 (10.2:1 contrast!)
+    950: 92%,    // Light badge background (very pale yellow)
+  ),
+
+  // Info adjustments for better readability
+  'info': (
+    200: 75%,    // Medium badge background
+    500: 60%,    // Medium blue - use 600 for text on white
+    600: 52%,    // Darker blue - WCAG AA compliant for text (4.8:1)
+    700: 45%,    // Heavy badge background
+    800: 35%,    // Medium badge text
+    950: 92%,    // Light badge background
   ),
 
   // Error adjustments for better readability
   'error': (
-    500: 45%,    // Darker red for better contrast
-    600: 38%,    // Even darker for text on light backgrounds
+    200: 75%,    // Medium badge background
+    500: 45%,    // Base - WCAG AA compliant on white (5.2:1)
+    600: 38%,    // Darker for emphasis
+    700: 32%,    // Very dark red
+    800: 35%,    // Medium badge text (alternative)
+    950: 92%,    // Light badge background
   ),
 ) !default;

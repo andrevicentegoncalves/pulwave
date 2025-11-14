@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
-@use '../../variables/foundation/spacing-scale' as spacing-vars;
-@use '../../variables/foundation/sizing-scale' as sizing-vars;
+@use '../../variables/foundation/core' as core;
 @use '../../variables/foundation/typography-scale' as typography-vars;
 @use '../../variables/foundation/timing-scale' as timing-vars;
 @use '../../variables/foundation/border-scale' as border-vars;
@@ -29,30 +28,33 @@
 // ============================================================================ //
 
 // -------------------------------------------
-// SPACING VALIDATION
+// UNIFIED SCALE VALIDATION
 // -------------------------------------------
 
-/// Check if spacing scale value exists
+/// Check if unified scale value exists
 /// @param {String|Number} $key - Scale key to check
 /// @return {Boolean} True if key exists
-/// @example spacing-exists(4) => true
-/// @example spacing-exists(999) => false
-@function spacing-exists($key) {
-  @return map.has-key(spacing-vars.$spacing-scale, $key);
+/// @example scale-exists(4) => true
+/// @example scale-exists(0.5) => true
+/// @example scale-exists(999) => false
+@function scale-exists($key) {
+  @return map.has-key(core.$scale, $key);
 }
 
 // -------------------------------------------
-// SIZING VALIDATION
+// LEGACY ALIASES (Backwards Compatibility)
 // -------------------------------------------
 
+/// @deprecated Use scale-exists() instead
+/// Check if spacing scale value exists
+@function spacing-exists($key) {
+  @return scale-exists($key);
+}
+
+/// @deprecated Use scale-exists() instead
 /// Check if sizing scale value exists
-/// @param {String|Number} $key - Scale key to check
-/// @return {Boolean} True if key exists
-/// @example sizing-exists(16) => true
-/// @example sizing-exists(999) => false
 @function sizing-exists($key) {
-  @return map.has-key(sizing-vars.$sizing-scale, $key) or 
-          map.has-key(sizing-vars.$size-semantic, $key);
+  @return scale-exists($key);
 }
 
 // -------------------------------------------
@@ -300,11 +302,11 @@
 // TRANSFORM VALIDATION
 // -------------------------------------------
 
-/// Check if scale value exists
+/// Check if transform scale value exists
 /// @param {String} $key - Scale key to check
 /// @return {Boolean} True if key exists
-@function scale-exists($key) {
-  @return map.has-key(transform-vars.$scale-scale, $key);
+@function transform-scale-exists($key) {
+  @return map.has-key(transform-vars.$transform-scale, $key);
 }
 
 /// Check if rotate value exists
@@ -402,18 +404,19 @@
 
 /// Universal function to check if any design token variable exists
 /// Automatically detects the type and checks the appropriate scale
-/// @param {String} $category - Category name (spacing, sizing, color, etc.)
+/// @param {String} $category - Category name
 /// @param {String} $key - Key to check
 /// @return {Boolean} True if variable exists
-/// @example variable-exists('spacing', 4) => true
-/// @example variable-exists('color', 'primary') => true
-/// @example variable-exists('timing', 'fast') => true
+/// @example variable-exists('scale', 4) => true
+/// @example variable-exists('spacing', 4) => true (legacy)
 @function variable-exists($category, $key) {
-  @if $category == 'spacing' {
-    @return spacing-exists($key);
-  } @else if $category == 'sizing' {
-    @return sizing-exists($key);
-  } @else if $category == 'font-size' {
+  // Unified scale
+  @if $category == 'scale' or $category == 'spacing' or $category == 'sizing' {
+    @return scale-exists($key);
+  }
+  
+  // Typography
+  @else if $category == 'font-size' {
     @return font-size-exists($key);
   } @else if $category == 'font-weight' {
     @return font-weight-exists($key);
@@ -423,13 +426,19 @@
     @return letter-spacing-exists($key);
   } @else if $category == 'font-family' {
     @return font-family-exists($key);
-  } @else if $category == 'duration' {
+  }
+  
+  // Timing
+  @else if $category == 'duration' {
     @return duration-exists($key);
   } @else if $category == 'easing' {
     @return easing-exists($key);
   } @else if $category == 'delay' {
     @return delay-exists($key);
-  } @else if $category == 'border-width' {
+  }
+  
+  // Visual
+  @else if $category == 'border-width' {
     @return border-width-exists($key);
   } @else if $category == 'border-style' {
     @return border-style-exists($key);
@@ -439,7 +448,10 @@
     @return shadow-exists($key);
   } @else if $category == 'opacity' {
     @return opacity-exists($key);
-  } @else if $category == 'icon-size' {
+  }
+  
+  // Components
+  @else if $category == 'icon-size' {
     @return icon-size-exists($key);
   } @else if $category == 'z-index' {
     @return z-index-exists($key);
@@ -453,17 +465,24 @@
     @return blur-exists($key);
   } @else if $category == 'cursor' {
     @return cursor-exists($key);
-  } @else if $category == 'scale' {
-    @return scale-exists($key);
+  }
+  
+  // Transforms
+  @else if $category == 'transform-scale' {
+    @return transform-scale-exists($key);
   } @else if $category == 'rotate' {
     @return rotate-exists($key);
   } @else if $category == 'translate' {
     @return translate-exists($key);
-  } @else if $category == 'breakpoint' {
+  }
+  
+  // Layout
+  @else if $category == 'breakpoint' {
     @return breakpoint-exists($key);
   } @else if $category == 'aspect-ratio' {
     @return aspect-ratio-exists($key);
   }
+
   
   @error "Unknown category '#{$category}'. Cannot validate variable existence.";
 }
