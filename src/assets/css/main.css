@@ -202,12 +202,11 @@
   /*                        CONTAINER: MAX-WIDTH SCALE                          */
   /* -------------------------------------------------------------------------- */
   /* Breakpoint-based and semantic container widths */
-  --container-sm: 40rem;
-  --container-md: 48rem;
-  --container-lg: 64rem;
+  --container-s: 40rem;
+  --container-m: 48rem;
+  --container-l: 64rem;
   --container-xl: 80rem;
-  --container-2xl: 96rem;
-  --container-3xl: 120rem;
+  --container-2xl: 120rem;
   --container-prose: 65ch;
   --container-narrow: 30rem;
   --container-wide: ;
@@ -218,15 +217,10 @@
   /* -------------------------------------------------------------------------- */
   /* Responsive padding for container elements */
   --container-padding-xs: 1rem;
-  --container-padding-sm: 1.5rem;
-  --container-padding-md: 2rem;
-  --container-padding-lg: 3rem;
+  --container-padding-s: 1.5rem;
+  --container-padding-m: 2rem;
+  --container-padding-l: 3rem;
   --container-padding-xl: 4rem;
-  /* -------------------------------------------------------------------------- */
-  /*                            CONTAINER: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --container-base: 80rem;
   /* ========================================================================== */
   /*                                TOKENS: CURSOR                              */
   /* ========================================================================== */
@@ -327,38 +321,38 @@
      GRID TOKENS: XS (Extra Small)
      Breakpoint: 320px - 639px | Columns: 4 | Type: Fluid
      ------------------------------------------- */
-  --grid-xs-columns: ;
-  --grid-xs-gutter: ;
-  --grid-xs-margin: ;
-  --grid-xs-max-width: ;
-  --grid-xs-type: ;
+  --grid-xs-columns: 4;
+  --grid-xs-gutter: 1rem;
+  --grid-xs-margin: 1rem;
+  --grid-xs-max-width: 100%;
+  --grid-xs-type: fluid;
   /* -------------------------------------------
      GRID TOKENS: SM (Small)
      Breakpoint: 640px - 767px | Columns: 4 | Type: Fluid
      ------------------------------------------- */
-  --grid-s-columns: ;
-  --grid-s-gutter: ;
-  --grid-s-margin: ;
-  --grid-s-max-width: ;
-  --grid-s-type: ;
+  --grid-s-columns: 4;
+  --grid-s-gutter: 1rem;
+  --grid-s-margin: 1rem;
+  --grid-s-max-width: 100%;
+  --grid-s-type: fluid;
   /* -------------------------------------------
      GRID TOKENS: MD (Medium)
      Breakpoint: 768px - 1023px | Columns: 8 | Type: Fluid
      ------------------------------------------- */
-  --grid-m-columns: ;
-  --grid-m-gutter: ;
-  --grid-m-margin: ;
-  --grid-m-max-width: ;
-  --grid-m-type: ;
+  --grid-m-columns: 8;
+  --grid-m-gutter: 1rem;
+  --grid-m-margin: 1.5rem;
+  --grid-m-max-width: 100%;
+  --grid-m-type: fluid;
   /* -------------------------------------------
      GRID TOKENS: LG (Large)
      Breakpoint: 1024px - 1279px | Columns: 12 | Type: Fluid
      ------------------------------------------- */
-  --grid-l-columns: ;
-  --grid-l-gutter: ;
-  --grid-l-margin: ;
-  --grid-l-max-width: ;
-  --grid-l-type: ;
+  --grid-l-columns: 12;
+  --grid-l-gutter: 1.5rem;
+  --grid-l-margin: 1.5rem;
+  --grid-l-max-width: 100%;
+  --grid-l-type: fluid;
   /* -------------------------------------------
      GRID TOKENS: XL (Extra Large)
      Breakpoint: 1280px+ | Columns: 12 | Type: Fixed

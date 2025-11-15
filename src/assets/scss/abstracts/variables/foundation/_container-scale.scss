@@ -4,22 +4,24 @@
 // ========================================================================== //
 //                       FOUNDATION: CONTAINER SCALE                          //
 // ========================================================================== //
+// Unified container system aligned with breakpoint naming (xs/s/m/l/xl/2xl)
+// All containers based on the unified scale for mathematical consistency
+// ========================================================================== //
 
 // -------------------------------------------
 // CONTAINER WIDTH SCALE
 // -------------------------------------------
 
 $container-scale: (
-  // Breakpoint-based containers (aligned with breakpoints)
-  'sm': map.get($scale, 160),   // 640px  - Small devices
-  'md': map.get($scale, 192),   // 768px  - Tablets
-  'lg': map.get($scale, 256),   // 1024px - Laptops
+  // Breakpoint-aligned containers (matches breakpoint system)
+  's': map.get($scale, 160),    // 640px  - Small devices
+  'm': map.get($scale, 192),    // 768px  - Tablets
+  'l': map.get($scale, 256),    // 1024px - Laptops
   'xl': map.get($scale, 320),   // 1280px - Desktops
-  '2xl': map.get($scale, 384),  // 1536px - Large desktops
-  '3xl': map.get($scale, 480),  // 1920px - Ultra-wide
+  '2xl': map.get($scale, 480),  // 1920px - Ultra-wide
   
   // Semantic containers
-  'prose': 65ch,                 // 65ch - Optimal reading
+  'prose': 65ch,                 // 65ch - Optimal reading width
   'narrow': map.get($scale, 120), // 480px - Forms/modals
   'wide': map.get($scale, 360),   // 1440px - Wide layouts
   
@@ -34,9 +36,9 @@ $container-scale: (
 
 $container-padding-scale: (
   'xs': map.get($scale, 4),   // 16px
-  'sm': map.get($scale, 6),   // 24px
-  'md': map.get($scale, 8),   // 32px
-  'lg': map.get($scale, 12),  // 48px
+  's': map.get($scale, 6),    // 24px
+  'm': map.get($scale, 8),    // 32px
+  'l': map.get($scale, 12),   // 48px
   'xl': map.get($scale, 16),  // 64px
 ) !default;
 
@@ -44,20 +46,16 @@ $container-padding-scale: (
 // CONTAINER ALIASES
 // -------------------------------------------
 
-$container-sm: map.get($container-scale, 'sm') !default;
-$container-md: map.get($container-scale, 'md') !default;
-$container-lg: map.get($container-scale, 'lg') !default;
+$container-s: map.get($container-scale, 's') !default;
+$container-m: map.get($container-scale, 'm') !default;
+$container-l: map.get($container-scale, 'l') !default;
 $container-xl: map.get($container-scale, 'xl') !default;
 $container-2xl: map.get($container-scale, '2xl') !default;
-$container-3xl: map.get($container-scale, '3xl') !default;
 
 $container-prose: map.get($container-scale, 'prose') !default;
 $container-narrow: map.get($container-scale, 'narrow') !default;
 $container-wide: map.get($container-scale, 'wide') !default;
 $container-full: map.get($container-scale, 'full') !default;
-
-// Default container
-$container-base: $container-xl !default;
 
 // -------------------------------------------
 // CONTAINER PRESETS
@@ -66,29 +64,29 @@ $container-base: $container-xl !default;
 $container-presets: (
   'page': (
     'max-width': $container-xl,
-    'padding-x': map.get($container-padding-scale, 'md'),
-    'padding-y': map.get($container-padding-scale, 'lg'),
+    'padding-x': map.get($container-padding-scale, 'm'),
+    'padding-y': map.get($container-padding-scale, 'l'),
     'margin-x': auto,
   ),
   
   'article': (
-    'max-width': $container-sm,
-    'padding-x': map.get($container-padding-scale, 'sm'),
-    'padding-y': map.get($container-padding-scale, 'md'),
+    'max-width': $container-s,
+    'padding-x': map.get($container-padding-scale, 's'),
+    'padding-y': map.get($container-padding-scale, 'm'),
     'margin-x': auto,
   ),
   
   'section': (
     'max-width': $container-2xl,
-    'padding-x': map.get($container-padding-scale, 'md'),
+    'padding-x': map.get($container-padding-scale, 'm'),
     'padding-y': map.get($container-padding-scale, 'xl'),
     'margin-x': auto,
   ),
   
   'narrow': (
     'max-width': $container-narrow,
-    'padding-x': map.get($container-padding-scale, 'sm'),
-    'padding-y': map.get($container-padding-scale, 'sm'),
+    'padding-x': map.get($container-padding-scale, 's'),
+    'padding-y': map.get($container-padding-scale, 's'),
     'margin-x': auto,
   ),
 ) !default;

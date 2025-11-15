@@ -24,11 +24,4 @@
   @each $size, $value in scale.$container-padding-scale {
     --container-padding-#{$size}: #{$value};
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                            CONTAINER: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-
-  --container-base: #{scale.$container-base};
 }

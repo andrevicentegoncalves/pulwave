@@ -4,17 +4,21 @@
 // ========================================================================== //
 //                    VARIABLES: FOUNDATION - GRID SCALE                      //
 // ========================================================================== //
+// Unified grid system aligned with breakpoint naming (xs/s/m/l/xl/2xl)
+// Mobile-first with progressive enhancement
+// ========================================================================== //
 
 // -------------------------------------------
 // GRID SCALE: COLUMNS
 // -------------------------------------------
 
 $grid-scale-columns: (
-  'sm': 4,
-  'md': 8,
-  'lg': 12,
-  'xl': 12,
-  '2xl': 12,
+  'xs': 4,    // Mobile portrait
+  's': 4,     // Mobile landscape
+  'm': 8,     // Tablets
+  'l': 12,    // Laptops
+  'xl': 12,   // Desktops
+  '2xl': 12,  // Ultra-wide
 ) !default;
 
 // -------------------------------------------
@@ -22,9 +26,10 @@ $grid-scale-columns: (
 // -------------------------------------------
 
 $grid-scale-gutters: (
-  'sm': map.get($scale, 4),    // 16px
-  'md': map.get($scale, 4),    // 16px
-  'lg': map.get($scale, 6),    // 24px
+  'xs': map.get($scale, 4),    // 16px
+  's': map.get($scale, 4),     // 16px
+  'm': map.get($scale, 4),     // 16px
+  'l': map.get($scale, 6),     // 24px
   'xl': map.get($scale, 6),    // 24px
   '2xl': map.get($scale, 8),   // 32px
 ) !default;
@@ -34,10 +39,11 @@ $grid-scale-gutters: (
 // -------------------------------------------
 
 $grid-scale-margins: (
-  'sm': map.get($scale, 4),    // 16px
-  'md': map.get($scale, 6),    // 24px
-  'lg': map.get($scale, 6),    // 24px
-  'xl': 0,                     // Full bleed
+  'xs': map.get($scale, 4),    // 16px
+  's': map.get($scale, 4),     // 16px
+  'm': map.get($scale, 6),     // 24px
+  'l': map.get($scale, 6),     // 24px
+  'xl': 0,                     // Full bleed (fixed centered)
   '2xl': map.get($scale, 8),   // 32px
 ) !default;
 
@@ -46,9 +52,10 @@ $grid-scale-margins: (
 // -------------------------------------------
 
 $grid-scale-max-widths: (
-  'sm': 100%,
-  'md': 100%,
-  'lg': 100%,
+  'xs': 100%,
+  's': 100%,
+  'm': 100%,
+  'l': 100%,
   'xl': map.get($scale, 320),  // 1280px - Fixed centered
   '2xl': 100%,                 // Fluid
 ) !default;
@@ -58,9 +65,10 @@ $grid-scale-max-widths: (
 // -------------------------------------------
 
 $grid-scale-types: (
-  'sm': 'fluid',
-  'md': 'fluid',
-  'lg': 'fluid',
+  'xs': 'fluid',
+  's': 'fluid',
+  'm': 'fluid',
+  'l': 'fluid',
   'xl': 'fixed',
   '2xl': 'fluid',
 ) !default;
