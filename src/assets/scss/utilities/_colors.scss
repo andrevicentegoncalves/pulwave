@@ -5,51 +5,350 @@
 /*                            UTILITY CLASSES: COLOR                          */
 /* ========================================================================== */
 
-//-------------------------------------------
+// ------------------------------------------- 
 // TEXT COLOR UTILITIES
-//-------------------------------------------
+// -------------------------------------------
+// Generates: .text-color-primary, .text-color-feedback-success, etc.
+// Uses: var(--color-primary), var(--color-feedback-success), etc.
 
 @include generate-text-colors(theme.$theme-mappings);
 
-//-------------------------------------------
+// ------------------------------------------- 
 // BACKGROUND COLOR UTILITIES
-//-------------------------------------------
+// -------------------------------------------
+// Generates: .background-color-primary, .background-color-surface-default, etc.
+// Uses: var(--color-primary), var(--color-surface-default), etc.
 
 @include generate-background-colors(theme.$theme-mappings);
 
-//-------------------------------------------
+// ------------------------------------------- 
 // BORDER COLOR UTILITIES
-//-------------------------------------------
+// -------------------------------------------
+// Generates: .border-color-default, .border-color-primary, etc.
+// Uses: var(--color-border-default), var(--color-border-primary), etc.
+// Note: Prefix 'border-' is removed from class names for cleaner usage
 
-@include generate-border-colors(theme.$theme-mappings, 'border-color', true);
+@include generate-border-colors(theme.$theme-mappings, 'border-color', false);
 
-//-------------------------------------------
-// COLOR COMBINATIONS (BADGES & TIERS)
-//-------------------------------------------
+// ------------------------------------------- 
+// FOCUS RING UTILITIES
+// -------------------------------------------
+// Generates: .focus-ring, .focus-ring-error, .focus-ring-success, etc.
 
-@include generate-color-combos();
+@include generate-focus-rings(theme.$theme-mappings);
 
-//-------------------------------------------
-// SPECIAL UTILITIES
-//-------------------------------------------
+// ------------------------------------------- 
+// FEEDBACK BADGES
+// -------------------------------------------
+// Generates complete badge styles with background + text color
+// .badge-success, .badge-error, .badge-warning, .badge-info
+// .badge-success-subtle, .badge-error-subtle, etc.
 
-// Link styling with states
-.link-no-decoration {
-  color: var(--link-default);
-  text-decoration: none;
+@include generate-feedback-badges();
+
+// ------------------------------------------- 
+// LINK UTILITIES
+// -------------------------------------------
+
+.link-default {
+  color: var(--color-link-default);
+  text-decoration: underline;
+  transition: color 200ms ease;
   
   &:hover {
-    color: var(--link-hover);
+    color: var(--color-link-hover);
+  }
+  
+  &:active {
+    color: var(--color-link-active);
+  }
+  
+  &:visited {
+    color: var(--color-link-visited);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.link-no-decoration {
+  color: var(--color-link-default);
+  text-decoration: none;
+  transition: color 200ms ease;
+  
+  &:hover {
+    color: var(--color-link-hover);
     text-decoration: none;
   }
   
-  &:focus {
-    color: var(--link-default);
+  &:active {
+    color: var(--color-link-active);
     text-decoration: none;
   }
   
   &:visited {
-    color: var(--link-visited);
+    color: var(--color-link-visited);
     text-decoration: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    text-decoration: none;
+  }
+}
+
+.link-subtle {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 200ms ease;
+  
+  &:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: var(--color-link-active);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+// ------------------------------------------- 
+// TEXT UTILITIES
+// -------------------------------------------
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+// ------------------------------------------- 
+// SURFACE UTILITIES
+// -------------------------------------------
+
+.surface-default {
+  background-color: var(--color-surface-default);
+}
+
+.surface-subtle {
+  background-color: var(--color-surface-subtle);
+}
+
+.surface-moderate {
+  background-color: var(--color-surface-moderate);
+}
+
+.surface-strong {
+  background-color: var(--color-surface-strong);
+}
+
+.surface-disabled {
+  background-color: var(--color-surface-disabled);
+}
+
+// ------------------------------------------- 
+// BRAND COLOR UTILITIES
+// -------------------------------------------
+
+.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--color-tertiary);
+  color: var(--color-on-tertiary);
+}
+
+.bg-primary-subtle {
+  background-color: var(--color-primary-subtle);
+  color: var(--color-on-surface-primary);
+}
+
+// ------------------------------------------- 
+// FEEDBACK COLOR UTILITIES
+// -------------------------------------------
+
+.bg-success {
+  background-color: var(--color-feedback-success);
+  color: var(--color-on-success);
+}
+
+.bg-success-subtle {
+  background-color: var(--color-feedback-success-subtle);
+  color: var(--color-on-success-subtle);
+}
+
+.bg-info {
+  background-color: var(--color-feedback-info);
+  color: var(--color-on-info);
+}
+
+.bg-info-subtle {
+  background-color: var(--color-feedback-info-subtle);
+  color: var(--color-on-info-subtle);
+}
+
+.bg-warning {
+  background-color: var(--color-feedback-warning);
+  color: var(--color-on-warning);
+}
+
+.bg-warning-subtle {
+  background-color: var(--color-feedback-warning-subtle);
+  color: var(--color-on-warning-subtle);
+}
+
+.bg-error {
+  background-color: var(--color-feedback-error);
+  color: var(--color-on-error);
+}
+
+.bg-error-subtle {
+  background-color: var(--color-feedback-error-subtle);
+  color: var(--color-on-error-subtle);
+}
+
+// ------------------------------------------- 
+// INTERACTIVE STATE UTILITIES
+// -------------------------------------------
+
+.interactive {
+  transition: all 200ms ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.hover-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.hover-bg-subtle:hover {
+  background-color: var(--color-surface-subtle);
+}
+
+.hover-bg-moderate:hover {
+  background-color: var(--color-surface-moderate);
+}
+
+// ------------------------------------------- 
+// SKELETON/LOADING UTILITIES
+// -------------------------------------------
+
+.skeleton {
+  background-color: var(--color-skeleton-base);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-skeleton-shimmer);
+    animation: skeleton-shimmer 2s infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// ------------------------------------------- 
+// OPACITY UTILITIES
+// -------------------------------------------
+
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+// ------------------------------------------- 
+// BLEND MODE UTILITIES
+// -------------------------------------------
+
+.blend-multiply { mix-blend-mode: multiply; }
+.blend-screen { mix-blend-mode: screen; }
+.blend-overlay { mix-blend-mode: overlay; }
+.blend-darken { mix-blend-mode: darken; }
+.blend-lighten { mix-blend-mode: lighten; }
+
+// ------------------------------------------- 
+// ACCESSIBILITY UTILITIES
+// -------------------------------------------
+
+// Visually hidden but accessible to screen readers
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Skip focus if user prefers reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .interactive,
+  .hover-lift {
+    transition: none;
+  }
+  
+  *:focus-visible {
+    transition: none;
   }
 }

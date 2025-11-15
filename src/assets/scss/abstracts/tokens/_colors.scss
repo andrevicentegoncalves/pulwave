@@ -17,25 +17,24 @@
         color-scheme: light;  
     }
     
-    // Default theme tokens (Light) - applies when no data-theme attribute
+    // ========================================================================
+    // DEFAULT THEME TOKENS (LIGHT MODE)
+    // ========================================================================
+    // Applies when no data-theme attribute is present
+    
     @each $token-name, $theme-map in theme.$theme-mappings {
         $light-color: map.get($theme-map, 'light');
         @if $light-color {
-            // Check if token starts with 'border-'
-            @if string.index($token-name, 'border-') == 1 {
-                --#{$token-name}: #{$light-color};  // No prefix for borders
-            } @else {
-                --color-#{$token-name}: #{$light-color};  // Add color- prefix for others
-            }
+            --color-#{$token-name}: #{$light-color};
         }
     }
 
-    // ----------------------------------------
+    // ========================================================================
     // DARK MODE
-    // ----------------------------------------
+    // ========================================================================
 
     @if flags.$is_dark_mode_forced {
-        
+        // Manual dark mode toggle via [data-theme="dark"]
         &[data-theme="dark"] {
             color-scheme: dark;
             
@@ -49,7 +48,7 @@
     }
     
     @else if flags.$is_dark_mode_auto {
-        
+        // Automatic dark mode based on system preference
         @media (prefers-color-scheme: dark) {
             color-scheme: dark;
             
@@ -62,9 +61,9 @@
         }
     }
     
-    // ----------------------------------------
+    // ========================================================================
     // SMOOTH TRANSITIONS FOR THEME CHANGES
-    // ----------------------------------------
+    // ========================================================================
     
     * {
         transition: 
@@ -76,7 +75,7 @@
             box-shadow 200ms ease;
     }
 
-    // Respect user's motion preferences
+    // Respect user's motion preferences (accessibility)
     @media (prefers-reduced-motion: reduce) {
         * {
             transition-duration: 0.01ms !important;
