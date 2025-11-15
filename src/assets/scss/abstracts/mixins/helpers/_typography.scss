@@ -1,10 +1,9 @@
 @use 'sass:map';
 @use '../foundation/breakpoints' as bp;
 @use '../../variables/foundation/typography-scale' as scale;
-@use '../../../abstracts/variables/' as *;
 
 // ========================================================================== //
-//                        MIXIN: UTILITIES - TYPOGRAPHY                       //
+//                        MIXINS: UTILITIES - TYPOGRAPHY                      //
 // ========================================================================== //
 
 // -------------------------------------------------------------------------- 
@@ -187,105 +186,4 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 ///   @include typography-letter-spacing('headline', 'l');
 @mixin typography-letter-spacing($category, $size) {
   letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
-}
-
-// -------------------------------------------------------------------------- 
-// LEGACY
-// --------------------------------------------------------------------------
-// Implements a consistent typography system using predefined font families
-// Handles various weights (thin, light, regular, bold) for Roboto, Lato, and Montserrat
-// Usage: @include apply-font('roboto', 'bold');
-@mixin apply-font($font-family, $font-weight) {
-  @if $font-family == 'roboto' {
-      @if $font-weight == 'thin' {
-          font-family: 'Roboto', sans-serif;
-          font-weight: 100;
-      } @else if $font-weight == 'light' {
-          font-family: 'Roboto', sans-serif;
-          font-weight: 300;
-      } @else if $font-weight == 'regular' {
-          font-family: 'Roboto', sans-serif;
-          font-weight: 400;
-      } @else if $font-weight == 'bold' {
-          font-family: 'Roboto', sans-serif;
-          font-weight: 700;
-      }
-  } @else if $font-family == 'lato' {
-      @if $font-weight == 'thin' {
-          font-family: 'Lato', sans-serif;
-          font-weight: 100;
-      } @else if $font-weight == 'light' {
-          font-family: 'Lato', sans-serif;
-          font-weight: 300;
-      } @else if $font-weight == 'regular' {
-          font-family: 'Lato', sans-serif;
-          font-weight: 400;
-      } @else if $font-weight == 'bold' {
-          font-family: 'Lato', sans-serif;
-          font-weight: 700;
-      }
-  } @else if $font-family == 'montserrat' {
-      @if $font-weight == 'thin' {
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 100;
-      } @else if $font-weight == 'light' {
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 300;
-      } @else if $font-weight == 'regular' {
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 400;
-      } @else if $font-weight == 'bold' {
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 700;
-      }
-  }
-}
-
-// Implements consistent typography using predefined base variables
-// Ensures uniform text appearance and maintains vertical rhythm
-// Usage: @include font-style(16px, 1.5);
-@mixin font-style($size: $font-size-base, $line-height: $line-height-base) {
-  font-size: $size;
-  line-height: $line-height;
-}
-
-// Handles text overflow with ellipsis and optional mobile adaptation
-// Ensures consistent text truncation across different screen sizes
-// Usage: @include truncate(200px, 150px);
-@mixin truncate($width: $truncate-width, $mobile-width: null) {
-  max-width: $width;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @if $mobile-width {
-    @media (max-width: $breakpoint-phone) {
-      max-width: $mobile-width;
-    }
-  }
-}
-
-// Enforces consistent text alignment in complex components
-// Prevents inheritance issues with nested elements
-// Usage: @include text-alignment;
-@mixin text-alignment {
-  .value {
-      text-align: left !important;
-      * { text-align: left !important; }
-  }
-  
-  .merged-text {
-      text-align: center !important;
-      * { text-align: center !important; }
-  }
-}
-
-// Prepares parent containers for truncated child elements
-// Maintains layout integrity when text is truncated
-// Usage: @include truncate-parent;
-@mixin truncate-parent {
-  overflow: hidden;
-  flex: 1;
-  display: flex;  
-  align-items: center; 
 }

@@ -1,16 +1,11 @@
 // ========================================================================== //
 //                       MIXINS: HELPERS - LAYOUT                             //
 // ========================================================================== //
+// Modern layout utilities for positioning and container management
+// For flexbox utilities, see _flex.scss
+// For grid utilities, see _grid.scss
+// ========================================================================== //
 
-/// Clearfix for floats
-@mixin clearfix {
-    &::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-}
-  
 /// Center element absolutely within parent
 /// Parent must have position: relative
 /// @example
@@ -20,36 +15,4 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-// -------------------------------------------------------------------------- 
-// LEGACY
-// --------------------------------------------------------------------------
-
-// Creates a customizable flexbox container with configurable alignment and direction
-// Useful for creating complex layouts with minimal code
-// Usage: @include flexbox(column, flex-start, center);
-@mixin flexbox($direction: row, $justify: center, $align: center) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
-    align-items: $align;
-}
-
-// Shorthand for vertical stack layout using flexbox
-// Useful for form groups and card content
-// Usage: @include flex-column;
-@mixin flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-// Adapts container padding for mobile screens
-// Includes minimum height to prevent collapsed layouts
-// Usage: @include mobile-padding;
-@mixin mobile-padding {
-  @media (max-width: $breakpoint-phone) {
-      padding: $space-s;
-      min-height: 80px;
-  }
 }

@@ -4,24 +4,77 @@
 // ========================================================================== //
 //                 FOUNDATION: BREAKPOINTS SCALE                              //
 // ========================================================================== //
+// Unified breakpoint system using consistent T-shirt sizing (xs, s, m, l, xl, 2xl)
+// All breakpoints are based on the unified scale for mathematical consistency
+// ========================================================================== //
+
+// -------------------------------------------
+// BREAKPOINT SCALE (Mobile-First)
+// -------------------------------------------
 
 $breakpoints-scale: (
-  'sm': map.get($scale, 160),   // 640px  - Small devices
-  'md': map.get($scale, 192),   // 768px  - Tablets
-  'lg': map.get($scale, 256),   // 1024px - Laptops
-  'xl': map.get($scale, 320),   // 1280px - Desktops
-  '2xl': map.get($scale, 384),  // 1536px - Large desktops
-  '3xl': map.get($scale, 480),  // 1920px - Ultra-wide
+  'xs': 0px,                    // 0px    - Mobile first (no min-width needed)
+  's': map.get($scale, 160),    // 640px  - Landscape phones, small tablets
+  'm': map.get($scale, 192),    // 768px  - Tablets, medium devices
+  'l': map.get($scale, 256),    // 1024px - Laptops, small desktops
+  'xl': map.get($scale, 320),   // 1280px - Large desktops, monitors
+  '2xl': map.get($scale, 480),  // 1920px - Ultra-wide, 4K displays
 ) !default;
 
 // -------------------------------------------
-// BREAKPOINT MAX VALUES 
+// BREAKPOINT MAX VALUES
 // -------------------------------------------
+// Used for bp-down() and bp-only() mixins
+// Each max is 1px less than the next breakpoint
 
 $breakpoints-max: (
-  'sm': 767px,   // 768px - 1
-  'md': 1023px,  // 1024px - 1
-  'lg': 1279px,  // 1280px - 1
-  'xl': 1535px,  // 1536px - 1
-  '2xl': 1919px, // 1920px - 1
+  'xs': 639px,   // 640px - 1
+  's': 767px,    // 768px - 1
+  'm': 1023px,   // 1024px - 1
+  'l': 1279px,   // 1280px - 1
+  'xl': 1919px,  // 1920px - 1
+) !default;
+
+// -------------------------------------------
+// BREAKPOINT CONTEXT
+// -------------------------------------------
+// Device context and column recommendations for each breakpoint
+
+$breakpoint-contexts: (
+  'xs': (
+    'label': 'Extra Small (Portrait Phones)',
+    'devices': 'iPhone SE, small Android phones',
+    'range': '0px - 639px',
+    'columns': 4,
+  ),
+  's': (
+    'label': 'Small (Landscape Phones)',
+    'devices': 'iPhone in landscape, phablets',
+    'range': '640px - 767px',
+    'columns': 4,
+  ),
+  'm': (
+    'label': 'Medium (Tablets)',
+    'devices': 'iPad, Android tablets, Galaxy Fold',
+    'range': '768px - 1023px',
+    'columns': 8,
+  ),
+  'l': (
+    'label': 'Large (Laptops)',
+    'devices': 'MacBook, 13-15" laptops, 1080p displays',
+    'range': '1024px - 1279px',
+    'columns': 12,
+  ),
+  'xl': (
+    'label': 'Extra Large (Desktops)',
+    'devices': '27" monitors, 1440p displays, iMac',
+    'range': '1280px - 1919px',
+    'columns': 12,
+  ),
+  '2xl': (
+    'label': '2X Large (Ultra-Wide)',
+    'devices': '32"+ ultrawide monitors, 4K displays',
+    'range': '1920px+',
+    'columns': 12,
+  ),
 ) !default;

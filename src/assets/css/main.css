@@ -74,16 +74,16 @@
   /* ========================================================================== */
   /*                             TOKENS: BREAKPOINTS                            */
   /* ========================================================================== */
-  --breakpoint-xs: ;
-  --breakpoint-s: ;
-  --breakpoint-m: ;
-  --breakpoint-l: ;
+  --breakpoint-xs: 0px;
+  --breakpoint-s: 48rem;
+  --breakpoint-m: 48rem;
+  --breakpoint-l: 64rem;
   --breakpoint-xl: 80rem;
-  --breakpoint-2xl: 96rem;
-  --breakpoint-xs-max: ;
-  --breakpoint-s-max: ;
-  --breakpoint-m-max: ;
-  --breakpoint-l-max: ;
+  --breakpoint-2xl: 120rem;
+  --breakpoint-xs-max: 639px;
+  --breakpoint-s-max: 767px;
+  --breakpoint-m-max: 1023px;
+  --breakpoint-l-max: 1279px;
   /* ========================================================================== */
   /*                                TOKENS: COLORS                              */
   /* ========================================================================== */
@@ -2844,7 +2844,7 @@
 /*                         RESPONSIVE UTILITIES                               */
 /* -------------------------------------------------------------------------- */
 /* Small breakpoint (640px+) - Using 's' from your system */
-@media screen and (min-width: ) {
+@media screen and (min-width: 40rem) {
   .s\:flex {
     display: flex;
   }
@@ -2877,7 +2877,7 @@
   }
 }
 /* Medium breakpoint (768px+) - Using 'm' from your system */
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .m\:flex {
     display: flex;
   }
@@ -2910,7 +2910,7 @@
   }
 }
 /* Large breakpoint (1024px+) - Using 'l' from your system */
-@media screen and (min-width: ) {
+@media screen and (min-width: 64rem) {
   .l\:flex {
     display: flex;
   }
@@ -3000,7 +3000,7 @@
   flex-direction: row;
   gap: var(--scale-4);
 }
-@media screen and (max-width: ) {
+@media screen and (max-width: 1023px) {
   .flex-stack {
     flex-direction: column;
   }
@@ -3063,7 +3063,7 @@
   letter-spacing: var(--typography-body-xl-letter-spacing);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-xl {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3076,7 +3076,7 @@
   font-weight: var(--typography-body-xl-weight-light);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-xl-light {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3089,7 +3089,7 @@
   font-weight: var(--typography-body-xl-weight-regular);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-xl-regular {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3102,7 +3102,7 @@
   font-weight: var(--typography-body-xl-weight-semi-bold);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-xl-semi-bold {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3115,7 +3115,7 @@
   font-weight: var(--typography-body-xl-weight-bold);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-xl-bold {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3127,7 +3127,7 @@
   letter-spacing: var(--typography-body-l-letter-spacing);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-l {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3140,7 +3140,7 @@
   font-weight: var(--typography-body-l-weight-light);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-l-light {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3153,7 +3153,7 @@
   font-weight: var(--typography-body-l-weight-regular);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-l-regular {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3166,7 +3166,7 @@
   font-weight: var(--typography-body-l-weight-semi-bold);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-l-semi-bold {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3179,7 +3179,7 @@
   font-weight: var(--typography-body-l-weight-bold);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-l-bold {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3191,7 +3191,7 @@
   letter-spacing: var(--typography-body-m-letter-spacing);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-m {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3204,7 +3204,7 @@
   font-weight: var(--typography-body-m-weight-light);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-m-light {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3217,7 +3217,7 @@
   font-weight: var(--typography-body-m-weight-regular);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-m-regular {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3230,7 +3230,7 @@
   font-weight: var(--typography-body-m-weight-semi-bold);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-m-semi-bold {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3243,7 +3243,7 @@
   font-weight: var(--typography-body-m-weight-bold);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-m-bold {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3255,7 +3255,7 @@
   letter-spacing: var(--typography-body-s-letter-spacing);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-s {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3268,7 +3268,7 @@
   font-weight: var(--typography-body-s-weight-light);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-s-light {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3281,7 +3281,7 @@
   font-weight: var(--typography-body-s-weight-regular);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-s-regular {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3294,7 +3294,7 @@
   font-weight: var(--typography-body-s-weight-semi-bold);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-s-semi-bold {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3307,7 +3307,7 @@
   font-weight: var(--typography-body-s-weight-bold);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-s-bold {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3319,7 +3319,7 @@
   letter-spacing: var(--typography-body-2xs-letter-spacing);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-2xs {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3332,7 +3332,7 @@
   font-weight: var(--typography-body-2xs-weight-light);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-2xs-light {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3345,7 +3345,7 @@
   font-weight: var(--typography-body-2xs-weight-regular);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-2xs-regular {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3358,7 +3358,7 @@
   font-weight: var(--typography-body-2xs-weight-semi-bold);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-2xs-semi-bold {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3371,7 +3371,7 @@
   font-weight: var(--typography-body-2xs-weight-bold);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-body-2xs-bold {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3383,7 +3383,7 @@
   letter-spacing: var(--typography-title-3xl-letter-spacing);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xl {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3396,7 +3396,7 @@
   font-weight: var(--typography-title-3xl-weight-medium);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xl-medium {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3409,7 +3409,7 @@
   font-weight: var(--typography-title-3xl-weight-bold);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xl-bold {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3421,7 +3421,7 @@
   letter-spacing: var(--typography-title-2xl-letter-spacing);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xl {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3434,7 +3434,7 @@
   font-weight: var(--typography-title-2xl-weight-medium);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xl-medium {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3447,7 +3447,7 @@
   font-weight: var(--typography-title-2xl-weight-bold);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xl-bold {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3459,7 +3459,7 @@
   letter-spacing: var(--typography-title-xl-letter-spacing);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xl {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3472,7 +3472,7 @@
   font-weight: var(--typography-title-xl-weight-medium);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xl-medium {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3485,7 +3485,7 @@
   font-weight: var(--typography-title-xl-weight-bold);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xl-bold {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3497,7 +3497,7 @@
   letter-spacing: var(--typography-title-l-letter-spacing);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-l {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3510,7 +3510,7 @@
   font-weight: var(--typography-title-l-weight-medium);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-l-medium {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3523,7 +3523,7 @@
   font-weight: var(--typography-title-l-weight-bold);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-l-bold {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3535,7 +3535,7 @@
   letter-spacing: var(--typography-title-m-letter-spacing);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-m {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3548,7 +3548,7 @@
   font-weight: var(--typography-title-m-weight-medium);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-m-medium {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3561,7 +3561,7 @@
   font-weight: var(--typography-title-m-weight-bold);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-m-bold {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3573,7 +3573,7 @@
   letter-spacing: var(--typography-title-s-letter-spacing);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-s {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3586,7 +3586,7 @@
   font-weight: var(--typography-title-s-weight-medium);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-s-medium {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3599,7 +3599,7 @@
   font-weight: var(--typography-title-s-weight-bold);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-s-bold {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3611,7 +3611,7 @@
   letter-spacing: var(--typography-title-xs-letter-spacing);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xs {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3624,7 +3624,7 @@
   font-weight: var(--typography-title-xs-weight-medium);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xs-medium {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3637,7 +3637,7 @@
   font-weight: var(--typography-title-xs-weight-bold);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-xs-bold {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3649,7 +3649,7 @@
   letter-spacing: var(--typography-title-2xs-letter-spacing);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xs {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3662,7 +3662,7 @@
   font-weight: var(--typography-title-2xs-weight-medium);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xs-medium {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3675,7 +3675,7 @@
   font-weight: var(--typography-title-2xs-weight-bold);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-2xs-bold {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3687,7 +3687,7 @@
   letter-spacing: var(--typography-title-3xs-letter-spacing);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xs {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3700,7 +3700,7 @@
   font-weight: var(--typography-title-3xs-weight-medium);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xs-medium {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3713,7 +3713,7 @@
   font-weight: var(--typography-title-3xs-weight-bold);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-title-3xs-bold {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3725,7 +3725,7 @@
   letter-spacing: var(--typography-headline-3xl-letter-spacing);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xl {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -3738,7 +3738,7 @@
   font-weight: var(--typography-headline-3xl-weight-medium);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xl-medium {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -3751,7 +3751,7 @@
   font-weight: var(--typography-headline-3xl-weight-bold);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xl-bold {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -3763,7 +3763,7 @@
   letter-spacing: var(--typography-headline-2xl-letter-spacing);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xl {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -3776,7 +3776,7 @@
   font-weight: var(--typography-headline-2xl-weight-medium);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xl-medium {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -3789,7 +3789,7 @@
   font-weight: var(--typography-headline-2xl-weight-bold);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xl-bold {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -3801,7 +3801,7 @@
   letter-spacing: var(--typography-headline-xl-letter-spacing);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xl {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -3814,7 +3814,7 @@
   font-weight: var(--typography-headline-xl-weight-medium);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xl-medium {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -3827,7 +3827,7 @@
   font-weight: var(--typography-headline-xl-weight-bold);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xl-bold {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -3839,7 +3839,7 @@
   letter-spacing: var(--typography-headline-l-letter-spacing);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-l {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -3852,7 +3852,7 @@
   font-weight: var(--typography-headline-l-weight-medium);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-l-medium {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -3865,7 +3865,7 @@
   font-weight: var(--typography-headline-l-weight-bold);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-l-bold {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -3877,7 +3877,7 @@
   letter-spacing: var(--typography-headline-m-letter-spacing);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-m {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -3890,7 +3890,7 @@
   font-weight: var(--typography-headline-m-weight-medium);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-m-medium {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -3903,7 +3903,7 @@
   font-weight: var(--typography-headline-m-weight-bold);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-m-bold {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -3915,7 +3915,7 @@
   letter-spacing: var(--typography-headline-s-letter-spacing);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-s {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -3928,7 +3928,7 @@
   font-weight: var(--typography-headline-s-weight-medium);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-s-medium {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -3941,7 +3941,7 @@
   font-weight: var(--typography-headline-s-weight-bold);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-s-bold {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -3953,7 +3953,7 @@
   letter-spacing: var(--typography-headline-xs-letter-spacing);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xs {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -3966,7 +3966,7 @@
   font-weight: var(--typography-headline-xs-weight-medium);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xs-medium {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -3979,7 +3979,7 @@
   font-weight: var(--typography-headline-xs-weight-bold);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-xs-bold {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -3991,7 +3991,7 @@
   letter-spacing: var(--typography-headline-2xs-letter-spacing);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xs {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4004,7 +4004,7 @@
   font-weight: var(--typography-headline-2xs-weight-medium);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xs-medium {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4017,7 +4017,7 @@
   font-weight: var(--typography-headline-2xs-weight-bold);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-2xs-bold {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4029,7 +4029,7 @@
   letter-spacing: var(--typography-headline-3xs-letter-spacing);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xs {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4042,7 +4042,7 @@
   font-weight: var(--typography-headline-3xs-weight-medium);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xs-medium {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4055,7 +4055,7 @@
   font-weight: var(--typography-headline-3xs-weight-bold);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-headline-3xs-bold {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4067,7 +4067,7 @@
   letter-spacing: var(--typography-caption-m-letter-spacing);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-m {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4080,7 +4080,7 @@
   font-weight: var(--typography-caption-m-weight-light);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-m-light {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4093,7 +4093,7 @@
   font-weight: var(--typography-caption-m-weight-regular);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-m-regular {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4106,7 +4106,7 @@
   font-weight: var(--typography-caption-m-weight-semi-bold);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-m-semi-bold {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4119,7 +4119,7 @@
   font-weight: var(--typography-caption-m-weight-bold);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-m-bold {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4131,7 +4131,7 @@
   letter-spacing: var(--typography-caption-s-letter-spacing);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-s {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4144,7 +4144,7 @@
   font-weight: var(--typography-caption-s-weight-light);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-s-light {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4157,7 +4157,7 @@
   font-weight: var(--typography-caption-s-weight-regular);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-s-regular {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4170,7 +4170,7 @@
   font-weight: var(--typography-caption-s-weight-semi-bold);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-s-semi-bold {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4183,7 +4183,7 @@
   font-weight: var(--typography-caption-s-weight-bold);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-s-bold {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4195,7 +4195,7 @@
   letter-spacing: var(--typography-caption-2xs-letter-spacing);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-2xs {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4208,7 +4208,7 @@
   font-weight: var(--typography-caption-2xs-weight-light);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-2xs-light {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4221,7 +4221,7 @@
   font-weight: var(--typography-caption-2xs-weight-regular);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-2xs-regular {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4234,7 +4234,7 @@
   font-weight: var(--typography-caption-2xs-weight-semi-bold);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-2xs-semi-bold {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4247,7 +4247,7 @@
   font-weight: var(--typography-caption-2xs-weight-bold);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-caption-2xs-bold {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4260,7 +4260,7 @@
   font-weight: var(--typography-label-m-weight-medium);
   text-transform: var(--typography-label-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-label-m {
     font-size: var(--typography-label-m-size-desktop);
   }
@@ -4273,7 +4273,7 @@
   font-weight: var(--typography-label-s-weight-medium);
   text-transform: var(--typography-label-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-label-s {
     font-size: var(--typography-label-s-size-desktop);
   }
@@ -4286,7 +4286,7 @@
   font-weight: var(--typography-action-button-l-weight-medium);
   text-transform: var(--typography-action-button-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-button-l {
     font-size: var(--typography-action-button-l-size-desktop);
   }
@@ -4299,7 +4299,7 @@
   font-weight: var(--typography-action-button-m-weight-medium);
   text-transform: var(--typography-action-button-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-button-m {
     font-size: var(--typography-action-button-m-size-desktop);
   }
@@ -4312,7 +4312,7 @@
   font-weight: var(--typography-action-button-s-weight-medium);
   text-transform: var(--typography-action-button-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-button-s {
     font-size: var(--typography-action-button-s-size-desktop);
   }
@@ -4325,7 +4325,7 @@
   font-weight: var(--typography-action-link-navigation-weight-regular);
   text-transform: var(--typography-action-link-navigation-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-link-navigation {
     font-size: var(--typography-action-link-navigation-size-desktop);
   }
@@ -4338,7 +4338,7 @@
   font-weight: var(--typography-action-link-hyperlink-weight-regular);
   text-transform: var(--typography-action-link-hyperlink-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-link-hyperlink {
     font-size: var(--typography-action-link-hyperlink-size-desktop);
   }
@@ -4351,7 +4351,7 @@
   font-weight: var(--typography-eyebrow-l-weight-bold);
   text-transform: var(--typography-eyebrow-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-eyebrow-l {
     font-size: var(--typography-eyebrow-l-size-desktop);
   }
@@ -4364,7 +4364,7 @@
   font-weight: var(--typography-eyebrow-m-weight-bold);
   text-transform: var(--typography-eyebrow-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-eyebrow-m {
     font-size: var(--typography-eyebrow-m-size-desktop);
   }
@@ -4377,7 +4377,7 @@
   font-weight: var(--typography-eyebrow-s-weight-bold);
   text-transform: var(--typography-eyebrow-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-eyebrow-s {
     font-size: var(--typography-eyebrow-s-size-desktop);
   }
@@ -4390,7 +4390,7 @@
   font-weight: var(--typography-price-xl-weight-bold);
   text-transform: var(--typography-price-xl-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-xl {
     font-size: var(--typography-price-xl-size-desktop);
   }
@@ -4403,7 +4403,7 @@
   font-weight: var(--typography-price-l-weight-bold);
   text-transform: var(--typography-price-l-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-l {
     font-size: var(--typography-price-l-size-desktop);
   }
@@ -4416,7 +4416,7 @@
   font-weight: var(--typography-price-m-weight-bold);
   text-transform: var(--typography-price-m-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-m {
     font-size: var(--typography-price-m-size-desktop);
   }
@@ -4429,7 +4429,7 @@
   font-weight: var(--typography-price-s-weight-bold);
   text-transform: var(--typography-price-s-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-s {
     font-size: var(--typography-price-s-size-desktop);
   }
@@ -4442,7 +4442,7 @@
   font-weight: var(--typography-price-xs-weight-bold);
   text-transform: var(--typography-price-xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-xs {
     font-size: var(--typography-price-xs-size-desktop);
   }
@@ -4455,7 +4455,7 @@
   font-weight: var(--typography-price-2xs-weight-bold);
   text-transform: var(--typography-price-2xs-text-transform);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .text-price-2xs {
     font-size: var(--typography-price-2xs-size-desktop);
   }
@@ -4688,7 +4688,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .bg-responsive {
     background-image: none;
   }
@@ -4915,7 +4915,7 @@
 .loader-plane--xl .osui-inline-svg svg path {
   stroke-width: 3;
 }
-@media screen and (max-width: ) {
+@media screen and (max-width: 639px) {
   .loader-plane--responsive-small {
     width: var(--spacing-6);
     height: var(--spacing-6);
@@ -4925,7 +4925,7 @@
   width: var(--spacing-6);
   height: var(--spacing-6);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .loader-plane--responsive-medium {
     width: var(--spacing-10);
     height: var(--spacing-10);
@@ -4935,7 +4935,7 @@
   width: var(--spacing-10);
   height: var(--spacing-10);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 64rem) {
   .loader-plane--responsive-large {
     width: var(--spacing-20);
     height: var(--spacing-20);
@@ -5302,13 +5302,13 @@
   width: var(--spacing-6);
   height: var(--spacing-6);
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 48rem) {
   .loader-responsive {
     width: var(--spacing-10);
     height: var(--spacing-10);
   }
 }
-@media screen and (min-width: ) {
+@media screen and (min-width: 64rem) {
   .loader-responsive {
     width: var(--spacing-20);
     height: var(--spacing-20);
