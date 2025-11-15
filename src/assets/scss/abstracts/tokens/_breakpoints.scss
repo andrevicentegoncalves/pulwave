@@ -18,7 +18,9 @@
   --breakpoint-xl: #{semantics.$breakpoint-xl};
   --breakpoint-2xl: #{semantics.$breakpoint-2xl};
 
-  /* BREAKPOINT TOKENS - Maximum Widths */
+  // -------------------------------------------
+  // BREAKPOINT TOKENS - Maximum Widths
+  // -------------------------------------------
 
   --breakpoint-xs-max: #{semantics.$breakpoint-xs-max};
   --breakpoint-s-max: #{semantics.$breakpoint-s-max};

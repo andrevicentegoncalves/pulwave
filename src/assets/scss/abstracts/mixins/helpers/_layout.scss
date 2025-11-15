@@ -36,15 +36,6 @@
     align-items: $align;
 }
 
-// Quick implementation of the most common flexbox pattern - centered content
-// Perfect for modal windows, hero sections, and centered content layouts
-// Usage: @include flex-center;
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 // Shorthand for vertical stack layout using flexbox
 // Useful for form groups and card content
 // Usage: @include flex-column;

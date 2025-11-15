@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   /* ========================================================================== */
   /*                             TOKENS: ASPECT RATIO                           */
@@ -31,23 +32,18 @@
   /* ========================================================================== */
   /* Border Width */
   --border-width-none: 0;
-  --border-width-2xs: 0.03125rem;
-  --border-width-xs: 0.0625rem;
-  --border-width-s: 0.125rem;
-  --border-width-m: 0.1875rem;
-  --border-width-l: 0.25rem;
-  --border-width-xl: 0.375rem;
+  --border-width-2xs: 0.0625rem;
+  --border-width-xs: 0.125rem;
+  --border-width-s: 0.25rem;
+  --border-width-m: ;
+  --border-width-l: 0.5rem;
+  --border-width-xl: 0.75rem;
   /* Border Style */
   --border-style-none: none;
   --border-style-solid: solid;
   --border-style-dashed: dashed;
   --border-style-dotted: dotted;
   --border-style-double: double;
-  --border-style-groove: groove;
-  --border-style-ridge: ridge;
-  --border-style-inset: inset;
-  --border-style-outset: outset;
-  --border-style-hidden: hidden;
   /* Border Radius */
   --border-radius-none: 0;
   --border-radius-2xs: 0.125rem;
@@ -57,19 +53,7 @@
   --border-radius-l: 1.5rem;
   --border-radius-xl: 2rem;
   --border-radius-2xl: 3rem;
-  --border-radius-round: 62.5rem;
-  /* -------------------------------------------------------------------------- */
-  /*                               BORDER: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --border-size-none: 0px;
-  --border-size-xs: 0.5px;
-  --border-size-s: 1px;
-  --border-width-selected: 3px;
-  --border-width: 0.3px;
-  --border-style: solid;
-  --border-radius-soft: 4px;
-  --border-radius-extra-soft: 15px;
+  --border-radius-round: 9999px;
   /* ========================================================================== */
   /*                               TOKENS: BLUR                                 */
   /* ========================================================================== */
@@ -90,26 +74,16 @@
   /* ========================================================================== */
   /*                             TOKENS: BREAKPOINTS                            */
   /* ========================================================================== */
-  --breakpoint-xs: 320px;
-  --breakpoint-s: 768px;
-  --breakpoint-m: 768px;
-  --breakpoint-l: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1920px;
-  /* BREAKPOINT TOKENS - Maximum Widths */
-  --breakpoint-xs-max: 639px;
-  --breakpoint-s-max: 767px;
-  --breakpoint-m-max: 1023px;
-  --breakpoint-l-max: 1279px;
-  /* -------------------------------------------------------------------------- */
-  /*                             BREAKPOINTS: LEGACY                            */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --breakpoint-phone: 480px;
-  --breakpoint-phone-horizontal: 767px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-tablet-horizontal: 1024px;
-  --breakpoint-desktop: 1200px;
+  --breakpoint-xs: ;
+  --breakpoint-s: ;
+  --breakpoint-m: ;
+  --breakpoint-l: ;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-xs-max: ;
+  --breakpoint-s-max: ;
+  --breakpoint-m-max: ;
+  --breakpoint-l-max: ;
   /* ========================================================================== */
   /*                                TOKENS: COLORS                              */
   /* ========================================================================== */
@@ -228,17 +202,15 @@
   /*                        CONTAINER: MAX-WIDTH SCALE                          */
   /* -------------------------------------------------------------------------- */
   /* Breakpoint-based and semantic container widths */
-  --container-xs: 20rem;
   --container-sm: 40rem;
   --container-md: 48rem;
   --container-lg: 64rem;
   --container-xl: 80rem;
   --container-2xl: 96rem;
   --container-3xl: 120rem;
-  --container-content: 40rem;
   --container-prose: 65ch;
   --container-narrow: 30rem;
-  --container-wide: 90rem;
+  --container-wide: ;
   --container-full: 100%;
   --container-screen: 100vw;
   /* -------------------------------------------------------------------------- */
@@ -355,38 +327,38 @@
      GRID TOKENS: XS (Extra Small)
      Breakpoint: 320px - 639px | Columns: 4 | Type: Fluid
      ------------------------------------------- */
-  --grid-xs-columns: 4;
-  --grid-xs-gutter: 1rem;
-  --grid-xs-margin: 1rem;
-  --grid-xs-max-width: 100%;
-  --grid-xs-type: fluid;
+  --grid-xs-columns: ;
+  --grid-xs-gutter: ;
+  --grid-xs-margin: ;
+  --grid-xs-max-width: ;
+  --grid-xs-type: ;
   /* -------------------------------------------
      GRID TOKENS: SM (Small)
      Breakpoint: 640px - 767px | Columns: 4 | Type: Fluid
      ------------------------------------------- */
-  --grid-s-columns: 4;
-  --grid-s-gutter: 1rem;
-  --grid-s-margin: 1rem;
-  --grid-s-max-width: 100%;
-  --grid-s-type: fluid;
+  --grid-s-columns: ;
+  --grid-s-gutter: ;
+  --grid-s-margin: ;
+  --grid-s-max-width: ;
+  --grid-s-type: ;
   /* -------------------------------------------
      GRID TOKENS: MD (Medium)
      Breakpoint: 768px - 1023px | Columns: 8 | Type: Fluid
      ------------------------------------------- */
-  --grid-m-columns: 8;
-  --grid-m-gutter: 1rem;
-  --grid-m-margin: 1.5rem;
-  --grid-m-max-width: 100%;
-  --grid-m-type: fluid;
+  --grid-m-columns: ;
+  --grid-m-gutter: ;
+  --grid-m-margin: ;
+  --grid-m-max-width: ;
+  --grid-m-type: ;
   /* -------------------------------------------
      GRID TOKENS: LG (Large)
      Breakpoint: 1024px - 1279px | Columns: 12 | Type: Fluid
      ------------------------------------------- */
-  --grid-l-columns: 12;
-  --grid-l-gutter: 1.5rem;
-  --grid-l-margin: 1.5rem;
-  --grid-l-max-width: 100%;
-  --grid-l-type: fluid;
+  --grid-l-columns: ;
+  --grid-l-gutter: ;
+  --grid-l-margin: ;
+  --grid-l-max-width: ;
+  --grid-l-type: ;
   /* -------------------------------------------
      GRID TOKENS: XL (Extra Large)
      Breakpoint: 1280px+ | Columns: 12 | Type: Fixed
@@ -453,14 +425,6 @@
   --container-query-l: 1024px;
   --container-query-xl: 1280px;
   --container-query-2xl: 1920px;
-  /* -------------------------------------------------------------------------- */
-  /*                                 GRID: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --grid-columns: 12;
-  --grid-columns-standard: 4;
-  --grid-gap: 25px;
-  --grid-gutter-width: 30px;
   /* ========================================================================== */
   /*                               TOKENS: ICONS                                */
   /* ========================================================================== */
@@ -472,18 +436,6 @@
   --icon-size-m: 1.5rem;
   --icon-size-l: 2rem;
   --icon-size-xl: 3rem;
-  /* -------------------------------------------------------------------------- */
-  /*                         ICONS: SPECIFIC FONT FAMILIES                      */
-  /* -------------------------------------------------------------------------- */
-  /* Icon Font Family */
-  --icon-font-family: "MegasisIconsFont";
-  /* -------------------------------------------------------------------------- */
-  /*                                 ICONS: LEGACY                              */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --fa-base: 1.5rem;
-  /* Default Icon Size */
-  --icon-size-base: 1.5rem;
   /* ========================================================================== */
   /*                            TOKENS: POSITIONING                             */
   /* ========================================================================== */
@@ -529,39 +481,37 @@
   /* -------------------------------------------------------------------------- */
   /*                               IMAGES: WIDTH                                */
   /* -------------------------------------------------------------------------- */
-  --image-width-xs: 9.5rem;
-  --image-width-s: 12.6875rem;
-  --image-width-sm: 15.625rem;
-  --image-width-m: 21.125rem;
-  --image-width-l: 29.625rem;
-  --image-width-xl: 37.5rem;
-  --image-width-2xl: 48.625rem;
-  --image-width-display: 48.625rem;
+  --image-width-xs: 9rem;
+  --image-width-s: 12rem;
+  --image-width-sm: 16rem;
+  --image-width-m: 20rem;
+  --image-width-l: 28rem;
+  --image-width-xl: 36rem;
+  --image-width-2xl: 48rem;
   /* -------------------------------------------------------------------------- */
   /*                               IMAGES: HEIGHT                               */
   /* -------------------------------------------------------------------------- */
-  --image-height-xs: 5.625rem;
-  --image-height-s: 7.5rem;
-  --image-height-m: 12.5rem;
-  --image-height-l: 17.5rem;
-  --image-height-xl: 28.75rem;
-  --image-height-display: 28.75rem;
+  --image-height-xs: 5rem;
+  --image-height-s: 7rem;
+  --image-height-m: 12rem;
+  --image-height-l: 16rem;
+  --image-height-xl: 24rem;
   /* -------------------------------------------------------------------------- */
   /*                              IMAGES: AVATAR                                */
   /* -------------------------------------------------------------------------- */
   --avatar-size-xs: 2rem;
   --avatar-size-s: 2.5rem;
-  --avatar-size-m: 3.5rem;
-  --avatar-size-l: 5rem;
-  --avatar-size-xl: ;
-  --avatar-size-2xl: 10rem;
+  --avatar-size-m: 3rem;
+  --avatar-size-l: 4rem;
+  --avatar-size-xl: 6rem;
+  --avatar-size-2xl: 8rem;
   /* -------------------------------------------------------------------------- */
   /*                              IMAGES: THUMBNAIL                             */
   /* -------------------------------------------------------------------------- */
   --thumbnail-size-xs: 4rem;
-  --thumbnail-size-s: ;
+  --thumbnail-size-s: 5rem;
   --thumbnail-size-m: ;
-  --thumbnail-size-l: ;
+  --thumbnail-size-l: 10rem;
   --thumbnail-size-xl: ;
   /* ========================================================================== */
   /*                                TOKENS: MOTION                              */
@@ -646,15 +596,6 @@
   --opacity-glass-dark: 0.9;
   --opacity-full: 1;
   --opacity-none: 0;
-  /* -------------------------------------------------------------------------- */
-  /*                              OPACITY: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --alpha-disabled: 0.4;
-  --alpha-hover: 0.1;
-  --alpha-active: 0.15;
-  --alpha-subtle: 0.6;
-  --alpha-ghost: 0.1;
   /* ========================================================================== */
   /*                              TOKENS: SHADOWS                               */
   /* ========================================================================== */
@@ -710,102 +651,57 @@
   --shadow-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.5);
   --shadow-focus-success: 0 0 0 3px rgba(34, 197, 94, 0.5);
   --shadow-focus-warning: 0 0 0 3px rgba(234, 179, 8, 0.5);
-  /* -------------------------------------------------------------------------- */
-  /*                               SHADOW: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  /* Legacy - DEPRECATED */
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --box-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
   /* ========================================================================== */
-  /*                               TOKENS: SIZING                               */
+  /*                           TOKENS: UNIFIED SCALE                            */
   /* ========================================================================== */
-  /* -------------------------------------------------------------------------- */
-  /*                           SIZING: CORE SCALE                               */
-  /* -------------------------------------------------------------------------- */
-  /* Pixel-perfect sizing system (1px base) for fixed dimensions */
-  --size-0: 0;
-  --size-1: 0.0625rem;
-  --size-2: 0.125rem;
-  --size-3: 0.1875rem;
-  --size-4: 0.25rem;
-  --size-6: 0.375rem;
-  --size-8: 0.5rem;
-  --size-10: 0.625rem;
-  --size-12: 0.75rem;
-  --size-16: 1rem;
-  --size-20: 1.25rem;
-  --size-24: 1.5rem;
-  --size-32: 2rem;
-  --size-40: 2.5rem;
-  --size-48: 3rem;
-  --size-56: 3.5rem;
-  --size-64: 4rem;
-  --size-1000: 62.5rem;
-  /* -------------------------------------------------------------------------- */
-  /*                          SIZING: COMPONENTS                                */
-  /* -------------------------------------------------------------------------- */
-  /* Checkbox Sizes */
-  --size-checkbox-xs: 0.625rem;
-  --size-checkbox-s: 0.75rem;
-  --size-checkbox-m: 1rem;
-  --size-checkbox-l: 1.25rem;
-  --size-checkbox-xl: 1.5rem;
-  /* -------------------------------------------------------------------------- */
-  /*                              SIZING: LEGACY                                */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility with existing components */
-  --sizing-base: 1px;
-  /* ========================================================================== */
-  /*                              TOKENS: SPACING                               */
-  /* ========================================================================== */
-  --spacing-0: 0;
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-6: 1.5rem;
-  --spacing-8: 2rem;
-  --spacing-10: 2.5rem;
-  --spacing-12: 3rem;
-  --spacing-14: 3.5rem;
-  --spacing-16: 4rem;
-  --spacing-18: 4.5rem;
-  --spacing-20: 5rem;
-  --spacing-24: 6rem;
-  --spacing-28: 7rem;
-  --spacing-32: 8rem;
-  --spacing-36: 9rem;
-  --spacing-40: 10rem;
-  --spacing-44: 11rem;
-  --spacing-48: 12rem;
-  --spacing-52: 13rem;
-  --spacing-56: 14rem;
-  --spacing-60: 15rem;
-  --spacing-64: 16rem;
-  --spacing-72: 18rem;
-  --spacing-80: 20rem;
-  --spacing-88: 22rem;
-  --spacing-96: 24rem;
-  --spacing-104: 26rem;
-  --spacing-112: 28rem;
-  --spacing-144: 36rem;
-  /* -------------------------------------------------------------------------- */
-  /*                              SPACING: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --space-none: 0;
-  --space-xs: 0.25rem; /* 4px */
-  --space-s: 0.5rem; /* 8px */
-  --space-sm: 0.625rem; /* 10px */
-  --space-base: 1rem; /* 16px */
-  --space-m: 1.5rem; /* 24px */
-  --space-ls: 1.75rem; /* 28px */
-  --space-l: 1.875rem; /* 30px */
-  --space-lm: 2.1875rem; /* 35px */
-  --space-xl: 2.5rem; /* 40px */
-  --space-xxl: 3rem; /* 48px */
-  --space-xxxl: 6rem; /* 96px */
+  /* Micro values (borders, hairlines) */
+  --scale-0: 0;
+  --scale-px: 0.0625rem;
+  --scale-0-5: 0.125rem;
+  /* Core scale (4px base) */
+  --scale-1: 0.25rem;
+  --scale-2: 0.5rem;
+  --scale-3: 0.75rem;
+  --scale-4: 1rem;
+  --scale-5: 1.25rem;
+  --scale-6: 1.5rem;
+  --scale-8: 2rem;
+  --scale-10: 2.5rem;
+  --scale-12: 3rem;
+  /* Medium */
+  --scale-14: 3.5rem;
+  --scale-16: 4rem;
+  --scale-18: 4.5rem;
+  --scale-20: 5rem;
+  --scale-24: 6rem;
+  --scale-28: 7rem;
+  --scale-32: 8rem;
+  /* Large */
+  --scale-36: 9rem;
+  --scale-40: 10rem;
+  --scale-44: 11rem;
+  --scale-48: 12rem;
+  --scale-52: 13rem;
+  --scale-56: 14rem;
+  --scale-60: 15rem;
+  --scale-64: 16rem;
+  /* Extra Large */
+  --scale-72: 18rem;
+  --scale-80: 20rem;
+  --scale-88: 22rem;
+  --scale-96: 24rem;
+  --scale-104: 26rem;
+  --scale-112: 28rem;
+  --scale-120: 30rem;
+  --scale-128: 32rem;
+  --scale-144: 36rem;
+  --scale-160: 40rem;
+  --scale-192: 48rem;
+  --scale-224: 56rem;
+  --scale-256: 64rem;
+  --scale-320: 80rem;
+  --scale-384: 96rem;
+  --scale-480: 120rem;
   /* ========================================================================== */
   /*                               TOKENS: TIMING                               */
   /* ========================================================================== */
@@ -849,12 +745,6 @@
   --delay-medium: 200ms;
   --delay-long: 300ms;
   --delay-longer: 500ms;
-  /* -------------------------------------------------------------------------- */
-  /*                               TIMING: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --transition-base: all 0.2s ease-in-out;
-  --animation-duration: 0.3s;
   /* ========================================================================== */
   /*                             TOKENS: TRANSFORM                              */
   /* ========================================================================== */
@@ -991,12 +881,6 @@
   /* Tilt Effects */
   --transform-tilt-left: rotate(var(--rotate--3));
   --transform-tilt-right: rotate(var(--rotate-3));
-  /* -------------------------------------------------------------------------- */
-  /*                            TRANSFORM: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --transform-scale-base: 1;
-  --transform-rotate-base: 0deg;
   /* ========================================================================== */
   /*                            TOKENS: TRANSITIONS                             */
   /* ========================================================================== */
@@ -1409,23 +1293,6 @@
   --line-height-price-2xs: 1;
   --letter-spacing-price-2xs: 0;
   --font-weight-price-2xs-medium: 500;
-  /* -------------------------------------------------------------------------- */
-  /*                            TYPOGRAPHYY: LEGACY                             */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  /* Font Sizes  */
-  --font-size-xxxs: 0.3125rem;
-  --font-size-xxs: 0.6875rem;
-  --font-size-xs: 0.75rem;
-  --font-size-s: 14px;
-  --font-size-base: 16px;
-  --font-size-m: 24px;
-  --font-size-l: 32px;
-  --font-size-xl: 48px;
-  /* Font Family */
-  --font-family-base: Arial, Helvetica Neue, Helvetica, sans-serif;
-  /* Truncaiton */
-  --truncate-width: 100%;
   /* ========================================================================== */
   /*                              TOKENS: Z-INDEX                               */
   /* ========================================================================== */
@@ -1440,11 +1307,6 @@
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
   --z-index-max: 10000;
-  /* -------------------------------------------------------------------------- */
-  /*                               TIMING: LEGACY                               */
-  /* -------------------------------------------------------------------------- */
-  /* Maintained for backward compatibility */
-  --z-index-modal-backdrop: var(--z-index-modal-overlay);
 }
 :root * {
   transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, fill 200ms ease, stroke 200ms ease, box-shadow 200ms ease;
@@ -1458,476 +1320,50 @@
 /* ==========================================================================*/
 /*                                 BASE: GLOBAL                              */
 /* ==========================================================================*/
-html {
-  font-size: var(--font-family-base);
-  line-height: var(--line-height-base);
-}
-
-body {
-  font-family: var(--font-family-base);
-}
-
 /* ==========================================================================*/
 /*                                 BASE: RESET                               */
 /* ==========================================================================*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ========================================================================== */
-/*                           ANIMATION: KEYFRAMES                             */
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/*                              LOADING ANIMATIONS                            */
-/* -------------------------------------------------------------------------- */
-@keyframes dash {
-  0% {
-    stroke-dashoffset: 425.59;
-  }
-  50% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -425.59;
-  }
-}
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes trail {
-  0% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -425.59;
-  }
-}
-/* -------------------------------------------------------------------------- */
-/*                           STATE/FEEDBACK ANIMATIONS                        */
-/* -------------------------------------------------------------------------- */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-@keyframes path-fade {
-  0% {
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.1;
-  }
-}
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.15);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.15);
-  }
-  56% {
-    transform: scale(1);
-  }
-}
-/* -------------------------------------------------------------------------- */
-/*                           TRANSFORM ANIMATIONS                             */
-/* -------------------------------------------------------------------------- */
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes rotate-reverse {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-@keyframes swing {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  20% {
-    transform: rotate(15deg);
-  }
-  40% {
-    transform: rotate(-10deg);
-  }
-  60% {
-    transform: rotate(5deg);
-  }
-  80% {
-    transform: rotate(-5deg);
-  }
-}
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-10px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(10px);
-  }
-}
-@keyframes wobble {
-  0%, 100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  15% {
-    transform: translateX(-25px) rotate(-5deg);
-  }
-  30% {
-    transform: translateX(20px) rotate(3deg);
-  }
-  45% {
-    transform: translateX(-15px) rotate(-3deg);
-  }
-  60% {
-    transform: translateX(10px) rotate(2deg);
-  }
-  75% {
-    transform: translateX(-5px) rotate(-1deg);
-  }
-}
-/* -------------------------------------------------------------------------- */
-/*                            ENTRANCE ANIMATIONS                             */
-/* -------------------------------------------------------------------------- */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes slide-in-right {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-@keyframes slide-in-left {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-@keyframes slide-in-up {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@keyframes slide-in-down {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@keyframes zoom-in {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes scale-up {
-  from {
-    transform: scale(0.95);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-/* -------------------------------------------------------------------------- */
-/*                             EXIT ANIMATIONS                                */
-/* -------------------------------------------------------------------------- */
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@keyframes fade-out-up {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-@keyframes fade-out-down {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-@keyframes slide-out-right {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-@keyframes slide-out-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-@keyframes slide-out-up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
-@keyframes slide-out-down {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
-}
-@keyframes zoom-out {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-}
-@keyframes scale-down {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0.95);
-  }
-}
-/* -------------------------------------------------------------------------- */
-/*                         SPECIAL EFFECT ANIMATIONS                          */
-/* -------------------------------------------------------------------------- */
-@keyframes expand {
-  from {
-    max-height: 0;
-    opacity: 0;
-  }
-  to {
-    max-height: 1000px;
-    opacity: 1;
-  }
-}
-@keyframes collapse {
-  from {
-    max-height: 1000px;
-    opacity: 1;
-  }
-  to {
-    max-height: 0;
-    opacity: 0;
-  }
-}
+/* ==========================================================================*/
+/*                               BASE: TYPOGRAPHY                            */
+/* ==========================================================================*/
 @keyframes flip-in-x {
   from {
-    transform: perspective(var(--perspective-xs)) rotateX(-90deg);
+    transform: perspective(500px) rotateX(-90deg);
     opacity: 0;
   }
   to {
-    transform: perspective(var(--perspective-xs)) rotateX(0);
+    transform: perspective(500px) rotateX(0);
     opacity: 1;
   }
 }
 @keyframes flip-in-y {
   from {
-    transform: perspective(var(--perspective-xs)) rotateY(-90deg);
+    transform: perspective(500px) rotateY(-90deg);
     opacity: 0;
   }
   to {
-    transform: perspective(var(--perspective-xs)) rotateY(0);
+    transform: perspective(500px) rotateY(0);
     opacity: 1;
   }
 }
 @keyframes flip-out-x {
   from {
-    transform: perspective(var(--perspective-xs)) rotateX(0);
+    transform: perspective(500px) rotateX(0);
     opacity: 1;
   }
   to {
-    transform: perspective(var(--perspective-xs)) rotateX(90deg);
+    transform: perspective(500px) rotateX(90deg);
     opacity: 0;
   }
 }
 @keyframes flip-out-y {
   from {
-    transform: perspective(var(--perspective-xs)) rotateY(0);
+    transform: perspective(500px) rotateY(0);
     opacity: 1;
   }
   to {
-    transform: perspective(var(--perspective-xs)) rotateY(90deg);
+    transform: perspective(500px) rotateY(90deg);
     opacity: 0;
-  }
-}
-@keyframes flash {
-  0%, 50%, 100% {
-    opacity: 1;
-  }
-  25%, 75% {
-    opacity: 0;
-  }
-}
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-@keyframes rubber-band {
-  0% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scaleX(1.25) scaleY(0.75);
-  }
-  40% {
-    transform: scaleX(0.75) scaleY(1.25);
-  }
-  50% {
-    transform: scaleX(1.15) scaleY(0.85);
-  }
-  65% {
-    transform: scaleX(0.95) scaleY(1.05);
-  }
-  75% {
-    transform: scaleX(1.05) scaleY(0.95);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes jello {
-  0%, 11.1%, 100% {
-    transform: translate3d(0, 0, 0);
-  }
-  22.2% {
-    transform: skewX(-12.5deg) skewY(-12.5deg);
-  }
-  33.3% {
-    transform: skewX(6.25deg) skewY(6.25deg);
-  }
-  44.4% {
-    transform: skewX(-3.125deg) skewY(-3.125deg);
-  }
-  55.5% {
-    transform: skewX(1.5625deg) skewY(1.5625deg);
-  }
-  66.6% {
-    transform: skewX(-0.78125deg) skewY(-0.78125deg);
-  }
-  77.7% {
-    transform: skewX(0.390625deg) skewY(0.390625deg);
-  }
-  88.8% {
-    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
   }
 }
 /* ==========================================================================*/
@@ -2894,26 +2330,6 @@ img {
   border-style: var(--border-style-double);
 }
 
-.border-style-groove {
-  border-style: var(--border-style-groove);
-}
-
-.border-style-ridge {
-  border-style: var(--border-style-ridge);
-}
-
-.border-style-inset {
-  border-style: var(--border-style-inset);
-}
-
-.border-style-outset {
-  border-style: var(--border-style-outset);
-}
-
-.border-style-hidden {
-  border-style: var(--border-style-hidden);
-}
-
 .border-radius-none {
   border-radius: var(--border-radius-none);
 }
@@ -3130,117 +2546,462 @@ img {
   border-bottom-right-radius: var(--border-radius-round);
 }
 
-/* ==========================================================================*/
-/*                           UTILITY CLASSES:: FLEX                          */
-/* ==========================================================================*/
+/* ========================================================================== */
+/*                          UTILITIES: FLEXBOX                                */
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/*                            DISPLAY UTILITIES                               */
+/* -------------------------------------------------------------------------- */
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.hidden {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         FLEX DIRECTION UTILITIES                           */
+/* -------------------------------------------------------------------------- */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           FLEX WRAP UTILITIES                              */
+/* -------------------------------------------------------------------------- */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         JUSTIFY CONTENT UTILITIES                          */
+/* -------------------------------------------------------------------------- */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          ALIGN ITEMS UTILITIES                             */
+/* -------------------------------------------------------------------------- */
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         ALIGN CONTENT UTILITIES                            */
+/* -------------------------------------------------------------------------- */
+.content-start {
+  align-content: flex-start;
+}
+
+.content-end {
+  align-content: flex-end;
+}
+
+.content-center {
+  align-content: center;
+}
+
+.content-between {
+  align-content: space-between;
+}
+
+.content-around {
+  align-content: space-around;
+}
+
+.content-evenly {
+  align-content: space-evenly;
+}
+
+.content-stretch {
+  align-content: stretch;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          ALIGN SELF UTILITIES                              */
+/* -------------------------------------------------------------------------- */
+.self-auto {
+  align-self: auto;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-baseline {
+  align-self: baseline;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            FLEX GROW UTILITIES                             */
+/* -------------------------------------------------------------------------- */
 .flex-grow-0 {
   flex-grow: 0;
 }
 
-.flex-grow-1 {
+.flex-grow {
   flex-grow: 1;
 }
 
-.flex-grow-2 {
-  flex-grow: 2;
+/* -------------------------------------------------------------------------- */
+/*                           FLEX SHRINK UTILITIES                            */
+/* -------------------------------------------------------------------------- */
+.flex-shrink-0 {
+  flex-shrink: 0;
 }
 
-.flex-grow-3 {
-  flex-grow: 3;
+.flex-shrink {
+  flex-shrink: 1;
 }
 
-.flex-grow-4 {
-  flex-grow: 4;
+/* -------------------------------------------------------------------------- */
+/*                            FLEX BASIS UTILITIES                            */
+/* -------------------------------------------------------------------------- */
+.flex-auto {
+  flex: 1 1 auto;
 }
 
-.flex-container-responsive {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.flex-initial {
+  flex: 0 1 auto;
 }
-@media (max-width: 768px) {
-  .flex-container-responsive {
+
+.flex-none {
+  flex: none;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              GAP UTILITIES                                 */
+/* -------------------------------------------------------------------------- */
+.gap-0 {
+  gap: 0;
+}
+
+.gap-1 {
+  gap: var(--scale-1);
+}
+
+.gap-2 {
+  gap: var(--scale-2);
+}
+
+.gap-3 {
+  gap: var(--scale-3);
+}
+
+.gap-4 {
+  gap: var(--scale-4);
+}
+
+.gap-6 {
+  gap: var(--scale-6);
+}
+
+.gap-8 {
+  gap: var(--scale-8);
+}
+
+.gap-12 {
+  gap: var(--scale-12);
+}
+
+/* Row gap (horizontal in column layouts) */
+.gap-x-0 {
+  column-gap: 0;
+}
+
+.gap-x-1 {
+  column-gap: var(--scale-1);
+}
+
+.gap-x-2 {
+  column-gap: var(--scale-2);
+}
+
+.gap-x-3 {
+  column-gap: var(--scale-3);
+}
+
+.gap-x-4 {
+  column-gap: var(--scale-4);
+}
+
+.gap-x-6 {
+  column-gap: var(--scale-6);
+}
+
+.gap-x-8 {
+  column-gap: var(--scale-8);
+}
+
+/* Column gap (vertical in row layouts) */
+.gap-y-0 {
+  row-gap: 0;
+}
+
+.gap-y-1 {
+  row-gap: var(--scale-1);
+}
+
+.gap-y-2 {
+  row-gap: var(--scale-2);
+}
+
+.gap-y-3 {
+  row-gap: var(--scale-3);
+}
+
+.gap-y-4 {
+  row-gap: var(--scale-4);
+}
+
+.gap-y-6 {
+  row-gap: var(--scale-6);
+}
+
+.gap-y-8 {
+  row-gap: var(--scale-8);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         RESPONSIVE UTILITIES                               */
+/* -------------------------------------------------------------------------- */
+/* Small breakpoint (640px+) - Using 's' from your system */
+@media screen and (min-width: ) {
+  .s\:flex {
+    display: flex;
+  }
+  .s\:flex-row {
+    flex-direction: row;
+  }
+  .s\:flex-col {
     flex-direction: column;
   }
-}
-
-.flex-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  gap: var(--grid-gap);
-  justify-content: center;
-}
-@media (max-width: 1024px) {
-  .flex-grid {
-    --grid-columns: 3;
+  .s\:justify-start {
+    justify-content: flex-start;
+  }
+  .s\:justify-center {
+    justify-content: center;
+  }
+  .s\:justify-between {
+    justify-content: space-between;
+  }
+  .s\:items-start {
+    align-items: flex-start;
+  }
+  .s\:items-center {
+    align-items: center;
+  }
+  .s\:gap-4 {
+    gap: var(--scale-4);
+  }
+  .s\:gap-6 {
+    gap: var(--scale-6);
   }
 }
-@media (max-width: 768px) {
-  .flex-grid {
-    --grid-columns: 2;
+/* Medium breakpoint (768px+) - Using 'm' from your system */
+@media screen and (min-width: ) {
+  .m\:flex {
+    display: flex;
   }
-}
-@media (max-width: 480px) {
-  .flex-grid {
-    --grid-columns: 1;
+  .m\:flex-row {
+    flex-direction: row;
   }
-}
-
-.flex-grid > * {
-  box-sizing: border-box;
-}
-
-.flex-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns-standard), 1fr);
-  gap: var(--grid-gap);
-  justify-content: center;
-}
-@media (max-width: 1024px) {
-  .flex-grid-4 {
-    --grid-columns: 3;
-  }
-}
-@media (max-width: 768px) {
-  .flex-grid-4 {
-    --grid-columns: 2;
-  }
-}
-@media (max-width: 480px) {
-  .flex-grid-4 {
-    --grid-columns: 1;
-  }
-}
-
-.flex-grid-4 > * {
-  box-sizing: border-box;
-}
-
-.flex-grid-item {
-  width: 100%;
-}
-
-.container-align-right {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-.container-align-right button {
-  width: auto;
-}
-
-.flex-direction-row-responsive {
-  flex-direction: row;
-}
-@media (max-width: 480px) {
-  .flex-direction-row-responsive {
+  .m\:flex-col {
     flex-direction: column;
   }
+  .m\:justify-start {
+    justify-content: flex-start;
+  }
+  .m\:justify-center {
+    justify-content: center;
+  }
+  .m\:justify-between {
+    justify-content: space-between;
+  }
+  .m\:items-start {
+    align-items: flex-start;
+  }
+  .m\:items-center {
+    align-items: center;
+  }
+  .m\:gap-4 {
+    gap: var(--scale-4);
+  }
+  .m\:gap-6 {
+    gap: var(--scale-6);
+  }
 }
-@media (max-width: 768px) {
-  .flex-direction-row-responsive-tablet {
+/* Large breakpoint (1024px+) - Using 'l' from your system */
+@media screen and (min-width: ) {
+  .l\:flex {
+    display: flex;
+  }
+  .l\:flex-row {
+    flex-direction: row;
+  }
+  .l\:flex-col {
+    flex-direction: column;
+  }
+  .l\:justify-start {
+    justify-content: flex-start;
+  }
+  .l\:justify-center {
+    justify-content: center;
+  }
+  .l\:justify-between {
+    justify-content: space-between;
+  }
+  .l\:items-start {
+    align-items: flex-start;
+  }
+  .l\:items-center {
+    align-items: center;
+  }
+  .l\:gap-6 {
+    gap: var(--scale-6);
+  }
+  .l\:gap-8 {
+    gap: var(--scale-8);
+  }
+}
+/* Extra Large breakpoint (1280px+) - Using 'xl' from your system */
+@media screen and (min-width: 80rem) {
+  .xl\:flex {
+    display: flex;
+  }
+  .xl\:flex-row {
+    flex-direction: row;
+  }
+  .xl\:flex-col {
+    flex-direction: column;
+  }
+  .xl\:justify-between {
+    justify-content: space-between;
+  }
+  .xl\:items-center {
+    align-items: center;
+  }
+  .xl\:gap-8 {
+    gap: var(--scale-8);
+  }
+}
+/* -------------------------------------------------------------------------- */
+/*                         COMMON FLEX PATTERNS                               */
+/* -------------------------------------------------------------------------- */
+/* Centered content */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Space between with center alignment */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Column with gap */
+.flex-col-gap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scale-4);
+}
+
+/* Row with gap */
+.flex-row-gap {
+  display: flex;
+  flex-direction: row;
+  gap: var(--scale-4);
+}
+
+/* Responsive stack (row → column on mobile) */
+.flex-stack {
+  display: flex;
+  flex-direction: row;
+  gap: var(--scale-4);
+}
+@media screen and (max-width: ) {
+  .flex-stack {
     flex-direction: column;
   }
 }
@@ -3302,7 +3063,7 @@ img {
   letter-spacing: var(--typography-body-xl-letter-spacing);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-xl {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3315,7 +3076,7 @@ img {
   font-weight: var(--typography-body-xl-weight-light);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-xl-light {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3328,7 +3089,7 @@ img {
   font-weight: var(--typography-body-xl-weight-regular);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-xl-regular {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3341,7 +3102,7 @@ img {
   font-weight: var(--typography-body-xl-weight-semi-bold);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-xl-semi-bold {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3354,7 +3115,7 @@ img {
   font-weight: var(--typography-body-xl-weight-bold);
   text-transform: var(--typography-body-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-xl-bold {
     font-size: var(--typography-body-xl-size-desktop);
   }
@@ -3366,7 +3127,7 @@ img {
   letter-spacing: var(--typography-body-l-letter-spacing);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-l {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3379,7 +3140,7 @@ img {
   font-weight: var(--typography-body-l-weight-light);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-l-light {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3392,7 +3153,7 @@ img {
   font-weight: var(--typography-body-l-weight-regular);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-l-regular {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3405,7 +3166,7 @@ img {
   font-weight: var(--typography-body-l-weight-semi-bold);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-l-semi-bold {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3418,7 +3179,7 @@ img {
   font-weight: var(--typography-body-l-weight-bold);
   text-transform: var(--typography-body-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-l-bold {
     font-size: var(--typography-body-l-size-desktop);
   }
@@ -3430,7 +3191,7 @@ img {
   letter-spacing: var(--typography-body-m-letter-spacing);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-m {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3443,7 +3204,7 @@ img {
   font-weight: var(--typography-body-m-weight-light);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-m-light {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3456,7 +3217,7 @@ img {
   font-weight: var(--typography-body-m-weight-regular);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-m-regular {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3469,7 +3230,7 @@ img {
   font-weight: var(--typography-body-m-weight-semi-bold);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-m-semi-bold {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3482,7 +3243,7 @@ img {
   font-weight: var(--typography-body-m-weight-bold);
   text-transform: var(--typography-body-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-m-bold {
     font-size: var(--typography-body-m-size-desktop);
   }
@@ -3494,7 +3255,7 @@ img {
   letter-spacing: var(--typography-body-s-letter-spacing);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-s {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3507,7 +3268,7 @@ img {
   font-weight: var(--typography-body-s-weight-light);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-s-light {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3520,7 +3281,7 @@ img {
   font-weight: var(--typography-body-s-weight-regular);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-s-regular {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3533,7 +3294,7 @@ img {
   font-weight: var(--typography-body-s-weight-semi-bold);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-s-semi-bold {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3546,7 +3307,7 @@ img {
   font-weight: var(--typography-body-s-weight-bold);
   text-transform: var(--typography-body-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-s-bold {
     font-size: var(--typography-body-s-size-desktop);
   }
@@ -3558,7 +3319,7 @@ img {
   letter-spacing: var(--typography-body-2xs-letter-spacing);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-2xs {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3571,7 +3332,7 @@ img {
   font-weight: var(--typography-body-2xs-weight-light);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-2xs-light {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3584,7 +3345,7 @@ img {
   font-weight: var(--typography-body-2xs-weight-regular);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-2xs-regular {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3597,7 +3358,7 @@ img {
   font-weight: var(--typography-body-2xs-weight-semi-bold);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-2xs-semi-bold {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3610,7 +3371,7 @@ img {
   font-weight: var(--typography-body-2xs-weight-bold);
   text-transform: var(--typography-body-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-body-2xs-bold {
     font-size: var(--typography-body-2xs-size-desktop);
   }
@@ -3622,7 +3383,7 @@ img {
   letter-spacing: var(--typography-title-3xl-letter-spacing);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xl {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3635,7 +3396,7 @@ img {
   font-weight: var(--typography-title-3xl-weight-medium);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xl-medium {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3648,7 +3409,7 @@ img {
   font-weight: var(--typography-title-3xl-weight-bold);
   text-transform: var(--typography-title-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xl-bold {
     font-size: var(--typography-title-3xl-size-desktop);
   }
@@ -3660,7 +3421,7 @@ img {
   letter-spacing: var(--typography-title-2xl-letter-spacing);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xl {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3673,7 +3434,7 @@ img {
   font-weight: var(--typography-title-2xl-weight-medium);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xl-medium {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3686,7 +3447,7 @@ img {
   font-weight: var(--typography-title-2xl-weight-bold);
   text-transform: var(--typography-title-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xl-bold {
     font-size: var(--typography-title-2xl-size-desktop);
   }
@@ -3698,7 +3459,7 @@ img {
   letter-spacing: var(--typography-title-xl-letter-spacing);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xl {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3711,7 +3472,7 @@ img {
   font-weight: var(--typography-title-xl-weight-medium);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xl-medium {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3724,7 +3485,7 @@ img {
   font-weight: var(--typography-title-xl-weight-bold);
   text-transform: var(--typography-title-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xl-bold {
     font-size: var(--typography-title-xl-size-desktop);
   }
@@ -3736,7 +3497,7 @@ img {
   letter-spacing: var(--typography-title-l-letter-spacing);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-l {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3749,7 +3510,7 @@ img {
   font-weight: var(--typography-title-l-weight-medium);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-l-medium {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3762,7 +3523,7 @@ img {
   font-weight: var(--typography-title-l-weight-bold);
   text-transform: var(--typography-title-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-l-bold {
     font-size: var(--typography-title-l-size-desktop);
   }
@@ -3774,7 +3535,7 @@ img {
   letter-spacing: var(--typography-title-m-letter-spacing);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-m {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3787,7 +3548,7 @@ img {
   font-weight: var(--typography-title-m-weight-medium);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-m-medium {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3800,7 +3561,7 @@ img {
   font-weight: var(--typography-title-m-weight-bold);
   text-transform: var(--typography-title-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-m-bold {
     font-size: var(--typography-title-m-size-desktop);
   }
@@ -3812,7 +3573,7 @@ img {
   letter-spacing: var(--typography-title-s-letter-spacing);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-s {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3825,7 +3586,7 @@ img {
   font-weight: var(--typography-title-s-weight-medium);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-s-medium {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3838,7 +3599,7 @@ img {
   font-weight: var(--typography-title-s-weight-bold);
   text-transform: var(--typography-title-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-s-bold {
     font-size: var(--typography-title-s-size-desktop);
   }
@@ -3850,7 +3611,7 @@ img {
   letter-spacing: var(--typography-title-xs-letter-spacing);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xs {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3863,7 +3624,7 @@ img {
   font-weight: var(--typography-title-xs-weight-medium);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xs-medium {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3876,7 +3637,7 @@ img {
   font-weight: var(--typography-title-xs-weight-bold);
   text-transform: var(--typography-title-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-xs-bold {
     font-size: var(--typography-title-xs-size-desktop);
   }
@@ -3888,7 +3649,7 @@ img {
   letter-spacing: var(--typography-title-2xs-letter-spacing);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xs {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3901,7 +3662,7 @@ img {
   font-weight: var(--typography-title-2xs-weight-medium);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xs-medium {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3914,7 +3675,7 @@ img {
   font-weight: var(--typography-title-2xs-weight-bold);
   text-transform: var(--typography-title-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-2xs-bold {
     font-size: var(--typography-title-2xs-size-desktop);
   }
@@ -3926,7 +3687,7 @@ img {
   letter-spacing: var(--typography-title-3xs-letter-spacing);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xs {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3939,7 +3700,7 @@ img {
   font-weight: var(--typography-title-3xs-weight-medium);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xs-medium {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3952,7 +3713,7 @@ img {
   font-weight: var(--typography-title-3xs-weight-bold);
   text-transform: var(--typography-title-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-title-3xs-bold {
     font-size: var(--typography-title-3xs-size-desktop);
   }
@@ -3964,7 +3725,7 @@ img {
   letter-spacing: var(--typography-headline-3xl-letter-spacing);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xl {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -3977,7 +3738,7 @@ img {
   font-weight: var(--typography-headline-3xl-weight-medium);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xl-medium {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -3990,7 +3751,7 @@ img {
   font-weight: var(--typography-headline-3xl-weight-bold);
   text-transform: var(--typography-headline-3xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xl-bold {
     font-size: var(--typography-headline-3xl-size-desktop);
   }
@@ -4002,7 +3763,7 @@ img {
   letter-spacing: var(--typography-headline-2xl-letter-spacing);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xl {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -4015,7 +3776,7 @@ img {
   font-weight: var(--typography-headline-2xl-weight-medium);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xl-medium {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -4028,7 +3789,7 @@ img {
   font-weight: var(--typography-headline-2xl-weight-bold);
   text-transform: var(--typography-headline-2xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xl-bold {
     font-size: var(--typography-headline-2xl-size-desktop);
   }
@@ -4040,7 +3801,7 @@ img {
   letter-spacing: var(--typography-headline-xl-letter-spacing);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xl {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -4053,7 +3814,7 @@ img {
   font-weight: var(--typography-headline-xl-weight-medium);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xl-medium {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -4066,7 +3827,7 @@ img {
   font-weight: var(--typography-headline-xl-weight-bold);
   text-transform: var(--typography-headline-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xl-bold {
     font-size: var(--typography-headline-xl-size-desktop);
   }
@@ -4078,7 +3839,7 @@ img {
   letter-spacing: var(--typography-headline-l-letter-spacing);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-l {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -4091,7 +3852,7 @@ img {
   font-weight: var(--typography-headline-l-weight-medium);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-l-medium {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -4104,7 +3865,7 @@ img {
   font-weight: var(--typography-headline-l-weight-bold);
   text-transform: var(--typography-headline-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-l-bold {
     font-size: var(--typography-headline-l-size-desktop);
   }
@@ -4116,7 +3877,7 @@ img {
   letter-spacing: var(--typography-headline-m-letter-spacing);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-m {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -4129,7 +3890,7 @@ img {
   font-weight: var(--typography-headline-m-weight-medium);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-m-medium {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -4142,7 +3903,7 @@ img {
   font-weight: var(--typography-headline-m-weight-bold);
   text-transform: var(--typography-headline-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-m-bold {
     font-size: var(--typography-headline-m-size-desktop);
   }
@@ -4154,7 +3915,7 @@ img {
   letter-spacing: var(--typography-headline-s-letter-spacing);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-s {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -4167,7 +3928,7 @@ img {
   font-weight: var(--typography-headline-s-weight-medium);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-s-medium {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -4180,7 +3941,7 @@ img {
   font-weight: var(--typography-headline-s-weight-bold);
   text-transform: var(--typography-headline-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-s-bold {
     font-size: var(--typography-headline-s-size-desktop);
   }
@@ -4192,7 +3953,7 @@ img {
   letter-spacing: var(--typography-headline-xs-letter-spacing);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xs {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -4205,7 +3966,7 @@ img {
   font-weight: var(--typography-headline-xs-weight-medium);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xs-medium {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -4218,7 +3979,7 @@ img {
   font-weight: var(--typography-headline-xs-weight-bold);
   text-transform: var(--typography-headline-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-xs-bold {
     font-size: var(--typography-headline-xs-size-desktop);
   }
@@ -4230,7 +3991,7 @@ img {
   letter-spacing: var(--typography-headline-2xs-letter-spacing);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xs {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4243,7 +4004,7 @@ img {
   font-weight: var(--typography-headline-2xs-weight-medium);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xs-medium {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4256,7 +4017,7 @@ img {
   font-weight: var(--typography-headline-2xs-weight-bold);
   text-transform: var(--typography-headline-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-2xs-bold {
     font-size: var(--typography-headline-2xs-size-desktop);
   }
@@ -4268,7 +4029,7 @@ img {
   letter-spacing: var(--typography-headline-3xs-letter-spacing);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xs {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4281,7 +4042,7 @@ img {
   font-weight: var(--typography-headline-3xs-weight-medium);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xs-medium {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4294,7 +4055,7 @@ img {
   font-weight: var(--typography-headline-3xs-weight-bold);
   text-transform: var(--typography-headline-3xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-headline-3xs-bold {
     font-size: var(--typography-headline-3xs-size-desktop);
   }
@@ -4306,7 +4067,7 @@ img {
   letter-spacing: var(--typography-caption-m-letter-spacing);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-m {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4319,7 +4080,7 @@ img {
   font-weight: var(--typography-caption-m-weight-light);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-m-light {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4332,7 +4093,7 @@ img {
   font-weight: var(--typography-caption-m-weight-regular);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-m-regular {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4345,7 +4106,7 @@ img {
   font-weight: var(--typography-caption-m-weight-semi-bold);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-m-semi-bold {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4358,7 +4119,7 @@ img {
   font-weight: var(--typography-caption-m-weight-bold);
   text-transform: var(--typography-caption-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-m-bold {
     font-size: var(--typography-caption-m-size-desktop);
   }
@@ -4370,7 +4131,7 @@ img {
   letter-spacing: var(--typography-caption-s-letter-spacing);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-s {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4383,7 +4144,7 @@ img {
   font-weight: var(--typography-caption-s-weight-light);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-s-light {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4396,7 +4157,7 @@ img {
   font-weight: var(--typography-caption-s-weight-regular);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-s-regular {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4409,7 +4170,7 @@ img {
   font-weight: var(--typography-caption-s-weight-semi-bold);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-s-semi-bold {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4422,7 +4183,7 @@ img {
   font-weight: var(--typography-caption-s-weight-bold);
   text-transform: var(--typography-caption-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-s-bold {
     font-size: var(--typography-caption-s-size-desktop);
   }
@@ -4434,7 +4195,7 @@ img {
   letter-spacing: var(--typography-caption-2xs-letter-spacing);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-2xs {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4447,7 +4208,7 @@ img {
   font-weight: var(--typography-caption-2xs-weight-light);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-2xs-light {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4460,7 +4221,7 @@ img {
   font-weight: var(--typography-caption-2xs-weight-regular);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-2xs-regular {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4473,7 +4234,7 @@ img {
   font-weight: var(--typography-caption-2xs-weight-semi-bold);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-2xs-semi-bold {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4486,7 +4247,7 @@ img {
   font-weight: var(--typography-caption-2xs-weight-bold);
   text-transform: var(--typography-caption-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-caption-2xs-bold {
     font-size: var(--typography-caption-2xs-size-desktop);
   }
@@ -4499,7 +4260,7 @@ img {
   font-weight: var(--typography-label-m-weight-medium);
   text-transform: var(--typography-label-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-label-m {
     font-size: var(--typography-label-m-size-desktop);
   }
@@ -4512,7 +4273,7 @@ img {
   font-weight: var(--typography-label-s-weight-medium);
   text-transform: var(--typography-label-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-label-s {
     font-size: var(--typography-label-s-size-desktop);
   }
@@ -4525,7 +4286,7 @@ img {
   font-weight: var(--typography-action-button-l-weight-medium);
   text-transform: var(--typography-action-button-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-button-l {
     font-size: var(--typography-action-button-l-size-desktop);
   }
@@ -4538,7 +4299,7 @@ img {
   font-weight: var(--typography-action-button-m-weight-medium);
   text-transform: var(--typography-action-button-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-button-m {
     font-size: var(--typography-action-button-m-size-desktop);
   }
@@ -4551,7 +4312,7 @@ img {
   font-weight: var(--typography-action-button-s-weight-medium);
   text-transform: var(--typography-action-button-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-button-s {
     font-size: var(--typography-action-button-s-size-desktop);
   }
@@ -4564,7 +4325,7 @@ img {
   font-weight: var(--typography-action-link-navigation-weight-regular);
   text-transform: var(--typography-action-link-navigation-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-link-navigation {
     font-size: var(--typography-action-link-navigation-size-desktop);
   }
@@ -4577,7 +4338,7 @@ img {
   font-weight: var(--typography-action-link-hyperlink-weight-regular);
   text-transform: var(--typography-action-link-hyperlink-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-link-hyperlink {
     font-size: var(--typography-action-link-hyperlink-size-desktop);
   }
@@ -4590,7 +4351,7 @@ img {
   font-weight: var(--typography-eyebrow-l-weight-bold);
   text-transform: var(--typography-eyebrow-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-eyebrow-l {
     font-size: var(--typography-eyebrow-l-size-desktop);
   }
@@ -4603,7 +4364,7 @@ img {
   font-weight: var(--typography-eyebrow-m-weight-bold);
   text-transform: var(--typography-eyebrow-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-eyebrow-m {
     font-size: var(--typography-eyebrow-m-size-desktop);
   }
@@ -4616,7 +4377,7 @@ img {
   font-weight: var(--typography-eyebrow-s-weight-bold);
   text-transform: var(--typography-eyebrow-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-eyebrow-s {
     font-size: var(--typography-eyebrow-s-size-desktop);
   }
@@ -4629,7 +4390,7 @@ img {
   font-weight: var(--typography-price-xl-weight-bold);
   text-transform: var(--typography-price-xl-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-xl {
     font-size: var(--typography-price-xl-size-desktop);
   }
@@ -4642,7 +4403,7 @@ img {
   font-weight: var(--typography-price-l-weight-bold);
   text-transform: var(--typography-price-l-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-l {
     font-size: var(--typography-price-l-size-desktop);
   }
@@ -4655,7 +4416,7 @@ img {
   font-weight: var(--typography-price-m-weight-bold);
   text-transform: var(--typography-price-m-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-m {
     font-size: var(--typography-price-m-size-desktop);
   }
@@ -4668,7 +4429,7 @@ img {
   font-weight: var(--typography-price-s-weight-bold);
   text-transform: var(--typography-price-s-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-s {
     font-size: var(--typography-price-s-size-desktop);
   }
@@ -4681,7 +4442,7 @@ img {
   font-weight: var(--typography-price-xs-weight-bold);
   text-transform: var(--typography-price-xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-xs {
     font-size: var(--typography-price-xs-size-desktop);
   }
@@ -4694,7 +4455,7 @@ img {
   font-weight: var(--typography-price-2xs-weight-bold);
   text-transform: var(--typography-price-2xs-text-transform);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .text-price-2xs {
     font-size: var(--typography-price-2xs-size-desktop);
   }
@@ -4758,287 +4519,6 @@ img {
   white-space: nowrap;
 }
 
-/* ========================================================================== */
-/*                       UTILITIES: GENERAL UTILITIES                         */
-/* ========================================================================== */
-.background-image-center {
-  background-position: center;
-  background-size: cover;
-  height: 100%;
-}
-
-.opacity-50 {
-  opacity: 0.5;
-}
-.opacity-s {
-  opacity: var(--opacity-s);
-}
-.opacity-m {
-  opacity: var(--opacity-m);
-}
-.opacity-l {
-  opacity: var(--opacity-l);
-}
-
-.bg-opacity-30 {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-.bg-opacity-40 {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.width-max {
-  max-width: var(--width-max);
-}
-.width-half {
-  max-width: 50%;
-  margin-inline: auto;
-}
-@media (max-width: 1200px) {
-  .width-half {
-    max-width: 100%;
-  }
-}
-.width-65 {
-  max-width: 65%;
-  margin-inline: auto;
-}
-@media (max-width: 1200px) {
-  .width-65 {
-    max-width: 100%;
-  }
-}
-.width-80 {
-  max-width: 80%;
-  margin-inline: auto;
-}
-@media (max-width: 1200px) {
-  .width-80 {
-    max-width: 100%;
-  }
-}
-
-.char-limit-20 {
-  width: 20ch;
-}
-.char-limit-30 {
-  width: 30ch;
-}
-.char-limit-40 {
-  width: 40ch;
-}
-
-.box-shadow-danger {
-  box-shadow: inset 0 5px 25px rgba(0, 0, 0, 0.05), 0 0 5px var(--color-danger);
-}
-.box-shadow-xs {
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
-}
-.box-shadow-s {
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
-}
-.box-shadow-base {
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-}
-
-.scrollable-y {
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-.cursor-default {
-  cursor: default;
-}
-.cursor-none {
-  cursor: none;
-}
-
-.flex-direction-row {
-  flex-direction: row;
-}
-.flex-direction-responsive {
-  flex-direction: row;
-}
-@media (max-width: 1200px) {
-  .flex-direction-responsive {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 1200px) {
-  .desktop-only {
-    display: none !important;
-  }
-}
-@media (max-width: 1024px) {
-  .desktop-and-tablet-large-only {
-    display: none !important;
-  }
-}
-@media (max-width: 767px) {
-  .desktop-and-tablet-only {
-    display: none !important;
-  }
-}
-
-@media (max-width: 767px), (min-width: 1200px) {
-  .tablet-only {
-    display: none !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .phone-only {
-    display: none !important;
-  }
-}
-@media (min-width: 1200px) {
-  .phone-and-tablet-only {
-    display: none !important;
-  }
-}
-@media (min-width: 1024px) {
-  .phone-and-tablet-small-only {
-    display: none !important;
-  }
-}
-
-@media (min-width: 1200px) {
-  .hide-on-desktop {
-    display: none !important;
-  }
-}
-@media (min-width: 768px) and (max-width: 1200px) {
-  .hide-on-tablet {
-    display: none !important;
-  }
-}
-@media (max-width: 767px) {
-  .hide-on-phone {
-    display: none !important;
-  }
-}
-
-.rotate {
-  transition: all 0.3s ease-in-out;
-  transform: rotate(180deg);
-}
-
-.container-max-width-xs {
-  max-width: 3.125rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-xs {
-    max-width: 100%;
-  }
-}
-.container-max-width-s {
-  max-width: 6.25rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-s {
-    max-width: 100%;
-  }
-}
-.container-max-width-base {
-  max-width: 9.375rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-base {
-    max-width: 100%;
-  }
-}
-.container-max-width-ms {
-  max-width: 12.5rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-ms {
-    max-width: 100%;
-  }
-}
-.container-max-width-ml {
-  max-width: 18.75rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-ml {
-    max-width: 100%;
-  }
-}
-.container-max-width-l {
-  max-width: 31.25rem;
-}
-@media (max-width: 767px) {
-  .container-max-width-l {
-    max-width: 100%;
-  }
-}
-
-.display-none-force {
-  display: none !important;
-}
-
-.loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--color-primary);
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-.loading-spinner--thin {
-  border: 3px solid var(--color-primary);
-  border-bottom-color: transparent;
-}
-.loading-spinner--extra-small {
-  width: 20px;
-  height: 20px;
-}
-.loading-spinner--small {
-  width: 30px;
-  height: 30px;
-}
-.loading-spinner--base {
-  width: 40px;
-  height: 40px;
-}
-.loading-spinner--large {
-  width: 60px;
-  height: 60px;
-}
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.link-no-decoration:hover,
-.link-no-decoration:focus,
-.link-no-decoration:visited {
-  color: var(--color-neutral-9);
-  text-decoration: none;
-}
-
-.service-studio-display-none {
-  -servicestudio-display: none;
-}
-
-.application-logo-custom {
-  width: 100px;
-}
-@media (max-width: 768px) {
-  .application-logo-custom {
-    width: 80px;
-  }
-}
-
 /* ==========================================================================*/
 /*                            UTILITY CLASSES: IMAGES                        */
 /* ==========================================================================*/
@@ -5065,11 +4545,6 @@ img {
 .image-size-xl {
   width: var(--image-width-xl);
   height: var(--image-height-xl);
-}
-
-.image-size-display {
-  width: var(--image-width-display);
-  height: var(--image-height-display);
 }
 
 .image-width-xs {
@@ -5100,10 +4575,6 @@ img {
   width: var(--image-width-2xl);
 }
 
-.image-width-display {
-  width: var(--image-width-display);
-}
-
 .image-height-xs {
   height: var(--image-height-xs);
 }
@@ -5122,10 +4593,6 @@ img {
 
 .image-height-xl {
   height: var(--image-height-xl);
-}
-
-.image-height-display {
-  height: var(--image-height-display);
 }
 
 .image-max-width-xs {
@@ -5154,10 +4621,6 @@ img {
 
 .image-max-width-2xl {
   max-width: var(--image-width-2xl);
-}
-
-.image-max-width-display {
-  max-width: var(--image-width-display);
 }
 
 .avatar-xs {
@@ -5225,33 +4688,10 @@ img {
   background-position: center;
   background-repeat: no-repeat;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .bg-responsive {
     background-image: none;
   }
-}
-
-.image-size-40 {
-  width: 40px;
-}
-.image-size-60 {
-  width: 60px;
-}
-.image-size-80 {
-  width: 80px;
-}
-.image-size-100 {
-  width: 100px;
-}
-.image-size-120 {
-  width: 120px;
-}
-.image-star-alliance {
-  width: var(--image-star-alliance);
-}
-.image-captcha {
-  width: var(--image-width-captcha);
-  height: var(--image-height-captcha);
 }
 
 /* ==========================================================================*/
@@ -5475,7 +4915,7 @@ img {
 .loader-plane--xl .osui-inline-svg svg path {
   stroke-width: 3;
 }
-@media screen and (max-width: 639px) {
+@media screen and (max-width: ) {
   .loader-plane--responsive-small {
     width: var(--spacing-6);
     height: var(--spacing-6);
@@ -5485,7 +4925,7 @@ img {
   width: var(--spacing-6);
   height: var(--spacing-6);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .loader-plane--responsive-medium {
     width: var(--spacing-10);
     height: var(--spacing-10);
@@ -5495,7 +4935,7 @@ img {
   width: var(--spacing-10);
   height: var(--spacing-10);
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: ) {
   .loader-plane--responsive-large {
     width: var(--spacing-20);
     height: var(--spacing-20);
@@ -5862,13 +5302,13 @@ img {
   width: var(--spacing-6);
   height: var(--spacing-6);
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: ) {
   .loader-responsive {
     width: var(--spacing-10);
     height: var(--spacing-10);
   }
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: ) {
   .loader-responsive {
     width: var(--spacing-20);
     height: var(--spacing-20);
@@ -5887,565 +5327,4 @@ img {
   .loader-skeleton {
     animation-duration: calc(var(--motion-slow-reveal-duration) * 2);
   }
-}
-/* ========================================================================== */
-/*                          UTILITIES: SPACING                                */
-/* ========================================================================== */
-@media (max-width: 767px) {
-  .responsive-margin-top {
-    margin-top: var(--space-base);
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .margin--phone-top-none {
-    margin-top: var(--space-none);
-  }
-  .margin--phone-top-xs {
-    margin-top: var(--space-xs);
-  }
-  .margin--phone-top-s {
-    margin-top: var(--space-s);
-  }
-  .margin--phone-top-base {
-    margin-top: var(--space-base);
-  }
-  .margin--phone-top-m {
-    margin-top: var(--space-m);
-  }
-  .margin--phone-top-ls {
-    margin-top: var(--space-ls);
-  }
-  .margin--phone-top-l {
-    margin-top: var(--space-l);
-  }
-  .margin--phone-top-lm {
-    margin-top: var(--space-lm);
-  }
-  .margin--phone-top-xl {
-    margin-top: var(--space-xl);
-  }
-  .margin--phone-top-xxl {
-    margin-top: var(--space-xxl);
-  }
-  .margin--phone-top-xxxl {
-    margin-top: var(--space-xxxl);
-  }
-  .margin--phone-right-none {
-    margin-right: var(--space-none);
-  }
-  .margin--phone-right-xs {
-    margin-right: var(--space-xs);
-  }
-  .margin--phone-right-s {
-    margin-right: var(--space-s);
-  }
-  .margin--phone-right-base {
-    margin-right: var(--space-base);
-  }
-  .margin--phone-right-m {
-    margin-right: var(--space-m);
-  }
-  .margin--phone-right-ls {
-    margin-right: var(--space-ls);
-  }
-  .margin--phone-right-l {
-    margin-right: var(--space-l);
-  }
-  .margin--phone-right-lm {
-    margin-right: var(--space-lm);
-  }
-  .margin--phone-right-xl {
-    margin-right: var(--space-xl);
-  }
-  .margin--phone-right-xxl {
-    margin-right: var(--space-xxl);
-  }
-  .margin--phone-right-xxxl {
-    margin-right: var(--space-xxxl);
-  }
-  .margin--phone-bottom-none {
-    margin-bottom: var(--space-none);
-  }
-  .margin--phone-bottom-xs {
-    margin-bottom: var(--space-xs);
-  }
-  .margin--phone-bottom-s {
-    margin-bottom: var(--space-s);
-  }
-  .margin--phone-bottom-base {
-    margin-bottom: var(--space-base);
-  }
-  .margin--phone-bottom-m {
-    margin-bottom: var(--space-m);
-  }
-  .margin--phone-bottom-ls {
-    margin-bottom: var(--space-ls);
-  }
-  .margin--phone-bottom-l {
-    margin-bottom: var(--space-l);
-  }
-  .margin--phone-bottom-lm {
-    margin-bottom: var(--space-lm);
-  }
-  .margin--phone-bottom-xl {
-    margin-bottom: var(--space-xl);
-  }
-  .margin--phone-bottom-xxl {
-    margin-bottom: var(--space-xxl);
-  }
-  .margin--phone-bottom-xxxl {
-    margin-bottom: var(--space-xxxl);
-  }
-  .margin--phone-left-none {
-    margin-left: var(--space-none);
-  }
-  .margin--phone-left-none-important {
-    margin-left: var(--space-none) !important;
-  }
-  .margin--phone-left-xs {
-    margin-left: var(--space-xs);
-  }
-  .margin--phone-left-s {
-    margin-left: var(--space-s);
-  }
-  .margin--phone-left-base {
-    margin-left: var(--space-base);
-  }
-  .margin--phone-left-m {
-    margin-left: var(--space-m);
-  }
-  .margin--phone-left-ls {
-    margin-left: var(--space-ls);
-  }
-  .margin--phone-left-l {
-    margin-left: var(--space-l);
-  }
-  .margin--phone-left-lm {
-    margin-left: var(--space-lm);
-  }
-  .margin--phone-left-xl {
-    margin-left: var(--space-xl);
-  }
-  .margin--phone-left-xxl {
-    margin-left: var(--space-xxl);
-  }
-  .margin--phone-left-xxxl {
-    margin-left: var(--space-xxxl);
-  }
-}
-@media screen and (max-width: 768px) {
-  .margin--phone-and-tablet-top-none {
-    margin-top: var(--space-none);
-  }
-  .margin--phone-and-tablet-top-xs {
-    margin-top: var(--space-xs);
-  }
-  .margin--phone-and-tablet-top-s {
-    margin-top: var(--space-s);
-  }
-  .margin--phone-and-tablet-top-base {
-    margin-top: var(--space-base);
-  }
-  .margin--phone-and-tablet-top-m {
-    margin-top: var(--space-m);
-  }
-  .margin--phone-and-tablet-top-ls {
-    margin-top: var(--space-ls);
-  }
-  .margin--phone-and-tablet-top-l {
-    margin-top: var(--space-l);
-  }
-  .margin--phone-and-tablet-top-lm {
-    margin-top: var(--space-lm);
-  }
-  .margin--phone-and-tablet-top-xl {
-    margin-top: var(--space-xl);
-  }
-  .margin--phone-and-tablet-top-xxl {
-    margin-top: var(--space-xxl);
-  }
-  .margin--phone-and-tablet-top-xxxl {
-    margin-top: var(--space-xxxl);
-  }
-  .margin--phone-and-tablet-right-none {
-    margin-right: var(--space-none);
-  }
-  .margin--phone-and-tablet-right-xs {
-    margin-right: var(--space-xs);
-  }
-  .margin--phone-and-tablet-right-s {
-    margin-right: var(--space-s);
-  }
-  .margin--phone-and-tablet-right-base {
-    margin-right: var(--space-base);
-  }
-  .margin--phone-and-tablet-right-m {
-    margin-right: var(--space-m);
-  }
-  .margin--phone-and-tablet-right-ls {
-    margin-right: var(--space-ls);
-  }
-  .margin--phone-and-tablet-right-l {
-    margin-right: var(--space-l);
-  }
-  .margin--phone-and-tablet-right-lm {
-    margin-right: var(--space-lm);
-  }
-  .margin--phone-and-tablet-right-xl {
-    margin-right: var(--space-xl);
-  }
-  .margin--phone-and-tablet-right-xxl {
-    margin-right: var(--space-xxl);
-  }
-  .margin--phone-and-tablet-right-xxxl {
-    margin-right: var(--space-xxxl);
-  }
-  .margin--phone-and-tablet-bottom-none {
-    margin-bottom: var(--space-none);
-  }
-  .margin--phone-and-tablet-bottom-xs {
-    margin-bottom: var(--space-xs);
-  }
-  .margin--phone-and-tablet-bottom-s {
-    margin-bottom: var(--space-s);
-  }
-  .margin--phone-and-tablet-bottom-base {
-    margin-bottom: var(--space-base);
-  }
-  .margin--phone-and-tablet-bottom-m {
-    margin-bottom: var(--space-m);
-  }
-  .margin--phone-and-tablet-bottom-ls {
-    margin-bottom: var(--space-ls);
-  }
-  .margin--phone-and-tablet-bottom-l {
-    margin-bottom: var(--space-l);
-  }
-  .margin--phone-and-tablet-bottom-lm {
-    margin-bottom: var(--space-lm);
-  }
-  .margin--phone-and-tablet-bottom-xl {
-    margin-bottom: var(--space-xl);
-  }
-  .margin--phone-and-tablet-bottom-xxl {
-    margin-bottom: var(--space-xxl);
-  }
-  .margin--phone-and-tablet-bottom-xxxl {
-    margin-bottom: var(--space-xxxl);
-  }
-  .margin--phone-and-tablet-left-none {
-    margin-left: var(--space-none);
-  }
-  .margin--phone-and-tablet-left-xs {
-    margin-left: var(--space-xs);
-  }
-  .margin--phone-and-tablet-left-s {
-    margin-left: var(--space-s);
-  }
-  .margin--phone-and-tablet-left-base {
-    margin-left: var(--space-base);
-  }
-  .margin--phone-and-tablet-left-m {
-    margin-left: var(--space-m);
-  }
-  .margin--phone-and-tablet-left-ls {
-    margin-left: var(--space-ls);
-  }
-  .margin--phone-and-tablet-left-l {
-    margin-left: var(--space-l);
-  }
-  .margin--phone-and-tablet-left-lm {
-    margin-left: var(--space-lm);
-  }
-  .margin--phone-and-tablet-left-xl {
-    margin-left: var(--space-xl);
-  }
-  .margin--phone-and-tablet-left-xxl {
-    margin-left: var(--space-xxl);
-  }
-  .margin--phone-and-tablet-left-xxxl {
-    margin-left: var(--space-xxxl);
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  .margin--tablet-top-none {
-    margin-top: var(--space-none);
-  }
-  .margin--tablet-top-xs {
-    margin-top: var(--space-xs);
-  }
-  .margin--tablet-top-s {
-    margin-top: var(--space-s);
-  }
-  .margin--tablet-top-base {
-    margin-top: var(--space-base);
-  }
-  .margin--tablet-top-m {
-    margin-top: var(--space-m);
-  }
-  .margin--tablet-top-ls {
-    margin-top: var(--space-ls);
-  }
-  .margin--tablet-top-l {
-    margin-top: var(--space-l);
-  }
-  .margin--tablet-top-lm {
-    margin-top: var(--space-lm);
-  }
-  .margin--tablet-top-xl {
-    margin-top: var(--space-xl);
-  }
-  .margin--tablet-top-xxl {
-    margin-top: var(--space-xxl);
-  }
-  .margin--tablet-top-xxxl {
-    margin-top: var(--space-xxxl);
-  }
-  .margin--tablet-right-none {
-    margin-right: var(--space-none);
-  }
-  .margin--tablet-right-xs {
-    margin-right: var(--space-xs);
-  }
-  .margin--tablet-right-s {
-    margin-right: var(--space-s);
-  }
-  .margin--tablet-right-base {
-    margin-right: var(--space-base);
-  }
-  .margin--tablet-right-m {
-    margin-right: var(--space-m);
-  }
-  .margin--tablet-right-ls {
-    margin-right: var(--space-ls);
-  }
-  .margin--tablet-right-l {
-    margin-right: var(--space-l);
-  }
-  .margin--tablet-right-lm {
-    margin-right: var(--space-lm);
-  }
-  .margin--tablet-right-xl {
-    margin-right: var(--space-xl);
-  }
-  .margin--tablet-right-xxl {
-    margin-right: var(--space-xxl);
-  }
-  .margin--tablet-right-xxxl {
-    margin-right: var(--space-xxxl);
-  }
-  .margin--tablet-bottom-none {
-    margin-bottom: var(--space-none);
-  }
-  .margin--tablet-bottom-xs {
-    margin-bottom: var(--space-xs);
-  }
-  .margin--tablet-bottom-s {
-    margin-bottom: var(--space-s);
-  }
-  .margin--tablet-bottom-base {
-    margin-bottom: var(--space-base);
-  }
-  .margin--tablet-bottom-m {
-    margin-bottom: var(--space-m);
-  }
-  .margin--tablet-bottom-ls {
-    margin-bottom: var(--space-ls);
-  }
-  .margin--tablet-bottom-l {
-    margin-bottom: var(--space-l);
-  }
-  .margin--tablet-bottom-lm {
-    margin-bottom: var(--space-lm);
-  }
-  .margin--tablet-bottom-xl {
-    margin-bottom: var(--space-xl);
-  }
-  .margin--tablet-bottom-xxl {
-    margin-bottom: var(--space-xxl);
-  }
-  .margin--tablet-bottom-xxxl {
-    margin-bottom: var(--space-xxxl);
-  }
-  .margin--tablet-left-none {
-    margin-left: var(--space-none);
-  }
-  .margin--tablet-left-xs {
-    margin-left: var(--space-xs);
-  }
-  .margin--tablet-left-s {
-    margin-left: var(--space-s);
-  }
-  .margin--tablet-left-base {
-    margin-left: var(--space-base);
-  }
-  .margin--tablet-left-m {
-    margin-left: var(--space-m);
-  }
-  .margin--tablet-left-ls {
-    margin-left: var(--space-ls);
-  }
-  .margin--tablet-left-l {
-    margin-left: var(--space-l);
-  }
-  .margin--tablet-left-lm {
-    margin-left: var(--space-lm);
-  }
-  .margin--tablet-left-xl {
-    margin-left: var(--space-xl);
-  }
-  .margin--tablet-left-xxl {
-    margin-left: var(--space-xxl);
-  }
-  .margin--tablet-left-xxxl {
-    margin-left: var(--space-xxxl);
-  }
-}
-@media screen and (min-width: 1200px) {
-  .margin--desktop-top-none {
-    margin-top: var(--space-none);
-  }
-  .margin--desktop-top-xs {
-    margin-top: var(--space-xs);
-  }
-  .margin--desktop-top-s {
-    margin-top: var(--space-s);
-  }
-  .margin--desktop-top-base {
-    margin-top: var(--space-base);
-  }
-  .margin--desktop-top-m {
-    margin-top: var(--space-m);
-  }
-  .margin--desktop-top-ls {
-    margin-top: var(--space-ls);
-  }
-  .margin--desktop-top-l {
-    margin-top: var(--space-l);
-  }
-  .margin--desktop-top-lm {
-    margin-top: var(--space-lm);
-  }
-  .margin--desktop-top-xl {
-    margin-top: var(--space-xl);
-  }
-  .margin--desktop-top-xxl {
-    margin-top: var(--space-xxl);
-  }
-  .margin--desktop-top-xxxl {
-    margin-top: var(--space-xxxl);
-  }
-  .margin--desktop-right-none {
-    margin-right: var(--space-none);
-  }
-  .margin--desktop-right-xs {
-    margin-right: var(--space-xs);
-  }
-  .margin--desktop-right-s {
-    margin-right: var(--space-s);
-  }
-  .margin--desktop-right-base {
-    margin-right: var(--space-base);
-  }
-  .margin--desktop-right-m {
-    margin-right: var(--space-m);
-  }
-  .margin--desktop-right-ls {
-    margin-right: var(--space-ls);
-  }
-  .margin--desktop-right-l {
-    margin-right: var(--space-l);
-  }
-  .margin--desktop-right-lm {
-    margin-right: var(--space-lm);
-  }
-  .margin--desktop-right-xl {
-    margin-right: var(--space-xl);
-  }
-  .margin--desktop-right-xxl {
-    margin-right: var(--space-xxl);
-  }
-  .margin--desktop-right-xxxl {
-    margin-right: var(--space-xxxl);
-  }
-  .margin--desktop-bottom-none {
-    margin-bottom: var(--space-none);
-  }
-  .margin--desktop-bottom-xs {
-    margin-bottom: var(--space-xs);
-  }
-  .margin--desktop-bottom-s {
-    margin-bottom: var(--space-s);
-  }
-  .margin--desktop-bottom-base {
-    margin-bottom: var(--space-base);
-  }
-  .margin--desktop-bottom-m {
-    margin-bottom: var(--space-m);
-  }
-  .margin--desktop-bottom-ls {
-    margin-bottom: var(--space-ls);
-  }
-  .margin--desktop-bottom-l {
-    margin-bottom: var(--space-l);
-  }
-  .margin--desktop-bottom-lm {
-    margin-bottom: var(--space-lm);
-  }
-  .margin--desktop-bottom-xl {
-    margin-bottom: var(--space-xl);
-  }
-  .margin--desktop-bottom-xxl {
-    margin-bottom: var(--space-xxl);
-  }
-  .margin--desktop-bottom-xxxl {
-    margin-bottom: var(--space-xxxl);
-  }
-  .margin--desktop-left-none {
-    margin-left: var(--space-none);
-  }
-  .margin--desktop-left-xs {
-    margin-left: var(--space-xs);
-  }
-  .margin--desktop-left-s {
-    margin-left: var(--space-s);
-  }
-  .margin--desktop-left-base {
-    margin-left: var(--space-base);
-  }
-  .margin--desktop-left-m {
-    margin-left: var(--space-m);
-  }
-  .margin--desktop-left-ls {
-    margin-left: var(--space-ls);
-  }
-  .margin--desktop-left-l {
-    margin-left: var(--space-l);
-  }
-  .margin--desktop-left-lm {
-    margin-left: var(--space-lm);
-  }
-  .margin--desktop-left-xl {
-    margin-left: var(--space-xl);
-  }
-  .margin--desktop-left-xxl {
-    margin-left: var(--space-xxl);
-  }
-  .margin--desktop-left-xxxl {
-    margin-left: var(--space-xxxl);
-  }
-}
-
-.padding-top-sm {
-  padding-top: var(--space-sm);
-}
-.padding-bottom-sm {
-  padding-bottom: var(--space-sm);
-}
-.padding-left-sm {
-  padding-left: var(--space-sm);
-}
-.padding-right-sm {
-  padding-right: var(--space-sm);
 }
