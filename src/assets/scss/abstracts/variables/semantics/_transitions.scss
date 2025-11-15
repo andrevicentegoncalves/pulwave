@@ -7,28 +7,28 @@
 
 $transition-semantic: (
   // Base transitions
-  'base': all 200ms map.get(timing.$easing-scale, 'ease-in-out'),
-  'fast': all 150ms map.get(timing.$easing-scale, 'ease-out'),
-  'slow': all 300ms map.get(timing.$easing-scale, 'ease-in-out'),
-  'smooth': all 300ms map.get(timing.$easing-scale, 'standard'),
+  'base': all map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'ease-in-out'),
+  'fast': all map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-out'),
+  'slow': all map.get(timing.$duration-scale, 'comfortable') map.get(timing.$easing-scale, 'ease-in-out'),
+  'smooth': all map.get(timing.$duration-scale, 'comfortable') map.get(timing.$easing-scale, 'standard'),
   
   // Property-specific
-  'color': color 200ms map.get(timing.$easing-scale, 'ease-in-out'),
-  'background': background-color 200ms map.get(timing.$easing-scale, 'ease-in-out'),
-  'opacity': opacity 150ms map.get(timing.$easing-scale, 'ease-out'),
-  'transform': transform 200ms map.get(timing.$easing-scale, 'standard'),
-  'shadow': box-shadow 200ms map.get(timing.$easing-scale, 'ease-in-out'),
-  'border': border-color 150ms map.get(timing.$easing-scale, 'ease-in-out'),
+  'color': color map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'ease-in-out'),
+  'background': background-color map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'ease-in-out'),
+  'opacity': opacity map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-out'),
+  'transform': transform map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'standard'),
+  'shadow': box-shadow map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'ease-in-out'),
+  'border': border-color map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-in-out'),
   
   // Interactive states
-  'hover': all 150ms map.get(timing.$easing-scale, 'ease-out'),
-  'active': all 100ms map.get(timing.$easing-scale, 'ease-in'),
-  'focus': all 150ms map.get(timing.$easing-scale, 'ease-out'),
-  'disabled': all 200ms map.get(timing.$easing-scale, 'ease-in-out'),
+  'hover': all map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-out'),
+  'active': all map.get(timing.$duration-scale, 'immediate') map.get(timing.$easing-scale, 'ease-in'),
+  'focus': all map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-out'),
+  'disabled': all map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'ease-in-out'),
   
   // Component-specific
-  'modal': all 300ms map.get(timing.$easing-scale, 'standard'),
-  'drawer': all 300ms map.get(timing.$easing-scale, 'decelerate'),
-  'tooltip': all 150ms map.get(timing.$easing-scale, 'ease-out'),
-  'dropdown': all 200ms map.get(timing.$easing-scale, 'decelerate'),
+  'modal': all map.get(timing.$duration-scale, 'comfortable') map.get(timing.$easing-scale, 'standard'),
+  'drawer': all map.get(timing.$duration-scale, 'comfortable') map.get(timing.$easing-scale, 'decelerate'),
+  'tooltip': all map.get(timing.$duration-scale, 'fast') map.get(timing.$easing-scale, 'ease-out'),
+  'dropdown': all map.get(timing.$duration-scale, 'base') map.get(timing.$easing-scale, 'decelerate'),
 ) !default;

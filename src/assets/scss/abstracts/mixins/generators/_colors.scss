@@ -121,27 +121,4 @@
       background-color: var(--feedback-danger);
     }
   }
-  
-  // Tier badges
-  .tier {
-    &-miles {
-      color: var(--on-tier);
-      background-color: var(--tier-miles);
-    }
-    
-    &-gold {
-      color: var(--on-tier);
-      background-color: var(--tier-gold);
-    }
-    
-    &-silver {
-      color: var(--on-tier);
-      background-color: var(--tier-silver);
-    }
-    
-    &-navigator {
-      color: var(--on-tier-navigator);
-      background-color: var(--tier-navigator);
-    }
-  }
 }

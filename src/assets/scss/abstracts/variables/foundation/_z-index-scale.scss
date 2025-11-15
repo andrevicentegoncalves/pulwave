@@ -1,8 +1,12 @@
 @use 'sass:map';
 
-// ========================================================================== //
-//                   VARIABLES: FOUNDATION - Z-INDEX SCALE                    //
-// ========================================================================== //
+// ============================================================================ //
+//                   VARIABLES: FOUNDATION - Z-INDEX SCALE                      //
+// ============================================================================ //
+
+// -------------------------------------------
+// Z-INDEX: CONTENT LAYERS (0-100)
+// -------------------------------------------
 
 $z-index-content: (
   'below': -1,
@@ -15,11 +19,15 @@ $z-index-content: (
   'elevated': 100,
 ) !default;
 
+// -------------------------------------------
+// Z-INDEX: OVERLAY LAYERS (1000-10000)
+// -------------------------------------------
+
 $z-index-overlay: (
   'dropdown': 1000,
   'sticky': 1020,
   'fixed': 1030,
-  'modal-overlay': 1040,
+  'modal-backdrop': 1040,
   'modal': 1050,
   'popover': 1060,
   'tooltip': 1070,
@@ -30,4 +38,14 @@ $z-index-overlay: (
   'max': 10000,
 ) !default;
 
-$z-index-layers: map.merge($z-index-content, $z-index-overlay) !default;
+// -------------------------------------------
+// Z-INDEX: COMPONENT-SPECIFIC (Semantic)
+// -------------------------------------------
+
+$z-index-components: (
+  'header': map.get($z-index-overlay, 'sticky'),
+  'sidebar': map.get($z-index-overlay, 'fixed'),
+  'dropdown-menu': map.get($z-index-overlay, 'dropdown'),
+  'modal-dialog': map.get($z-index-overlay, 'modal'),
+  'toast': map.get($z-index-overlay, 'notification'),
+) !default;
