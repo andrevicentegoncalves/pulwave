@@ -48,21 +48,15 @@ $scale-ratio-golden: 1.618 !default;         // 1:φ (golden ratio)
 /// @type Number
 $typography-scale-ratio: $scale-ratio-minor-third !default;
 
-// -------------------------------------------
-// CORE UNITS MAP - Programmatic access
-// -------------------------------------------
-
-$core-units: (
-  'space': $base-unit,
-  'font': $base-font-size,
-  'line-height': $base-line-height,
-  'border': $base-border-width,
-  'duration': $base-duration,
-) !default;
-
-// -------------------------------------------
-// UNIFIED SCALE - Single source for all dimensions
-// -------------------------------------------
+// ============================================================================ //
+//                            UNIFIED SCALE                                     //
+// ============================================================================ //
+// Single mathematical scale for ALL spacing, sizing, and dimensional needs
+// Base: 4px grid system for consistency and simplicity
+// Mathematical progression: key × 4px = value
+// Includes micro values (1px, 2px) for borders and hairlines
+// Uses this for: spacing, sizing, borders, radius, images, avatars, etc.
+// ============================================================================ //
 
 $scale: (
   // Micro (for borders, hairlines)

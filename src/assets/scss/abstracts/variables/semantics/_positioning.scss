@@ -1,50 +1,33 @@
 @use 'sass:map';
-@use '../foundation/positioning-scale' as position;
+@use '../foundation/positioning-scale' as foundation;
 
 // ============================================================================ //
 //                       VARIABLES: SEMANTICS - POSITIONING                     //
 // ============================================================================ //
 
 // ---------------------------------------------------------------------------- //
-// SEMANTIC POSITIONING MAPS
+// SEMANTIC POSITIONING SCALES
 // ---------------------------------------------------------------------------- //
 
-$position-scale: (
-  '0': position.$position-0,
-  '1': position.$position-1,
-  '2': position.$position-2,
-  '3': position.$position-3,
-  '4': position.$position-4,
-  '6': position.$position-6,
-  '8': position.$position-8,
-  '10': position.$position-10,
-  '12': position.$position-12,
-  '16': position.$position-16,
-  '20': position.$position-20,
-  '24': position.$position-24,
-  '32': position.$position-32,
-  '40': position.$position-40,
-  '48': position.$position-48,
-  '64': position.$position-64,
-) !default;
+/// Forward foundation positioning scale
+/// @type Map
+$position-scale: foundation.$positioning-scale !default;
 
-$position-percentages: (
-  '0': position.$position-0-percent,
-  '25': position.$position-25-percent,
-  '50': position.$position-50-percent,
-  '75': position.$position-75-percent,
-  '100': position.$position-100-percent,
-) !default;
+/// Forward foundation positioning percentages
+/// @type Map
+$position-percentages: foundation.$positioning-percentages !default;
 
 // ---------------------------------------------------------------------------- //
-// SEMANTIC POSITIONING TOKENS 
+// SEMANTIC INSET TOKENS
 // ---------------------------------------------------------------------------- //
 
-// Inset positioning (for absolute/fixed elements)
-$inset-none: position.$position-0 !default;
-$inset-xs: position.$position-1 !default;
-$inset-sm: position.$position-2 !default;
-$inset-md: position.$position-4 !default;
-$inset-lg: position.$position-6 !default;
-$inset-xl: position.$position-8 !default;
+/// Forward foundation inset values
+$inset-none: foundation.$inset-none !default;
+$inset-xs: foundation.$inset-xs !default;
+$inset-s: foundation.$inset-s !default;
+$inset-m: foundation.$inset-m !default;
+$inset-l: foundation.$inset-l !default;
+$inset-xl: foundation.$inset-xl !default;
 
+/// Forward foundation auto value
+$auto: foundation.$auto !default;

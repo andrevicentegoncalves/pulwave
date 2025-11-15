@@ -13,7 +13,7 @@
 
   /* Offset */
   --focus-offset-none: #{map.get(scale.$focus-scale, 'none')};
-  --focus-offset-sm: #{map.get(scale.$focus-scale, 'sm')};
+  --focus-offset-s: #{map.get(scale.$focus-scale, 's')};
   --focus-offset-base: #{map.get(scale.$focus-scale, 'base')};
 
   /* Style */

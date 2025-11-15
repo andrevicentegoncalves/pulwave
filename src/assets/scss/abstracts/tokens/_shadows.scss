@@ -3,70 +3,58 @@
 
 @mixin generate-shadow-tokens() {
 
-    /* ========================================================================== */
-    /*                              TOKENS: SHADOWS                               */
-    /* ========================================================================== */
+  /* ========================================================================== */
+  /*                              TOKENS: SHADOWS                               */
+  /* ========================================================================== */
 
-    --shadow-xs: #{map.get(map.get(scale.$shadow-components, 'xs'), 'offset-x')} 
-                #{map.get(map.get(scale.$shadow-components, 'xs'), 'offset-y')} 
-                #{map.get(map.get(scale.$shadow-components, 'xs'), 'blur')} 
-                #{map.get(map.get(scale.$shadow-components, 'xs'), 'spread')} 
-                rgba(0, 0, 0, #{map.get(map.get(scale.$shadow-components, 'xs'), 'opacity')});
+  /* -------------------------------------------------------------------------- */
+  /*                            SHADOW: BASE LEVELS                             */
+  /* -------------------------------------------------------------------------- */
 
-    --shadow-s: #{map.get(map.get(scale.$shadow-components, 's'), 'offset-x')} 
-                #{map.get(map.get(scale.$shadow-components, 's'), 'offset-y')} 
-                #{map.get(map.get(scale.$shadow-components, 's'), 'blur')} 
-                #{map.get(map.get(scale.$shadow-components, 's'), 'spread')} 
-                rgba(0, 0, 0, #{map.get(map.get(scale.$shadow-components, 's'), 'opacity')});
+  @each $level, $properties in scale.$shadow-components {
+    --shadow-#{$level}: #{map.get($properties, 'offset-x')} 
+                        #{map.get($properties, 'offset-y')} 
+                        #{map.get($properties, 'blur')} 
+                        #{map.get($properties, 'spread')} 
+                        rgba(0, 0, 0, #{map.get($properties, 'opacity')});
+  }
 
-    --shadow-m: #{map.get(map.get(scale.$shadow-components, 'm'), 'offset-x')} 
-                #{map.get(map.get(scale.$shadow-components, 'm'), 'offset-y')} 
-                #{map.get(map.get(scale.$shadow-components, 'm'), 'blur')} 
-                #{map.get(map.get(scale.$shadow-components, 'm'), 'spread')} 
-                rgba(0, 0, 0, #{map.get(map.get(scale.$shadow-components, 'm'), 'opacity')});
+  /* -------------------------------------------------------------------------- */
+  /*                              SHADOW: ELEVATION                             */
+  /* -------------------------------------------------------------------------- */
 
-    --shadow-l: #{map.get(map.get(scale.$shadow-components, 'l'), 'offset-x')} 
-                #{map.get(map.get(scale.$shadow-components, 'l'), 'offset-y')} 
-                #{map.get(map.get(scale.$shadow-components, 'l'), 'blur')} 
-                #{map.get(map.get(scale.$shadow-components, 'l'), 'spread')} 
-                rgba(0, 0, 0, #{map.get(map.get(scale.$shadow-components, 'l'), 'opacity')});
+  /* Semantic shadow names based on component elevation */
+  --shadow-card: var(--shadow-s);
+  --shadow-card-hover: var(--shadow-m);
+  --shadow-dropdown: var(--shadow-l);
+  --shadow-modal: var(--shadow-l);
+  --shadow-popover: var(--shadow-l);
+  --shadow-tooltip: var(--shadow-m);
+  --shadow-drawer: var(--shadow-l);
+  --shadow-sticky: var(--shadow-m);
+  --shadow-floating: var(--shadow-l);
 
-    /* -------------------------------------------------------------------------- */
-    /*                              SHADOW: ELEVATION                             */
-    /* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                                SHADOW: INSET                               */
+  /* -------------------------------------------------------------------------- */
 
-    /* Semantic shadow names based on component elevation */
-    --shadow-card: var(--shadow-s);
-    --shadow-card-hover: var(--shadow-m);
-    --shadow-dropdown: var(--shadow-l);
-    --shadow-modal: var(--shadow-l);
-    --shadow-popover: var(--shadow-l);
-    --shadow-tooltip: var(--shadow-m);
-    --shadow-drawer: var(--shadow-l);
-    --shadow-sticky: var(--shadow-m);
-    --shadow-floating: var(--shadow-l);
+  /* Inner shadows for pressed states and inputs */
+  --shadow-inset-xs: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-inset-s: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-inset-m: inset 0 4px 8px 0 rgba(0, 0, 0, 0.08);
 
-    /* -------------------------------------------------------------------------- */
-    /*                                SHADOW: INSET                               */
-    /* -------------------------------------------------------------------------- */
+  /* Semantic inner shadows */
+  --shadow-input-default: var(--shadow-inset-xs);
+  --shadow-input-focus: var(--shadow-inset-s);
+  --shadow-well: var(--shadow-inset-m);
 
-    /* Inner shadows for pressed states and inputs */
-    --shadow-inset-xs: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-inset-s: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-    --shadow-inset-m: inset 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  /* -------------------------------------------------------------------------- */
+  /*                               SHADOW: COLORED                              */
+  /* -------------------------------------------------------------------------- */
 
-    /* Semantic inner shadows */
-    --shadow-input-default: var(--shadow-inset-xs);
-    --shadow-input-focus: var(--shadow-inset-s);
-    --shadow-well: var(--shadow-inset-m);
-
-    /* -------------------------------------------------------------------------- */
-    /*                               SHADOW: COLORED                              */
-    /* -------------------------------------------------------------------------- */
-
-    /* Focus ring shadows (requires color override at component level) */
-    --shadow-focus-default: 0 0 0 3px rgba(59, 130, 246, 0.5);
-    --shadow-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.5);
-    --shadow-focus-success: 0 0 0 3px rgba(34, 197, 94, 0.5);
-    --shadow-focus-warning: 0 0 0 3px rgba(234, 179, 8, 0.5);
+  /* Focus ring shadows (requires color override at component level) */
+  --shadow-focus-default: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  --shadow-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.5);
+  --shadow-focus-success: 0 0 0 3px rgba(34, 197, 94, 0.5);
+  --shadow-focus-warning: 0 0 0 3px rgba(234, 179, 8, 0.5);
 }

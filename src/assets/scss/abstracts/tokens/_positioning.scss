@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../variables/semantics/positioning' as pos;
+@use '../variables/foundation/positioning-scale' as pos;
 
 @mixin generate-positioning-tokens() {
   /* ========================================================================== */
@@ -10,7 +10,7 @@
   /*                            POSITIONING: NUMERIC                            */
   /* -------------------------------------------------------------------------- */
 
-  @each $key, $value in pos.$position-scale {
+  @each $key, $value in pos.$positioning-scale {
     --position-#{$key}: #{$value};
   }
 
@@ -18,7 +18,7 @@
   /*                          POSITIONING: PERCENTAGE                           */
   /* -------------------------------------------------------------------------- */
 
-  @each $key, $value in pos.$position-percentages {
+  @each $key, $value in pos.$positioning-percentages {
     --position-#{$key}-percent: #{$value};
   }
 
@@ -28,8 +28,14 @@
 
   --inset-none: #{pos.$inset-none};
   --inset-xs: #{pos.$inset-xs};
-  --inset-sm: #{pos.$inset-sm};
-  --inset-md: #{pos.$inset-md};
-  --inset-lg: #{pos.$inset-lg};
+  --inset-s: #{pos.$inset-s};
+  --inset-m: #{pos.$inset-m};
+  --inset-l: #{pos.$inset-l};
   --inset-xl: #{pos.$inset-xl};
+  
+  /* -------------------------------------------------------------------------- */
+  /*                              POSITIONING: AUTO                             */
+  /* -------------------------------------------------------------------------- */
+  
+  --position-auto: #{pos.$auto};
 }

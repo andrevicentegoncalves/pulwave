@@ -35,9 +35,9 @@
   --border-width-2xs: 0.0625rem;
   --border-width-xs: 0.125rem;
   --border-width-s: 0.25rem;
-  --border-width-m: ;
-  --border-width-l: 0.5rem;
-  --border-width-xl: 0.75rem;
+  --border-width-m: 0.5rem;
+  --border-width-l: 0.75rem;
+  --border-width-xl: 1rem;
   /* Border Style */
   --border-style-none: none;
   --border-style-solid: solid;
@@ -53,7 +53,7 @@
   --border-radius-l: 1.5rem;
   --border-radius-xl: 2rem;
   --border-radius-2xl: 3rem;
-  --border-radius-round: 9999px;
+  --border-radius-round: 50%;
   /* ========================================================================== */
   /*                               TOKENS: BLUR                                 */
   /* ========================================================================== */
@@ -269,7 +269,7 @@
   --focus-width-thick: 4px;
   /* Offset */
   --focus-offset-none: 0px;
-  --focus-offset-sm: ;
+  --focus-offset-s: 2px;
   --focus-offset-base: 4px;
   /* Style */
   --focus-style-solid: solid;
@@ -464,11 +464,15 @@
   /*                             POSITIONING: INSET                             */
   /* -------------------------------------------------------------------------- */
   --inset-none: 0;
-  --inset-xs: 0.25rem;
-  --inset-sm: 0.5rem;
-  --inset-md: 1rem;
-  --inset-lg: 1.5rem;
-  --inset-xl: 2rem;
+  --inset-xs: 0.5rem;
+  --inset-s: 1rem;
+  --inset-m: 1.5rem;
+  --inset-l: 2rem;
+  --inset-xl: 3rem;
+  /* -------------------------------------------------------------------------- */
+  /*                              POSITIONING: AUTO                             */
+  /* -------------------------------------------------------------------------- */
+  --position-auto: auto;
   /* ========================================================================== */
   /*                               TOKENS: IMAGES                               */
   /* ========================================================================== */
@@ -593,26 +597,34 @@
   /* ========================================================================== */
   /*                              TOKENS: SHADOWS                               */
   /* ========================================================================== */
+  /* -------------------------------------------------------------------------- */
+  /*                            SHADOW: BASE LEVELS                             */
+  /* -------------------------------------------------------------------------- */
   --shadow-xs: 0
-              0.0625rem
-              0.25rem
-              0
-              rgba(0, 0, 0, 0.1);
+                      0.0625rem
+                      0.25rem
+                      0
+                      rgba(0, 0, 0, 0.1);
   --shadow-s: 0
-              0.125rem
-              0.5rem
-              0
-              rgba(0, 0, 0, 0.12);
+                      0.125rem
+                      0.5rem
+                      0
+                      rgba(0, 0, 0, 0.12);
   --shadow-m: 0
-              0.5rem
-              1rem
-              0
-              rgba(0, 0, 0, 0.15);
+                      0.5rem
+                      1rem
+                      0
+                      rgba(0, 0, 0, 0.15);
   --shadow-l: 0
-              1rem
-              2rem
-              0
-              rgba(0, 0, 0, 0.18);
+                      1rem
+                      2rem
+                      0
+                      rgba(0, 0, 0, 0.18);
+  --shadow-xl: 0
+                      1.5rem
+                      3rem
+                      0
+                      rgba(0, 0, 0, 0.2);
   /* -------------------------------------------------------------------------- */
   /*                              SHADOW: ELEVATION                             */
   /* -------------------------------------------------------------------------- */
@@ -706,7 +718,7 @@
   --duration-instant: 0ms;
   --duration-immediate: 50ms;
   --duration-fast: 150ms;
-  --duration-base: 200ms;
+  --duration-normal: 200ms;
   --duration-comfortable: 300ms;
   --duration-moderate: 400ms;
   --duration-slow: 500ms;
@@ -969,7 +981,7 @@
   --letter-spacing-wider: 0.05em;
   --letter-spacing-widest: 0.1em;
   /* -------------------------------------------------------------------------- */
-  /*                       TYPOGRAPHYY: SEMANTIC PRESETS                        */
+  /*                       TYPOGRAPHY: SEMANTIC PRESETS                        */
   /* -------------------------------------------------------------------------- */
   /* ========================================================================== */
   /*                  TOKENS: TYPOGRAPHY PRESET - BODY */

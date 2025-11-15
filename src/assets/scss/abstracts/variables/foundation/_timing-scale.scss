@@ -14,7 +14,7 @@ $duration-scale: (
   'instant': 0ms,
   'immediate': core.$base-duration * 0.5,        // 50ms
   'fast': core.$base-duration * 1.5,             // 150ms
-  'base': core.$base-duration * 2,               // 200ms
+  'normal': core.$base-duration * 2,             // 200ms
   'comfortable': core.$base-duration * 3,        // 300ms
   'moderate': core.$base-duration * 4,           // 400ms
   'slow': core.$base-duration * 5,               // 500ms

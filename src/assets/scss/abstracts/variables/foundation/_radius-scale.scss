@@ -13,12 +13,12 @@ $radius-scale: (
   'none': 0,
   '2xs': map.get($scale, 0.5),   // 2px  - Minimal rounding
   'xs': map.get($scale, 1),      // 4px  - Subtle rounding
-  's': map.get($scale, 2),       // 8px  - Default rounding ⭐
+  's': map.get($scale, 2),       // 8px  - Default rounding
   'm': map.get($scale, 4),       // 16px - Medium rounding
   'l': map.get($scale, 6),       // 24px - Large rounding
   'xl': map.get($scale, 8),      // 32px - Extra large rounding
   '2xl': map.get($scale, 12),    // 48px - Maximum rounding
-  'round': 9999px,               // Full circle/pill shape
+  'round': 50%,                  // Fully rounded (pill/circle)
 ) !default;
 
 // -------------------------------------------

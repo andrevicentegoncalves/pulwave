@@ -5,30 +5,54 @@
 //                 VARIABLES: FOUNDATION - POSITIONING SCALE                    //
 // ============================================================================ //
 
-// Positioning uses the unified scale
-$position-0: map.get($scale, 0) !default;
-$position-1: map.get($scale, 1) !default;
-$position-2: map.get($scale, 2) !default;
-$position-3: map.get($scale, 3) !default;
-$position-4: map.get($scale, 4) !default;
-$position-6: map.get($scale, 6) !default;
-$position-8: map.get($scale, 8) !default;
-$position-10: map.get($scale, 10) !default;
-$position-12: map.get($scale, 12) !default;
-$position-16: map.get($scale, 16) !default;
-$position-20: map.get($scale, 20) !default;
-$position-24: map.get($scale, 24) !default;
-$position-32: map.get($scale, 32) !default;
-$position-40: map.get($scale, 40) !default;
-$position-48: map.get($scale, 48) !default;
-$position-64: map.get($scale, 64) !default;
+// -------------------------------------------
+// NUMERIC POSITIONING
+// -------------------------------------------
 
-// Percentage-based positioning
-$position-0-percent: 0%;
-$position-25-percent: 25%;
-$position-50-percent: 50%;
-$position-75-percent: 75%;
-$position-100-percent: 100%;
+$positioning-scale: (
+  0: map.get($scale, 0),      // 0
+  1: map.get($scale, 1),      // 4px
+  2: map.get($scale, 2),      // 8px
+  3: map.get($scale, 3),      // 12px
+  4: map.get($scale, 4),      // 16px
+  6: map.get($scale, 6),      // 24px
+  8: map.get($scale, 8),      // 32px
+  10: map.get($scale, 10),    // 40px
+  12: map.get($scale, 12),    // 48px
+  16: map.get($scale, 16),    // 64px
+  20: map.get($scale, 20),    // 80px
+  24: map.get($scale, 24),    // 96px
+  32: map.get($scale, 32),    // 128px
+  40: map.get($scale, 40),    // 160px
+  48: map.get($scale, 48),    // 192px
+  64: map.get($scale, 64),    // 256px
+) !default;
 
-// Auto positioning
-$position-auto: auto;
+// -------------------------------------------
+// PERCENTAGE POSITIONING
+// -------------------------------------------
+
+$positioning-percentages: (
+  0: 0%,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+) !default;
+
+// -------------------------------------------
+// INSET VALUES
+// -------------------------------------------
+
+$inset-none: 0 !default;
+$inset-xs: map.get($scale, 2) !default;   // 8px
+$inset-s: map.get($scale, 4) !default;    // 16px
+$inset-m: map.get($scale, 6) !default;    // 24px
+$inset-l: map.get($scale, 8) !default;    // 32px
+$inset-xl: map.get($scale, 12) !default;  // 48px
+
+// -------------------------------------------
+// AUTO POSITIONING
+// -------------------------------------------
+
+$auto: auto !default;
