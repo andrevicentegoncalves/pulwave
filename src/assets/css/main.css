@@ -269,7 +269,7 @@
   --focus-width-thick: 4px;
   /* Offset */
   --focus-offset-none: 0px;
-  --focus-offset-sm: 2px;
+  --focus-offset-sm: ;
   --focus-offset-base: 4px;
   /* Style */
   --focus-style-solid: solid;
