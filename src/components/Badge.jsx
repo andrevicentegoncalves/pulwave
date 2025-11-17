@@ -1,13 +1,43 @@
+// src/components/Badge.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
+// Icon components matching the design
+const IconInfo = () => (
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M8 7.5V11.5M8 5.5V5.51" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconSuccess = () => (
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M5 8L7 10L11 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconWarning = () => (
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+    <path d="M8 6.5V9.5M8 11.5V11.51" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconError = () => (
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M5 5L11 11M11 5L5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
 const iconMap = {
-  info: 'i',
-  success: 'Check',
-  warning: '',
-  error: '!',
-  neutral: '',
+  info: <IconInfo />,
+  success: <IconSuccess />,
+  warning: <IconWarning />,
+  error: <IconError />,
+  neutral: null,
 };
 
 const Badge = ({
@@ -19,10 +49,8 @@ const Badge = ({
   onClick,
   ...rest
 }) => {
-  const hasIcon = icon !== undefined || iconMap[type];
-
-  // No longer need to map 'neutral' to 'default', as CSS is updated
-  // const cssType = type === 'neutral' ? 'default' : type;
+  const badgeIcon = icon !== undefined ? icon : iconMap[type];
+  const hasIcon = badgeIcon !== null && badgeIcon !== undefined;
 
   return (
     <span
@@ -33,7 +61,7 @@ const Badge = ({
       className={clsx(
         'badge',
         `badge--${variant}`,
-        `badge--${type}`, // Using 'type' directly now
+        `badge--${type}`,
         onClick && 'badge--clickable',
         className
       )}
@@ -41,10 +69,10 @@ const Badge = ({
     >
       {hasIcon && (
         <span className="badge__icon" aria-hidden="true">
-          {icon ?? iconMap[type]}
+          {badgeIcon}
         </span>
       )}
-      <span className="badge__label">{children}</span>
+      <span className="badge__text">{children}</span>
     </span>
   );
 };

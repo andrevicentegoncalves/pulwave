@@ -1,0 +1,156 @@
+// src/assets/scss/components/_form.scss
+
+/* ────────────────────── FORM COMPONENT ────────────────────── */
+
+.form {
+  width: 100%;
+  
+  // ── LAYOUT: VERTICAL (default, mobile-first) ──
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-5);
+  }
+
+  // ── LAYOUT: HORIZONTAL ──
+  &--horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-4);
+
+    @media (min-width: 768px) {
+      .form-group {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: var(--scale-4);
+        align-items: start;
+
+        .input__label {
+          padding-top: var(--scale-3);
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // ── LAYOUT: INLINE ──
+  &--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--scale-3);
+    align-items: flex-end;
+
+    .input-wrapper {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+}
+
+// ── FORM GROUP ──
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scale-2);
+}
+
+// ── FORM ROW ──
+.form-row {
+  display: grid;
+  width: 100%;
+  
+  // Mobile-first: Stack on mobile
+  grid-template-columns: 1fr;
+  gap: var(--scale-4);
+
+  // Desktop: Side by side
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  // ── GAP VARIANTS ──
+  &--gap-sm {
+    gap: var(--scale-2);
+  }
+
+  &--gap-md {
+    gap: var(--scale-4);
+  }
+
+  &--gap-lg {
+    gap: var(--scale-6);
+  }
+}
+
+// ── FORM ACTIONS ──
+.form-actions {
+  display: flex;
+  gap: var(--scale-3);
+  padding-top: var(--scale-5);
+  margin-top: var(--scale-5);
+  border-top: var(--border-width-1) solid var(--color-border-default);
+
+  // ── ALIGNMENT VARIANTS ──
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+
+  &--space-between {
+    justify-content: space-between;
+  }
+
+  // Mobile: Stack buttons vertically
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// ── FIELD SET ──
+.form__fieldset {
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--border-radius-m);
+  padding: var(--scale-5);
+  margin: 0 0 var(--scale-5) 0;
+
+  legend {
+    padding: 0 var(--scale-2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-on-surface-default);
+  }
+}
+
+// ── FORM ERROR MESSAGE (Global) ──
+.form__error {
+  padding: var(--scale-3) var(--scale-4);
+  background-color: var(--color-feedback-error-subtle);
+  color: var(--color-feedback-error);
+  border: var(--border-width-1) solid var(--color-feedback-error);
+  border-left: var(--border-width-l) solid var(--color-feedback-error);
+  border-radius: var(--border-radius-s);
+  font-size: var(--font-size-body-s);
+  margin-bottom: var(--scale-4);
+}
+
+// ── FORM SUCCESS MESSAGE (Global) ──
+.form__success {
+  padding: var(--scale-3) var(--scale-4);
+  background-color: var(--color-feedback-success-subtle);
+  color: var(--color-feedback-success);
+  border: var(--border-width-1) solid var(--color-feedback-success);
+  border-left: var(--border-width-l) solid var(--color-feedback-success);
+  border-radius: var(--border-radius-s);
+  font-size: var(--font-size-body-s);
+  margin-bottom: var(--scale-4);
+}

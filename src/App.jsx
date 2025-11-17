@@ -1,9 +1,11 @@
+// src/App.jsx
 import './assets/scss/main.scss';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AuthForm from './components/AuthForm';
 import Home from './components/Home';
+import StyleGuide from './components/StyleGuide';
 
 function App() {
   const [user, setUser] = useState(null); 
@@ -32,6 +34,10 @@ function App() {
         <Route
           path="/login"
           element={!user ? <AuthForm /> : <Navigate to="/" replace />}
+        />
+        <Route
+          path="/style-guide"
+          element={user ? <StyleGuide /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </Router>

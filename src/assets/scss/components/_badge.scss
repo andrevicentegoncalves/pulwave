@@ -1,30 +1,51 @@
-/* ────────────────────── BADGE BLOCK ────────────────────── */
+// src/assets/scss/components/_badge.scss
+
+/* ────────────────────── BADGE COMPONENT ────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--scale-2);                   
-  padding: 0 var(--scale-4);               
-  height: var(--scale-10);                 
-  font: bold var(--font-size-caption-m) var(--font-family-sans);
-  letter-spacing: var(--letter-spacing-wide);
-  border-radius: var(--border-radius-l);
+  gap: var(--scale-2);                   // 8px gap between icon and text
+  padding: var(--scale-2) var(--scale-4); // Consistent: 8px top/bottom, 16px left/right
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body-s);    // 14px
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;                      // Tight line height to prevent overflow
+  letter-spacing: 0.01em;
+  border-radius: var(--border-radius-l); // Full rounded (999px equivalent)
   white-space: nowrap;
   transition: var(--transition-smooth);
+  overflow: hidden;                      // Prevent any overflow
+  text-overflow: ellipsis;
 
   /* ── ELEMENTS ── */
   &__icon {
-    width: var(--icon-size-s);
-    height: var(--icon-size-s);
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* ── VARIANTS ── */
   &--heavy {
     background-color: var(--badge-bg-heavy);
-    color: var(--badge-text-heavy);;
+    color: var(--badge-text-heavy);
+    border: none;
   }
 
   &--medium {
@@ -40,70 +61,76 @@
   }
 
   /* ── TYPES ── */
-    &--success {
+  &--success {
     --badge-bg-heavy: var(--color-feedback-success-800);
     --badge-bg-medium: var(--color-feedback-success-500);
     --badge-bg-light: var(--color-feedback-success-100);
 
-    --badge-text-heavy:       var(--color-feedback-success-50);
-    --badge-text-medium:       var(--color-feedback-success-100);
-    --badge-text-light:       var(--color-feedback-success-800);
+    --badge-text-heavy: var(--color-feedback-success-50);
+    --badge-text-medium: var(--color-feedback-success-100);
+    --badge-text-light: var(--color-feedback-success-800);
 
-    --badge-border:     var(--color-feedback-success);
-    }
+    --badge-border: var(--color-feedback-success);
+  }
 
-    &--info {
-    --badge-bg-heavy:   var(--color-feedback-info-800);
+  &--info {
+    --badge-bg-heavy: var(--color-feedback-info-800);
     --badge-bg-medium: var(--color-feedback-info-200);
-    --badge-bg-light:  var(--color-feedback-info-100);
+    --badge-bg-light: var(--color-feedback-info-100);
 
-    --badge-text-heavy:   var(--color-feedback-info-50);
-    --badge-text-medium:  var(--color-feedback-info-900);
-    --badge-text-light:   var(--color-feedback-info-800);
+    --badge-text-heavy: var(--color-feedback-info-50);
+    --badge-text-medium: var(--color-feedback-info-900);
+    --badge-text-light: var(--color-feedback-info-800);
 
     --badge-border: var(--color-feedback-info);
-    }
+  }
 
-    &--warning {
-    --badge-bg-heavy:   var(--color-feedback-warning-900);
+  &--warning {
+    --badge-bg-heavy: var(--color-feedback-warning-900);
     --badge-bg-medium: var(--color-feedback-warning-200);
-    --badge-bg-light:  var(--color-feedback-warning-100);
+    --badge-bg-light: var(--color-feedback-warning-100);
 
-    --badge-text-heavy:   var(--color-feedback-warning-200);
-    --badge-text-medium:  var(--color-feedback-warning-900);
-    --badge-text-light:   var(--color-feedback-warning-900);
+    --badge-text-heavy: var(--color-feedback-warning-200);
+    --badge-text-medium: var(--color-feedback-warning-900);
+    --badge-text-light: var(--color-feedback-warning-900);
 
     --badge-border: var(--color-feedback-warning);
-    }
+  }
 
-    &--error {
-    --badge-bg-heavy:   var(--color-feedback-error-700);
+  &--error {
+    --badge-bg-heavy: var(--color-feedback-error-700);
     --badge-bg-medium: var(--color-feedback-error-200);
-    --badge-bg-light:  var(--color-feedback-error-100);
+    --badge-bg-light: var(--color-feedback-error-100);
 
-    --badge-text-heavy:   var(--color-feedback-error-50);
-    --badge-text-medium:  var(--color-feedback-error-900);
-    --badge-text-light:   var(--color-feedback-error-700);
+    --badge-text-heavy: var(--color-feedback-error-50);
+    --badge-text-medium: var(--color-feedback-error-900);
+    --badge-text-light: var(--color-feedback-error-700);
 
     --badge-border: var(--color-feedback-error);
-    }
-  
-    &--neutral {
-      --badge-bg-heavy: var(--color-neutral-600);
-      --badge-bg-medium: var(--color-neutral-200);
-      --badge-bg-light: var(--color-neutral-100);
+  }
 
-      --badge-text-heavy: var(--color-neutral-100);
-      --badge-text-medium: var(--color-neutral-900);
-      --badge-text-light: var(--color-neutral-800);
+  &--neutral {
+    --badge-bg-heavy: var(--color-neutral-600);
+    --badge-bg-medium: var(--color-neutral-200);
+    --badge-bg-light: var(--color-neutral-100);
 
-      --badge-border: var(--color-neutral-400);
-    }
+    --badge-text-heavy: var(--color-neutral-100);
+    --badge-text-medium: var(--color-neutral-900);
+    --badge-text-light: var(--color-neutral-800);
 
-  &:hover { filter: brightness(0.95); }
+    --badge-border: var(--color-neutral-400);
+  }
+
+  &:hover { 
+    filter: brightness(0.95); 
+  }
 
   &--clickable {
     cursor: var(--cursor-pointer);
     user-select: none;
+
+    &:active {
+      filter: brightness(0.9);
+    }
   }
 }

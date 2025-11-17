@@ -1,13 +1,19 @@
+// src/assets/scss/components/_alert.scss
+
+/* ────────────────────── ALERT COMPONENT ────────────────────── */
+
 .alert {
   display: flex;
   align-items: center;
   gap: var(--scale-2);
   padding: var(--scale-3);
   border-radius: var(--border-radius-m);
-  margin-bottom: var(--scale-3);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body-s);
+  transition: var(--transition-smooth);
+  position: relative;
 
+  // ── ELEMENTS ──
   &__icon {
     display: flex;
     align-items: center;
@@ -16,38 +22,142 @@
     height: var(--icon-size-s);
     font-weight: var(--font-weight-bold);
     flex-shrink: 0;
+    border-radius: 50%;
   }
 
   &__content {
     flex-grow: 1;
+    line-height: var(--line-height-body-s);
   }
 
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scale-6);
+    height: var(--scale-6);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    color: currentColor;
+    opacity: 0.7;
+    flex-shrink: 0;
+    transition: var(--transition-smooth);
 
+    &:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus-visible {
+      outline: var(--border-width-2) solid currentColor;
+      outline-offset: var(--border-width-1);
+    }
+  }
+
+  // ── VARIANTS: INLINE (default) ──
+  &--inline {
+    margin-bottom: var(--scale-3);
+  }
+
+  // ── VARIANTS: TOAST (floating at top) ──
+  &--toast {
+    position: fixed;
+    top: var(--scale-4);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-index-alert, 1090);
+    min-width: 320px;
+    max-width: 90vw;
+    box-shadow: var(--shadow-l);
+    animation: slide-down var(--duration-comfortable) var(--easing-standard);
+
+    // Mobile: Full width with margin
+    @media (max-width: 640px) {
+      left: var(--scale-2);
+      right: var(--scale-2);
+      transform: none;
+      width: calc(100% - var(--scale-4));
+    }
+  }
+
+  // ── TYPES: SUCCESS ──
   &--success {
     background-color: var(--color-feedback-success-50);
     color: var(--color-feedback-success-800);
-    border: 1px solid var(--color-feedback-success-500);
-    border-left: 4px solid var(--color-feedback-success-700);
+    border: var(--border-width-1) solid var(--color-feedback-success-500);
+    border-left: var(--border-width-l) solid var(--color-feedback-success-700);
+
+    .alert__icon {
+      color: var(--color-feedback-success-700);
+      background-color: var(--color-feedback-success-200);
+    }
   }
 
+  // ── TYPES: INFO ──
   &--info {
     background-color: var(--color-feedback-info-50);
     color: var(--color-feedback-info-800);
-    border: 1px solid var(--color-feedback-info-500);
-    border-left: 4px solid var(--color-feedback-info-700);
+    border: var(--border-width-1) solid var(--color-feedback-info-500);
+    border-left: var(--border-width-l) solid var(--color-feedback-info-700);
+
+    .alert__icon {
+      color: var(--color-feedback-info-700);
+      background-color: var(--color-feedback-info-200);
+    }
   }
 
+  // ── TYPES: WARNING ──
   &--warning {
     background-color: var(--color-feedback-warning-50);
     color: var(--color-feedback-warning-800);
-    border: 1px solid var(--color-feedback-warning-500);
-    border-left: 4px solid var(--color-feedback-warning-700);
+    border: var(--border-width-1) solid var(--color-feedback-warning-500);
+    border-left: var(--border-width-l) solid var(--color-feedback-warning-700);
+
+    .alert__icon {
+      color: var(--color-feedback-warning-800);
+      background-color: var(--color-feedback-warning-200);
+    }
   }
 
+  // ── TYPES: ERROR ──
   &--error {
     background-color: var(--color-feedback-error-50);
     color: var(--color-feedback-error-800);
-    border: 1px solid var(--color-feedback-error-500);
-    border-left: 4px solid var(--color-feedback-error-700);
+    border: var(--border-width-1) solid var(--color-feedback-error-500);
+    border-left: var(--border-width-l) solid var(--color-feedback-error-700);
+
+    .alert__icon {
+      color: var(--color-feedback-error-700);
+      background-color: var(--color-feedback-error-200);
+    }
+  }
+}
+
+// ── ANIMATIONS ──
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Mobile animation override
+@media (max-width: 640px) {
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
