@@ -1,8 +1,5 @@
 import React from 'react';
-import Card from '../../Card';
-import Input from '../../Input';
-import { Divider } from '../../Divider';
-import { Dropdown, DropdownItem, DropdownDivider, DropdownLabel } from '../../Dropdown';
+import { Card, Input, Divider, Dropdown, DropdownItem, DropdownDivider, DropdownLabel } from '../../../components/ui';
 
 export default function Components({ triggerAlert }) {
   return (

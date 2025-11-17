@@ -32,6 +32,24 @@ export default function Typography() {
           Body 2XS - The quick brown fox jumps over the lazy dog and continues running through the forest
         </div>
       </div>
+
+      <h3 className="styleguide-section__title" style={{ marginTop: 'var(--space-10)' }}>Font Weights</h3>
+      <p className="styleguide-section__description">Available font weight variations</p>
+      
+      <div className="typography-samples">
+        <div className="typography-sample" style={{ fontSize: 'var(--font-size-3xs)', fontWeight: 'var(--font-weight-regular)' }}>
+          Regular (400) - The quick brown fox jumps over the lazy dog
+        </div>
+        <div className="typography-sample" style={{ fontSize: 'var(--font-size-3xs)', fontWeight: 'var(--font-weight-medium)' }}>
+          Medium (500) - The quick brown fox jumps over the lazy dog
+        </div>
+        <div className="typography-sample" style={{ fontSize: 'var(--font-size-3xs)', fontWeight: 'var(--font-weight-semi-bold)' }}>
+          Semi Bold (600) - The quick brown fox jumps over the lazy dog
+        </div>
+        <div className="typography-sample" style={{ fontSize: 'var(--font-size-3xs)', fontWeight: 'var(--font-weight-bold)' }}>
+          Bold (700) - The quick brown fox jumps over the lazy dog
+        </div>
+      </div>
     </section>
   );
 }

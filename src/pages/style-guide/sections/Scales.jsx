@@ -19,6 +19,7 @@ export default function Scales() {
       </div>
 
       <h3 className="styleguide-section__title" style={{ marginTop: 'var(--space-10)' }}>Border Radius</h3>
+      <p className="styleguide-section__description">Rounded corner scale for consistent component styling</p>
       <div className="radius-samples">
         {['none', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', 'round'].map(size => (
           <div 
@@ -41,6 +42,24 @@ export default function Scales() {
             style={{ boxShadow: `var(--shadow-${size})` }}
           >
             <span>{size.toUpperCase()}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3 className="styleguide-section__title" style={{ marginTop: 'var(--space-10)' }}>Border Widths</h3>
+      <p className="styleguide-section__description">Standard border width scale</p>
+      <div className="border-samples">
+        {[1, 2, 4].map(width => (
+          <div 
+            key={width} 
+            className="border-sample" 
+            style={{ 
+              borderWidth: `${width}px`,
+              borderStyle: 'solid',
+              borderColor: 'var(--color-border-default)'
+            }}
+          >
+            <span>{width}px</span>
           </div>
         ))}
       </div>

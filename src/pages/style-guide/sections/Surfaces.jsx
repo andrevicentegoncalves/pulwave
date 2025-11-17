@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Card } from '../../../components/ui';
 
 export default function Surfaces() {
   return (
@@ -7,47 +7,586 @@ export default function Surfaces() {
       <h2 className="styleguide-section__title">Surface Elevation System</h2>
       <p className="styleguide-section__description">Layered surfaces for visual hierarchy and depth</p>
       
-      <div className="surface-grid">
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-default)' }}>
-          <span className="surface-item__label">Default</span>
-          <p className="surface-item__description">Base application background</p>
-        </div>
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-subtle)' }}>
-          <span className="surface-item__label">Subtle</span>
-          <p className="surface-item__description">First elevation - cards and panels</p>
-        </div>
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-strong)' }}>
-          <span className="surface-item__label">Strong</span>
-          <p className="surface-item__description">Second elevation - modals</p>
-        </div>
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-hover)' }}>
-          <span className="surface-item__label">Hover</span>
-          <p className="surface-item__description">Interactive hover state</p>
-        </div>
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-pressed)' }}>
-          <span className="surface-item__label">Pressed</span>
-          <p className="surface-item__description">Active/pressed state</p>
-        </div>
-        <div className="surface-item" style={{ backgroundColor: 'var(--color-surface-disabled)' }}>
-          <span className="surface-item__label">Disabled</span>
-          <p className="surface-item__description">Disabled elements background</p>
+      <div className="color-category">
+        <h3 className="color-category__title">Surface Layers</h3>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+          gap: 'var(--space-4)' 
+        }}>
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-default)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Default
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Default
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Base application background
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-subtle)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Subtle
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Subtle
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                First elevation - cards and panels
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-strong)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Strong
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Strong
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Second elevation - modals
+              </p>
+            </div>
+          </Card>
         </div>
       </div>
 
-      <h3 className="styleguide-section__title" style={{ marginTop: 'var(--space-10)' }}>Inverse Surfaces</h3>
-      <p className="styleguide-section__description">High contrast inverse surfaces for emphasis</p>
-      <div className="surface-grid">
-        <div className="surface-item surface-item--dark" style={{ backgroundColor: 'var(--color-surface-inverse-default)' }}>
-          <span className="surface-item__label">Inverse Default</span>
-          <p className="surface-item__description">High contrast inverted surface</p>
+      <div className="color-category">
+        <h3 className="color-category__title">Interactive States</h3>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+          gap: 'var(--space-4)' 
+        }}>
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-hover)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Hover
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Hover
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Interactive hover state
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-pressed)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Pressed
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Pressed
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Active/pressed state
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-disabled)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-disabled)'
+              }}>
+                Disabled
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Disabled
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Disabled elements background
+              </p>
+            </div>
+          </Card>
         </div>
-        <div className="surface-item surface-item--dark" style={{ backgroundColor: 'var(--color-surface-inverse-subtle)' }}>
-          <span className="surface-item__label">Inverse Subtle</span>
-          <p className="surface-item__description">Subtle inverse variant</p>
+      </div>
+
+      <div className="color-category" style={{ marginTop: 'var(--space-10)' }}>
+        <h3 className="color-category__title">Inverse Surfaces</h3>
+        <p style={{ 
+          fontSize: 'var(--font-size-7xs)', 
+          color: 'var(--color-on-surface-subtle)',
+          marginBottom: 'var(--space-4)'
+        }}>
+          High contrast inverse surfaces for emphasis
+        </p>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+          gap: 'var(--space-4)' 
+        }}>
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-inverse-default)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-inverse-default)'
+              }}>
+                Inverse Default
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Inverse Default
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                High contrast inverted surface
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-inverse-subtle)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-inverse-default)'
+              }}>
+                Inverse Subtle
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Inverse Subtle
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Subtle inverse variant
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-inverse-hover)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-inverse-default)'
+              }}>
+                Inverse Hover
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Inverse Hover
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Hover state for inverse surfaces
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-surface-inverse-pressed)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-on-surface-inverse-default)'
+              }}>
+                Inverse Pressed
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                Surface Inverse Pressed
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Pressed state for inverse surfaces
+              </p>
+            </div>
+          </Card>
         </div>
-        <div className="surface-item surface-item--dark" style={{ backgroundColor: 'var(--color-surface-inverse-hover)' }}>
-          <span className="surface-item__label">Inverse Hover</span>
-          <p className="surface-item__description">Hover state for inverse</p>
+      </div>
+
+      <div className="color-category" style={{ marginTop: 'var(--space-10)' }}>
+        <h3 className="color-category__title">Text on Surfaces</h3>
+        <p style={{ 
+          fontSize: 'var(--font-size-7xs)', 
+          color: 'var(--color-on-surface-subtle)',
+          marginBottom: 'var(--space-4)'
+        }}>
+          Text color tokens for use on surface backgrounds
+        </p>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+          gap: 'var(--space-4)' 
+        }}>
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-on-surface-default)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-surface-default)'
+              }}>
+                Default Text
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                On Surface Default
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Primary text on surfaces
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-on-surface-subtle)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-surface-default)'
+              }}>
+                Subtle Text
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                On Surface Subtle
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Secondary text, captions
+              </p>
+            </div>
+          </Card>
+
+          <Card 
+            variant="elevated"
+            noPadding
+            style={{ cursor: 'pointer' }}
+          >
+            <div 
+              style={{ 
+                height: '120px', 
+                backgroundColor: 'var(--color-on-surface-disabled)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                color: 'var(--color-surface-default)'
+              }}>
+                Disabled Text
+              </span>
+            </div>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <h4 style={{ 
+                fontSize: 'var(--font-size-6xs)', 
+                fontWeight: 'var(--font-weight-semi-bold)',
+                margin: '0 0 var(--space-1) 0',
+                color: 'var(--color-on-surface-default)'
+              }}>
+                On Surface Disabled
+              </h4>
+              <p style={{ 
+                fontSize: 'var(--font-size-8xs)', 
+                color: 'var(--color-on-surface-subtle)',
+                margin: 0
+              }}>
+                Disabled text state
+              </p>
+            </div>
+          </Card>
         </div>
       </div>
     </section>

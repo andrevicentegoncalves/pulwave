@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ThemeToggle } from '../../components/ui';
+import { ThemeToggle, Tabs, TabPanel } from '../../components/ui';
+import { 
+  Colors as ColorSection,
+  Surfaces as SurfaceSection,
+  Typography as TypographySection,
+  Scales as ScalesSection,
+  Components as ComponentsSection 
+} from './sections';
 
 const StyleGuide = () => {
   const [isDark, setIsDark] = useState(() => {
