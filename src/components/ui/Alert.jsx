@@ -1,40 +1,20 @@
-// src/components/Alert.jsx
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 const Alert = ({ 
   type = 'info', 
+  children, 
   variant = 'inline',
   dismissible = false,
   onDismiss,
-  autoHideDuration,
-  children 
+  className 
 }) => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    if (autoHideDuration && variant === 'toast') {
-      const timer = setTimeout(() => {
-        handleDismiss();
-      }, autoHideDuration);
-      return () => clearTimeout(timer);
-    }
-  }, [autoHideDuration, variant]);
-
-  const handleDismiss = () => {
-    setIsVisible(false);
-    onDismiss?.();
-  };
-
-  if (!isVisible) return null;
-
-  // Mapping types to the specific icons seen in your image
   const icons = {
+    info: 'ℹ',
     success: '✓',
-    info: 'i',
-    warning: '▲',
-    error: '✕',
+    warning: '⚠',
+    error: '×'
   };
 
   return (
@@ -42,11 +22,11 @@ const Alert = ({
       className={clsx(
         'alert',
         `alert--${type}`,
-        `alert--${variant}`,
-        dismissible && 'alert--dismissible'
+        variant === 'modal' && 'alert--modal',
+        variant === 'toast' && 'alert--toast',
+        className
       )}
       role="alert"
-      aria-live="polite"
     >
       <div className="alert__icon" aria-hidden="true">
         {icons[type]}
@@ -56,14 +36,14 @@ const Alert = ({
         {children}
       </div>
       
-      {(dismissible || variant === 'toast') && (
+      {dismissible && (
         <button
-          type="button"
           className="alert__close"
-          onClick={handleDismiss}
-          aria-label="Close alert"
+          onClick={onDismiss}
+          aria-label="Dismiss alert"
+          type="button"
         >
-          ✕
+          ×
         </button>
       )}
     </div>
@@ -71,12 +51,12 @@ const Alert = ({
 };
 
 Alert.propTypes = {
-  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
-  variant: PropTypes.oneOf(['inline', 'toast']),
+  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['inline', 'modal', 'toast']),
   dismissible: PropTypes.bool,
   onDismiss: PropTypes.func,
-  autoHideDuration: PropTypes.number,
-  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default Alert;
