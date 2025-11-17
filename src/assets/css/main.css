@@ -1586,12 +1586,11 @@
 
 .alert {
   display: flex;
-  align-items: center; /* Align vertically centered */
+  align-items: center;
   gap: var(--scale-2);
   padding: var(--scale-3);
   border-radius: var(--border-radius-m);
   margin-bottom: var(--scale-3);
-  /* Default font styles */
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body-s);
 }
@@ -1646,7 +1645,7 @@
   transition: var(--transition-smooth);
   /* ── ELEMENTS ── */
   /* ── VARIANTS ── */
-  /* ── TYPES – map to the new tokens ── */
+  /* ── TYPES ── */
 }
 .badge__icon {
   width: var(--icon-size-s);

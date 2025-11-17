@@ -39,11 +39,11 @@
     border: var(--border-width-2xs) solid var(--badge-border);
   }
 
-  /* ── TYPES – map to the new tokens ── */
+  /* ── TYPES ── */
     &--success {
-    --badge-bg-heavy:         var(--color-feedback-success-800);
-    --badge-bg-medium:  var(--color-feedback-success-500);
-    --badge-bg-light:  var(--color-feedback-success-100);
+    --badge-bg-heavy: var(--color-feedback-success-800);
+    --badge-bg-medium: var(--color-feedback-success-500);
+    --badge-bg-light: var(--color-feedback-success-100);
 
     --badge-text-heavy:       var(--color-feedback-success-50);
     --badge-text-medium:       var(--color-feedback-success-100);

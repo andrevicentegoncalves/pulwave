@@ -1,15 +1,13 @@
 .alert {
   display: flex;
-  align-items: center; /* Align vertically centered */
+  align-items: center;
   gap: var(--scale-2);
   padding: var(--scale-3);
   border-radius: var(--border-radius-m);
   margin-bottom: var(--scale-3);
-  /* Default font styles */
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body-s);
 
-  // Element within the block: .alert__icon
   &__icon {
     display: flex;
     align-items: center;
@@ -20,7 +18,6 @@
     flex-shrink: 0;
   }
 
-  // Element within the block: .alert__content
   &__content {
     flex-grow: 1;
   }
