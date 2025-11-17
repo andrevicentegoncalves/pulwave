@@ -5,7 +5,8 @@ import {
   Surfaces as SurfaceSection,
   Typography as TypographySection,
   Scales as ScalesSection,
-  Components as ComponentsSection 
+  Components as ComponentsSection,
+  Contrast as ContrastSection
 } from './sections';
 
 const StyleGuide = () => {
@@ -41,17 +42,24 @@ const StyleGuide = () => {
     alertDiv.className = `alert alert--${type} alert--toast`;
     alertDiv.innerHTML = `
       <div class="alert__icon">${
-        type === 'success' ? '✓' : 
-        type === 'info' ? 'i' : 
-        type === 'warning' ? '!' : '×'
+        type === 'success' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : 
+        type === 'info' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9V14M10 6V6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' : 
+        type === 'warning' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 17H2L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7V11M10 14V14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' : 
+        '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7L13 13M13 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
       }</div>
       <div class="alert__content">
-        <strong>${title}</strong><br/>
-        ${message}
+        <strong>${title}</strong> ${message}
       </div>
+      <button class="alert__close" onclick="this.parentElement.remove()" aria-label="Dismiss alert">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     `;
     document.body.appendChild(alertDiv);
-    setTimeout(() => alertDiv.remove(), 3000);
+    setTimeout(() => {
+      if (alertDiv.parentElement) alertDiv.remove();
+    }, 5000);
   }, []);
 
   return (
@@ -74,6 +82,10 @@ const StyleGuide = () => {
       <Tabs defaultTab={0}>
         <TabPanel label="Colors">
           <ColorSection copyToClipboard={copyToClipboard} />
+        </TabPanel>
+        
+        <TabPanel label="Contrast">
+          <ContrastSection copyToClipboard={copyToClipboard} />
         </TabPanel>
 
         <TabPanel label="Surfaces">

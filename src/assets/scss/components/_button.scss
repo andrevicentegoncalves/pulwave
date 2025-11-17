@@ -3,9 +3,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--scale-2);
-  padding: 0 var(--scale-6);
-  height: var(--scale-10);
+  gap: var(--space-2);
+  padding: 0 var(--space-6);
+  height: var(--space-10);
+  min-width: var(--space-10);
   font: var(--font-weight-medium) var(--font-size-body-s)/1 var(--font-family-sans);
   letter-spacing: var(--letter-spacing-normal);
   border-radius: var(--border-radius-l);
@@ -20,7 +21,7 @@
     box-shadow: var(--shadow-focus-default);
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: var(--transform-press-down);
   }
 
@@ -34,17 +35,19 @@
     flex-shrink: 0;
   }
 
+  /* ── SIZES ── */
   &--s { 
-    height: var(--scale-8);
-    padding: 0 var(--scale-3);
+    height: var(--space-8);
+    min-width: var(--space-8);
+    padding: 0 var(--space-4);
     font-size: var(--font-size-caption-s);
   }
 
   &--l {
-    height: var(--scale-12);
-    padding: 0 var(--scale-5);
+    height: var(--space-12);
+    min-width: var(--space-12);
+    padding: 0 var(--space-8);
     font-size: var(--font-size-body-m);
-    padding: 0 var(--scale-6);
   }
 
   /* ── VARIANTS ── */
@@ -52,32 +55,80 @@
     background-color: var(--color-primary);
     color: var(--color-on-primary);
 
-    &:hover { background-color: var(--color-primary-hover); }
-    &:active { background-color: var(--color-primary-active); }
+    &:hover:not(:disabled) { 
+      background-color: var(--color-primary-hover); 
+    }
+    
+    &:active:not(:disabled) { 
+      background-color: var(--color-primary-active); 
+    }
+    
+    &:disabled {
+      background-color: var(--color-primary);
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   &--secondary {
     background-color: var(--color-secondary);
     color: var(--color-on-secondary);
 
-    &:hover { background-color: var(--color-secondary-hover); }
-    &:active { background-color: var(--color-secondary-active); }
-
+    &:hover:not(:disabled) { 
+      background-color: var(--color-secondary-hover); 
+    }
+    
+    &:active:not(:disabled) { 
+      background-color: var(--color-secondary-active); 
+    }
+    
+    &:disabled {
+      background-color: var(--color-secondary);
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
-&--tertiary {
+  &--tertiary {
     background-color: var(--color-tertiary);
     color: var(--color-on-tertiary);
 
-    &:hover { background-color: var(--color-tertiary-hover); }
-    &:active { background-color: var(--color-tertiary-active); }
+    &:hover:not(:disabled) { 
+      background-color: var(--color-tertiary-hover); 
+    }
+    
+    &:active:not(:disabled) { 
+      background-color: var(--color-tertiary-active); 
+    }
+    
+    &:disabled {
+      background-color: var(--color-tertiary);
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   &--destructive {
     background-color: var(--color-feedback-error);
     color: var(--color-neutral-0);
 
-    &:hover { background-color: var(--color-feedback-error-hover); }
+    &:hover:not(:disabled) { 
+      background-color: var(--color-feedback-error-hover); 
+    }
+    
+    &:active:not(:disabled) { 
+      background-color: var(--color-feedback-error-active); 
+    }
+    
+    &:disabled {
+      background-color: var(--color-feedback-error);
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   &--ghost {
@@ -85,16 +136,20 @@
     color: var(--color-on-surface-default);
     border: var(--border-width-2xs) solid var(--color-neutral-400);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-neutral-200);
+      border-color: var(--color-neutral-500);
     }
-  }
-
-  /* ── DISABLED ── */
-  &:disabled,
-  &--disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
+    
+    &:active:not(:disabled) {
+      background-color: var(--color-neutral-300);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+      border-color: var(--color-neutral-300);
+    }
   }
 }

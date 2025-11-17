@@ -36,26 +36,17 @@ export const Dropdown = ({ trigger, children, align = 'left' }) => {
     };
   }, [isOpen, handleClose]);
 
+  // Clone trigger with dropdown props
+  const triggerElement = React.cloneElement(trigger, {
+    onClick: handleToggle,
+    'aria-haspopup': 'true',
+    'aria-expanded': isOpen,
+    className: `${trigger.props.className || ''} dropdown__trigger`,
+  });
+
   return (
     <div className="dropdown" ref={dropdownRef}>
-      <button 
-        className="dropdown__trigger"
-        onClick={handleToggle}
-        type="button"
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-      >
-        {trigger}
-        <svg 
-          className={`dropdown__arrow ${isOpen ? 'dropdown__arrow--open' : ''}`}
-          width="12" 
-          height="12" 
-          viewBox="0 0 12 12"
-          aria-hidden="true"
-        >
-          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
+      {triggerElement}
       
       {isOpen && (
         <div className={`dropdown__menu dropdown__menu--${align}`} role="menu">
@@ -68,7 +59,7 @@ export const Dropdown = ({ trigger, children, align = 'left' }) => {
   );
 };
 
-export const DropdownItem = ({ children, onClick, danger = false, disabled = false, onClose }) => {
+export const DropdownItem = ({ children, icon, onClick, danger = false, disabled = false, onClose }) => {
   const handleClick = useCallback(() => {
     if (disabled) return;
     if (onClick) onClick();
@@ -83,7 +74,8 @@ export const DropdownItem = ({ children, onClick, danger = false, disabled = fal
       role="menuitem"
       disabled={disabled}
     >
-      {children}
+      {icon && <span className="dropdown__item-icon">{icon}</span>}
+      <span className="dropdown__item-text">{children}</span>
     </button>
   );
 };
