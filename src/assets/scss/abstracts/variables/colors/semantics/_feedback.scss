@@ -9,94 +9,86 @@
 // SUCCESS
 // ---------------------------------------------------------------------------//
 
-$color-success: primitives.get-color('success', 500) !default;
-$color-success-hover: primitives.get-color('success', 600) !default;
-$color-success-active: primitives.get-color('success', 700) !default;
-$color-success-subtle: primitives.get-color('success', 50) !default;
-$color-success-subtle-dark: primitives.get-color('success', 900) !default;
+$color-success-50:   primitives.get-color('success', 50)   !default;
+$color-success-100:  primitives.get-color('success', 100)  !default;
+$color-success-200:  primitives.get-color('success', 200)  !default;
+$color-success-300:  primitives.get-color('success', 300)  !default;
+$color-success-400:  primitives.get-color('success', 400)  !default;
+$color-success-500:  primitives.get-color('success', 500)  !default;
+$color-success-600:  primitives.get-color('success', 600)  !default;
+$color-success-700:  primitives.get-color('success', 700)  !default;
+$color-success-800:  primitives.get-color('success', 800)  !default;
+$color-success-900:  primitives.get-color('success', 900)  !default;
+$color-success-950:  primitives.get-color('success', 950)  !default;
 
-// Badge variants - same hue, different lightness
-$color-success-badge-heavy: primitives.get-color('success', 700) !default;
-$color-success-badge-medium-bg: primitives.get-color('success', 200) !default;
-$color-success-badge-medium-text: primitives.get-color('success', 700) !default;
-$color-success-badge-light-bg: primitives.get-color('success', 950) !default;
-$color-success-badge-light-text: primitives.get-color('success', 700) !default;
+// Semantic aliases (mapped to scale)
+$color-success:           $color-success-500 !default;
+$color-success-hover:     $color-success-600 !default;
+$color-success-active:    $color-success-700 !default;
+$color-success-subtle:    $color-success-100 !default;
 
 // ---------------------------------------------------------------------------//
 // WARNING - Bright Yellow (hsl 45, 100%, 55%)
 // ---------------------------------------------------------------------------//
 
-$color-warning: primitives.get-color('warning', 500) !default;      
-$color-warning-hover: primitives.get-color('warning', 600) !default;
-$color-warning-active: primitives.get-color('warning', 700) !default;
-$color-warning-subtle: primitives.get-color('warning', 50) !default;
-$color-warning-subtle-dark: primitives.get-color('warning', 900) !default;
+$color-warning-50:   primitives.get-color('warning', 50)   !default;
+$color-warning-100:  primitives.get-color('warning', 100)  !default;
+$color-warning-200:  primitives.get-color('warning', 200)  !default;
+$color-warning-300:  primitives.get-color('warning', 300)  !default;
+$color-warning-400:  primitives.get-color('warning', 400)  !default;
+$color-warning-500:  primitives.get-color('warning', 500)  !default;
+$color-warning-600:  primitives.get-color('warning', 600)  !default;
+$color-warning-700:  primitives.get-color('warning', 700)  !default;
+$color-warning-800:  primitives.get-color('warning', 800)  !default;
+$color-warning-900:  primitives.get-color('warning', 900)  !default;
+$color-warning-950:  primitives.get-color('warning', 950)  !default;
 
-// Warning text color for bright yellow backgrounds
-$color-warning-text: primitives.get-color('warning', 900) !default;  
-
-// Badge variants - same hue, different lightness
-$color-warning-badge-heavy: primitives.get-color('warning', 700) !default;
-$color-warning-badge-medium-bg: primitives.get-color('warning', 200) !default;
-$color-warning-badge-medium-text: primitives.get-color('warning', 800) !default;
-$color-warning-badge-light-bg: primitives.get-color('warning', 950) !default;
-$color-warning-badge-light-text: primitives.get-color('warning', 700) !default;
+// Semantic aliases
+$color-warning:           $color-warning-500 !default;
+$color-warning-hover:     $color-warning-600 !default;
+$color-warning-active:    $color-warning-700 !default;
+$color-warning-subtle:    $color-warning-100 !default;
 
 // ---------------------------------------------------------------------------//
 // INFO
 // ---------------------------------------------------------------------------//
 
-$color-info: primitives.get-color('info', 500) !default;
-$color-info-hover: primitives.get-color('info', 600) !default;
-$color-info-active: primitives.get-color('info', 700) !default;
-$color-info-subtle: primitives.get-color('info', 50) !default;
-$color-info-subtle-dark: primitives.get-color('info', 900) !default;
+$color-info-50:   primitives.get-color('info', 50)   !default;
+$color-info-100:  primitives.get-color('info', 100)  !default;
+$color-info-200:  primitives.get-color('info', 200)  !default;
+$color-info-300:  primitives.get-color('info', 300)  !default;
+$color-info-400:  primitives.get-color('info', 400)  !default;
+$color-info-500:  primitives.get-color('info', 500)  !default;
+$color-info-600:  primitives.get-color('info', 600)  !default;
+$color-info-700:  primitives.get-color('info', 700)  !default;
+$color-info-800:  primitives.get-color('info', 800)  !default;
+$color-info-900:  primitives.get-color('info', 900)  !default;
+$color-info-950:  primitives.get-color('info', 950)  !default;
 
-// Badge variants - same hue, different lightness
-$color-info-badge-heavy: primitives.get-color('info', 700) !default;
-$color-info-badge-medium-bg: primitives.get-color('info', 200) !default;
-$color-info-badge-medium-text: primitives.get-color('info', 800) !default;
-$color-info-badge-light-bg: primitives.get-color('info', 950) !default;
-$color-info-badge-light-text: primitives.get-color('info', 700) !default;
+// Semantic aliases
+$color-info:           $color-info-500 !default;
+$color-info-hover:     $color-info-600 !default;
+$color-info-active:    $color-info-700 !default;
+$color-info-subtle:    $color-info-100 !default;
 
 // ---------------------------------------------------------------------------//
 // ERROR
 // ---------------------------------------------------------------------------//
 
-$color-error: primitives.get-color('error', 500) !default;
-$color-error-hover: primitives.get-color('error', 600) !default;
-$color-error-active: primitives.get-color('error', 700) !default;
-$color-error-subtle: primitives.get-color('error', 50) !default;
-$color-error-subtle-dark: primitives.get-color('error', 900) !default;
+$color-error-50:   primitives.get-color('error', 50)   !default;
+$color-error-100:  primitives.get-color('error', 100)  !default;
+$color-error-200:  primitives.get-color('error', 200)  !default;
+$color-error-300:  primitives.get-color('error', 300)  !default;
+$color-error-400:  primitives.get-color('error', 400)  !default;
+$color-error-500:  primitives.get-color('error', 500)  !default;
+$color-error-600:  primitives.get-color('error', 600)  !default;
+$color-error-700:  primitives.get-color('error', 700)  !default;
+$color-error-800:  primitives.get-color('error', 800)  !default;
+$color-error-900:  primitives.get-color('error', 900)  !default;
+$color-error-950:  primitives.get-color('error', 950)  !default;
 
-// Badge variants - same hue, different lightness
-$color-error-badge-heavy: primitives.get-color('error', 700) !default;
-$color-error-badge-medium-bg: primitives.get-color('error', 200) !default;
-$color-error-badge-medium-text: primitives.get-color('error', 800) !default;
-$color-error-badge-light-bg: primitives.get-color('error', 950) !default;
-$color-error-badge-light-text: primitives.get-color('error', 700) !default;
-
-// ---------------------------------------------------------------------------//
-// ON-FEEDBACK COLORS (text on full color backgrounds)
-// ---------------------------------------------------------------------------//
-
-$color-on-success: neutral.$color-neutral-0 !default;
-$color-on-warning: primitives.get-color('warning', 900) !default;  
-$color-on-info: neutral.$color-neutral-0 !default;
-$color-on-error: neutral.$color-neutral-0 !default;
-
-// ---------------------------------------------------------------------------//
-// ON-SUBTLE FEEDBACK (text on subtle backgrounds)
-// ---------------------------------------------------------------------------//
-
-// Light Mode
-$color-on-success-subtle: primitives.get-color('success', 800) !default;
-$color-on-warning-subtle: primitives.get-color('warning', 800) !default;
-$color-on-info-subtle: primitives.get-color('info', 800) !default;
-$color-on-error-subtle: primitives.get-color('error', 800) !default;
-
-// Dark Mode
-$color-on-success-subtle-dark: primitives.get-color('success', 100) !default;
-$color-on-warning-subtle-dark: primitives.get-color('warning', 100) !default;
-$color-on-info-subtle-dark: primitives.get-color('info', 100) !default;
-$color-on-error-subtle-dark: primitives.get-color('error', 100) !default;
+// Semantic aliases
+$color-error:           $color-error-500 !default;
+$color-error-hover:     $color-error-600 !default;
+$color-error-active:    $color-error-700 !default;
+$color-error-subtle:    $color-error-100 !default;

@@ -1,7 +1,7 @@
 @use "sass:list";
 @use '../flags' as flags;
 
-// Import all token modules (alphabetical order)
+// Import all token modules
 @use 'aspect-ratio';
 @use 'borders';
 @use 'breakpoints';

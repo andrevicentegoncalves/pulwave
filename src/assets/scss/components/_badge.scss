@@ -1,0 +1,109 @@
+/* ────────────────────── BADGE BLOCK ────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--scale-2);                   
+  padding: 0 var(--scale-4);               
+  height: var(--scale-10);                 
+  font: bold var(--font-size-caption-m) var(--font-family-sans);
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--border-radius-l);
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+
+  /* ── ELEMENTS ── */
+  &__icon {
+    width: var(--icon-size-s);
+    height: var(--icon-size-s);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── VARIANTS ── */
+  &--heavy {
+    background-color: var(--badge-bg-heavy);
+    color: var(--badge-text-heavy);;
+  }
+
+  &--medium {
+    background-color: var(--badge-bg-medium);
+    color: var(--badge-text-medium);
+    border: var(--border-width-2xs) solid var(--badge-border);
+  }
+
+  &--light {
+    background-color: var(--badge-bg-light);
+    color: var(--badge-text-light);
+    border: var(--border-width-2xs) solid var(--badge-border);
+  }
+
+  /* ── TYPES – map to the new tokens ── */
+    &--success {
+    --badge-bg-heavy:         var(--color-feedback-success-800);
+    --badge-bg-medium:  var(--color-feedback-success-500);
+    --badge-bg-light:  var(--color-feedback-success-100);
+
+    --badge-text-heavy:       var(--color-feedback-success-50);
+    --badge-text-medium:       var(--color-feedback-success-100);
+    --badge-text-light:       var(--color-feedback-success-800);
+
+    --badge-border:     var(--color-feedback-success);
+    }
+
+    &--info {
+    --badge-bg-heavy:   var(--color-feedback-info-800);
+    --badge-bg-medium: var(--color-feedback-info-200);
+    --badge-bg-light:  var(--color-feedback-info-100);
+
+    --badge-text-heavy:   var(--color-feedback-info-50);
+    --badge-text-medium:  var(--color-feedback-info-900);
+    --badge-text-light:   var(--color-feedback-info-800);
+
+    --badge-border: var(--color-feedback-info);
+    }
+
+    &--warning {
+    --badge-bg-heavy:   var(--color-feedback-warning-900);
+    --badge-bg-medium: var(--color-feedback-warning-200);
+    --badge-bg-light:  var(--color-feedback-warning-100);
+
+    --badge-text-heavy:   var(--color-feedback-warning-200);
+    --badge-text-medium:  var(--color-feedback-warning-900);
+    --badge-text-light:   var(--color-feedback-warning-900);
+
+    --badge-border: var(--color-feedback-warning);
+    }
+
+    &--error {
+    --badge-bg-heavy:   var(--color-feedback-error-700);
+    --badge-bg-medium: var(--color-feedback-error-200);
+    --badge-bg-light:  var(--color-feedback-error-100);
+
+    --badge-text-heavy:   var(--color-feedback-error-50);
+    --badge-text-medium:  var(--color-feedback-error-900);
+    --badge-text-light:   var(--color-feedback-error-700);
+
+    --badge-border: var(--color-feedback-error);
+    }
+  
+    &--neutral {
+      --badge-bg-heavy: var(--color-neutral-600);
+      --badge-bg-medium: var(--color-neutral-200);
+      --badge-bg-light: var(--color-neutral-100);
+
+      --badge-text-heavy: var(--color-neutral-100);
+      --badge-text-medium: var(--color-neutral-900);
+      --badge-text-light: var(--color-neutral-800);
+
+      --badge-border: var(--color-neutral-400);
+    }
+
+  &:hover { filter: brightness(0.95); }
+
+  &--clickable {
+    cursor: var(--cursor-pointer);
+    user-select: none;
+  }
+}
