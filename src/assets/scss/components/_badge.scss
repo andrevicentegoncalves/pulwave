@@ -1,136 +1,127 @@
 // src/assets/scss/components/_badge.scss
 
 /* ────────────────────── BADGE COMPONENT ────────────────────── */
+
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--scale-2);                   // 8px gap between icon and text
-  padding: var(--scale-2) var(--scale-4); // Consistent: 8px top/bottom, 16px left/right
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-body-s);    // 14px
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;                      // Tight line height to prevent overflow
-  letter-spacing: 0.01em;
-  border-radius: var(--border-radius-l); // Full rounded (999px equivalent)
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-l);
+  font-size: var(--font-size-7xs);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: 1;
   white-space: nowrap;
-  transition: var(--transition-smooth);
-  overflow: hidden;                      // Prevent any overflow
-  text-overflow: ellipsis;
+  transition: all var(--duration-fast) var(--easing-standard);
 
-  /* ── ELEMENTS ── */
   &__icon {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     svg {
       width: 100%;
       height: 100%;
-      display: block;
     }
   }
 
-  &__text {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  // ==========================================
+  // EMPHASIS LEVELS
+  // ==========================================
 
-  /* ── VARIANTS ── */
+  // Heavy (Solid) - Full color background
   &--heavy {
-    background-color: var(--badge-bg-heavy);
-    color: var(--badge-text-heavy);
-    border: none;
+    &.badge--info {
+      background-color: var(--color-feedback-info-600);
+      color: var(--color-neutral-0);
+      border: 1px solid transparent;
+    }
+
+    &.badge--success {
+      background-color: var(--color-feedback-success-600);
+      color: var(--color-neutral-0);
+      border: 1px solid transparent;
+    }
+
+    &.badge--warning {
+      background-color: var(--color-feedback-warning-600);
+      color: var(--color-neutral-0);
+      border: 1px solid transparent;
+    }
+
+    &.badge--danger {
+      background-color: var(--color-feedback-error-600);
+      color: var(--color-neutral-0);
+      border: 1px solid transparent;
+    }
+
+    &.badge--neutral {
+      background-color: var(--color-neutral-600);
+      color: var(--color-neutral-0);
+      border: 1px solid transparent;
+    }
   }
 
+  // Medium - Light background with colored text
   &--medium {
-    background-color: var(--badge-bg-medium);
-    color: var(--badge-text-medium);
-    border: var(--border-width-2xs) solid var(--badge-border);
+    &.badge--info {
+      background-color: var(--color-feedback-info-100);
+      color: var(--color-feedback-info-700);
+      border: 1px solid transparent;
+    }
+
+    &.badge--success {
+      background-color: var(--color-feedback-success-100);
+      color: var(--color-feedback-success-700);
+      border: 1px solid transparent;
+    }
+
+    &.badge--warning {
+      background-color: var(--color-feedback-warning-100);
+      color: var(--color-feedback-warning-700);
+      border: 1px solid transparent;
+    }
+
+    &.badge--danger {
+      background-color: var(--color-feedback-error-100);
+      color: var(--color-feedback-error-700);
+      border: 1px solid transparent;
+    }
+
+    &.badge--neutral {
+      background-color: var(--color-neutral-100);
+      color: var(--color-neutral-700);
+      border: 1px solid transparent;
+    }
   }
 
+  // Light - Border with colored text, transparent background
   &--light {
-    background-color: var(--badge-bg-light);
-    color: var(--badge-text-light);
-    border: var(--border-width-2xs) solid var(--badge-border);
-  }
+    background-color: transparent;
 
-  /* ── TYPES ── */
-  &--success {
-    --badge-bg-heavy: var(--color-feedback-success-800);
-    --badge-bg-medium: var(--color-feedback-success-500);
-    --badge-bg-light: var(--color-feedback-success-100);
+    &.badge--info {
+      color: var(--color-feedback-info-600);
+      border: 1px solid var(--color-feedback-info-300);
+    }
 
-    --badge-text-heavy: var(--color-feedback-success-50);
-    --badge-text-medium: var(--color-feedback-success-100);
-    --badge-text-light: var(--color-feedback-success-800);
+    &.badge--success {
+      color: var(--color-feedback-success-600);
+      border: 1px solid var(--color-feedback-success-300);
+    }
 
-    --badge-border: var(--color-feedback-success);
-  }
+    &.badge--warning {
+      color: var(--color-feedback-warning-600);
+      border: 1px solid var(--color-feedback-warning-300);
+    }
 
-  &--info {
-    --badge-bg-heavy: var(--color-feedback-info-800);
-    --badge-bg-medium: var(--color-feedback-info-200);
-    --badge-bg-light: var(--color-feedback-info-100);
+    &.badge--danger {
+      color: var(--color-feedback-error-600);
+      border: 1px solid var(--color-feedback-error-300);
+    }
 
-    --badge-text-heavy: var(--color-feedback-info-50);
-    --badge-text-medium: var(--color-feedback-info-900);
-    --badge-text-light: var(--color-feedback-info-800);
-
-    --badge-border: var(--color-feedback-info);
-  }
-
-  &--warning {
-    --badge-bg-heavy: var(--color-feedback-warning-900);
-    --badge-bg-medium: var(--color-feedback-warning-200);
-    --badge-bg-light: var(--color-feedback-warning-100);
-
-    --badge-text-heavy: var(--color-feedback-warning-200);
-    --badge-text-medium: var(--color-feedback-warning-900);
-    --badge-text-light: var(--color-feedback-warning-900);
-
-    --badge-border: var(--color-feedback-warning);
-  }
-
-  &--error {
-    --badge-bg-heavy: var(--color-feedback-error-700);
-    --badge-bg-medium: var(--color-feedback-error-200);
-    --badge-bg-light: var(--color-feedback-error-100);
-
-    --badge-text-heavy: var(--color-feedback-error-50);
-    --badge-text-medium: var(--color-feedback-error-900);
-    --badge-text-light: var(--color-feedback-error-700);
-
-    --badge-border: var(--color-feedback-error);
-  }
-
-  &--neutral {
-    --badge-bg-heavy: var(--color-neutral-600);
-    --badge-bg-medium: var(--color-neutral-200);
-    --badge-bg-light: var(--color-neutral-100);
-
-    --badge-text-heavy: var(--color-neutral-100);
-    --badge-text-medium: var(--color-neutral-900);
-    --badge-text-light: var(--color-neutral-800);
-
-    --badge-border: var(--color-neutral-400);
-  }
-
-  &:hover { 
-    filter: brightness(0.95); 
-  }
-
-  &--clickable {
-    cursor: var(--cursor-pointer);
-    user-select: none;
-
-    &:active {
-      filter: brightness(0.9);
+    &.badge--neutral {
+      color: var(--color-neutral-600);
+      border: 1px solid var(--color-neutral-300);
     }
   }
 }

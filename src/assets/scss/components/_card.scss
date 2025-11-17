@@ -1,36 +1,69 @@
-/* ────────────────────── CARD BLOCK STYLES (SCSS/BEM/CSS Tokens) ────────────────────── */
+/* ────────────────────── CARD COMPONENT ────────────────────── */
 
-// The main block: .card
 .card {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface-default, #FFFFFF);
-  border-radius: var(--border-radius-m, 8px);
-  box-shadow: var(--shadow-default, 0 4px 6px rgba(0, 0, 0, 0.1));
-  border: 1px solid var(--color-neutral-200, #E0E0E0);
-  overflow: hidden; /* Ensures content respects border radius */
+  background-color: var(--color-surface-subtle);
+  border-radius: var(--border-radius-m);
+  overflow: hidden;
   width: 100%;
+  transition: all var(--duration-normal) var(--easing-standard);
 
   &__header {
-    padding: var(--scale-3, 12px) var(--scale-4, 16px);
-    border-bottom: 1px solid var(--color-neutral-100, #F5F5F5);
-    font-weight: var(--font-weight-semibold);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-6xs);
     color: var(--color-on-surface-default);
   }
 
   &__body {
-    padding: var(--scale-4, 16px);
-    flex-grow: 1; /* Allows body to fill available space */
-    color: var(--color-on-surface-variant);
-    font-size: var(--font-size-body-s);
-    line-height: var(--line-height-body-s);
+    padding: var(--space-4);
+    flex-grow: 1;
+    color: var(--color-on-surface-default);
+    font-size: var(--font-size-7xs);
+    line-height: var(--line-height-relaxed);
   }
 
   &__footer {
-    padding: var(--scale-3, 12px) var(--scale-4, 16px);
-    border-top: 1px solid var(--color-neutral-100, #F5F5F5);
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
     display: flex;
-    justify-content: flex-end; /* Aligns buttons or actions to the right */
-    gap: var(--scale-2);
+    justify-content: flex-end;
+    gap: var(--space-2);
+  }
+
+  // ==========================================
+  // MODIFIERS
+  // ==========================================
+
+  &--no-padding {
+    .card__body {
+      padding: 0;
+    }
+  }
+
+  // ==========================================
+  // VARIANTS
+  // ==========================================
+
+  &--default {
+    box-shadow: var(--shadow-xs);
+    border: 1px solid var(--color-border-default);
+  }
+
+  &--elevated {
+    box-shadow: var(--shadow-m);
+    border: 1px solid var(--color-border-subtle);
+
+    &:hover {
+      box-shadow: var(--shadow-l);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--outlined {
+    box-shadow: none;
+    border: 2px solid var(--color-border-default);
   }
 }

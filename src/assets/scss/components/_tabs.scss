@@ -1,3 +1,5 @@
+// src/assets/scss/components/_tabs.scss
+
 .tabs {
   width: 100%;
   margin-bottom: var(--space-8);
@@ -8,6 +10,7 @@
     border-bottom: 2px solid var(--color-border-default);
     margin-bottom: var(--space-6);
     overflow-x: auto;
+    overflow-y: hidden;  // ← ADDED: Prevent vertical scroll
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
@@ -65,10 +68,11 @@
 
   &__content {
     animation: fadeIn var(--duration-comfortable) var(--easing-standard);
+    overflow-y: visible;  // ← ADDED: Ensure content doesn't cause scroll
   }
 
   &__panel {
-    // Panel styles
+    overflow: visible;  // ← ADDED: Prevent scroll on panel
   }
 }
 

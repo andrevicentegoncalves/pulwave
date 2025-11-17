@@ -145,6 +145,43 @@
     opacity: 1;  // Keep full opacity, colors show disabled state
   }
 
+   &--success {
+    .input__field {
+      border-color: var(--color-feedback-success-500);
+      
+      &:focus {
+        border-color: var(--color-feedback-success-600);
+        box-shadow: 0 0 0 3px var(--color-feedback-success-100);
+      }
+    }
+  }
+
+  &--error {
+    .input__field {
+      border-color: var(--color-feedback-danger-500);
+      
+      &:focus {
+        border-color: var(--color-feedback-danger-600);
+        box-shadow: 0 0 0 3px var(--color-feedback-danger-100);
+      }
+    }
+
+    .input__error {
+      color: var(--color-feedback-danger-600);
+    }
+  }
+
+  &--warning {
+    .input__field {
+      border-color: var(--color-feedback-warning-500);
+      
+      &:focus {
+        border-color: var(--color-feedback-warning-600);
+        box-shadow: 0 0 0 3px var(--color-feedback-warning-100);
+      }
+    }
+  }
+
   // ── READ-ONLY STATE ──
   &:read-only {
     background-color: #f8fafc;
