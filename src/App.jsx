@@ -1,4 +1,3 @@
-// src/App.jsx
 import './assets/scss/main.scss';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';

@@ -1,144 +1,76 @@
-// src/assets/scss/components/_divider.scss
-
-/* ────────────────────── DIVIDER COMPONENT ────────────────────── */
-
 .divider {
   border: none;
-  margin: 0;
   flex-shrink: 0;
 
-  // ── ORIENTATION: HORIZONTAL (default) ──
   &--horizontal {
     width: 100%;
-    height: var(--border-width-1);
-    background-color: var(--color-border-default);
-
-    // ── SPACING VARIANTS ──
-    &.divider--spacing-sm {
-      margin: var(--scale-3) 0;
-    }
-
-    &.divider--spacing-md {
-      margin: var(--scale-5) 0;
-    }
-
-    &.divider--spacing-lg {
-      margin: var(--scale-8) 0;
-    }
+    height: 1px;
+    background: var(--color-border-default);
   }
 
-  // ── ORIENTATION: VERTICAL ──
   &--vertical {
-    width: var(--border-width-1);
-    height: 100%;
-    min-height: var(--scale-8);
-    background-color: var(--color-border-default);
-    display: inline-block;
-
-    // ── SPACING VARIANTS ──
-    &.divider--spacing-sm {
-      margin: 0 var(--scale-3);
-    }
-
-    &.divider--spacing-md {
-      margin: 0 var(--scale-5);
-    }
-
-    &.divider--spacing-lg {
-      margin: 0 var(--scale-8);
-    }
+    width: 1px;
+    height: 24px;
+    background: var(--color-border-default);
   }
 
-  // ── VARIANT: SOLID (default) ──
-  &--solid {
-    background-color: var(--color-border-default);
-  }
-
-  // ── VARIANT: DASHED ──
   &--dashed {
-    background: none;
-    border: none;
+    background: none !important;
     
     &.divider--horizontal {
-      border-top: var(--border-width-1) dashed var(--color-border-default);
+      border-top: 2px dashed var(--color-border-default);
       height: 0;
     }
-
+    
     &.divider--vertical {
-      border-left: var(--border-width-1) dashed var(--color-border-default);
+      border-left: 2px dashed var(--color-border-default);
       width: 0;
     }
   }
 
-  // ── VARIANT: DOTTED ──
   &--dotted {
-    background: none;
-    border: none;
+    background: none !important;
     
     &.divider--horizontal {
-      border-top: var(--border-width-1) dotted var(--color-border-default);
+      border-top: 2px dotted var(--color-border-default);
       height: 0;
     }
-
+    
     &.divider--vertical {
-      border-left: var(--border-width-1) dotted var(--color-border-default);
+      border-left: 2px dotted var(--color-border-default);
       width: 0;
     }
   }
 
-  // ── WITH TEXT ──
-  &--with-text {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    color: var(--color-on-surface-subtle);
-    font-size: var(--font-size-body-s);
-    gap: var(--scale-3);
-    background: none;
-    height: auto;
+  // Spacing variants
+  &--spacing-none {
+    margin: 0;
+  }
 
-    // Mobile: Smaller text
-    @media (max-width: 640px) {
-      font-size: var(--font-size-caption-l);
-      gap: var(--scale-2);
+  &--spacing-tight {
+    &.divider--horizontal {
+      margin: var(--space-2) 0;
+    }
+    &.divider--vertical {
+      margin: 0 var(--space-2);
     }
   }
 
-  &__line {
-    flex: 1;
-    height: var(--border-width-1);
-    background-color: var(--color-border-default);
-  }
-
-  &__text {
-    padding: 0 var(--scale-2);
-    white-space: nowrap;
-    font-weight: var(--font-weight-medium);
-  }
-
-  // ── TEXT ALIGNMENT ──
-  &--text-left {
-    .divider__line:first-child {
-      flex: 0 0 var(--scale-4);
+  &--spacing-default {
+    &.divider--horizontal {
+      margin: var(--space-4) 0;
+    }
+    &.divider--vertical {
+      margin: 0 var(--space-4);
     }
   }
 
-  &--text-center {
-    .divider__line {
-      flex: 1;
+  &--spacing-loose {
+    &.divider--horizontal {
+      margin: var(--space-6) 0;
+    }
+    &.divider--vertical {
+      margin: 0 var(--space-6);
     }
   }
-
-  &--text-right {
-    .divider__line:last-child {
-      flex: 0 0 var(--scale-4);
-    }
-  }
-}
-
-// ── SECTION DIVIDER (utility) ──
-.section-divider {
-  @extend .divider;
-  @extend .divider--horizontal;
-  @extend .divider--spacing-lg;
 }

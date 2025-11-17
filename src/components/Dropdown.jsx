@@ -1,20 +1,16 @@
-// src/components/Dropdown.jsx
-import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
-const Dropdown = ({
-  trigger,
-  children,
-  align = 'left',
-  disabled = false,
-  closeOnSelect = true,
-  className,
-  onOpen,
-  onClose,
-}) => {
+export const Dropdown = ({ trigger, children, align = 'left' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const handleToggle = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,7 +20,7 @@ const Dropdown = ({
     };
 
     const handleEscape = (event) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === 'Escape') {
         handleClose();
       }
     };
@@ -38,153 +34,64 @@ const Dropdown = ({
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isOpen]);
-
-  const handleToggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (disabled) return;
-    
-    if (!isOpen) {
-      setIsOpen(true);
-      onOpen?.();
-    } else {
-      handleClose();
-    }
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-    onClose?.();
-  };
-
-  const handleItemClick = (itemCallback) => {
-    return (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      if (itemCallback) {
-        itemCallback(e);
-      }
-      
-      if (closeOnSelect) {
-        handleClose();
-      }
-    };
-  };
+  }, [isOpen, handleClose]);
 
   return (
-    <div 
-      ref={dropdownRef}
-      className={clsx(
-        'dropdown',
-        isOpen && 'dropdown--open',
-        disabled && 'dropdown--disabled',
-        className
-      )}
-    >
-      {/* Dropdown Trigger */}
-      <div
+    <div className="dropdown" ref={dropdownRef}>
+      <button 
         className="dropdown__trigger"
         onClick={handleToggle}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleToggle(e);
-          }
-        }}
-        role="button"
-        tabIndex={disabled ? -1 : 0}
+        type="button"
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
         {trigger}
-      </div>
-
-      {/* Dropdown Menu */}
-      {isOpen && (
-        <div 
-          className={clsx(
-            'dropdown__menu',
-            `dropdown__menu--${align}`
-          )}
-          role="menu"
+        <svg 
+          className={`dropdown__arrow ${isOpen ? 'dropdown__arrow--open' : ''}`}
+          width="12" 
+          height="12" 
+          viewBox="0 0 12 12"
+          aria-hidden="true"
         >
-          {React.Children.map(children, (child) => {
-            if (React.isValidElement(child) && child.type === DropdownItem) {
-              return React.cloneElement(child, {
-                onClick: handleItemClick(child.props.onClick),
-              });
-            }
-            return child;
-          })}
+          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      
+      {isOpen && (
+        <div className={`dropdown__menu dropdown__menu--${align}`} role="menu">
+          {React.Children.map(children, child => 
+            React.cloneElement(child, { onClose: handleClose })
+          )}
         </div>
       )}
     </div>
   );
 };
 
-Dropdown.propTypes = {
-  trigger: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
-  align: PropTypes.oneOf(['left', 'right', 'center']),
-  disabled: PropTypes.bool,
-  closeOnSelect: PropTypes.bool,
-  className: PropTypes.string,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-};
-
-// Dropdown Item Component
-export const DropdownItem = ({
-  children,
-  onClick,
-  disabled = false,
-  icon,
-  danger = false,
-  className,
-}) => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (!disabled && onClick) {
-      onClick(e);
-    }
-  };
+export const DropdownItem = ({ children, onClick, danger = false, disabled = false, onClose }) => {
+  const handleClick = useCallback(() => {
+    if (disabled) return;
+    if (onClick) onClick();
+    if (onClose) onClose();
+  }, [onClick, onClose, disabled]);
 
   return (
     <button
-      type="button"
-      className={clsx(
-        'dropdown__item',
-        disabled && 'dropdown__item--disabled',
-        danger && 'dropdown__item--danger',
-        className
-      )}
+      className={`dropdown__item ${danger ? 'dropdown__item--danger' : ''} ${disabled ? 'dropdown__item--disabled' : ''}`}
       onClick={handleClick}
-      disabled={disabled}
+      type="button"
       role="menuitem"
+      disabled={disabled}
     >
-      {icon && <span className="dropdown__item-icon">{icon}</span>}
-      <span className="dropdown__item-text">{children}</span>
+      {children}
     </button>
   );
 };
 
-DropdownItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  icon: PropTypes.node,
-  danger: PropTypes.bool,
-  className: PropTypes.string,
+export const DropdownDivider = ({ variant = 'solid' }) => {
+  return <div className={`dropdown__divider dropdown__divider--${variant}`} role="separator" />;
 };
 
-// Dropdown Divider Component
-export const DropdownDivider = () => {
-  return <div className="dropdown__divider" role="separator" />;
+export const DropdownLabel = ({ children }) => {
+  return <div className="dropdown__label" role="presentation">{children}</div>;
 };
-
-export default Dropdown;
