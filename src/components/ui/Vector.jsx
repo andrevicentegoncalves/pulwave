@@ -14,7 +14,7 @@ const Vector = ({
   ...props 
 }) => {
   return (
-    <Vector
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
       fill={fill}
@@ -26,7 +26,7 @@ const Vector = ({
     >
       {title && <title>{title}</title>}
       {children}
-    </Vector>
+    </svg>
   );
 };
 

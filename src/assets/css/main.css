@@ -3279,7 +3279,6 @@ textarea.input {
   align-items: center;
   justify-content: center;
   background-color: var(--color-primary);
-  padding: var(--space-6);
   background-image: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Vector from './Vector';
 
 /**
  * Icon Component
