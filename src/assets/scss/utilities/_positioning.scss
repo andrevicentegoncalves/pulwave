@@ -1,7 +1,0 @@
-@use '../abstracts/mixins/generators/positioning' as generator;
-
-/* ============================================================================ */
-/*                         UTILITY CLASSES: POSITIONING                         */
-/* ============================================================================ */
-
-@include generator.generate-positioning-utilities();
