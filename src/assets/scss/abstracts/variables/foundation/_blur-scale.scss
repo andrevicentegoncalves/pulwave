@@ -1,0 +1,147 @@
+@use 'sass:map';
+@use 'core' as *;
+
+// ========================================================================== //
+//                         FOUNDATION: BLUR SCALE                             //
+// ========================================================================== //
+// Backdrop filter blur system for glassmorphism and depth effects
+
+// -------------------------------------------
+// BLUR RADIUS SCALE
+// -------------------------------------------
+
+$blur-scale: (
+  'none': 0,
+  'xs': map.get($scale, 1),     // 4px - Minimal blur
+  's': map.get($scale, 2),      // 8px - Light blur
+  'm': map.get($scale, 3),      // 12px - Medium blur ⭐
+  'l': map.get($scale, 4),      // 16px - Strong blur
+  'xl': map.get($scale, 6),     // 24px - Heavy blur
+  '2xl': map.get($scale, 8),    // 32px - Extra heavy blur
+  '3xl': map.get($scale, 10),   // 40px - Maximum blur
+) !default;
+
+// -------------------------------------------
+// BLUR ALIASES
+// -------------------------------------------
+
+$blur-none: map.get($blur-scale, 'none') !default;
+$blur-xs: map.get($blur-scale, 'xs') !default;
+$blur-s: map.get($blur-scale, 's') !default;
+$blur-m: map.get($blur-scale, 'm') !default;
+$blur-l: map.get($blur-scale, 'l') !default;
+$blur-xl: map.get($blur-scale, 'xl') !default;
+$blur-2xl: map.get($blur-scale, '2xl') !default;
+$blur-3xl: map.get($blur-scale, '3xl') !default;
+
+// Default blur value
+$blur-base: $blur-m !default;  // 12px
+
+// -------------------------------------------
+// SEMANTIC BLUR TOKENS
+// -------------------------------------------
+
+$blur-semantic: (
+  // Glassmorphism effects (Apple-style frosted glass)
+  'glass-subtle': $blur-xs,        // 4px - Minimal glass
+  'glass-default': $blur-m,        // 12px - Standard glass ⭐
+  'glass-strong': map.get($scale, 5),  // 20px - Prominent glass
+  'glass-intense': $blur-xl,       // 24px - Heavy glass
+  
+  // Backdrop effects (modals, overlays)
+  'backdrop-light': $blur-s,       // 8px - Light backdrop
+  'backdrop-default': $blur-m,     // 12px - Standard backdrop
+  'backdrop-heavy': $blur-l,       // 16px - Heavy backdrop
+  'backdrop-intense': $blur-xl,    // 24px - Maximum backdrop
+  
+  // Navigation components
+  'navbar': $blur-m,               // 12px - Navigation bars
+  'sidebar': $blur-m,              // 12px - Sidebar panels
+  'header': $blur-s,               // 8px - Page headers
+  
+  // Card and surface effects
+  'card-subtle': $blur-xs,         // 4px - Subtle card
+  'card-default': $blur-s,         // 8px - Standard card
+  'card-elevated': $blur-m,        // 12px - Elevated card
+  
+  // Image effects
+  'image-thumbnail': $blur-l,      // 16px - Blurred thumbnails
+  'image-loading': $blur-xl,       // 24px - Loading placeholder
+  'image-sensitive': $blur-3xl,    // 40px - Privacy blur
+  
+  // Focus and disabled states
+  'focus-glow': map.get($scale, 1.5),  // 6px - Focus ring glow
+  'disabled': $blur-xs,            // 4px - Disabled element
+) !default;
+
+// -------------------------------------------
+// GLASSMORPHISM PRESETS
+// -------------------------------------------
+
+$glassmorphism-presets: (
+  // Light glass (for light backgrounds)
+  'glass-light-subtle': (
+    'blur': map.get($blur-semantic, 'glass-subtle'),
+    'background': rgba(255, 255, 255, 0.4),
+    'border': rgba(255, 255, 255, 0.6),
+    'opacity': 0.9,
+  ),
+  'glass-light-default': (
+    'blur': map.get($blur-semantic, 'glass-default'),
+    'background': rgba(255, 255, 255, 0.25),
+    'border': rgba(255, 255, 255, 0.4),
+    'opacity': 0.85,
+  ),
+  'glass-light-strong': (
+    'blur': map.get($blur-semantic, 'glass-strong'),
+    'background': rgba(255, 255, 255, 0.15),
+    'border': rgba(255, 255, 255, 0.3),
+    'opacity': 0.8,
+  ),
+  
+  // Dark glass (for dark backgrounds)
+  'glass-dark-subtle': (
+    'blur': map.get($blur-semantic, 'glass-subtle'),
+    'background': rgba(0, 0, 0, 0.4),
+    'border': rgba(255, 255, 255, 0.15),
+    'opacity': 0.9,
+  ),
+  'glass-dark-default': (
+    'blur': map.get($blur-semantic, 'glass-default'),
+    'background': rgba(0, 0, 0, 0.25),
+    'border': rgba(255, 255, 255, 0.1),
+    'opacity': 0.85,
+  ),
+  'glass-dark-strong': (
+    'blur': map.get($blur-semantic, 'glass-strong'),
+    'background': rgba(0, 0, 0, 0.15),
+    'border': rgba(255, 255, 255, 0.08),
+    'opacity': 0.8,
+  ),
+  
+  // Acrylic material (Microsoft Fluent-style)
+  'acrylic-default': (
+    'blur': $blur-l,                    // 16px
+    'background': rgba(255, 255, 255, 0.7),
+    'border': rgba(0, 0, 0, 0.05),
+    'opacity': 0.95,
+    'noise-opacity': 0.02,              // Subtle noise texture
+  ),
+  'acrylic-prominent': (
+    'blur': $blur-xl,                   // 24px
+    'background': rgba(255, 255, 255, 0.5),
+    'border': rgba(0, 0, 0, 0.08),
+    'opacity': 0.9,
+    'noise-opacity': 0.03,
+  ),
+) !default;
+
+// -------------------------------------------
+// BROWSER FALLBACKS
+// -------------------------------------------
+
+$blur-fallbacks: (
+  'glass-light-fallback': rgba(255, 255, 255, 0.85),
+  'glass-dark-fallback': rgba(0, 0, 0, 0.85),
+  'backdrop-fallback': rgba(0, 0, 0, 0.75),
+) !default;

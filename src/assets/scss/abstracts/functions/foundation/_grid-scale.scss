@@ -1,0 +1,155 @@
+@use 'sass:map';
+@use '../../variables/semantics/grid' as semantics;
+
+// ========================================================================== //
+//                         FUNCTIONS: GRID SYSTEM                             //
+// ========================================================================== //
+
+// ========================================================================== //
+//                    FUNCTION: GET GRID VALUE                                //
+// ========================================================================== //
+// Retrieves a specific grid property for a given breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name (xs, s, m, l, xl, 2xl)
+// @param {String} $property - Property name (columns, gutter, margin, max-width, type)
+// @return {Mixed} The requested grid value
+//
+// @example
+//   $columns: grid-get('m', 'columns'); // Returns: 8
+//   $gutter: grid-get('l', 'gutter');   // Returns: 24px
+// ========================================================================== //
+
+@function grid-get($breakpoint, $property) {
+  // Map semantic naming to internal naming if needed
+  $bp-map: (
+    's': 's',
+    'm': 'm',
+    'l': 'l'
+  );
+  
+  $internal-bp: if(map.has-key($bp-map, $breakpoint), map.get($bp-map, $breakpoint), $breakpoint);
+  
+  @if not map.has-key(semantics.$grid-config, $internal-bp) {
+    @error "Breakpoint '#{$breakpoint}' not found in grid configuration. Available: xs, s, m, l, xl, 2xl";
+  }
+  
+  $breakpoint-config: map.get(semantics.$grid-config, $internal-bp);
+  
+  @if not map.has-key($breakpoint-config, $property) {
+    @error "Property '#{$property}' not found for breakpoint '#{$breakpoint}'. Available: columns, gutter, margin, max-width, type";
+  }
+  
+  @return map.get($breakpoint-config, $property);
+}
+
+// ========================================================================== //
+//                    FUNCTION: GRID COLUMNS                                  //
+// ========================================================================== //
+// Shorthand to get column count for a breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {Number} Column count
+//
+// @example
+//   $cols: grid-columns('m'); // Returns: 8
+// ========================================================================== //
+
+@function grid-columns($breakpoint) {
+  @return grid-get($breakpoint, 'columns');
+}
+
+// ========================================================================== //
+//                    FUNCTION: GRID GUTTER                                   //
+// ========================================================================== //
+// Shorthand to get gutter size for a breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {Number} Gutter size
+//
+// @example
+//   $gutter: grid-gutter('l'); // Returns: 24px
+// ========================================================================== //
+
+@function grid-gutter($breakpoint) {
+  @return grid-get($breakpoint, 'gutter');
+}
+
+// ========================================================================== //
+//                    FUNCTION: GRID MARGIN                                   //
+// ========================================================================== //
+// Shorthand to get margin size for a breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {Number} Margin size
+//
+// @example
+//   $margin: grid-margin('xs'); // Returns: 16px
+// ========================================================================== //
+
+@function grid-margin($breakpoint) {
+  @return grid-get($breakpoint, 'margin');
+}
+
+// ========================================================================== //
+//                    FUNCTION: GRID MAX WIDTH                                //
+// ========================================================================== //
+// Shorthand to get max-width for a breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @return {Number} Max-width value
+//
+// @example
+//   $max: grid-max-width('xl'); // Returns: 1280px
+// ========================================================================== //
+
+@function grid-max-width($breakpoint) {
+  @return grid-get($breakpoint, 'max-width');
+}
+
+// ========================================================================== //
+//                    FUNCTION: CALCULATE COLUMN WIDTH                        //
+// ========================================================================== //
+// Calculates the width of a single column for a given breakpoint
+//
+// @param {String} $breakpoint - Breakpoint name
+// @param {Number} $span - Number of columns to span (default: 1)
+// @return {String} CSS calc() expression
+//
+// @example
+//   width: grid-column-width('m');      // Width of 1 column
+//   width: grid-column-width('m', 6);   // Width of 6 columns
+// ========================================================================== //
+
+@function grid-column-width($breakpoint, $span: 1) {
+  $columns: grid-columns($breakpoint);
+  $gutter: grid-gutter($breakpoint);
+  $margin: grid-margin($breakpoint);
+  
+  // Width of one column
+  $single-col: calc((100% - (#{$margin} * 2) - (#{$gutter} * (#{$columns} - 1))) / #{$columns});
+  
+  @if $span == 1 {
+    @return $single-col;
+  } @else {
+    // Width of multiple columns including gutters
+    @return calc((#{$single-col} * #{$span}) + (#{$gutter} * (#{$span} - 1)));
+  }
+}
+
+// ========================================================================== //
+//                    FUNCTION: CALCULATE SPAN PERCENTAGE                     //
+// ========================================================================== //
+// Calculates the percentage width for a column span
+//
+// @param {Number} $span - Number of columns to span
+// @param {Number} $total-columns - Total columns in grid (default: 12)
+// @return {Number} Percentage value
+//
+// @example
+//   width: grid-span-percentage(6);     // Returns: 50%
+//   width: grid-span-percentage(4, 8);  // Returns: 50% (4 of 8)
+// ========================================================================== //
+
+@function grid-span-percentage($span, $total-columns: 12) {
+  @return percentage($span / $total-columns);
+}

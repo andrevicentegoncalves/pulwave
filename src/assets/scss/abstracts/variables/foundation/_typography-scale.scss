@@ -1,0 +1,186 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+@use 'core' as *;
+
+// ========================================================================== //
+//                  VARIABLES: FOUNDATION - TYPOGRAPHY SCALES                 //
+// ========================================================================== //
+             
+// -------------------------------------------
+// FONT FAMILY SCALE
+// -------------------------------------------
+
+$font-family-sans: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif !default;
+$font-family-serif: 'Georgia', 'Times New Roman', serif !default;
+$font-family-mono: 'Courier New', 'Courier', monospace !default;
+
+$font-family-scale: (
+  'sans': $font-family-sans,
+  'serif': $font-family-serif,
+  'mono': $font-family-mono,
+) !default;
+
+// -------------------------------------------
+// FONT SIZE SCALE - DESKTOP
+// -------------------------------------------
+
+$font-size-desktop: (
+  // Display sizes (96px+) - Hero sections
+  '3xl': 136px,
+  '2xl': 112px,
+  'xl': 96px,
+  
+  // Large sizes (48-72px) - Page headlines
+  'l': 72px,
+  'm': 64px,
+  's': 48px,
+  
+  // Medium sizes (24-40px) - Section headings
+  'xs': 40px,
+  '2xs': 32px,
+  '3xs': 24px,
+  
+  // Body sizes (14-20px) - Content text
+  '4xs': 20px,
+  '5xs': 18px,
+  '6xs': 16px,
+  '7xs': 14px,
+  
+  // Small sizes (11-13px) - Captions, labels
+  '8xs': 13px,
+  '9xs': 11px,  // Minimum WCAG readable size
+) !default;
+
+// -------------------------------------------
+// FONT SIZE SCALE - PHONE
+// -------------------------------------------
+
+$font-size-phone: (
+  // Display sizes (60px+) - Hero sections
+  '3xl': 76px,
+  '2xl': 68px,
+  'xl': 60px,
+  
+  // Large sizes (28-52px) - Page headlines
+  'l': 52px,
+  'm': 48px,  
+  's': 36px,
+  
+  // Medium sizes (20-28px) - Section headings
+  'xs': 28px,
+  '2xs': 24px,
+  '3xs': 20px,
+  
+  // Body sizes (14-18px) - Content text
+  '4xs': 18px,
+  '5xs': 18px,
+  '6xs': 16px,
+  '7xs': 14px,
+  
+  // Small sizes (11-13px) - Captions, labels
+  '8xs': 13px,
+  '9xs': 11px,
+) !default;
+
+// -------------------------------------------
+// FONT WEIGHT SCALE 
+// -------------------------------------------
+
+$font-weight-scale: (
+  'thin': 100,          // Ultra light displays
+  'extra-light': 200,   // Large displays, elegant headers
+  'light': 300,         // Subheadings, captions
+  'regular': 400,       // Body text default
+  'medium': 500,        // Emphasis, buttons, labels
+  'semi-bold': 600,     // Section headings
+  'bold': 700,          // Headlines, CTAs 
+  'extra-bold': 800,    // Hero headlines
+  'black': 900,         // Maximum impact, marketing
+) !default;
+
+// Numeric aliases
+$font-weight-100: map.get($font-weight-scale, 'thin') !default;
+$font-weight-200: map.get($font-weight-scale, 'extra-light') !default;
+$font-weight-300: map.get($font-weight-scale, 'light') !default;
+$font-weight-400: map.get($font-weight-scale, 'regular') !default;
+$font-weight-500: map.get($font-weight-scale, 'medium') !default;
+$font-weight-600: map.get($font-weight-scale, 'semi-bold') !default;
+$font-weight-700: map.get($font-weight-scale, 'bold') !default;
+$font-weight-800: map.get($font-weight-scale, 'extra-bold') !default;
+$font-weight-900: map.get($font-weight-scale, 'black') !default;
+
+// -------------------------------------------
+// LINE HEIGHT SCALE
+// -------------------------------------------
+// Vertical rhythm for text blocks
+
+$line-height-scale: (
+  'none': 1,        // 100% - Display headlines only
+  'tight': 1.1,     // 110% - Large headings
+  'snug': 1.2,      // 120% - Titles, subheadings
+  'normal': 1.4,    // 140% - Comfortable body text
+  'base': 1.5,      // 150% - Body text default
+  'relaxed': 1.6,   // 160% - Long-form content
+  'loose': 1.8,     // 180% - Very spacious reading
+) !default;
+
+// Numeric aliases
+$line-height-100: map.get($line-height-scale, 'none') !default;
+$line-height-110: map.get($line-height-scale, 'tight') !default;
+$line-height-120: map.get($line-height-scale, 'snug') !default;
+$line-height-140: map.get($line-height-scale, 'normal') !default;
+$line-height-150: map.get($line-height-scale, 'base') !default;
+$line-height-160: map.get($line-height-scale, 'relaxed') !default;
+$line-height-180: map.get($line-height-scale, 'loose') !default;
+
+// -------------------------------------------
+// LETTER SPACING SCALE
+// -------------------------------------------
+
+$letter-spacing-scale: (
+  'tighter': -0.25rem,   // -4px - Large headlines
+  'tight': -0.125rem,    // -2px - Headlines, titles
+  'snug': -0.0625rem,    // -1px - Body, buttons
+  'normal': 0,           // 0px  - Default
+  'wide': 0.01em,        // 1%   - Labels
+  'wider': 0.05em,       // 5%   - Uppercase, eyebrows
+  'widest': 0.1em,       // 10%  - All caps headings
+) !default;
+
+// Numeric aliases
+$letter-spacing-minus-4: map.get($letter-spacing-scale, 'tighter') !default;
+$letter-spacing-minus-2: map.get($letter-spacing-scale, 'tight') !default;
+$letter-spacing-minus-1: map.get($letter-spacing-scale, 'snug') !default;
+$letter-spacing-0: map.get($letter-spacing-scale, 'normal') !default;
+
+// -------------------------------------------
+// TEXT TRANSFORM SCALE
+// -------------------------------------------
+
+$text-transform-scale: (
+  'none': none,
+  'uppercase': uppercase,
+  'lowercase': lowercase,
+  'capitalize': capitalize,
+) !default;
+
+// -------------------------------------------
+// FONT STYLE SCALE
+// -------------------------------------------
+
+$font-style-scale: (
+  'normal': normal,
+  'italic': italic,
+  'oblique': oblique,
+) !default;
+
+// -------------------------------------------
+// TEXT DECORATION SCALE
+// -------------------------------------------
+
+$text-decoration-scale: (
+  'none': none,
+  'underline': underline,
+  'overline': overline,
+  'line-through': line-through,
+) !default;

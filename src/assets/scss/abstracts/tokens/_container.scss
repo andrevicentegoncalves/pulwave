@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../variables/foundation/container-scale' as scale;
+
+@mixin generate-container-tokens() {
+  
+  /* ========================================================================== */
+  /*                             TOKENS: CONTAINER                              */
+  /* ========================================================================== */
+
+  /* -------------------------------------------------------------------------- */
+  /*                        CONTAINER: MAX-WIDTH SCALE                          */
+  /* -------------------------------------------------------------------------- */
+  /* Breakpoint-based and semantic container widths */
+  
+  @each $size, $value in scale.$container-scale {
+    --container-#{$size}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                         CONTAINER: PADDING SCALE                           */
+  /* -------------------------------------------------------------------------- */
+  /* Responsive padding for container elements */
+  
+  @each $size, $value in scale.$container-padding-scale {
+    --container-padding-#{$size}: #{$value};
+  }
+}

@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '../variables/foundation/gradient-scale' as scale;
+
+@mixin generate-gradient-tokens() {
+  /* ========================================================================== */
+  /*                              TOKENS: GRADIENTS                             */
+  /* ========================================================================== */
+
+  /* Gradient Directions */
+  @each $name, $value in scale.$gradient-directions {
+    --gradient-direction-#{$name}: #{$value};
+  }
+  
+  /* Radial Positions */
+  @each $name, $value in scale.$radial-positions {
+    --gradient-radial-#{$name}: #{$value};
+  }
+  
+  /* Radial Sizes */
+  @each $name, $value in scale.$radial-sizes {
+    --gradient-size-#{$name}: #{$value};
+  }
+}

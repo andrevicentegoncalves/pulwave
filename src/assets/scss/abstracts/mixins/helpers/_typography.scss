@@ -1,0 +1,189 @@
+@use 'sass:map';
+@use '../foundation/breakpoints' as bp;
+@use '../../variables/foundation/typography-scale' as scale;
+
+// ========================================================================== //
+//                        MIXINS: UTILITIES - TYPOGRAPHY                      //
+// ========================================================================== //
+
+// -------------------------------------------------------------------------- 
+// CONFIGURATION
+// -------------------------------------------------------------------------- 
+
+/// Defines which font weights will be loaded into the project by default.
+$font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
+
+// -------------------------------------------------------------------------- 
+// MIXIN: FONT FACE GENERATOR
+// -------------------------------------------------------------------------- 
+// Dynamically generates a @font-face rule for a given font family and weight.
+/// 
+/// @param {String} $family - Font family name (e.g., 'Lato')
+/// @param {String} $path - Path to the font file (without the weight suffix)
+/// @param {Number} $weight - Numeric font weight (e.g., 300, 400, 700)
+/// @param {String} $style - Font style (default: normal)
+///
+/// @example
+///   @include font-face-generator('Lato', '/fonts/Lato-Light.ttf', 300);
+///   @include font-face-generator('Montserrat', '/fonts/Montserrat-Bold.ttf', 700, italic);
+@mixin font-face-generator($family, $path, $weight, $style: normal) {
+  @font-face {
+    font-family: $family;
+    src: url('#{$path}') format('truetype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+// -------------------------------------------------------------------------- 
+// MIXIN: LOAD FONT WEIGHTS
+// -------------------------------------------------------------------------- 
+// Iterates through a list of weight names and generates @font-face declarations
+// only for the weights specified in `$weights-to-load`.
+///
+/// @param {String} $font-family - Font family name (e.g., 'Lato')
+/// @param {String} $font-path - Path to font files (e.g., '/fonts/')
+/// @param {List} $weights-to-load - Optional custom list of weights to load
+///
+/// @example
+///   @include load-font-weights('Lato', '/fonts/');
+///   @include load-font-weights('Roboto', '/assets/fonts/', ('regular', 'bold'));
+@mixin load-font-weights($font-family, $font-path, $weights-to-load: $font-weights-to-load) {
+  @each $style in $weights-to-load {
+    @if map.has-key(scale.$font-weight-scale, $style) {
+      $weight: map.get(scale.$font-weight-scale, $style);
+      @include font-face-generator($font-family, '#{$font-path}#{$font-family}-#{$style}.ttf', $weight);
+    }
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                           MIXINS: TYPOGRAPHY PRESETS                       //
+// -------------------------------------------------------------------------- //
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY
+// --------------------------------------------------------------------------  
+// Mobile-first with automatic desktop override at breakpoint `m`.
+///
+/// @param {String} $category - Typography category (e.g., 'body', 'title', 'headline')
+/// @param {String} $size - Size variant (e.g., 'xl', 'm', 's')
+/// @param {String | Null} $weight - Optional weight variant (e.g., 'bold', 'regular')
+///
+/// @example
+///   @include typography('body', 'm');
+///   @include typography('title', 'xl', 'bold');
+@mixin typography($category, $size, $weight: null) {
+  // Mobile-first
+  font-size: var(--typography-#{$category}-#{$size}-size-phone);
+  line-height: var(--typography-#{$category}-#{$size}-line-height);
+  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+
+  @if $weight {
+    font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
+  }
+
+  // Optional text-transform (e.g., for eyebrow styles)
+  @if var(--typography-#{$category}-#{$size}-text-transform) {
+    text-transform: var(--typography-#{$category}-#{$size}-text-transform);
+  }
+
+  // Desktop override
+  @include bp.bp-up(m) {
+    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+  }
+}
+
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY AT (CUSTOM BREAKPOINT)
+// -------------------------------------------------------------------------- 
+// Same as `typography`, but allows specifying a custom breakpoint key.
+///
+/// @param {String} $category - Typography category
+/// @param {String} $size - Size variant
+/// @param {String | Null} $weight - Optional weight variant
+/// @param {String} $breakpoint - Custom breakpoint (default: 'm')
+///
+/// @example
+///   @include typography-at('body', 'm', 'regular', 'l');
+@mixin typography-at($category, $size, $weight: null, $breakpoint: 'm') {
+  font-size: var(--typography-#{$category}-#{$size}-size-phone);
+  line-height: var(--typography-#{$category}-#{$size}-line-height);
+  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+
+  @if $weight {
+    font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
+  }
+
+  // Desktop override at custom breakpoint
+  @include bp.bp-up($breakpoint) {
+    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+  }
+}
+
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY SIZE
+// -------------------------------------------------------------------------- 
+// Applies only the font size from a typography preset (mobile-first).
+///
+/// @param {String} $category - Typography category
+/// @param {String} $size - Size variant
+///
+/// @example
+///   @include typography-size('body', 's');
+@mixin typography-size($category, $size) {
+  font-size: var(--typography-#{$category}-#{$size}-size-phone);
+
+  @include bp.bp-up(m) {
+    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+  }
+}
+
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY WEIGHT
+// -------------------------------------------------------------------------- 
+// Applies only the font-weight from a typography preset.
+///
+/// @param {String} $category - Typography category
+/// @param {String} $size - Size variant
+/// @param {String} $weight - Weight variant
+///
+/// @example
+///   @include typography-weight('title', 'xl', 'bold');
+@mixin typography-weight($category, $size, $weight) {
+  font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
+}
+
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY LINE HEIGHT
+// --------------------------------------------------------------------------
+// Applies only the line-height from a typography preset.
+///
+/// @param {String} $category - Typography category
+/// @param {String} $size - Size variant
+///
+/// @example
+///   @include typography-line-height('body', 'm');
+@mixin typography-line-height($category, $size) {
+  line-height: var(--typography-#{$category}-#{$size}-line-height);
+}
+
+
+// -------------------------------------------------------------------------- 
+// MIXIN: TYPOGRAPHY LETTER SPACING
+// -------------------------------------------------------------------------- 
+// Applies only the letter-spacing from a typography preset.
+///
+/// @param {String} $category - Typography category
+/// @param {String} $size - Size variant
+///
+/// @example
+///   @include typography-letter-spacing('headline', 'l');
+@mixin typography-letter-spacing($category, $size) {
+  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+}

@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '../variables/foundation/blur-scale' as scale;
+
+@mixin generate-blur-tokens() {
+  /* ========================================================================== */
+  /*                               TOKENS: BLUR                                 */
+  /* ========================================================================== */
+
+  @each $size, $value in scale.$blur-scale {
+    --blur-#{$size}: #{$value};
+  }
+  
+  /* Semantic blur tokens */
+  --blur-backdrop-light: var(--blur-s);
+  --blur-backdrop-medium: var(--blur-m);
+  --blur-backdrop-heavy: var(--blur-l);
+  --blur-glass-effect: var(--blur-m);
+  --blur-disabled: var(--blur-xs);
+}

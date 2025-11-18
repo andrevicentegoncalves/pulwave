@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use 'sass:math';
+
+// ============================================================================ //
+//                        FOUNDATION: OPACITY SCALE                             //
+// ============================================================================ //
+
+$opacity-scale: (
+  // Full transparency
+  0: 0,
+  
+  // Light opacities (subtle effects)
+  5: 0.05,      // 5% - barely visible
+  10: 0.10,     // 10% - very subtle
+  15: 0.15,     // 15% - subtle
+  20: 0.20,     // 20% - light
+  
+  // Medium opacities (overlays, disabled states)
+  25: 0.25,     // 25% - light medium
+  30: 0.30,     // 30% - medium light
+  40: 0.40,     // 40% - medium
+  50: 0.50,     // 50% - half
+  60: 0.60,     // 60% - prominent
+  
+  // Strong opacities (emphasis)
+  70: 0.70,     // 70% - strong
+  75: 0.75,     // 75% - very strong
+  80: 0.80,     // 80% - heavy
+  85: 0.85,     // 85% - heavier
+  90: 0.90,     // 90% - almost opaque
+  95: 0.95,     // 95% - barely transparent
+  
+  // Full opacity
+  100: 1,
+) !default;

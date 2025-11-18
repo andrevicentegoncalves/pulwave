@@ -1,0 +1,256 @@
+@use '../helpers/typography' as typography;
+
+// ========================================================================== //
+//                    GENERATOR: TYPOGRAPHY UTILITIES                         //
+// ========================================================================== //
+
+/// Generate ALL typography-related utilities
+@mixin generate-all-typography-utilities() {
+  @include generate-font-family-utilities();
+  @include generate-font-weight-utilities();
+  @include generate-font-style-utilities();
+  @include generate-typography-preset-utilities();
+  @include generate-text-alignment-utilities();
+  @include generate-text-transform-utilities();
+  @include generate-text-decoration-utilities();
+  @include generate-text-wrapping-utilities();
+}
+
+// -------------------------------------------------------------------------- //
+//                         FONT FAMILY UTILITIES                              //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-font-family-utilities() {
+  .font-sans {
+    font-family: var(--font-family-sans);
+  }
+  
+  .font-serif {
+    font-family: var(--font-family-serif);
+  }
+  
+  .font-mono {
+    font-family: var(--font-family-mono);
+  }
+  
+  .font-display {
+    font-family: var(--font-family-display);
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         FONT WEIGHT UTILITIES                              //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-font-weight-utilities() {
+  .font-thin {
+    font-weight: var(--font-weight-thin);
+  }
+  
+  .font-light {
+    font-weight: var(--font-weight-light);
+  }
+  
+  .font-regular {
+    font-weight: var(--font-weight-regular);
+  }
+  
+  .font-medium {
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .font-semibold {
+    font-weight: var(--font-weight-semi-bold);
+  }
+  
+  .font-bold {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         FONT STYLE UTILITIES                               //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-font-style-utilities() {
+  .font-italic {
+    font-style: italic;
+  }
+  
+  .font-normal {
+    font-style: normal;
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                      TYPOGRAPHY PRESET UTILITIES                           //
+// -------------------------------------------------------------------------- //
+
+/// Generate utility classes for all typography presets (mobile-first)
+/// Output: .text-body-m, .text-headline-xl, etc.
+@mixin generate-typography-preset-utilities() {
+  
+  // Body Presets
+  @include generate-category-utilities('body', (
+    'xl', 'l', 'm', 's', '2xs'
+  ), ('light', 'regular', 'semi-bold', 'bold'));
+  
+  // Title Presets
+  @include generate-category-utilities('title', (
+    '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'
+  ), ('medium', 'bold'));
+  
+  // Headline Presets
+  @include generate-category-utilities('headline', (
+    '3xl', '2xl', 'xl', 'l', 'm', 's', 'xs', '2xs', '3xs'
+  ), ('medium', 'bold'));
+  
+  // Caption Presets
+  @include generate-category-utilities('caption', (
+    'm', 's', '2xs'
+  ), ('light', 'regular', 'semi-bold', 'bold'));
+  
+  // Label Presets
+  @each $size in ('m', 's') {
+    .text-label-#{$size} {
+      @include typography.typography('label', $size, 'medium');
+    }
+  }
+  
+  // Action Presets (Buttons & Links)
+  .text-button-l {
+    @include typography.typography('action', 'button-l', 'medium');
+  }
+  
+  .text-button-m {
+    @include typography.typography('action', 'button-m', 'medium');
+  }
+  
+  .text-button-s {
+    @include typography.typography('action', 'button-s', 'medium');
+  }
+  
+  .text-link-navigation {
+    @include typography.typography('action', 'link-navigation', 'regular');
+  }
+  
+  .text-link-hyperlink {
+    @include typography.typography('action', 'link-hyperlink', 'regular');
+  }
+  
+  // Eyebrow Presets
+  @each $size in ('l', 'm', 's') {
+    .text-eyebrow-#{$size} {
+      @include typography.typography('eyebrow', $size, 'bold');
+    }
+  }
+  
+  // Price Presets
+  @each $size in ('xl', 'l', 'm', 's', 'xs', '2xs') {
+    .text-price-#{$size} {
+      @include typography.typography('price', $size, 'bold');
+    }
+  }
+}
+
+/// Generate utilities for a specific category (mobile-first)
+/// @param {String} $category - Typography category (body, title, headline, etc.)
+/// @param {List} $sizes - List of size variants
+/// @param {List} $weights - List of weight variants
+@mixin generate-category-utilities($category, $sizes, $weights) {
+  @each $size in $sizes {
+    // Base class without weight
+    .text-#{$category}-#{$size} {
+      @include typography.typography($category, $size);
+    }
+    
+    // Weight variants
+    @each $weight in $weights {
+      .text-#{$category}-#{$size}-#{$weight} {
+        @include typography.typography($category, $size, $weight);
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         TEXT ALIGNMENT UTILITIES                           //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-text-alignment-utilities() {
+  .text-left {
+    text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-justify {
+    text-align: justify;
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         TEXT TRANSFORM UTILITIES                           //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-text-transform-utilities() {
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .text-lowercase {
+    text-transform: lowercase;
+  }
+  
+  .text-capitalize {
+    text-transform: capitalize;
+  }
+  
+  .text-normal-case {
+    text-transform: none;
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         TEXT DECORATION UTILITIES                          //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-text-decoration-utilities() {
+  .text-underline {
+    text-decoration: underline;
+  }
+  
+  .text-line-through {
+    text-decoration: line-through;
+  }
+  
+  .text-no-underline {
+    text-decoration: none;
+  }
+}
+
+// -------------------------------------------------------------------------- //
+//                         TEXT WRAPPING UTILITIES                            //
+// -------------------------------------------------------------------------- //
+
+@mixin generate-text-wrapping-utilities() {
+  .text-wrap {
+    white-space: normal;
+  }
+  
+  .text-nowrap {
+    white-space: nowrap;
+  }
+  
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

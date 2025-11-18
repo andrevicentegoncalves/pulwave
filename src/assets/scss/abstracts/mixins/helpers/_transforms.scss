@@ -1,0 +1,45 @@
+// ========================================================================== //
+//                      MIXINS: HELPERS - TRANSFORMS                          //
+// ========================================================================== //
+
+// -------------------------------------------------------------------------- //
+//                           MIXIN: ROTATE TRANSITION                          //
+// -------------------------------------------------------------------------- //
+// Applies a smooth rotation around a pivot point with optional axis.
+//
+// @param {Number} $angle - Rotation angle in degrees (default: 0deg)
+// @param {Time} $duration - Duration of transition (default: 0.3s)
+// @param {String} $ease - Timing function (default: ease-in-out)
+// @param {String} $origin - Pivot point (default: center)
+// @param {String} $axis - Axis of rotation: x, y, z (default: z)
+//
+// @example
+//   .rotating-element {
+//     // Initial state
+//     @include rotate-transition(0deg);
+//
+//     &.active {
+//       // Rotated state
+//       @include rotate-transition(180deg);
+//     }
+// }
+// -------------------------------------------------------------------------- //
+
+@mixin rotate-transition(
+  $angle: 0deg,
+  $axis: z,
+  $duration: 0.3s,
+  $ease: ease-in-out,
+  $origin: center
+) {
+  transform-origin: $origin;
+  transition: transform $duration $ease;
+
+  @if $axis == x {
+    transform: rotateX($angle);
+  } @else if $axis == y {
+    transform: rotateY($angle);
+  } @else {
+    transform: rotateZ($angle);
+  }
+}

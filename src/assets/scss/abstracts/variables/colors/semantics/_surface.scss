@@ -1,0 +1,111 @@
+@use 'neutral' as neutral;
+
+// ============================================================================= //
+//                      VARIABLES: COLOR SEMANTICS - SURFACE                     //
+// ============================================================================= //
+
+// ---------------------------------------------------------------------------//
+// BASE SURFACE COLORS - 4 Elevation Levels
+// ---------------------------------------------------------------------------//
+
+// Light Mode - Elevation system (darker as you go up)
+$color-surface-base: neutral.$color-neutral-0 !default;       // Ground level (white) - page background
+$color-surface-default: neutral.$color-neutral-0 !default;    // Level 0 (white) - default components
+$color-surface-subtle: neutral.$color-neutral-50 !default;    // Level +1 (cards, panels)
+$color-surface-moderate: neutral.$color-neutral-100 !default; // Level +2 (elevated cards)
+$color-surface-strong: neutral.$color-neutral-200 !default;   // Level +3 (modals, dropdowns, popovers)
+$color-surface-disabled: neutral.$color-neutral-100 !default;
+
+// Dark Mode - Elevation system (lighter as you go up)
+$color-surface-base-dark: neutral.$color-neutral-950 !default;     // Ground level (darkest) - page background
+$color-surface-default-dark: neutral.$color-neutral-900 !default;  // Level 0 (very dark) - default components
+$color-surface-subtle-dark: neutral.$color-neutral-800 !default;   // Level +1 (lighter)
+$color-surface-moderate-dark: neutral.$color-neutral-700 !default; // Level +2 (more light)
+$color-surface-strong-dark: neutral.$color-neutral-600 !default;   // Level +3 (lightest elevated)
+$color-surface-disabled-dark: neutral.$color-neutral-800 !default;
+
+// ---------------------------------------------------------------------------//
+// INTERACTIVE SURFACE STATES
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-hover: neutral.$color-neutral-50 !default;
+$color-surface-pressed: neutral.$color-neutral-100 !default;
+$color-surface-selected: neutral.$color-neutral-100 !default;
+$color-surface-focus: neutral.$color-neutral-50 !default;
+
+// Dark Mode
+$color-surface-hover-dark: neutral.$color-neutral-800 !default;
+$color-surface-pressed-dark: neutral.$color-neutral-700 !default;
+$color-surface-selected-dark: neutral.$color-neutral-700 !default;
+$color-surface-focus-dark: neutral.$color-neutral-800 !default;
+
+// ---------------------------------------------------------------------------//
+// ON-SURFACE COLORS (text on surfaces)
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-on-surface-default: neutral.$color-neutral-900 !default;
+$color-on-surface-subtle: neutral.$color-neutral-700 !default;
+$color-on-surface-muted: neutral.$color-neutral-600 !default;
+$color-on-surface-strong: neutral.$color-neutral-950 !default;   // ⭐ ADDED - Maximum emphasis
+$color-on-surface-disabled: neutral.$color-neutral-400 !default;
+
+// Dark Mode
+$color-on-surface-default-dark: neutral.$color-neutral-100 !default;
+$color-on-surface-subtle-dark: neutral.$color-neutral-400 !default;
+$color-on-surface-muted-dark: neutral.$color-neutral-500 !default;
+$color-on-surface-strong-dark: neutral.$color-neutral-0 !default;  // ⭐ ADDED - Maximum emphasis
+$color-on-surface-disabled-dark: neutral.$color-neutral-600 !default;
+
+// ---------------------------------------------------------------------------//
+// INVERSE SURFACE COLORS - 4 Elevation Levels
+// ---------------------------------------------------------------------------//
+
+// Light Mode - High contrast surfaces (dark surfaces in light mode)
+$color-surface-inverse-base: neutral.$color-neutral-950 !default;       // Darkest ground
+$color-surface-inverse-default: neutral.$color-neutral-900 !default;    // Default inverse
+$color-surface-inverse-subtle: neutral.$color-neutral-800 !default;     // Level +1
+$color-surface-inverse-moderate: neutral.$color-neutral-700 !default;   // Level +2
+$color-surface-inverse-strong: neutral.$color-neutral-600 !default;     // Level +3 (lighter)
+$color-surface-inverse-disabled: neutral.$color-neutral-700 !default;
+
+// Dark Mode - High contrast surfaces (light surfaces in dark mode)
+$color-surface-inverse-base-dark: neutral.$color-neutral-0 !default;       // Lightest ground
+$color-surface-inverse-default-dark: neutral.$color-neutral-100 !default;  // Default inverse
+$color-surface-inverse-subtle-dark: neutral.$color-neutral-200 !default;   // Level +1
+$color-surface-inverse-moderate-dark: neutral.$color-neutral-300 !default; // Level +2
+$color-surface-inverse-strong-dark: neutral.$color-neutral-400 !default;   // Level +3 (darker)
+$color-surface-inverse-disabled-dark: neutral.$color-neutral-400 !default;
+
+// ---------------------------------------------------------------------------//
+// INTERACTIVE INVERSE SURFACE STATES
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-surface-inverse-hover: neutral.$color-neutral-800 !default;
+$color-surface-inverse-pressed: neutral.$color-neutral-700 !default;
+$color-surface-inverse-focus: neutral.$color-neutral-800 !default;
+
+// Dark Mode
+$color-surface-inverse-hover-dark: neutral.$color-neutral-200 !default;
+$color-surface-inverse-pressed-dark: neutral.$color-neutral-300 !default;
+$color-surface-inverse-focus-dark: neutral.$color-neutral-200 !default;
+
+// ---------------------------------------------------------------------------//
+// ON-SURFACE INVERSE COLORS (text on inverse surfaces)
+// ---------------------------------------------------------------------------//
+
+// Light Mode (text on dark inverse surfaces)
+$color-on-surface-inverse-default: neutral.$color-neutral-0 !default;
+$color-on-surface-inverse-subtle: neutral.$color-neutral-200 !default;
+$color-on-surface-inverse-muted: neutral.$color-neutral-400 !default;
+$color-on-surface-inverse-strong: neutral.$color-neutral-50 !default;   // ⭐ ADDED - Maximum emphasis
+$color-on-surface-inverse-disabled: neutral.$color-neutral-600 !default;
+
+// Dark Mode (text on light inverse surfaces)
+$color-on-surface-inverse-default-dark: neutral.$color-neutral-900 !default;
+$color-on-surface-inverse-subtle-dark: neutral.$color-neutral-800 !default;
+$color-on-surface-inverse-muted-dark: neutral.$color-neutral-700 !default;
+$color-on-surface-inverse-strong-dark: neutral.$color-neutral-950 !default;  // ⭐ ADDED - Maximum emphasis
+$color-on-surface-inverse-disabled-dark: neutral.$color-neutral-600 !default;

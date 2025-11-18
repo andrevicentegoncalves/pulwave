@@ -1,0 +1,54 @@
+@use 'sass:map';
+@use '../../variables/foundation/timing-scale' as scale;
+
+// ============================================================================ //
+//                    FUNCTIONS: FOUNDATION - TIMING SCALE                      //
+// ============================================================================ //
+
+/// Get duration from timing scale
+/// @param {String} $speed - Duration name
+/// @return {Number} Duration value in milliseconds
+@function duration($speed) {
+  @if map.has-key(scale.$duration-scale, $speed) {
+    @return map.get(scale.$duration-scale, $speed);
+  }
+  @error "Duration '#{$speed}' not found. Available: #{map.keys(scale.$duration-scale)}";
+}
+
+/// Get easing function from scale
+/// @param {String} $easing-name - Easing function name
+/// @return {String} Easing function value
+@function easing($easing-name) {
+  @if map.has-key(scale.$easing-scale, $easing-name) {
+    @return map.get(scale.$easing-scale, $easing-name);
+  }
+  @error "Easing '#{$easing-name}' not found. Available: #{map.keys(scale.$easing-scale)}";
+}
+
+/// Get delay from scale
+/// @param {String} $delay-name - Delay name
+/// @return {Number} Delay value in milliseconds
+@function delay($delay-name) {
+  @if map.has-key(scale.$delay-scale, $delay-name) {
+    @return map.get(scale.$delay-scale, $delay-name);
+  }
+  @error "Delay '#{$delay-name}' not found. Available: #{map.keys(scale.$delay-scale)}";
+}
+
+/// Create complete transition shorthand
+/// @param {String} $property - CSS property to transition
+/// @param {String} $duration - Duration name
+/// @param {String} $easing - Easing name
+/// @param {String} $delay - Delay name (optional)
+/// @return {String} Complete transition value
+@function transition($property, $duration-name, $easing-name, $delay-name: 'none') {
+  $dur: duration($duration-name);
+  $ease: easing($easing-name);
+  $del: delay($delay-name);
+  
+  @if $del == 0ms {
+    @return $property $dur $ease;
+  } @else {
+    @return $property $dur $ease $del;
+  }
+}

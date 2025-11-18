@@ -1,0 +1,64 @@
+@use '../../../functions/colors/primitives-system' as primitives;
+@use 'neutral' as neutral;
+
+// ============================================================================= //
+//                      VARIABLES: COLOR SEMANTICS - BORDER                      //
+// ============================================================================= //
+
+// ---------------------------------------------------------------------------//
+// BASE BORDER COLORS
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-border-default: neutral.$color-neutral-300 !default;
+$color-border-subtle: neutral.$color-neutral-200 !default;
+$color-border-strong: neutral.$color-neutral-400 !default;
+$color-border-disabled: neutral.$color-neutral-200 !default;
+
+// Dark Mode
+$color-border-default-dark: neutral.$color-neutral-700 !default;
+$color-border-subtle-dark: neutral.$color-neutral-800 !default;
+$color-border-strong-dark: neutral.$color-neutral-600 !default;
+$color-border-disabled-dark: neutral.$color-neutral-800 !default;
+
+// ---------------------------------------------------------------------------//
+// INTERACTIVE BORDER STATES
+// ---------------------------------------------------------------------------//
+
+// Light Mode
+$color-border-hover: neutral.$color-neutral-400 !default;
+$color-border-active: neutral.$color-neutral-500 !default;
+$color-border-focus: primitives.get-color('primary', 500) !default;
+$color-border-selected: primitives.get-color('primary', 500) !default;
+
+// Dark Mode
+$color-border-hover-dark: neutral.$color-neutral-600 !default;
+$color-border-active-dark: neutral.$color-neutral-500 !default;
+$color-border-focus-dark: primitives.get-color('primary', 400) !default;
+$color-border-selected-dark: primitives.get-color('primary', 400) !default;
+
+// ---------------------------------------------------------------------------//
+// BRAND BORDERS
+// ---------------------------------------------------------------------------//
+
+$color-border-primary: primitives.get-color('primary', 500) !default;
+$color-border-secondary: primitives.get-color('secondary', 700) !default;  // Use 700 (text-safe)
+$color-border-tertiary: primitives.get-color('tertiary', 600) !default;    // Use 600 (text-safe)
+
+// ---------------------------------------------------------------------------//
+// FEEDBACK BORDERS
+// ---------------------------------------------------------------------------//
+
+$color-border-success: primitives.get-color('success', 500) !default;
+$color-border-warning: primitives.get-color('warning', 500) !default;  // Bright yellow
+$color-border-info: primitives.get-color('info', 600) !default;        // Use 600 (text-safe)
+$color-border-error: primitives.get-color('error', 500) !default;
+
+// ---------------------------------------------------------------------------//
+// MATERIAL DESIGN 3 ALIASES
+// ---------------------------------------------------------------------------//
+
+$color-outline: $color-border-default !default;
+$color-outline-variant: $color-border-subtle !default;
+$color-outline-dark: $color-border-default-dark !default;
+$color-outline-variant-dark: $color-border-subtle-dark !default;

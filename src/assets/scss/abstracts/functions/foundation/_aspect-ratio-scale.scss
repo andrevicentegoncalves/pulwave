@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../../variables/foundation/aspect-ratio-scale' as scale;
+
+// ========================================================================== //
+//                   FUNCTIONS: FOUNDATION - ASPECT RATIO                     //
+// ========================================================================== //
+
+/// Get aspect ratio from scale
+/// @param {String} $name - Aspect ratio name
+/// @return {Number} Aspect ratio value
+@function aspect-ratio($name) {
+  @if map.has-key(scale.$aspect-ratio-scale, $name) {
+    @return map.get(scale.$aspect-ratio-scale, $name);
+  }
+  @error "Aspect ratio '#{$name}' not found. Available: #{map.keys(scale.$aspect-ratio-scale)}";
+}
+
+/// Get component-specific aspect ratio
+/// @param {String} $component - Component name
+/// @return {Number} Aspect ratio value
+@function component-aspect-ratio($component) {
+  @if map.has-key(scale.$aspect-ratio-components, $component) {
+    @return map.get(scale.$aspect-ratio-components, $component);
+  }
+  @error "Component aspect ratio '#{$component}' not found";
+}

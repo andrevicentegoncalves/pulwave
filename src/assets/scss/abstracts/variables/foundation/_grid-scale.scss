@@ -1,0 +1,74 @@
+@use 'sass:map';
+@use 'core' as *;
+
+// ========================================================================== //
+//                    VARIABLES: FOUNDATION - GRID SCALE                      //
+// ========================================================================== //
+// Unified grid system aligned with breakpoint naming (xs/s/m/l/xl/2xl)
+// Mobile-first with progressive enhancement
+// ========================================================================== //
+
+// -------------------------------------------
+// GRID SCALE: COLUMNS
+// -------------------------------------------
+
+$grid-scale-columns: (
+  'xs': 4,    // Mobile portrait
+  's': 4,     // Mobile landscape
+  'm': 8,     // Tablets
+  'l': 12,    // Laptops
+  'xl': 12,   // Desktops
+  '2xl': 12,  // Ultra-wide
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: GUTTERS
+// -------------------------------------------
+
+$grid-scale-gutters: (
+  'xs': map.get($scale, 4),    // 16px
+  's': map.get($scale, 4),     // 16px
+  'm': map.get($scale, 4),     // 16px
+  'l': map.get($scale, 6),     // 24px
+  'xl': map.get($scale, 6),    // 24px
+  '2xl': map.get($scale, 8),   // 32px
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: MARGINS
+// -------------------------------------------
+
+$grid-scale-margins: (
+  'xs': map.get($scale, 4),    // 16px
+  's': map.get($scale, 4),     // 16px
+  'm': map.get($scale, 6),     // 24px
+  'l': map.get($scale, 6),     // 24px
+  'xl': 0,                     // Full bleed (fixed centered)
+  '2xl': map.get($scale, 8),   // 32px
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: MAX WIDTHS
+// -------------------------------------------
+
+$grid-scale-max-widths: (
+  'xs': 100%,
+  's': 100%,
+  'm': 100%,
+  'l': 100%,
+  'xl': map.get($scale, 320),  // 1280px - Fixed centered
+  '2xl': 100%,                 // Fluid
+) !default;
+
+// -------------------------------------------
+// GRID SCALE: TYPES
+// -------------------------------------------
+
+$grid-scale-types: (
+  'xs': 'fluid',
+  's': 'fluid',
+  'm': 'fluid',
+  'l': 'fluid',
+  'xl': 'fixed',
+  '2xl': 'fluid',
+) !default;

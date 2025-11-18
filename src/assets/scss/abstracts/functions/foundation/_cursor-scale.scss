@@ -1,0 +1,94 @@
+@use 'sass:map';
+@use '../../variables/foundation/cursor-scale' as scale;
+
+// ============================================================================ //
+//                    FUNCTIONS: FOUNDATION - CURSOR SCALE                      //
+// ============================================================================ //
+
+/// Get cursor value
+/// @param {String} $type - Cursor type name
+/// @return {String} CSS cursor value
+/// @example cursor('pointer') => pointer
+@function cursor($type) {
+  @if map.has-key(scale.$cursor-scale, $type) {
+    @return map.get(scale.$cursor-scale, $type);
+  }
+  @error "Cursor type '#{$type}' not found. Available: #{map.keys(scale.$cursor-scale)}";
+}
+
+/// Get semantic cursor value
+/// @param {String} $context - Semantic context name
+/// @return {String} CSS cursor value
+/// @example cursor-semantic('button') => pointer
+@function cursor-semantic($context) {
+  @if map.has-key(scale.$cursor-semantic, $context) {
+    @return map.get(scale.$cursor-semantic, $context);
+  }
+  @error "Semantic cursor '#{$context}' not found. Available: #{map.keys(scale.$cursor-semantic)}";
+}
+
+/// Get component-specific cursor
+/// @param {String} $component - Component name
+/// @return {String} CSS cursor value
+/// @example cursor-component('button-default') => pointer
+@function cursor-component($component) {
+  @if map.has-key(scale.$cursor-components, $component) {
+    @return map.get(scale.$cursor-components, $component);
+  }
+  @error "Component cursor '#{$component}' not found. Available: #{map.keys(scale.$cursor-components)}";
+}
+
+/// Get cursor for component state
+/// @param {String} $component - Component type
+/// @param {String} $state - State name
+/// @return {String} CSS cursor value
+/// @example cursor-state('button', 'disabled') => not-allowed
+@function cursor-state($component, $state) {
+  $transition: map.get(scale.$cursor-transitions, $component);
+  
+  @if not $transition {
+    @error "Cursor transition for '#{$component}' not found. Available: #{map.keys(scale.$cursor-transitions)}";
+  }
+  
+  @if map.has-key($transition, $state) {
+    @return map.get($transition, $state);
+  }
+  
+  @error "State '#{$state}' not found for component '#{$component}'. Available: #{map.keys($transition)}";
+}
+
+/// Get interactive cursor (pointer by default)
+/// @return {String} Cursor value for interactive elements
+@function cursor-interactive() {
+  @return cursor('pointer');
+}
+
+/// Get disabled cursor (not-allowed by default)
+/// @return {String} Cursor value for disabled elements
+@function cursor-disabled() {
+  @return cursor('not-allowed');
+}
+
+/// Get draggable cursor (grab by default)
+/// @return {String} Cursor value for draggable elements
+@function cursor-draggable() {
+  @return cursor('grab');
+}
+
+/// Get dragging cursor (grabbing by default)
+/// @return {String} Cursor value while dragging
+@function cursor-dragging() {
+  @return cursor('grabbing');
+}
+
+/// Get all cursor types
+/// @return {List} List of available cursor types
+@function cursor-types() {
+  @return map.keys(scale.$cursor-scale);
+}
+
+/// Get all semantic cursor contexts
+/// @return {List} List of semantic cursor contexts
+@function cursor-semantic-contexts() {
+  @return map.keys(scale.$cursor-semantic);
+}

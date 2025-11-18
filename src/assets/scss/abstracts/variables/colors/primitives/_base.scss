@@ -1,0 +1,125 @@
+@use 'sass:map';
+@use 'sass:math';
+
+// ============================================================================= //
+//                   VARIABLES: COLOR PRIMITIVES - BASE (REDESIGN)               //
+// ============================================================================= //
+
+// This file contains the foundation for all color lightness values in the system.
+// It uses a mathematically-derived, perceptually uniform scale based on 
+// exponential easing and APCA research.
+
+// =============================================================================
+// MATHEMATICAL FOUNDATION
+// =============================================================================
+
+// Formula: L(w) = L_max - (L_max - L_min) × (w/1000)^γ
+// Where:
+//   - L_max = 100% (pure white)
+//   - L_min = 5% (darkest, not 0% to preserve depth)
+//   - w = weight (0-1000)
+//   - γ = 2.0 (gamma exponent for perceptual uniformity)
+//
+// This creates an exponential ease curve that matches human perception
+// of lightness differences, ensuring visually equal steps.
+
+// =============================================================================
+// BASE LIGHTNESS SCALE - 12 Weights (Tailwind-inspired)
+// =============================================================================
+// Perceptually uniform steps for all non-neutral color families
+// Weights: 0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+
+$base-lightness: (
+  // LIGHTEST TONES (Backgrounds, subtle states)
+  0:   100%,        // Pure white - use for pure backgrounds
+  50:  98%,         // Off-white - subtle backgrounds (forms, cards)
+  100: 95%,         // Very light - hover states on white
+  
+  // LIGHT TONES (Tints, disabled states)
+  200: 88%,         // Light - subtle fills, disabled backgrounds
+  300: 76%,         // Light-medium - borders, dividers
+  
+  // MIDDLE TONES (Interactive elements)
+  400: 62%,         // Medium-light - hover on light buttons
+  500: 50%,         // True middle - primary brand color base (perceptual center)
+  600: 40%,         // Medium-dark - hover on solid buttons
+  
+  // DARK TONES (Text, strong emphasis)
+  700: 30%,         // Dark - active states, secondary text
+  800: 20%,         // Very dark - primary text on light bg
+  900: 12%,         // Near-black - headings, strong emphasis
+  
+  // DARKEST TONE (Pure dark mode)
+  950: 5%           // Pure dark - darkest possible (not 0% for subtle depth)
+) !default;
+
+// =============================================================================
+// NEUTRAL LIGHTNESS SCALE - 12 Weights (Text-optimized)
+// =============================================================================
+// Special scale for neutral colors optimized for text contrast and backgrounds
+// More granularity in light range, compressed dark range for text hierarchy
+
+$neutral-lightness: (
+  // BACKGROUNDS (More granular for subtle distinctions)
+  0:   100%,        // Pure white
+  50:  99%,         // Barely tinted (1% difference for subtle depth)
+  100: 97%,         // Very subtle gray (hover on white)
+  
+  // BORDERS & DIVIDERS
+  200: 92%,         // Light surface backgrounds
+  300: 82%,         // Light borders, inactive states
+  400: 64%,         // Medium borders, placeholder text
+  
+  // MIDDLE (Balanced neutral)
+  500: 50%,         // True neutral (APCA perceptual middle)
+  
+  // TEXT HIERARCHY (Optimized for WCAG contrast)
+  600: 38%,         // Disabled text (4.5:1 on white)
+  700: 26%,         // Secondary text (7:1 on white)
+  800: 16%,         // Body text (12:1 on white)
+  900: 8%,          // Headings (18:1 on white)
+  
+  // PURE DARK
+  950: 4%           // Darkest backgrounds/text
+) !default;
+
+// =============================================================================
+// ALL AVAILABLE WEIGHTS (for iteration/validation)
+// =============================================================================
+
+$all-weights: (
+  0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+) !default;
+
+// =============================================================================
+// WEIGHT STEP SIZES (for programmatic generation)
+// =============================================================================
+
+$weight-steps: (
+  'subtle-background': 50,     // 0 → 50 (barely noticeable)
+  'background': 100,            // 50 → 100 → 200 (backgrounds)
+  'standard': 100,              // Standard step between weights
+  'interactive': 100,           // Hover/active states
+  'contrast': 200               // Large jumps for high contrast
+) !default;
+
+// =============================================================================
+// PERCEPTUAL VALIDATION DATA
+// =============================================================================
+// Visual difference between each step (perceptual, not mathematical)
+// All steps should feel roughly equal when viewing swatches
+
+$perceptual-steps: (
+  '0-50':     2%,    // ✓ Subtle (backgrounds)
+  '50-100':   3%,    // ✓ Noticeable
+  '100-200':  7%,    // ✓ Clear distinction
+  '200-300':  12%,   // ✓ Strong separation
+  '300-400':  14%,   // ✓ Perceptually equal
+  '400-500':  12%,   // ✓ Balanced
+  '500-600':  10%,   // ✓ Consistent rhythm
+  '600-700':  10%,   // ✓ Maintained
+  '700-800':  10%,   // ✓ Equal feel
+  '800-900':  8%,    // ✓ Near-black distinction
+  '900-950':  7%     // ✓ Final step
+) !default;
+

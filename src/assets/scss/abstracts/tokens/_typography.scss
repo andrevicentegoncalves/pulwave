@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '../functions/foundation/unit-conversion' as units;
+@use '../mixins/foundation/typography' as *;
+@use '../variables/foundation/typography-scale' as foundation;
+@use '../variables/semantics/typography' as semantics;
+
+@mixin generate-typography-tokens() {
+
+/* ============================================================================ */
+/*                             TOKENS: TYPOGRAPHY                               */
+/* ============================================================================ */
+
+  /* Font Family Scale */
+  @each $name, $value in foundation.$font-family-scale {
+    --font-family-#{$name}: #{$value};
+  }
+
+  /* Font Size Scale - Desktop */
+  @each $size, $value in foundation.$font-size-desktop {
+    --font-size-#{$size}: #{$value};
+  }
+
+  /* Font Size Scale - Phone (for responsive tokens) */
+  @each $size, $value in foundation.$font-size-phone {
+    --font-size-#{$size}-phone: #{$value};
+  }
+
+  /* Font Weight Scale (100-900) */
+  @each $name, $value in foundation.$font-weight-scale {
+    --font-weight-#{$name}: #{$value};
+  }
+
+  /* Numeric Weight Aliases (100, 200, 300...) */
+  @each $name, $value in foundation.$font-weight-scale {
+    --font-weight-#{$value}: #{$value};
+  }
+
+  /* Line Height Scale */
+  @each $name, $value in foundation.$line-height-scale {
+    --line-height-#{$name}: #{$value};
+  }
+
+  /* Letter Spacing Scale */
+  @each $name, $value in foundation.$letter-spacing-scale {
+    --letter-spacing-#{$name}: #{$value};
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                       TYPOGRAPHY: SEMANTIC PRESETS                        */
+  /* -------------------------------------------------------------------------- */
+
+  @include generate-semantic-tokens('body', semantics.$typography-body);
+  @include generate-semantic-tokens('title', semantics.$typography-title);
+  @include generate-semantic-tokens('headline', semantics.$typography-headline);
+  @include generate-semantic-tokens('caption', semantics.$typography-caption);
+  @include generate-semantic-tokens('label', semantics.$typography-label);
+  @include generate-semantic-tokens('action', semantics.$typography-action);
+  @include generate-semantic-tokens('eyebrow', semantics.$typography-eyebrow);
+  @include generate-semantic-tokens('price', semantics.$typography-price);
+}

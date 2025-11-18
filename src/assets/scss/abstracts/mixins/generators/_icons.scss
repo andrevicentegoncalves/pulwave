@@ -1,0 +1,20 @@
+@use 'sass:map';
+@use '../../variables/foundation/icon-scale' as scale;
+
+// ========================================================================== //
+//                      GENERATOR: ICON UTILITIES                             //
+// ========================================================================== //
+
+@mixin generate-icon-utilities {
+  
+    // -------------------------------------------
+    // ICON SIZE UTILITIES
+    // -------------------------------------------
+    @each $size, $value in scale.$icon-size-scale {
+      .icon-#{$size} {
+        width: var(--icon-size-#{$size});
+        height: var(--icon-size-#{$size});
+        font-size: var(--icon-size-#{$size});
+      }
+    }
+  }

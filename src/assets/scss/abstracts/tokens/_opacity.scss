@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../variables/semantics/opacity' as semantics;
+
+@mixin generate-opacity-tokens() {
+
+  /* ========================================================================== */
+  /*                               TOKENS: OPACITY                              */
+  /* ========================================================================== */
+
+  // Semantic opacity tokens
+  --opacity-disabled: #{map.get(semantics.$opacity-semantic, 'disabled')};
+  --opacity-hover: #{map.get(semantics.$opacity-semantic, 'hover')};
+  --opacity-active: #{map.get(semantics.$opacity-semantic, 'active')};
+  --opacity-inactive: #{map.get(semantics.$opacity-semantic, 'inactive')};
+  --opacity-subtle: #{map.get(semantics.$opacity-semantic, 'subtle')};
+  --opacity-muted: #{map.get(semantics.$opacity-semantic, 'muted')};
+  --opacity-faded: #{map.get(semantics.$opacity-semantic, 'faded')};
+  --opacity-ghost: #{map.get(semantics.$opacity-semantic, 'ghost')};
+  --opacity-overlay-light: #{map.get(semantics.$opacity-semantic, 'overlay-light')};
+  --opacity-overlay-medium: #{map.get(semantics.$opacity-semantic, 'overlay-medium')};
+  --opacity-overlay-dark: #{map.get(semantics.$opacity-semantic, 'overlay-dark')};
+  --opacity-backdrop: #{map.get(semantics.$opacity-semantic, 'backdrop')};
+  --opacity-glass-light: #{map.get(semantics.$opacity-semantic, 'glass-light')};
+  --opacity-glass-medium: #{map.get(semantics.$opacity-semantic, 'glass-medium')};
+  --opacity-glass-dark: #{map.get(semantics.$opacity-semantic, 'glass-dark')};
+  --opacity-full: #{map.get(semantics.$opacity-semantic, 'full')};
+  --opacity-none: #{map.get(semantics.$opacity-semantic, 'none')};
+}

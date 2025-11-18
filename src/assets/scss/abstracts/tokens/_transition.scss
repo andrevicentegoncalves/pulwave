@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../variables/semantics/transitions' as trans;
+
+@mixin generate-transition-tokens() {
+
+  /* ========================================================================== */
+  /*                            TOKENS: TRANSITIONS                             */
+  /* ========================================================================== */
+
+  /* Base Transitions */
+  --transition-base: #{map.get(trans.$transition-semantic, 'base')};
+  --transition-fast: #{map.get(trans.$transition-semantic, 'fast')};
+  --transition-slow: #{map.get(trans.$transition-semantic, 'slow')};
+  --transition-smooth: #{map.get(trans.$transition-semantic, 'smooth')};
+  
+  /* Property-Specific */
+  --transition-color: #{map.get(trans.$transition-semantic, 'color')};
+  --transition-background: #{map.get(trans.$transition-semantic, 'background')};
+  --transition-opacity: #{map.get(trans.$transition-semantic, 'opacity')};
+  --transition-transform: #{map.get(trans.$transition-semantic, 'transform')};
+  --transition-shadow: #{map.get(trans.$transition-semantic, 'shadow')};
+  
+  /* Interactive States */
+  --transition-hover: #{map.get(trans.$transition-semantic, 'hover')};
+  --transition-active: #{map.get(trans.$transition-semantic, 'active')};
+  --transition-focus: #{map.get(trans.$transition-semantic, 'focus')};
+}

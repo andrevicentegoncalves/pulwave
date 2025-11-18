@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use 'core' as *;
+
+// ========================================================================== //
+//                        FOUNDATION: BORDER SCALE                            //
+// ========================================================================== //
+
+//-------------------------------------------
+// BORDER WIDTH SCALE
+//-------------------------------------------
+
+$border-width-scale: (
+  'none': 0,
+  '2xs': map.get($scale, 0.25),  // 1px - Hairline borders
+  'xs': map.get($scale, 0.5),    // 2px - Subtle dividers
+  's': map.get($scale, 1),       // 4px - Default borders ⭐
+  'm': map.get($scale, 2),       // 8px - Medium borders (CHANGED from 1.5)
+  'l': map.get($scale, 3),       // 12px - Heavy borders (CHANGED from 2)
+  'xl': map.get($scale, 4),      // 16px - Extra heavy borders (CHANGED from 3)
+) !default;
+
+// -------------------------------------------
+// BORDER STYLE OPTIONS
+// -------------------------------------------
+
+$border-style-options: (
+  'none': none,
+  'solid': solid,
+  'dashed': dashed,
+  'dotted': dotted,
+  'double': double,
+) !default;
+
+// -------------------------------------------
+// BORDER WIDTH ALIASES
+// -------------------------------------------
+
+$border-width-none: map.get($border-width-scale, 'none') !default;
+$border-width-2xs: map.get($border-width-scale, '2xs') !default;
+$border-width-xs: map.get($border-width-scale, 'xs') !default;
+$border-width-s: map.get($border-width-scale, 's') !default;
+$border-width-m: map.get($border-width-scale, 'm') !default;
+$border-width-l: map.get($border-width-scale, 'l') !default;
+$border-width-xl: map.get($border-width-scale, 'xl') !default;
+
+// Default border width
+$border-width-base: $border-width-s !default;  // 4px

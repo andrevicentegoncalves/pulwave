@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../foundation/positioning-scale' as foundation;
+
+// ============================================================================ //
+//                       VARIABLES: SEMANTICS - POSITIONING                     //
+// ============================================================================ //
+
+// ---------------------------------------------------------------------------- //
+// SEMANTIC POSITIONING SCALES
+// ---------------------------------------------------------------------------- //
+
+/// Forward foundation positioning scale
+/// @type Map
+$position-scale: foundation.$positioning-scale !default;
+
+/// Forward foundation positioning percentages
+/// @type Map
+$position-percentages: foundation.$positioning-percentages !default;
+
+// ---------------------------------------------------------------------------- //
+// SEMANTIC INSET TOKENS
+// ---------------------------------------------------------------------------- //
+
+/// Forward foundation inset values
+$inset-none: foundation.$inset-none !default;
+$inset-xs: foundation.$inset-xs !default;
+$inset-s: foundation.$inset-s !default;
+$inset-m: foundation.$inset-m !default;
+$inset-l: foundation.$inset-l !default;
+$inset-xl: foundation.$inset-xl !default;
+
+/// Forward foundation auto value
+$auto: foundation.$auto !default;

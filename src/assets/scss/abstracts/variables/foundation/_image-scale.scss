@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use 'core' as *;
+
+// ========================================================================== //
+//                        FOUNDATION: IMAGE SCALE                             //
+// ========================================================================== //
+
+// -------------------------------------------
+// IMAGE WIDTH SCALE                               
+// -------------------------------------------
+
+$image-width-scale: (
+  'xs': map.get($scale, 36),   // 144px
+  's': map.get($scale, 48),    // 192px
+  'sm': map.get($scale, 64),   // 256px
+  'm': map.get($scale, 80),    // 320px
+  'l': map.get($scale, 112),   // 448px
+  'xl': map.get($scale, 144),  // 576px
+  '2xl': map.get($scale, 192), // 768px
+) !default;
+
+// -------------------------------------------
+// IMAGE HEIGHT SCALE                               
+// -------------------------------------------
+
+$image-height-scale: (
+  'xs': map.get($scale, 20),   // 80px
+  's': map.get($scale, 28),    // 112px
+  'm': map.get($scale, 48),    // 192px
+  'l': map.get($scale, 64),    // 256px
+  'xl': map.get($scale, 96),   // 384px
+) !default;
+
+// -------------------------------------------
+// AVATAR SIZE SCALE                               
+// -------------------------------------------
+
+$avatar-size-scale: (
+  'xs': map.get($scale, 8),    // 32px
+  's': map.get($scale, 10),    // 40px
+  'm': map.get($scale, 12),    // 48px
+  'l': map.get($scale, 16),    // 64px
+  'xl': map.get($scale, 24),   // 96px
+  '2xl': map.get($scale, 32),  // 128px
+) !default;
+
+// -------------------------------------------
+// THUMBNAIL SIZE SCALE                               
+// -------------------------------------------
+
+$thumbnail-size-scale: (
+  'xs': map.get($scale, 16),   // 64px
+  's': map.get($scale, 20),    // 80px
+  'm': map.get($scale, 30),    // 120px
+  'l': map.get($scale, 40),    // 160px
+  'xl': map.get($scale, 50),   // 200px
+) !default;

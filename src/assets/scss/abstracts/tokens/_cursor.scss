@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '../variables/foundation/cursor-scale' as scale;
+
+@mixin generate-cursor-tokens() {
+
+  /* ========================================================================== */
+  /*                                TOKENS: CURSOR                              */
+  /* ========================================================================== */
+
+  @each $name, $value in scale.$cursor-scale {
+    --cursor-#{$name}: #{$value};
+  }
+
+}

@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '../variables/foundation/focus-scale' as scale;
+
+@mixin generate-focus-tokens() {
+  /* ========================================================================== */
+  /*                                TOKENS: FOCUS                               */
+  /* ========================================================================== */
+
+  /* Width */
+  --focus-width-thin: #{map.get(scale.$focus-scale, 'thin')};
+  --focus-width-medium: #{map.get(scale.$focus-scale, 'medium')};
+  --focus-width-thick: #{map.get(scale.$focus-scale, 'thick')};
+
+  /* Offset */
+  --focus-offset-none: #{map.get(scale.$focus-scale, 'none')};
+  --focus-offset-s: #{map.get(scale.$focus-scale, 's')};
+  --focus-offset-base: #{map.get(scale.$focus-scale, 'base')};
+
+  /* Style */
+  --focus-style-solid: #{map.get(scale.$focus-scale, 'solid')};
+  --focus-style-dashed: #{map.get(scale.$focus-scale, 'dashed')};
+  --focus-style-dotted: #{map.get(scale.$focus-scale, 'dotted')};
+}

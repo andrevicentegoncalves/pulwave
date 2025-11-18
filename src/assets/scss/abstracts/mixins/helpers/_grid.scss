@@ -1,0 +1,216 @@
+@use 'sass:map';
+
+// ========================================================================== //
+//                    MIXIN: RESPONSIVE GRID                                  //
+// ========================================================================== //
+
+//
+// @param {Map} $columns - Map of breakpoint to column count
+// @param {String} $gap - Optional gap override (default: uses --grid-gap)
+//
+// @example
+//   .product-grid {
+//     @include responsive-grid((
+//       xs: 1,    // 1 column on mobile
+//       s: 2,     // 2 columns on small devices
+//       m: 3,     // 3 columns on tablets
+//       l: 4      // 4 columns on desktop
+//     ));
+//   }
+//
+//   .custom-grid {
+//     @include responsive-grid((
+//       xs: 1,
+//       l: 3
+//     ), 2rem);  // Custom gap
+//   }
+// ========================================================================== //
+
+@mixin responsive-grid($columns, $gap: null) {
+  display: grid;
+  gap: if($gap, $gap, var(--grid-gap));
+  
+  // Get the first breakpoint value (should be 'xs' for mobile-first)
+  $first-bp: nth(map.keys($columns), 1);
+  $first-cols: map.get($columns, $first-bp);
+  
+  // Set initial mobile columns
+  grid-template-columns: repeat($first-cols, 1fr);
+  
+  // Apply responsive columns for other breakpoints
+  @each $breakpoint, $cols in $columns {
+    @if $breakpoint != $first-bp {
+      @media (min-width: var(--breakpoint-#{$breakpoint})) {
+        grid-template-columns: repeat($cols, 1fr);
+      }
+    }
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: AUTO-FIT GRID                                    //
+// ========================================================================== //
+// Creates an auto-fitting grid that adapts based on minimum item width
+// Modern responsive approach without media queries
+// Grid items will automatically wrap to fit the container
+//
+// @param {Number} $min-width - Minimum width for each grid item
+// @param {String} $gap - Optional gap override
+//
+// @example
+//   .card-grid {
+//     @include auto-fit-grid(280px);
+//     // Cards will automatically wrap based on available space
+//   }
+//
+//   .product-grid {
+//     @include auto-fit-grid(250px, 1.5rem);
+//   }
+// ========================================================================== //
+
+@mixin auto-fit-grid($min-width: 250px, $gap: null) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: if($gap, $gap, var(--grid-gap));
+}
+
+// ========================================================================== //
+//                    MIXIN: AUTO-FILL GRID                                   //
+// ========================================================================== //
+// Creates an auto-filling grid (fills all available space even if empty)
+// Use when you want to maintain column structure regardless of content
+// Empty columns will be created to fill the space
+//
+// @param {Number} $min-width - Minimum width for each grid item
+// @param {String} $gap - Optional gap override
+//
+// @example
+//   .gallery {
+//     @include auto-fill-grid(200px);
+//     // Maintains grid structure even with few items
+//   }
+// ========================================================================== //
+
+@mixin auto-fill-grid($min-width: 250px, $gap: null) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: if($gap, $gap, var(--grid-gap));
+}
+
+// ========================================================================== //
+//                    MIXIN: RESPONSIVE PROPERTY                              //
+// ========================================================================== //
+// Sets a CSS property with different values at different breakpoints
+// Mobile-first progressive enhancement
+//
+// @param {String} $property - CSS property name
+// @param {Map} $values - Map of breakpoint to value
+//
+// @example
+//   .section {
+//     @include responsive-property('padding', (
+//       xs: 1rem,
+//       m: 2rem,
+//       l: 3rem
+//     ));
+//   }
+//
+//   .heading {
+//     @include responsive-property('font-size', (
+//       xs: 1.5rem,
+//       s: 2rem,
+//       m: 2.5rem,
+//       l: 3rem
+//     ));
+//   }
+// ========================================================================== //
+
+@mixin responsive-property($property, $values) {
+  $first-bp: nth(map.keys($values), 1);
+  $first-value: map.get($values, $first-bp);
+  
+  // Set initial mobile value
+  #{$property}: $first-value;
+  
+  // Apply responsive values
+  @each $breakpoint, $value in $values {
+    @if $breakpoint != $first-bp {
+      @media (min-width: var(--breakpoint-#{$breakpoint})) {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: EQUAL HEIGHT GRID                                //
+// ========================================================================== //
+// Creates a grid where all items in a row have equal height
+// Useful for card layouts where content varies
+//
+// @param {Map} $columns - Map of breakpoint to column count
+// @param {String} $gap - Optional gap override
+//
+// @example
+//   .card-grid {
+//     @include equal-height-grid((
+//       xs: 1,
+//       s: 2,
+//       m: 3
+//     ));
+//   }
+// ========================================================================== //
+
+@mixin equal-height-grid($columns, $gap: null) {
+  display: grid;
+  gap: if($gap, $gap, var(--grid-gap));
+  grid-auto-rows: 1fr;
+  
+  $first-bp: nth(map.keys($columns), 1);
+  $first-cols: map.get($columns, $first-bp);
+  
+  grid-template-columns: repeat($first-cols, 1fr);
+  
+  @each $breakpoint, $cols in $columns {
+    @if $breakpoint != $first-bp {
+      @media (min-width: var(--breakpoint-#{$breakpoint})) {
+        grid-template-columns: repeat($cols, 1fr);
+      }
+    }
+  }
+}
+
+// ========================================================================== //
+//                    MIXIN: RESPONSIVE COLUMNS                               //
+// ========================================================================== //
+// Simplified responsive column layout (common pattern shorthand)
+// Automatically sets sensible defaults for common use cases
+//
+// @param {Number} $mobile - Columns on mobile (default: 1)
+// @param {Number} $tablet - Columns on tablet (default: 2)
+// @param {Number} $desktop - Columns on desktop (default: 3)
+// @param {String} $gap - Optional gap override
+//
+// @example
+//   .simple-grid {
+//     @include responsive-columns(1, 2, 4);
+//   }
+//
+//   .two-col-grid {
+//     @include responsive-columns(1, 2, 2);
+//   }
+// ========================================================================== //
+
+@mixin responsive-columns($mobile: 1, $tablet: 2, $desktop: 3, $gap: null) {
+  display: grid;
+  gap: if($gap, $gap, var(--grid-gap));
+  grid-template-columns: repeat($mobile, 1fr);
+  
+  @media (min-width: var(--breakpoint-m)) {
+    grid-template-columns: repeat($tablet, 1fr);
+  }
+  
+  @media (min-width: var(--breakpoint-l)) {
+    grid-template-columns: repeat($desktop, 1fr);
+  }
+}

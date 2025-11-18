@@ -1,0 +1,114 @@
+@use 'sass:map';
+@use '../../functions/foundation/unit-conversion' as units;
+
+// ============================================================================ //
+//                           FOUNDATION: CORE UNITS                             //
+// ============================================================================ //
+// The atomic primitives that everything else derives from
+
+// -------------------------------------------
+// BASE UNITS - Single source of truth
+// -------------------------------------------
+
+/// Base spatial unit - all spacing derives from this
+/// @type Number
+$base-unit: 4px !default;
+
+/// Base font size - root typography reference
+/// @type Number
+$base-font-size: 16px !default;
+
+/// Base line height ratio - typography vertical rhythm
+/// @type Number
+$base-line-height: 1.5 !default;
+
+/// Base border width - stroke reference
+/// @type Number
+$base-border-width: 1px !default;
+
+/// Base duration - animation timing reference
+/// @type Number
+$base-duration: 100ms !default;
+
+// -------------------------------------------
+// MATHEMATICAL RATIOS - Scale generators
+// -------------------------------------------
+
+/// Typography scale ratios (type scales)
+$scale-ratio-minor-second: 1.067 !default;   // 15:16
+$scale-ratio-major-second: 1.125 !default;   // 8:9
+$scale-ratio-minor-third: 1.2 !default;      // 5:6
+$scale-ratio-major-third: 1.25 !default;     // 4:5
+$scale-ratio-perfect-fourth: 1.333 !default; // 3:4
+$scale-ratio-augmented-fourth: 1.414 !default; // 1:√2
+$scale-ratio-perfect-fifth: 1.5 !default;    // 2:3
+$scale-ratio-golden: 1.618 !default;         // 1:φ (golden ratio)
+
+/// Selected type scale ratio for this project
+/// @type Number
+$typography-scale-ratio: $scale-ratio-minor-third !default;
+
+// ============================================================================ //
+//                            UNIFIED SCALE                                     //
+// ============================================================================ //
+// Single mathematical scale for ALL spacing, sizing, and dimensional needs
+// Base: 4px grid system for consistency and simplicity
+// Mathematical progression: key × 4px = value
+// Includes micro values (1px, 2px) for borders and hairlines
+// Uses this for: spacing, sizing, borders, radius, images, avatars, etc.
+// ============================================================================ //
+
+$scale: (
+  // Micro (for borders, hairlines)
+  0: 0,
+  0.25: units.rem(1),                    // 1px  → 0.0625rem (hairline borders)
+  0.5: units.rem(2),                     // 2px  → 0.125rem  (thin borders)
+  
+  // Core Scale (4px base)
+  1: units.rem($base-unit * 1),          // 4px   → 0.25rem
+  2: units.rem($base-unit * 2),          // 8px   → 0.5rem
+  3: units.rem($base-unit * 3),          // 12px  → 0.75rem
+  4: units.rem($base-unit * 4),          // 16px  → 1rem    
+  5: units.rem($base-unit * 5),          // 20px  → 1.25rem  
+  6: units.rem($base-unit * 6),          // 24px  → 1.5rem
+  8: units.rem($base-unit * 8),          // 32px  → 2rem
+  10: units.rem($base-unit * 10),        // 40px  → 2.5rem
+  12: units.rem($base-unit * 12),        // 48px  → 3rem
+  
+  // Medium
+  14: units.rem($base-unit * 14),        // 56px  → 3.5rem
+  16: units.rem($base-unit * 16),        // 64px  → 4rem
+  18: units.rem($base-unit * 18),        // 72px  → 4.5rem
+  20: units.rem($base-unit * 20),        // 80px  → 5rem
+  24: units.rem($base-unit * 24),        // 96px  → 6rem
+  28: units.rem($base-unit * 28),        // 112px → 7rem
+  32: units.rem($base-unit * 32),        // 128px → 8rem
+  
+  // Large
+  36: units.rem($base-unit * 36),        // 144px → 9rem
+  40: units.rem($base-unit * 40),        // 160px → 10rem
+  44: units.rem($base-unit * 44),        // 176px → 11rem
+  48: units.rem($base-unit * 48),        // 192px → 12rem
+  52: units.rem($base-unit * 52),        // 208px → 13rem
+  56: units.rem($base-unit * 56),        // 224px → 14rem
+  60: units.rem($base-unit * 60),        // 240px → 15rem
+  64: units.rem($base-unit * 64),        // 256px → 16rem
+  
+  // Extra Large
+  72: units.rem($base-unit * 72),        // 288px → 18rem
+  80: units.rem($base-unit * 80),        // 320px → 20rem
+  88: units.rem($base-unit * 88),        // 352px → 22rem
+  96: units.rem($base-unit * 96),        // 384px → 24rem
+  104: units.rem($base-unit * 104),      // 416px → 26rem
+  112: units.rem($base-unit * 112),      // 448px → 28rem
+  120: units.rem($base-unit * 120),      // 480px → 30rem
+  128: units.rem($base-unit * 128),      // 512px → 32rem
+  144: units.rem($base-unit * 144),      // 576px → 36rem
+  160: units.rem($base-unit * 160),      // 640px → 40rem
+  192: units.rem($base-unit * 192),      // 768px → 48rem
+  224: units.rem($base-unit * 224),      // 896px → 56rem
+  256: units.rem($base-unit * 256),      // 1024px → 64rem
+  320: units.rem($base-unit * 320),      // 1280px → 80rem
+  384: units.rem($base-unit * 384),      // 1536px → 96rem
+  480: units.rem($base-unit * 480),      // 1920px → 120rem
+) !default;
