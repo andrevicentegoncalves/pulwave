@@ -2,7 +2,7 @@ import './assets/scss/main.scss';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import AuthForm from './components/ui/AuthForm';
+import AuthForm from './pages/Login';
 import Home from './pages/Home';
 import StyleGuide from './pages/style-guide/StyleGuide';
 

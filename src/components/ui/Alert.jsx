@@ -2,32 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-// Icon components with improved visuals
+// Icon components with bigger size (24x24)
 const IconInfo = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5"/>
-    <path d="M10 9V14M10 6V6.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+    <path d="M12 11V16M12 8V8.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
   </svg>
 );
 
 const IconSuccess = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5"/>
-    <path d="M6 10L9 13L14 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+    <path d="M8 12L11 15L16 9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
 const IconWarning = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 2L18 17H2L10 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-    <path d="M10 7V11M10 14V14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L21 19H3L12 3Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M12 9V13M12 16V16.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
   </svg>
 );
 
 const IconError = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5"/>
-    <path d="M7 7L13 13M13 7L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+    <path d="M9 9L15 15M15 9L9 15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
   </svg>
 );
 
