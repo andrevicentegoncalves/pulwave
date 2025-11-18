@@ -2,7 +2,7 @@ import './assets/scss/main.scss';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import AuthForm from './pages/Login';
+import AuthForm from './pages/Auth';
 import Home from './pages/Home';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
@@ -28,15 +28,15 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={user ? <Home /> : <Navigate to="/login" replace />}
+          element={user ? <Home /> : <Navigate to="/Auth" replace />}
         />
         <Route
-          path="/login"
+          path="/Auth"
           element={!user ? <AuthForm /> : <Navigate to="/" replace />}
         />
         <Route
           path="/style-guide"
-          element={user ? <StyleGuide /> : <Navigate to="/login" replace />}
+          element={user ? <StyleGuide /> : <Navigate to="/Auth" replace />}
         />
       </Routes>
     </Router>
