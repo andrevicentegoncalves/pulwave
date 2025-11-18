@@ -150,55 +150,6 @@ export default function Badges() {
           With Icon
         </Badge>
       </div>
-
-      {/* USAGE EXAMPLES */}
-      <h4 style={{ 
-        marginTop: 'var(--space-8)', 
-        marginBottom: 'var(--space-3)',
-        fontSize: 'var(--font-size-5xs)',
-        fontWeight: 'var(--font-weight-semi-bold)',
-        color: 'var(--color-on-surface-default)'
-      }}>Usage Examples</h4>
-      <div style={{
-        padding: 'var(--space-4)',
-        backgroundColor: 'var(--color-neutral-50)',
-        borderRadius: 'var(--border-radius-m)',
-        fontSize: 'var(--font-size-body-s)',
-        lineHeight: 'var(--line-height-body)'
-      }}>
-        <div style={{ marginBottom: 'var(--space-4)' }}>
-          <p style={{ marginBottom: 'var(--space-2)', fontWeight: 'var(--font-weight-medium)' }}>
-            Status indicators:
-          </p>
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-            <Badge variant="heavy" type="success" size="s">Active</Badge>
-            <Badge variant="heavy" type="warning" size="s">Pending</Badge>
-            <Badge variant="heavy" type="error" size="s">Inactive</Badge>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: 'var(--space-4)' }}>
-          <p style={{ marginBottom: 'var(--space-2)', fontWeight: 'var(--font-weight-medium)' }}>
-            Category tags:
-          </p>
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-            <Badge variant="light" type="neutral">Design</Badge>
-            <Badge variant="light" type="neutral">Development</Badge>
-            <Badge variant="light" type="neutral">Marketing</Badge>
-          </div>
-        </div>
-
-        <div>
-          <p style={{ marginBottom: 'var(--space-2)', fontWeight: 'var(--font-weight-medium)' }}>
-            Notification counts:
-          </p>
-          <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span>Messages <Badge variant="heavy" type="error" size="s">3</Badge></span>
-            <span>Notifications <Badge variant="heavy" type="info" size="s">12</Badge></span>
-            <span>Updates <Badge variant="heavy" type="success" size="s">5</Badge></span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
