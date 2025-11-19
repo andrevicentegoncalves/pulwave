@@ -1,3 +1,4 @@
+// src/components/ui/TextArea.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -12,14 +13,26 @@ const Textarea = ({
   disabled = false,
   error,
   helperText,
+  fullWidth = false, // NEW: Add fullWidth prop
   className,
   ...rest
 }) => {
+  // ✅ FIX: Remove fullWidth from rest props to prevent passing to DOM
+  const { fullWidth: _, ...domProps } = rest;
+
   return (
-    <div className={clsx('textarea', className)}>
+    <div className={clsx(
+      'textarea', 
+      fullWidth && 'textarea--full-width', // Apply fullWidth class
+      className
+    )}>
       {label && (
-        <label className={clsx('textarea__label', { 'textarea__label--required': required })}>
+        <label className={clsx(
+          'textarea__label', 
+          required && 'textarea__label--required'
+        )}>
           {label}
+          {required && <span className="textarea__required" aria-label="required">*</span>}
         </label>
       )}
       
@@ -34,7 +47,7 @@ const Textarea = ({
         rows={rows}
         required={required}
         disabled={disabled}
-        {...rest}
+        {...domProps}
       />
       
       {error && (
@@ -58,6 +71,7 @@ Textarea.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   helperText: PropTypes.string,
+  fullWidth: PropTypes.bool, // NEW: Add to propTypes
   className: PropTypes.string,
 };
 

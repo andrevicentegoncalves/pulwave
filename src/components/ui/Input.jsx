@@ -19,21 +19,27 @@ const Input = forwardRef(({
   leftIcon,
   rightIcon,
   size = 'md',
-  fullWidth = false, // ✅ Added fullWidth prop (defaults to false)
+  fullWidth = false,
   className,
   onChange,
   onBlur,
   onFocus,
+  as = 'input', // NEW: Support select elements
+  children, // NEW: For select options
   ...rest
 }, ref) => {
   const inputId = id || name;
   const hasError = !!error;
   const hasSuccess = !!success;
+  const InputElement = as; // Can be 'input', 'select', or 'textarea'
+
+  // ✅ FIX: Remove fullWidth from rest props to prevent passing to DOM
+  const { fullWidth: _, ...domProps } = rest;
 
   return (
     <div className={clsx(
       'input-wrapper', 
-      fullWidth && 'input-wrapper--full-width', // ✅ Use fullWidth for CSS class only
+      fullWidth && 'input-wrapper--full-width',
       className
     )}>
       {/* Label */}
@@ -66,10 +72,10 @@ const Input = forwardRef(({
           </span>
         )}
 
-        {/* Input Element */}
-        <input
+        {/* Input/Select/Textarea Element */}
+        <InputElement
           ref={ref}
-          type={type}
+          type={as === 'input' ? type : undefined}
           id={inputId}
           name={name}
           value={value}
@@ -90,8 +96,10 @@ const Input = forwardRef(({
           onChange={onChange}
           onBlur={onBlur}
           onFocus={onFocus}
-          {...rest}
-        />
+          {...domProps}
+        >
+          {children}
+        </InputElement>
 
         {/* Right Icon */}
         {rightIcon && (
@@ -137,11 +145,13 @@ Input.propTypes = {
   leftIcon: PropTypes.node,
   rightIcon: PropTypes.node,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  fullWidth: PropTypes.bool, // ✅ Added propType definition
+  fullWidth: PropTypes.bool,
   className: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  as: PropTypes.oneOf(['input', 'select', 'textarea']),
+  children: PropTypes.node,
 };
 
 export default Input;

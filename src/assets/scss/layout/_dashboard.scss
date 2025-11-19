@@ -1,0 +1,93 @@
+@use '../abstracts' as *;
+
+/* ========================================================================== */
+/*                         LAYOUT: DASHBOARD                                  */
+/* ========================================================================== */
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-surface-default);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              MAIN CONTENT                                  */
+/* -------------------------------------------------------------------------- */
+
+.dashboard-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; // Prevent overflow
+  
+  // On mobile, use full width
+  margin-left: 0;
+  
+  // On desktop, account for sidebar
+  @include bp-up(l) {
+    margin-left: var(--space-18); // Collapsed sidebar width (72px)
+    transition: margin-left var(--duration-normal) var(--easing-standard);
+    
+    &--shifted {
+      margin-left: var(--space-64); // Expanded sidebar width (256px)
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            MOBILE HEADER                                   */
+/* -------------------------------------------------------------------------- */
+
+.dashboard-layout__mobile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-surface-default);
+  border-bottom: 1px solid var(--color-border-default);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky, 100);
+  
+  // Hide on desktop (Header component will be used)
+  @include bp-up(l) {
+    display: none;
+  }
+}
+
+.dashboard-layout__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dashboard-layout__logo-text {
+  font-size: var(--font-size-5xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-7);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              PAGE CONTENT                                  */
+/* -------------------------------------------------------------------------- */
+
+.dashboard-layout__content {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RESPONSIVE ADJUSTMENTS                            */
+/* -------------------------------------------------------------------------- */
+
+// Optimize for very small screens
+@media (max-width: 360px) {
+  .dashboard-layout__mobile-header {
+    padding: var(--space-3);
+  }
+  
+  .dashboard-layout__logo-text {
+    font-size: var(--font-size-6xs);
+  }
+}

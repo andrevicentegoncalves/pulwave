@@ -1,0 +1,91 @@
+@use '../abstracts' as *;
+
+/* ========================================================================== */
+/*                          COMPONENT: BURGER MENU                            */
+/* ========================================================================== */
+
+.burger-menu {
+  // Layout
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: var(--space-10); // 40px
+  height: var(--space-10);
+  padding: var(--space-2);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  // Hide on desktop
+  @include bp-up(l) {
+    display: none;
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-s);
+  }
+  
+  // Hover state
+  &:hover {
+    .burger-menu__line {
+      background: var(--color-primary-6);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              MENU LINES                                    */
+/* -------------------------------------------------------------------------- */
+
+.burger-menu__line {
+  width: 100%;
+  height: 2px;
+  background: var(--color-on-surface-default);
+  border-radius: var(--border-radius-2xs);
+  transition: all var(--duration-normal) var(--easing-standard);
+  transform-origin: center;
+  position: relative;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              ACTIVE STATE                                  */
+/* -------------------------------------------------------------------------- */
+
+.burger-menu--active {
+  // Top line rotates and moves down
+  .burger-menu__line--top {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  // Middle line fades out
+  .burger-menu__line--middle {
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  // Bottom line rotates and moves up
+  .burger-menu__line--bottom {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  // Change color when active
+  .burger-menu__line {
+    background: var(--color-primary-6);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RESPONSIVE ADJUSTMENTS                            */
+/* -------------------------------------------------------------------------- */
+
+// Slightly smaller on very small screens
+@media (max-width: 360px) {
+  .burger-menu {
+    width: var(--space-8); // 32px
+    height: var(--space-8);
+  }
+}

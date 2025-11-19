@@ -1,0 +1,201 @@
+@use '../abstracts' as *;
+
+/* ========================================================================== */
+/*                    COMPONENT: FLOATING ACTION BUTTON                       */
+/* ========================================================================== */
+
+.fab-container {
+  position: fixed;
+  z-index: var(--z-index-fab, 1000);
+  
+  // Hide on desktop, show on mobile/tablet
+  display: none;
+  
+  @include bp-down(l) {
+    display: block;
+  }
+  
+  // Position variants
+  &--bottom-right {
+    bottom: var(--space-6);
+    right: var(--space-4);
+  }
+  
+  &--bottom-left {
+    bottom: var(--space-6);
+    left: var(--space-4);
+  }
+  
+  &--bottom-center {
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              MAIN FAB BUTTON                               */
+/* -------------------------------------------------------------------------- */
+
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-16); // 64px
+  height: var(--space-16);
+  border-radius: var(--border-radius-round);
+  background: var(--color-primary-6);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-l);
+  transition: all var(--duration-normal) var(--easing-standard);
+  position: relative;
+  
+  // Icon color
+  .fab__icon {
+    color: var(--color-neutral-0);
+    transition: transform var(--duration-fast) var(--easing-standard);
+  }
+  
+  // Hover state - using unquote() to avoid Sass scale() function conflict
+  &:hover {
+    background: var(--color-primary-7);
+    box-shadow: var(--shadow-xl);
+    transform: unquote('scale(1.05)');
+  }
+  
+  // Active state (when expanded)
+  &--active {
+    background: var(--color-neutral-8);
+    transform: rotate(45deg);
+    
+    &:hover {
+      background: var(--color-neutral-9);
+    }
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              ACTION ITEMS                                  */
+/* -------------------------------------------------------------------------- */
+
+.fab-actions {
+  position: absolute;
+  bottom: calc(100% + var(--space-3));
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.fab-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--border-radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-m);
+  transition: all var(--duration-fast) var(--easing-standard);
+  min-width: max-content;
+  white-space: nowrap;
+  
+  // Animation entrance
+  opacity: 0;
+  transform: translateY(var(--space-2));
+  animation: fabActionSlideIn var(--duration-normal) var(--easing-bounce) forwards;
+  
+  .fab-action__icon {
+    color: var(--color-primary-6);
+    flex-shrink: 0;
+  }
+  
+  .fab-action__label {
+    font-size: var(--font-size-body-s);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-on-surface-default);
+  }
+  
+  // Hover state
+  &:hover {
+    background: var(--color-surface-hover);
+    box-shadow: var(--shadow-l);
+    transform: translateY(-2px);
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                OVERLAY                                     */
+/* -------------------------------------------------------------------------- */
+
+.fab-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(s);
+  z-index: -1;
+  animation: fabOverlayFadeIn var(--duration-fast) var(--easing-standard);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               ANIMATIONS                                   */
+/* -------------------------------------------------------------------------- */
+
+@keyframes fabActionSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-2));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fabOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RESPONSIVE ADJUSTMENTS                            */
+/* -------------------------------------------------------------------------- */
+
+// Smaller FAB on very small screens
+@media (max-width: 360px) {
+  .fab {
+    width: var(--space-14); // 56px
+    height: var(--space-14);
+  }
+  
+  .fab-action {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-caption-l);
+  }
+}
+
+// Adjust position for very small screens
+@media (max-height: 600px) {
+  .fab-container {
+    bottom: var(--space-4);
+  }
+}

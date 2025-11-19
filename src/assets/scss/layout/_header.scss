@@ -1,5 +1,214 @@
 @use '../abstracts' as *;
 
-/* ==========================================================================*/
-/*                               LAYOUT: HEADER                              */
-/* ==========================================================================*/
+/* ========================================================================== */
+/*                          COMPONENT: HEADER                                 */
+/* ========================================================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-header, 900);
+  background: var(--color-surface-default);
+  border-bottom: 1px solid var(--color-border-default);
+  padding: var(--space-4) var(--space-6);
+  
+  @include bp-up(l) {
+    padding: var(--space-4) var(--space-8);
+  }
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            MOBILE MENU BUTTON                              */
+/* -------------------------------------------------------------------------- */
+
+.header__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-on-surface-default);
+  border-radius: var(--border-radius-s);
+  transition: background-color var(--duration-fast) var(--easing-standard);
+  
+  // Only show on mobile/tablet
+  @include bp-up(l) {
+    display: none;
+  }
+  
+  &:hover {
+    background: var(--color-surface-hover);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             PROFILE SECTION                                */
+/* -------------------------------------------------------------------------- */
+
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              AVATAR/PHOTO                                  */
+/* -------------------------------------------------------------------------- */
+
+.header__avatar {
+  width: var(--space-10); // 40px
+  height: var(--space-10);
+  border-radius: var(--border-radius-round);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  
+  &:hover {
+    border-color: var(--color-primary-6);
+    transform: unquote('scale(1.05)');
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+}
+
+.header__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-2);
+  color: var(--color-primary-7);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              USER INFO                                     */
+/* -------------------------------------------------------------------------- */
+
+.header__user-info {
+  display: none; // Hide on mobile
+  
+  @include bp-up(s) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.header__user-name {
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-surface-default);
+  line-height: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            LOGOUT BUTTON                                   */
+/* -------------------------------------------------------------------------- */
+
+.header__logout-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  color: var(--color-on-surface-subtle);
+  font-size: var(--font-size-caption-l);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-fast) var(--easing-standard);
+  
+  &:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-hover);
+    color: var(--color-on-surface-default);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+}
+
+.header__logout-text {
+  display: none; // Hide text on mobile
+  
+  @include bp-up(s) {
+    display: inline;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            LOADING SKELETON                                */
+/* -------------------------------------------------------------------------- */
+
+.header__skeleton {
+  width: 200px;
+  height: var(--space-10);
+  background: var(--color-surface-subtle);
+  border-radius: var(--border-radius-s);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RESPONSIVE ADJUSTMENTS                            */
+/* -------------------------------------------------------------------------- */
+
+// Larger avatar on desktop
+@include bp-up(l) {
+  .header__avatar {
+    width: var(--space-12); // 48px
+    height: var(--space-12);
+  }
+}
+
+// Adjust for very small screens
+@media (max-width: 360px) {
+  .header {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .header__avatar {
+    width: var(--space-8); // 32px
+    height: var(--space-8);
+  }
+}

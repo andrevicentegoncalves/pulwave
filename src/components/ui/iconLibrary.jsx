@@ -56,6 +56,16 @@ export const Spinner = () => (
   />
 );
 
+// NEW: Check icon (checkmark without circle)
+export const Check = () => (
+  <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+);
+
+// NEW: Plus icon
+export const Plus = () => (
+  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+);
+
 // Navigation Icons
 export const Home = () => (
   <path 
@@ -169,5 +179,24 @@ export const Camera = () => (
   <>
     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="none"/>
     <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </>
+);
+
+// NEW: Theme/Settings Icons
+export const Sun = () => (
+  <>
+    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </>
+);
+
+export const Moon = () => (
+  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="none"/>
+);
+
+export const Monitor = () => (
+  <>
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M8 21h8M12 17v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </>
 );

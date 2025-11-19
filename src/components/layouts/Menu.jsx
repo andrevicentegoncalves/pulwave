@@ -10,14 +10,21 @@ import clsx from 'clsx';
  * Menu Component  
  * Navigation menu for sidebar
  * Adapts to show icon-only or icon+text based on sidebar state
+ * Closes mobile menu when item is clicked
  */
-const Menu = ({ expanded }) => {
+const Menu = ({ expanded, onItemClick }) => {
   const menuItems = [
     {
       id: 'home',
       label: 'Home',
       to: '/',
       icon: Home,
+    },
+    {
+      id: 'buildings',
+      label: 'Buildings',
+      to: '/buildings',
+      icon: Building,
     },
     {
       id: 'properties',
@@ -33,6 +40,13 @@ const Menu = ({ expanded }) => {
     },
   ];
 
+  const handleItemClick = () => {
+    // Close mobile menu when item is clicked
+    if (onItemClick) {
+      onItemClick();
+    }
+  };
+
   return (
     <ul className="menu">
       {menuItems.map((item) => (
@@ -43,6 +57,7 @@ const Menu = ({ expanded }) => {
               clsx('menu__link', { 'menu__link--active': isActive })
             }
             title={!expanded ? item.label : undefined}
+            onClick={handleItemClick}
           >
             <Icon size="m" className="menu__icon">
               <item.icon />
@@ -59,6 +74,11 @@ const Menu = ({ expanded }) => {
 
 Menu.propTypes = {
   expanded: PropTypes.bool.isRequired,
+  onItemClick: PropTypes.func,
+};
+
+Menu.defaultProps = {
+  onItemClick: () => {},
 };
 
 export default Menu;

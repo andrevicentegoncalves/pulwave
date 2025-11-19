@@ -2,9 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Button } from '../components/ui';
+import { Card, Button, CardGrid, FloatingActionButton } from '../components/ui';
 import Icon from '../components/ui/Icon';
-import { Home as HomeIcon, Building, MapPin, Calendar, DollarSign, AlertCircle } from '../components/ui/iconLibrary';
+import { 
+  Home as HomeIcon, 
+  Building, 
+  MapPin, 
+  Calendar, 
+  DollarSign, 
+  AlertCircle 
+} from '../components/ui/iconLibrary';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -88,13 +95,38 @@ const Home = () => {
     return 'Good evening';
   };
 
+  const getDisplayName = () => {
+    if (!profile) return user?.email?.split('@')[0] || 'there';
+    
+    const firstName = profile.first_name || '';
+    const lastName = profile.last_name || '';
+    
+    if (firstName) return firstName;
+    if (lastName) return lastName;
+    return user?.email?.split('@')[0] || 'there';
+  };
+
+  // Floating Action Button actions
+  const fabActions = [
+    {
+      icon: <Building />,
+      label: 'Add Building',
+      onClick: () => navigate('/buildings/new')
+    },
+    {
+      icon: <HomeIcon />,
+      label: 'Add Property',
+      onClick: () => navigate('/properties/new')
+    }
+  ];
+
   return (
     <div className="home-page">
       {/* Welcome Header */}
       <div className="home-page__welcome">
         <div className="home-page__welcome-text">
           <h1 className="home-page__greeting">
-            {getGreeting()}, {profile?.full_name || user?.email?.split('@')[0]}! 👋
+            {getGreeting()}, {getDisplayName()}! 👋
           </h1>
           <p className="home-page__date">
             {new Date().toLocaleDateString('en-US', { 
@@ -122,7 +154,7 @@ const Home = () => {
       {/* Statistics Overview */}
       <div className="home-page__section">
         <h2 className="home-page__section-title">Overview</h2>
-        <div className="home-page__stats-grid">
+        <CardGrid minCardWidth="250px" gap="var(--space-4)">
           <Card variant="elevated" className="stat-card stat-card--primary">
             <div className="stat-card__header">
               <div className="stat-card__icon-wrapper stat-card__icon-wrapper--primary">
@@ -147,7 +179,7 @@ const Home = () => {
             </div>
             <div className="stat-card__body">
               <div className="stat-card__value">{loading ? '—' : stats.totalProperties}</div>
-              <div className="stat-card__label">Total Properties</div>
+              <div className="stat-card__label">Properties</div>
             </div>
           </Card>
 
@@ -175,50 +207,28 @@ const Home = () => {
             </div>
             <div className="stat-card__body">
               <div className="stat-card__value">
-                ${loading ? '—' : stats.monthlyRevenue.toLocaleString()}
+                {loading ? '—' : `$${stats.monthlyRevenue.toLocaleString()}`}
               </div>
               <div className="stat-card__label">Monthly Revenue</div>
             </div>
           </Card>
-        </div>
-      </div>
-
-      {/* Occupancy Section */}
-      <div className="home-page__section">
-        <h2 className="home-page__section-title">Occupancy Status</h2>
-        <div className="home-page__occupancy-grid">
-          <Card variant="elevated" className="occupancy-card occupancy-card--rented">
-            <div className="occupancy-card__value">{loading ? '—' : stats.rentedUnits}</div>
-            <div className="occupancy-card__label">Rented Units</div>
-            <div className="occupancy-card__percentage">
-              {loading || stats.totalProperties === 0 
-                ? '—' 
-                : Math.round((stats.rentedUnits / stats.totalProperties) * 100)}%
-            </div>
-          </Card>
-
-          <Card variant="elevated" className="occupancy-card occupancy-card--available">
-            <div className="occupancy-card__value">{loading ? '—' : stats.availableUnits}</div>
-            <div className="occupancy-card__label">Available Units</div>
-            <div className="occupancy-card__percentage">
-              {loading || stats.totalProperties === 0 
-                ? '—' 
-                : Math.round((stats.availableUnits / stats.totalProperties) * 100)}%
-            </div>
-          </Card>
-        </div>
+        </CardGrid>
       </div>
 
       {/* Quick Actions */}
       <div className="home-page__section">
         <h2 className="home-page__section-title">Quick Actions</h2>
-        <div className="home-page__actions-grid">
+        <CardGrid 
+          minCardWidth="280px" 
+          gap="var(--space-4)" 
+          className="card-grid--comfortable"
+        >
           <Card 
-            variant="elevated" 
+            variant="elevated"
             className="action-card"
             onClick={() => navigate('/buildings/new')}
           >
-            <div className="action-card__icon action-card__icon--primary">
+            <div className="action-card__icon-wrapper action-card__icon-wrapper--primary">
               <Icon size="xl">
                 <Building />
               </Icon>
@@ -230,11 +240,11 @@ const Home = () => {
           </Card>
 
           <Card 
-            variant="elevated" 
+            variant="elevated"
             className="action-card"
             onClick={() => navigate('/properties')}
           >
-            <div className="action-card__icon action-card__icon--success">
+            <div className="action-card__icon-wrapper action-card__icon-wrapper--success">
               <Icon size="xl">
                 <HomeIcon />
               </Icon>
@@ -246,11 +256,11 @@ const Home = () => {
           </Card>
 
           <Card 
-            variant="elevated" 
+            variant="elevated"
             className="action-card"
-            onClick={() => navigate('/properties')}
+            onClick={() => navigate('/schedule')}
           >
-            <div className="action-card__icon action-card__icon--info">
+            <div className="action-card__icon-wrapper action-card__icon-wrapper--info">
               <Icon size="xl">
                 <Calendar />
               </Icon>
@@ -262,11 +272,11 @@ const Home = () => {
           </Card>
 
           <Card 
-            variant="elevated" 
+            variant="elevated"
             className="action-card"
-            onClick={() => navigate('/properties')}
+            onClick={() => navigate('/maintenance')}
           >
-            <div className="action-card__icon action-card__icon--warning">
+            <div className="action-card__icon-wrapper action-card__icon-wrapper--warning">
               <Icon size="xl">
                 <AlertCircle />
               </Icon>
@@ -276,20 +286,20 @@ const Home = () => {
               Track and manage maintenance requests
             </p>
           </Card>
-        </div>
+        </CardGrid>
       </div>
 
-      {/* Empty State */}
+      {/* Empty State for New Users */}
       {!loading && stats.totalBuildings === 0 && (
-        <Card variant="elevated" className="home-page__empty-state">
-          <div className="empty-state">
-            <div className="empty-state__icon">
+        <div className="home-page__empty-state">
+          <Card variant="elevated" className="empty-state-card">
+            <div className="empty-state-card__icon">
               <Icon size="2xl">
                 <Building />
               </Icon>
             </div>
-            <h3 className="empty-state__title">Get Started with Your First Building</h3>
-            <p className="empty-state__description">
+            <h3 className="empty-state-card__title">Get Started with Your First Building</h3>
+            <p className="empty-state-card__description">
               Add your first building to start managing your real estate portfolio
             </p>
             <Button 
@@ -297,14 +307,20 @@ const Home = () => {
               size="l"
               onClick={() => navigate('/buildings/new')}
             >
-              <Icon size="m">
+              <Icon size="s">
                 <Building />
               </Icon>
               <span>Add Your First Building</span>
             </Button>
-          </div>
-        </Card>
+          </Card>
+        </div>
       )}
+
+      {/* Floating Action Button (Mobile Only) */}
+      <FloatingActionButton 
+        position="bottom-right"
+        actions={fabActions}
+      />
     </div>
   );
 };

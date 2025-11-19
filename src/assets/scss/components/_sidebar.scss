@@ -1,0 +1,243 @@
+@use '../abstracts' as *;
+
+/* ========================================================================== */
+/*                          COMPONENT: SIDEBAR                                */
+/* ========================================================================== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background: var(--color-surface-default);
+  border-right: 1px solid var(--color-border-default);
+  transition: all var(--duration-normal) var(--easing-standard);
+  z-index: var(--z-index-sidebar, 1000);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  // ✅ NEW: Add shadow for better separation
+  box-shadow: var(--shadow-m);
+  
+  // Collapsed width (icon-only)
+  width: var(--space-18); // 72px
+  
+  // Expanded width (icon + text)
+  &--expanded {
+    width: var(--space-64); // 256px
+  }
+  
+  // Mobile: Hide by default, show when menu is open
+  @include bp-down(l) {
+    transform: translateX(-100%);
+    
+    &--mobile-open {
+      transform: translateX(0);
+    }
+    
+    // Full-width on very small screens
+    @media (max-width: 480px) {
+      width: 100%;
+      
+      &--expanded {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              SIDEBAR HEADER                                */
+/* -------------------------------------------------------------------------- */
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-default);
+  min-height: var(--space-18);
+  flex-shrink: 0;
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--easing-standard);
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.sidebar__logo-icon {
+  color: var(--color-primary-6);
+  flex-shrink: 0;
+}
+
+.sidebar__logo-text {
+  font-size: var(--font-size-5xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-on-surface-default);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all var(--duration-normal) var(--easing-standard);
+  
+  .sidebar--expanded & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              SIDEBAR CONTENT                               */
+/* -------------------------------------------------------------------------- */
+
+.sidebar__content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4) 0;
+  
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border-default);
+    border-radius: var(--border-radius-s);
+    
+    &:hover {
+      background: var(--color-border-hover);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              SIDEBAR FOOTER                                */
+/* -------------------------------------------------------------------------- */
+
+.sidebar__footer {
+  flex-shrink: 0;
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+}
+
+// ✅ NEW: Bottom decoration container
+.sidebar__decoration {
+  width: 100%;
+  height: auto;
+  margin-top: var(--space-2);
+  display: flex;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity var(--duration-normal) var(--easing-standard);
+  
+  svg {
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+  }
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            TOGGLE BUTTON                                   */
+/* -------------------------------------------------------------------------- */
+
+.sidebar__toggle {
+  position: absolute;
+  right: calc(-1 * var(--space-6));
+  top: var(--space-20);
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--border-radius-round);
+  background: var(--color-surface-default);
+  border: 1px solid var(--color-border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
+  z-index: 1;
+  box-shadow: var(--shadow-s);
+  
+  // Hide on mobile
+  @include bp-down(l) {
+    display: none;
+  }
+  
+  &:hover {
+    background: var(--color-surface-hover);
+    box-shadow: var(--shadow-m);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-6);
+    outline-offset: 2px;
+  }
+  
+  svg {
+    color: var(--color-on-surface-default);
+    transition: transform var(--duration-fast) var(--easing-standard);
+  }
+  
+  .sidebar--expanded & svg {
+    transform: rotate(180deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          MOBILE OVERLAY                                    */
+/* -------------------------------------------------------------------------- */
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: calc(var(--z-index-sidebar, 1000) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--easing-standard);
+  
+  // Only show on mobile when sidebar is open
+  @include bp-down(l) {
+    &--active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+  
+  // Hide on desktop
+  @include bp-up(l) {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RESPONSIVE ADJUSTMENTS                            */
+/* -------------------------------------------------------------------------- */
+
+// Adjust sidebar width on smaller desktops
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .sidebar--expanded {
+    width: var(--space-56); // 224px (slightly narrower)
+  }
+}
