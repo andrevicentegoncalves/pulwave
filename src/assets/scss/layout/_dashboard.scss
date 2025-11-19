@@ -1,70 +1,90 @@
 @use '../abstracts' as *;
 
 /* ========================================================================== */
-/*                         LAYOUT: DASHBOARD                                  */
+/*                          LAYOUT: DASHBOARD                                 */
 /* ========================================================================== */
 
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background: var(--color-surface-default);
+  background: var(--color-background-default);
 }
 
 /* -------------------------------------------------------------------------- */
-/*                              MAIN CONTENT                                  */
+/*                              MAIN CONTENT AREA                             */
 /* -------------------------------------------------------------------------- */
 
 .dashboard-layout__main {
+  // Layout
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 0; // Prevent overflow
   
-  // On mobile, use full width
-  margin-left: 0;
+  // Positioning - account for sidebar
+  margin-left: var(--sidebar-collapsed-width); // 72px
   
-  // On desktop, account for sidebar
-  @include bp-up(l) {
-    margin-left: var(--space-18); // Collapsed sidebar width (72px)
-    transition: margin-left var(--duration-normal) var(--easing-standard);
-    
-    &--shifted {
-      margin-left: var(--space-64); // Expanded sidebar width (256px)
-    }
+  // Transition for sidebar expansion
+  transition: margin-left var(--duration-normal) var(--easing-emphasized);
+  
+  // When sidebar is expanded
+  &--shifted {
+    margin-left: var(--sidebar-expanded-width); // 256px
+  }
+  
+  // Mobile: no margin (sidebar overlays)
+  @include bp-down(l) {
+    margin-left: 0;
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/*                            MOBILE HEADER                                   */
+/*                              MOBILE HEADER                                 */
 /* -------------------------------------------------------------------------- */
 
 .dashboard-layout__mobile-header {
+  // Layout
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-4);
-  background: var(--color-surface-default);
-  border-bottom: 1px solid var(--color-border-default);
-  position: sticky;
-  top: 0;
-  z-index: var(--z-index-sticky, 100);
   
-  // Hide on desktop (Header component will be used)
+  // Spacing
+  padding: var(--space-4);
+  min-height: var(--space-18); // 72px
+  
+  // Styling
+  background: var(--color-surface-default);
+  border-bottom: 1px solid var(--color-border-subtle);
+  
+  // Only show on mobile/tablet
   @include bp-up(l) {
     display: none;
   }
 }
 
 .dashboard-layout__logo {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  justify-content: center;
 }
 
 .dashboard-layout__logo-text {
-  font-size: var(--font-size-5xs);
+  font-size: var(--font-size-body-l);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-7);
+  color: var(--color-primary-6);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              DESKTOP HEADER                                */
+/* -------------------------------------------------------------------------- */
+
+.dashboard-layout__header {
+  // Hide on mobile (we have mobile header)
+  display: none;
+  
+  @include bp-up(l) {
+    display: flex;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -72,22 +92,37 @@
 /* -------------------------------------------------------------------------- */
 
 .dashboard-layout__content {
+  // Layout
   flex: 1;
-  overflow-x: hidden;
+  
+  // Spacing
+  padding: var(--space-8) var(--space-6);
+  
+  // Allow scrolling if content overflows
   overflow-y: auto;
+  
+  // Responsive padding
+  @media (max-width: 1024px) {
+    padding: var(--space-6) var(--space-5);
+  }
+  
+  @media (max-width: 640px) {
+    padding: var(--space-5) var(--space-4);
+  }
 }
 
 /* -------------------------------------------------------------------------- */
-/*                          RESPONSIVE ADJUSTMENTS                            */
+/*                              RESPONSIVE                                    */
 /* -------------------------------------------------------------------------- */
 
-// Optimize for very small screens
+// Very small screens
 @media (max-width: 360px) {
   .dashboard-layout__mobile-header {
     padding: var(--space-3);
+    min-height: var(--space-16); // 64px
   }
   
-  .dashboard-layout__logo-text {
-    font-size: var(--font-size-6xs);
+  .dashboard-layout__content {
+    padding: var(--space-4) var(--space-3);
   }
 }

@@ -5,160 +5,146 @@
 /* ========================================================================== */
 
 .card-grid {
+  // Use CSS Grid with auto-fit for responsive behavior
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-6);
   width: 100%;
   
-  // Default gap using design tokens
-  gap: var(--card-grid-gap, var(--space-4));
-  
-  // Mobile-first: Single column on mobile
-  grid-template-columns: 1fr;
-  
-  // Small screens: 2 columns when space allows
-  @include bp-up(s) {
-    grid-template-columns: repeat(
-      auto-fit, 
-      minmax(
-        min(var(--card-grid-min-width, 280px), 100%), 
-        1fr
-      )
-    );
-  }
-  
-  // Ensure cards stretch to fill their grid cell
-  > * {
+  // Ensure all cards fill available space
+  & > * {
     min-width: 0; // Prevent grid blowout
-    width: 100%; // Ensure full width in grid cell
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/*                         CARD GRID FULL WIDTH                               */
-/* -------------------------------------------------------------------------- */
-// Ensures grid takes full width of container
-.card-grid--full-width {
-  width: 100%;
-}
-
-/* -------------------------------------------------------------------------- */
-/*                         CARD GRID VARIANTS                                 */
-/* -------------------------------------------------------------------------- */
-
-// Dense grid with smaller gaps
-.card-grid--dense {
-  --card-grid-gap: var(--space-2);
-}
-
-// Comfortable grid with larger gaps
-.card-grid--comfortable {
-  --card-grid-gap: var(--space-4);
-  
-  @include bp-up(m) {
-    --card-grid-gap: var(--space-6);
   }
   
-  @include bp-up(l) {
-    --card-grid-gap: var(--space-8);
-  }
-}
-
-// Extra spacious for landing pages
-.card-grid--spacious {
-  --card-grid-gap: var(--space-6);
+  /* Responsive Breakpoints */
   
-  @include bp-up(l) {
-    --card-grid-gap: var(--space-10);
+  // Mobile: 1 column
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  // Tablet: 2 columns
+  @media (min-width: 641px) and (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+  
+  // Desktop: 3-4 columns based on container width
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  // Large desktop: Ensure max 4 columns
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/*                      CARD GRID COLUMN CONSTRAINTS                          */
+/*                              VARIANTS                                      */
 /* -------------------------------------------------------------------------- */
 
-// Two columns maximum
-.card-grid--two-col-max {
-  @include bp-up(m) {
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--card-grid-min-width, 280px), 100%), 1fr));
+// 2-column layout variant
+.card-grid--2-col {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 3-column layout variant
+.card-grid--3-col {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 4-column layout variant
+.card-grid--4-col {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
   }
   
-  @include bp-up(l) {
+  @media (min-width: 641px) and (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-// Three columns maximum
-.card-grid--three-col-max {
-  @include bp-up(l) {
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--card-grid-min-width, 280px), 100%), 1fr));
-  }
+// Compact gap variant
+.card-grid--compact {
+  gap: var(--space-4);
   
-  @include bp-up(xl) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 640px) {
+    gap: var(--space-3);
   }
 }
 
-// Four columns maximum
-.card-grid--four-col-max {
-  @include bp-up(m) {
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--card-grid-min-width, 250px), 100%), 1fr));
-  }
+// Loose gap variant
+.card-grid--loose {
+  gap: var(--space-8);
   
-  @include bp-up(xl) {
-    grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 640px) {
+    gap: var(--space-5);
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/*                       CARD GRID RESPONSIVE HELPERS                         */
+/*                              CARD GRID ITEMS                               */
 /* -------------------------------------------------------------------------- */
 
-// Auto-fill pattern (maintains column structure)
-.card-grid--auto-fill {
-  @include bp-up(s) {
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(min(var(--card-grid-min-width, 280px), 100%), 1fr)
-    );
+.card-grid__item {
+  // Ensure cards stretch to fill grid cell height
+  display: flex;
+  
+  // Ensure nested cards take full width
+  & > * {
+    flex: 1;
+    min-width: 0;
   }
 }
 
-// Stack on mobile, grid on tablet+
-.card-grid--stack-mobile {
+/* -------------------------------------------------------------------------- */
+/*                          EMPTY STATE                                       */
+/* -------------------------------------------------------------------------- */
+
+.card-grid--empty {
   grid-template-columns: 1fr;
+  min-height: 300px;
+  place-items: center;
+}
+
+.card-grid__empty-state {
+  text-align: center;
+  padding: var(--space-10);
+  color: var(--color-on-surface-subtle);
   
-  @include bp-up(m) {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(var(--card-grid-min-width, 280px), 100%), 1fr)
-    );
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/*                         CARD GRID ALIGNMENTS                               */
-/* -------------------------------------------------------------------------- */
-
-.card-grid--align-start {
-  align-items: start;
-}
-
-.card-grid--align-center {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: var(--space-4);
+  
+  max-width: 400px;
 }
 
-.card-grid--align-stretch {
-  align-items: stretch;
+.card-grid__empty-icon {
+  color: var(--color-on-surface-disabled);
+  opacity: 0.5;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                       INTEGRATION WITH GRID SYSTEM                         */
-/* -------------------------------------------------------------------------- */
+.card-grid__empty-title {
+  font-size: var(--font-size-body-l);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-surface-default);
+}
 
-// Use existing grid utilities where applicable
-.card-grid {
-  // Can work within the existing container system
-  &.container {
-    margin-inline: auto;
-    padding-inline: var(--grid-margin);
-  }
+.card-grid__empty-description {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-normal);
 }

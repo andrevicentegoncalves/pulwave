@@ -9,10 +9,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: var(--space-1-5); // 6px between lines
   width: var(--space-10); // 40px
   height: var(--space-10);
   padding: var(--space-2);
+  
+  // Styling
   background: transparent;
   border: none;
   cursor: pointer;
@@ -58,7 +61,7 @@
 .burger-menu--active {
   // Top line rotates and moves down
   .burger-menu__line--top {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
   
   // Middle line fades out
@@ -69,7 +72,7 @@
   
   // Bottom line rotates and moves up
   .burger-menu__line--bottom {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
   
   // Change color when active
@@ -87,5 +90,16 @@
   .burger-menu {
     width: var(--space-8); // 32px
     height: var(--space-8);
+    gap: var(--space-1); // 4px between lines
+  }
+  
+  .burger-menu--active {
+    .burger-menu__line--top {
+      transform: translateY(6px) rotate(45deg);
+    }
+    
+    .burger-menu__line--bottom {
+      transform: translateY(-6px) rotate(-45deg);
+    }
   }
 }

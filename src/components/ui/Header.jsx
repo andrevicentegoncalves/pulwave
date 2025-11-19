@@ -1,24 +1,23 @@
-// src/components/layouts/Header.jsx
+// src/components/ui/Header.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabaseClient';
-import Icon from '../ui/Icon';
-import { User, LogOut, Menu as MenuIcon } from '../ui/iconLibrary';
+import Icon from './Icon';
+import { User, LogOut } from './iconLibrary';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 
 /**
  * Header Component
- * Displays user profile with photo, name, and logout button
- * Includes burger menu for mobile sidebar toggle
+ * Displays user profile with photo, name, and quick actions
  * 
- * @param {function} onMenuClick - Callback for mobile menu toggle
+ * @param {string} className - Additional CSS classes
  */
-const Header = ({ onMenuClick }) => {
+const Header = ({ className }) => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     fetchProfile();
@@ -93,78 +92,94 @@ const Header = ({ onMenuClick }) => {
 
   if (loading) {
     return (
-      <div className="header">
-        <div className="header__content">
-          <div className="header__skeleton"></div>
-        </div>
+      <div className={`header ${className || ''}`}>
+        <div className="header__loading">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="header">
-      <div className="header__content">
-        {/* Mobile Menu Button */}
+    <div className={`header ${className || ''}`}>
+      <div className="header__user">
+        {/* User Avatar */}
+        <div className="header__avatar">
+          {profileImageUrl ? (
+            <img 
+              src={profileImageUrl} 
+              alt={getDisplayName()}
+              className="header__avatar-image"
+            />
+          ) : (
+            <div className="header__avatar-placeholder">
+              <Icon size="m">
+                <User />
+              </Icon>
+            </div>
+          )}
+        </div>
+
+        {/* User Info */}
+        <div className="header__info">
+          <div className="header__name">{getDisplayName()}</div>
+          <div className="header__email">{profile?.email}</div>
+        </div>
+
+        {/* Actions Dropdown Toggle */}
         <button
-          className="header__menu-btn"
-          onClick={onMenuClick}
-          aria-label="Toggle menu"
+          className="header__dropdown-toggle"
+          onClick={() => setShowDropdown(!showDropdown)}
+          aria-label="User menu"
+          aria-expanded={showDropdown}
         >
-          <Icon size="m">
-            <MenuIcon />
+          <Icon size="s">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </Icon>
         </button>
 
-        {/* Profile Section */}
-        <div className="header__profile">
-          {/* Profile Image */}
-          <div 
-            className="header__avatar"
-            onClick={() => navigate('/profile')}
-            role="button"
-            tabIndex={0}
-            aria-label="Go to profile"
-          >
-            {profileImageUrl ? (
-              <img 
-                src={profileImageUrl} 
-                alt={getDisplayName()}
-                className="header__avatar-img"
-              />
-            ) : (
-              <div className="header__avatar-placeholder">
-                <Icon size="m">
+        {/* Dropdown Menu */}
+        {showDropdown && (
+          <>
+            <div 
+              className="header__dropdown-overlay"
+              onClick={() => setShowDropdown(false)}
+            />
+            <div className="header__dropdown">
+              <button
+                className="header__dropdown-item"
+                onClick={() => {
+                  navigate('/profile');
+                  setShowDropdown(false);
+                }}
+              >
+                <Icon size="s">
                   <User />
                 </Icon>
-              </div>
-            )}
-          </div>
-
-          {/* User Name */}
-          <div className="header__user-info">
-            <span className="header__user-name">{getDisplayName()}</span>
-          </div>
-
-          {/* Logout Button */}
-          <button
-            className="header__logout-btn"
-            onClick={handleLogout}
-            aria-label="Log out"
-            title="Log out"
-          >
-            <Icon size="s">
-              <LogOut />
-            </Icon>
-            <span className="header__logout-text">Logout</span>
-          </button>
-        </div>
+                <span>Profile Settings</span>
+              </button>
+              
+              <div className="header__dropdown-divider" />
+              
+              <button
+                className="header__dropdown-item header__dropdown-item--danger"
+                onClick={handleLogout}
+              >
+                <Icon size="s">
+                  <LogOut />
+                </Icon>
+                <span>Log Out</span>
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
 Header.propTypes = {
-  onMenuClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Header;

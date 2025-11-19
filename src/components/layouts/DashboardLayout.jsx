@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import Header from '../ui/Header';
 import BurgerMenu from '../ui/BurgerMenu';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -9,10 +10,10 @@ import PropTypes from 'prop-types';
 /**
  * DashboardLayout
  * Main layout wrapper for authenticated pages
- * Provides sidebar navigation with mobile support
+ * Provides sidebar navigation, header with user info, and mobile support
  * 
  * Features:
- * - Desktop: Toggle sidebar expand/collapse
+ * - Desktop: Toggle sidebar expand/collapse, header with user profile
  * - Mobile: BurgerMenu to show/hide sidebar with overlay
  */
 const DashboardLayout = ({ children }) => {
@@ -65,6 +66,9 @@ const DashboardLayout = ({ children }) => {
             <span className="dashboard-layout__logo-text">Pulwave</span>
           </div>
         </div>
+
+        {/* Desktop Header with User Info */}
+        <Header className="dashboard-layout__header" />
         
         {/* Page Content */}
         <div className="dashboard-layout__content">
