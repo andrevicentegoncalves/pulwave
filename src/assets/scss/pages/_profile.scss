@@ -1,0 +1,126 @@
+@use '../abstracts' as *;
+
+/* ==========================================================================*/
+/*                              PAGES: PROFILE                               */
+/* ==========================================================================*/
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 800px;
+
+  &__header {
+    margin-bottom: var(--space-4);
+  }
+
+  &__title {
+    font-size: var(--font-size-heading-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-on-surface-default);
+    margin: 0 0 var(--space-2) 0;
+    line-height: var(--line-height-heading);
+  }
+
+  &__subtitle {
+    font-size: var(--font-size-body-m);
+    color: var(--color-on-surface-subtle);
+    margin: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  &__avatar-card,
+  &__info-card {
+    padding: var(--space-8);
+
+    @media (max-width: 640px) {
+      padding: var(--space-6);
+    }
+  }
+
+  &__section-title {
+    font-size: var(--font-size-heading-s);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+    margin: 0 0 var(--space-6) 0;
+  }
+}
+
+.profile-avatar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+
+  &__preview {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: var(--border-width-2) solid var(--color-border-default);
+    background-color: var(--color-surface-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-surface-subtle);
+  }
+
+  &__actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  &__upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-body-m);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: var(--border-width-1) solid var(--color-primary);
+    border-radius: var(--radius-s);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+      background-color: var(--color-primary-subtle-hover);
+    }
+
+    &:active {
+      background-color: var(--color-primary-subtle-pressed);
+    }
+
+    &:focus-visible {
+      outline: var(--focus-width) solid var(--color-focus-ring);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}

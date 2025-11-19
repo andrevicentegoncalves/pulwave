@@ -7,7 +7,15 @@ import {
   XCircle, 
   InfoCircle,
   XClose,
-  Spinner 
+  Spinner,
+  Home,
+  User,
+  Settings,
+  Bell,
+  ChevronRight,
+  ChevronLeft,
+  Menu,
+  Search
 } from '../../../../components/ui/iconLibrary';
 
 export default function Icons() {
@@ -19,6 +27,14 @@ export default function Icons() {
     { name: 'InfoCircle', component: InfoCircle, description: 'Information' },
     { name: 'XClose', component: XClose, description: 'Close/dismiss' },
     { name: 'Spinner', component: Spinner, description: 'Loading state' },
+    { name: 'Home', component: Home, description: 'Home navigation' },
+    { name: 'User', component: User, description: 'User profile' },
+    { name: 'Settings', component: Settings, description: 'Settings/config' },
+    { name: 'Bell', component: Bell, description: 'Notifications' },
+    { name: 'ChevronRight', component: ChevronRight, description: 'Next/expand' },
+    { name: 'ChevronLeft', component: ChevronLeft, description: 'Back/collapse' },
+    { name: 'Menu', component: Menu, description: 'Menu/hamburger' },
+    { name: 'Search', component: Search, description: 'Search' },
   ];
 
   const sizes = [

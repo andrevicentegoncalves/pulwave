@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 /* ==========================================================================*/
-/*                                PAGES: LOGIN                               */
+/*                                PAGES: AUTH                                */
 /* ==========================================================================*/
 
 .auth-page {
@@ -9,29 +9,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-primary);
-  
-  background-image: 
-    linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
 }
 
 .auth-container {
   width: 100%;
   max-width: 480px;
-  background-color: var(--color-surface-default);
-  border-radius: var(--radius-l);
-  box-shadow: var(--shadow-l);
-  padding: var(--space-10);
   
   @media (max-width: 640px) {
-    padding: var(--space-8);
-    border-radius: var(--radius-m);
+    max-width: 100%;
+    padding: 0 var(--space-4);
   }
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: var(--space-8); 
+  margin-bottom: var(--space-8);
   
   h2 {
     font-size: var(--font-size-heading-l);
@@ -39,303 +32,5 @@
     color: var(--color-on-surface-default);
     margin: 0;
     line-height: var(--line-height-heading);
-  }
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6); 
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2); 
-  
-  label {
-    font-size: var(--font-size-body-s);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-on-surface-strong);
-    
-    &.sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-  }
-  
-  input {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    font-size: var(--font-size-body-m);
-    line-height: var(--line-height-body);
-    color: var(--color-on-surface-default);
-    background-color: var(--color-surface-default);
-    border: var(--border-width-1) solid var(--border-default);
-    border-radius: var(--radius-s);
-    transition: all var(--duration-base) var(--easing-standard);
-    
-    &::placeholder {
-      color: var(--color-on-surface-subtle);
-    }
-    
-    &:hover:not(:disabled) {
-      border-color: var(--border-hover);
-    }
-    
-    &:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px var(--color-primary-subtle);
-    }
-    
-    &:disabled {
-      background-color: var(--color-surface-disabled);
-      color: var(--color-on-surface-disabled);
-      cursor: not-allowed;
-    }
-    
-    &:first-of-type:not(:only-of-type) {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    
-    &:last-of-type:not(:only-of-type) {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      margin-top: -1px;
-    }
-    
-    &:not(:first-of-type):not(:last-of-type) {
-      border-radius: 0;
-      margin-top: -1px;
-    }
-  }
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  
-  input {
-    position: relative;
-    z-index: 1;
-    
-    &:focus {
-      z-index: 2;
-    }
-  }
-}
-
-.auth-alert {
-  padding: var(--space-4); // 16px
-  border-radius: var(--radius-s);
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3); // 12px
-  font-size: var(--font-size-body-s);
-  line-height: var(--line-height-body);
-  
-  svg {
-    flex-shrink: 0;
-    width: var(--icon-size-s);
-    height: var(--icon-size-s);
-  }
-  
-  &--error {
-    background-color: var(--color-feedback-error-subtle);
-    color: var(--color-feedback-error);
-    
-    svg {
-      color: var(--color-feedback-error);
-    }
-  }
-  
-  &--success {
-    background-color: var(--color-feedback-success-subtle);
-    color: var(--color-feedback-success);
-    
-    svg {
-      color: var(--color-feedback-success);
-    }
-  }
-}
-
-.auth-submit {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2); // 8px
-  padding: var(--space-3) var(--space-6); // 12px 24px
-  font-size: var(--font-size-body-m);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-on-primary);
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: var(--radius-s);
-  cursor: pointer;
-  transition: all var(--duration-base) var(--easing-standard);
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-s);
-  }
-  
-  &:active:not(:disabled) {
-    background-color: var(--color-primary-pressed);
-    transform: translateY(0);
-    box-shadow: none;
-  }
-  
-  &:focus-visible {
-    outline: var(--focus-width) solid var(--color-focus-ring);
-    outline-offset: var(--focus-offset);
-  }
-  
-  &:disabled {
-    background-color: var(--color-primary-disabled);
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  
-  .spinner {
-    width: var(--icon-size-s);
-    height: var(--icon-size-s);
-    animation: spin var(--duration-comfortable) linear infinite;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.auth-divider {
-  position: relative;
-  margin: var(--space-6) 0; // 24px top/bottom
-  text-align: center;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: var(--border-default);
-  }
-  
-  span {
-    position: relative;
-    display: inline-block;
-    padding: 0 var(--space-2); // 8px
-    background-color: var(--color-surface-default);
-    color: var(--color-on-surface-subtle);
-    font-size: var(--font-size-body-s);
-  }
-}
-
-.auth-oauth-button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2); // 8px
-  padding: var(--space-3) var(--space-6); // 12px 24px
-  font-size: var(--font-size-body-m);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-on-surface-default);
-  background-color: var(--color-surface-default);
-  border: var(--border-width-1) solid var(--border-default);
-  border-radius: var(--radius-s);
-  cursor: pointer;
-  transition: all var(--duration-base) var(--easing-standard);
-  
-  svg {
-    width: var(--icon-size-m);
-    height: var(--icon-size-m);
-  }
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-surface-hover);
-    border-color: var(--border-hover);
-  }
-  
-  &:active:not(:disabled) {
-    background-color: var(--color-surface-pressed);
-  }
-  
-  &:focus-visible {
-    outline: var(--focus-width) solid var(--color-focus-ring);
-    outline-offset: var(--focus-offset);
-  }
-  
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-.auth-toggle {
-  text-align: center;
-  margin-top: var(--space-6); // 24px
-  
-  button {
-    background: none;
-    border: none;
-    color: var(--color-primary);
-    font-size: var(--font-size-body-s);
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    text-decoration: none;
-    transition: color var(--duration-base) var(--easing-standard);
-    padding: var(--space-2); // 8px
-    
-    &:hover:not(:disabled) {
-      color: var(--color-primary-hover);
-      text-decoration: underline;
-    }
-    
-    &:focus-visible {
-      outline: var(--focus-width) solid var(--color-focus-ring);
-      outline-offset: var(--focus-offset);
-      border-radius: var(--radius-xs);
-    }
-    
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-}
-
-.auth-debug {
-  margin-top: var(--space-6); // 24px
-  padding: var(--space-4); // 16px
-  background-color: var(--color-neutral-100);
-  border-radius: var(--radius-s);
-  font-size: var(--font-size-body-xs);
-  font-family: monospace;
-  
-  p {
-    margin: var(--space-1) 0; // 4px
-    color: var(--color-on-surface-subtle);
-    
-    strong {
-      color: var(--color-on-surface-default);
-    }
   }
 }
