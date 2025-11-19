@@ -1,9 +1,10 @@
 // src/components/layouts/Sidebar.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Menu from './Menu';
 import Icon from '../ui/Icon';
-import { ChevronLeft, ChevronRight } from '../ui/iconLibrary';
+import { ChevronLeft, ChevronRight, Settings } from '../ui/iconLibrary';
 import clsx from 'clsx';
 
 /**
@@ -14,6 +15,15 @@ import clsx from 'clsx';
  * Mobile: Slides in from left, overlay behind
  */
 const Sidebar = ({ expanded, onToggle, mobileOpen, onMobileClose }) => {
+  const navigate = useNavigate();
+
+  const handleSettingsClick = () => {
+    navigate('/settings');
+    if (onMobileClose) {
+      onMobileClose();
+    }
+  };
+
   return (
     <aside className={clsx(
       'sidebar',
@@ -24,18 +34,18 @@ const Sidebar = ({ expanded, onToggle, mobileOpen, onMobileClose }) => {
       <div className="sidebar__header">
         <div className="sidebar__logo">
           <div className="sidebar__logo-icon">
-            {/* You can add your logo icon here */}
+            {/* Logo icon */}
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
               <rect width="32" height="32" rx="8" fill="currentColor" fillOpacity="0.1"/>
               <path d="M16 8L8 14V24H12V18H20V24H24V14L16 8Z" fill="currentColor"/>
             </svg>
           </div>
-          {expanded && (
+          {(expanded || mobileOpen) && (
             <span className="sidebar__logo-text">Pulwave</span>
           )}
         </div>
         
-        {/* Desktop Toggle Button */}
+        {/* Desktop Toggle Button - NO BORDER */}
         <button
           className="sidebar__toggle"
           onClick={onToggle}
@@ -53,9 +63,20 @@ const Sidebar = ({ expanded, onToggle, mobileOpen, onMobileClose }) => {
         <Menu expanded={expanded || mobileOpen} onItemClick={onMobileClose} />
       </nav>
 
-      {/* Sidebar Footer (for future use - settings, etc.) */}
+      {/* Sidebar Footer with Settings */}
       <div className="sidebar__footer">
-        {/* You can add footer items like Settings link here */}
+        <button
+          className="sidebar__footer-link"
+          onClick={handleSettingsClick}
+          title={!(expanded || mobileOpen) ? 'Settings' : undefined}
+        >
+          <Icon size="m" className="sidebar__footer-icon">
+            <Settings />
+          </Icon>
+          {(expanded || mobileOpen) && (
+            <span className="sidebar__footer-label">Settings</span>
+          )}
+        </button>
       </div>
     </aside>
   );

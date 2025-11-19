@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import Header from '../ui/Header';
+import Header from './Header';
 import BurgerMenu from '../ui/BurgerMenu';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';

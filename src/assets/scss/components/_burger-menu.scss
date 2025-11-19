@@ -9,11 +9,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--space-1-5); // 6px between lines
+  justify-content: space-between; // Changed from center to space-between
   width: var(--space-10); // 40px
   height: var(--space-10);
-  padding: var(--space-2);
+  padding: var(--space-2-5); // 10px padding to create 3 lines
   
   // Styling
   background: transparent;
@@ -49,30 +48,30 @@
   height: 2px;
   background: var(--color-on-surface-default);
   border-radius: var(--border-radius-2xs);
-  transition: all var(--duration-normal) var(--easing-standard);
+  transition: all var(--duration-normal) var(--easing-emphasized);
   transform-origin: center;
   position: relative;
 }
 
 /* -------------------------------------------------------------------------- */
-/*                              ACTIVE STATE                                  */
+/*                              ACTIVE STATE (X)                              */
 /* -------------------------------------------------------------------------- */
 
 .burger-menu--active {
-  // Top line rotates and moves down
+  // Top line rotates and moves to center
   .burger-menu__line--top {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
   }
   
   // Middle line fades out
   .burger-menu__line--middle {
     opacity: 0;
-    transform: scale(0);
+    transform: scaleX(0);
   }
   
-  // Bottom line rotates and moves up
+  // Bottom line rotates and moves to center
   .burger-menu__line--bottom {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg);
   }
   
   // Change color when active
@@ -88,18 +87,18 @@
 // Slightly smaller on very small screens
 @media (max-width: 360px) {
   .burger-menu {
-    width: var(--space-8); // 32px
-    height: var(--space-8);
-    gap: var(--space-1); // 4px between lines
+    width: var(--space-9); // 36px
+    height: var(--space-9);
+    padding: var(--space-2);
   }
   
   .burger-menu--active {
     .burger-menu__line--top {
-      transform: translateY(6px) rotate(45deg);
+      transform: translateY(8px) rotate(45deg);
     }
     
     .burger-menu__line--bottom {
-      transform: translateY(-6px) rotate(-45deg);
+      transform: translateY(-8px) rotate(-45deg);
     }
   }
 }

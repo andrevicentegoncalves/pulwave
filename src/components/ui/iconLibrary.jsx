@@ -218,3 +218,21 @@ export const Camera = () => (
     <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" fill="none"/>
   </>
 );
+
+// Calendar Icon
+export const Calendar = () => (
+  <>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" strokeWidth="2"/>
+  </>
+);
+
+// DollarSign Icon
+export const DollarSign = () => (
+  <>
+    <line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </>
+);

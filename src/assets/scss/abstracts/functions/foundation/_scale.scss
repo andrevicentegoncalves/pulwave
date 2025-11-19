@@ -11,7 +11,7 @@
 /// @return {Number} Scale value in rem
 /// @example scale(4) => 1rem (16px)
 /// @example scale(0.5) => 0.125rem (2px)
-@function scale($key) {
+@function get-scale($key) {
   @if map.has-key(core.$scale, $key) {
     @return map.get(core.$scale, $key);
   }

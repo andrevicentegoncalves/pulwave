@@ -11,7 +11,6 @@ export { default as Modal } from './Modal.jsx';
 export { Tabs, TabPanel } from './Tabs.jsx';
 export { ThemeToggle } from './ThemeToggle.jsx';
 export { default as TextArea } from './TextArea.jsx';
-export { default as Header } from './Header.jsx';
 export { default as FloatingActionButton } from './FloatingActionButton.jsx';
 export { default as CardGrid } from './CardGrid.jsx';
 
