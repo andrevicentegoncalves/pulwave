@@ -13,11 +13,21 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    // ✅ SMOOTH ANIMATION: Sidebar width change
     margin-left: var(--sidebar-width-collapsed);
-    transition: margin-left var(--duration-base) var(--easing-standard);
+    transition: margin-left 400ms cubic-bezier(0.4, 0, 0.2, 1); // Smooth easing
+
+    // ✅ When sidebar is expanded, shift content
+    &--shifted {
+      margin-left: var(--sidebar-width-expanded);
+    }
 
     @media (max-width: 768px) {
       margin-left: 0;
+      
+      &--shifted {
+        margin-left: 0;
+      }
     }
   }
 
@@ -28,6 +38,10 @@
     background-color: var(--color-surface-default);
     border-bottom: var(--border-width-1) solid var(--color-border-default);
     padding: var(--space-4) var(--space-6);
+
+    @media (max-width: 640px) {
+      padding: var(--space-3) var(--space-4);
+    }
   }
 
   &__content {
@@ -57,8 +71,12 @@
   border-right: var(--border-width-1) solid var(--color-border-default);
   display: flex;
   flex-direction: column;
-  transition: width var(--duration-base) var(--easing-standard);
+  // ✅ SMOOTH ANIMATION: Width change with nice easing
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 100;
+  overflow: hidden;
+  // ✅ Add will-change for better performance
+  will-change: width;
 
   &--expanded {
     width: var(--sidebar-width-expanded);
@@ -70,6 +88,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-shrink: 0;
+    // ✅ Smooth transition for header changes
+    transition: padding 400ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__toggle {
@@ -83,20 +104,28 @@
     background-color: transparent;
     color: var(--color-on-surface-subtle);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--easing-standard);
+    // ✅ Smooth transitions for button states
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
       background-color: var(--color-surface-hover);
       color: var(--color-on-surface-default);
+      transform: unquote('scale(1.05)');
     }
 
     &:active {
       background-color: var(--color-surface-pressed);
+      transform: unquote('scale(0.95)');
     }
 
     &:focus-visible {
       outline: var(--focus-width) solid var(--color-focus-ring);
       outline-offset: var(--focus-offset);
+    }
+
+    // ✅ Smooth icon rotation
+    .icon {
+      transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -105,13 +134,36 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: var(--space-2);
+    // ✅ Smooth scrollbar appearance
+    transition: padding 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Custom scrollbar for webkit browsers
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-border-default);
+      border-radius: 3px;
+      
+      &:hover {
+        background-color: var(--color-border-hover);
+      }
+    }
   }
 
   @media (max-width: 768px) {
     transform: translateX(-100%);
+    // ✅ Smooth slide animation on mobile
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
     &--expanded {
       transform: translateX(0);
+      box-shadow: var(--shadow-xl);
     }
   }
 }
@@ -142,18 +194,23 @@
     text-decoration: none;
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-medium);
-    transition: all var(--duration-fast) var(--easing-standard);
+    // ✅ Smooth transitions for all states
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
 
+    // ✅ Smooth hover effect
     &:hover {
       background-color: var(--color-surface-hover);
       color: var(--color-on-surface-default);
+      transform: translateX(2px);
     }
 
     &:active {
       background-color: var(--color-surface-pressed);
+      transform: translateX(1px);
     }
 
     &--active {
@@ -163,6 +220,21 @@
 
       &:hover {
         background-color: var(--color-primary-subtle-hover);
+        transform: translateX(0);
+      }
+
+      // ✅ Active indicator with smooth animation
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60%;
+        background-color: var(--color-primary);
+        border-radius: 0 2px 2px 0;
+        animation: slideIn 200ms cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
 
@@ -174,12 +246,42 @@
 
   &__icon {
     flex-shrink: 0;
+    // ✅ Smooth icon transitions
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    .menu__link:hover & {
+      transform: unquote('scale(1.1)');
+    }
+
+    .menu__link--active & {
+      transform: unquote('scale(1)');
+    }
   }
 
   &__label {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    // ✅ Fade in/out for collapsed state
+    opacity: 1;
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    .sidebar:not(.sidebar--expanded) & {
+      opacity: 0;
+      width: 0;
+    }
+  }
+}
+
+/* ✅ Smooth slide-in animation for active indicator */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50%) translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
   }
 }
 
@@ -192,6 +294,10 @@
   align-items: center;
   gap: var(--space-4);
   justify-content: flex-end;
+
+  @media (max-width: 640px) {
+    gap: var(--space-2);
+  }
 
   &__actions {
     display: flex;
@@ -234,7 +340,7 @@
       background-color: var(--color-feedback-error);
       border-radius: 50%;
       border: 2px solid var(--color-surface-default);
-      display: none; // Show when there are notifications
+      display: none;
     }
 
     &--has-notifications::after {
@@ -246,6 +352,10 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
+
+    @media (max-width: 640px) {
+      gap: var(--space-2);
+    }
   }
 
   &__avatar {

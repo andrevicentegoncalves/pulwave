@@ -1,12 +1,14 @@
+// src/pages/Auth.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { Card, Form, Button, Alert, Input, Divider, Spinner } from '../components/ui';
-import Icon from '../components/ui/Icon.jsx';
+import Icon from '../components/ui/Icon';
 
 /**
  * Auth Component
  * Handles user authentication (login/signup) using design system components
+ * ✅ Uses: Card, Form, Button, Alert, Input, Divider, Icon from design system
  */
 const Auth = () => {
   const navigate = useNavigate();
@@ -68,7 +70,6 @@ const Auth = () => {
             type="error" 
             dismissible 
             onDismiss={() => setError(null)}
-            iconSize="s"
           >
             {error}
           </Alert>
@@ -79,7 +80,6 @@ const Auth = () => {
             type="success" 
             dismissible 
             onDismiss={() => setSuccess(null)}
-            iconSize="s"
           >
             {success}
           </Alert>

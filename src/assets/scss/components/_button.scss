@@ -1,4 +1,6 @@
-/* ────────────────────── BUTTON BLOCK ────────────────────── */
+// src/assets/scss/components/_button.scss
+
+/* ────────────────────── BUTTON COMPONENT ────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -48,6 +50,11 @@
     min-width: var(--space-12);
     padding: 0 var(--space-8);
     font-size: var(--font-size-body-m);
+  }
+
+  /* ── FULL WIDTH ── */
+  &--full-width {
+    width: 100%;
   }
 
   /* ── VARIANTS ── */
@@ -152,4 +159,30 @@
       border-color: var(--color-neutral-300);
     }
   }
+
+  /* ── LOADING STATE ── */
+  &--loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

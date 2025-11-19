@@ -1,0 +1,48 @@
+// src/assets/scss/components/_spinner.scss
+
+/* ==========================================================================*/
+/*                           COMPONENT: SPINNER                              */
+/* ==========================================================================*/
+
+/**
+ * Spinner Component Styles
+ * Animated spinner for loading states
+ * Works with Icon component and Spinner icon from iconLibrary
+ */
+
+// Spinner animation keyframes
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Apply animation to any Icon containing Spinner
+.icon {
+  // When Icon contains a Spinner, add rotation animation
+  svg:has(path[d*="M12 2v4m0 12v4"]) {
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Alternative: Apply to parent with specific class
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+// Utility class for any spinning element
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+// Speed variants
+.spin-slow {
+  animation: spin 2s linear infinite;
+}
+
+.spin-fast {
+  animation: spin 0.5s linear infinite;
+}

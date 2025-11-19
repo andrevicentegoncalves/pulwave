@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Button, Input, TextArea, Alert, Form } from '../components/ui';
+import { Card, Button, Input, TextArea, Alert, Form, Building, MapPin, XClose, CheckCircle } from '../components/ui';
 import Icon from '../components/ui/Icon';
-import { Building, MapPin, XClose, CheckCircle } from '../components/ui/iconLibrary';
 
 const BuildingForm = () => {
   const navigate = useNavigate();

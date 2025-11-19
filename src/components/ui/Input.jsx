@@ -1,4 +1,4 @@
-// src/components/Input.jsx
+// src/components/ui/Input.jsx
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -19,6 +19,7 @@ const Input = forwardRef(({
   leftIcon,
   rightIcon,
   size = 'md',
+  fullWidth = false, // ✅ Added fullWidth prop (defaults to false)
   className,
   onChange,
   onBlur,
@@ -30,7 +31,11 @@ const Input = forwardRef(({
   const hasSuccess = !!success;
 
   return (
-    <div className={clsx('input-wrapper', className)}>
+    <div className={clsx(
+      'input-wrapper', 
+      fullWidth && 'input-wrapper--full-width', // ✅ Use fullWidth for CSS class only
+      className
+    )}>
       {/* Label */}
       {label && (
         <label 
@@ -132,6 +137,7 @@ Input.propTypes = {
   leftIcon: PropTypes.node,
   rightIcon: PropTypes.node,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  fullWidth: PropTypes.bool, // ✅ Added propType definition
   className: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
