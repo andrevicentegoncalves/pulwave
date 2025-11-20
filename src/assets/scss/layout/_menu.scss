@@ -1,114 +1,113 @@
-@use '../abstracts' as *;
+// ============================================================================ //
+//                           MENU COMPONENT STYLES                              //
+// ============================================================================ //
+// Navigation menu component styles. Pure menu styling without sidebar-specific
+// layout concerns.
 
-/* ========================================================================== */
-/*                          COMPONENT: MENU (SIDEBAR NAV)                     */
-/* ========================================================================== */
+// ---------------------------------------------------------------------------//
+// MENU CONTAINER
+// ---------------------------------------------------------------------------//
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2); // 8px between items
   width: 100%;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                              MENU ITEMS                                    */
-/* -------------------------------------------------------------------------- */
+// ---------------------------------------------------------------------------//
+// MENU ITEM
+// ---------------------------------------------------------------------------//
 
 .menu__item {
   // Layout
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-3); // 12px between icon and label
   position: relative;
   
   // Spacing
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-6); // 12px 24px
   
-  // Sizing - consistent height
-  min-height: var(--space-12); // 48px
+  // Sizing
+  min-height: 48px; // Touch target
   
   // Styling
   background: transparent;
   border: none;
-  border-radius: var(--radius-s);
+  border-radius: var(--border-radius-m); // 16px
   color: var(--color-on-primary);
-  font-size: var(--font-size-body-s);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body-m); // 16px
+  font-weight: var(--font-weight-medium); // 500
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
   
   // Animation
-  transition: all var(--duration-fast) var(--easing-standard);
+  transition: all var(--duration-base) var(--easing-standard);
   
   // Hover state
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(2px);
+  &:hover:not(.menu__item--active) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  // Focus state - keyboard navigation
+  &:focus-visible {
+    outline: var(--focus-width) solid var(--color-on-primary);
+    outline-offset: var(--focus-offset);
   }
   
   // Active/pressed state
   &:active {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(1px);
-  }
-  
-  // Focus state
-  &:focus-visible {
-    outline: 2px solid var(--color-on-primary);
-    outline-offset: 2px;
-  }
-  
-  // ✅ NEW: Active/selected state with animated indicator
-  &--active {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--color-on-primary);
-    font-weight: var(--font-weight-semi-bold);
-    
-    // Animated left indicator bar (like the reference image)
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 70%;
-      background: var(--color-on-primary);
-      border-radius: 0 var(--radius-2xs) var(--radius-2xs) 0;
-      animation: slideIn var(--duration-comfortable) var(--easing-emphasized);
-    }
-    
-    // Icon highlight on active
-    .menu__icon {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-    
-    // No transform on hover when active
-    &:hover {
-      transform: none;
-    }
+    background-color: rgba(255, 255, 255, 0.15);
   }
 }
 
-// Slide-in animation for the active indicator
-@keyframes slideIn {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 4px;
+// ---------------------------------------------------------------------------//
+// MENU ITEM - ACTIVE STATE
+// ---------------------------------------------------------------------------//
+
+.menu__item--active {
+  background-color: var(--color-surface-default); // White background
+  color: var(--color-primary); // Emerald text
+  font-weight: var(--font-weight-semi-bold); // 600
+  
+  // Icon enhancement
+  .menu__icon {
     opacity: 1;
+    transform: scale(1.05);
+  }
+  
+  // No hover transform when active
+  &:hover {
+    background-color: var(--color-surface-default);
   }
 }
+
+// ---------------------------------------------------------------------------//
+// MENU ITEM - COLLAPSED STATE
+// ---------------------------------------------------------------------------//
+
+.menu__item--collapsed {
+  justify-content: center;
+  padding: var(--space-3) 0; // Center icon, no horizontal padding
+  
+  .menu__label {
+    display: none;
+    opacity: 0;
+    width: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// MENU ICON
+// ---------------------------------------------------------------------------//
 
 .menu__icon {
   // Sizing
   flex-shrink: 0;
-  width: var(--space-6); // 24px
-  height: var(--space-6);
+  width: var(--icon-size-m); // 24px
+  height: var(--icon-size-m);
   
   // Layout
   display: flex;
@@ -116,11 +115,17 @@
   justify-content: center;
   
   // Styling
-  color: var(--color-on-primary);
+  color: inherit;
   opacity: 0.9;
   
   // Animation
   transition: all var(--duration-fast) var(--easing-standard);
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 1.5;
+  }
   
   // Icon enhancement on hover
   .menu__item:hover & {
@@ -129,6 +134,10 @@
   }
 }
 
+// ---------------------------------------------------------------------------//
+// MENU LABEL
+// ---------------------------------------------------------------------------//
+
 .menu__label {
   // Layout
   flex: 1;
@@ -136,22 +145,44 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  // Initially hidden when collapsed
-  opacity: 0;
-  width: 0;
-  transition: opacity var(--duration-fast) var(--easing-standard);
+  // Typography
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: var(--line-height-tight); // 1.25
+  color: inherit;
   
-  // Show when sidebar is expanded or mobile open
-  .sidebar--expanded &,
-  .sidebar--mobile-open & {
-    opacity: 1;
-    width: auto;
+  // Animation
+  opacity: 1;
+  transition: opacity var(--duration-base) var(--easing-standard);
+}
+
+// ---------------------------------------------------------------------------//
+// MENU VARIANTS (Optional Enhancements)
+// ---------------------------------------------------------------------------//
+
+// Danger variant (e.g., Logout, Delete)
+.menu__item--danger {
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--color-error);
+  }
+  
+  &.menu__item--active {
+    background-color: var(--color-error);
+    color: var(--color-on-error);
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/*                              MENU SECTIONS                                 */
-/* -------------------------------------------------------------------------- */
+// Disabled state
+.menu__item--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ---------------------------------------------------------------------------//
+// MENU SECTIONS (Optional)
+// ---------------------------------------------------------------------------//
 
 .menu__section {
   display: flex;
@@ -171,39 +202,73 @@
   padding: var(--space-2) var(--space-3);
   margin-bottom: var(--space-1);
   
-  // Styling
-  font-size: var(--font-size-caption-m);
-  font-weight: var(--font-weight-semi-bold);
+  // Typography
+  font-size: var(--font-size-caption-m); // 12px
+  font-weight: var(--font-weight-semi-bold); // 600
   color: var(--color-on-primary);
   opacity: 0.7;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   
-  // Hide when collapsed
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
+  // Animation
   transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+// ---------------------------------------------------------------------------//
+// MENU BADGE (Optional)
+// ---------------------------------------------------------------------------//
+
+.menu__badge {
+  margin-left: auto;
+  padding: var(--space-1) var(--space-2);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-circle);
+  font-size: var(--font-size-caption-s); // 11px
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-primary);
+  line-height: 1;
   
-  // Show when expanded
-  .sidebar--expanded &,
-  .sidebar--mobile-open & {
-    opacity: 0.7;
-    height: auto;
+  // Hide in collapsed state
+  .menu__item--collapsed & {
+    display: none;
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/*                          TOOLTIP FOR COLLAPSED STATE                       */
-/* -------------------------------------------------------------------------- */
+// ---------------------------------------------------------------------------//
+// TOOLTIP (For collapsed state)
+// ---------------------------------------------------------------------------//
 
-// Tooltip for collapsed sidebar (optional enhancement)
-.menu__item {
-  &[title] {
-    // Only show tooltip when collapsed (expanded state shows labels)
-    .sidebar--expanded &,
-    .sidebar--mobile-open & {
-      title: none;
-    }
+.menu__item[title] {
+  position: relative;
+  
+  &::after {
+    content: attr(title);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-surface-default);
+    color: var(--color-on-surface-default);
+    font-size: var(--font-size-caption-m);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--bordeer-radius-s);
+    box-shadow: var(--shadow-m);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-fast) var(--easing-standard);
+    z-index: 1001;
+  }
+  
+  // Show tooltip on hover when collapsed
+  &.menu__item--collapsed:hover::after {
+    opacity: 1;
+  }
+  
+  // Don't show tooltip when expanded (label is visible)
+  &:not(.menu__item--collapsed)::after {
+    display: none;
   }
 }

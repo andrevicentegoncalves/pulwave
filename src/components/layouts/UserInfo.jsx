@@ -106,9 +106,6 @@ const UserInfo = ({
             {showName && (
                 <div className="user-info__details">
                     <span className="user-info__name">{userName}</span>
-                    {userEmail && (
-                        <span className="user-info__email">{userEmail}</span>
-                    )}
                 </div>
             )}
 

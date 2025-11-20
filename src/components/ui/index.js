@@ -13,6 +13,8 @@ export { ThemeToggle } from './ThemeToggle.jsx';
 export { default as TextArea } from './TextArea.jsx';
 export { default as FloatingActionButton } from './FloatingActionButton.jsx';
 export { default as CardGrid } from './CardGrid.jsx';
+export { default as Wave } from './Wave.jsx';
+
 
 // Icon System
 export { default as Icon } from './Icon.jsx';

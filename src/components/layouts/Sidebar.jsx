@@ -14,11 +14,11 @@ import {
     User,
     Palette,
 } from 'lucide-react';
-import SidebarHeader from './SidebarHeader';
-import SidebarMenu from './SidebarMenu';
+import SidebarToggle from './SidebarToggle';
+import Menu from './Menu';
 import UserInfo from './UserInfo';
-import SidebarWave from './SidebarWave';
-import MobileHeader from './MobileHeader';
+import Wave from '../ui/Wave';
+import Header from './Header';
 
 /**
  * Sidebar - Main navigation component
@@ -27,8 +27,8 @@ import MobileHeader from './MobileHeader';
  * - Collapsible sidebar with smooth transitions
  * - Mobile-responsive with overlay
  * - Active route highlighting with curved design
- * - User profile section
- * - Decorative wave animation
+ * - User profile section with responsive orientation
+ * - Decorative wave animation (only when space available)
  * - Full keyboard navigation support
  * - WCAG AA compliant
  * 
@@ -84,27 +84,67 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     }, []);
 
     /**
-     * Calculate if wave should be visible based on sidebar height and content
-     * Wave is 370px tall - hide if it overlaps with menu items significantly
+     * Calculate if wave should be visible based on available space
+     * Wave is 370px tall - only show if there's enough free space after menu items
+     * This prevents wave from overlapping with menu items
      */
     useEffect(() => {
         const checkWaveVisibility = () => {
-            if (!sidebarRef.current) return;
+            // Hide wave when sidebar is collapsed
+            if (!sidebarRef.current || !isExpanded) {
+                setShowWave(false);
+                return;
+            }
 
-            const sidebarHeight = sidebarRef.current.clientHeight;
-            const headerHeight = 60;
-            const menuHeight = menuItems.length * 60; // Approximate item height
-            const profileHeight = 100;
-            const waveHeight = 370;
+            // Use actual DOM measurements for more accuracy
+            const sidebar = sidebarRef.current;
+            const sidebarInner = sidebar.querySelector('.sidebar');
+            const menuContainer = sidebar.querySelector('.sidebar__menu') || sidebar.querySelector('.menu-items');
+            const profileContainer = sidebar.querySelector('.user-info-container') || sidebar.querySelector('.sidebar-user');
             
-            // Allow 100px overlap before hiding wave
-            const availableSpace = sidebarHeight - headerHeight - menuHeight - profileHeight;
-            setShowWave(availableSpace > (waveHeight - 100));
+            if (!sidebarInner) {
+                setShowWave(false);
+                return;
+            }
+            
+            const sidebarHeight = sidebarInner.clientHeight;
+            const waveHeight = 370; // Wave SVG fixed height
+            const minClearance = 50; // Minimum safety margin
+            
+            // Get actual heights from DOM when available
+            let contentHeight = 60; // Header fallback
+            
+            if (menuContainer) {
+                contentHeight += menuContainer.offsetHeight + 20; // Add padding
+            } else {
+                // Fallback calculation
+                contentHeight += menuItems.length * 56;
+            }
+            
+            if (profileContainer) {
+                contentHeight += profileContainer.offsetHeight + 20;
+            } else {
+                // Fallback
+                contentHeight += 120;
+            }
+            
+            // Calculate available space
+            const availableSpace = sidebarHeight - contentHeight;
+            const requiredSpace = waveHeight + minClearance;
+            
+            // Only show if there's clear space - no overlap allowed
+            setShowWave(availableSpace >= requiredSpace);
         };
 
-        checkWaveVisibility();
+        // Initial check with slight delay to ensure DOM is ready
+        const timeoutId = setTimeout(checkWaveVisibility, 100);
+        
+        // Recheck on window resize
         window.addEventListener('resize', checkWaveVisibility);
-        return () => window.removeEventListener('resize', checkWaveVisibility);
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener('resize', checkWaveVisibility);
+        };
     }, [menuItems.length, isExpanded]);
 
     // Get current path, defaulting to dashboard
@@ -113,7 +153,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     return (
         <>
             {/* Mobile Header - only visible on small screens */}
-            <MobileHeader toggleSidebar={toggleSidebar} />
+            <Header toggleSidebar={toggleSidebar} />
 
             {/* Overlay for mobile sidebar */}
             <div 
@@ -130,29 +170,31 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
             >
                 <div className="sidebar">
                     {/* Toggle Button - Desktop only */}
-                    <SidebarHeader 
+                    <SidebarToggle 
                         isExpanded={isExpanded} 
                         toggleSidebar={toggleSidebar}
                     />
 
                     {/* Navigation Menu */}
-                    <SidebarMenu
-                        items={menuItems}
-                        activeItem={currentPath}
-                        onItemClick={handleItemClick}
-                        isExpanded={isExpanded}
-                    />
+                    <div className="sidebar__menu">
+                        <Menu
+                            items={menuItems}
+                            activeItem={currentPath}
+                            onItemClick={handleItemClick}
+                            isCollapsed={!isExpanded}
+                        />
+                    </div>
 
-                    {/* User Profile Section */}
+                    {/* User Profile Section - Responsive Orientation */}
                     <UserInfo 
                         showAvatar={true}
-                        showName={isExpanded}      // Responsive to sidebar state
-                        showLogout={isExpanded}    // Responsive to sidebar state
-                        orientation="horizontal"
+                        showName={isExpanded}
+                        showLogout={isExpanded}
+                        orientation={isExpanded ? 'horizontal' : 'vertical'}
                     />
 
-                    {/* Decorative Wave - only when expanded and space available */}
-                    {isExpanded && showWave && <SidebarWave />}
+                    {/* Decorative Wave - only when expanded AND sufficient space available */}
+                    {showWave && <Wave />}
                 </div>
             </aside>
         </>

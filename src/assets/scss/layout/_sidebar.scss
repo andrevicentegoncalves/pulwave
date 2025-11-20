@@ -1,8 +1,8 @@
 // ============================================================================ //
-//                           SIDEBAR COMPONENT STYLES                           //
+//                           SIDEBAR LAYOUT STYLES                              //
 // ============================================================================ //
-// Full navigation sidebar with collapsible behavior, mobile overlay, and
-// decorative wave animation. Uses Pulwave design tokens exclusively.
+// Main navigation sidebar with collapsible behavior, mobile overlay, and
+// responsive design. Uses Pulwave design tokens exclusively.
 
 // ---------------------------------------------------------------------------//
 // SIDEBAR CONTAINER
@@ -10,7 +10,7 @@
 
 .sidebar-container {
   height: 100vh;
-  background-color: var(--color-surface-subtle); // Light gray background
+  background-color: var(--color-surface-subtle);
   display: flex;
   flex-direction: column;
   transition: width var(--duration-comfortable) var(--easing-standard);
@@ -24,11 +24,15 @@
   }
 }
 
+// ---------------------------------------------------------------------------//
+// SIDEBAR MAIN
+// ---------------------------------------------------------------------------//
+
 .sidebar {
-  background-color: var(--color-primary); // Emerald green
+  background-color: var(--color-primary);
   height: 100%;
   width: 100%;
-  border-radius: var(--radius-2xl); // 48px rounded corners
+  border-radius: var(--border-radius-xl); // 48px rounded corners
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -36,7 +40,7 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden; // Contain wave animation
-  box-shadow: var(--shadow-m); // Subtle elevation
+  box-shadow: var(--shadow-m);
 }
 
 // ---------------------------------------------------------------------------//
@@ -62,11 +66,11 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: var(--color-on-primary); // White on emerald
+  color: var(--color-on-primary);
   padding: var(--space-2); // 8px
   transition: all var(--duration-fast) var(--easing-standard);
   outline: none;
-  border-radius: var(--radius-s); // 8px for focus ring
+  border-radius: var(--border-radius-s); // 8px for focus ring
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,17 +102,13 @@
 }
 
 // ---------------------------------------------------------------------------//
-// MENU ITEMS CONTAINER
+// MENU INTEGRATION (Sidebar-specific menu styling)
 // ---------------------------------------------------------------------------//
 
-.menu-items {
-  flex: 1;
+.sidebar__menu {
   overflow-y: auto;
   overflow-x: hidden;
   padding: var(--space-3) 0; // 12px vertical
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2); // 8px between items
   z-index: 10; // Above wave
   
   // Custom scrollbar styling
@@ -122,76 +122,24 @@
   
   &::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-2xs); // 2px
+    border-radius: var(--border-radius-2xs); // 2px
     
     &:hover {
       background: rgba(255, 255, 255, 0.3);
     }
   }
-}
-
-// ---------------------------------------------------------------------------//
-// MENU ITEM
-// ---------------------------------------------------------------------------//
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  padding: var(--space-3) var(--space-6); // 12px 24px
-  cursor: pointer;
-  color: var(--color-on-primary); // White text
-  transition: all var(--duration-base) var(--easing-standard);
-  text-decoration: none;
-  position: relative;
-  white-space: nowrap;
-  border-radius: var(--radius-m); // 16px
-  min-height: 48px; // Touch target
   
-  // Icon container
-  .menu-item__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--icon-size-m); // 24px
-    height: var(--icon-size-m);
-    
-    svg {
-      width: 100%;
-      height: 100%;
-      stroke-width: 1.5;
-    }
+  // Menu component inside sidebar
+  .menu {
+    // No additional styles needed - Menu component handles its own layout
   }
   
-  // Label text
-  .menu-item__label {
-    margin-left: var(--space-3); // 12px gap from icon
-    font-size: var(--font-size-body-m); // 16px
-    font-weight: var(--font-weight-medium); // 500
-    line-height: var(--line-height-tight); // 1.25
-    opacity: 1;
-    transition: opacity var(--duration-base) var(--easing-standard);
-  }
-  
-  // Hover state
-  &:hover:not(.active) {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  // Focus state - keyboard navigation
-  &:focus-visible {
-    outline: var(--focus-width) solid var(--color-on-primary);
-    outline-offset: var(--focus-offset);
-  }
-  
-  // Active/selected state
-  &.active {
-    background-color: var(--color-surface-default); // White background
-    color: var(--color-primary); // Emerald text
+  // Sidebar-specific menu item modifications (curved active state)
+  .menu__item--active {
     margin-left: var(--space-3); // 12px indent
     padding-left: var(--space-4); // Adjust padding to compensate
-    border-top-left-radius: var(--radius-xl); // 32px
-    border-bottom-left-radius: var(--radius-xl); // 32px
+    border-top-left-radius: var(--border-radius-xl); 
+    border-bottom-left-radius: var(--border-radius-xl);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     
@@ -205,32 +153,6 @@
       height: var(--space-5);
       background-color: transparent;
       pointer-events: none;
-    }
-    
-    // Top curve
-    &::before {
-      top: calc(var(--space-5) * -1); // -20px
-      border-bottom-right-radius: var(--space-5);
-      box-shadow: 5px 5px 0 5px var(--color-surface-default);
-    }
-    
-    // Bottom curve
-    &::after {
-      bottom: calc(var(--space-5) * -1); // -20px
-      border-top-right-radius: var(--space-5);
-      box-shadow: 5px -5px 0 5px var(--color-surface-default);
-    }
-  }
-  
-  // Collapsed state
-  &.collapsed {
-    justify-content: center;
-    padding: var(--space-3) 0; // Center icon
-    
-    .menu-item__label {
-      display: none;
-      opacity: 0;
-      width: 0;
     }
   }
 }
@@ -254,8 +176,8 @@
   justify-content: space-between;
   gap: var(--space-3); // 12px
   padding: var(--space-3); // 12px all around
-  background-color: rgba(255, 255, 255, 0.1); // Subtle background
-  border-radius: var(--radius-m); // 16px
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-m); // 16px
   backdrop-filter: blur(10px);
   transition: all var(--duration-comfortable) var(--easing-standard);
 }
@@ -263,15 +185,15 @@
 .user-info {
   display: flex;
   align-items: center;
-  flex: 1;
-  min-width: 0; // Allow text truncation
-  gap: var(--space-3); // 12px
+  min-width: 0;
+  gap: var(--space-3);
+  padding: var(--space-4);
 }
 
 .user-avatar {
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-full); // Circle
+  border-radius: var(--border-radius-circle); // Circle
   object-fit: cover;
   border: var(--border-width-2) solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
@@ -297,7 +219,7 @@
 }
 
 .user-name {
-  color: var(--color-on-primary); // White
+  color: var(--color-on-primary);
   font-size: var(--font-size-body-m); // 16px
   font-weight: var(--font-weight-semi-bold); // 600
   line-height: var(--line-height-tight); // 1.25
@@ -324,7 +246,7 @@
   border: none;
   width: 36px;
   height: 36px;
-  border-radius: var(--radius-full); // Circle
+  border-radius: var(--border-radius-circle); // Circle
   display: flex;
   align-items: center;
   justify-content: center;
@@ -419,7 +341,7 @@
     }
     
     .sidebar {
-      border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0; // Only right side rounded
+      border-radius: 0 var(--border-radius-2xl) var(--border-radius-2xl) 0; // Only right side rounded
       height: 100%;
     }
     
@@ -436,8 +358,7 @@
 
 @media print {
   .sidebar-container,
-  .sidebar-overlay,
-  .mobile-header {
+  .sidebar-overlay {
     display: none;
   }
 }

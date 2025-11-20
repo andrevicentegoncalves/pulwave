@@ -11,9 +11,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--space-3); // 12px
-  background-color: rgba(255, 255, 255, 0.1); // Subtle background
-  border-radius: var(--radius-m); // 16px
+  padding: var(--space-4); 
+  border-radius: var(--border-radius-m); // 16px
   backdrop-filter: blur(10px);
   transition: all var(--duration-comfortable) var(--easing-standard);
   box-sizing: border-box;
@@ -27,11 +26,10 @@
 // ---------------------------------------------------------------------------//
 
 .user-info__avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full); // Circle
+  width: 46px;
+  height: 46px;
+  border-radius: var(--border-radius-round);
   object-fit: cover;
-  border: var(--border-width-2) solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
   cursor: pointer;
   transition: all var(--duration-fast) var(--easing-standard);
@@ -89,9 +87,9 @@
 .user-info__logout {
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full); // Circle
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-round); // Circle
   display: flex;
   align-items: center;
   justify-content: center;

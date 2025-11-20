@@ -1,84 +1,79 @@
-// src/components/layouts/Menu.jsx
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Icon from '../ui/Icon';
-import { Home, Building, Settings } from '../ui/iconLibrary';
-import clsx from 'clsx';
 
 /**
- * Menu Component  
- * Navigation menu for sidebar
- * Adapts to show icon-only or icon+text based on sidebar state
- * Closes mobile menu when item is clicked
+ * Menu - Navigation menu component
+ * 
+ * Renders a list of navigation items with active state highlighting,
+ * keyboard navigation, and responsive behavior.
+ * 
+ * Features:
+ * - Active route highlighting
+ * - Keyboard navigation (Enter/Space)
+ * - Icon and label support
+ * - Collapsed/expanded states
+ * - WCAG AA compliant
+ * 
+ * @example
+ * <Menu 
+ *   items={menuItems}
+ *   activeItem="/dashboard"
+ *   onItemClick={handleClick}
+ *   isCollapsed={false}
+ * />
  */
-const Menu = ({ expanded, onItemClick }) => {
-  const menuItems = [
-    {
-      id: 'home',
-      label: 'Home',
-      to: '/',
-      icon: Home,
-    },
-    {
-      id: 'buildings',
-      label: 'Buildings',
-      to: '/buildings',
-      icon: Building,
-    },
-    {
-      id: 'properties',
-      label: 'Properties',
-      to: '/properties',
-      icon: Building,
-    },
-    {
-      id: 'styleguide',
-      label: 'Style Guide',
-      to: '/style-guide',
-      icon: Settings,
-    },
-  ];
+const Menu = ({ items, activeItem, onItemClick, isCollapsed = false }) => {
+    /**
+     * Handle keyboard navigation
+     */
+    const handleKeyDown = (event, itemId) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onItemClick(itemId);
+        }
+    };
 
-  const handleItemClick = () => {
-    // Close mobile menu when item is clicked
-    if (onItemClick) {
-      onItemClick();
-    }
-  };
-
-  return (
-    <ul className="menu">
-      {menuItems.map((item) => (
-        <li key={item.id} className="menu__item">
-          <NavLink
-            to={item.to}
-            className={({ isActive }) =>
-              clsx('menu__link', { 'menu__link--active': isActive })
-            }
-            title={!expanded ? item.label : undefined}
-            onClick={handleItemClick}
-          >
-            <Icon size="m" className="menu__icon">
-              <item.icon />
-            </Icon>
-            {expanded && (
-              <span className="menu__label">{item.label}</span>
-            )}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  );
+    return (
+        <nav className="menu" aria-label="Main navigation">
+            {items.map((item) => {
+                const isActive = activeItem === item.id;
+                const Icon = item.icon;
+                
+                return (
+                    <div
+                        key={item.id}
+                        className={`menu__item ${isActive ? 'menu__item--active' : ''} ${isCollapsed ? 'menu__item--collapsed' : ''}`}
+                        onClick={() => onItemClick(item.id)}
+                        onKeyDown={(e) => handleKeyDown(e, item.id)}
+                        role="button"
+                        tabIndex={0}
+                        aria-current={isActive ? 'page' : undefined}
+                        title={isCollapsed ? item.label : undefined}
+                    >
+                        <div className="menu__icon" aria-hidden="true">
+                            <Icon />
+                        </div>
+                        <span className="menu__label">
+                            {item.label}
+                        </span>
+                    </div>
+                );
+            })}
+        </nav>
+    );
 };
 
 Menu.propTypes = {
-  expanded: PropTypes.bool.isRequired,
-  onItemClick: PropTypes.func,
-};
-
-Menu.defaultProps = {
-  onItemClick: () => {},
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            icon: PropTypes.elementType.isRequired,
+            label: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    activeItem: PropTypes.string.isRequired,
+    onItemClick: PropTypes.func.isRequired,
+    isCollapsed: PropTypes.bool,
 };
 
 export default Menu;
