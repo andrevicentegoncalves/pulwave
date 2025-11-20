@@ -123,7 +123,7 @@
     
     &:hover {
       background: var(--color-neutral-9);
-      transform: #{'rotate(45deg) scale(1)'};
+      transform: #{unquote('rotate(45deg) scale(1.08)')};
     }
   }
   

@@ -1,97 +1,167 @@
-// src/components/layouts/Sidebar.jsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Menu from './Menu';
-import Icon from '../ui/Icon';
-import { ChevronLeft, ChevronRight, Settings } from '../ui/iconLibrary';
-import clsx from 'clsx';
+import {
+    ChartNoAxesCombined,
+    Home,
+    Building,
+    Lamp,
+    ShieldCheck,
+    MapPin,
+    Users,
+    LayoutGrid,
+    Settings,
+    User,
+    Palette,
+} from 'lucide-react';
+import SidebarHeader from './SidebarHeader';
+import SidebarMenu from './SidebarMenu';
+import UserInfo from './UserInfo';
+import SidebarWave from './SidebarWave';
+import MobileHeader from './MobileHeader';
 
 /**
- * Sidebar Component
- * Collapsible navigation sidebar with mobile support
+ * Sidebar - Main navigation component
  * 
- * Desktop: Shows toggle button, expands/collapses in place
- * Mobile: Slides in from left, overlay behind
+ * Features:
+ * - Collapsible sidebar with smooth transitions
+ * - Mobile-responsive with overlay
+ * - Active route highlighting with curved design
+ * - User profile section
+ * - Decorative wave animation
+ * - Full keyboard navigation support
+ * - WCAG AA compliant
+ * 
+ * @example
+ * <Sidebar isExpanded={true} toggleSidebar={handleToggle} />
  */
-const Sidebar = ({ expanded, onToggle, mobileOpen, onMobileClose }) => {
-  const navigate = useNavigate();
+const Sidebar = ({ isExpanded, toggleSidebar }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const sidebarRef = useRef(null);
+    const [showWave, setShowWave] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
 
-  const handleSettingsClick = () => {
-    navigate('/settings');
-    if (onMobileClose) {
-      onMobileClose();
-    }
-  };
+    // Menu configuration
+    const menuItems = [
+        { id: '/dashboard', icon: ChartNoAxesCombined, label: 'Dashboard' },
+        { id: '/property', icon: Home, label: 'Property' },
+        { id: '/buildings', icon: Building, label: 'Buildings' },
+        { id: '/lights', icon: Lamp, label: 'Lights' },
+        { id: '/security', icon: ShieldCheck, label: 'Security' },
+        { id: '/location', icon: MapPin, label: 'Location' },
+        { id: '/users', icon: Users, label: 'Users' },
+        { id: '/analytics', icon: LayoutGrid, label: 'Analytics' },
+        { id: '/settings', icon: Settings, label: 'Settings' },
+        { id: '/profile', icon: User, label: 'Profile' },
+        { id: '/style-guide', icon: Palette, label: 'Style Guide' },
+    ];
 
-  return (
-    <aside className={clsx(
-      'sidebar',
-      expanded && 'sidebar--expanded',
-      mobileOpen && 'sidebar--mobile-open'
-    )}>
-      {/* Sidebar Header with Logo */}
-      <div className="sidebar__header">
-        <div className="sidebar__logo">
-          <div className="sidebar__logo-icon">
-            {/* Logo icon */}
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="currentColor" fillOpacity="0.1"/>
-              <path d="M16 8L8 14V24H12V18H20V24H24V14L16 8Z" fill="currentColor"/>
-            </svg>
-          </div>
-          {(expanded || mobileOpen) && (
-            <span className="sidebar__logo-text">Pulwave</span>
-          )}
-        </div>
+    /**
+     * Handle menu item click
+     * Navigate to route and close sidebar on mobile
+     */
+    const handleItemClick = (path) => {
+        navigate(path);
         
-        {/* Desktop Toggle Button - NO BORDER */}
-        <button
-          className="sidebar__toggle"
-          onClick={onToggle}
-          aria-label={expanded ? 'Collapse sidebar' : 'Expand sidebar'}
-          aria-expanded={expanded}
-        >
-          <Icon size="s">
-            {expanded ? <ChevronLeft /> : <ChevronRight />}
-          </Icon>
-        </button>
-      </div>
+        // Auto-close sidebar on mobile after navigation
+        if (isMobile && isExpanded) {
+            toggleSidebar();
+        }
+    };
 
-      {/* Navigation Menu */}
-      <nav className="sidebar__content">
-        <Menu expanded={expanded || mobileOpen} onItemClick={onMobileClose} />
-      </nav>
+    /**
+     * Check if device is mobile
+     */
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
 
-      {/* Sidebar Footer with Settings */}
-      <div className="sidebar__footer">
-        <button
-          className="sidebar__footer-link"
-          onClick={handleSettingsClick}
-          title={!(expanded || mobileOpen) ? 'Settings' : undefined}
-        >
-          <Icon size="m" className="sidebar__footer-icon">
-            <Settings />
-          </Icon>
-          {(expanded || mobileOpen) && (
-            <span className="sidebar__footer-label">Settings</span>
-          )}
-        </button>
-      </div>
-    </aside>
-  );
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    /**
+     * Calculate if wave should be visible based on sidebar height and content
+     * Wave is 370px tall - hide if it overlaps with menu items significantly
+     */
+    useEffect(() => {
+        const checkWaveVisibility = () => {
+            if (!sidebarRef.current) return;
+
+            const sidebarHeight = sidebarRef.current.clientHeight;
+            const headerHeight = 60;
+            const menuHeight = menuItems.length * 60; // Approximate item height
+            const profileHeight = 100;
+            const waveHeight = 370;
+            
+            // Allow 100px overlap before hiding wave
+            const availableSpace = sidebarHeight - headerHeight - menuHeight - profileHeight;
+            setShowWave(availableSpace > (waveHeight - 100));
+        };
+
+        checkWaveVisibility();
+        window.addEventListener('resize', checkWaveVisibility);
+        return () => window.removeEventListener('resize', checkWaveVisibility);
+    }, [menuItems.length, isExpanded]);
+
+    // Get current path, defaulting to dashboard
+    const currentPath = location.pathname === '/' ? '/dashboard' : location.pathname;
+
+    return (
+        <>
+            {/* Mobile Header - only visible on small screens */}
+            <MobileHeader toggleSidebar={toggleSidebar} />
+
+            {/* Overlay for mobile sidebar */}
+            <div 
+                className={`sidebar-overlay ${isExpanded && isMobile ? 'visible' : ''}`}
+                onClick={toggleSidebar}
+                aria-hidden="true"
+            />
+
+            {/* Main Sidebar Container */}
+            <aside 
+                className={`sidebar-container ${isExpanded ? 'expanded' : 'collapsed'}`}
+                ref={sidebarRef}
+                aria-label="Main navigation"
+            >
+                <div className="sidebar">
+                    {/* Toggle Button - Desktop only */}
+                    <SidebarHeader 
+                        isExpanded={isExpanded} 
+                        toggleSidebar={toggleSidebar}
+                    />
+
+                    {/* Navigation Menu */}
+                    <SidebarMenu
+                        items={menuItems}
+                        activeItem={currentPath}
+                        onItemClick={handleItemClick}
+                        isExpanded={isExpanded}
+                    />
+
+                    {/* User Profile Section */}
+                    <UserInfo 
+                        showAvatar={true}
+                        showName={isExpanded}      // Responsive to sidebar state
+                        showLogout={isExpanded}    // Responsive to sidebar state
+                        orientation="horizontal"
+                    />
+
+                    {/* Decorative Wave - only when expanded and space available */}
+                    {isExpanded && showWave && <SidebarWave />}
+                </div>
+            </aside>
+        </>
+    );
 };
 
 Sidebar.propTypes = {
-  expanded: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  mobileOpen: PropTypes.bool,
-  onMobileClose: PropTypes.func,
-};
-
-Sidebar.defaultProps = {
-  mobileOpen: false,
-  onMobileClose: () => {},
+    isExpanded: PropTypes.bool.isRequired,
+    toggleSidebar: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

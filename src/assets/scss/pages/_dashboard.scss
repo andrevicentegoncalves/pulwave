@@ -1,0 +1,145 @@
+// ============================================================================ //
+//                       DASHBOARD LAYOUT COMPONENT STYLES                      //
+// ============================================================================ //
+// Main application layout with sidebar and responsive content area
+
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-surface-subtle); // Light gray background
+  position: relative;
+}
+
+// ---------------------------------------------------------------------------//
+// MAIN CONTENT AREA
+// ---------------------------------------------------------------------------//
+
+.dashboard-content {
+  flex: 1;
+  min-width: 0; // Allow content to shrink below natural width
+  padding: var(--space-6); // 24px padding
+  transition: margin-left var(--duration-comfortable) var(--easing-standard);
+  position: relative;
+  
+  // Desktop: Adjust margin based on sidebar state
+  @media (min-width: 769px) {
+    // When sidebar is collapsed (80px)
+    &.collapsed {
+      margin-left: 80px;
+    }
+    
+    // When sidebar is expanded (280px)
+    &.expanded {
+      margin-left: 280px;
+    }
+  }
+  
+  // Mobile: No margin (sidebar overlays)
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 60px; // Account for mobile header
+    padding: var(--space-4); // Reduced padding on mobile
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// CONTENT CONTAINER (OPTIONAL INNER WRAPPER)
+// ---------------------------------------------------------------------------//
+
+.content-container {
+  max-width: var(--container-2xl); // 1536px max width
+  margin: 0 auto;
+  width: 100%;
+}
+
+// ---------------------------------------------------------------------------//
+// PAGE HEADER WITHIN CONTENT
+// ---------------------------------------------------------------------------//
+
+.page-header {
+  margin-bottom: var(--space-6); // 24px
+  
+  .page-title {
+    font-size: var(--font-size-title-l); // 32px
+    font-weight: var(--font-weight-semi-bold); // 600
+    color: var(--color-on-surface-default);
+    line-height: var(--line-height-tight);
+    margin: 0 0 var(--space-2); // 8px bottom margin
+  }
+  
+  .page-description {
+    font-size: var(--font-size-body-m); // 16px
+    color: var(--color-on-surface-subtle);
+    line-height: var(--line-height-normal); // 1.5
+    margin: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// RESPONSIVE SPACING ADJUSTMENTS
+// ---------------------------------------------------------------------------//
+
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: var(--space-4); // 16px on mobile
+    
+    .page-title {
+      font-size: var(--font-size-title-m); // 24px on mobile
+    }
+    
+    .page-description {
+      font-size: var(--font-size-body-s); // 14px on mobile
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// UTILITY CLASSES FOR CONTENT SPACING
+// ---------------------------------------------------------------------------//
+
+// Section spacing
+.content-section {
+  margin-bottom: var(--space-8); // 32px between sections
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Card grid
+.content-grid {
+  display: grid;
+  gap: var(--space-6); // 24px gap
+  
+  // Responsive columns
+  &--2-col {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  &--3-col {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  &--4-col {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  // Mobile: Always single column
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-4); // 16px on mobile
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// PRINT STYLES
+// ---------------------------------------------------------------------------//
+
+@media print {
+  .dashboard-content {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+}

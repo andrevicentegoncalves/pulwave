@@ -1,86 +1,81 @@
-// src/components/layouts/DashboardLayout.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import BurgerMenu from '../ui/BurgerMenu';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import Sidebar from './Sidebar';
 
 /**
- * DashboardLayout
- * Main layout wrapper for authenticated pages
- * Provides sidebar navigation, header with user info, and mobile support
+ * DashboardLayout - Main application layout with sidebar
  * 
  * Features:
- * - Desktop: Toggle sidebar expand/collapse, header with user profile
- * - Mobile: BurgerMenu to show/hide sidebar with overlay
+ * - Persistent sidebar state (localStorage)
+ * - Responsive content area that adjusts to sidebar width
+ * - Smooth transitions when sidebar expands/collapses
+ * - Mobile-optimized with overlay behavior
+ * 
+ * @example
+ * // In your router configuration:
+ * <Route element={<DashboardLayout />}>
+ *   <Route path="/dashboard" element={<Dashboard />} />
+ *   <Route path="/property" element={<Property />} />
+ * </Route>
  */
 const DashboardLayout = ({ children }) => {
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    // Initialize sidebar state from localStorage or default to expanded
+    const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
+        const saved = localStorage.getItem('sidebarExpanded');
+        return saved !== null ? JSON.parse(saved) : true;
+    });
 
-  const handleBurgerClick = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+    /**
+     * Toggle sidebar and persist state
+     */
+    const toggleSidebar = () => {
+        setIsSidebarExpanded((prev) => {
+            const newState = !prev;
+            localStorage.setItem('sidebarExpanded', JSON.stringify(newState));
+            return newState;
+        });
+    };
 
-  const handleSidebarToggle = () => {
-    setSidebarExpanded(!sidebarExpanded);
-  };
+    /**
+     * Handle window resize - collapse sidebar on mobile by default
+     */
+    useEffect(() => {
+        const handleResize = () => {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile && isSidebarExpanded) {
+                setIsSidebarExpanded(false);
+            }
+        };
 
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+        handleResize(); // Check on mount
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Only run on mount
 
-  return (
-    <div className="dashboard-layout">
-      {/* Sidebar with mobile support */}
-      <Sidebar 
-        expanded={sidebarExpanded}
-        onToggle={handleSidebarToggle}
-        mobileOpen={mobileMenuOpen}
-        onMobileClose={closeMobileMenu}
-      />
-      
-      {/* Mobile overlay */}
-      {mobileMenuOpen && (
-        <div 
-          className="sidebar-overlay sidebar-overlay--active"
-          onClick={closeMobileMenu}
-          aria-hidden="true"
-        />
-      )}
-      
-      {/* Main content area */}
-      <div className={clsx(
-        'dashboard-layout__main',
-        sidebarExpanded && 'dashboard-layout__main--shifted'
-      )}>
-        {/* Mobile Header with Burger Menu */}
-        <div className="dashboard-layout__mobile-header">
-          <BurgerMenu 
-            isOpen={mobileMenuOpen}
-            onClick={handleBurgerClick}
-          />
-          <div className="dashboard-layout__logo">
-            <span className="dashboard-layout__logo-text">Pulwave</span>
-          </div>
+    return (
+        <div className="dashboard-layout">
+            {/* Sidebar Navigation */}
+            <Sidebar 
+                isExpanded={isSidebarExpanded} 
+                toggleSidebar={toggleSidebar} 
+            />
+
+            {/* Main Content Area */}
+            <main 
+                className={`dashboard-content ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}
+                role="main"
+                aria-label="Main content"
+            >
+                {/* Render child routes or children */}
+                {children || <Outlet />}
+            </main>
         </div>
-
-        {/* Desktop Header with User Info */}
-        <Header className="dashboard-layout__header" />
-        
-        {/* Page Content */}
-        <div className="dashboard-layout__content">
-          {children || <Outlet />}
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 DashboardLayout.propTypes = {
-  children: PropTypes.node,
+    children: PropTypes.node,
 };
 
 export default DashboardLayout;

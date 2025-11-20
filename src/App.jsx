@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import StyleGuide from './pages/style-guide/StyleGuide';
 import Properties from './pages/Properties';
 import BuildingForm from './pages/BuildingForm';
+import Settings from './pages/Settings'; // ✅ NEW: Import Settings page
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/buildings/new" element={<BuildingForm />} />
           <Route path="/buildings/:id/edit" element={<BuildingForm />} />
+          <Route path="/settings" element={<Settings />} /> {/* ✅ NEW: Settings route */}
           <Route path="/style-guide" element={<StyleGuide />} />
         </Route>
 

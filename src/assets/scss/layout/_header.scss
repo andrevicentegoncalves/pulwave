@@ -295,3 +295,173 @@
     display: none;
   }
 }
+
+// ============================================================================ //
+//                        MOBILE HEADER COMPONENT STYLES                        //
+// ============================================================================ //
+// Mobile-only navigation header with menu toggle and user actions
+
+.mobile-header {
+  display: none; // Hidden on desktop
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 0 var(--space-6); // 24px horizontal
+  background-color: var(--color-surface-default); // White background
+  z-index: 1001; // Above overlay
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-s); // Subtle shadow for depth
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+// ---------------------------------------------------------------------------//
+// RIGHT SIDE ACTIONS CONTAINER
+// ---------------------------------------------------------------------------//
+
+.mobile-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3); // 12px between items
+}
+
+// ---------------------------------------------------------------------------//
+// MENU BUTTON (HAMBURGER)
+// ---------------------------------------------------------------------------//
+
+.mobile-menu-btn {
+  background-color: transparent;
+  color: var(--color-on-surface-default); // Dark text
+  border: none;
+  padding: var(--space-2); // 8px
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-s); // 8px
+  transition: all var(--duration-fast) var(--easing-standard);
+  min-width: 40px; // Touch target
+  min-height: 40px;
+  
+  svg {
+    width: var(--icon-size-m); // 24px
+    height: var(--icon-size-m);
+    color: var(--color-on-surface-default);
+  }
+  
+  // Hover state
+  &:hover {
+    background-color: var(--color-surface-hover);
+    transform: scale(1.05);
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: var(--focus-width) solid var(--color-primary);
+    outline-offset: var(--focus-offset);
+  }
+  
+  // Active/pressed state
+  &:active {
+    background-color: var(--color-surface-pressed);
+    transform: scale(1.0);
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// PROFILE IMAGE
+// ---------------------------------------------------------------------------//
+
+.mobile-profile-image {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full); // Circle
+  object-fit: cover;
+  border: var(--border-width-2) solid var(--color-border-default);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
+  flex-shrink: 0;
+  
+  // Hover state
+  &:hover {
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-s);
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: var(--focus-width) solid var(--color-primary);
+    outline-offset: var(--focus-offset);
+  }
+  
+  // Active/pressed state
+  &:active {
+    transform: scale(1.0);
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// LOGOUT BUTTON
+// ---------------------------------------------------------------------------//
+
+.mobile-logout-btn {
+  background-color: transparent;
+  border: none;
+  padding: var(--space-2); // 8px
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-error); // Red for logout
+  border-radius: var(--radius-s); // 8px
+  transition: all var(--duration-fast) var(--easing-standard);
+  min-width: 40px; // Touch target
+  min-height: 40px;
+  flex-shrink: 0;
+  
+  svg {
+    width: var(--icon-size-s); // 20px
+    height: var(--icon-size-s);
+  }
+  
+  // Hover state
+  &:hover {
+    background-color: var(--color-error-subtle); // Light red background
+    transform: scale(1.05);
+  }
+  
+  // Focus state
+  &:focus-visible {
+    outline: var(--focus-width) solid var(--color-error);
+    outline-offset: var(--focus-offset);
+  }
+  
+  // Active/pressed state
+  &:active {
+    background-color: var(--color-error-muted);
+    transform: scale(1.0);
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// MOBILE RESPONSIVE
+// ---------------------------------------------------------------------------//
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex; // Show on mobile
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// PRINT STYLES
+// ---------------------------------------------------------------------------//
+
+@media print {
+  .mobile-header {
+    display: none;
+  }
+}
