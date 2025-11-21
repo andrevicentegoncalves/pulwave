@@ -1,126 +1,253 @@
-@use '../abstracts' as *;
+// ============================================================================ //
+//                              PROFILE PAGE STYLES                             //
+// ============================================================================ //
+// Modern profile page with centered avatar and large wave animation
 
-/* ==========================================================================*/
-/*                              PAGES: PROFILE                               */
-/* ==========================================================================*/
+// ---------------------------------------------------------------------------//
+// MAIN CONTAINER
+// ---------------------------------------------------------------------------//
 
 .profile-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  max-width: 800px;
+  align-items: center;
+  width: 100%;
+  max-width: 900px; // Increased max-width for better form layout
+  margin: 0 auto;
+  padding-bottom: var(--space-12);
+}
 
-  &__header {
-    margin-bottom: var(--space-4);
-  }
+.profile-page__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
 
-  &__title {
-    font-size: var(--font-size-heading-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-on-surface-default);
-    margin: 0 0 var(--space-2) 0;
-    line-height: var(--line-height-heading);
-  }
+.profile-page__title {
+  font-size: var(--font-size-heading-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-on-surface-default);
+  margin-bottom: var(--space-2);
+}
 
-  &__subtitle {
-    font-size: var(--font-size-body-m);
-    color: var(--color-on-surface-subtle);
-    margin: 0;
-  }
+.profile-page__subtitle {
+  font-size: var(--font-size-body-m);
+  color: var(--color-on-surface-subtle);
+}
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
+// ---------------------------------------------------------------------------//
+// AVATAR SECTION (CENTERED)
+// ---------------------------------------------------------------------------//
 
-  &__avatar-card,
-  &__info-card {
-    padding: var(--space-8);
-
-    @media (max-width: 640px) {
-      padding: var(--space-6);
-    }
-  }
-
-  &__section-title {
-    font-size: var(--font-size-heading-s);
-    font-weight: var(--font-weight-semi-bold);
-    color: var(--color-on-surface-default);
-    margin: 0 0 var(--space-6) 0;
-  }
+.profile-avatar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 450px; // Increased height to accommodate the 400px rings
+  margin-bottom: var(--space-8);
+  overflow: visible; // Allow rings to extend if needed
 }
 
 .profile-avatar {
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: var(--space-6);
+  width: 100%;
+  height: 100%;
+}
 
-  @media (max-width: 640px) {
-    flex-direction: column;
+// Target the ProfileRingWave component
+.profile-avatar .profile-ring-wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px; // Increased to match section
+  height: 450px;
+  z-index: 0;
+  pointer-events: none;
+
+  &__svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 
-  &__preview {
-    width: 120px;
-    height: 120px;
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    border: var(--border-width-2) solid var(--color-border-default);
-    background-color: var(--color-surface-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .ring {
+    transform-origin: center;
   }
 
-  &__image {
+  .ring--1 {
+    animation: spin 30s ease-in-out infinite alternate;
+  }
+
+  .ring--2 {
+    animation: spin-reverse 40s linear infinite;
+  }
+
+  .ring--3 {
+    animation: spin 25s ease-in-out infinite;
+  }
+
+  .ring--4 {
+    animation: spin-reverse 50s ease-in-out infinite alternate;
+  }
+
+  .ring--5 {
+    animation: spin 60s linear infinite;
+  }
+
+  .ring--dots {
+    animation: spin 80s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.profile-avatar__preview {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%; // Ensure perfect circle
+  overflow: hidden;
+  box-shadow: var(--shadow-l);
+  z-index: 1; // Ensure it sits on top of the wave
+  border: 4px solid var(--color-surface-default);
+  background-color: var(--color-surface-subtle);
+  transition: all var(--duration-comfortable) var(--easing-standard);
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  &__placeholder {
+  // Target the inner placeholder from AvatarUpload component
+  .avatar-upload__placeholder {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-on-surface-subtle);
+    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, var(--color-primary) 100%);
+    color: #ffffff; // White icon on gradient
+
+    // Style the icon
+    svg {
+      width: 64px; // Large icon
+      height: 64px;
+      stroke-width: 1.5;
+      opacity: 0.9;
+    }
   }
 
-  &__actions {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+  // Hover effect handled by AvatarUpload component structure, 
+  // but we ensure container styles support it.
+  &:hover {
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.02);
+  }
+}
+
+// Upload Button - Hidden by default, handled by AvatarUpload hover
+.profile-avatar__upload-btn {
+  display: none;
+}
+
+// ---------------------------------------------------------------------------//
+// FORM SECTION
+// ---------------------------------------------------------------------------//
+
+.profile-form-section {
+  width: 100%;
+  background-color: var(--color-surface-default);
+  border-radius: var(--border-radius-l);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-s);
+  border: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+
+  @media (min-width: 768px) {
+    padding: var(--space-8);
+  }
+}
+
+.profile-form-title {
+  font-size: var(--font-size-heading-s);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-surface-default);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-6);
+    row-gap: var(--space-5);
+  }
+}
+
+// Three column row for names
+.form-row-three {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  grid-column: 1 / -1;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
+// Full width items
+.form-item--full {
+  grid-column: 1 / -1;
+}
+
+// ---------------------------------------------------------------------------//
+// RESPONSIVE
+// ---------------------------------------------------------------------------//
+
+@media (max-width: 480px) {
+  .profile-avatar {
+    width: 300px;
+    height: 300px;
   }
 
-  &__upload-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    font-size: var(--font-size-body-m);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-primary);
-    background-color: var(--color-primary-subtle);
-    border: var(--border-width-1) solid var(--color-primary);
-    border-radius: var(--radius-s);
-    cursor: pointer;
-    transition: all var(--duration-fast) var(--easing-standard);
+  .profile-avatar__upload-btn {
+    bottom: 20px;
+    position: relative;
+  }
 
-    &:hover {
-      background-color: var(--color-primary-subtle-hover);
-    }
-
-    &:active {
-      background-color: var(--color-primary-subtle-pressed);
-    }
-
-    &:focus-visible {
-      outline: var(--focus-width) solid var(--color-focus-ring);
-      outline-offset: var(--focus-offset);
-    }
+  .profile-avatar__preview {
+    width: 140px;
+    height: 140px;
   }
 }

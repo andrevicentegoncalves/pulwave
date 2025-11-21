@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
 
 /**
- * DashboardLayout - Main application layout with sidebar
+ * BaseLayout - Main application layout with sidebar
+ * 
+ * This is the base layout wrapper for all authenticated pages in the app.
+ * It provides a consistent structure with a sidebar and main content area.
  * 
  * Features:
  * - Persistent sidebar state (localStorage)
@@ -14,12 +17,12 @@ import Sidebar from './Sidebar';
  * 
  * @example
  * // In your router configuration:
- * <Route element={<DashboardLayout />}>
+ * <Route element={<BaseLayout />}>
  *   <Route path="/dashboard" element={<Dashboard />} />
- *   <Route path="/property" element={<Property />} />
+ *   <Route path="/profile" element={<Profile />} />
  * </Route>
  */
-const DashboardLayout = ({ children }) => {
+const BaseLayout = ({ children }) => {
     // Initialize sidebar state from localStorage or default to expanded
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
         const saved = localStorage.getItem('sidebarExpanded');
@@ -54,7 +57,7 @@ const DashboardLayout = ({ children }) => {
     }, []); // Only run on mount
 
     return (
-        <div className="dashboard-layout">
+        <div className="base-layout">
             {/* Sidebar Navigation */}
             <Sidebar
                 isExpanded={isSidebarExpanded}
@@ -63,7 +66,7 @@ const DashboardLayout = ({ children }) => {
 
             {/* Main Content Area */}
             <main
-                className={`dashboard-layout__main ${isSidebarExpanded ? 'dashboard-layout__main--shifted' : ''}`}
+                className={`base-layout__content ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}
                 role="main"
                 aria-label="Main content"
             >
@@ -74,8 +77,8 @@ const DashboardLayout = ({ children }) => {
     );
 };
 
-DashboardLayout.propTypes = {
+BaseLayout.propTypes = {
     children: PropTypes.node,
 };
 
-export default DashboardLayout;
+export default BaseLayout;

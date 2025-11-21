@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Menu } from 'lucide-react';
 
 /**
  * SidebarToggle - Toggle button for expanding/collapsing sidebar
@@ -10,20 +10,24 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
  * @example
  * <SidebarToggle isExpanded={true} toggleSidebar={handleToggle} />
  */
-const SidebarToggle = ({ isExpanded, toggleSidebar }) => {
+const SidebarToggle = ({ isExpanded, toggleSidebar, isMobile }) => {
     return (
         <div className="sidebar-header">
-            <button 
-                className="toggle-btn" 
+            <button
+                className="toggle-btn"
                 onClick={toggleSidebar}
                 aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 aria-expanded={isExpanded}
                 type="button"
             >
-                {isExpanded ? (
-                    <ArrowLeft size={20} aria-hidden="true" />
+                {isMobile ? (
+                    <Menu size={24} aria-hidden="true" />
                 ) : (
-                    <ArrowRight size={20} aria-hidden="true" />
+                    isExpanded ? (
+                        <ArrowLeft size={20} aria-hidden="true" />
+                    ) : (
+                        <ArrowRight size={20} aria-hidden="true" />
+                    )
                 )}
             </button>
         </div>
@@ -33,6 +37,7 @@ const SidebarToggle = ({ isExpanded, toggleSidebar }) => {
 SidebarToggle.propTypes = {
     isExpanded: PropTypes.bool.isRequired,
     toggleSidebar: PropTypes.func.isRequired,
+    isMobile: PropTypes.bool,
 };
 
 export default SidebarToggle;

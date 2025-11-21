@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Power } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 
 /**
  * UserInfo - Flexible user profile component with multiple layout configurations
@@ -13,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
  * - Responsive to sidebar collapsed state
  * - Keyboard accessible
  * - WCAG AA compliant
+ * - Fetches real user data from Supabase
  * 
  * Layout Rules:
  * HORIZONTAL (orientation="horizontal"):
@@ -27,9 +29,18 @@ import { useNavigate } from 'react-router-dom';
  * - Avatar + Name (stacked)
  * - Avatar + Logout (stacked)
  * 
+ * Size Variants:
+ * - 's' (small): Compact size for mobile headers
+ * - 'default': Standard size for sidebars
+ * - 'l' (large): Larger size for prominent displays
+ * 
  * @example
  * // Full horizontal (default)
  * <UserInfo showAvatar showName showLogout orientation="horizontal" />
+ * 
+ * @example
+ * // Small size for mobile header
+ * <UserInfo showAvatar showLogout size="s" orientation="horizontal" />
  * 
  * @example
  * // Avatar + Name vertical
@@ -44,13 +55,66 @@ const UserInfo = ({
     showName = true,
     showLogout = true,
     orientation = 'horizontal', // 'horizontal' | 'vertical'
-    userName = 'Sarah Connor',
-    userEmail = 'sarah.connor@pulwave.com',
-    avatarUrl = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    size = 'default', // 's' | 'default' | 'l'
     onLogout,
     className,
+    style,
 }) => {
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [profile, setProfile] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch user data on mount
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                setLoading(true);
+                // Get authenticated user
+                const { data: { user: authUser } } = await supabase.auth.getUser();
+                setUser(authUser);
+
+                if (authUser) {
+                    // Get profile data
+                    const { data: profileData } = await supabase
+                        .from('profiles')
+                        .select('*')
+                        .eq('id', authUser.id)
+                        .single();
+
+                    console.log('UserInfo - Profile Data:', profileData);
+                    console.log('UserInfo - First Name:', profileData?.first_name);
+                    console.log('UserInfo - Last Name:', profileData?.last_name);
+                    console.log('UserInfo - Username:', profileData?.username);
+
+                    setProfile(profileData);
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+
+        // Subscribe to auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session?.user) {
+                setUser(session.user);
+                // Refetch profile when auth state changes
+                fetchUserData();
+            } else {
+                setUser(null);
+                setProfile(null);
+                setLoading(false);
+            }
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
 
     /**
      * Handle profile click - navigate to profile page
@@ -62,13 +126,17 @@ const UserInfo = ({
     /**
      * Handle logout click
      */
-    const handleLogout = () => {
+    const handleLogout = async () => {
         if (onLogout) {
             onLogout();
         } else {
             // Default logout behavior
-            console.log('Logout clicked - implement your logout logic');
-            // Example: logout(), navigate('/login')
+            try {
+                await supabase.auth.signOut();
+                navigate('/login');
+            } catch (error) {
+                console.error('Error logging out:', error);
+            }
         }
     };
 
@@ -82,9 +150,44 @@ const UserInfo = ({
         }
     };
 
+    // Don't render until data is loaded to prevent flickering
+    if (loading) {
+        return null;
+    }
+
+    // Construct display name from profile
+    const displayName = (() => {
+        if (!profile) {
+            return user?.email?.split('@')[0] || 'User';
+        }
+
+        // Try to build full name from first and last name
+        const fullName = `${profile.first_name || ''} ${profile.last_name || ''}`.trim();
+        if (fullName) {
+            console.log('UserInfo - Using full name:', fullName);
+            return fullName;
+        }
+
+        // Fall back to username if available
+        if (profile.username) {
+            console.log('UserInfo - Using username:', profile.username);
+            return profile.username;
+        }
+
+        // Last resort: use email username
+        console.log('UserInfo - Using email username');
+        return user?.email?.split('@')[0] || 'User';
+    })();
+
+    console.log('UserInfo - Final display name:', displayName);
+
+    // Get avatar URL with fallback
+    const avatarUrl = profile?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
+
     return (
-        <div 
-            className={`user-info user-info--${orientation} ${className || ''}`}
+        <div
+            className={`user-info user-info--${orientation} user-info--${size} ${className || ''}`}
+            style={style}
             role="region"
             aria-label="User profile"
         >
@@ -92,20 +195,20 @@ const UserInfo = ({
             {showAvatar && (
                 <img
                     src={avatarUrl}
-                    alt={`${userName}'s profile picture`}
+                    alt={`${displayName}'s profile picture`}
                     className="user-info__avatar"
                     onClick={handleProfileClick}
                     onKeyDown={handleAvatarKeyDown}
                     role="button"
                     tabIndex={0}
-                    aria-label={`View ${userName}'s profile`}
+                    aria-label={`View ${displayName}'s profile`}
                 />
             )}
 
             {/* Name & Email */}
             {showName && (
                 <div className="user-info__details">
-                    <span className="user-info__name">{userName}</span>
+                    <span className="user-info__name">{displayName}</span>
                 </div>
             )}
 
@@ -130,11 +233,10 @@ UserInfo.propTypes = {
     showName: PropTypes.bool,
     showLogout: PropTypes.bool,
     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    userName: PropTypes.string,
-    userEmail: PropTypes.string,
-    avatarUrl: PropTypes.string,
+    size: PropTypes.oneOf(['s', 'default', 'l']),
     onLogout: PropTypes.func,
     className: PropTypes.string,
+    style: PropTypes.object,
 };
 
 export default UserInfo;

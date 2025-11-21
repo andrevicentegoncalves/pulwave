@@ -17,7 +17,7 @@ import {
 import SidebarToggle from './SidebarToggle';
 import Menu from './Menu';
 import UserInfo from './UserInfo';
-import Wave from '../ui/Wave';
+import { VisualEffect } from '../ui';
 import Header from './Header';
 
 /**
@@ -38,9 +38,11 @@ import Header from './Header';
 const Sidebar = ({ isExpanded, toggleSidebar }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const sidebarRef = useRef(null);
-    const [showWave, setShowWave] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
+    const [showWave, setShowWave] = useState(true);
+
+    // Refs for measuring space
+    const menuRef = useRef(null);
 
     // Menu configuration
     const menuItems = [
@@ -63,7 +65,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
      */
     const handleItemClick = (path) => {
         navigate(path);
-        
+
         // Auto-close sidebar on mobile after navigation
         if (isMobile && isExpanded) {
             toggleSidebar();
@@ -84,68 +86,60 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     }, []);
 
     /**
-     * Calculate if wave should be visible based on available space
-     * Wave is 370px tall - only show if there's enough free space after menu items
-     * This prevents wave from overlapping with menu items
+     * Calculate available space and show/hide wave
+     * Wave only shows when there's at least 300px from bottom of menu to bottom of sidebar
      */
     useEffect(() => {
-        const checkWaveVisibility = () => {
-            // Hide wave when sidebar is collapsed
-            if (!sidebarRef.current || !isExpanded) {
+        const calculateSpace = () => {
+            if (!menuRef.current || !isExpanded) {
+                console.log('Wave hidden: menu ref or not expanded', { menuRef: !!menuRef.current, isExpanded });
                 setShowWave(false);
                 return;
             }
 
-            // Use actual DOM measurements for more accuracy
-            const sidebar = sidebarRef.current;
-            const sidebarInner = sidebar.querySelector('.sidebar');
-            const menuContainer = sidebar.querySelector('.sidebar__menu') || sidebar.querySelector('.menu-items');
-            const profileContainer = sidebar.querySelector('.user-info-container') || sidebar.querySelector('.sidebar-user');
-            
-            if (!sidebarInner) {
+            // Find the actual .menu element inside .sidebar__menu
+            const actualMenu = menuRef.current.querySelector('.menu');
+            if (!actualMenu) {
+                console.log('Wave hidden: .menu element not found');
                 setShowWave(false);
                 return;
             }
-            
-            const sidebarHeight = sidebarInner.clientHeight;
-            const waveHeight = 370; // Wave SVG fixed height
-            const minClearance = 50; // Minimum safety margin
-            
-            // Get actual heights from DOM when available
-            let contentHeight = 60; // Header fallback
-            
-            if (menuContainer) {
-                contentHeight += menuContainer.offsetHeight + 20; // Add padding
-            } else {
-                // Fallback calculation
-                contentHeight += menuItems.length * 56;
-            }
-            
-            if (profileContainer) {
-                contentHeight += profileContainer.offsetHeight + 20;
-            } else {
-                // Fallback
-                contentHeight += 120;
-            }
-            
-            // Calculate available space
-            const availableSpace = sidebarHeight - contentHeight;
-            const requiredSpace = waveHeight + minClearance;
-            
-            // Only show if there's clear space - no overlap allowed
-            setShowWave(availableSpace >= requiredSpace);
+
+            const menuRect = actualMenu.getBoundingClientRect();
+            const sidebarRect = menuRef.current.closest('.sidebar').getBoundingClientRect();
+
+            // Calculate space from bottom of menu to bottom of sidebar
+            const availableSpace = sidebarRect.bottom - menuRect.bottom;
+
+            console.log('Wave calculation:', {
+                menuBottom: menuRect.bottom,
+                sidebarBottom: sidebarRect.bottom,
+                availableSpace,
+                threshold: 300,
+                willShow: availableSpace >= 300
+            });
+
+            // Show wave only if there's at least 300px of space
+            setShowWave(availableSpace >= 300);
         };
 
-        // Initial check with slight delay to ensure DOM is ready
-        const timeoutId = setTimeout(checkWaveVisibility, 100);
-        
-        // Recheck on window resize
-        window.addEventListener('resize', checkWaveVisibility);
+        // Calculate on mount and when expanded state changes
+        calculateSpace();
+
+        // Recalculate on window resize
+        window.addEventListener('resize', calculateSpace);
+
+        // Use ResizeObserver to detect menu content changes
+        const resizeObserver = new ResizeObserver(calculateSpace);
+        if (menuRef.current) {
+            resizeObserver.observe(menuRef.current);
+        }
+
         return () => {
-            clearTimeout(timeoutId);
-            window.removeEventListener('resize', checkWaveVisibility);
+            window.removeEventListener('resize', calculateSpace);
+            resizeObserver.disconnect();
         };
-    }, [menuItems.length, isExpanded]);
+    }, [isExpanded]);
 
     // Get current path, defaulting to dashboard
     const currentPath = location.pathname === '/' ? '/dashboard' : location.pathname;
@@ -153,30 +147,29 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     return (
         <>
             {/* Mobile Header - only visible on small screens */}
-            <Header toggleSidebar={toggleSidebar} />
+            <Header toggleSidebar={toggleSidebar} isExpanded={isExpanded} />
 
             {/* Overlay for mobile sidebar */}
-            <div 
+            <div
                 className={`sidebar-overlay ${isExpanded && isMobile ? 'visible' : ''}`}
                 onClick={toggleSidebar}
                 aria-hidden="true"
             />
 
             {/* Main Sidebar Container */}
-            <aside 
+            <aside
                 className={`sidebar-container ${isExpanded ? 'expanded' : 'collapsed'}`}
-                ref={sidebarRef}
                 aria-label="Main navigation"
             >
                 <div className="sidebar">
                     {/* Toggle Button - Desktop only */}
-                    <SidebarToggle 
-                        isExpanded={isExpanded} 
+                    <SidebarToggle
+                        isExpanded={isExpanded}
                         toggleSidebar={toggleSidebar}
                     />
 
                     {/* Navigation Menu */}
-                    <div className="sidebar__menu">
+                    <div className="sidebar__menu" ref={menuRef}>
                         <Menu
                             items={menuItems}
                             activeItem={currentPath}
@@ -186,15 +179,17 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
                     </div>
 
                     {/* User Profile Section - Responsive Orientation */}
-                    <UserInfo 
-                        showAvatar={true}
-                        showName={isExpanded}
-                        showLogout={isExpanded}
-                        orientation={isExpanded ? 'horizontal' : 'vertical'}
-                    />
+                    <div className="sidebar-user">
+                        <UserInfo
+                            showAvatar={true}
+                            showName={isExpanded}
+                            showLogout={true}
+                            orientation={isExpanded ? 'horizontal' : 'vertical'}
+                        />
+                    </div>
 
-                    {/* Decorative Wave - only when expanded AND sufficient space available */}
-                    {showWave && <Wave />}
+                    {/* Decorative Wave - only show when there's enough space */}
+                    {isExpanded && showWave && <VisualEffect variant="sidebar-wave" />}
                 </div>
             </aside>
         </>

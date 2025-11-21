@@ -1,0 +1,71 @@
+// ============================================================================ //
+//                           BASE LAYOUT STYLES                                 //
+// ============================================================================ //
+// Main application layout wrapper for all authenticated pages.
+// Provides consistent structure with sidebar and content area.
+
+.base-layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--color-background-default);
+}
+
+// ---------------------------------------------------------------------------//
+// CONTENT AREA
+// ---------------------------------------------------------------------------//
+
+.base-layout__content {
+    // Layout
+    flex: 1;
+
+    // Spacing - adjusted based on sidebar state
+    // Collapsed width (80px) + sidebar margin (var(--space-5)) + small gap (var(--space-4))
+    margin-left: calc(80px + var(--space-5) + var(--space-4));
+
+    // Transition for sidebar expansion
+    transition: margin-left var(--duration-comfortable) var(--easing-standard);
+
+    // When sidebar is expanded
+    // Expanded width (280px) + sidebar margin (var(--space-5)) + small gap (var(--space-4))
+    &.expanded {
+        margin-left: calc(280px + var(--space-5) + var(--space-4));
+    }
+
+    // Tablet: Reduce gap
+    @media (max-width: 1024px) {
+        // Collapsed width (80px) + sidebar margin (var(--space-5)) + smaller gap (var(--space-3))
+        margin-left: calc(80px + var(--space-5) + var(--space-3));
+
+        &.expanded {
+            // Expanded width (280px) + sidebar margin (var(--space-5)) + smaller gap (var(--space-3))
+            margin-left: calc(280px + var(--space-5) + var(--space-3));
+        }
+    }
+
+    // Mobile: no margin (sidebar overlays)
+    @media (max-width: 768px) {
+        margin-left: 0 !important;
+    }
+
+    // Padding for content
+    padding: var(--space-8) var(--space-6);
+
+    // Allow scrolling if content overflows
+    overflow-y: auto;
+
+    // Responsive padding
+    @media (max-width: 1024px) {
+        padding: var(--space-6) var(--space-5);
+    }
+
+    @media (max-width: 640px) {
+        padding: var(--space-5) var(--space-4);
+    }
+}
+
+// Very small screens
+@media (max-width: 360px) {
+    .base-layout__content {
+        padding: var(--space-4) var(--space-3);
+    }
+}

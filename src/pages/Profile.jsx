@@ -1,14 +1,12 @@
-// src/pages/Profile.jsx
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Button, Input, Alert, Form } from '../components/ui';
+import { Card, Button, Input, Alert, Form, Select } from '../components/ui';
 import Icon from '../components/ui/Icon';
-import { User, Camera, CheckCircle } from '../components/ui/iconLibrary';
+import { User, CheckCircle, MapPin, Building } from '../components/ui/iconLibrary';
+import { VisualEffect } from '../components/ui';
+import AvatarUpload from '../components/ui/AvatarUpload';
+import ContentLayout from '../components/layouts/ContentLayout';
 
-/**
- * Profile Page
- * ✅ UPDATED: Now includes automatic image resizing and old image deletion
- */
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -16,11 +14,37 @@ const Profile = () => {
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+
+  // Profile Form State
   const [formData, setFormData] = useState({
-    full_name: '',
+    username: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     phone: '',
+    company_name: '',
+    vat_id: '',
+    theme: 'light',
   });
 
+  // Address Form State - keeping country_id/region_id for UI filtering, but won't save them
+  const [addressData, setAddressData] = useState({
+    country_id: '',
+    region_id: '',
+    city_id: '',
+    street_name: '',
+    number: '',
+    floor: '',
+    postal_code: '',
+    type: 'home',
+  });
+
+  // Dropdown Data
+  const [countries, setCountries] = useState([]);
+  const [regions, setRegions] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  // Fetch User & Profile Data
   useEffect(() => {
     const fetchUserData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -32,24 +56,133 @@ const Profile = () => {
           .select('*')
           .eq('id', user.id)
           .single();
-        
+
         setProfile(profileData);
         if (profileData) {
           setFormData({
-            full_name: profileData.full_name || '',
+            username: profileData.username || '',
+            first_name: profileData.first_name || '',
+            middle_name: profileData.middle_name || '',
+            last_name: profileData.last_name || '',
             phone: profileData.phone || '',
+            company_name: profileData.company_name || '',
+            vat_id: profileData.vat_id || '',
+            theme: profileData.theme || 'light',
           });
+
+          // Fetch Address if exists
+          if (profileData.address_id) {
+            const { data: address } = await supabase
+              .from('addresses')
+              .select(`
+                *,
+                cities (
+                  id,
+                  name,
+                  country_id,
+                  region_id
+                )
+              `)
+              .eq('id', profileData.address_id)
+              .single();
+
+            if (address) {
+              setAddressData({
+                country_id: address.cities?.country_id || '', // For UI filtering
+                region_id: address.cities?.region_id || '', // For UI filtering
+                city_id: address.city_id || '',
+                street_name: address.street || '', // Map from 'street' column
+                number: address.number || '',
+                floor: address.floor || '',
+                postal_code: address.postal_code || '',
+                type: address.type || 'home',
+              });
+            }
+          }
         }
       }
     };
 
     fetchUserData();
+    fetchCountries();
   }, []);
+
+  // Fetch Countries
+  const fetchCountries = async () => {
+    try {
+      const { data } = await supabase.from('countries').select('id, name').order('name');
+      if (data) setCountries(data);
+    } catch (err) {
+      console.error('Error fetching countries:', err);
+    }
+  };
+
+  // Fetch Regions when Country changes
+  useEffect(() => {
+    const fetchRegions = async () => {
+      if (!addressData.country_id) {
+        setRegions([]);
+        return;
+      }
+      try {
+        const { data } = await supabase
+          .from('regions')
+          .select('id, name')
+          .eq('country_id', addressData.country_id)
+          .order('name');
+        if (data) setRegions(data);
+      } catch (err) {
+        console.error('Error fetching regions:', err);
+      }
+    };
+
+    fetchRegions();
+  }, [addressData.country_id]);
+
+  // Fetch Cities when Country changes
+  useEffect(() => {
+    const fetchCities = async () => {
+      if (!addressData.country_id) {
+        setCities([]);
+        return;
+      }
+      try {
+        const { data } = await supabase
+          .from('cities')
+          .select('id, name')
+          .eq('country_id', addressData.country_id)
+          .order('name');
+        if (data) setCities(data);
+      } catch (err) {
+        console.error('Error fetching cities:', err);
+      }
+    };
+
+    fetchCities();
+  }, [addressData.country_id]);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleThemeChange = (value) => {
+    setFormData({ ...formData, theme: value });
+  };
+
+  const handleAddressChange = (e) => {
+    setAddressData({
+      ...addressData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAddressSelectChange = (name, value) => {
+    setAddressData({
+      ...addressData,
+      [name]: value,
     });
   };
 
@@ -60,19 +193,60 @@ const Profile = () => {
     setSuccess(null);
 
     try {
+      let addressId = profile?.address_id;
+
+      // 1. Upsert Address - filter out fields that don't exist in DB
+      const { country_id, region_id, street_name, ...restAddressData } = addressData;
+
+      const addressPayload = {
+        ...restAddressData,
+        street: street_name, // Map street_name to street column
+      };
+
+      // Validate required fields - city_id is required (NOT NULL constraint)
+      if (!addressPayload.city_id) {
+        throw new Error('Please select a city before saving your address');
+      }
+
+      if (addressId) {
+        // Update existing address
+        const { error: addrError } = await supabase
+          .from('addresses')
+          .update(addressPayload)
+          .eq('id', addressId);
+        if (addrError) throw addrError;
+      } else {
+        // Create new address
+        const { data: newAddress, error: addrError } = await supabase
+          .from('addresses')
+          .insert([addressPayload])
+          .select()
+          .single();
+        if (addrError) throw addrError;
+        addressId = newAddress.id;
+      }
+
+      // 2. Update Profile
       const { error: updateError } = await supabase
         .from('profiles')
         .update({
-          full_name: formData.full_name,
+          username: formData.username,
+          first_name: formData.first_name,
+          middle_name: formData.middle_name,
+          last_name: formData.last_name,
           phone: formData.phone,
+          company_name: formData.company_name,
+          vat_id: formData.vat_id,
+          theme: formData.theme,
+          address_id: addressId,
           updated_at: new Date().toISOString(),
         })
         .eq('id', user.id);
 
       if (updateError) throw updateError;
 
-      setSuccess('Profile updated successfully!');
-      
+      setSuccess('Profile and address updated successfully!');
+
       // Refresh profile data
       const { data: updatedProfile } = await supabase
         .from('profiles')
@@ -82,15 +256,13 @@ const Profile = () => {
       setProfile(updatedProfile);
     } catch (err) {
       setError(err.message);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  /**
-   * ✅ NEW: Resize image before upload to optimize storage
-   * Maintains aspect ratio and converts to JPEG for better compression
-   */
+  // Image resizing logic
   const resizeImage = (file, maxWidth = 800, maxHeight = 800) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -101,7 +273,6 @@ const Profile = () => {
           let width = img.width;
           let height = img.height;
 
-          // Calculate new dimensions maintaining aspect ratio
           if (width > height) {
             if (width > maxWidth) {
               height *= maxWidth / width;
@@ -119,7 +290,6 @@ const Profile = () => {
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          // Convert to blob with compression
           canvas.toBlob((blob) => {
             if (blob) {
               resolve(new File([blob], file.name, {
@@ -129,7 +299,7 @@ const Profile = () => {
             } else {
               reject(new Error('Failed to create image blob'));
             }
-          }, 'image/jpeg', 0.85); // 85% quality
+          }, 'image/jpeg', 0.85);
         };
         img.onerror = () => reject(new Error('Failed to load image'));
         img.src = e.target.result;
@@ -139,74 +309,48 @@ const Profile = () => {
     });
   };
 
-  /**
-   * ✅ UPDATED: Now includes automatic resizing and old image deletion
-   */
   const handleAvatarUpload = async (e) => {
     try {
       setUploading(true);
       setError(null);
-
-      const file = e.target.files[0];
+      const file = e.target.files && e.target.files[0];
       if (!file) return;
 
-      // Validate file type
-      if (!file.type.startsWith('image/')) {
-        throw new Error('Please upload an image file');
+      if (!file.type.startsWith('image/')) throw new Error('Please upload an image file');
+      if (file.size > 5 * 1024 * 1024) throw new Error('Image size must be less than 5MB');
+
+      let fileToUpload = file;
+      try {
+        fileToUpload = await resizeImage(file);
+      } catch (resizeErr) {
+        console.warn('Image resizing failed, falling back to original file:', resizeErr);
+        // Continue with original file
       }
 
-      // Validate file size (before resizing)
-      if (file.size > 5 * 1024 * 1024) {
-        throw new Error('Image size must be less than 5MB');
-      }
-
-      // ✅ RESIZE IMAGE for better performance
-      console.log('Resizing image...');
-      const resizedFile = await resizeImage(file);
-      console.log(`Original size: ${(file.size / 1024).toFixed(2)}KB, Resized: ${(resizedFile.size / 1024).toFixed(2)}KB`);
-
-      // ✅ DELETE OLD AVATAR if it exists
       if (profile?.avatar_url) {
         try {
-          // Extract file path from URL
           const urlParts = profile.avatar_url.split('/storage/v1/object/public/profile-images/');
           if (urlParts.length > 1) {
-            const oldFilePath = urlParts[1];
-            console.log('Deleting old avatar:', oldFilePath);
-            await supabase.storage
-              .from('profile-images')
-              .remove([oldFilePath]);
+            await supabase.storage.from('profile-images').remove([urlParts[1]]);
           }
-        } catch (deleteError) {
-          // Log but don't fail the upload if deletion fails
-          console.warn('Failed to delete old avatar:', deleteError);
-        }
+        } catch (e) { console.warn(e); }
       }
 
-      // Generate unique filename
-      const fileExt = 'jpg'; // Always use jpg since we converted it
-      const fileName = `${user.id}-${Date.now()}.${fileExt}`;
-      const filePath = `avatars/${fileName}`;
-
-      // Upload to Supabase Storage
+      const fileName = `${user.id}-${Date.now()}.jpg`;
       const { error: uploadError } = await supabase.storage
         .from('profile-images')
-        .upload(filePath, resizedFile, {
-          cacheControl: '3600',
-          upsert: false
-        });
+        .upload(`avatars/${fileName}`, fileToUpload, { cacheControl: '3600', upsert: false });
 
       if (uploadError) throw uploadError;
 
-      // Get public URL
       const { data: { publicUrl } } = supabase.storage
         .from('profile-images')
-        .getPublicUrl(filePath);
+        .getPublicUrl(`avatars/${fileName}`);
 
-      // Update profile with new avatar URL
+      // Update profile
       const { error: updateError } = await supabase
         .from('profiles')
-        .update({ 
+        .update({
           avatar_url: publicUrl,
           updated_at: new Date().toISOString(),
         })
@@ -218,135 +362,167 @@ const Profile = () => {
       setSuccess('Avatar updated successfully!');
     } catch (err) {
       setError(err.message);
-      console.error('Avatar upload error:', err);
+      console.error(err);
     } finally {
       setUploading(false);
+      // Reset input value to allow selecting same file again
+      if (e.target) e.target.value = '';
     }
   };
 
   return (
-    <div className="profile-page">
-      <div className="profile-page__header">
-        <h1 className="profile-page__title">Profile Settings</h1>
-        <p className="profile-page__subtitle">
-          Manage your account information and preferences
-        </p>
-      </div>
+    <ContentLayout className="content-layout--no-top-padding">
+      <div className="profile-page">
 
-      {success && (
-        <Alert type="success" dismissible onDismiss={() => setSuccess(null)}>
-          {success}
-        </Alert>
-      )}
+        {success && <Alert type="success" dismissible onDismiss={() => setSuccess(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{success}</Alert>}
+        {error && <Alert type="error" dismissible onDismiss={() => setError(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{error}</Alert>}
 
-      {error && (
-        <Alert type="error" dismissible onDismiss={() => setError(null)}>
-          {error}
-        </Alert>
-      )}
-
-      <div className="profile-page__content">
-        <Card variant="elevated" className="profile-page__avatar-card">
-          <h2 className="profile-page__section-title">Profile Photo</h2>
-          
+        {/* Centered Avatar Section with Large Wave Animation */}
+        <div className="profile-avatar-section">
           <div className="profile-avatar">
-            <div className="profile-avatar__preview">
-              {profile?.avatar_url ? (
-                <img
-                  src={profile.avatar_url}
-                  alt={formData.full_name || user?.email}
-                  className="profile-avatar__image"
-                />
-              ) : (
-                <div className="profile-avatar__placeholder">
-                  <Icon size="2xl">
-                    <User />
-                  </Icon>
-                </div>
-              )}
-            </div>
-
-            <div className="profile-avatar__actions">
-              <label htmlFor="avatar-upload" className="profile-avatar__upload-btn">
-                <Icon size="s">
-                  <Camera />
-                </Icon>
-                <span>{uploading ? 'Uploading...' : 'Change Photo'}</span>
-              </label>
-              <input
-                id="avatar-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleAvatarUpload}
-                disabled={uploading}
-                style={{ display: 'none' }}
-              />
-              <p style={{ 
-                fontSize: 'var(--font-size-caption-s)', 
-                color: 'var(--color-on-surface-subtle)',
-                margin: '0'
-              }}>
-                JPG, PNG or WebP • Max 5MB • Auto-optimized
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card variant="elevated" className="profile-page__info-card">
-          <h2 className="profile-page__section-title">Personal Information</h2>
-          
-          <Form layout="vertical" onSubmit={handleSubmit}>
-            <Input
-              label="Email Address"
-              type="email"
-              value={user?.email || ''}
-              disabled
-              helperText="Email cannot be changed"
-              fullWidth
-            />
-
-            <Input
-              label="Full Name"
-              type="text"
-              name="full_name"
-              value={formData.full_name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              fullWidth
-            />
-
-            <Input
-              label="Phone Number"
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+1 (555) 000-0000"
-              fullWidth
-            />
-
-            <Button
-              type="submit"
-              variant="primary"
+            <VisualEffect variant="ring-wave" />
+            <AvatarUpload
+              src={profile?.avatar_url}
+              alt={formData.username || 'User'}
               size="l"
-              disabled={loading}
-              fullWidth
-            >
-              {loading ? (
-                <>
-                  <Icon size="s">
-                    <CheckCircle />
-                  </Icon>
-                  <span>Saving...</span>
-                </>
-              ) : (
-                <span>Save Changes</span>
-              )}
+              onUpload={handleAvatarUpload}
+              loading={uploading}
+              className="profile-avatar__preview"
+            />
+          </div>
+        </div>
+
+        <Form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          {/* Personal Information Section */}
+          <Card
+            header={
+              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
+                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><User /></Icon>
+                Personal Information
+              </h2>
+            }
+            style={{ marginBottom: 'var(--space-6)' }}
+          >
+            <div className="profile-form-grid">
+              <Input label="Username" name="username" value={formData.username} onChange={handleChange} placeholder="@username" fullWidth />
+              <Input label="Email" value={user?.email || ''} disabled fullWidth helperText="Managed by auth provider" />
+
+              {/* Names in one row */}
+              <div className="form-row-three">
+                <Input label="First Name" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" fullWidth />
+                <Input label="Middle Name" name="middle_name" value={formData.middle_name} onChange={handleChange} placeholder="Middle Name" fullWidth />
+                <Input label="Last Name" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Last Name" fullWidth />
+              </div>
+
+              <Input label="Phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" fullWidth />
+
+              {/* Theme Selector */}
+              <Select
+                label="Theme Preference"
+                value={formData.theme}
+                onChange={handleThemeChange}
+                options={[
+                  { value: 'light', label: 'Light' },
+                  { value: 'dark', label: 'Dark' },
+                  { value: 'auto', label: 'Auto (System)' }
+                ]}
+                fullWidth
+              />
+            </div>
+          </Card>
+
+          {/* Company Information Section */}
+          <Card
+            header={
+              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
+                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><Building /></Icon>
+                Company Details
+              </h2>
+            }
+            style={{ marginBottom: 'var(--space-6)' }}
+          >
+            <div className="profile-form-grid">
+              <Input label="Company Name" name="company_name" value={formData.company_name} onChange={handleChange} placeholder="Company Name" fullWidth />
+              <Input label="VAT ID" name="vat_id" value={formData.vat_id} onChange={handleChange} placeholder="VAT ID" fullWidth />
+            </div>
+          </Card>
+
+          {/* Address Section */}
+          <Card
+            header={
+              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
+                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><MapPin /></Icon>
+                Address
+              </h2>
+            }
+            style={{ marginBottom: 'var(--space-6)' }}
+          >
+            <div className="profile-form-grid">
+              {/* Country Dropdown - for filtering regions/cities, not saved to DB */}
+              <Select
+                label="Country"
+                value={addressData.country_id}
+                onChange={(val) => handleAddressSelectChange('country_id', val)}
+                options={countries.map(c => ({ value: c.id, label: c.name }))}
+                placeholder="Select Country"
+                fullWidth
+              />
+
+              {/* Region Dropdown */}
+              <Select
+                label="Region/State"
+                value={addressData.region_id}
+                onChange={(val) => handleAddressSelectChange('region_id', val)}
+                options={regions.map(r => ({ value: r.id, label: r.name }))}
+                placeholder="Select Region"
+                disabled={!addressData.country_id}
+                fullWidth
+              />
+
+              {/* City Dropdown */}
+              <Select
+                label="City"
+                value={addressData.city_id}
+                onChange={(val) => handleAddressSelectChange('city_id', val)}
+                options={cities.map(c => ({ value: c.id, label: c.name }))}
+                placeholder="Select City"
+                disabled={!addressData.country_id}
+                fullWidth
+              />
+
+              <Input label="Postal Code" name="postal_code" value={addressData.postal_code} onChange={handleAddressChange} placeholder="Postal Code" fullWidth />
+
+              <div className="form-item--full">
+                <Input label="Street Name" name="street_name" value={addressData.street_name} onChange={handleAddressChange} placeholder="Street Name" fullWidth />
+              </div>
+
+              <div className="form-row-three">
+                <Input label="Number" name="number" value={addressData.number} onChange={handleAddressChange} placeholder="No." fullWidth />
+                <Input label="Floor/Unit" name="floor" value={addressData.floor} onChange={handleAddressChange} placeholder="Floor" fullWidth />
+
+                <Select
+                  label="Type"
+                  value={addressData.type}
+                  onChange={(val) => handleAddressSelectChange('type', val)}
+                  options={[
+                    { value: 'home', label: 'Home' },
+                    { value: 'work', label: 'Work' },
+                    { value: 'billing', label: 'Billing' }
+                  ]}
+                  fullWidth
+                />
+              </div>
+            </div>
+          </Card>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button type="submit" variant="primary" size="l" disabled={loading} icon={<CheckCircle />}>
+              {loading ? 'Saving...' : 'Save All Changes'}
             </Button>
-          </Form>
-        </Card>
+          </div>
+        </Form>
       </div>
-    </div>
+    </ContentLayout>
   );
 };
 

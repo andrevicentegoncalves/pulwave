@@ -4,7 +4,7 @@
 
 .form {
   width: 100%;
-  
+
   // ── LAYOUT: VERTICAL (default, mobile-first) ──
   &--vertical {
     display: flex;
@@ -47,6 +47,18 @@
   }
 }
 
+// ── FORM ITEM ──
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scale-2);
+  width: 100%;
+
+  &--full-width {
+    width: 100%;
+  }
+}
+
 // ── FORM GROUP ──
 .form-group {
   display: flex;
@@ -58,7 +70,7 @@
 .form-row {
   display: grid;
   width: 100%;
-  
+
   // Mobile-first: Stack on mobile
   grid-template-columns: 1fr;
   gap: var(--scale-4);

@@ -1,29 +1,6 @@
 // ============================================================================ //
 //                         USER INFO COMPONENT STYLES                           //
 // ============================================================================ //
-// Flexible user profile component with horizontal and vertical orientations
-
-// ---------------------------------------------------------------------------//
-// BASE STYLES
-// ---------------------------------------------------------------------------//
-
-.user-info {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: var(--space-4); 
-  border-radius: var(--border-radius-m); // 16px
-  backdrop-filter: blur(10px);
-  transition: all var(--duration-comfortable) var(--easing-standard);
-  box-sizing: border-box;
-  
-  // Default gap between elements
-  gap: var(--space-3); // 12px
-}
-
-// ---------------------------------------------------------------------------//
-// AVATAR
-// ---------------------------------------------------------------------------//
 
 .user-info__avatar {
   width: 46px;
@@ -33,17 +10,17 @@
   flex-shrink: 0;
   cursor: pointer;
   transition: all var(--duration-fast) var(--easing-standard);
-  
+
   &:hover {
     transform: scale(1.05);
     border-color: rgba(255, 255, 255, 0.4);
   }
-  
+
   &:focus-visible {
     outline: var(--focus-width) solid var(--color-on-primary);
     outline-offset: var(--focus-offset);
   }
-  
+
   &:active {
     transform: scale(1.0);
   }
@@ -97,22 +74,22 @@
   cursor: pointer;
   transition: all var(--duration-fast) var(--easing-standard);
   flex-shrink: 0;
-  
+
   svg {
     width: var(--icon-size-s); // 20px
     height: var(--icon-size-s);
   }
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
   }
-  
+
   &:focus-visible {
     outline: var(--focus-width) solid var(--color-on-primary);
     outline-offset: var(--focus-offset);
   }
-  
+
   &:active {
     background: rgba(255, 255, 255, 0.15);
     transform: scale(1.0);
@@ -127,13 +104,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  
-  // Full: Avatar + Name + Logout (same line) ✓
-  // Avatar + Name (same line) ✓
-  // Avatar + Logout (same line) ✓
-  // Avatar only ✓
-  // Logout only ✓
-  // All handled by default flex-direction: row
 }
 
 // ---------------------------------------------------------------------------//
@@ -146,27 +116,85 @@
   align-items: center;
   text-align: center;
   gap: var(--space-2); // 8px vertical spacing
-  
+
   // Avatar and details centered
   .user-info__avatar {
     margin-bottom: var(--space-1); // Extra spacing below avatar
   }
-  
+
   // Details centered
   .user-info__details {
     align-items: center;
     text-align: center;
     width: 100%;
   }
-  
+
   // Logout button centered
   .user-info__logout {
     margin-top: var(--space-1); // Extra spacing above logout
   }
-  
-  // Full: Avatar + Name + Logout (stacked) ✓
-  // Avatar + Name (stacked) ✓
-  // Avatar + Logout (stacked) ✓
+}
+
+// ---------------------------------------------------------------------------//
+// SIZE VARIANTS
+// ---------------------------------------------------------------------------//
+
+// Small size - for mobile headers and compact displays
+.user-info--s {
+  padding: var(--space-2); // 8px
+  gap: var(--space-2); // 8px
+
+  .user-info__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .user-info__logout {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .user-info__name {
+    font-size: var(--font-size-body-s); // 14px
+  }
+
+  .user-info__email {
+    font-size: var(--font-size-caption-s); // 11px
+  }
+}
+
+// Large size - for prominent displays
+.user-info--l {
+  padding: var(--space-5); // 20px
+  gap: var(--space-4); // 16px
+
+  .user-info__avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .user-info__logout {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .user-info__name {
+    font-size: var(--font-size-body-l); // 18px
+  }
+
+  .user-info__email {
+    font-size: var(--font-size-caption-l); // 14px
+  }
 }
 
 // ---------------------------------------------------------------------------//
@@ -179,23 +207,23 @@
     flex-direction: column;
     padding: var(--space-2); // Reduced padding
     gap: var(--space-2); // Smaller gap
-    
+
     // Hide name/email in collapsed state
     .user-info__details {
       display: none;
     }
-    
+
     // Smaller avatar
     .user-info__avatar {
       width: 36px;
       height: 36px;
     }
-    
+
     // Keep logout button visible but smaller
     .user-info__logout {
       width: 32px;
       height: 32px;
-      
+
       svg {
         width: 18px;
         height: 18px;
@@ -227,23 +255,10 @@
 }
 
 // ---------------------------------------------------------------------------//
-// MOBILE RESPONSIVE
-// ---------------------------------------------------------------------------//
-
-@media (max-width: 768px) {
-  // Hide user info in sidebar on mobile (shown in mobile header instead)
-  .sidebar .user-info {
-    display: none;
-  }
-}
-
-// ---------------------------------------------------------------------------//
 // HOVER EFFECTS FOR CONTAINER
 // ---------------------------------------------------------------------------//
 
-.user-info:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
+.user-info:hover {}
 
 // ---------------------------------------------------------------------------//
 // ACCESSIBILITY
@@ -254,7 +269,7 @@
   .user-info {
     border: var(--border-width-1) solid rgba(255, 255, 255, 0.5);
   }
-  
+
   .user-info__avatar {
     border-width: var(--border-width-2);
   }
@@ -262,6 +277,7 @@
 
 // Reduced motion
 @media (prefers-reduced-motion: reduce) {
+
   .user-info,
   .user-info__avatar,
   .user-info__logout {
@@ -276,5 +292,18 @@
 @media print {
   .user-info {
     display: none;
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// MOBILE RESPONSIVE
+// ---------------------------------------------------------------------------//
+
+@media (max-width: 768px) {
+
+  // Hide user info in sidebar on mobile (shown in mobile header instead)
+  .sidebar-container .user-info,
+  .sidebar .user-info {
+    display: none !important;
   }
 }

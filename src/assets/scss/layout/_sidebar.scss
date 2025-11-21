@@ -9,16 +9,20 @@
 // ---------------------------------------------------------------------------//
 
 .sidebar-container {
-  height: 100vh;
+  height: calc(100vh - var(--space-5) * 2);
   background-color: var(--color-surface-subtle);
   display: flex;
   flex-direction: column;
   transition: width var(--duration-comfortable) var(--easing-standard);
-  position: relative;
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: var(--space-5) 0 var(--space-5) var(--space-5);
+  z-index: 100;
+
   // Width states
   width: 280px; // Expanded width
-  
+
   &.collapsed {
     width: 80px;
   }
@@ -76,24 +80,24 @@
   justify-content: center;
   min-width: 40px; // Touch target
   min-height: 40px; // Touch target
-  
+
   svg {
     width: var(--icon-size-s); // 20px
     height: var(--icon-size-s);
   }
-  
+
   // Focus state - WCAG compliant
   &:focus-visible {
     outline: var(--focus-width) solid var(--color-on-primary);
     outline-offset: var(--focus-offset);
   }
-  
+
   // Hover state
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transform: scale(1.1);
   }
-  
+
   // Active/pressed state
   &:active {
     background-color: rgba(255, 255, 255, 0.15);
@@ -110,39 +114,39 @@
   overflow-x: hidden;
   padding: var(--space-3) 0; // 12px vertical
   z-index: 10; // Above wave
-  
+
   // Custom scrollbar styling
   &::-webkit-scrollbar {
     width: 4px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: transparent;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius-2xs); // 2px
-    
+
     &:hover {
       background: rgba(255, 255, 255, 0.3);
     }
   }
-  
+
   // Menu component inside sidebar
   .menu {
     // No additional styles needed - Menu component handles its own layout
   }
-  
+
   // Sidebar-specific menu item modifications (curved active state)
   .menu__item--active {
     margin-left: var(--space-3); // 12px indent
     padding-left: var(--space-4); // Adjust padding to compensate
-    border-top-left-radius: var(--border-radius-xl); 
+    border-top-left-radius: var(--border-radius-xl);
     border-bottom-left-radius: var(--border-radius-xl);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    
+
     // Curved cutouts using pseudo-elements
     &::before,
     &::after {
@@ -168,6 +172,7 @@
   padding: 0 var(--space-3); // 12px horizontal
   box-sizing: border-box;
   margin-bottom: var(--space-5); // 20px from bottom
+  margin-top: var(--space-6);
 }
 
 .user-profile-section {
@@ -187,7 +192,6 @@
   align-items: center;
   min-width: 0;
   gap: var(--space-3);
-  padding: var(--space-4);
 }
 
 .user-avatar {
@@ -199,12 +203,12 @@
   flex-shrink: 0;
   cursor: pointer;
   transition: transform var(--duration-fast) var(--easing-standard);
-  
+
   &:hover {
     transform: scale(1.05);
     border-color: rgba(255, 255, 255, 0.4);
   }
-  
+
   &:focus-visible {
     outline: var(--focus-width) solid var(--color-on-primary);
     outline-offset: var(--focus-offset);
@@ -253,22 +257,22 @@
   color: var(--color-on-primary);
   cursor: pointer;
   transition: all var(--duration-fast) var(--easing-standard);
-  
+
   svg {
     width: var(--icon-size-s); // 20px
     height: var(--icon-size-s);
   }
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
   }
-  
+
   &:focus-visible {
     outline: var(--focus-width) solid var(--color-on-primary);
     outline-offset: var(--focus-offset);
   }
-  
+
   &:active {
     background: rgba(255, 255, 255, 0.15);
     transform: scale(1.0);
@@ -281,11 +285,11 @@
     flex-direction: column;
     padding: var(--space-2);
   }
-  
+
   .user-details {
     display: none;
   }
-  
+
   .user-avatar {
     width: 36px;
     height: 36px;
@@ -308,7 +312,7 @@
   opacity: 0;
   transition: opacity var(--duration-comfortable) var(--easing-standard);
   pointer-events: none;
-  
+
   &.visible {
     opacity: 1;
     pointer-events: auto;
@@ -323,7 +327,7 @@
   .sidebar-overlay {
     display: block;
   }
-  
+
   .sidebar-container {
     position: fixed;
     top: 60px; // Below mobile header
@@ -335,16 +339,16 @@
     padding: 0;
     background-color: transparent;
     transition: transform var(--duration-comfortable) cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     &.expanded {
       transform: translateX(0);
     }
-    
+
     .sidebar {
       border-radius: 0 var(--border-radius-2xl) var(--border-radius-2xl) 0; // Only right side rounded
       height: 100%;
     }
-    
+
     // Hide desktop toggle on mobile
     .sidebar-header .toggle-btn {
       display: none;
@@ -357,6 +361,7 @@
 // ---------------------------------------------------------------------------//
 
 @media print {
+
   .sidebar-container,
   .sidebar-overlay {
     display: none;

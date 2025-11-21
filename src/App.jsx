@@ -3,14 +3,14 @@ import './assets/scss/main.scss';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import DashboardLayout from './components/layouts/DashboardLayout';
+import BaseLayout from './components/layouts/BaseLayout';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import StyleGuide from './pages/style-guide/StyleGuide';
 import Properties from './pages/Properties';
 import BuildingForm from './pages/BuildingForm';
-import Settings from './pages/Settings'; // ✅ NEW: Import Settings page
+import Settings from './pages/Settings';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,11 +33,11 @@ function App() {
 
   if (loading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        minHeight: '100vh' 
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh'
       }}>
         Loading...
       </div>
@@ -53,14 +53,14 @@ function App() {
           element={!user ? <Auth /> : <Navigate to="/" replace />}
         />
 
-        {/* Protected Routes with Dashboard Layout */}
-        <Route element={user ? <DashboardLayout /> : <Navigate to="/auth" replace />}>
+        {/* Protected Routes with Base Layout */}
+        <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/buildings/new" element={<BuildingForm />} />
           <Route path="/buildings/:id/edit" element={<BuildingForm />} />
-          <Route path="/settings" element={<Settings />} /> {/* ✅ NEW: Settings route */}
+          <Route path="/settings" element={<Settings />} />
           <Route path="/style-guide" element={<StyleGuide />} />
         </Route>
 
