@@ -116,7 +116,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                 />
 
                 {/* Demographics */}
-                <div className="form-row-three">
+                <div className="form-row-two">
                     <Input
                         label="Date of Birth"
                         name="date_of_birth"
@@ -138,18 +138,10 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                         ]}
                         fullWidth
                     />
-                    <Input
-                        label="Pronouns"
-                        name="pronouns"
-                        value={formData.pronouns || ''}
-                        onChange={onChange}
-                        placeholder="e.g., they/them"
-                        fullWidth
-                    />
                 </div>
 
                 {/* Bio */}
-                <div className="form-item--full">
+                <div className="form-item--full" style={{ width: '100%' }}>
                     <Textarea
                         label="Bio"
                         name="bio"
@@ -158,7 +150,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                         placeholder="Tell us about yourself..."
                         rows={4}
                         fullWidth
-                        style={{ resize: 'vertical', minHeight: '100px', maxHeight: '300px' }}
+                        style={{ resize: 'vertical', minHeight: '100px', maxHeight: '300px', width: '100%' }}
                     />
                 </div>
 

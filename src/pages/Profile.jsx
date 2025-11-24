@@ -520,6 +520,8 @@ const Profile = () => {
                 onChange={handleAddressChange}
                 onSelectChange={handleAddressSelectChange}
                 countries={countries}
+                regions={regions}
+                billingRegions={billingRegions}
               />
             </TabPanel>
 
@@ -543,7 +545,6 @@ const Profile = () => {
                 onChange={handleCheckboxChange}
               />
             </TabPanel>
-
 
             <TabPanel label="Preferences">
               <PreferencesSection

@@ -11,6 +11,8 @@ import StyleGuide from './pages/style-guide/StyleGuide';
 import Assets from './pages/Assets';
 import BuildingForm from './pages/BuildingForm';
 import Settings from './pages/Settings';
+import TermsAndConditions from './pages/TermsAndConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,6 +72,8 @@ function App() {
           <Route path="/buildings/:id/edit" element={<BuildingForm />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/style-guide" element={<StyleGuide />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Route>
 
         {/* Catch all - redirect to home or auth */}

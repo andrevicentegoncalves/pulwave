@@ -27,6 +27,12 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                             { value: 'homeowner', label: 'Homeowner' },
                             { value: 'contractor', label: 'Contractor' },
                             { value: 'vendor', label: 'Vendor' },
+                            { value: 'real_estate_agent', label: 'Real Estate Agent' },
+                            { value: 'broker', label: 'Broker' },
+                            { value: 'investor', label: 'Investor' },
+                            { value: 'developer', label: 'Developer' },
+                            { value: 'manager', label: 'Manager' },
+                            { value: 'designer', label: 'Designer' },
                             { value: 'admin', label: 'Admin' },
                         ]}
                         fullWidth
@@ -104,13 +110,13 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                     </h3>
                 </div>
 
-                <div className="form-row-three">
+                <div className="form-row-two">
                     <Input
-                        label="Tax ID"
+                        label="Tax ID / VAT"
                         name="tax_id"
                         value={formData.tax_id || ''}
                         onChange={onChange}
-                        placeholder="Tax ID / EIN"
+                        placeholder="Tax ID / VAT Number"
                         fullWidth
                     />
                     <Input
@@ -119,14 +125,6 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                         value={formData.business_registration_number || ''}
                         onChange={onChange}
                         placeholder="Registration #"
-                        fullWidth
-                    />
-                    <Input
-                        label="VAT ID"
-                        name="vat_id"
-                        value={formData.vat_id || ''}
-                        onChange={onChange}
-                        placeholder="VAT ID"
                         fullWidth
                     />
                 </div>

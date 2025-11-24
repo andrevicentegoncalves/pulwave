@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input } from '../../components/ui';
+import { useNavigate } from 'react-router-dom';
+import { Card, Input, Button } from '../../components/ui';
 import Checkbox from '../../components/ui/Checkbox';
-import Textarea from '../../components/ui/TextArea';
 import Icon from '../../components/ui/Icon';
 import { ShieldCheck } from '../../components/ui/iconLibrary';
 
 const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
+    const navigate = useNavigate();
+
     return (
         <Card
             header={
@@ -19,60 +21,37 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
             }
         >
             <div className="profile-form-grid">
-                {/* Terms & Conditions */}
+                {/* Legal Documents */}
                 <div className="form-item--full">
-                    <h3 style={{ marginBottom: 'var(--space-3)' }}>Terms & Conditions</h3>
+                    <h3 style={{ marginBottom: 'var(--space-3)' }}>Legal Documents</h3>
+                </div>
+
+                <div className="form-item--full" style={{ display: 'flex', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
+                    <Button variant="outline" onClick={() => navigate('/terms-and-conditions')}>
+                        View Terms & Conditions
+                    </Button>
+                    <Button variant="outline" onClick={() => navigate('/privacy-policy')}>
+                        View Privacy Policy
+                    </Button>
                 </div>
 
                 <div className="form-row-three">
                     <div className="read-only-field">
-                        <label className="input__label">Accepted</label>
+                        <label className="input__label">Terms Accepted</label>
                         <div className="read-only-value">
                             {formData.terms_accepted ? '✓ Yes' : '✗ No'}
                         </div>
                     </div>
                     <div className="read-only-field">
-                        <label className="input__label">Accepted At</label>
+                        <label className="input__label">Privacy Accepted</label>
                         <div className="read-only-value">
-                            {formData.terms_accepted_at
-                                ? new Date(formData.terms_accepted_at).toLocaleDateString()
-                                : 'N/A'}
+                            {formData.privacy_accepted ? '✓ Yes' : '✗ No'}
                         </div>
                     </div>
                     <div className="read-only-field">
                         <label className="input__label">Version</label>
                         <div className="read-only-value">
                             {formData.terms_version || 'N/A'}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Privacy Policy */}
-                <div className="form-item--full">
-                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-                        Privacy Policy
-                    </h3>
-                </div>
-
-                <div className="form-row-three">
-                    <div className="read-only-field">
-                        <label className="input__label">Accepted</label>
-                        <div className="read-only-value">
-                            {formData.privacy_accepted ? '✓ Yes' : '✗ No'}
-                        </div>
-                    </div>
-                    <div className="read-only-field">
-                        <label className="input__label">Accepted At</label>
-                        <div className="read-only-value">
-                            {formData.privacy_accepted_at
-                                ? new Date(formData.privacy_accepted_at).toLocaleDateString()
-                                : 'N/A'}
-                        </div>
-                    </div>
-                    <div className="read-only-field">
-                        <label className="input__label">Version</label>
-                        <div className="read-only-value">
-                            {formData.privacy_version || 'N/A'}
                         </div>
                     </div>
                 </div>
@@ -101,78 +80,41 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     />
                 </div>
 
-                {/* Account Deletion */}
-                <div className="form-item--full">
-                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-                        Account Deletion
-                    </h3>
-                </div>
-
-                <div className="form-row-three">
-                    <div className="read-only-field">
-                        <label className="input__label">Deletion Requested</label>
-                        <div className="read-only-value">
-                            {formData.deletion_requested ? '⚠ Yes' : '✓ No'}
+                {/* Account Deletion - Only show if requested */}
+                {formData.deletion_requested && (
+                    <>
+                        <div className="form-item--full">
+                            <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
+                                Account Deletion
+                            </h3>
                         </div>
-                    </div>
-                    <div className="read-only-field">
-                        <label className="input__label">Requested At</label>
-                        <div className="read-only-value">
-                            {formData.deletion_requested_at
-                                ? new Date(formData.deletion_requested_at).toLocaleDateString()
-                                : 'N/A'}
+
+                        <div className="form-row-three">
+                            <div className="read-only-field">
+                                <label className="input__label">Deletion Requested</label>
+                                <div className="read-only-value">
+                                    {formData.deletion_requested ? '⚠ Yes' : '✓ No'}
+                                </div>
+                            </div>
+                            <div className="read-only-field">
+                                <label className="input__label">Requested At</label>
+                                <div className="read-only-value">
+                                    {formData.deletion_requested_at
+                                        ? new Date(formData.deletion_requested_at).toLocaleDateString()
+                                        : 'N/A'}
+                                </div>
+                            </div>
+                            <div className="read-only-field">
+                                <label className="input__label">Scheduled For</label>
+                                <div className="read-only-value">
+                                    {formData.deletion_scheduled_for
+                                        ? new Date(formData.deletion_scheduled_for).toLocaleDateString()
+                                        : 'N/A'}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="read-only-field">
-                        <label className="input__label">Scheduled For</label>
-                        <div className="read-only-value">
-                            {formData.deletion_scheduled_for
-                                ? new Date(formData.deletion_scheduled_for).toLocaleDateString()
-                                : 'N/A'}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Advanced: Tags & Metadata */}
-                <div className="form-item--full">
-                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-                        Advanced (Optional)
-                    </h3>
-                </div>
-
-                <Input
-                    label="Tags"
-                    name="tags"
-                    value={formData.tags ? formData.tags.join(', ') : ''}
-                    onChange={(e) => {
-                        // Convert comma-separated string to array
-                        const tagsArray = e.target.value.split(',').map(tag => tag.trim()).filter(Boolean);
-                        onChange({ target: { name: 'tags', value: tagsArray } });
-                    }}
-                    placeholder="tag1, tag2, tag3"
-                    fullWidth
-                    helperText="Comma-separated tags for categorization"
-                />
-
-                <div className="form-item--full">
-                    <Textarea
-                        label="Metadata (JSON)"
-                        name="metadata"
-                        value={formData.metadata ? JSON.stringify(formData.metadata, null, 2) : '{}'}
-                        onChange={(e) => {
-                            try {
-                                const parsed = JSON.parse(e.target.value);
-                                onChange({ target: { name: 'metadata', value: parsed } });
-                            } catch (err) {
-                                // Invalid JSON, keep as string for now
-                                onChange(e);
-                            }
-                        }}
-                        rows={6}
-                        fullWidth
-                        helperText="Advanced: Custom metadata in JSON format"
-                    />
-                </div>
+                    </>
+                )}
             </div>
         </Card>
     );

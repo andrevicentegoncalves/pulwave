@@ -67,22 +67,42 @@ const UserInfo = ({
 
     // Fetch user data on mount
     useEffect(() => {
-        const fetchUserData = async () => {
+        const fetchProfile = async (currentUser) => {
+            if (!currentUser) return;
             try {
-                setLoading(true);
-            } finally {
-                setLoading(false);
+                const { data: profileData, error } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('auth_user_id', currentUser.id)
+                    .single();
+
+                if (error) {
+                    console.error('Error fetching profile:', error);
+                } else {
+                    setProfile(profileData);
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
             }
         };
 
-        fetchUserData();
+        const init = async () => {
+            setLoading(true);
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user) {
+                setUser(session.user);
+                await fetchProfile(session.user);
+            }
+            setLoading(false);
+        };
+
+        init();
 
         // Subscribe to auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             if (session?.user) {
                 setUser(session.user);
-                // Refetch profile when auth state changes
-                fetchUserData();
+                fetchProfile(session.user);
             } else {
                 setUser(null);
                 setProfile(null);
