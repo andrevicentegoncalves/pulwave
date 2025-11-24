@@ -520,8 +520,6 @@ const Profile = () => {
                 onChange={handleAddressChange}
                 onSelectChange={handleAddressSelectChange}
                 countries={countries}
-                regions={regions}
-                billingRegions={billingRegions}
               />
             </TabPanel>
 
@@ -529,9 +527,13 @@ const Profile = () => {
               <SecuritySection
                 formData={formData}
                 securityData={securityData}
-                onChange={handleSecurityChange}
+                onChange={handleChange}
+                onSelectChange={handleSelectChange}
+                onSecurityChange={handleSecurityChange}
+                onCheckboxChange={handleCheckboxChange}
                 setError={setError}
                 setSuccess={setSuccess}
+                user={user}
               />
             </TabPanel>
 
@@ -541,6 +543,7 @@ const Profile = () => {
                 onChange={handleCheckboxChange}
               />
             </TabPanel>
+
 
             <TabPanel label="Preferences">
               <PreferencesSection
