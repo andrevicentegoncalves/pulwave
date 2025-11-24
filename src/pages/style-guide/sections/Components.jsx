@@ -1,15 +1,17 @@
 import React, { useRef } from 'react';
 import { Divider } from '../../../components/ui';
-import { 
-  Alerts, 
-  Badges, 
+import {
+  Alerts,
+  Badges,
   Buttons,
   Cards,
-  Dropdowns, 
+  Dropdowns,
   Dividers,
   FormAndInputs,
   Modals
 } from './component-sections';
+import SearchFilterSection from './SearchFilterSection';
+import DataDisplaySection from './DataDisplaySection';
 
 export default function Components({ triggerAlert }) {
   const alertsRef = useRef(null);
@@ -20,6 +22,8 @@ export default function Components({ triggerAlert }) {
   const formsRef = useRef(null);
   const modalsRef = useRef(null);
   const dividersRef = useRef(null);
+  const searchFilterRef = useRef(null);
+  const dataDisplayRef = useRef(null);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -54,7 +58,9 @@ export default function Components({ triggerAlert }) {
               { name: 'Dropdowns', ref: dropdownsRef },
               { name: 'Forms & Inputs', ref: formsRef },
               { name: 'Modals', ref: modalsRef },
-              { name: 'Dividers', ref: dividersRef }
+              { name: 'Dividers', ref: dividersRef },
+              { name: 'Search & Filter', ref: searchFilterRef },
+              { name: 'Data Display', ref: dataDisplayRef }
             ].map(({ name, ref }) => (
               <li key={name}>
                 <button
@@ -94,47 +100,59 @@ export default function Components({ triggerAlert }) {
         <div ref={alertsRef}>
           <Alerts triggerAlert={triggerAlert} />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={badgesRef}>
           <Badges />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={buttonsRef}>
           <Buttons />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={cardsRef}>
           <Cards />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={dropdownsRef}>
           <Dropdowns />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={formsRef}>
           <FormAndInputs />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={modalsRef}>
           <Modals />
         </div>
-        
+
         <Divider style={{ margin: 'var(--space-10) 0' }} />
-        
+
         <div ref={dividersRef}>
           <Dividers />
+        </div>
+
+        <Divider style={{ margin: 'var(--space-10) 0' }} />
+
+        <div ref={searchFilterRef}>
+          <SearchFilterSection />
+        </div>
+
+        <Divider style={{ margin: 'var(--space-10) 0' }} />
+
+        <div ref={dataDisplayRef}>
+          <DataDisplaySection />
         </div>
       </section>
     </div>

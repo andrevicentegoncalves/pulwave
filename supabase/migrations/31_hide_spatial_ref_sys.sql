@@ -1,0 +1,36 @@
+-- ============================================================================
+-- SPATIAL_REF_SYS RLS WARNING - SAFE TO IGNORE
+-- ============================================================================
+-- The Supabase security advisor warns that spatial_ref_sys does not have RLS enabled.
+-- This warning is a FALSE POSITIVE and should be IGNORED.
+--
+-- WHY THIS WARNING APPEARS:
+-- Supabase's security scanner flags all tables without RLS, but it doesn't
+-- distinguish between application tables and system/extension tables.
+--
+-- WHY WE CANNOT FIX IT:
+-- 1. spatial_ref_sys is a PostGIS system table (part of postgis extension)
+-- 2. It is owned by the extension owner (postgres/superuser), not application roles
+-- 3. Attempting to ALTER this table results in: "ERROR: 42501: must be owner of table"
+-- 4. Regular database roles cannot enable RLS on tables they don't own
+--
+-- WHY IT'S SAFE TO IGNORE:
+-- 1. spatial_ref_sys contains read-only reference data (coordinate systems/SRID definitions)
+-- 2. PostGIS already sets appropriate permissions on this table
+-- 3. The table is meant to be globally readable by design
+-- 4. It's not application data - it's spatial reference metadata
+-- 5. PostGIS manages this table's security through extension ownership
+--
+-- CONCLUSION:
+-- No action required. This is a known limitation of Supabase's security scanner.
+-- The warning can be safely dismissed.
+--
+-- References:
+-- - PostGIS docs: https://postgis.net/docs/using_postgis_dbmanagement.html#spatial_ref_sys
+-- - Supabase RLS: https://supabase.com/docs/guides/database/postgres/row-level-security
+--
+-- NOTE: The Supabase AI Assistant's recommendation to enable RLS on this table
+-- was incorrect - it's not possible without superuser/owner privileges.
+
+-- This migration intentionally contains no executable SQL.
+-- It exists solely to document why the spatial_ref_sys RLS warning is ignored.

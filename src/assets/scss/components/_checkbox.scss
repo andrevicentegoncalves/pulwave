@@ -1,0 +1,61 @@
+// ============================================================================ //
+//                            CHECKBOX COMPONENT STYLES                         //
+// ============================================================================ //
+
+.checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    cursor: pointer;
+}
+
+.checkbox__input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+    border-radius: var(--border-radius-s);
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &--error {
+        border-color: var(--color-error);
+    }
+}
+
+.checkbox__label {
+    font-size: var(--font-size-body-m);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-on-surface-default);
+    cursor: pointer;
+    user-select: none;
+
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.checkbox__required {
+    color: var(--color-error);
+    margin-left: var(--space-1);
+}
+
+.checkbox__helper {
+    font-size: var(--font-size-body-s);
+    color: var(--color-on-surface-subtle);
+    margin-left: calc(20px + var(--space-3)); // Align with label
+
+    &--error {
+        color: var(--color-error);
+    }
+}

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Button, Input, Alert, Form, Select } from '../components/ui';
-import Icon from '../components/ui/Icon';
-import { User, CheckCircle, MapPin, Building } from '../components/ui/iconLibrary';
+import { Button, Alert, Form, Tabs, TabPanel } from '../components/ui';
+import { CheckCircle } from '../components/ui/iconLibrary';
 import { VisualEffect } from '../components/ui';
 import AvatarUpload from '../components/ui/AvatarUpload';
 import ContentLayout from '../components/layouts/ContentLayout';
+import {
+  PersonalInfoSection,
+  ProfessionalSection,
+  AddressSection,
+  SecuritySection,
+  PrivacySection,
+  PreferencesSection
+} from './profile-sections';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -21,17 +28,32 @@ const Profile = () => {
     first_name: '',
     middle_name: '',
     last_name: '',
+    display_name: '',
+    email: '',
+    email_secondary: '',
     phone: '',
+    phone_secondary: '',
+    preferred_contact_method: 'email',
+    date_of_birth: '',
+    gender: '',
+    pronouns: '',
+    bio: '',
+    website: '',
+    linkedin_url: '',
+    twitter_url: '',
+    facebook_url: '',
     company_name: '',
     vat_id: '',
+    job_title: '',
+    department: '',
     theme: 'light',
   });
 
-  // Address Form State - keeping country_id/region_id for UI filtering, but won't save them
+  // Address Form State
   const [addressData, setAddressData] = useState({
     country_id: '',
     region_id: '',
-    city_id: '',
+    city_name: '',
     street_name: '',
     number: '',
     floor: '',
@@ -39,10 +61,28 @@ const Profile = () => {
     type: 'home',
   });
 
+  const [billingAddressData, setBillingAddressData] = useState({
+    country_id: '',
+    region_id: '',
+    city_name: '',
+    street_name: '',
+    number: '',
+    floor: '',
+    postal_code: '',
+    type: 'billing',
+  });
+
+  // Security Form State
+  const [securityData, setSecurityData] = useState({
+    current_password: '',
+    new_password: '',
+    confirm_password: '',
+  });
+
   // Dropdown Data
   const [countries, setCountries] = useState([]);
   const [regions, setRegions] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [billingRegions, setBillingRegions] = useState([]);
 
   // Fetch User & Profile Data
   useEffect(() => {
@@ -54,7 +94,7 @@ const Profile = () => {
         const { data: profileData } = await supabase
           .from('profiles')
           .select('*')
-          .eq('id', user.id)
+          .eq('auth_user_id', user.id)
           .single();
 
         setProfile(profileData);
@@ -64,9 +104,24 @@ const Profile = () => {
             first_name: profileData.first_name || '',
             middle_name: profileData.middle_name || '',
             last_name: profileData.last_name || '',
+            display_name: profileData.display_name || '',
+            email: user.email || '',
+            email_secondary: profileData.email_secondary || '',
             phone: profileData.phone || '',
+            phone_secondary: profileData.phone_secondary || '',
+            preferred_contact_method: profileData.preferred_contact_method || 'email',
+            date_of_birth: profileData.date_of_birth || '',
+            gender: profileData.gender || '',
+            pronouns: profileData.pronouns || '',
+            bio: profileData.bio || '',
+            website: profileData.website || '',
+            linkedin_url: profileData.linkedin_url || '',
+            twitter_url: profileData.twitter_url || '',
+            facebook_url: profileData.facebook_url || '',
             company_name: profileData.company_name || '',
             vat_id: profileData.vat_id || '',
+            job_title: profileData.job_title || '',
+            department: profileData.department || '',
             theme: profileData.theme || 'light',
           });
 
@@ -74,28 +129,42 @@ const Profile = () => {
           if (profileData.address_id) {
             const { data: address } = await supabase
               .from('addresses')
-              .select(`
-                *,
-                cities (
-                  id,
-                  name,
-                  country_id,
-                  region_id
-                )
-              `)
+              .select('*')
               .eq('id', profileData.address_id)
               .single();
 
             if (address) {
               setAddressData({
-                country_id: address.cities?.country_id || '', // For UI filtering
-                region_id: address.cities?.region_id || '', // For UI filtering
-                city_id: address.city_id || '',
-                street_name: address.street || '', // Map from 'street' column
+                country_id: address.country_id || '',
+                region_id: address.region_id || '',
+                city_name: address.city || '',
+                street_name: address.street || '',
                 number: address.number || '',
                 floor: address.floor || '',
                 postal_code: address.postal_code || '',
                 type: address.type || 'home',
+              });
+            }
+          }
+
+          // Fetch Billing Address if exists
+          if (profileData.billing_address_id) {
+            const { data: billingAddress } = await supabase
+              .from('addresses')
+              .select('*')
+              .eq('id', profileData.billing_address_id)
+              .single();
+
+            if (billingAddress) {
+              setBillingAddressData({
+                country_id: billingAddress.country_id || '',
+                region_id: billingAddress.region_id || '',
+                city_name: billingAddress.city || '',
+                street_name: billingAddress.street || '',
+                number: billingAddress.number || '',
+                floor: billingAddress.floor || '',
+                postal_code: billingAddress.postal_code || '',
+                type: billingAddress.type || 'billing',
               });
             }
           }
@@ -139,51 +208,63 @@ const Profile = () => {
     fetchRegions();
   }, [addressData.country_id]);
 
-  // Fetch Cities when Country changes
+  // Fetch Billing Regions when Billing Country changes
   useEffect(() => {
-    const fetchCities = async () => {
-      if (!addressData.country_id) {
-        setCities([]);
+    const fetchBillingRegions = async () => {
+      if (!billingAddressData.country_id) {
+        setBillingRegions([]);
         return;
       }
       try {
         const { data } = await supabase
-          .from('cities')
+          .from('regions')
           .select('id, name')
-          .eq('country_id', addressData.country_id)
+          .eq('country_id', billingAddressData.country_id)
           .order('name');
-        if (data) setCities(data);
+        if (data) setBillingRegions(data);
       } catch (err) {
-        console.error('Error fetching cities:', err);
+        console.error('Error fetching billing regions:', err);
       }
     };
 
-    fetchCities();
-  }, [addressData.country_id]);
+    fetchBillingRegions();
+  }, [billingAddressData.country_id]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleThemeChange = (value) => {
-    setFormData({ ...formData, theme: value });
+  const handleSelectChange = (name, value) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleAddressChange = (e) => {
-    setAddressData({
-      ...addressData,
-      [e.target.name]: e.target.value,
-    });
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData(prev => ({ ...prev, [name]: checked }));
   };
 
-  const handleAddressSelectChange = (name, value) => {
-    setAddressData({
-      ...addressData,
-      [name]: value,
-    });
+  const handleSecurityChange = (e) => {
+    const { name, value } = e.target;
+    setSecurityData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddressChange = (type, e) => {
+    if (e && e.target) {
+      const { name, value } = e.target;
+      if (type === 'billing') {
+        setBillingAddressData(prev => ({ ...prev, [name]: value }));
+      } else {
+        setAddressData(prev => ({ ...prev, [name]: value }));
+      }
+    }
+  };
+
+  const handleAddressSelectChange = (type, name, value) => {
+    if (type === 'billing') {
+      setBillingAddressData(prev => ({ ...prev, [name]: value }));
+    } else {
+      setAddressData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -194,29 +275,31 @@ const Profile = () => {
 
     try {
       let addressId = profile?.address_id;
+      let billingAddressId = profile?.billing_address_id;
 
-      // 1. Upsert Address - filter out fields that don't exist in DB
-      const { country_id, region_id, street_name, ...restAddressData } = addressData;
+      // 1. Upsert Primary Address
+      const { country_id, region_id, street_name, city_name, ...restAddressData } = addressData;
 
       const addressPayload = {
         ...restAddressData,
-        street: street_name, // Map street_name to street column
+        country_id,
+        region_id,
+        city: city_name,
+        street: street_name,
       };
 
-      // Validate required fields - city_id is required (NOT NULL constraint)
-      if (!addressPayload.city_id) {
-        throw new Error('Please select a city before saving your address');
+      // Validate city is selected
+      if (!city_name) {
+        throw new Error('Please select a city from the dropdown for your primary address');
       }
 
       if (addressId) {
-        // Update existing address
         const { error: addrError } = await supabase
           .from('addresses')
           .update(addressPayload)
           .eq('id', addressId);
         if (addrError) throw addrError;
       } else {
-        // Create new address
         const { data: newAddress, error: addrError } = await supabase
           .from('addresses')
           .insert([addressPayload])
@@ -226,32 +309,55 @@ const Profile = () => {
         addressId = newAddress.id;
       }
 
-      // 2. Update Profile
+      // 2. Upsert Billing Address
+      const { country_id: billing_country_id, region_id: billing_region_id, street_name: billing_street_name, city_name: billing_city_name, ...restBillingAddressData } = billingAddressData;
+
+      const billingAddressPayload = {
+        ...restBillingAddressData,
+        country_id: billing_country_id,
+        region_id: billing_region_id,
+        city: billing_city_name,
+        street: billing_street_name,
+      };
+
+      if (billing_city_name) {
+        if (billingAddressId) {
+          const { error: billingError } = await supabase
+            .from('addresses')
+            .update(billingAddressPayload)
+            .eq('id', billingAddressId);
+          if (billingError) throw billingError;
+        } else {
+          const { data: newBillingAddress, error: billingError } = await supabase
+            .from('addresses')
+            .insert([billingAddressPayload])
+            .select()
+            .single();
+          if (billingError) throw billingError;
+          billingAddressId = newBillingAddress.id;
+        }
+      }
+
+      // 3. Update Profile
       const { error: updateError } = await supabase
         .from('profiles')
         .update({
-          username: formData.username,
-          first_name: formData.first_name,
-          middle_name: formData.middle_name,
-          last_name: formData.last_name,
-          phone: formData.phone,
-          company_name: formData.company_name,
-          vat_id: formData.vat_id,
-          theme: formData.theme,
+          ...formData,
           address_id: addressId,
+          billing_address_id: billingAddressId,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', user.id);
+        .eq('auth_user_id', user.id);
 
       if (updateError) throw updateError;
 
-      setSuccess('Profile and address updated successfully!');
+      setSuccess('Profile updated successfully!');
 
       // Refresh profile data
       const { data: updatedProfile } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', user.id)
+        .eq('auth_user_id', user.id)
         .single();
       setProfile(updatedProfile);
     } catch (err) {
@@ -324,7 +430,6 @@ const Profile = () => {
         fileToUpload = await resizeImage(file);
       } catch (resizeErr) {
         console.warn('Image resizing failed, falling back to original file:', resizeErr);
-        // Continue with original file
       }
 
       if (profile?.avatar_url) {
@@ -347,14 +452,13 @@ const Profile = () => {
         .from('profile-images')
         .getPublicUrl(`avatars/${fileName}`);
 
-      // Update profile
       const { error: updateError } = await supabase
         .from('profiles')
         .update({
           avatar_url: publicUrl,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', user.id);
+        .eq('auth_user_id', user.id);
 
       if (updateError) throw updateError;
 
@@ -365,7 +469,6 @@ const Profile = () => {
       console.error(err);
     } finally {
       setUploading(false);
-      // Reset input value to allow selecting same file again
       if (e.target) e.target.value = '';
     }
   };
@@ -377,7 +480,7 @@ const Profile = () => {
         {success && <Alert type="success" dismissible onDismiss={() => setSuccess(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{success}</Alert>}
         {error && <Alert type="error" dismissible onDismiss={() => setError(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{error}</Alert>}
 
-        {/* Centered Avatar Section with Large Wave Animation */}
+        {/* Centered Avatar Section */}
         <div className="profile-avatar-section">
           <div className="profile-avatar">
             <VisualEffect variant="ring-wave" />
@@ -393,130 +496,63 @@ const Profile = () => {
         </div>
 
         <Form onSubmit={handleSubmit} style={{ width: '100%' }}>
-          {/* Personal Information Section */}
-          <Card
-            header={
-              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><User /></Icon>
-                Personal Information
-              </h2>
-            }
-            style={{ marginBottom: 'var(--space-6)' }}
-          >
-            <div className="profile-form-grid">
-              <Input label="Username" name="username" value={formData.username} onChange={handleChange} placeholder="@username" fullWidth />
-              <Input label="Email" value={user?.email || ''} disabled fullWidth helperText="Managed by auth provider" />
-
-              {/* Names in one row */}
-              <div className="form-row-three">
-                <Input label="First Name" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" fullWidth />
-                <Input label="Middle Name" name="middle_name" value={formData.middle_name} onChange={handleChange} placeholder="Middle Name" fullWidth />
-                <Input label="Last Name" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Last Name" fullWidth />
-              </div>
-
-              <Input label="Phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" fullWidth />
-
-              {/* Theme Selector */}
-              <Select
-                label="Theme Preference"
-                value={formData.theme}
-                onChange={handleThemeChange}
-                options={[
-                  { value: 'light', label: 'Light' },
-                  { value: 'dark', label: 'Dark' },
-                  { value: 'auto', label: 'Auto (System)' }
-                ]}
-                fullWidth
+          <Tabs defaultTab={0}>
+            <TabPanel label="Personal Info">
+              <PersonalInfoSection
+                formData={formData}
+                onChange={handleChange}
+                onSelectChange={handleSelectChange}
               />
-            </div>
-          </Card>
+            </TabPanel>
 
-          {/* Company Information Section */}
-          <Card
-            header={
-              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><Building /></Icon>
-                Company Details
-              </h2>
-            }
-            style={{ marginBottom: 'var(--space-6)' }}
-          >
-            <div className="profile-form-grid">
-              <Input label="Company Name" name="company_name" value={formData.company_name} onChange={handleChange} placeholder="Company Name" fullWidth />
-              <Input label="VAT ID" name="vat_id" value={formData.vat_id} onChange={handleChange} placeholder="VAT ID" fullWidth />
-            </div>
-          </Card>
-
-          {/* Address Section */}
-          <Card
-            header={
-              <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}><MapPin /></Icon>
-                Address
-              </h2>
-            }
-            style={{ marginBottom: 'var(--space-6)' }}
-          >
-            <div className="profile-form-grid">
-              {/* Country Dropdown - for filtering regions/cities, not saved to DB */}
-              <Select
-                label="Country"
-                value={addressData.country_id}
-                onChange={(val) => handleAddressSelectChange('country_id', val)}
-                options={countries.map(c => ({ value: c.id, label: c.name }))}
-                placeholder="Select Country"
-                fullWidth
+            <TabPanel label="Professional">
+              <ProfessionalSection
+                formData={formData}
+                onChange={handleChange}
+                onSelectChange={handleSelectChange}
               />
+            </TabPanel>
 
-              {/* Region Dropdown */}
-              <Select
-                label="Region/State"
-                value={addressData.region_id}
-                onChange={(val) => handleAddressSelectChange('region_id', val)}
-                options={regions.map(r => ({ value: r.id, label: r.name }))}
-                placeholder="Select Region"
-                disabled={!addressData.country_id}
-                fullWidth
+            <TabPanel label="Address">
+              <AddressSection
+                addressData={addressData}
+                billingAddressData={billingAddressData}
+                onChange={handleAddressChange}
+                onSelectChange={handleAddressSelectChange}
+                countries={countries}
+                regions={regions}
+                billingRegions={billingRegions}
               />
+            </TabPanel>
 
-              {/* City Dropdown */}
-              <Select
-                label="City"
-                value={addressData.city_id}
-                onChange={(val) => handleAddressSelectChange('city_id', val)}
-                options={cities.map(c => ({ value: c.id, label: c.name }))}
-                placeholder="Select City"
-                disabled={!addressData.country_id}
-                fullWidth
+            <TabPanel label="Security">
+              <SecuritySection
+                formData={formData}
+                securityData={securityData}
+                onChange={handleSecurityChange}
+                setError={setError}
+                setSuccess={setSuccess}
               />
+            </TabPanel>
 
-              <Input label="Postal Code" name="postal_code" value={addressData.postal_code} onChange={handleAddressChange} placeholder="Postal Code" fullWidth />
+            <TabPanel label="Privacy">
+              <PrivacySection
+                formData={formData}
+                onChange={handleCheckboxChange}
+              />
+            </TabPanel>
 
-              <div className="form-item--full">
-                <Input label="Street Name" name="street_name" value={addressData.street_name} onChange={handleAddressChange} placeholder="Street Name" fullWidth />
-              </div>
+            <TabPanel label="Preferences">
+              <PreferencesSection
+                formData={formData}
+                onChange={handleChange}
+                onSelectChange={handleSelectChange}
+              />
+            </TabPanel>
+          </Tabs>
 
-              <div className="form-row-three">
-                <Input label="Number" name="number" value={addressData.number} onChange={handleAddressChange} placeholder="No." fullWidth />
-                <Input label="Floor/Unit" name="floor" value={addressData.floor} onChange={handleAddressChange} placeholder="Floor" fullWidth />
-
-                <Select
-                  label="Type"
-                  value={addressData.type}
-                  onChange={(val) => handleAddressSelectChange('type', val)}
-                  options={[
-                    { value: 'home', label: 'Home' },
-                    { value: 'work', label: 'Work' },
-                    { value: 'billing', label: 'Billing' }
-                  ]}
-                  fullWidth
-                />
-              </div>
-            </div>
-          </Card>
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button type="submit" variant="primary" size="l" disabled={loading} icon={<CheckCircle />}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-6)' }}>
+            <Button type="submit" variant="primary" disabled={loading} icon={<CheckCircle />}>
               {loading ? 'Saving...' : 'Save All Changes'}
             </Button>
           </div>

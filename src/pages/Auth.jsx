@@ -4,17 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { Card, Form, Button, Alert, Input, Divider, Spinner } from '../components/ui';
 import Icon from '../components/ui/Icon';
+import { Eye, EyeOff } from '../components/ui/iconLibrary';
 
 /**
  * Auth Component
- * Handles user authentication (login/signup) using design system components
+ * Handles user authentication (login/signup/password reset) using design system components
  * ✅ Uses: Card, Form, Button, Alert, Input, Divider, Icon from design system
  */
 const Auth = () => {
   const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -26,12 +29,19 @@ const Auth = () => {
     setSuccess(null);
 
     try {
-      if (isSignUp) {
+      if (isForgotPassword) {
+        // Handle password reset
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email);
+
+        if (resetError) throw resetError;
+        setSuccess('Password reset email sent! Check your inbox.');
+        setEmail('');
+      } else if (isSignUp) {
         const { error: signUpError } = await supabase.auth.signUp({
           email,
           password,
         });
-        
+
         if (signUpError) throw signUpError;
         setSuccess('Account created! Check your email for verification.');
       } else {
@@ -39,9 +49,9 @@ const Auth = () => {
           email,
           password,
         });
-        
+
         if (signInError) throw signInError;
-        
+
         // Successful login - navigate to home
         if (data.session) {
           navigate('/', { replace: true });
@@ -55,20 +65,33 @@ const Auth = () => {
     }
   };
 
+  const getTitle = () => {
+    if (isForgotPassword) return 'Reset Password';
+    if (isSignUp) return 'Create Account';
+    return 'Welcome Back';
+  };
+
+  const getButtonText = () => {
+    if (loading) return 'Processing...';
+    if (isForgotPassword) return 'Send Reset Email';
+    if (isSignUp) return 'Sign Up';
+    return 'Sign In';
+  };
+
   return (
     <div className="auth-page">
-      <Card 
-        variant="elevated" 
+      <Card
+        variant="elevated"
         className="auth-container"
       >
         <div className="auth-header">
-          <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+          <h2>{getTitle()}</h2>
         </div>
 
         {error && (
-          <Alert 
-            type="error" 
-            dismissible 
+          <Alert
+            type="error"
+            dismissible
             onDismiss={() => setError(null)}
           >
             {error}
@@ -76,9 +99,9 @@ const Auth = () => {
         )}
 
         {success && (
-          <Alert 
-            type="success" 
-            dismissible 
+          <Alert
+            type="success"
+            dismissible
             onDismiss={() => setSuccess(null)}
           >
             {success}
@@ -98,21 +121,48 @@ const Auth = () => {
             fullWidth
           />
 
-          <Input
-            label="Password"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            required
-            disabled={loading}
-            fullWidth
-          />
+          {!isForgotPassword && (
+            <Input
+              label="Password"
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              disabled={loading}
+              fullWidth
+              rightIcon={
+                <div
+                  style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </div>
+              }
+            />
+          )}
 
-          <Button 
-            type="submit" 
-            variant="primary" 
+          {!isForgotPassword && !isSignUp && (
+            <div style={{ textAlign: 'right', marginTop: '-8px', marginBottom: '12px' }}>
+              <Button
+                variant="text"
+                size="s"
+                onClick={() => {
+                  setIsForgotPassword(true);
+                  setError(null);
+                  setSuccess(null);
+                }}
+                type="button"
+              >
+                Forgot Password?
+              </Button>
+            </div>
+          )}
+
+          <Button
+            type="submit"
+            variant="primary"
             size="l"
             disabled={loading}
             fullWidth
@@ -125,27 +175,59 @@ const Auth = () => {
                 <span>Processing...</span>
               </>
             ) : (
-              <span>{isSignUp ? 'Sign Up' : 'Sign In'}</span>
+              <span>{getButtonText()}</span>
             )}
           </Button>
         </Form>
 
         <Divider spacing="default" />
 
-        <Button
-          variant="secondary"
-          size="m"
-          fullWidth
-          onClick={() => {
-            setIsSignUp(!isSignUp);
-            setError(null);
-            setSuccess(null);
-          }}
-          disabled={loading}
-        >
-          {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-        </Button>
+        {isForgotPassword ? (
+          <Button
+            variant="secondary"
+            size="m"
+            fullWidth
+            onClick={() => {
+              setIsForgotPassword(false);
+              setIsSignUp(false);
+              setError(null);
+              setSuccess(null);
+            }}
+            disabled={loading}
+          >
+            Back to Sign In
+          </Button>
+        ) : (
+          <Button
+            variant="secondary"
+            size="m"
+            fullWidth
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setError(null);
+              setSuccess(null);
+            }}
+            disabled={loading}
+          >
+            {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+          </Button>
+        )}
       </Card>
+
+      {/* Dev Bypass Button - Temporary */}
+      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+        <Button
+          variant="text"
+          size="s"
+          onClick={() => {
+            localStorage.setItem('dev_bypass', 'true');
+            window.location.reload();
+          }}
+          style={{ opacity: 0.5 }}
+        >
+          Dev Bypass (Temporary)
+        </Button>
+      </div>
     </div>
   );
 };

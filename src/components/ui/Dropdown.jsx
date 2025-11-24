@@ -1,5 +1,13 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
+export const DropdownContext = React.createContext({
+  isOpen: false,
+  onClose: () => { },
+  onToggle: () => { }
+});
+
+export const useDropdown = () => React.useContext(DropdownContext);
+
 export const Dropdown = ({ trigger, children, align = 'left' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -44,18 +52,26 @@ export const Dropdown = ({ trigger, children, align = 'left' }) => {
     className: `${trigger.props.className || ''} dropdown__trigger`,
   });
 
+  const contextValue = React.useMemo(() => ({
+    isOpen,
+    onClose: handleClose,
+    onToggle: handleToggle
+  }), [isOpen, handleClose, handleToggle]);
+
   return (
-    <div className="dropdown" ref={dropdownRef}>
-      {triggerElement}
-      
-      {isOpen && (
-        <div className={`dropdown__menu dropdown__menu--${align}`} role="menu">
-          {React.Children.map(children, child => 
-            React.cloneElement(child, { onClose: handleClose })
-          )}
-        </div>
-      )}
-    </div>
+    <DropdownContext.Provider value={contextValue}>
+      <div className="dropdown" ref={dropdownRef}>
+        {triggerElement}
+
+        {isOpen && (
+          <div className={`dropdown__menu dropdown__menu--${align}`} role="menu">
+            {React.Children.map(children, child =>
+              React.isValidElement(child) ? React.cloneElement(child, { onClose: handleClose }) : child
+            )}
+          </div>
+        )}
+      </div>
+    </DropdownContext.Provider>
   );
 };
 

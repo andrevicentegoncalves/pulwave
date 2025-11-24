@@ -1,0 +1,166 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Card, Input, Select } from '../../components/ui';
+import Checkbox from '../../components/ui/Checkbox';
+import Icon from '../../components/ui/Icon';
+import { Settings } from '../../components/ui/iconLibrary';
+
+const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChange }) => {
+    return (
+        <Card
+            header={
+                <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
+                    <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}>
+                        <Settings />
+                    </Icon>
+                    Preferences
+                </h2>
+            }
+        >
+            <div className="profile-form-grid">
+                {/* Theme, Timezone, Locale */}
+                <div className="form-row-three">
+                    <Select
+                        label="Theme Preference"
+                        value={formData.theme || 'auto'}
+                        onChange={(val) => onSelectChange('theme', val)}
+                        options={[
+                            { value: 'light', label: 'Light' },
+                            { value: 'dark', label: 'Dark' },
+                            { value: 'auto', label: 'Auto (System)' },
+                        ]}
+                        fullWidth
+                    />
+                    <Select
+                        label="Timezone"
+                        value={formData.timezone || 'UTC'}
+                        onChange={(val) => onSelectChange('timezone', val)}
+                        options={[
+                            { value: 'UTC', label: 'UTC' },
+                            { value: 'America/New_York', label: 'New York (EST/EDT)' },
+                            { value: 'America/Los_Angeles', label: 'Los Angeles (PST/PDT)' },
+                            { value: 'America/Chicago', label: 'Chicago (CST/CDT)' },
+                            { value: 'Europe/London', label: 'London (GMT/BST)' },
+                            { value: 'Europe/Paris', label: 'Paris (CET/CEST)' },
+                            { value: 'Asia/Tokyo', label: 'Tokyo (JST)' },
+                            { value: 'Asia/Dubai', label: 'Dubai (GST)' },
+                            { value: 'Asia/Singapore', label: 'Singapore (SGT)' },
+                            { value: 'Australia/Sydney', label: 'Sydney (AEST/AEDT)' },
+                        ]}
+                        fullWidth
+                    />
+                    <Select
+                        label="Locale"
+                        value={formData.locale || 'en-US'}
+                        onChange={(val) => onSelectChange('locale', val)}
+                        options={[
+                            { value: 'en-US', label: 'English (US)' },
+                            { value: 'en-GB', label: 'English (UK)' },
+                            { value: 'en-CA', label: 'English (Canada)' },
+                            { value: 'es-ES', label: 'Spanish (Spain)' },
+                            { value: 'fr-FR', label: 'French (France)' },
+                            { value: 'de-DE', label: 'German (Germany)' },
+                            { value: 'pt-BR', label: 'Portuguese (Brazil)' },
+                        ]}
+                        fullWidth
+                    />
+                </div>
+
+                <Select
+                    label="Profile Visibility"
+                    value={formData.profile_visibility || 'private'}
+                    onChange={(val) => onSelectChange('profile_visibility', val)}
+                    options={[
+                        { value: 'public', label: 'Public' },
+                        { value: 'private', label: 'Private' },
+                        { value: 'connections', label: 'Connections Only' },
+                    ]}
+                    fullWidth
+                />
+
+                {/* Notifications */}
+                <div className="form-item--full">
+                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
+                        Notification Preferences
+                    </h3>
+                </div>
+
+                <div className="form-item--full">
+                    <Checkbox
+                        label="Enable Notifications"
+                        name="notifications_enabled"
+                        checked={formData.notifications_enabled ?? true}
+                        onChange={onCheckboxChange}
+                    />
+                </div>
+
+                <div className="form-row-two">
+                    <Checkbox
+                        label="Email Notifications"
+                        name="email_notifications"
+                        checked={formData.email_notifications ?? true}
+                        onChange={onCheckboxChange}
+                        disabled={!formData.notifications_enabled}
+                    />
+                    <Checkbox
+                        label="SMS Notifications"
+                        name="sms_notifications"
+                        checked={formData.sms_notifications ?? false}
+                        onChange={onCheckboxChange}
+                        disabled={!formData.notifications_enabled}
+                    />
+                </div>
+
+                <div className="form-row-two">
+                    <Checkbox
+                        label="Push Notifications"
+                        name="push_notifications"
+                        checked={formData.push_notifications ?? true}
+                        onChange={onCheckboxChange}
+                        disabled={!formData.notifications_enabled}
+                    />
+                    <Checkbox
+                        label="Marketing Emails"
+                        name="marketing_emails"
+                        checked={formData.marketing_emails ?? false}
+                        onChange={onCheckboxChange}
+                    />
+                </div>
+
+                {/* Payment Preference */}
+                <div className="form-item--full">
+                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
+                        Payment
+                    </h3>
+                </div>
+
+                <Select
+                    label="Preferred Payment Method"
+                    value={formData.preferred_payment_method || ''}
+                    onChange={(val) => onSelectChange('preferred_payment_method', val)}
+                    options={[
+                        { value: '', label: 'Not Set' },
+                        { value: 'credit-card', label: 'Credit Card' },
+                        { value: 'debit-card', label: 'Debit Card' },
+                        { value: 'bank-transfer', label: 'Bank Transfer' },
+                        { value: 'paypal', label: 'PayPal' },
+                        { value: 'stripe', label: 'Stripe' },
+                        { value: 'check', label: 'Check' },
+                        { value: 'cash', label: 'Cash' },
+                        { value: 'other', label: 'Other' },
+                    ]}
+                    fullWidth
+                />
+            </div>
+        </Card>
+    );
+};
+
+PreferencesSection.propTypes = {
+    formData: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onSelectChange: PropTypes.func.isRequired,
+    onCheckboxChange: PropTypes.func.isRequired,
+};
+
+export default PreferencesSection;

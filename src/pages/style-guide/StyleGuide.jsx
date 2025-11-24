@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeToggle, Tabs, TabPanel } from '../../components/ui';
-import { 
+import {
   Colors as ColorSection,
   Surfaces as SurfaceSection,
   Typography as TypographySection,
@@ -41,11 +41,10 @@ const StyleGuide = () => {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert--${type} alert--toast`;
     alertDiv.innerHTML = `
-      <div class="alert__icon">${
-        type === 'success' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : 
-        type === 'info' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9V14M10 6V6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' : 
-        type === 'warning' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 17H2L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7V11M10 14V14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' : 
-        '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7L13 13M13 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+      <div class="alert__icon">${type === 'success' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' :
+        type === 'info' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 9V14M10 6V6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' :
+          type === 'warning' ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 17H2L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7V11M10 14V14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' :
+            '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 7L13 13M13 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
       }</div>
       <div class="alert__content">
         <strong>${title}</strong> ${message}
@@ -83,7 +82,7 @@ const StyleGuide = () => {
         <TabPanel label="Colors">
           <ColorSection copyToClipboard={copyToClipboard} />
         </TabPanel>
-        
+
         <TabPanel label="Contrast">
           <ContrastSection copyToClipboard={copyToClipboard} />
         </TabPanel>

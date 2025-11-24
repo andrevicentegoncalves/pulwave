@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { Card, Button, CardGrid, FloatingActionButton } from '../components/ui';
 import Icon from '../components/ui/Icon';
-import { 
-  Home as HomeIcon, 
-  Building, 
-  MapPin, 
-  Calendar, 
-  DollarSign, 
-  AlertCircle 
+import {
+  Home as HomeIcon,
+  Building,
+  MapPin,
+  Calendar,
+  DollarSign,
+  AlertCircle
 } from '../components/ui/iconLibrary';
 
 const Home = () => {
@@ -38,9 +38,9 @@ const Home = () => {
           const { data: profileData } = await supabase
             .from('profiles')
             .select('*')
-            .eq('id', user.id)
+            .eq('auth_user_id', user.id)
             .single();
-          
+
           setProfile(profileData);
 
           // Fetch statistics
@@ -58,7 +58,7 @@ const Home = () => {
               .in('id', buildingIds);
 
             const { data: properties } = await supabase
-              .from('properties')
+              .from('units')
               .select('id, status, monthly_rent, building_id')
               .in('building_id', buildingIds);
 
@@ -97,10 +97,10 @@ const Home = () => {
 
   const getDisplayName = () => {
     if (!profile) return user?.email?.split('@')[0] || 'there';
-    
+
     const firstName = profile.first_name || '';
     const lastName = profile.last_name || '';
-    
+
     if (firstName) return firstName;
     if (lastName) return lastName;
     return user?.email?.split('@')[0] || 'there';
@@ -129,17 +129,17 @@ const Home = () => {
             {getGreeting()}, {getDisplayName()}! 👋
           </h1>
           <p className="home-page__date">
-            {new Date().toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
+            {new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
             })}
           </p>
         </div>
         <div className="home-page__welcome-actions">
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             size="m"
             onClick={() => navigate('/buildings/new')}
           >
@@ -218,12 +218,12 @@ const Home = () => {
       {/* Quick Actions */}
       <div className="home-page__section">
         <h2 className="home-page__section-title">Quick Actions</h2>
-        <CardGrid 
-          minCardWidth="280px" 
-          gap="var(--space-4)" 
+        <CardGrid
+          minCardWidth="280px"
+          gap="var(--space-4)"
           className="card-grid--comfortable"
         >
-          <Card 
+          <Card
             variant="elevated"
             className="action-card"
             onClick={() => navigate('/buildings/new')}
@@ -239,7 +239,7 @@ const Home = () => {
             </p>
           </Card>
 
-          <Card 
+          <Card
             variant="elevated"
             className="action-card"
             onClick={() => navigate('/properties')}
@@ -255,7 +255,7 @@ const Home = () => {
             </p>
           </Card>
 
-          <Card 
+          <Card
             variant="elevated"
             className="action-card"
             onClick={() => navigate('/schedule')}
@@ -271,7 +271,7 @@ const Home = () => {
             </p>
           </Card>
 
-          <Card 
+          <Card
             variant="elevated"
             className="action-card"
             onClick={() => navigate('/maintenance')}
@@ -302,8 +302,8 @@ const Home = () => {
             <p className="empty-state-card__description">
               Add your first building to start managing your real estate portfolio
             </p>
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               size="l"
               onClick={() => navigate('/buildings/new')}
             >
@@ -317,7 +317,7 @@ const Home = () => {
       )}
 
       {/* Floating Action Button (Mobile Only) */}
-      <FloatingActionButton 
+      <FloatingActionButton
         position="bottom-right"
         actions={fabActions}
       />

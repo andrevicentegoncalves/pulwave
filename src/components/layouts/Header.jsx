@@ -14,7 +14,7 @@ import UserInfo from './UserInfo';
 const Header = ({ toggleSidebar, isExpanded }) => {
     const handleLogout = () => {
         // TODO: Implement actual logout logic
-        console.log('Logout clicked');
+
     };
 
     return (

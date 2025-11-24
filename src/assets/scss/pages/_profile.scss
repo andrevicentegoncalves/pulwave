@@ -226,9 +226,49 @@
   }
 }
 
+// Two column row
+.form-row-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  grid-column: 1 / -1;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
 // Full width items
 .form-item--full {
   grid-column: 1 / -1;
+}
+
+// ---------------------------------------------------------------------------//
+// READ-ONLY FIELDS
+// ---------------------------------------------------------------------------//
+
+.read-only-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: var(--color-surface-subtle);
+  border-radius: var(--border-radius-m);
+  border: 1px solid var(--color-border-subtle);
+
+  .input__label {
+    font-size: var(--font-size-body-s);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-on-surface-subtle);
+    margin-bottom: 0;
+  }
+
+  .read-only-value {
+    font-size: var(--font-size-body-m);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-on-surface-default);
+  }
 }
 
 // ---------------------------------------------------------------------------//
@@ -236,6 +276,10 @@
 // ---------------------------------------------------------------------------//
 
 @media (max-width: 480px) {
+  .profile-avatar-section {
+    height: 300px;
+  }
+
   .profile-avatar {
     width: 300px;
     height: 300px;
@@ -249,5 +293,11 @@
   .profile-avatar__preview {
     width: 140px;
     height: 140px;
+  }
+
+  // Reduce ring wave size on mobile
+  .profile-avatar .profile-ring-wave {
+    width: 300px;
+    height: 300px;
   }
 }

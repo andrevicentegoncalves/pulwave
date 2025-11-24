@@ -1,0 +1,206 @@
+@use '../abstracts' as *;
+
+/* ==========================================================================*/
+/*                          PAGINATION COMPONENT (MOBILE-FIRST)             */
+/* ==========================================================================*/
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-m);
+    gap: var(--space-m);
+
+    // Mobile: stack vertically
+    @media (max-width: 767px) {
+        flex-direction: column;
+        gap: var(--space-base);
+    }
+
+    // Pagination counter (showing X-Y of Z items)
+    &__counter {
+        color: var(--color-neutral-7);
+        font-size: 11px;
+
+        @media (max-width: 767px) {
+            font-size: 10px;
+            order: 2; // Show below buttons on mobile
+        }
+    }
+
+    // Container for all buttons
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        flex-wrap: wrap;
+
+        @media (max-width: 767px) {
+            order: 1;
+        }
+    }
+
+    // Individual pagination button
+    &__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        height: 32px;
+        padding: 0 var(--space-s);
+        background-color: var(--color-neutral-0);
+        border: 1px solid var(--color-neutral-4);
+        border-radius: var(--border-radius-soft);
+        color: var(--color-neutral-8);
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+
+        // Tablet & Mobile: larger touch targets
+        @media (max-width: 1023px) {
+            min-width: 40px;
+            height: 40px;
+        }
+
+        // Mobile: even larger
+        @media (max-width: 767px) {
+            font-size: 10px;
+        }
+
+        // Hover state (desktop only)
+        @media (min-width: 768px) {
+            &:hover:not(:disabled):not(&--active):not(&--ellipsis) {
+                background-color: var(--color-neutral-2);
+                border-color: var(--color-neutral-5);
+            }
+        }
+
+        // Active page
+        &--active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-neutral-0);
+            font-weight: 600;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        // Ellipsis button (non-clickable)
+        &--ellipsis {
+            background-color: transparent;
+            border: 0;
+            cursor: default;
+            pointer-events: none;
+            min-width: 16px;
+            width: 16px;
+            color: var(--color-neutral-6);
+        }
+
+        // Disabled state
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        // Active (click) state
+        &:active:not(:disabled):not(&--active) {
+            transform: scale(0.95);
+        }
+
+        // Focus state (accessibility)
+        &:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-color: var(--color-primary);
+        }
+
+        // Icon sizing
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
+    // Page input (optional "Go to page X" feature)
+    &__input {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+        margin-left: var(--space-m);
+        font-size: 11px;
+        color: var(--color-neutral-7);
+
+        @media (max-width: 767px) {
+            margin-left: 0;
+            margin-top: var(--space-s);
+            font-size: 10px;
+        }
+    }
+
+    &__input-field {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        text-align: center;
+        border: 1px solid var(--color-neutral-4);
+        border-radius: var(--border-radius-soft);
+        font-size: 11px;
+        color: var(--color-neutral-8);
+        background-color: var(--color-neutral-0);
+        transition: border-color 0.2s ease;
+
+        @media (max-width: 1023px) {
+            width: 40px;
+            height: 40px;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.1);
+        }
+
+        // Remove number input arrows
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+// RTL support
+.is-rtl {
+    .pagination {
+        &__button {
+            svg {
+                transform: rotate(180deg);
+            }
+
+            &--active svg,
+            &--ellipsis svg {
+                transform: none;
+            }
+        }
+
+        &__input {
+            margin-left: 0;
+            margin-right: var(--space-m);
+
+            @media (max-width: 767px) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+// High contrast mode support
+.os-high-contrast {
+    .pagination {
+        &__button--active {
+            outline: 3px solid var(--color-focus-outer);
+        }
+    }
+}

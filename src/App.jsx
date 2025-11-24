@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import BaseLayout from './components/layouts/BaseLayout';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+import ProfileWrapper from './pages/ProfileWrapper';
 import StyleGuide from './pages/style-guide/StyleGuide';
-import Properties from './pages/Properties';
+import Assets from './pages/Assets';
 import BuildingForm from './pages/BuildingForm';
 import Settings from './pages/Settings';
 
@@ -17,6 +17,14 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check for dev bypass
+    const devBypass = localStorage.getItem('dev_bypass');
+    if (devBypass) {
+      setUser({ id: 'dev', email: 'dev@example.com' });
+      setLoading(false);
+      return;
+    }
+
     // Get current session
     supabase.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null);
@@ -56,8 +64,8 @@ function App() {
         {/* Protected Routes with Base Layout */}
         <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/properties" element={<Properties />} />
+          <Route path="/profile" element={<ProfileWrapper />} />
+          <Route path="/assets" element={<Assets />} />
           <Route path="/buildings/new" element={<BuildingForm />} />
           <Route path="/buildings/:id/edit" element={<BuildingForm />} />
           <Route path="/settings" element={<Settings />} />

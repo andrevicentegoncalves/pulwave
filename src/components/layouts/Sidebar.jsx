@@ -39,30 +39,9 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
-    const [showWave, setShowWave] = useState(true);
-
-    // Refs for measuring space
+    const [showWave, setShowWave] = useState(false);
     const menuRef = useRef(null);
 
-    // Menu configuration
-    const menuItems = [
-        { id: '/dashboard', icon: ChartNoAxesCombined, label: 'Dashboard' },
-        { id: '/property', icon: Home, label: 'Property' },
-        { id: '/buildings', icon: Building, label: 'Buildings' },
-        { id: '/lights', icon: Lamp, label: 'Lights' },
-        { id: '/security', icon: ShieldCheck, label: 'Security' },
-        { id: '/location', icon: MapPin, label: 'Location' },
-        { id: '/users', icon: Users, label: 'Users' },
-        { id: '/analytics', icon: LayoutGrid, label: 'Analytics' },
-        { id: '/settings', icon: Settings, label: 'Settings' },
-        { id: '/profile', icon: User, label: 'Profile' },
-        { id: '/style-guide', icon: Palette, label: 'Style Guide' },
-    ];
-
-    /**
-     * Handle menu item click
-     * Navigate to route and close sidebar on mobile
-     */
     const handleItemClick = (path) => {
         navigate(path);
 
@@ -92,7 +71,6 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     useEffect(() => {
         const calculateSpace = () => {
             if (!menuRef.current || !isExpanded) {
-                console.log('Wave hidden: menu ref or not expanded', { menuRef: !!menuRef.current, isExpanded });
                 setShowWave(false);
                 return;
             }
@@ -100,7 +78,6 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
             // Find the actual .menu element inside .sidebar__menu
             const actualMenu = menuRef.current.querySelector('.menu');
             if (!actualMenu) {
-                console.log('Wave hidden: .menu element not found');
                 setShowWave(false);
                 return;
             }
@@ -110,14 +87,6 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
 
             // Calculate space from bottom of menu to bottom of sidebar
             const availableSpace = sidebarRect.bottom - menuRect.bottom;
-
-            console.log('Wave calculation:', {
-                menuBottom: menuRect.bottom,
-                sidebarBottom: sidebarRect.bottom,
-                availableSpace,
-                threshold: 300,
-                willShow: availableSpace >= 300
-            });
 
             // Show wave only if there's at least 300px of space
             setShowWave(availableSpace >= 300);
@@ -140,6 +109,20 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
             resizeObserver.disconnect();
         };
     }, [isExpanded]);
+
+    // Menu configuration
+    const menuItems = [
+        { id: '/dashboard', icon: ChartNoAxesCombined, label: 'Dashboard' },
+        { id: '/assets', icon: Building, label: 'Assets' },
+        { id: '/lights', icon: Lamp, label: 'Lights' },
+        { id: '/security', icon: ShieldCheck, label: 'Security' },
+        { id: '/location', icon: MapPin, label: 'Location' },
+        { id: '/users', icon: Users, label: 'Users' },
+        { id: '/analytics', icon: LayoutGrid, label: 'Analytics' },
+        { id: '/settings', icon: Settings, label: 'Settings' },
+        { id: '/profile', icon: User, label: 'Profile' },
+        { id: '/style-guide', icon: Palette, label: 'Style Guide' },
+    ];
 
     // Get current path, defaulting to dashboard
     const currentPath = location.pathname === '/' ? '/dashboard' : location.pathname;
@@ -174,7 +157,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
                             items={menuItems}
                             activeItem={currentPath}
                             onItemClick={handleItemClick}
-                            isCollapsed={!isExpanded}
+                            isCollapsed={!isExpanded && !isMobile}
                         />
                     </div>
 
@@ -182,9 +165,9 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
                     <div className="sidebar-user">
                         <UserInfo
                             showAvatar={true}
-                            showName={isExpanded}
+                            showName={isExpanded || isMobile}
                             showLogout={true}
-                            orientation={isExpanded ? 'horizontal' : 'vertical'}
+                            orientation={(isExpanded || isMobile) ? 'horizontal' : 'vertical'}
                         />
                     </div>
 

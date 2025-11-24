@@ -70,27 +70,6 @@ const UserInfo = ({
         const fetchUserData = async () => {
             try {
                 setLoading(true);
-                // Get authenticated user
-                const { data: { user: authUser } } = await supabase.auth.getUser();
-                setUser(authUser);
-
-                if (authUser) {
-                    // Get profile data
-                    const { data: profileData } = await supabase
-                        .from('profiles')
-                        .select('*')
-                        .eq('id', authUser.id)
-                        .single();
-
-                    console.log('UserInfo - Profile Data:', profileData);
-                    console.log('UserInfo - First Name:', profileData?.first_name);
-                    console.log('UserInfo - Last Name:', profileData?.last_name);
-                    console.log('UserInfo - Username:', profileData?.username);
-
-                    setProfile(profileData);
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
             } finally {
                 setLoading(false);
             }
@@ -161,25 +140,20 @@ const UserInfo = ({
             return user?.email?.split('@')[0] || 'User';
         }
 
-        // Try to build full name from first and last name
+        // Priority 1: Display Name
+        if (profile.display_name) {
+            return profile.display_name;
+        }
+
+        // Priority 2: Full Name
         const fullName = `${profile.first_name || ''} ${profile.last_name || ''}`.trim();
         if (fullName) {
-            console.log('UserInfo - Using full name:', fullName);
             return fullName;
         }
 
-        // Fall back to username if available
-        if (profile.username) {
-            console.log('UserInfo - Using username:', profile.username);
-            return profile.username;
-        }
-
         // Last resort: use email username
-        console.log('UserInfo - Using email username');
         return user?.email?.split('@')[0] || 'User';
     })();
-
-    console.log('UserInfo - Final display name:', displayName);
 
     // Get avatar URL with fallback
     const avatarUrl = profile?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;

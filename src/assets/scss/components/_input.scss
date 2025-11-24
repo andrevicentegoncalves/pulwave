@@ -14,13 +14,13 @@
   display: block;
   font-size: var(--font-size-body-s);
   font-weight: var(--font-weight-medium);
-  color: #1e293b;  // Dark color for visibility
+  color: #1e293b; // Dark color for visibility
   line-height: var(--line-height-body);
   margin-bottom: var(--scale-1);
 
   &--required {
     .input__required {
-      color: #dc2626;  // Strong red
+      color: #dc2626; // Strong red
       margin-left: var(--scale-1);
     }
   }
@@ -51,11 +51,11 @@
     .input {
       border-color: #dc2626;
       border-width: 2px;
-      
+
       &:hover {
         border-color: #b91c1c;
       }
-      
+
       &:focus {
         border-color: #dc2626;
         box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
@@ -68,11 +68,11 @@
     .input {
       border-color: #16a34a;
       border-width: 2px;
-      
+
       &:hover {
         border-color: #15803d;
       }
-      
+
       &:focus {
         border-color: #16a34a;
         box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
@@ -94,9 +94,9 @@
   font-size: var(--font-size-body-m);
   font-family: var(--font-family-sans);
   line-height: var(--line-height-body);
-  color: #1e293b;  // Dark text
-  background-color: #ffffff;  // Pure white background
-  border: 2px solid #cbd5e1;  // Strong visible border (2px instead of 1px)
+  color: #1e293b; // Dark text
+  background-color: #ffffff; // Pure white background
+  border: 2px solid #cbd5e1; // Strong visible border (2px instead of 1px)
   border-radius: 6px;
   transition: all 0.15s ease;
   outline: none;
@@ -119,21 +119,21 @@
 
   // ── PLACEHOLDER ──
   &::placeholder {
-    color: #94a3b8;  // Medium gray
+    color: #94a3b8; // Medium gray
     opacity: 1;
   }
 
   // ── HOVER STATE ──
   &:hover:not(:disabled):not(:focus) {
-    border-color: #94a3b8;  // Darker on hover
-    background-color: #f8fafc;  // Slight background change
+    border-color: #94a3b8; // Darker on hover
+    background-color: #f8fafc; // Slight background change
   }
 
   // ── FOCUS STATE ──
   &:focus {
-    border-color: #3b82f6;  // Strong blue border
+    border-color: #3b82f6; // Strong blue border
     background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);  // Blue glow
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); // Blue glow
   }
 
   // ── DISABLED STATE ──
@@ -142,13 +142,13 @@
     color: #94a3b8;
     border-color: #e2e8f0;
     cursor: not-allowed;
-    opacity: 1;  // Keep full opacity, colors show disabled state
+    opacity: 1; // Keep full opacity, colors show disabled state
   }
 
-   &--success {
+  &--success {
     .input__field {
       border-color: var(--color-feedback-success-500);
-      
+
       &:focus {
         border-color: var(--color-feedback-success-600);
         box-shadow: 0 0 0 3px var(--color-feedback-success-100);
@@ -159,7 +159,7 @@
   &--error {
     .input__field {
       border-color: var(--color-feedback-danger-500);
-      
+
       &:focus {
         border-color: var(--color-feedback-danger-600);
         box-shadow: 0 0 0 3px var(--color-feedback-danger-100);
@@ -174,7 +174,7 @@
   &--warning {
     .input__field {
       border-color: var(--color-feedback-warning-500);
-      
+
       &:focus {
         border-color: var(--color-feedback-warning-600);
         box-shadow: 0 0 0 3px var(--color-feedback-warning-100);
@@ -184,7 +184,6 @@
 
   // ── READ-ONLY STATE ──
   &:read-only {
-    background-color: #f8fafc;
     border-color: #cbd5e1;
     cursor: default;
   }
