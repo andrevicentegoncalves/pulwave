@@ -22,7 +22,7 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-on-surface-default);
   line-height: var(--line-height-tight);
-  
+
   // Required indicator
   &--required::after {
     content: ' *';
@@ -35,45 +35,32 @@
 /* -------------------------------------------------------------------------- */
 
 .textarea__field {
-  // Typography
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-normal);
-  color: var(--color-on-surface-default);
-  
-  // Layout & Spacing - FIX: Proper padding and margin
-  width: 100%;
-  padding: var(--space-3) var(--space-4); // 12px 16px
-  margin: 0; // Remove default margin
-  min-height: var(--space-20); // 80px minimum
-  resize: vertical; // Allow vertical resizing only
-  
   // Styling
   background: var(--color-surface-default);
   border: 1px solid var(--color-border-default);
   border-radius: var(--border-radius-m);
-  
+
   // Animation
   transition: all var(--duration-fast) var(--easing-standard);
-  
+
   // Placeholder
   &::placeholder {
     color: var(--color-on-surface-subtle);
     opacity: 1;
   }
-  
+
   // Hover state
   &:hover:not(:disabled):not(:focus) {
     border-color: var(--color-border-emphasis);
   }
-  
+
   // Focus state
   &:focus {
     outline: none;
     border-color: var(--color-primary-6);
     box-shadow: 0 0 0 3px var(--color-primary-1);
   }
-  
+
   // Disabled state
   &:disabled {
     background: var(--color-surface-disabled);
@@ -81,20 +68,20 @@
     cursor: not-allowed;
     border-color: var(--color-border-subtle);
   }
-  
+
   // Error state
   &--error {
     border-color: var(--color-danger-6);
-    
+
     &:focus {
       box-shadow: 0 0 0 3px var(--color-danger-1);
     }
   }
-  
+
   // Success state
   &--success {
     border-color: var(--color-success-6);
-    
+
     &:focus {
       box-shadow: 0 0 0 3px var(--color-success-1);
     }
@@ -110,20 +97,20 @@
   font-size: var(--font-size-body-xs);
   line-height: var(--line-height-normal);
   color: var(--color-on-surface-subtle);
-  
+
   // Spacing
   margin: 0; // Remove default margin
-  
+
   // Icon alignment
   display: flex;
   align-items: flex-start;
   gap: var(--space-1-5);
-  
+
   // Error variant
   &--error {
     color: var(--color-danger-7);
   }
-  
+
   // Success variant
   &--success {
     color: var(--color-success-7);
@@ -139,10 +126,10 @@
   font-size: var(--font-size-body-xs);
   color: var(--color-on-surface-subtle);
   text-align: right;
-  
+
   // Spacing
   margin-top: var(--space-1);
-  
+
   // Over limit state
   &--over-limit {
     color: var(--color-danger-6);

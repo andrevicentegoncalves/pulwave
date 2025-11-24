@@ -1,34 +1,61 @@
-import React from 'react';
-import { ContentLayout, Card } from '../components/ui';
+import React, { useEffect, useState } from 'react';
+import { Card } from '../components/ui';
+import ContentLayout from '../components/layouts/ContentLayout';
+import { supabase } from '../lib/supabaseClient';
+
+export const PrivacyContent = ({ content }) => (
+    <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content || 'Loading...' }} />
+);
 
 const PrivacyPolicy = () => {
+    const [privacyData, setPrivacyData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPrivacy = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('legal_documents')
+                    .select('*')
+                    .eq('document_type', 'privacy_policy')
+                    .eq('is_current', true)
+                    .single();
+
+                if (error) throw error;
+                setPrivacyData(data);
+            } catch (err) {
+                console.error('Error fetching privacy policy:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPrivacy();
+    }, []);
+
+    if (loading) {
+        return (
+            <ContentLayout>
+                <Card header={<h1 className="text-2xl font-bold">Privacy Policy</h1>}>
+                    <p>Loading...</p>
+                </Card>
+            </ContentLayout>
+        );
+    }
+
     return (
         <ContentLayout>
-            <Card header={<h1 className="text-2xl font-bold">Privacy Policy</h1>}>
-                <div className="prose max-w-none">
-                    <p>Last updated: {new Date().toLocaleDateString()}</p>
-
-                    <h3>1. Information We Collect</h3>
-                    <p>We collect information you provide directly to us, such as when you create an account, update your profile, or communicate with us.</p>
-
-                    <h3>2. How We Use Your Information</h3>
-                    <p>We use the information we collect to provide, maintain, and improve our services, to develop new ones, and to protect our users.</p>
-
-                    <h3>3. Sharing of Information</h3>
-                    <p>We do not share your personal information with third parties except as described in this policy.</p>
-
-                    <h3>4. Data Security</h3>
-                    <p>We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction.</p>
-
-                    <h3>5. Your Choices</h3>
-                    <p>You may update, correct or delete information about you at any time by logging into your online account.</p>
-
-                    <h3>6. Changes to this Policy</h3>
-                    <p>We may change this Privacy Policy from time to time. If we make changes, we will notify you by revising the date at the top of the policy.</p>
-
-                    <h3>7. Contact Us</h3>
-                    <p>If you have any questions about this Privacy Policy, please contact us.</p>
+            <Card header={
+                <div>
+                    <h1 className="text-2xl font-bold">Privacy Policy</h1>
+                    {privacyData && (
+                        <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+                            Version {privacyData.version} • Effective {new Date(privacyData.effective_date).toLocaleDateString()}
+                        </p>
+                    )}
                 </div>
+            }>
+                <PrivacyContent content={privacyData?.content} />
             </Card>
         </ContentLayout>
     );
