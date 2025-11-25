@@ -575,7 +575,7 @@ const Profile = () => {
             </TabPanel>
           </Tabs>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-6)' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type="submit" variant="primary" disabled={loading} icon={<CheckCircle />}>
               {loading ? 'Saving...' : 'Save All Changes'}
             </Button>

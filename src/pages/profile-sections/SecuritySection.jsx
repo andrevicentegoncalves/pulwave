@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Input, Select, Button } from '../../components/ui';
 import Checkbox from '../../components/ui/Checkbox';
 import Icon from '../../components/ui/Icon';
-import { Lock } from '../../components/ui/iconLibrary';
+import { Key } from '../../components/ui/iconLibrary';
 import { supabase } from '../../lib/supabaseClient';
 
 const SecuritySection = ({
@@ -21,7 +21,7 @@ const SecuritySection = ({
         <div className="profile-section">
             <h2 className="profile-section__title">
                 <Icon size="l">
-                    <Lock />
+                    <Key />
                 </Icon>
                 Security
             </h2>
