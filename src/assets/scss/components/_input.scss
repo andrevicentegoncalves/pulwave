@@ -15,8 +15,8 @@
   font-size: var(--font-size-body-s);
   font-weight: var(--font-weight-medium);
   color: #1e293b; // Dark color for visibility
-  line-height: var(--line-height-body);
-  margin-bottom: var(--scale-1);
+  line-height: var(--line-height-body-m);
+  margin-bottom: var(--scale-2);
 
   &--required {
     .input__required {
@@ -36,7 +36,7 @@
   // ── ICON POSITIONING ──
   &--has-left-icon {
     .input {
-      padding-left: var(--scale-10);
+      padding-left: var(--scale-12);
     }
   }
 
@@ -93,7 +93,7 @@
   padding: var(--scale-3) var(--scale-6);
   font-size: var(--font-size-body-m);
   font-family: var(--font-family-sans);
-  line-height: var(--line-height-body);
+  line-height: var(--line-height-body-m);
   color: #1e293b; // Dark text
   background-color: #ffffff; // Pure white background
   border: 2px solid #cbd5e1; // Strong visible border (2px instead of 1px)
@@ -201,7 +201,7 @@
   pointer-events: none;
 
   &--left {
-    left: var(--scale-3);
+    left: var(--scale-4);
   }
 
   &--right {
@@ -236,5 +236,5 @@ textarea.input {
   min-height: 100px;
   resize: vertical;
   padding: var(--scale-3) var(--scale-6);
-  line-height: var(--line-height-body);
+  line-height: var(--line-height-body-m);
 }

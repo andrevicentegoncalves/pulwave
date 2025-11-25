@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Card, Input, Button, Modal } from '../../components/ui';
+import { Card, Input, Button, Modal, Badge } from '../../components/ui';
 import Checkbox from '../../components/ui/Checkbox';
 import Icon from '../../components/ui/Icon';
 import { ShieldCheck } from '../../components/ui/iconLibrary';
@@ -67,7 +67,6 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
 
         const acceptedAt = new Date().toISOString();
 
-        // Save to database first
         try {
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
@@ -81,7 +80,6 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     .eq('auth_user_id', user.id);
 
                 if (!error) {
-                    // Only update UI if database save succeeded
                     onChange({
                         target: {
                             name: 'terms_accepted_version',
@@ -108,7 +106,6 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
 
         const acceptedAt = new Date().toISOString();
 
-        // Save to database first
         try {
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
@@ -122,7 +119,6 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     .eq('auth_user_id', user.id);
 
                 if (!error) {
-                    // Only update UI if database save succeeded
                     onChange({
                         target: {
                             name: 'privacy_accepted_version',
@@ -155,148 +151,116 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
     };
 
     return (
-        <Card
-            header={
-                <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                    <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}>
-                        <ShieldCheck />
-                    </Icon>
-                    Privacy & Compliance
-                </h2>
-            }
-        >
-            <div className="profile-form-grid">
-                {/* Legal Documents */}
-                <div className="form-item--full">
-                    <h3 style={{ marginBottom: 'var(--space-3)' }}>Legal Documents</h3>
-                </div>
-
-                {/* Terms & Conditions Section */}
-                <div className="form-item--full" style={{ marginBottom: 'var(--space-4)' }}>
-                    <h4 style={{ marginBottom: 'var(--space-2)' }}>Terms & Conditions</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-                        <Button variant="outline" onClick={openTermsModal}>
-                            View Terms & Conditions
-                        </Button>
-                        <div className="read-only-field" style={{ margin: 0 }}>
-                            <label className="input__label" style={{ marginBottom: '2px' }}>Accepted Version</label>
-                            <div className="read-only-value">
-                                {formData.terms_accepted_version || 'Not Accepted'}
+        <div className="profile-section">
+            <h2 className="profile-section__title">
+                <Icon size="l">
+                    <ShieldCheck />
+                </Icon>
+                Privacy
+            </h2>
+            <div className="profile-section__cards">
+                {/* Legal Documents Card */}
+                <Card header={<h3>Legal Documents</h3>}>
+                    <div className="profile-form-grid">
+                        {/* Terms & Conditions */}
+                        <div className="form-item--full" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+                                <div style={{ flex: 1, minWidth: '200px' }}>
+                                    <div style={{ fontWeight: 'var(--font-weight-semi-bold)', marginBottom: 'var(--space-2)' }}>
+                                        Terms & Conditions
+                                    </div>
+                                    <div style={{ fontSize: 'var(--font-size-caption-m)', color: 'var(--color-on-surface-subtle)' }}>
+                                        {formData.terms_accepted_version ? (
+                                            <>Version {formData.terms_accepted_version} • Accepted {new Date(formData.terms_accepted_at).toLocaleDateString()}</>
+                                        ) : (
+                                            'Not accepted'
+                                        )}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+                                    <Badge
+                                        variant="light"
+                                        type={formData.terms_accepted_version ? "success" : "neutral"}
+                                    >
+                                        {formData.terms_accepted_version ? "Accepted" : "Not Accepted"}
+                                    </Badge>
+                                    <Button variant="outline" size="s" onClick={openTermsModal}>
+                                        View
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                        <div className="read-only-field" style={{ margin: 0 }}>
-                            <label className="input__label" style={{ marginBottom: '2px' }}>Accepted Date</label>
-                            <div className="read-only-value">
-                                {formData.terms_accepted_at
-                                    ? new Date(formData.terms_accepted_at).toLocaleDateString()
-                                    : 'N/A'}
+
+                            {/* Privacy Policy */}
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+                                <div style={{ flex: 1, minWidth: '200px' }}>
+                                    <div style={{ fontWeight: 'var(--font-weight-semi-bold)', marginBottom: 'var(--space-2)' }}>
+                                        Privacy Policy
+                                    </div>
+                                    <div style={{ fontSize: 'var(--font-size-caption-m)', color: 'var(--color-on-surface-subtle)' }}>
+                                        {formData.privacy_accepted_version ? (
+                                            <>Version {formData.privacy_accepted_version} • Accepted {new Date(formData.privacy_accepted_at).toLocaleDateString()}</>
+                                        ) : (
+                                            'Not accepted'
+                                        )}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+                                    <Badge
+                                        variant="light"
+                                        type={formData.privacy_accepted_version ? "success" : "neutral"}
+                                    >
+                                        {formData.privacy_accepted_version ? "Accepted" : "Not Accepted"}
+                                    </Badge>
+                                    <Button variant="outline" size="s" onClick={openPrivacyModal}>
+                                        View
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Card>
 
-                {/* Privacy Policy Section */}
-                <div className="form-item--full" style={{ marginBottom: 'var(--space-4)' }}>
-                    <h4 style={{ marginBottom: 'var(--space-2)' }}>Privacy Policy</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-                        <Button variant="outline" onClick={openPrivacyModal}>
-                            View Privacy Policy
-                        </Button>
-                        <div className="read-only-field" style={{ margin: 0 }}>
-                            <label className="input__label" style={{ marginBottom: '2px' }}>Accepted Version</label>
-                            <div className="read-only-value">
-                                {formData.privacy_accepted_version || 'Not Accepted'}
-                            </div>
-                        </div>
-                        <div className="read-only-field" style={{ margin: 0 }}>
-                            <label className="input__label" style={{ marginBottom: '2px' }}>Accepted Date</label>
-                            <div className="read-only-value">
-                                {formData.privacy_accepted_at
-                                    ? new Date(formData.privacy_accepted_at).toLocaleDateString()
-                                    : 'N/A'}
-                            </div>
+                {/* Content Settings Card */}
+                <Card header={<h3>Content Settings</h3>}>
+                    <div className="profile-form-grid">
+                        <div className="form-row-two">
+                            <Checkbox
+                                label="Data Processing Consent"
+                                name="data_processing_consent"
+                                checked={formData.data_processing_consent ?? false}
+                                onChange={onCheckboxChange}
+                                helperText="I consent to the processing of my personal data"
+                            />
+
+                            <Checkbox
+                                label="Marketing Communications"
+                                name="marketing_consent"
+                                checked={formData.marketing_consent ?? false}
+                                onChange={onCheckboxChange}
+                                helperText="I agree to receive marketing communications"
+                            />
                         </div>
                     </div>
-                </div>
-
-                {/* Consent Settings */}
-                <div className="form-item--full">
-                    <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-                        Consent Settings
-                    </h3>
-                </div>
-
-                <div className="form-row-two">
-                    <Checkbox
-                        label="Data Processing Consent"
-                        name="data_processing_consent"
-                        checked={formData.data_processing_consent}
-                        onChange={onCheckboxChange}
-                        helperText="Allow us to process your personal data"
-                    />
-                    <Checkbox
-                        label="Marketing Consent"
-                        name="marketing_consent"
-                        checked={formData.marketing_consent}
-                        onChange={onCheckboxChange}
-                        helperText="Receive marketing communications"
-                    />
-                </div>
-
-                {/* Account Deletion - Only show if requested */}
-                {formData.deletion_requested && (
-                    <>
-                        <div className="form-item--full">
-                            <h3 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-                                Account Deletion
-                            </h3>
-                        </div>
-
-                        <div className="form-row-three">
-                            <div className="read-only-field">
-                                <label className="input__label">Deletion Requested</label>
-                                <div className="read-only-value">
-                                    {formData.deletion_requested ? '⚠ Yes' : '✓ No'}
-                                </div>
-                            </div>
-                            <div className="read-only-field">
-                                <label className="input__label">Requested At</label>
-                                <div className="read-only-value">
-                                    {formData.deletion_requested_at
-                                        ? new Date(formData.deletion_requested_at).toLocaleDateString()
-                                        : 'N/A'}
-                                </div>
-                            </div>
-                            <div className="read-only-field">
-                                <label className="input__label">Scheduled For</label>
-                                <div className="read-only-value">
-                                    {formData.deletion_scheduled_for
-                                        ? new Date(formData.deletion_scheduled_for).toLocaleDateString()
-                                        : 'N/A'}
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )}
+                </Card>
             </div>
 
-            {/* Terms Modal */}
+            {/* Terms & Conditions Modal */}
             <Modal
                 isOpen={showTermsModal}
                 onClose={() => setShowTermsModal(false)}
-                title={`Terms and Conditions ${termsData ? `(v${termsData.version})` : ''}`}
-                size="lg"
+                title="Terms & Conditions"
+                size="large"
                 footer={
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)' }}>
+                    <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'flex-end' }}>
                         <Button variant="outline" onClick={() => setShowTermsModal(false)}>
-                            Back
+                            Close
                         </Button>
                         <Button
                             variant="primary"
                             onClick={handleAcceptTerms}
                             disabled={!hasScrolledTerms}
                         >
-                            Accept
+                            {hasScrolledTerms ? 'Accept Terms' : 'Scroll to Accept'}
                         </Button>
                     </div>
                 }
@@ -307,30 +271,30 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     style={{
                         maxHeight: '60vh',
                         overflowY: 'auto',
-                        paddingRight: 'var(--space-2)'
+                        padding: 'var(--space-4)',
                     }}
                 >
                     <TermsContent content={termsData?.content} />
                 </div>
             </Modal>
 
-            {/* Privacy Modal */}
+            {/* Privacy Policy Modal */}
             <Modal
                 isOpen={showPrivacyModal}
                 onClose={() => setShowPrivacyModal(false)}
-                title={`Privacy Policy ${privacyData ? `(v${privacyData.version})` : ''}`}
-                size="lg"
+                title="Privacy Policy"
+                size="large"
                 footer={
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)' }}>
+                    <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'flex-end' }}>
                         <Button variant="outline" onClick={() => setShowPrivacyModal(false)}>
-                            Back
+                            Close
                         </Button>
                         <Button
                             variant="primary"
                             onClick={handleAcceptPrivacy}
                             disabled={!hasScrolledPrivacy}
                         >
-                            Accept
+                            {hasScrolledPrivacy ? 'Accept Policy' : 'Scroll to Accept'}
                         </Button>
                     </div>
                 }
@@ -341,13 +305,13 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     style={{
                         maxHeight: '60vh',
                         overflowY: 'auto',
-                        paddingRight: 'var(--space-2)'
+                        padding: 'var(--space-4)',
                     }}
                 >
                     <PrivacyContent content={privacyData?.content} />
                 </div>
             </Modal>
-        </Card>
+        </div>
     );
 };
 

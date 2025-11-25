@@ -14,7 +14,7 @@
   }
 
   &__title {
-    font-size: var(--font-size-heading-xl);
+    font-size: var(--font-size-headline-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-on-surface-default);
     margin: 0 0 var(--space-2) 0;
@@ -47,7 +47,7 @@
     }
 
     h3 {
-      font-size: var(--font-size-heading-m);
+      font-size: var(--font-size-headline-m);
       font-weight: var(--font-weight-semi-bold);
       color: var(--color-on-surface-default);
       margin: 0;
@@ -92,7 +92,7 @@
   }
 
   &__title {
-    font-size: var(--font-size-heading-s);
+    font-size: var(--font-size-headline-s);
     font-weight: var(--font-weight-semi-bold);
     color: var(--color-on-surface-default);
     margin: 0;
@@ -150,7 +150,7 @@
   }
 
   &__rent {
-    font-size: var(--font-size-heading-s);
+    font-size: var(--font-size-headline-s);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
     padding-top: var(--space-2);

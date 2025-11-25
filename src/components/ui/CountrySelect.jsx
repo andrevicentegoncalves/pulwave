@@ -257,10 +257,10 @@ const CountrySelect = ({
                                     src={selectedCountry.flag_url}
                                     alt={`${selectedCountry.name} flag`}
                                     style={{
-                                        width: '24px',
-                                        height: '16px',
+                                        width: '20px',
+                                        height: '20px',
                                         objectFit: 'cover',
-                                        borderRadius: '2px'
+                                        borderRadius: '50%'
                                     }}
                                 />
                             ) : null}

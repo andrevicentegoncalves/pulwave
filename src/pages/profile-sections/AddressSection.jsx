@@ -98,234 +98,227 @@ const AddressSection = ({
     };
 
     return (
-        <>
-            {/* Primary Address */}
-            <Card
-                header={
-                    <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                        <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}>
-                            <MapPin />
-                        </Icon>
-                        Primary Address
-                    </h2>
-                }
-                style={{ marginBottom: 'var(--space-6)' }}
-            >
-                <div className="profile-form-grid">
-                    {/* Country Dropdown */}
-                    <CountrySelect
-                        label="Country"
-                        value={addressData.country_id || ''}
-                        onChange={(val) => onSelectChange('address', 'country_id', val)}
-                        placeholder="Select your country..."
-                        fullWidth
-                    />
+        <div className="profile-section">
+            <h2 className="profile-section__title">
+                <Icon size="l">
+                    <MapPin />
+                </Icon>
+                Address
+            </h2>
+            <div className="profile-section__cards">
+                {/* Primary Address */}
+                <Card header={<h3>Primary Address</h3>}>
+                    <div className="profile-form-grid">
+                        {/* Country Dropdown */}
+                        <CountrySelect
+                            label="Country"
+                            value={addressData.country_id || ''}
+                            onChange={(val) => onSelectChange('address', 'country_id', val)}
+                            placeholder="Select your country..."
+                            fullWidth
+                        />
 
-                    {/* Region Dropdown */}
-                    <Select
-                        label="Region/State"
-                        value={addressData.region_id || ''}
-                        onChange={(val) => onSelectChange('address', 'region_id', val)}
-                        options={regions.map(r => ({ value: r.id, label: r.name }))}
-                        placeholder="Select Region"
-                        disabled={!addressData.country_id}
-                        fullWidth
-                    />
+                        {/* Region Dropdown */}
+                        <Select
+                            label="Region/State"
+                            value={addressData.region_id || ''}
+                            onChange={(val) => onSelectChange('address', 'region_id', val)}
+                            options={regions.map(r => ({ value: r.id, label: r.name }))}
+                            placeholder="Select Region"
+                            disabled={!addressData.country_id}
+                            fullWidth
+                        />
 
-                    {/* City Autocomplete */}
-                    <AddressAutocomplete
-                        label="City"
-                        type="city"
-                        value={addressData.city_name || ''}
-                        onChange={(val) => handleCityChange('address', val)}
-                        onSelect={(info) => handleCitySelect('address', info)}
-                        countryCode={selectedCountry?.iso_code_2 || ''}
-                        placeholder="Search for your city..."
-                        disabled={!addressData.country_id}
-                        fullWidth
-                    />
-                    {!citySelected && addressData.city_name && (
-                        <div style={{ gridColumn: '1 / -1', color: 'var(--color-warning)', fontSize: '0.875rem', marginTop: '-12px' }}>
-                            Please select a city from the dropdown suggestions
-                        </div>
-                    )}
-
-                    <Input
-                        label="Postal Code"
-                        name="postal_code"
-                        value={addressData.postal_code || ''}
-                        onChange={(e) => onChange('address', e)}
-                        placeholder="Postal Code"
-                        fullWidth
-                    />
-
-                    <div className="form-item--full">
+                        {/* City Autocomplete */}
                         <AddressAutocomplete
-                            label="Street Address"
-                            type="street"
-                            name="street_name"
-                            value={addressData.street_name || ''}
-                            onChange={(val) => onChange('address', { target: { name: 'street_name', value: val } })}
-                            onSelect={(info) => handleStreetSelect('address', info)}
+                            label="City"
+                            type="city"
+                            value={addressData.city_name || ''}
+                            onChange={(val) => handleCityChange('address', val)}
+                            onSelect={(info) => handleCitySelect('address', info)}
                             countryCode={selectedCountry?.iso_code_2 || ''}
-                            city={addressData.city_name || ''}
-                            placeholder="Search for your street..."
-                            disabled={!addressData.city_name || !citySelected}
+                            placeholder="Search for your city..."
+                            disabled={!addressData.country_id}
                             fullWidth
                         />
-                    </div>
+                        {!citySelected && addressData.city_name && (
+                            <div style={{ gridColumn: '1 / -1', color: 'var(--color-warning)', fontSize: '0.875rem', marginTop: '-12px' }}>
+                                Please select a city from the dropdown suggestions
+                            </div>
+                        )}
 
-                    <div className="form-row-three">
                         <Input
-                            label="Number"
-                            name="number"
-                            value={addressData.number || ''}
+                            label="Postal Code"
+                            name="postal_code"
+                            value={addressData.postal_code || ''}
                             onChange={(e) => onChange('address', e)}
-                            placeholder="No."
+                            placeholder="Postal Code"
                             fullWidth
                         />
-                        <Input
-                            label="Floor/Unit"
-                            name="floor"
-                            value={addressData.floor || ''}
-                            onChange={(e) => onChange('address', e)}
-                            placeholder="Floor"
-                            fullWidth
-                        />
-                        <Select
-                            label="Type"
-                            value={addressData.type || 'home'}
-                            onChange={(val) => onSelectChange('address', 'type', val)}
-                            options={[
-                                { value: 'home', label: 'Home' },
-                                { value: 'work', label: 'Work' },
-                                { value: 'billing', label: 'Billing' },
-                            ]}
-                            fullWidth
-                        />
-                    </div>
-                </div>
-            </Card>
 
-            {/* Billing Address */}
-            <Card
-                header={
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h2 className="profile-form-title" style={{ border: 'none', margin: 0, padding: 0 }}>
-                            <Icon size="m" style={{ marginRight: 'var(--space-3)', verticalAlign: 'middle' }}>
-                                <MapPin />
-                            </Icon>
-                            Billing Address
-                        </h2>
-                        <Checkbox
-                            label="Same as Primary Address"
-                            checked={sameAsPrimary}
-                            onChange={handleToggleSameAsPrimary}
-                        />
-                    </div>
-                }
-            >
-                <div className="profile-form-grid" style={{ opacity: sameAsPrimary ? 0.6 : 1, pointerEvents: sameAsPrimary ? 'none' : 'auto' }}>
-                    {/* Country Dropdown */}
-                    <CountrySelect
-                        label="Country"
-                        value={billingAddressData.country_id || ''}
-                        onChange={(val) => onSelectChange('billing', 'country_id', val)}
-                        placeholder="Select your country..."
-                        fullWidth
-                        disabled={sameAsPrimary}
-                    />
-
-                    {/* Region Dropdown */}
-                    <Select
-                        label="Region/State"
-                        value={billingAddressData.region_id || ''}
-                        onChange={(val) => onSelectChange('billing', 'region_id', val)}
-                        options={billingRegions.map(r => ({ value: r.id, label: r.name }))}
-                        placeholder="Select Region"
-                        disabled={!billingAddressData.country_id || sameAsPrimary}
-                        fullWidth
-                    />
-
-                    {/* City Autocomplete */}
-                    <AddressAutocomplete
-                        label="City"
-                        type="city"
-                        value={billingAddressData.city_name || ''}
-                        onChange={(val) => handleCityChange('billing', val)}
-                        onSelect={(info) => handleCitySelect('billing', info)}
-                        countryCode={billingCountry?.iso_code_2 || ''}
-                        placeholder="Search for your city..."
-                        disabled={!billingAddressData.country_id || sameAsPrimary}
-                        fullWidth
-                    />
-                    {!billingCitySelected && billingAddressData.city_name && !sameAsPrimary && (
-                        <div style={{ gridColumn: '1 / -1', color: 'var(--color-warning)', fontSize: '0.875rem', marginTop: '-12px' }}>
-                            Please select a city from the dropdown suggestions
+                        <div className="form-item--full">
+                            <AddressAutocomplete
+                                label="Street Address"
+                                type="street"
+                                name="street_name"
+                                value={addressData.street_name || ''}
+                                onChange={(val) => onChange('address', { target: { name: 'street_name', value: val } })}
+                                onSelect={(info) => handleStreetSelect('address', info)}
+                                countryCode={selectedCountry?.iso_code_2 || ''}
+                                city={addressData.city_name || ''}
+                                placeholder="Search for your street..."
+                                disabled={!addressData.city_name || !citySelected}
+                                fullWidth
+                            />
                         </div>
-                    )}
 
-                    <Input
-                        label="Postal Code"
-                        name="postal_code"
-                        value={billingAddressData.postal_code || ''}
-                        onChange={(e) => onChange('billing', e)}
-                        placeholder="Postal Code"
-                        fullWidth
-                        disabled={sameAsPrimary}
-                    />
-
-                    <div className="form-item--full">
-                        <AddressAutocomplete
-                            label="Street Address"
-                            type="street"
-                            name="street_name"
-                            value={billingAddressData.street_name || ''}
-                            onChange={(val) => onChange('billing', { target: { name: 'street_name', value: val } })}
-                            onSelect={(info) => handleStreetSelect('billing', info)}
-                            countryCode={billingCountry?.iso_code_2 || ''}
-                            city={billingAddressData.city_name || ''}
-                            placeholder="Search for your street..."
-                            disabled={!billingAddressData.city_name || !billingCitySelected || sameAsPrimary}
-                            fullWidth
-                        />
+                        <div className="form-row-three">
+                            <Input
+                                label="Number"
+                                name="number"
+                                value={addressData.number || ''}
+                                onChange={(e) => onChange('address', e)}
+                                placeholder="No."
+                                fullWidth
+                            />
+                            <Input
+                                label="Floor/Unit"
+                                name="floor"
+                                value={addressData.floor || ''}
+                                onChange={(e) => onChange('address', e)}
+                                placeholder="Floor"
+                                fullWidth
+                            />
+                            <Select
+                                label="Type"
+                                value={addressData.type || 'home'}
+                                onChange={(val) => onSelectChange('address', 'type', val)}
+                                options={[
+                                    { value: 'home', label: 'Home' },
+                                    { value: 'work', label: 'Work' },
+                                    { value: 'billing', label: 'Billing' },
+                                ]}
+                                fullWidth
+                            />
+                        </div>
                     </div>
+                </Card>
 
-                    <div className="form-row-three">
-                        <Input
-                            label="Number"
-                            name="number"
-                            value={billingAddressData.number || ''}
-                            onChange={(e) => onChange('billing', e)}
-                            placeholder="No."
+                {/* Billing Address */}
+                <Card
+                    header={
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <h3>Billing Address</h3>
+                            <Checkbox
+                                label="Same as Primary Address"
+                                checked={sameAsPrimary}
+                                onChange={handleToggleSameAsPrimary}
+                            />
+                        </div>
+                    }
+                >
+                    <div className="profile-form-grid" style={{ opacity: sameAsPrimary ? 0.6 : 1, pointerEvents: sameAsPrimary ? 'none' : 'auto' }}>
+                        {/* Country Dropdown */}
+                        <CountrySelect
+                            label="Country"
+                            value={billingAddressData.country_id || ''}
+                            onChange={(val) => onSelectChange('billing', 'country_id', val)}
+                            placeholder="Select your country..."
                             fullWidth
                             disabled={sameAsPrimary}
                         />
-                        <Input
-                            label="Floor/Unit"
-                            name="floor"
-                            value={billingAddressData.floor || ''}
-                            onChange={(e) => onChange('billing', e)}
-                            placeholder="Floor"
-                            fullWidth
-                            disabled={sameAsPrimary}
-                        />
+
+                        {/* Region Dropdown */}
                         <Select
-                            label="Type"
-                            value={billingAddressData.type || 'billing'}
-                            onChange={(val) => onSelectChange('billing', 'type', val)}
-                            options={[
-                                { value: 'home', label: 'Home' },
-                                { value: 'work', label: 'Work' },
-                                { value: 'billing', label: 'Billing' },
-                            ]}
+                            label="Region/State"
+                            value={billingAddressData.region_id || ''}
+                            onChange={(val) => onSelectChange('billing', 'region_id', val)}
+                            options={billingRegions.map(r => ({ value: r.id, label: r.name }))}
+                            placeholder="Select Region"
+                            disabled={!billingAddressData.country_id || sameAsPrimary}
+                            fullWidth
+                        />
+
+                        {/* City Autocomplete */}
+                        <AddressAutocomplete
+                            label="City"
+                            type="city"
+                            value={billingAddressData.city_name || ''}
+                            onChange={(val) => handleCityChange('billing', val)}
+                            onSelect={(info) => handleCitySelect('billing', info)}
+                            countryCode={billingCountry?.iso_code_2 || ''}
+                            placeholder="Search for your city..."
+                            disabled={!billingAddressData.country_id || sameAsPrimary}
+                            fullWidth
+                        />
+                        {!billingCitySelected && billingAddressData.city_name && !sameAsPrimary && (
+                            <div style={{ gridColumn: '1 / -1', color: 'var(--color-warning)', fontSize: '0.875rem', marginTop: '-12px' }}>
+                                Please select a city from the dropdown suggestions
+                            </div>
+                        )}
+
+                        <Input
+                            label="Postal Code"
+                            name="postal_code"
+                            value={billingAddressData.postal_code || ''}
+                            onChange={(e) => onChange('billing', e)}
+                            placeholder="Postal Code"
                             fullWidth
                             disabled={sameAsPrimary}
                         />
+
+                        <div className="form-item--full">
+                            <AddressAutocomplete
+                                label="Street Address"
+                                type="street"
+                                name="street_name"
+                                value={billingAddressData.street_name || ''}
+                                onChange={(val) => onChange('billing', { target: { name: 'street_name', value: val } })}
+                                onSelect={(info) => handleStreetSelect('billing', info)}
+                                countryCode={billingCountry?.iso_code_2 || ''}
+                                city={billingAddressData.city_name || ''}
+                                placeholder="Search for your street..."
+                                disabled={!billingAddressData.city_name || !billingCitySelected || sameAsPrimary}
+                                fullWidth
+                            />
+                        </div>
+
+                        <div className="form-row-three">
+                            <Input
+                                label="Number"
+                                name="number"
+                                value={billingAddressData.number || ''}
+                                onChange={(e) => onChange('billing', e)}
+                                placeholder="No."
+                                fullWidth
+                                disabled={sameAsPrimary}
+                            />
+                            <Input
+                                label="Floor/Unit"
+                                name="floor"
+                                value={billingAddressData.floor || ''}
+                                onChange={(e) => onChange('billing', e)}
+                                placeholder="Floor"
+                                fullWidth
+                                disabled={sameAsPrimary}
+                            />
+                            <Select
+                                label="Type"
+                                value={billingAddressData.type || 'billing'}
+                                onChange={(val) => onSelectChange('billing', 'type', val)}
+                                options={[
+                                    { value: 'home', label: 'Home' },
+                                    { value: 'work', label: 'Work' },
+                                    { value: 'billing', label: 'Billing' },
+                                ]}
+                                fullWidth
+                                disabled={sameAsPrimary}
+                            />
+                        </div>
                     </div>
-                </div>
-            </Card>
-        </>
+                </Card>
+            </div>
+        </div>
     );
 };
 

@@ -256,7 +256,7 @@ const PropertyForm = () => {
                     </div>
 
                     <div style={{ margin: 'var(--space-6) 0', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
-                        <h3 style={{ fontSize: 'var(--font-size-h4)', marginBottom: 'var(--space-4)' }}>Specifications</h3>
+                        <h3 style={{ fontSize: 'var(--font-size-title-xs)', marginBottom: 'var(--space-4)' }}>Specifications</h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
                             <Input label="Bedrooms" name="bedrooms" type="number" step="0.5" value={formData.bedrooms} onChange={handleChange} placeholder="e.g. 2" fullWidth />
                             <Input label="Bathrooms" name="bathrooms" type="number" step="0.5" value={formData.bathrooms} onChange={handleChange} placeholder="e.g. 1.5" fullWidth />
@@ -265,7 +265,7 @@ const PropertyForm = () => {
                     </div>
 
                     <div style={{ margin: 'var(--space-6) 0', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-6)' }}>
-                        <h3 style={{ fontSize: 'var(--font-size-h4)', marginBottom: 'var(--space-4)' }}>Financials</h3>
+                        <h3 style={{ fontSize: 'var(--font-size-title-xs)', marginBottom: 'var(--space-4)' }}>Financials</h3>
                         <Input
                             label="Monthly Rent"
                             name="monthly_rent"
