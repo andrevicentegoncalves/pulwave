@@ -1,0 +1,77 @@
+    const handleAcceptTerms = async () => {
+        if (!termsData) return;
+        
+        const acceptedAt = new Date().toISOString();
+        
+        // Update local state
+        onChange({
+            target: {
+                name: 'terms_accepted_version',
+                value: termsData.version
+            }
+        });
+        onChange({
+            target: {
+                name: 'terms_accepted_at',
+                value: acceptedAt
+            }
+        });
+        
+        // Save to database immediately
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                await supabase
+                    .from('profiles')
+                    .update({
+                        terms_accepted_version: termsData.version,
+                        terms_accepted_at: acceptedAt,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('auth_user_id', user.id);
+            }
+        } catch (err) {
+            console.error('Error saving terms acceptance:', err);
+        }
+        
+        setShowTermsModal(false);
+    };
+
+    const handleAcceptPrivacy = async () => {
+        if (!privacyData) return;
+        
+        const acceptedAt = new Date().toISOString();
+        
+        // Update local state
+        onChange({
+            target: {
+                name: 'privacy_accepted_version',
+                value: privacyData.version
+            }
+        });
+        onChange({
+            target: {
+                name: 'privacy_accepted_at',
+                value: acceptedAt
+            }
+        });
+        
+        // Save to database immediately
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                await supabase
+                    .from('profiles')
+                    .update({
+                        privacy_accepted_version: privacyData.version,
+                        privacy_accepted_at: acceptedAt,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('auth_user_id', user.id);
+            }
+        } catch (err) {
+            console.error('Error saving privacy acceptance:', err);
+        }
+        
+        setShowPrivacyModal(false);
+    };

@@ -119,7 +119,7 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                     <Checkbox
                         label="Enable Notifications"
                         name="notifications_enabled"
-                        checked={formData.notifications_enabled ?? true}
+                        checked={formData.notifications_enabled}
                         onChange={onCheckboxChange}
                     />
                 </div>
@@ -128,14 +128,14 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                     <Checkbox
                         label="Email Notifications"
                         name="email_notifications"
-                        checked={formData.email_notifications ?? true}
+                        checked={formData.email_notifications}
                         onChange={onCheckboxChange}
                         disabled={!formData.notifications_enabled}
                     />
                     <Checkbox
                         label="SMS Notifications"
                         name="sms_notifications"
-                        checked={formData.sms_notifications ?? false}
+                        checked={formData.sms_notifications}
                         onChange={onCheckboxChange}
                         disabled={!formData.notifications_enabled}
                     />
@@ -145,14 +145,14 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                     <Checkbox
                         label="Push Notifications"
                         name="push_notifications"
-                        checked={formData.push_notifications ?? true}
+                        checked={formData.push_notifications}
                         onChange={onCheckboxChange}
                         disabled={!formData.notifications_enabled}
                     />
                     <Checkbox
                         label="Marketing Emails"
                         name="marketing_emails"
-                        checked={formData.marketing_emails ?? false}
+                        checked={formData.marketing_emails}
                         onChange={onCheckboxChange}
                     />
                 </div>

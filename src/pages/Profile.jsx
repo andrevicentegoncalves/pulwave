@@ -47,6 +47,15 @@ const Profile = () => {
     job_title: '',
     department: '',
     theme: 'light',
+    // Notification preferences
+    notifications_enabled: false,
+    email_notifications: false,
+    sms_notifications: false,
+    push_notifications: false,
+    marketing_emails: false,
+    // Privacy preferences
+    data_processing_consent: false,
+    marketing_consent: false,
   });
 
   // Address Form State
@@ -123,6 +132,15 @@ const Profile = () => {
             job_title: profileData.job_title || '',
             department: profileData.department || '',
             theme: profileData.theme || 'light',
+            // Notification preferences
+            notifications_enabled: profileData.notifications_enabled ?? false,
+            email_notifications: profileData.email_notifications ?? false,
+            sms_notifications: profileData.sms_notifications ?? false,
+            push_notifications: profileData.push_notifications ?? false,
+            marketing_emails: profileData.marketing_emails ?? false,
+            // Privacy preferences
+            data_processing_consent: profileData.data_processing_consent ?? false,
+            marketing_consent: profileData.marketing_consent ?? false,
           });
 
           // Fetch Address if exists
@@ -542,7 +560,8 @@ const Profile = () => {
             <TabPanel label="Privacy">
               <PrivacySection
                 formData={formData}
-                onChange={handleCheckboxChange}
+                onChange={handleChange}
+                onCheckboxChange={handleCheckboxChange}
               />
             </TabPanel>
 
@@ -551,6 +570,7 @@ const Profile = () => {
                 formData={formData}
                 onChange={handleChange}
                 onSelectChange={handleSelectChange}
+                onCheckboxChange={handleCheckboxChange}
               />
             </TabPanel>
           </Tabs>

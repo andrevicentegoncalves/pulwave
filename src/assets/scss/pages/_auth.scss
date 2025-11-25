@@ -4,33 +4,57 @@
 /*                                PAGES: AUTH                                */
 /* ==========================================================================*/
 
+// Fix body overflow on auth page
+body:has(.auth-page) {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 .auth-page {
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .auth-container {
   width: 100%;
   max-width: 480px;
-  
+  padding: var(--space-8);
+
   @media (max-width: 640px) {
-    max-width: 100%;
-    padding: 0 var(--space-4);
+    max-width: 90%;
+    padding: var(--space-6);
   }
 }
 
 .auth-header {
   text-align: center;
   margin-bottom: var(--space-8);
-  
-  h2 {
-    font-size: var(--font-size-heading-l);
+
+  h1 {
+    font-size: var(--font-size-heading-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-on-surface-default);
     margin: 0;
     line-height: var(--line-height-heading);
   }
+}
+
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }

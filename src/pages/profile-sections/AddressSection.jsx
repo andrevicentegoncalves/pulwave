@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select, CountrySelect, AddressAutocomplete } from '../../components/ui';
+import { Card, Input, Select, CountrySelect, AddressAutocomplete, Checkbox } from '../../components/ui';
 import Icon from '../../components/ui/Icon';
 import { MapPin } from '../../components/ui/iconLibrary';
 import { supabase } from '../../lib/supabaseClient';
@@ -217,15 +217,11 @@ const AddressSection = ({
                             </Icon>
                             Billing Address
                         </h2>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.875rem' }}>
-                            <input
-                                type="checkbox"
-                                checked={sameAsPrimary}
-                                onChange={handleToggleSameAsPrimary}
-                                style={{ cursor: 'pointer' }}
-                            />
-                            Same as Primary Address
-                        </label>
+                        <Checkbox
+                            label="Same as Primary Address"
+                            checked={sameAsPrimary}
+                            onChange={handleToggleSameAsPrimary}
+                        />
                     </div>
                 }
             >

@@ -34,77 +34,129 @@
 /*                              TEXTAREA FIELD                                */
 /* -------------------------------------------------------------------------- */
 
+.textarea__container {
+  position: relative;
+  width: 100%;
+}
+
 .textarea__field {
-  // Styling
-  background: var(--color-surface-default);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--border-radius-m);
+  // Common Styling
+  width: 100%;
+  box-sizing: border-box; // Fix overflow issue
+  border-radius: var(--border-radius-xl); // Match Input
+  padding: var(--scale-3) var(--scale-6); // Match Input padding
+  font-family: var(--font-family-sans); // Match Input font
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body);
+  color: #1e293b; // Match Input text color
+  resize: vertical;
+  min-height: 100px;
 
   // Animation
-  transition: all var(--duration-fast) var(--easing-standard);
+  transition: all 0.15s ease; // Match Input transition
 
   // Placeholder
   &::placeholder {
-    color: var(--color-on-surface-subtle);
+    color: #94a3b8; // Match Input placeholder
     opacity: 1;
   }
 
-  // Hover state
-  &:hover:not(:disabled):not(:focus) {
-    border-color: var(--color-border-emphasis);
-  }
-
-  // Focus state
+  // Focus state (Common)
   &:focus {
     outline: none;
-    border-color: var(--color-primary-6);
-    box-shadow: 0 0 0 3px var(--color-primary-1);
   }
 
-  // Disabled state
+  // Disabled state (Common)
   &:disabled {
-    background: var(--color-surface-disabled);
-    color: var(--color-on-surface-disabled);
+    background-color: #f1f5f9; // Match Input disabled bg
+    color: #94a3b8; // Match Input disabled text
+    border-color: #e2e8f0; // Match Input disabled border
     cursor: not-allowed;
-    border-color: var(--color-border-subtle);
+    opacity: 1;
   }
 
-  // Error state
-  &--error {
-    border-color: var(--color-danger-6);
+  // --------------------------------------------------------------------------
+  // Variant: Outlined (Default)
+  // --------------------------------------------------------------------------
+  &--outlined {
+    background-color: #ffffff; // Match Input bg
+    border: 2px solid #cbd5e1; // Match Input border (2px)
+
+    &:hover:not(:disabled):not(:focus) {
+      border-color: #94a3b8; // Match Input hover
+      background-color: #f8fafc; // Match Input hover bg
+    }
 
     &:focus {
-      box-shadow: 0 0 0 3px var(--color-danger-1);
+      border-color: #3b82f6; // Match Input focus border
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); // Match Input focus shadow
     }
   }
 
-  // Success state
-  &--success {
-    border-color: var(--color-success-6);
+  // --------------------------------------------------------------------------
+  // Variant: Contained
+  // --------------------------------------------------------------------------
+  &--contained {
+    background-color: #f1f5f9; // Light gray background
+    border: 2px solid transparent;
+
+    &:hover:not(:disabled):not(:focus) {
+      background-color: #e2e8f0;
+    }
 
     &:focus {
-      box-shadow: 0 0 0 3px var(--color-success-1);
+      background-color: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // State: Error
+  // --------------------------------------------------------------------------
+  &--error {
+    border-color: #dc2626; // Match Input error
+
+    &:focus {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+  }
+
+  // State: Success
+  &--success {
+    border-color: #16a34a; // Match Input success
+
+    &:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
     }
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/*                              HELPER TEXT                                   */
+/*                              FOOTER (Helper + Count)                       */
 /* -------------------------------------------------------------------------- */
+
+.textarea__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.textarea__helper-container {
+  flex: 1;
+}
 
 .textarea__helper {
   // Typography
   font-size: var(--font-size-body-xs);
   line-height: var(--line-height-normal);
   color: var(--color-on-surface-subtle);
-
-  // Spacing
-  margin: 0; // Remove default margin
-
-  // Icon alignment
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-1-5);
+  display: block;
 
   // Error variant
   &--error {
@@ -126,9 +178,8 @@
   font-size: var(--font-size-body-xs);
   color: var(--color-on-surface-subtle);
   text-align: right;
-
-  // Spacing
-  margin-top: var(--space-1);
+  white-space: nowrap;
+  margin-left: auto; // Push to right if helper text is missing
 
   // Over limit state
   &--over-limit {

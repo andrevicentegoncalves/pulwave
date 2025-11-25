@@ -3,6 +3,7 @@ export { default as Alert } from './Alert.jsx';
 export { default as Badge } from './Badge.jsx';
 export { default as Button } from './Button.jsx';
 export { default as Card } from './Card.jsx';
+export { default as Checkbox } from './Checkbox.jsx';
 export { Divider } from './Divider.jsx';
 export { Dropdown, DropdownItem, DropdownDivider, DropdownLabel } from './Dropdown.jsx';
 export { default as Form } from './Form.jsx';

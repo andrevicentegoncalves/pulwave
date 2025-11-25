@@ -150,7 +150,9 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                         placeholder="Tell us about yourself..."
                         rows={4}
                         fullWidth
-                        style={{ resize: 'vertical', minHeight: '100px', maxHeight: '300px', width: '100%' }}
+                        showCount
+                        maxLength={500}
+                        helperText="Brief description for your profile."
                     />
                 </div>
 

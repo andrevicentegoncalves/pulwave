@@ -117,8 +117,8 @@ const SecuritySection = ({
                     </div>
                 </div>
 
-                {/* Account Status (Read-Only) */}
-                <div className="form-row-two">
+                {/* Account Status (Read-Only) - HIDDEN */}
+                {/* <div className="form-row-two">
                     <div className="read-only-field">
                         <label className="input__label">Account Status</label>
                         <div className="read-only-value">
@@ -131,7 +131,7 @@ const SecuritySection = ({
                             {formData.is_suspended ? '⚠ Yes' : '✓ No'}
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Emergency Contact */}
                 <div className="form-item--full">

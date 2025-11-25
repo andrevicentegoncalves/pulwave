@@ -3,9 +3,21 @@ import { Card } from '../components/ui';
 import ContentLayout from '../components/layouts/ContentLayout';
 import { supabase } from '../lib/supabaseClient';
 
-export const TermsContent = ({ content }) => (
-    <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content || 'Loading...' }} />
-);
+export const TermsContent = ({ content }) => {
+    if (!content) return <p>Loading...</p>;
+
+    // Convert markdown-style content to formatted text
+    const formattedContent = content
+        .replace(/\\n/g, '\n')  // Convert escaped newlines to actual newlines
+        .replace(/##\s+/g, '\n\n')  // Add spacing before headers
+        .replace(/#\s+/g, '\n\n');  // Add spacing before main headers
+
+    return (
+        <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
+            {formattedContent}
+        </div>
+    );
+};
 
 const TermsAndConditions = () => {
     const [termsData, setTermsData] = useState(null);

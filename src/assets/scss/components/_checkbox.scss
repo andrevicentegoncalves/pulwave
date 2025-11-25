@@ -13,22 +13,83 @@
     align-items: center;
     gap: var(--space-3);
     cursor: pointer;
+    position: relative;
 }
 
 .checkbox__input {
-    width: 20px;
-    height: 20px;
+    // Hide native checkbox
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
-    accent-color: var(--color-primary);
-    border-radius: var(--border-radius-s);
+    position: relative;
+    margin: 0;
+    flex-shrink: 0; // Prevent checkbox from shrinking
+
+    // Custom checkbox background
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        border: 2px solid #cbd5e1;
+        border-radius: var(--border-radius-xl);
+        background-color: #ffffff;
+        transition: all 0.15s ease;
+    }
+
+    // Checkmark
+    &::after {
+        content: '';
+        position: absolute;
+        top: 52%;
+        left: 57%;
+        width: 7px;
+        height: 12px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: translate(-50%, -55%) rotate(45deg) scale(0);
+        transform-origin: center;
+        transition: transform 0.15s ease;
+    }
+
+    // Checked state
+    &:checked::before {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    &:checked::after {
+        transform: translate(-50%, -55%) rotate(45deg) scale(1);
+    }
+
+    // Hover state
+    &:hover:not(:disabled)::before {
+        border-color: #94a3b8;
+    }
+
+    // Focus state
+    &:focus-visible::before {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
 
     &:disabled {
         cursor: not-allowed;
-        opacity: 0.5;
+
+        &::before {
+            background-color: #f1f5f9;
+            border-color: #e2e8f0;
+            opacity: 0.5;
+        }
     }
 
-    &--error {
-        border-color: var(--color-error);
+    &--error::before {
+        border-color: #dc2626;
     }
 }
 
@@ -38,6 +99,7 @@
     color: var(--color-on-surface-default);
     cursor: pointer;
     user-select: none;
+    line-height: 1.5; // Ensure consistent line height for alignment
 
     &--disabled {
         opacity: 0.5;
@@ -53,7 +115,7 @@
 .checkbox__helper {
     font-size: var(--font-size-body-s);
     color: var(--color-on-surface-subtle);
-    margin-left: calc(20px + var(--space-3)); // Align with label
+    margin-left: calc(25px + var(--space-3)); // Align with label
 
     &--error {
         color: var(--color-error);

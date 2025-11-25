@@ -90,14 +90,14 @@
 // ── INPUT ELEMENT ──
 .input {
   width: 100%;
-  padding: var(--scale-3) var(--scale-4);
+  padding: var(--scale-3) var(--scale-6);
   font-size: var(--font-size-body-m);
   font-family: var(--font-family-sans);
   line-height: var(--line-height-body);
   color: #1e293b; // Dark text
   background-color: #ffffff; // Pure white background
   border: 2px solid #cbd5e1; // Strong visible border (2px instead of 1px)
-  border-radius: 6px;
+  border-radius: var(--border-radius-xl);
   transition: all 0.15s ease;
   outline: none;
 
@@ -108,7 +108,7 @@
   }
 
   &--md {
-    padding: var(--scale-3) var(--scale-4);
+    padding: var(--scale-3) var(--scale-6);
     font-size: var(--font-size-body-m);
   }
 
@@ -235,6 +235,6 @@
 textarea.input {
   min-height: 100px;
   resize: vertical;
-  padding: var(--scale-3) var(--scale-4);
+  padding: var(--scale-3) var(--scale-6);
   line-height: var(--line-height-body);
 }

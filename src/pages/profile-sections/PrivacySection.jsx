@@ -62,43 +62,85 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
         }
     };
 
-    const handleAcceptTerms = () => {
+    const handleAcceptTerms = async () => {
         if (!termsData) return;
 
-        // Update version
-        onChange({
-            target: {
-                name: 'terms_accepted_version',
-                value: termsData.version
+        const acceptedAt = new Date().toISOString();
+
+        // Save to database first
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { error } = await supabase
+                    .from('profiles')
+                    .update({
+                        terms_accepted_version: termsData.version,
+                        terms_accepted_at: acceptedAt,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('auth_user_id', user.id);
+
+                if (!error) {
+                    // Only update UI if database save succeeded
+                    onChange({
+                        target: {
+                            name: 'terms_accepted_version',
+                            value: termsData.version
+                        }
+                    });
+                    onChange({
+                        target: {
+                            name: 'terms_accepted_at',
+                            value: acceptedAt
+                        }
+                    });
+                }
             }
-        });
-        // Update acceptance timestamp
-        onChange({
-            target: {
-                name: 'terms_accepted_at',
-                value: new Date().toISOString()
-            }
-        });
+        } catch (err) {
+            console.error('Error saving terms acceptance:', err);
+        }
+
         setShowTermsModal(false);
     };
 
-    const handleAcceptPrivacy = () => {
+    const handleAcceptPrivacy = async () => {
         if (!privacyData) return;
 
-        // Update version
-        onChange({
-            target: {
-                name: 'privacy_accepted_version',
-                value: privacyData.version
+        const acceptedAt = new Date().toISOString();
+
+        // Save to database first
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { error } = await supabase
+                    .from('profiles')
+                    .update({
+                        privacy_accepted_version: privacyData.version,
+                        privacy_accepted_at: acceptedAt,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('auth_user_id', user.id);
+
+                if (!error) {
+                    // Only update UI if database save succeeded
+                    onChange({
+                        target: {
+                            name: 'privacy_accepted_version',
+                            value: privacyData.version
+                        }
+                    });
+                    onChange({
+                        target: {
+                            name: 'privacy_accepted_at',
+                            value: acceptedAt
+                        }
+                    });
+                }
             }
-        });
-        // Update acceptance timestamp
-        onChange({
-            target: {
-                name: 'privacy_accepted_at',
-                value: new Date().toISOString()
-            }
-        });
+        } catch (err) {
+            console.error('Error saving privacy acceptance:', err);
+        }
+
         setShowPrivacyModal(false);
     };
 
@@ -188,14 +230,14 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     <Checkbox
                         label="Data Processing Consent"
                         name="data_processing_consent"
-                        checked={formData.data_processing_consent ?? false}
+                        checked={formData.data_processing_consent}
                         onChange={onCheckboxChange}
                         helperText="Allow us to process your personal data"
                     />
                     <Checkbox
                         label="Marketing Consent"
                         name="marketing_consent"
-                        checked={formData.marketing_consent ?? false}
+                        checked={formData.marketing_consent}
                         onChange={onCheckboxChange}
                         helperText="Receive marketing communications"
                     />

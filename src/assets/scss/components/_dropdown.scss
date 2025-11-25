@@ -4,17 +4,13 @@
   position: relative;
   display: inline-block;
 
-  &__trigger {
-    // Trigger inherits button styling, no additional wrapper needed
-  }
-
   &__menu {
     position: absolute;
     top: calc(100% + var(--space-2));
     min-width: 200px;
     background: var(--color-surface-default);
     border: var(--border-width-1) solid var(--color-border-default);
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-xl);
     box-shadow: var(--shadow-l);
     padding: var(--space-2);
     z-index: var(--z-index-dropdown, 1000);
@@ -127,6 +123,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

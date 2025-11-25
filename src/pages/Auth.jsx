@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Form, Button, Alert, Input, Divider, Spinner } from '../components/ui';
+import { Card, Form, Button, Alert, Input, Divider, Spinner, Checkbox } from '../components/ui';
 import Icon from '../components/ui/Icon';
 import { Eye, EyeOff } from '../components/ui/iconLibrary';
 
 /**
  * Auth Component
  * Handles user authentication (login/signup/password reset) using design system components
- * ✅ Uses: Card, Form, Button, Alert, Input, Divider, Icon from design system
+ * ✅ Uses: Card, Form, Button, Alert, Input, Divider, Icon, Checkbox from design system
  */
 const Auth = () => {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(localStorage.getItem('rememberMe') === 'true');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -45,6 +46,18 @@ const Auth = () => {
         if (signUpError) throw signUpError;
         setSuccess('Account created! Check your email for verification.');
       } else {
+        // Store remember me preference BEFORE login
+        const currentRememberMe = localStorage.getItem('rememberMe') === 'true';
+        if (rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+        } else {
+          localStorage.removeItem('rememberMe');
+        }
+
+        // If preference changed, we need to reload the page after login
+        // so the Supabase client uses the correct storage
+        const needsReload = currentRememberMe !== rememberMe;
+
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -52,9 +65,14 @@ const Auth = () => {
 
         if (signInError) throw signInError;
 
-        // Successful login - navigate to home
+        // Successful login
         if (data.session) {
-          navigate('/', { replace: true });
+          if (needsReload) {
+            // Reload to reinitialize Supabase with correct storage
+            window.location.href = '/';
+          } else {
+            navigate('/', { replace: true });
+          }
         }
       }
     } catch (err) {
@@ -83,9 +101,10 @@ const Auth = () => {
       <Card
         variant="elevated"
         className="auth-container"
+        noHoverTransform
       >
         <div className="auth-header">
-          <h2>{getTitle()}</h2>
+          <h1>{getTitle()}</h1>
         </div>
 
         {error && (
@@ -144,7 +163,12 @@ const Auth = () => {
           )}
 
           {!isForgotPassword && !isSignUp && (
-            <div style={{ textAlign: 'right', marginTop: '-8px', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-8px', marginBottom: '12px' }}>
+              <Checkbox
+                label="Remember me"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
               <Button
                 variant="text"
                 size="s"
@@ -182,36 +206,38 @@ const Auth = () => {
 
         <Divider spacing="default" />
 
-        {isForgotPassword ? (
-          <Button
-            variant="secondary"
-            size="m"
-            fullWidth
-            onClick={() => {
-              setIsForgotPassword(false);
-              setIsSignUp(false);
-              setError(null);
-              setSuccess(null);
-            }}
-            disabled={loading}
-          >
-            Back to Sign In
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            size="m"
-            fullWidth
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-              setError(null);
-              setSuccess(null);
-            }}
-            disabled={loading}
-          >
-            {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-          </Button>
-        )}
+        <div className="auth-buttons">
+          {isForgotPassword ? (
+            <Button
+              variant="secondary"
+              size="m"
+              fullWidth
+              onClick={() => {
+                setIsForgotPassword(false);
+                setIsSignUp(false);
+                setError(null);
+                setSuccess(null);
+              }}
+              disabled={loading}
+            >
+              Back to Sign In
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              size="m"
+              fullWidth
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setError(null);
+                setSuccess(null);
+              }}
+              disabled={loading}
+            >
+              {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+            </Button>
+          )}
+        </div>
       </Card>
 
       {/* Dev Bypass Button - Temporary */}
