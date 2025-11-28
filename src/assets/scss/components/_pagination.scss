@@ -8,22 +8,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: var(--space-m);
-    gap: var(--space-m);
+    margin-top: var(--spacing-m);
+    gap: var(--spacing-m);
 
     // Mobile: stack vertically
-    @media (max-width: 767px) {
+    @include bp-down(s) {
         flex-direction: column;
-        gap: var(--space-base);
+        gap: var(--spacing-base);
     }
 
     // Pagination counter (showing X-Y of Z items)
     &__counter {
         color: var(--color-neutral-7);
-        font-size: 11px;
+        font-size: var(--font-size-9xs);
 
-        @media (max-width: 767px) {
-            font-size: 10px;
+        @include bp-down(s) {
+            font-size: var(--font-size-9xs);
             order: 2; // Show below buttons on mobile
         }
     }
@@ -33,10 +33,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--space-xs);
+        gap: var(--spacing-xs);
         flex-wrap: wrap;
 
-        @media (max-width: 767px) {
+        @include bp-down(s) {
             order: 1;
         }
     }
@@ -46,31 +46,31 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 32px;
-        height: 32px;
-        padding: 0 var(--space-s);
+        min-width: var(--scale-8); // 32px
+        height: var(--scale-8);
+        padding: 0 var(--spacing-s);
         background-color: var(--color-neutral-0);
-        border: 1px solid var(--color-neutral-4);
+        border: var(--border-width-1) solid var(--color-neutral-4);
         border-radius: var(--border-radius-soft);
         color: var(--color-neutral-8);
-        font-size: 11px;
+        font-size: var(--font-size-9xs);
         cursor: pointer;
         transition: all 0.2s ease;
         user-select: none;
 
         // Tablet & Mobile: larger touch targets
-        @media (max-width: 1023px) {
-            min-width: 40px;
-            height: 40px;
+        @include bp-down(m) {
+            min-width: var(--scale-10); // 40px
+            height: var(--scale-10);
         }
 
         // Mobile: even larger
-        @media (max-width: 767px) {
-            font-size: 10px;
+        @include bp-down(s) {
+            font-size: var(--font-size-9xs);
         }
 
         // Hover state (desktop only)
-        @media (min-width: 768px) {
+        @include bp-up(m) {
             &:hover:not(:disabled):not(&--active):not(&--ellipsis) {
                 background-color: var(--color-neutral-2);
                 border-color: var(--color-neutral-5);
@@ -93,8 +93,8 @@
             border: 0;
             cursor: default;
             pointer-events: none;
-            min-width: 16px;
-            width: 16px;
+            min-width: var(--scale-4); // 16px
+            width: var(--scale-4);
             color: var(--color-neutral-6);
         }
 
@@ -112,8 +112,8 @@
 
         // Focus state (accessibility)
         &:focus-visible {
-            outline: 2px solid var(--color-primary);
-            outline-offset: 2px;
+            outline: var(--border-width-xs) solid var(--color-primary);
+            outline-offset: var(--border-width-xs);
             border-color: var(--color-primary);
         }
 
@@ -127,33 +127,33 @@
     &__input {
         display: flex;
         align-items: center;
-        gap: var(--space-s);
-        margin-left: var(--space-m);
-        font-size: 11px;
+        gap: var(--spacing-s);
+        margin-left: var(--spacing-m);
+        font-size: var(--font-size-9xs);
         color: var(--color-neutral-7);
 
-        @media (max-width: 767px) {
+        @include bp-down(s) {
             margin-left: 0;
-            margin-top: var(--space-s);
-            font-size: 10px;
+            margin-top: var(--spacing-s);
+            font-size: var(--font-size-9xs);
         }
     }
 
     &__input-field {
-        width: 32px;
-        height: 32px;
+        width: var(--scale-8); // 32px
+        height: var(--scale-8);
         padding: 0;
         text-align: center;
-        border: 1px solid var(--color-neutral-4);
+        border: var(--border-width-1) solid var(--color-neutral-4);
         border-radius: var(--border-radius-soft);
-        font-size: 11px;
+        font-size: var(--font-size-9xs);
         color: var(--color-neutral-8);
         background-color: var(--color-neutral-0);
         transition: border-color 0.2s ease;
 
-        @media (max-width: 1023px) {
-            width: 40px;
-            height: 40px;
+        @include bp-down(m) {
+            width: var(--scale-10); // 40px
+            height: var(--scale-10);
         }
 
         &:focus {
@@ -187,9 +187,9 @@
 
         &__input {
             margin-left: 0;
-            margin-right: var(--space-m);
+            margin-right: var(--spacing-m);
 
-            @media (max-width: 767px) {
+            @include bp-down(s) {
                 margin-right: 0;
             }
         }
@@ -200,7 +200,7 @@
 .os-high-contrast {
     .pagination {
         &__button--active {
-            outline: 3px solid var(--color-focus-outer);
+            outline: var(--border-width-m) solid var(--color-focus-outer);
         }
     }
 }

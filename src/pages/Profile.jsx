@@ -300,10 +300,10 @@ const Profile = () => {
 
       const addressPayload = {
         ...restAddressData,
-        country_id,
-        region_id,
-        city: city_name,
-        street: street_name,
+        country_id: country_id || null,
+        region_id: region_id || null,
+        city_name,
+        street_name,
       };
 
       // Validate city is selected
@@ -332,10 +332,10 @@ const Profile = () => {
 
       const billingAddressPayload = {
         ...restBillingAddressData,
-        country_id: billing_country_id,
-        region_id: billing_region_id,
-        city: billing_city_name,
-        street: billing_street_name,
+        country_id: billing_country_id || null,
+        region_id: billing_region_id || null,
+        city_name: billing_city_name,
+        street_name: billing_street_name,
       };
 
       if (billing_city_name) {
@@ -505,7 +505,7 @@ const Profile = () => {
             <AvatarUpload
               src={profile?.avatar_url}
               alt={formData.username || 'User'}
-              size="l"
+              size="xl"
               onUpload={handleAvatarUpload}
               loading={uploading}
               className="profile-avatar__preview"

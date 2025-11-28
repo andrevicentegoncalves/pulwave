@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Card, Button, Input, TextArea, Alert, Form } from '../components/ui';
+import { Card, Button, Input, TextArea, Alert, Form, AddressAutocomplete } from '../components/ui';
+import CountriesSelect from '../components/ui/CountriesSelect';
+import RegionsSelect from '../components/ui/RegionsSelect';
 import Icon from '../components/ui/Icon';
 import { Building, MapPin, XClose, CheckCircle, Info, ShieldCheck, Car, Dumbbell, Waves, Shirt } from '../components/ui/iconLibrary';
 import ContentLayout from '../components/layouts/ContentLayout';
@@ -16,15 +18,15 @@ const BuildingForm = () => {
   const [saveLoading, setSaveLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    street_address: '',
-    street_address_2: '',
-    city_id: '',
+    street_name: '',
+    street_address_2: '', // Keeping this if it exists in DB schema, otherwise remove
+    city_name: '',
+    region_id: '',
     postal_code: '',
     country_id: '',
     year_built: '',
@@ -42,36 +44,25 @@ const BuildingForm = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    fetchCountries();
     if (isEdit) {
       fetchBuilding();
     }
   }, [id]);
 
+  // Fetch selected country details for ISO code (needed for autocomplete)
   useEffect(() => {
-    if (formData.country_id) {
-      fetchCities(formData.country_id);
-    }
+    const fetchCountry = async () => {
+      if (formData.country_id) {
+        const { data } = await supabase
+          .from('countries')
+          .select('iso_code_2')
+          .eq('id', formData.country_id)
+          .single();
+        setSelectedCountry(data);
+      }
+    };
+    fetchCountry();
   }, [formData.country_id]);
-
-  const fetchCountries = async () => {
-    const { data, error } = await supabase
-      .from('countries')
-      .select('*')
-      .order('name');
-
-    if (!error) setCountries(data || []);
-  };
-
-  const fetchCities = async (countryId) => {
-    const { data, error } = await supabase
-      .from('cities')
-      .select('*')
-      .eq('country_id', countryId)
-      .order('name');
-
-    if (!error) setCities(data || []);
-  };
 
   const fetchBuilding = async () => {
     setLoading(true);
@@ -81,11 +72,7 @@ const BuildingForm = () => {
         .select(`
           *,
           address:addresses (
-            *,
-            city:cities (
-              *,
-              country:countries (*)
-            )
+            *
           )
         `)
         .eq('id', id)
@@ -96,11 +83,12 @@ const BuildingForm = () => {
       setFormData({
         name: data.name || '',
         description: data.description || '',
-        street_address: data.address?.street_address || '',
-        street_address_2: data.address?.street_address_2 || '',
-        city_id: data.address?.city_id || '',
+        street_name: data.address?.street_name || '',
+        street_address_2: data.address?.street_address_2 || '', // Assuming this column exists or will be ignored
+        city_name: data.address?.city_name || '',
+        region_id: data.address?.region_id || '',
         postal_code: data.address?.postal_code || '',
-        country_id: data.address?.city?.country_id || '',
+        country_id: data.address?.country_id || '',
         year_built: data.year_built || '',
         total_floors: data.total_floors || '',
         total_units: data.total_units || '',
@@ -130,12 +118,40 @@ const BuildingForm = () => {
     }
   };
 
+  const handleSelectChange = (name, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const handleCitySelect = (addressInfo) => {
+    setFormData(prev => ({
+      ...prev,
+      city_name: addressInfo.value,
+      postal_code: addressInfo.postalCode || prev.postal_code
+    }));
+    if (errors.city_name) setErrors(prev => ({ ...prev, city_name: null }));
+  };
+
+  const handleStreetSelect = (addressInfo) => {
+    setFormData(prev => ({
+      ...prev,
+      street_name: addressInfo.value,
+      postal_code: addressInfo.postalCode || prev.postal_code
+    }));
+    if (errors.street_name) setErrors(prev => ({ ...prev, street_name: null }));
+  };
+
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Building name is required';
-    if (!formData.street_address.trim()) newErrors.street_address = 'Street address is required';
+    if (!formData.street_name.trim()) newErrors.street_name = 'Street address is required';
     if (!formData.country_id) newErrors.country_id = 'Country is required';
-    if (!formData.city_id) newErrors.city_id = 'City is required';
+    if (!formData.city_name.trim()) newErrors.city_name = 'City is required';
     if (!formData.postal_code.trim()) newErrors.postal_code = 'Postal code is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -154,15 +170,6 @@ const BuildingForm = () => {
     setSuccess(null);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      const addressData = {
-        street_address: formData.street_address,
-        street_address_2: formData.street_address_2,
-        city_id: formData.city_id,
-        postal_code: formData.postal_code,
-      };
-
       let addressId;
 
       if (isEdit) {
@@ -298,21 +305,54 @@ const BuildingForm = () => {
             Location
           </h2>
 
-          <Input label="Street Address" name="street_address" value={formData.street_address} onChange={handleChange} placeholder="123 Main Street" error={errors.street_address} required fullWidth />
-          <Input label="Street Address Line 2" name="street_address_2" value={formData.street_address_2} onChange={handleChange} placeholder="Apt, suite, etc. (optional)" fullWidth />
-
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
-            <Input label="Country" name="country_id" value={formData.country_id} onChange={handleChange} as="select" error={errors.country_id} required fullWidth>
-              <option value="">Select Country</option>
-              {countries.map(country => <option key={country.id} value={country.id}>{country.name}</option>)}
-            </Input>
-            <Input label="City" name="city_id" value={formData.city_id} onChange={handleChange} as="select" error={errors.city_id} required disabled={!formData.country_id} fullWidth>
-              <option value="">Select City</option>
-              {cities.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}
-            </Input>
+            <CountriesSelect
+              name="country_id"
+              label="Country"
+              value={formData.country_id}
+              onChange={(val) => handleSelectChange('country_id', val)}
+              error={errors.country_id}
+              required
+            />
+            <RegionsSelect
+              name="region_id"
+              label="Region/State"
+              countryId={formData.country_id}
+              value={formData.region_id}
+              onChange={(val) => handleSelectChange('region_id', val)}
+            />
           </div>
 
+          <AddressAutocomplete
+            label="City"
+            type="city"
+            value={formData.city_name}
+            onChange={(val) => handleSelectChange('city_name', val)}
+            onSelect={handleCitySelect}
+            countryCode={selectedCountry?.iso_code_2 || ''}
+            placeholder="Search for your city..."
+            disabled={!formData.country_id}
+            error={errors.city_name}
+            fullWidth
+          />
+
           <Input label="Postal Code" name="postal_code" value={formData.postal_code} onChange={handleChange} placeholder="12345" error={errors.postal_code} required fullWidth />
+
+          <AddressAutocomplete
+            label="Street Address"
+            type="street"
+            name="street_name"
+            value={formData.street_name}
+            onChange={(val) => handleSelectChange('street_name', val)}
+            onSelect={handleStreetSelect}
+            countryCode={selectedCountry?.iso_code_2 || ''}
+            city={formData.city_name}
+            placeholder="Search for your street..."
+            disabled={!formData.city_name}
+            error={errors.street_name}
+            fullWidth
+          />
+          {/* <Input label="Street Address Line 2" name="street_address_2" value={formData.street_address_2} onChange={handleChange} placeholder="Apt, suite, etc. (optional)" fullWidth /> */}
         </Card>
 
         <Card variant="elevated" style={{ marginBottom: 'var(--space-6)' }}>

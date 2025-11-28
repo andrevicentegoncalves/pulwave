@@ -1,15 +1,15 @@
 .theme-toggle {
   position: relative;
-  width: 64px;
-  height: 34px;
+  width: var(--scale-16); // 64px
+  height: var(--scale-8-5); // 34px
   background: var(--color-surface-strong);
-  border: 2px solid var(--color-border-default);
+  border: var(--border-width-m) solid var(--color-border-default);
   border-radius: var(--border-radius-xl);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-1);
+  padding: 0 var(--spacing-1);
   transition: all var(--duration-normal) var(--easing-standard);
   overflow: hidden;
 
@@ -19,8 +19,8 @@
   }
 
   &:focus-visible {
-    outline: 3px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--border-width-l) solid var(--color-focus-ring);
+    outline-offset: var(--border-width-s);
   }
 
   &:active {
@@ -30,35 +30,35 @@
   &::before {
     content: '';
     position: absolute;
-    width: 26px;
-    height: 26px;
+    width: var(--scale-6-5); // 26px
+    height: var(--scale-6-5); // 26px
     background: var(--color-primary);
     border-radius: 50%;
     transition: transform var(--duration-comfortable) var(--easing-standard);
-    left: 3px;
+    left: var(--spacing-0-75); // 3px
     z-index: 1;
     box-shadow: var(--shadow-s);
   }
 
   &[data-theme="dark"]::before {
-    transform: translateX(30px);
+    transform: translateX(var(--scale-7-5)); // 30px
   }
 
   &__icon {
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size-s); // 20px
+    height: var(--icon-size-s); // 20px
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-on-surface-default);
-    opacity: 0.4;
+    opacity: var(--opacity-disabled);
     z-index: 2;
     transition: all var(--duration-normal) var(--easing-standard);
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: var(--scale-4); // 16px
+      height: var(--scale-4); // 16px
     }
 
     &--active {

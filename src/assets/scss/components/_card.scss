@@ -10,15 +10,15 @@
   transition: all var(--duration-normal) var(--easing-standard);
 
   &__header {
-    padding: var(--space-3) var(--space-4);
-    border-bottom: 1px solid var(--color-border-subtle);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
     font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-6xs);
     color: var(--color-on-surface-default);
   }
 
   &__body {
-    padding: var(--space-4);
+    padding: var(--spacing-4);
     flex-grow: 1;
     color: var(--color-on-surface-default);
     font-size: var(--font-size-7xs);
@@ -26,11 +26,11 @@
   }
 
   &__footer {
-    padding: var(--space-3) var(--space-4);
-    border-top: 1px solid var(--color-border-subtle);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-top: var(--border-width-2xs) solid var(--color-border-subtle);
     display: flex;
     justify-content: flex-end;
-    gap: var(--space-2);
+    gap: var(--spacing-2);
   }
 
   // ==========================================
@@ -55,12 +55,12 @@
 
   &--default {
     box-shadow: var(--shadow-xs);
-    border: 1px solid #cbd5e1;
+    border: var(--border-width-2xs) solid #cbd5e1;
   }
 
   &--elevated {
     box-shadow: var(--shadow-m);
-    border: 1px solid #cbd5e1;
+    border: var(--border-width-2xs) solid #cbd5e1;
 
     &:hover {
       box-shadow: var(--shadow-l);
@@ -70,6 +70,6 @@
 
   &--outlined {
     box-shadow: none;
-    border: 2px solid #cbd5e1;
+    border: var(--border-width-xs) solid #cbd5e1;
   }
 }

@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
+
 // src/assets/scss/components/_form.scss
 
 /* ────────────────────── FORM COMPONENT ────────────────────── */
@@ -18,10 +20,10 @@
     flex-direction: column;
     gap: var(--scale-4);
 
-    @media (min-width: 768px) {
+    @include bp-up(m) {
       .form-group {
         display: grid;
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: var(--scale-50) 1fr;
         gap: var(--scale-4);
         align-items: start;
 
@@ -42,7 +44,7 @@
 
     .input-wrapper {
       flex: 1;
-      min-width: 200px;
+      min-width: var(--scale-50);
     }
   }
 }
@@ -76,8 +78,8 @@
   gap: var(--scale-4);
 
   // Desktop: Side by side
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  @include bp-up(m) {
+    grid-template-columns: repeat(auto-fit, minmax(var(--scale-50), 1fr));
   }
 
   // ── GAP VARIANTS ──
@@ -120,7 +122,7 @@
   }
 
   // Mobile: Stack buttons vertically
-  @media (max-width: 640px) {
+  @include bp-down(xs) {
     flex-direction: column-reverse;
 
     button {

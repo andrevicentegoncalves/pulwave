@@ -1,10 +1,12 @@
+@use '../abstracts/mixins/foundation/breakpoints' as bp;
+
 // ============================================================================ //
 //                         USER INFO COMPONENT STYLES                           //
 // ============================================================================ //
 
 .user-info__avatar {
-  width: 46px;
-  height: 46px;
+  width: var(--scale-12); // 48px
+  height: var(--scale-12);
   border-radius: var(--border-radius-round);
   object-fit: cover;
   flex-shrink: 0;
@@ -13,7 +15,7 @@
 
   &:hover {
     transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-medium) * 100%));
   }
 
   &:focus-visible {
@@ -35,7 +37,7 @@
   flex-direction: column;
   min-width: 0; // Allow text truncation
   flex: 1; // Take available space
-  gap: var(--space-1); // 4px between name and email
+  gap: var(--spacing-1); // 4px between name and email
 }
 
 .user-info__name {
@@ -49,7 +51,7 @@
 }
 
 .user-info__email {
-  color: rgba(255, 255, 255, 0.7); // Subtle white
+  color: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-muted) * 100%)); // Subtle white
   font-size: var(--font-size-caption-m); // 12px
   line-height: var(--line-height-tight); // 1.25
   white-space: nowrap;
@@ -62,10 +64,10 @@
 // ---------------------------------------------------------------------------//
 
 .user-info__logout {
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-hover) * 100%));
   border: none;
-  width: 40px;
-  height: 40px;
+  width: var(--scale-10); // 40px
+  height: var(--scale-10);
   border-radius: var(--border-radius-round); // Circle
   display: flex;
   align-items: center;
@@ -81,7 +83,7 @@
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-active) * 100%));
     transform: scale(1.05);
   }
 
@@ -91,7 +93,7 @@
   }
 
   &:active {
-    background: rgba(255, 255, 255, 0.15);
+    background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-pressed) * 100%));
     transform: scale(1.0);
   }
 }
@@ -115,11 +117,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: var(--space-2); // 8px vertical spacing
+  gap: var(--spacing-2); // 8px vertical spacing
 
   // Avatar and details centered
   .user-info__avatar {
-    margin-bottom: var(--space-1); // Extra spacing below avatar
+    margin-bottom: var(--spacing-1); // Extra spacing below avatar
   }
 
   // Details centered
@@ -131,7 +133,7 @@
 
   // Logout button centered
   .user-info__logout {
-    margin-top: var(--space-1); // Extra spacing above logout
+    margin-top: var(--spacing-1); // Extra spacing above logout
   }
 }
 
@@ -141,21 +143,21 @@
 
 // Small size - for mobile headers and compact displays
 .user-info--s {
-  padding: var(--space-2); // 8px
-  gap: var(--space-2); // 8px
+  padding: var(--spacing-2); // 8px
+  gap: var(--spacing-2); // 8px
 
   .user-info__avatar {
-    width: 32px;
-    height: 32px;
+    width: var(--scale-8); // 32px
+    height: var(--scale-8);
   }
 
   .user-info__logout {
-    width: 32px;
-    height: 32px;
+    width: var(--scale-8); // 32px
+    height: var(--scale-8);
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: var(--scale-4); // 16px
+      height: var(--scale-4);
     }
   }
 
@@ -170,21 +172,21 @@
 
 // Large size - for prominent displays
 .user-info--l {
-  padding: var(--space-5); // 20px
-  gap: var(--space-4); // 16px
+  padding: var(--spacing-5); // 20px
+  gap: var(--spacing-4); // 16px
 
   .user-info__avatar {
-    width: 56px;
-    height: 56px;
+    width: var(--scale-14); // 56px
+    height: var(--scale-14);
   }
 
   .user-info__logout {
-    width: 48px;
-    height: 48px;
+    width: var(--scale-12); // 48px
+    height: var(--scale-12);
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: var(--icon-size-m); // 24px
+      height: var(--icon-size-m);
     }
   }
 
@@ -205,8 +207,8 @@
 :global(.sidebar-container.collapsed) {
   .user-info {
     flex-direction: column;
-    padding: var(--space-2); // Reduced padding
-    gap: var(--space-2); // Smaller gap
+    padding: var(--spacing-2); // Reduced padding
+    gap: var(--spacing-2); // Smaller gap
 
     // Hide name/email in collapsed state
     .user-info__details {
@@ -215,18 +217,18 @@
 
     // Smaller avatar
     .user-info__avatar {
-      width: 36px;
-      height: 36px;
+      width: var(--scale-10); // 40px
+      height: var(--scale-10);
     }
 
     // Keep logout button visible but smaller
     .user-info__logout {
-      width: 32px;
-      height: 32px;
+      width: var(--scale-8); // 32px
+      height: var(--scale-8);
 
       svg {
-        width: 18px;
-        height: 18px;
+        width: var(--scale-5); // 20px
+        height: var(--scale-5);
       }
     }
   }
@@ -239,26 +241,26 @@
 // Avatar only (no name, no logout)
 .user-info:has(.user-info__avatar):not(:has(.user-info__details)):not(:has(.user-info__logout)) {
   justify-content: center;
-  padding: var(--space-2);
+  padding: var(--spacing-2);
 }
 
 // Logout only (no avatar, no name)
 .user-info:has(.user-info__logout):not(:has(.user-info__avatar)):not(:has(.user-info__details)) {
   justify-content: center;
-  padding: var(--space-2);
+  padding: var(--spacing-2);
 }
 
 // Name only (no avatar, no logout)
 .user-info:has(.user-info__details):not(:has(.user-info__avatar)):not(:has(.user-info__logout)) {
   justify-content: center;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--spacing-3) var(--spacing-4);
 }
 
 // ---------------------------------------------------------------------------//
 // HOVER EFFECTS FOR CONTAINER
 // ---------------------------------------------------------------------------//
 
-.user-info:hover {}
+// .user-info:hover {} // Removed empty ruleset
 
 // ---------------------------------------------------------------------------//
 // ACCESSIBILITY
@@ -299,7 +301,7 @@
 // MOBILE RESPONSIVE
 // ---------------------------------------------------------------------------//
 
-@media (max-width: 768px) {
+@include bp.bp-down('m') {
 
   // Hide user info in sidebar on mobile (shown in mobile header instead)
   .sidebar-container .user-info,

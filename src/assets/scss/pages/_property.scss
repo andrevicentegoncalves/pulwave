@@ -7,17 +7,17 @@
 .properties-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--spacing-8);
 
   &__header {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--spacing-4);
   }
 
   &__title {
     font-size: var(--font-size-headline-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-on-surface-default);
-    margin: 0 0 var(--space-2) 0;
+    margin: 0 0 var(--spacing-2) 0;
     line-height: var(--line-height-heading);
   }
 
@@ -29,21 +29,21 @@
 
   &__actions {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--spacing-4);
     flex-wrap: wrap;
   }
 
   &__empty {
-    padding: var(--space-12);
+    padding: var(--spacing-12);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--spacing-4);
     text-align: center;
 
     &-icon {
       color: var(--color-on-surface-subtle);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--spacing-4);
     }
 
     h3 {
@@ -56,7 +56,7 @@
     p {
       font-size: var(--font-size-body-m);
       color: var(--color-on-surface-subtle);
-      margin: 0 0 var(--space-6) 0;
+      margin: 0 0 var(--spacing-6) 0;
     }
   }
 }
@@ -64,18 +64,18 @@
 .properties-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--space-6);
+  gap: var(--spacing-6);
 
-  @media (max-width: 640px) {
+  @include bp-down(xs) {
     grid-template-columns: 1fr;
   }
 }
 
 .property-card {
-  padding: var(--space-6);
+  padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--spacing-4);
   transition: transform var(--duration-fast) var(--easing-standard);
 
   &:hover {
@@ -86,8 +86,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3);
-    padding-bottom: var(--space-4);
+    gap: var(--spacing-3);
+    padding-bottom: var(--spacing-4);
     border-bottom: var(--border-width-1) solid var(--color-border-subtle);
   }
 
@@ -99,7 +99,7 @@
   }
 
   &__status {
-    padding: var(--space-1) var(--space-3);
+    padding: var(--spacing-1) var(--spacing-3);
     font-size: var(--font-size-caption-s);
     font-weight: var(--font-weight-medium);
     border-radius: var(--radius-xs);
@@ -129,13 +129,13 @@
   &__info {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--spacing-2);
   }
 
   &__detail {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--spacing-2);
     font-size: var(--font-size-body-s);
     color: var(--color-on-surface-subtle);
   }
@@ -143,7 +143,7 @@
   &__specs {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--spacing-2);
     font-size: var(--font-size-body-s);
     color: var(--color-on-surface-default);
     font-weight: var(--font-weight-medium);
@@ -153,6 +153,6 @@
     font-size: var(--font-size-headline-s);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
-    padding-top: var(--space-2);
+    padding-top: var(--spacing-2);
   }
 }

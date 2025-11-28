@@ -19,18 +19,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  
+
   // Positioning - account for sidebar
   margin-left: var(--sidebar-collapsed-width); // 72px
-  
+
   // Transition for sidebar expansion
   transition: margin-left var(--duration-normal) var(--easing-emphasized);
-  
+
   // When sidebar is expanded
   &--shifted {
     margin-left: var(--sidebar-expanded-width); // 256px
   }
-  
+
   // Mobile: no margin (sidebar overlays)
   @include bp-down(l) {
     margin-left: 0;
@@ -45,16 +45,16 @@
   // Layout
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  
+  gap: var(--spacing-4);
+
   // Spacing
-  padding: var(--space-4);
-  min-height: var(--space-18); // 72px
-  
+  padding: var(--spacing-4);
+  min-height: var(--spacing-18); // 72px
+
   // Styling
   background: var(--color-surface-default);
-  border-bottom: 1px solid var(--color-border-subtle);
-  
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+
   // Only show on mobile/tablet
   @include bp-up(l) {
     display: none;
@@ -81,7 +81,7 @@
 .dashboard-layout__header {
   // Hide on mobile (we have mobile header)
   display: none;
-  
+
   @include bp-up(l) {
     display: flex;
   }
@@ -94,20 +94,20 @@
 .dashboard-layout__content {
   // Layout
   flex: 1;
-  
+
   // Spacing
-  padding: var(--space-8) var(--space-6);
-  
+  padding: var(--spacing-8) var(--spacing-6);
+
   // Allow scrolling if content overflows
   overflow-y: auto;
-  
+
   // Responsive padding
-  @media (max-width: 1024px) {
-    padding: var(--space-6) var(--space-5);
+  @include bp-down(l) {
+    padding: var(--spacing-6) var(--spacing-5);
   }
-  
-  @media (max-width: 640px) {
-    padding: var(--space-5) var(--space-4);
+
+  @include bp-down(xs) {
+    padding: var(--spacing-5) var(--spacing-4);
   }
 }
 
@@ -116,13 +116,13 @@
 /* -------------------------------------------------------------------------- */
 
 // Very small screens
-@media (max-width: 360px) {
+@include bp-down(xs) {
   .dashboard-layout__mobile-header {
-    padding: var(--space-3);
-    min-height: var(--space-16); // 64px
+    padding: var(--spacing-3);
+    min-height: var(--spacing-16); // 64px
   }
-  
+
   .dashboard-layout__content {
-    padding: var(--space-4) var(--space-3);
+    padding: var(--spacing-4) var(--spacing-3);
   }
 }

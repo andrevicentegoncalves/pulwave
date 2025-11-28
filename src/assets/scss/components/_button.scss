@@ -5,10 +5,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  padding: 0 var(--space-6);
-  height: var(--space-10);
-  min-width: var(--space-10);
+  gap: var(--spacing-2);
+  padding: 0 var(--spacing-6);
+  height: var(--spacing-10);
+  min-width: var(--spacing-10);
   font: var(--font-weight-medium) var(--font-size-body-s)/1 var(--font-family-sans);
   letter-spacing: var(--letter-spacing-normal);
   border-radius: var(--border-radius-l);
@@ -38,17 +38,17 @@
   }
 
   /* ── SIZES ── */
-  &--s { 
-    height: var(--space-8);
-    min-width: var(--space-8);
-    padding: 0 var(--space-4);
+  &--s {
+    height: var(--spacing-8);
+    min-width: var(--spacing-8);
+    padding: 0 var(--spacing-4);
     font-size: var(--font-size-caption-s);
   }
 
   &--l {
-    height: var(--space-12);
-    min-width: var(--space-12);
-    padding: 0 var(--space-8);
+    height: var(--spacing-12);
+    min-width: var(--spacing-12);
+    padding: 0 var(--spacing-8);
     font-size: var(--font-size-body-m);
   }
 
@@ -62,14 +62,14 @@
     background-color: var(--color-primary);
     color: var(--color-on-primary);
 
-    &:hover:not(:disabled) { 
-      background-color: var(--color-primary-hover); 
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
     }
-    
-    &:active:not(:disabled) { 
-      background-color: var(--color-primary-active); 
+
+    &:active:not(:disabled) {
+      background-color: var(--color-primary-active);
     }
-    
+
     &:disabled {
       background-color: var(--color-primary);
       opacity: 0.5;
@@ -82,14 +82,14 @@
     background-color: var(--color-secondary);
     color: var(--color-on-secondary);
 
-    &:hover:not(:disabled) { 
-      background-color: var(--color-secondary-hover); 
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary-hover);
     }
-    
-    &:active:not(:disabled) { 
-      background-color: var(--color-secondary-active); 
+
+    &:active:not(:disabled) {
+      background-color: var(--color-secondary-active);
     }
-    
+
     &:disabled {
       background-color: var(--color-secondary);
       opacity: 0.5;
@@ -102,14 +102,14 @@
     background-color: var(--color-tertiary);
     color: var(--color-on-tertiary);
 
-    &:hover:not(:disabled) { 
-      background-color: var(--color-tertiary-hover); 
+    &:hover:not(:disabled) {
+      background-color: var(--color-tertiary-hover);
     }
-    
-    &:active:not(:disabled) { 
-      background-color: var(--color-tertiary-active); 
+
+    &:active:not(:disabled) {
+      background-color: var(--color-tertiary-active);
     }
-    
+
     &:disabled {
       background-color: var(--color-tertiary);
       opacity: 0.5;
@@ -122,14 +122,14 @@
     background-color: var(--color-feedback-error);
     color: var(--color-neutral-0);
 
-    &:hover:not(:disabled) { 
-      background-color: var(--color-feedback-error-hover); 
+    &:hover:not(:disabled) {
+      background-color: var(--color-feedback-error-hover);
     }
-    
-    &:active:not(:disabled) { 
-      background-color: var(--color-feedback-error-active); 
+
+    &:active:not(:disabled) {
+      background-color: var(--color-feedback-error-active);
     }
-    
+
     &:disabled {
       background-color: var(--color-feedback-error);
       opacity: 0.5;
@@ -147,11 +147,11 @@
       background-color: var(--color-neutral-200);
       border-color: var(--color-neutral-500);
     }
-    
+
     &:active:not(:disabled) {
       background-color: var(--color-neutral-300);
     }
-    
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -169,13 +169,13 @@
     &::after {
       content: '';
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: var(--scale-4);
+      height: var(--scale-4);
       top: 50%;
       left: 50%;
-      margin-left: -8px;
-      margin-top: -8px;
-      border: 2px solid currentColor;
+      margin-left: calc(var(--scale-2) * -1);
+      margin-top: calc(var(--scale-2) * -1);
+      border: var(--border-width-xs) solid currentColor;
       border-radius: 50%;
       border-top-color: transparent;
       animation: spin 0.6s linear infinite;
@@ -184,5 +184,7 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

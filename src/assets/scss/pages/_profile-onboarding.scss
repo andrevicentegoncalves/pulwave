@@ -1,33 +1,35 @@
+@use '../abstracts' as *;
+
 // Profile Onboarding Styles
 .profile-onboarding {
-    max-width: 700px;
+    max-width: var(--scale-175);
     margin: 0 auto;
-    padding: var(--space-6) var(--space-4);
+    padding: var(--spacing-6) var(--spacing-4);
 
     .onboarding-progress {
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--spacing-6);
 
         .progress-steps {
             display: flex;
             justify-content: space-between;
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--spacing-3);
             position: relative;
 
             .progress-step {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: var(--space-1);
+                gap: var(--spacing-1);
                 flex: 1;
                 position: relative;
                 z-index: 1;
 
                 .step-circle {
-                    width: 40px;
-                    height: 40px;
+                    width: var(--scale-10);
+                    height: var(--scale-10);
                     border-radius: 50%;
                     background: var(--color-background);
-                    border: 2px solid var(--color-border);
+                    border: var(--border-width-xs) solid var(--color-border);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -58,7 +60,7 @@
                     .step-circle {
                         border-color: var(--color-success);
                         background: var(--color-success);
-                        color: white;
+                        color: var(--color-neutral-0);
                     }
 
                     .step-title {
@@ -69,7 +71,7 @@
         }
 
         .progress-bar {
-            height: 3px;
+            height: var(--border-width-m);
             background: var(--color-border);
             border-radius: var(--radius-full);
             overflow: hidden;
@@ -85,7 +87,7 @@
     }
 
     .onboarding-card {
-        min-height: 350px;
+        min-height: var(--scale-88);
         display: flex;
         flex-direction: column;
     }
@@ -94,32 +96,32 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: var(--space-3);
+        gap: var(--spacing-3);
 
         h3 {
             font-size: var(--font-size-l);
             font-weight: var(--font-weight-semibold);
             color: var(--color-text-primary);
-            margin: 0 0 var(--space-1) 0;
+            margin: 0 0 var(--spacing-1) 0;
         }
 
         .step-description {
             color: var(--color-text-secondary);
             font-size: var(--font-size-s);
-            margin: 0 0 var(--space-3) 0;
+            margin: 0 0 var(--spacing-3) 0;
         }
 
         .form-row-two {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-3);
+            gap: var(--spacing-3);
         }
 
         .avatar-upload-center {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: var(--space-6) 0;
+            padding: var(--spacing-6) 0;
         }
 
         &.completion-step {
@@ -129,33 +131,33 @@
 
             .completion-icon {
                 color: var(--color-success);
-                margin-bottom: var(--space-3);
+                margin-bottom: var(--spacing-3);
             }
 
             .completion-summary {
                 background: var(--color-background-secondary);
-                padding: var(--space-4);
+                padding: var(--spacing-4);
                 border-radius: var(--radius-m);
                 text-align: left;
-                max-width: 500px;
-                margin-top: var(--space-4);
+                max-width: var(--scale-125);
+                margin-top: var(--spacing-4);
 
                 h4 {
                     font-size: var(--font-size-m);
                     font-weight: var(--font-weight-semibold);
-                    margin: 0 0 var(--space-3) 0;
+                    margin: 0 0 var(--spacing-3) 0;
                     color: var(--color-text-primary);
                 }
 
                 p {
-                    margin: var(--space-1) 0;
+                    margin: var(--spacing-1) 0;
                     font-size: var(--font-size-s);
                     color: var(--color-text-secondary);
 
                     strong {
                         color: var(--color-text-primary);
                         font-weight: var(--font-weight-medium);
-                        margin-right: var(--space-2);
+                        margin-right: var(--spacing-2);
                     }
                 }
             }
@@ -166,28 +168,28 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: var(--space-3);
-        margin-top: var(--space-4);
-        padding-top: var(--space-4);
-        border-top: 1px solid var(--color-border);
+        gap: var(--spacing-3);
+        margin-top: var(--spacing-4);
+        padding-top: var(--spacing-4);
+        border-top: var(--border-width-2xs) solid var(--color-border);
     }
 }
 
 // Responsive
-@media (max-width: 768px) {
+@include bp-down(s) {
     .profile-onboarding {
-        padding: var(--space-4) var(--space-2);
+        padding: var(--spacing-4) var(--spacing-2);
 
         .onboarding-progress {
             .progress-steps {
                 .progress-step {
                     .step-circle {
-                        width: 36px;
-                        height: 36px;
+                        width: var(--scale-9);
+                        height: var(--scale-9);
                     }
 
                     .step-title {
-                        font-size: 10px;
+                        font-size: var(--font-size-9xs);
                     }
                 }
             }

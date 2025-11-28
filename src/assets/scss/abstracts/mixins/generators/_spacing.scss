@@ -1,0 +1,130 @@
+@use 'sass:map';
+@use '../../variables/foundation/core' as core;
+
+// ========================================================================== //
+//                      GENERATOR: SPACING UTILITIES                          //
+// ========================================================================== //
+
+@mixin generate-spacing-utilities() {
+
+    /* -------------------------------------------------------------------------- */
+    /*                        SPACING: MARGIN UTILITIES                           */
+    /* -------------------------------------------------------------------------- */
+
+    // All sides
+    @each $key, $value in core.$scale {
+        .m-#{$key} {
+            margin: var(--scale-#{$key});
+        }
+    }
+
+    // Individual sides
+    @each $side in (top, right, bottom, left) {
+        @each $key, $value in core.$scale {
+            .m#{str-slice($side, 1, 1)}-#{$key} {
+                margin-#{$side}: var(--scale-#{$key});
+            }
+        }
+    }
+
+    // Horizontal (left + right)
+    @each $key, $value in core.$scale {
+        .mx-#{$key} {
+            margin-left: var(--scale-#{$key});
+            margin-right: var(--scale-#{$key});
+        }
+    }
+
+    // Vertical (top + bottom)
+    @each $key, $value in core.$scale {
+        .my-#{$key} {
+            margin-top: var(--scale-#{$key});
+            margin-bottom: var(--scale-#{$key});
+        }
+    }
+
+    // Auto margins
+    .m-auto {
+        margin: auto;
+    }
+
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .my-auto {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .mt-auto {
+        margin-top: auto;
+    }
+
+    .mr-auto {
+        margin-right: auto;
+    }
+
+    .mb-auto {
+        margin-bottom: auto;
+    }
+
+    .ml-auto {
+        margin-left: auto;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                        SPACING: PADDING UTILITIES                          */
+    /* -------------------------------------------------------------------------- */
+
+    // All sides
+    @each $key, $value in core.$scale {
+        .p-#{$key} {
+            padding: var(--scale-#{$key});
+        }
+    }
+
+    // Individual sides
+    @each $side in (top, right, bottom, left) {
+        @each $key, $value in core.$scale {
+            .p#{str-slice($side, 1, 1)}-#{$key} {
+                padding-#{$side}: var(--scale-#{$key});
+            }
+        }
+    }
+
+    // Horizontal (left + right)
+    @each $key, $value in core.$scale {
+        .px-#{$key} {
+            padding-left: var(--scale-#{$key});
+            padding-right: var(--scale-#{$key});
+        }
+    }
+
+    // Vertical (top + bottom)
+    @each $key, $value in core.$scale {
+        .py-#{$key} {
+            padding-top: var(--scale-#{$key});
+            padding-bottom: var(--scale-#{$key});
+        }
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                        SPACING: GAP UTILITIES                              */
+    /* -------------------------------------------------------------------------- */
+
+    @each $key, $value in core.$scale {
+        .gap-#{$key} {
+            gap: var(--scale-#{$key});
+        }
+
+        .gap-x-#{$key} {
+            column-gap: var(--scale-#{$key});
+        }
+
+        .gap-y-#{$key} {
+            row-gap: var(--scale-#{$key});
+        }
+    }
+}

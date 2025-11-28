@@ -117,7 +117,7 @@
 
   // Custom scrollbar styling
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
 
   &::-webkit-scrollbar-track {
@@ -125,7 +125,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: var(--border-radius-2xs); // 2px
     border-top-left-radius: var(--border-radius-xl);
     border-bottom-left-radius: var(--border-radius-xl);

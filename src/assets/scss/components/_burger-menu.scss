@@ -10,27 +10,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; // Changed from center to space-between
-  width: var(--space-10); // 40px
-  height: var(--space-10);
-  padding: var(--space-2-5); // 10px padding to create 3 lines
-  
+  width: var(--spacing-10); // 40px
+  height: var(--spacing-10);
+  padding: var(--spacing-2-5); // 10px padding to create 3 lines
+
   // Styling
   background: transparent;
   border: none;
   cursor: pointer;
-  
+
   // Hide on desktop
   @include bp-up(l) {
     display: none;
   }
-  
+
   // Focus state
   &:focus-visible {
-    outline: 2px solid var(--color-primary-6);
-    outline-offset: 2px;
+    outline: var(--border-width-m) solid var(--color-primary-6);
+    outline-offset: var(--border-width-xs);
     border-radius: var(--border-radius-s);
   }
-  
+
   // Hover state
   &:hover {
     .burger-menu__line {
@@ -45,7 +45,7 @@
 
 .burger-menu__line {
   width: 100%;
-  height: 2px;
+  height: var(--border-width-xs);
   background: var(--color-on-surface-default);
   border-radius: var(--border-radius-2xs);
   transition: all var(--duration-normal) var(--easing-emphasized);
@@ -58,22 +58,23 @@
 /* -------------------------------------------------------------------------- */
 
 .burger-menu--active {
+
   // Top line rotates and moves to center
   .burger-menu__line--top {
     transform: translateY(9px) rotate(45deg);
   }
-  
+
   // Middle line fades out
   .burger-menu__line--middle {
     opacity: 0;
     transform: scaleX(0);
   }
-  
+
   // Bottom line rotates and moves to center
   .burger-menu__line--bottom {
     transform: translateY(-9px) rotate(-45deg);
   }
-  
+
   // Change color when active
   .burger-menu__line {
     background: var(--color-primary-6);
@@ -85,18 +86,18 @@
 /* -------------------------------------------------------------------------- */
 
 // Slightly smaller on very small screens
-@media (max-width: 360px) {
+@include bp-down(xs) {
   .burger-menu {
-    width: var(--space-9); // 36px
-    height: var(--space-9);
-    padding: var(--space-2);
+    width: var(--spacing-9); // 36px
+    height: var(--spacing-9);
+    padding: var(--spacing-2);
   }
-  
+
   .burger-menu--active {
     .burger-menu__line--top {
       transform: translateY(8px) rotate(45deg);
     }
-    
+
     .burger-menu__line--bottom {
       transform: translateY(-8px) rotate(-45deg);
     }

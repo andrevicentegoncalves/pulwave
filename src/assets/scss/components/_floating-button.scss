@@ -7,43 +7,43 @@
 .fab-container {
   position: fixed;
   z-index: var(--z-index-fab); // 900
-  
+
   // Positioning variants
   &--bottom-right {
-    bottom: var(--space-8); // More padding from bottom
-    right: var(--space-6);
+    bottom: var(--spacing-8); // More padding from bottom
+    right: var(--spacing-6);
   }
-  
+
   &--bottom-left {
-    bottom: var(--space-8);
-    left: var(--space-6);
+    bottom: var(--spacing-8);
+    left: var(--spacing-6);
   }
-  
+
   &--bottom-center {
-    bottom: var(--space-8);
+    bottom: var(--spacing-8);
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   // Hide on desktop (only show on mobile/tablet)
   @include bp-up(l) {
     display: none;
   }
-  
+
   // Responsive adjustments
-  @media (max-width: 360px) {
+  @include bp-down('xs') {
     &--bottom-right {
-      bottom: var(--space-6);
-      right: var(--space-4);
+      bottom: var(--spacing-6);
+      right: var(--spacing-4);
     }
-    
+
     &--bottom-left {
-      bottom: var(--space-6);
-      left: var(--space-4);
+      bottom: var(--spacing-6);
+      left: var(--spacing-4);
     }
-    
+
     &--bottom-center {
-      bottom: var(--space-6);
+      bottom: var(--spacing-6);
     }
   }
 }
@@ -58,7 +58,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: color-mix(in srgb, var(--color-neutral-950), transparent calc(100% - var(--opacity-overlay-light) * 100%));
   backdrop-filter: blur(s);
   z-index: calc(var(--z-index-fab) - 2); // 898 - Below FAB and actions
   animation: fadeIn var(--duration-fast) var(--easing-standard);
@@ -70,67 +70,67 @@
 
 .fab {
   // Layout
-  width: var(--space-16); // 64px - More padding
-  height: var(--space-16);
+  width: var(--spacing-16); // 64px - More padding
+  height: var(--spacing-16);
   border-radius: 50%;
   padding: 0;
-  
+
   // Position - Above everything
   position: relative;
   z-index: calc(var(--z-index-fab) + 1); // 901 - Above overlay and actions
-  
+
   // Styling
   background: var(--color-primary-6);
   border: none;
   box-shadow: var(--shadow-xl); // Stronger shadow
   cursor: pointer;
-  
+
   // Icon positioning
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   // Animation
   transition: all var(--duration-normal) var(--easing-standard);
-  
+
   // Icon color - WHITE on primary
   .fab__icon {
     color: var(--color-on-primary-default);
     transition: transform var(--duration-normal) var(--easing-standard);
   }
-  
+
   // Hover state
   &:hover {
     background: var(--color-primary-7);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 var(--scale-2) var(--scale-6) color-mix(in srgb, var(--color-neutral-950), transparent calc(100% - var(--opacity-medium) * 100%));
     transform: #{unquote('scale(1.08)')};
   }
-  
+
   // Active state (pressed)
   &:active {
     transform: #{unquote('scale(0.95)')};
     box-shadow: var(--shadow-m);
   }
-  
+
   // Active state (when expanded)
   &--active {
     background: var(--color-neutral-8);
     transform: #{unquote('rotate(45deg)')};
-    
+
     .fab__icon {
       color: var(--color-on-surface-inverse);
     }
-    
+
     &:hover {
       background: var(--color-neutral-9);
       transform: #{unquote('rotate(45deg) scale(1.08)')};
     }
   }
-  
+
   // Focus state
   &:focus-visible {
-    outline: 3px solid var(--color-primary-3);
-    outline-offset: 4px;
+    outline: var(--border-width-m) solid var(--color-primary-3);
+    outline-offset: var(--scale-1);
   }
 }
 
@@ -140,13 +140,13 @@
 
 .fab-actions {
   position: absolute;
-  bottom: calc(100% + var(--space-4)); // More spacing
+  bottom: calc(100% + var(--spacing-4)); // More spacing
   right: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3); // More gap between actions
-  padding-bottom: var(--space-2);
-  
+  gap: var(--spacing-3); // More gap between actions
+  padding-bottom: var(--spacing-2);
+
   // Position - Above overlay, below main FAB
   z-index: var(--z-index-fab); // 900 - Same as container
 }
@@ -154,59 +154,59 @@
 .fab-action {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3-5) var(--space-4); // More padding
+  gap: var(--spacing-3);
+  padding: var(--spacing-3-5) var(--spacing-4); // More padding
   background: var(--color-surface-default);
-  border: 1px solid var(--color-border-default);
+  border: var(--border-width-1) solid var(--color-border-default);
   border-radius: var(--border-radius-m);
   cursor: pointer;
   box-shadow: var(--shadow-l); // Stronger shadow
   transition: all var(--duration-fast) var(--easing-standard);
   min-width: max-content;
   white-space: nowrap;
-  
+
   // Position - Above overlay
   position: relative;
   z-index: calc(var(--z-index-fab) + 1); // 901 - Above overlay
-  
+
   // Animation entrance
   opacity: 0;
-  transform: translateY(var(--space-2));
+  transform: translateY(var(--spacing-2));
   animation: fabActionSlideIn var(--duration-normal) var(--easing-emphasized) forwards;
-  
+
   .fab-action__icon {
     color: var(--color-primary-6);
     flex-shrink: 0;
   }
-  
+
   .fab-action__label {
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-medium);
     color: var(--color-on-surface-default);
   }
-  
+
   // Hover state
   &:hover {
     background: var(--color-surface-hover);
     box-shadow: var(--shadow-xl);
     transform: translateX(-4px) translateY(0);
     border-color: var(--color-primary-3);
-    
+
     .fab-action__icon {
       transform: #{unquote('scale(1.1)')};
     }
   }
-  
+
   // Active state
   &:active {
     transform: translateX(-2px) translateY(0) #{unquote('scale(0.98)')};
     box-shadow: var(--shadow-m);
   }
-  
+
   // Focus state
   &:focus-visible {
-    outline: 2px solid var(--color-primary-6);
-    outline-offset: 2px;
+    outline: var(--border-width-m) solid var(--color-primary-6);
+    outline-offset: var(--border-width-m);
   }
 }
 
@@ -217,8 +217,9 @@
 @keyframes fabActionSlideIn {
   from {
     opacity: 0;
-    transform: translateY(var(--space-4)) scale(0.9);
+    transform: translateY(var(--spacing-4)) scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -229,6 +230,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

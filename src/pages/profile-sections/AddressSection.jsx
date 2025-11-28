@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select, CountrySelect, AddressAutocomplete, Checkbox } from '../../components/ui';
+import { Card, Input, Select, AddressAutocomplete, Checkbox } from '../../components/ui';
+import CountriesSelect from '../../components/ui/CountriesSelect';
+import RegionsSelect from '../../components/ui/RegionsSelect';
 import Icon from '../../components/ui/Icon';
 import { MapPin } from '../../components/ui/iconLibrary';
 import { supabase } from '../../lib/supabaseClient';
@@ -10,7 +12,7 @@ const AddressSection = ({
     billingAddressData,
     onChange,
     onSelectChange,
-    countries,
+
     regions,
     billingRegions,
 }) => {
@@ -110,23 +112,21 @@ const AddressSection = ({
                 <Card header={<h3>Primary Address</h3>}>
                     <div className="profile-form-grid">
                         {/* Country Dropdown */}
-                        <CountrySelect
+                        <CountriesSelect
+                            name="country_id"
                             label="Country"
                             value={addressData.country_id || ''}
                             onChange={(val) => onSelectChange('address', 'country_id', val)}
-                            placeholder="Select your country..."
-                            fullWidth
+                            required
                         />
 
                         {/* Region Dropdown */}
-                        <Select
+                        <RegionsSelect
+                            name="region_id"
                             label="Region/State"
+                            countryId={addressData.country_id}
                             value={addressData.region_id || ''}
                             onChange={(val) => onSelectChange('address', 'region_id', val)}
-                            options={regions.map(r => ({ value: r.id, label: r.name }))}
-                            placeholder="Select Region"
-                            disabled={!addressData.country_id}
-                            fullWidth
                         />
 
                         {/* City Autocomplete */}
@@ -219,24 +219,22 @@ const AddressSection = ({
                 >
                     <div className="profile-form-grid" style={{ opacity: sameAsPrimary ? 0.6 : 1, pointerEvents: sameAsPrimary ? 'none' : 'auto' }}>
                         {/* Country Dropdown */}
-                        <CountrySelect
+                        <CountriesSelect
+                            name="country_id"
                             label="Country"
                             value={billingAddressData.country_id || ''}
                             onChange={(val) => onSelectChange('billing', 'country_id', val)}
-                            placeholder="Select your country..."
-                            fullWidth
                             disabled={sameAsPrimary}
                         />
 
                         {/* Region Dropdown */}
-                        <Select
+                        <RegionsSelect
+                            name="region_id"
                             label="Region/State"
+                            countryId={billingAddressData.country_id}
                             value={billingAddressData.region_id || ''}
                             onChange={(val) => onSelectChange('billing', 'region_id', val)}
-                            options={billingRegions.map(r => ({ value: r.id, label: r.name }))}
-                            placeholder="Select Region"
                             disabled={!billingAddressData.country_id || sameAsPrimary}
-                            fullWidth
                         />
 
                         {/* City Autocomplete */}
@@ -327,7 +325,7 @@ AddressSection.propTypes = {
     billingAddressData: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func.isRequired,
-    countries: PropTypes.array.isRequired,
+
     regions: PropTypes.array.isRequired,
     billingRegions: PropTypes.array.isRequired,
 };

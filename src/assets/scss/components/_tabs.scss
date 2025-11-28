@@ -5,30 +5,51 @@
 
   &__header {
     display: flex;
-    gap: var(--space-1);
-    border-bottom: 2px solid var(--color-border-default);
-    margin-bottom: var(--space-6);
+    justify-content: space-between;
+    gap: var(--spacing-1);
+    margin-bottom: var(--spacing-6);
     overflow-x: auto;
-    overflow-y: hidden; // ← ADDED: Prevent vertical scroll
+    overflow-y: hidden;
     scrollbar-width: thin;
 
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-surface-subtle);
+
+    /* Scrollbar styling for WebKit (Chrome, Safari, Edge) */
     &::-webkit-scrollbar {
-      height: 4px;
+      height: var(--spacing-xs); // thickness of the scrollbar
+      margin-top: var(--spacing-xs); // spacing from top (may not work in all browsers)
     }
 
     &::-webkit-scrollbar-track {
       background: var(--color-surface-subtle);
+      border-radius: var(--border-radius-m);
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--color-border-default);
-      border-radius: var(--border-radius-xs);
+      background: var(--color-primary);
+      border-radius: var(--border-radius-m);
+
+      &:hover {
+        background: var(--color-primary-dark);
+      }
+    }
+
+    /* Default border */
+    border-bottom: var(--border-width-m) solid var(--color-border-primary);
+
+    /* Controlled by JS or mutation */
+    border-bottom-color: var(--tabs-border-color, var(--color-border-primary));
+    border-bottom-width: var(--tabs-border-width, var(--border-width-xs));
+
+    &.has-scroll {
+      --tabs-border-color: transparent;
     }
   }
 
   &__tab {
     position: relative;
-    padding: var(--space-3) var(--space-6);
+    padding: var(--spacing-3) var(--spacing-6);
     background: none;
     border: none;
     font-size: var(--font-size-6xs);
@@ -36,8 +57,8 @@
     color: var(--color-on-surface-subtle);
     cursor: pointer;
     transition: all var(--duration-normal) var(--easing-standard);
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
+    border-bottom: var(--border-width-l) solid transparent;
+    margin-bottom: calc(var(--border-width-m) * -1);
     white-space: nowrap;
     user-select: none;
 
@@ -48,8 +69,8 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--color-focus-ring);
-      outline-offset: -2px;
+      outline: var(--border-width-m) solid var(--color-focus-ring);
+      outline-offset: calc(var(--border-width-m) * -1);
       border-radius: var(--border-radius-xs);
       z-index: 1;
     }
@@ -67,18 +88,18 @@
 
   &__content {
     animation: fadeIn var(--duration-comfortable) var(--easing-standard);
-    overflow-y: visible; // ← ADDED: Ensure content doesn't cause scroll
+    overflow-y: visible; // Ensure content doesn't cause scroll
   }
 
   &__panel {
-    overflow: visible; // ← ADDED: Prevent scroll on panel
+    overflow: visible; // Prevent scroll on panel
   }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(calc(var(--spacing-2) * -1));
   }
 
   to {

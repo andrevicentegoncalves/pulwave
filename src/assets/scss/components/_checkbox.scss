@@ -5,13 +5,13 @@
 .checkbox-wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--spacing-2);
 }
 
 .checkbox-container {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--spacing-3);
     cursor: pointer;
     position: relative;
 }
@@ -21,8 +21,8 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    width: 25px;
-    height: 25px;
+    width: var(--scale-6);
+    height: var(--scale-6);
     cursor: pointer;
     position: relative;
     margin: 0;
@@ -34,11 +34,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 25px;
-        height: 25px;
-        border: 2px solid #cbd5e1;
+        width: var(--scale-6);
+        height: var(--scale-6);
+        border: var(--border-width-xs) solid var(--color-border-default);
         border-radius: var(--border-radius-xl);
-        background-color: #ffffff;
+        background-color: var(--color-surface-default);
         transition: all 0.15s ease;
     }
 
@@ -48,10 +48,10 @@
         position: absolute;
         top: 52%;
         left: 57%;
-        width: 7px;
-        height: 12px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
+        width: var(--scale-2);
+        height: var(--scale-3);
+        border: solid var(--color-neutral-0);
+        border-width: 0 var(--border-width-s) var(--border-width-s) 0;
         transform: translate(-50%, -55%) rotate(45deg) scale(0);
         transform-origin: center;
         transition: transform 0.15s ease;
@@ -69,27 +69,27 @@
 
     // Hover state
     &:hover:not(:disabled)::before {
-        border-color: #94a3b8;
+        border-color: var(--color-border-hover);
     }
 
     // Focus state
     &:focus-visible::before {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px var(--color-focus-ring);
     }
 
     &:disabled {
         cursor: not-allowed;
 
         &::before {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
+            background-color: var(--color-surface-disabled);
+            border-color: var(--color-border-disabled);
             opacity: 0.5;
         }
     }
 
     &--error::before {
-        border-color: #dc2626;
+        border-color: var(--color-error);
     }
 }
 
@@ -109,13 +109,13 @@
 
 .checkbox__required {
     color: var(--color-error);
-    margin-left: var(--space-1);
+    margin-left: var(--spacing-1);
 }
 
 .checkbox__helper {
     font-size: var(--font-size-body-s);
     color: var(--color-on-surface-subtle);
-    margin-left: calc(25px + var(--space-3)); // Align with label
+    margin-left: calc(var(--scale-6) + var(--spacing-3)); // Align with label
 
     &--error {
         color: var(--color-error);

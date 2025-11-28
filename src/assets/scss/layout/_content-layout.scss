@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
+
 // ============================================================================ //
 //                           CONTENT LAYOUT STYLES                              //
 // ============================================================================ //
@@ -6,15 +8,15 @@
 
 .content-layout {
     width: 100%;
-    max-width: 1200px; // Constrain width for readability on large screens
+    max-width: var(--scale-300); // Constrain width for readability on large screens
     margin: 0 auto;
-    padding: var(--space-6); // 24px
+    padding: var(--spacing-6); // 24px
     box-sizing: border-box;
     animation: fadeIn var(--duration-comfortable) var(--easing-standard);
 
     // Responsive padding
-    @media (max-width: 768px) {
-        padding: var(--space-4); // 16px
+    @include bp-down(s) {
+        padding: var(--spacing-4); // 16px
     }
 
     // Modifier: Remove top padding (useful for pages with custom headers like Profile)
@@ -31,21 +33,21 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6); // 24px
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6); // 24px
     flex-wrap: wrap; // Allow wrapping on small screens
 }
 
 .content-layout__title-group {
     flex: 1;
-    min-width: 200px; // Prevent crushing
+    min-width: var(--scale-50); // Prevent crushing
 }
 
 .content-layout__title {
     font-size: var(--font-size-title-m); // 32px
     font-weight: var(--font-weight-bold);
     color: var(--color-on-surface);
-    margin: 0 0 var(--space-2) 0;
+    margin: 0 0 var(--spacing-2) 0;
     line-height: var(--line-height-tight);
 }
 
@@ -58,7 +60,7 @@
 
 .content-layout__actions {
     display: flex;
-    gap: var(--space-3);
+    gap: var(--spacing-3);
     align-items: center;
     flex-shrink: 0;
 }
@@ -70,7 +72,7 @@
 .content-layout__content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6); // 24px between content blocks
+    gap: var(--spacing-6); // 24px between content blocks
 
     // Optional: Grid layout for content if needed
     // display: grid;

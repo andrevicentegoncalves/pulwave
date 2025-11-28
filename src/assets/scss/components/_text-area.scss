@@ -8,7 +8,7 @@
   // Layout
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--spacing-2);
   width: 100%;
 }
 
@@ -20,13 +20,12 @@
   // Typography
   font-size: var(--font-size-body-s);
   font-weight: var(--font-weight-medium);
-  color: var(--color-on-surface-default);
   line-height: var(--line-height-tight);
 
   // Required indicator
   &--required::after {
     content: ' *';
-    color: var(--color-danger-6);
+    color: var(--color-feedback-danger-600);
   }
 }
 
@@ -42,22 +41,22 @@
 .textarea__field {
   // Common Styling
   width: 100%;
-  box-sizing: border-box; // Fix overflow issue
-  border-radius: var(--border-radius-xl); // Match Input
-  padding: var(--scale-3) var(--scale-6); // Match Input padding
-  font-family: var(--font-family-sans); // Match Input font
+  box-sizing: border-box;
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-3) var(--spacing-6);
+  font-family: var(--font-family-sans);
   font-size: var(--font-size-body-m);
   line-height: var(--line-height-body);
-  color: #1e293b; // Match Input text color
+  color: var(--color-neutral-800);
   resize: vertical;
-  min-height: 100px;
+  min-height: var(--scale-25); // 100px
 
   // Animation
-  transition: all 0.15s ease; // Match Input transition
+  transition: all 0.15s ease;
 
   // Placeholder
   &::placeholder {
-    color: #94a3b8; // Match Input placeholder
+    color: var(--color-neutral-400);
     opacity: 1;
   }
 
@@ -68,9 +67,9 @@
 
   // Disabled state (Common)
   &:disabled {
-    background-color: #f1f5f9; // Match Input disabled bg
-    color: #94a3b8; // Match Input disabled text
-    border-color: #e2e8f0; // Match Input disabled border
+    background-color: var(--color-neutral-100);
+    color: var(--color-neutral-400);
+    border-color: var(--color-neutral-200);
     cursor: not-allowed;
     opacity: 1;
   }
@@ -79,18 +78,18 @@
   // Variant: Outlined (Default)
   // --------------------------------------------------------------------------
   &--outlined {
-    background-color: #ffffff; // Match Input bg
-    border: 2px solid #cbd5e1; // Match Input border (2px)
+    background-color: var(--color-neutral-0);
+    border: var(--border-width-xs) solid var(--color-neutral-300);
 
     &:hover:not(:disabled):not(:focus) {
-      border-color: #94a3b8; // Match Input hover
-      background-color: #f8fafc; // Match Input hover bg
+      border-color: var(--color-neutral-400);
+      background-color: var(--color-neutral-50);
     }
 
     &:focus {
-      border-color: #3b82f6; // Match Input focus border
-      background-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); // Match Input focus shadow
+      border-color: var(--color-primary);
+      background-color: var(--color-neutral-0);
+      box-shadow: 0 0 0 var(--scale-0-75) var(--color-primary-subtle);
     }
   }
 
@@ -98,17 +97,17 @@
   // Variant: Contained
   // --------------------------------------------------------------------------
   &--contained {
-    background-color: #f1f5f9; // Light gray background
-    border: 2px solid transparent;
+    background-color: var(--color-neutral-100);
+    border: var(--border-width-xs) solid transparent;
 
     &:hover:not(:disabled):not(:focus) {
-      background-color: #e2e8f0;
+      background-color: var(--color-neutral-200);
     }
 
     &:focus {
-      background-color: #ffffff;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background-color: var(--color-neutral-0);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 var(--scale-0-75) var(--color-primary-subtle);
     }
   }
 
@@ -116,21 +115,21 @@
   // State: Error
   // --------------------------------------------------------------------------
   &--error {
-    border-color: #dc2626; // Match Input error
+    border-color: var(--color-feedback-danger-600);
 
     &:focus {
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+      border-color: var(--color-feedback-danger-600);
+      box-shadow: 0 0 0 var(--scale-0-75) var(--color-feedback-danger-100);
     }
   }
 
   // State: Success
   &--success {
-    border-color: #16a34a; // Match Input success
+    border-color: var(--color-feedback-success-600);
 
     &:focus {
-      border-color: #16a34a;
-      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+      border-color: var(--color-feedback-success-600);
+      box-shadow: 0 0 0 var(--scale-0-75) var(--color-feedback-success-100);
     }
   }
 }
@@ -143,8 +142,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
 }
 
 .textarea__helper-container {
@@ -155,17 +154,17 @@
   // Typography
   font-size: var(--font-size-body-xs);
   line-height: var(--line-height-normal);
-  color: var(--color-on-surface-subtle);
+  color: var(--color-neutral-500);
   display: block;
 
   // Error variant
   &--error {
-    color: var(--color-danger-7);
+    color: var(--color-feedback-danger-700);
   }
 
   // Success variant
   &--success {
-    color: var(--color-success-7);
+    color: var(--color-feedback-success-700);
   }
 }
 
@@ -176,14 +175,14 @@
 .textarea__count {
   // Typography
   font-size: var(--font-size-body-xs);
-  color: var(--color-on-surface-subtle);
+  color: var(--color-neutral-500);
   text-align: right;
   white-space: nowrap;
   margin-left: auto; // Push to right if helper text is missing
 
   // Over limit state
   &--over-limit {
-    color: var(--color-danger-6);
+    color: var(--color-feedback-danger-600);
     font-weight: var(--font-weight-medium);
   }
 }
@@ -208,9 +207,9 @@
 /* -------------------------------------------------------------------------- */
 
 // Smaller padding on mobile
-@media (max-width: 480px) {
+@include bp-down('xs') {
   .textarea__field {
-    padding: var(--space-2-5) var(--space-3); // 10px 12px
+    padding: var(--spacing-2-5) var(--spacing-3);
     font-size: var(--font-size-body-s);
   }
 }

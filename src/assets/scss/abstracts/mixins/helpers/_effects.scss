@@ -1,4 +1,4 @@
-@use '../../../abstracts/variables' as *;
+@use '../../variables/semantics/shadow' as *;
 
 // -------------------------------------------------------------------------- //
 //                               MIXIN: EFFECTS                               //
@@ -21,12 +21,12 @@
 // Creates loading shimmer effect with customizable timing
 // Used for content placeholder animations
 // Usage: @include glow-animation(2s, 0.8);
-@mixin glow-animation($speed: 3s, $opacity: 0.9) { 
+@mixin glow-animation($speed: 3s, $opacity: 0.9) {
   animation: glow $speed linear infinite;
-  background: linear-gradient(to right, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(0, 0, 0, 0.3) 50%, 
-    rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%);
   bottom: 0;
   content: "";
   left: 0;

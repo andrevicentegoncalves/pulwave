@@ -12,17 +12,17 @@
         flex-direction: row;
         align-items: center;
         width: 100%;
-        gap: var(--space-base);
-        padding: var(--space-base);
+        gap: var(--spacing-base);
+        padding: var(--spacing-base);
     }
 
     &__icon {
-        padding: var(--space-s);
+        padding: var(--spacing-s);
         border-radius: 50%;
         background-color: var(--color-primary);
         color: var(--color-neutral-0);
-        width: 36px;
-        height: 36px;
+        width: var(--scale-9); // 36px
+        height: var(--scale-9);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -53,17 +53,17 @@
     }
 
     &__placeholder {
-        padding: var(--space-base);
+        padding: var(--spacing-base);
         background-color: var(--color-neutral-1);
-        border-top: 1px solid var(--color-neutral-3);
+        border-top: var(--border-width-1) solid var(--color-neutral-3);
     }
 
     // Button group (appears after filters when expanded)
     &__button-group {
         display: flex;
-        gap: var(--space-s);
-        padding: var(--space-base);
-        border-top: 1px solid var(--color-neutral-3);
+        gap: var(--spacing-s);
+        padding: var(--spacing-base);
+        border-top: var(--border-width-1) solid var(--color-neutral-3);
         justify-content: flex-end;
     }
 
@@ -71,9 +71,9 @@
     &__active-filters {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-xs);
-        padding: var(--space-s) var(--space-base);
-        border-top: 1px solid var(--color-neutral-3);
+        gap: var(--spacing-xs);
+        padding: var(--spacing-s) var(--spacing-base);
+        border-top: var(--border-width-1) solid var(--color-neutral-3);
     }
 
     // Clear button in input
@@ -84,7 +84,7 @@
         display: flex;
         align-items: center;
         color: var(--color-neutral-6);
-        padding: var(--space-xs);
+        padding: var(--spacing-xs);
 
         &:hover {
             color: var(--color-neutral-8);

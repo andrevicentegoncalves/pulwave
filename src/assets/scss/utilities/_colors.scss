@@ -54,22 +54,22 @@
   color: var(--color-link-default);
   text-decoration: underline;
   transition: color 200ms ease;
-  
+
   &:hover {
     color: var(--color-link-hover);
   }
-  
+
   &:active {
     color: var(--color-link-active);
   }
-  
+
   &:visited {
     color: var(--color-link-visited);
   }
-  
+
   &:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--border-width-xs) solid var(--color-focus-ring);
+    outline-offset: var(--border-width-xs);
   }
 }
 
@@ -77,25 +77,25 @@
   color: var(--color-link-default);
   text-decoration: none;
   transition: color 200ms ease;
-  
+
   &:hover {
     color: var(--color-link-hover);
     text-decoration: none;
   }
-  
+
   &:active {
     color: var(--color-link-active);
     text-decoration: none;
   }
-  
+
   &:visited {
     color: var(--color-link-visited);
     text-decoration: none;
   }
-  
+
   &:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--border-width-xs) solid var(--color-focus-ring);
+    outline-offset: var(--border-width-xs);
     text-decoration: none;
   }
 }
@@ -104,19 +104,19 @@
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 200ms ease;
-  
+
   &:hover {
     color: var(--color-link-hover);
     text-decoration: underline;
   }
-  
+
   &:active {
     color: var(--color-link-active);
   }
-  
+
   &:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--border-width-xs) solid var(--color-focus-ring);
+    outline-offset: var(--border-width-xs);
   }
 }
 
@@ -242,24 +242,24 @@
 
 .interactive {
   transition: all 200ms ease;
-  
+
   &:hover {
     transform: translateY(-1px);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   &:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--border-width-xs) solid var(--color-focus-ring);
+    outline-offset: var(--border-width-xs);
   }
 }
 
 .hover-lift {
   transition: transform 200ms ease, box-shadow 200ms ease;
-  
+
   &:hover {
     transform: translateY(-2px);
   }
@@ -279,10 +279,10 @@
 
 .skeleton {
   background-color: var(--color-skeleton-base);
-  border-radius: 4px;
+  border-radius: var(--border-radius-xs);
   position: relative;
   overflow: hidden;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -299,6 +299,7 @@
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
@@ -308,21 +309,49 @@
 // OPACITY UTILITIES
 // -------------------------------------------
 
-.opacity-0 { opacity: 0; }
-.opacity-25 { opacity: 0.25; }
-.opacity-50 { opacity: 0.5; }
-.opacity-75 { opacity: 0.75; }
-.opacity-100 { opacity: 1; }
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
 
 // ------------------------------------------- 
 // BLEND MODE UTILITIES
 // -------------------------------------------
 
-.blend-multiply { mix-blend-mode: multiply; }
-.blend-screen { mix-blend-mode: screen; }
-.blend-overlay { mix-blend-mode: overlay; }
-.blend-darken { mix-blend-mode: darken; }
-.blend-lighten { mix-blend-mode: lighten; }
+.blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+.blend-screen {
+  mix-blend-mode: screen;
+}
+
+.blend-overlay {
+  mix-blend-mode: overlay;
+}
+
+.blend-darken {
+  mix-blend-mode: darken;
+}
+
+.blend-lighten {
+  mix-blend-mode: lighten;
+}
 
 // ------------------------------------------- 
 // ACCESSIBILITY UTILITIES
@@ -331,10 +360,10 @@
 // Visually hidden but accessible to screen readers
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--border-width-1);
+  height: var(--border-width-1);
   padding: 0;
-  margin: -1px;
+  margin: calc(var(--border-width-1) * -1);
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -343,11 +372,12 @@
 
 // Skip focus if user prefers reduced motion
 @media (prefers-reduced-motion: reduce) {
+
   .interactive,
   .hover-lift {
     transition: none;
   }
-  
+
   *:focus-visible {
     transition: none;
   }

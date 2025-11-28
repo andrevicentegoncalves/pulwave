@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
+
 // ============================================================================ //
 //                           HEADER COMPONENT STYLES                            //
 // ============================================================================ //
@@ -9,8 +11,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  padding: 0 var(--space-6); // 24px horizontal
+  height: var(--spacing-15);
+  padding: 0 var(--spacing-6); // 24px horizontal
   background-color: var(--color-surface-default);
   z-index: 1001; // Above overlay
   align-items: center;
@@ -40,12 +42,12 @@
 
     .toggle-btn {
       display: flex !important; // Force visible on mobile
-      padding: var(--space-2);
+      padding: var(--spacing-2);
       color: var(--color-on-surface-default);
 
       svg {
-        width: 24px;
-        height: 24px;
+        width: var(--scale-6);
+        height: var(--scale-6);
       }
 
       &:hover {
@@ -110,14 +112,14 @@
 // MOBILE RESPONSIVE - SHOW ON MOBILE ONLY
 // ---------------------------------------------------------------------------//
 
-@media (max-width: 768px) {
+@include bp-down(s) {
   .mobile-header {
     display: flex;
   }
 
   // Add padding to main content to account for fixed header
   body {
-    padding-top: 60px;
+    padding-top: var(--spacing-15);
   }
 }
 

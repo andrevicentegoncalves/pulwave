@@ -5,68 +5,94 @@
 @use '../flags' as flags;
 
 @mixin generate-color-tokens() {
-    
+
     /* ========================================================================== */
     /*                                TOKENS: COLORS                              */
     /* ========================================================================== */
-    
-    // Set color-scheme based on dark mode configuration
-    @if flags.$is_dark_mode_auto or flags.$is_dark_mode_forced {
-        color-scheme: light dark; 
-    } @else {
-        color-scheme: light;  
-    }
-    
+
     // ========================================================================
     // DEFAULT THEME TOKENS (LIGHT MODE)
     // ========================================================================
     // Applies when no data-theme attribute is present
-    
+    // NOTE: This mixin is already included inside a :root selector in _design-tokens-wrapper.scss
+
+    color-scheme: light;
+
     @each $token-name, $theme-map in theme.$theme-mappings {
         $light-color: map.get($theme-map, 'light');
+
         @if $light-color {
             --color-#{$token-name}: #{$light-color};
         }
     }
 
     // ========================================================================
-    // DARK MODE
+    // DARK MODE (SYSTEM PREFERENCE)
     // ========================================================================
+    // Applies when system prefers dark mode AND no override is present
 
-    @if flags.$is_dark_mode_forced {
-        // Manual dark mode toggle via [data-theme="dark"]
-        &[data-theme="dark"] {
-            color-scheme: dark;
-            
-            @each $token-name, $theme-map in theme.$theme-mappings {
-                $dark-color: map.get($theme-map, 'dark');
-                @if $dark-color {
-                    --color-#{$token-name}: #{$dark-color};
-                }
-            }
-        }
-    }
-    
-    @else if flags.$is_dark_mode_auto {
-        // Automatic dark mode based on system preference
+    @at-root {
         @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+
+                @each $token-name, $theme-map in theme.$theme-mappings {
+                    $dark-color: map.get($theme-map, 'dark');
+
+                    @if $dark-color {
+                        --color-#{$token-name}: #{$dark-color};
+                    }
+                }
+            }
+        }
+
+        // ========================================================================
+        // MANUAL OVERRIDES
+        // ========================================================================
+
+        // Force Dark Mode
+        [data-theme="dark"] {
             color-scheme: dark;
-            
+
             @each $token-name, $theme-map in theme.$theme-mappings {
                 $dark-color: map.get($theme-map, 'dark');
+
                 @if $dark-color {
                     --color-#{$token-name}: #{$dark-color};
                 }
             }
         }
+
+        // Force Light Mode
+        [data-theme="light"] {
+            color-scheme: light;
+
+            @each $token-name, $theme-map in theme.$theme-mappings {
+                $light-color: map.get($theme-map, 'light');
+
+                @if $light-color {
+                    --color-#{$token-name}: #{$light-color};
+                }
+            }
+        }
     }
-    
+
     // ========================================================================
     // SMOOTH TRANSITIONS FOR THEME CHANGES
     // ========================================================================
-    
-    * {
-        transition: 
+    // Apply transitions only to elements that typically change with theme
+    // This avoids performance issues with the universal selector
+
+    body,
+    button,
+    a,
+    input,
+    textarea,
+    select,
+    [class*="background-"],
+    [class*="text-"],
+    [class*="border-"] {
+        transition:
             background-color 200ms ease,
             border-color 200ms ease,
             color 200ms ease,
@@ -77,7 +103,12 @@
 
     // Respect user's motion preferences (accessibility)
     @media (prefers-reduced-motion: reduce) {
-        * {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
         }
     }

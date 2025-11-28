@@ -13,6 +13,7 @@ import BuildingForm from './pages/BuildingForm';
 import Settings from './pages/Settings';
 import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -55,34 +56,36 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        {/* Public Route */}
-        <Route
-          path="/auth"
-          element={!user ? <Auth /> : <Navigate to="/" replace />}
-        />
+    <ThemeProvider user={user}>
+      <Router>
+        <Routes>
+          {/* Public Route */}
+          <Route
+            path="/auth"
+            element={!user ? <Auth /> : <Navigate to="/" replace />}
+          />
 
-        {/* Protected Routes with Base Layout */}
-        <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProfileWrapper />} />
-          <Route path="/assets" element={<Assets />} />
-          <Route path="/buildings/new" element={<BuildingForm />} />
-          <Route path="/buildings/:id/edit" element={<BuildingForm />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/style-guide" element={<StyleGuide />} />
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        </Route>
+          {/* Protected Routes with Base Layout */}
+          <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<ProfileWrapper />} />
+            <Route path="/assets" element={<Assets />} />
+            <Route path="/buildings/new" element={<BuildingForm />} />
+            <Route path="/buildings/:id/edit" element={<BuildingForm />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/style-guide" element={<StyleGuide />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          </Route>
 
-        {/* Catch all - redirect to home or auth */}
-        <Route
-          path="*"
-          element={<Navigate to={user ? "/" : "/auth"} replace />}
-        />
-      </Routes>
-    </Router>
+          {/* Catch all - redirect to home or auth */}
+          <Route
+            path="*"
+            element={<Navigate to={user ? "/" : "/auth"} replace />}
+          />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

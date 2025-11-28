@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../variables/foundation/typography-scale' as scale;
+@use '../../variables/semantics/typography' as scale;
 
 // ============================================================================ //
 //                  FUNCTIONS: FOUNDATION - TYPOGRAPHY SCALE                    //
@@ -13,30 +13,44 @@
 /// @return {*} Token value
 @function typography($category, $size, $property: 'size-desktop', $breakpoint: null) {
   $category-map: null;
-  
-  @if $category == 'headline' {
-    $category-map: $typography-headline;
-  } @else if $category == 'title' {
-    $category-map: $typography-title;
-  } @else if $category == 'body' {
-    $category-map: $typography-body;
-  } @else if $category == 'action' {
-    $category-map: $typography-action;
-  } @else if $category == 'label' {
-    $category-map: $typography-label;
-  } @else if $category == 'eyebrow' {
-    $category-map: $typography-eyebrow;
-  } @else if $category == 'price' {
-    $category-map: $typography-price;
-  } @else {
+
+  @if $category =='headline' {
+    $category-map: scale.$typography-headline;
+  }
+
+  @else if $category =='title' {
+    $category-map: scale.$typography-title;
+  }
+
+  @else if $category =='body' {
+    $category-map: scale.$typography-body;
+  }
+
+  @else if $category =='action' {
+    $category-map: scale.$typography-action;
+  }
+
+  @else if $category =='label' {
+    $category-map: scale.$typography-label;
+  }
+
+  @else if $category =='eyebrow' {
+    $category-map: scale.$typography-eyebrow;
+  }
+
+  @else if $category =='price' {
+    $category-map: scale.$typography-price;
+  }
+
+  @else {
     @error "Unknown typography category '#{$category}'. Available: headline, title, body, action, label, eyebrow, price";
   }
-  
+
   $size-map: map.get($category-map, $size);
-  
+
   @if not $size-map {
     @error "Size '#{$size}' not found in '#{$category}'. Available: #{map.keys($category-map)}";
   }
-  
+
   @return map.get($size-map, $property);
 }

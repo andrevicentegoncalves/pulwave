@@ -35,14 +35,14 @@ $base-duration: 100ms !default;
 // -------------------------------------------
 
 /// Typography scale ratios (type scales)
-$scale-ratio-minor-second: 1.067 !default;   // 15:16
-$scale-ratio-major-second: 1.125 !default;   // 8:9
-$scale-ratio-minor-third: 1.2 !default;      // 5:6
-$scale-ratio-major-third: 1.25 !default;     // 4:5
+$scale-ratio-minor-second: 1.067 !default; // 15:16
+$scale-ratio-major-second: 1.125 !default; // 8:9
+$scale-ratio-minor-third: 1.2 !default; // 5:6
+$scale-ratio-major-third: 1.25 !default; // 4:5
 $scale-ratio-perfect-fourth: 1.333 !default; // 3:4
 $scale-ratio-augmented-fourth: 1.414 !default; // 1:√2
-$scale-ratio-perfect-fifth: 1.5 !default;    // 2:3
-$scale-ratio-golden: 1.618 !default;         // 1:φ (golden ratio)
+$scale-ratio-perfect-fifth: 1.5 !default; // 2:3
+$scale-ratio-golden: 1.618 !default; // 1:φ (golden ratio)
 
 /// Selected type scale ratio for this project
 /// @type Number
@@ -61,54 +61,108 @@ $typography-scale-ratio: $scale-ratio-minor-third !default;
 $scale: (
   // Micro (for borders, hairlines)
   0: 0,
-  0.25: units.rem(1),                    // 1px  → 0.0625rem (hairline borders)
-  0.5: units.rem(2),                     // 2px  → 0.125rem  (thin borders)
-  
+  0.25: units.rem(1),
+  // 1px  → 0.0625rem (hairline borders)
+  0.5: units.rem(2),
+  // 2px  → 0.125rem  (thin borders)
+
   // Core Scale (4px base)
-  1: units.rem($base-unit * 1),          // 4px   → 0.25rem
-  2: units.rem($base-unit * 2),          // 8px   → 0.5rem
-  3: units.rem($base-unit * 3),          // 12px  → 0.75rem
-  4: units.rem($base-unit * 4),          // 16px  → 1rem    
-  5: units.rem($base-unit * 5),          // 20px  → 1.25rem  
-  6: units.rem($base-unit * 6),          // 24px  → 1.5rem
-  8: units.rem($base-unit * 8),          // 32px  → 2rem
-  10: units.rem($base-unit * 10),        // 40px  → 2.5rem
-  12: units.rem($base-unit * 12),        // 48px  → 3rem
-  
-  // Medium
-  14: units.rem($base-unit * 14),        // 56px  → 3.5rem
-  16: units.rem($base-unit * 16),        // 64px  → 4rem
-  18: units.rem($base-unit * 18),        // 72px  → 4.5rem
-  20: units.rem($base-unit * 20),        // 80px  → 5rem
-  24: units.rem($base-unit * 24),        // 96px  → 6rem
-  28: units.rem($base-unit * 28),        // 112px → 7rem
-  32: units.rem($base-unit * 32),        // 128px → 8rem
-  
-  // Large
-  36: units.rem($base-unit * 36),        // 144px → 9rem
-  40: units.rem($base-unit * 40),        // 160px → 10rem
-  44: units.rem($base-unit * 44),        // 176px → 11rem
-  48: units.rem($base-unit * 48),        // 192px → 12rem
-  52: units.rem($base-unit * 52),        // 208px → 13rem
-  56: units.rem($base-unit * 56),        // 224px → 14rem
-  60: units.rem($base-unit * 60),        // 240px → 15rem
-  64: units.rem($base-unit * 64),        // 256px → 16rem
-  
-  // Extra Large
-  72: units.rem($base-unit * 72),        // 288px → 18rem
-  80: units.rem($base-unit * 80),        // 320px → 20rem
-  88: units.rem($base-unit * 88),        // 352px → 22rem
-  96: units.rem($base-unit * 96),        // 384px → 24rem
-  104: units.rem($base-unit * 104),      // 416px → 26rem
-  112: units.rem($base-unit * 112),      // 448px → 28rem
-  120: units.rem($base-unit * 120),      // 480px → 30rem
-  128: units.rem($base-unit * 128),      // 512px → 32rem
-  144: units.rem($base-unit * 144),      // 576px → 36rem
-  160: units.rem($base-unit * 160),      // 640px → 40rem
-  192: units.rem($base-unit * 192),      // 768px → 48rem
-  224: units.rem($base-unit * 224),      // 896px → 56rem
-  256: units.rem($base-unit * 256),      // 1024px → 64rem
-  320: units.rem($base-unit * 320),      // 1280px → 80rem
-  384: units.rem($base-unit * 384),      // 1536px → 96rem
-  480: units.rem($base-unit * 480),      // 1920px → 120rem
-) !default;
+  1: units.rem($base-unit * 1),
+  // 4px   → 0.25rem
+  2: units.rem($base-unit * 2),
+  // 8px   → 0.5rem
+  3: units.rem($base-unit * 3),
+  // 12px  → 0.75rem
+  4: units.rem($base-unit * 4),
+  // 16px  → 1rem
+  5: units.rem($base-unit * 5),
+  // 20px  → 1.25rem
+  6: units.rem($base-unit * 6),
+  // 24px  → 1.5rem
+  8: units.rem($base-unit * 8),
+  // 32px  → 2rem
+  9: units.rem($base-unit * 9),
+  // 36px  → 2.25rem
+  10: units.rem($base-unit * 10),
+  // 40px  → 2.5rem
+  12: units.rem($base-unit * 12),
+  // 48px  → 3rem
+  14: units.rem($base-unit * 14),
+  // 56px  → 3.5rem
+  15: units.rem($base-unit * 15),
+  // 60px  → 3.75rem
+  16: units.rem($base-unit * 16),
+  // 64px  → 4rem
+  20: units.rem($base-unit * 20),
+  // 80px  → 5rem
+  22: units.rem($base-unit * 22),
+  // 88px  → 5.5rem
+  24: units.rem($base-unit * 24),
+  // 96px  → 6rem
+  28: units.rem($base-unit * 28),
+  // 112px → 7rem
+  30: units.rem($base-unit * 30),
+  // 120px → 7.5rem
+  32: units.rem($base-unit * 32),
+  // 128px → 8rem
+  36: units.rem($base-unit * 36),
+  // 144px → 9rem
+  38: units.rem($base-unit * 38),
+  // 152px → 9.5rem
+  40: units.rem($base-unit * 40),
+  // 160px → 10rem
+  48: units.rem($base-unit * 48),
+  // 192px → 12rem
+  50: units.rem($base-unit * 50),
+  // 200px → 12.5rem
+  56: units.rem($base-unit * 56),
+  // 224px → 14rem
+  64: units.rem($base-unit * 64),
+  // 256px → 16rem
+  70: units.rem($base-unit * 70),
+  // 280px → 17.5rem
+  72: units.rem($base-unit * 72),
+  // 288px → 18rem
+  75: units.rem($base-unit * 75),
+  // 300px → 18.75rem
+  80: units.rem($base-unit * 80),
+  // 320px → 20rem
+  88: units.rem($base-unit * 88),
+  // 352px → 22rem
+  96: units.rem($base-unit * 96),
+  // 384px → 24rem
+  100: units.rem($base-unit * 100),
+  // 400px → 25rem
+  104: units.rem($base-unit * 104),
+  // 416px → 26rem
+  112: units.rem($base-unit * 112),
+  // 448px → 28rem
+  120: units.rem($base-unit * 120),
+  // 480px → 30rem
+  125: units.rem($base-unit * 125),
+  // 500px → 31.25rem
+  128: units.rem($base-unit * 128),
+  // 512px → 32rem
+  144: units.rem($base-unit * 144),
+  // 576px → 36rem
+  150: units.rem($base-unit * 150),
+  // 600px → 37.5rem
+  160: units.rem($base-unit * 160),
+  // 640px → 40rem
+  175: units.rem($base-unit * 175),
+  // 700px → 43.75rem
+  192: units.rem($base-unit * 192),
+  // 768px → 48rem
+  224: units.rem($base-unit * 224),
+  // 896px → 56rem
+  256: units.rem($base-unit * 256),
+  // 1024px → 64rem
+  300: units.rem($base-unit * 300),
+  // 1200px → 75rem
+  320: units.rem($base-unit * 320),
+  // 1280px → 80rem
+  384: units.rem($base-unit * 384),
+  // 1536px → 96rem
+  480: units.rem($base-unit * 480),
+  // 1920px → 120rem
+  ) !default;

@@ -1,43 +1,22 @@
 // src/pages/Settings.jsx
-import React, { useState, useEffect } from 'react';
-import { Card, Button } from '../components/ui';
+import React, { useState } from 'react';
+import { Card } from '../components/ui';
 import Icon from '../components/ui/Icon';
 import { Sun, Moon, Monitor, Check } from '../components/ui/iconLibrary';
+import { useTheme } from '../contexts/ThemeContext';
 
 /**
  * Settings Page
  * Allows user to configure app preferences
- * Currently supports theme selection (light/dark/auto)
+ * Currently supports theme selection (light/dark/system)
  */
 const Settings = () => {
-  const [theme, setTheme] = useState('auto');
+  const { theme, updateTheme } = useTheme();
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    // Load saved theme preference
-    const savedTheme = localStorage.getItem('theme-preference') || 'auto';
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
-
-  const applyTheme = (selectedTheme) => {
-    const root = document.documentElement;
-    
-    if (selectedTheme === 'auto') {
-      // Use system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    } else {
-      // Use selected theme
-      root.setAttribute('data-theme', selectedTheme);
-    }
-  };
-
   const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-    applyTheme(newTheme);
-    localStorage.setItem('theme-preference', newTheme);
-    
+    updateTheme(newTheme);
+
     // Show save confirmation
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
@@ -57,8 +36,8 @@ const Settings = () => {
       icon: <Moon />,
     },
     {
-      value: 'auto',
-      label: 'Auto',
+      value: 'system',
+      label: 'System',
       description: 'Automatically matches your system settings',
       icon: <Monitor />,
     },
@@ -126,7 +105,7 @@ const Settings = () => {
             Additional preferences coming soon...
           </p>
         </div>
-        
+
         <div className="settings-placeholder">
           <p>• Notification preferences</p>
           <p>• Language selection</p>

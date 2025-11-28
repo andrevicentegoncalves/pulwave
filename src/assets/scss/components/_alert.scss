@@ -5,8 +5,8 @@
 .alert {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-4);
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
   border-radius: var(--border-radius-m);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body-s);
@@ -18,10 +18,10 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: var(--icon-size-m);
+    height: var(--icon-size-m);
     flex-shrink: 0;
-    
+
     svg {
       width: 100%;
       height: 100%;
@@ -31,38 +31,25 @@
   &__content {
     flex-grow: 1;
     line-height: var(--line-height-body-s);
-    
+
     strong {
-      display: block; // Force information title on new line
+      display: block;
       font-weight: var(--font-weight-semi-bold);
-      margin-bottom: var(--space-1);
+      margin-bottom: var(--spacing-1);
     }
   }
 
   &__close {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--space-6);
-    height: var(--space-6);
-    padding: 0;
-    background: transparent;
-    border: none;
-    border-radius: var(--border-radius-s);
-    cursor: pointer;
-    color: currentColor;
-    opacity: 0.7;
-    flex-shrink: 0;
-    transition: var(--transition-smooth);
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: var(--icon-size-s);
+      height: var(--icon-size-s);
     }
 
     &:hover {
       opacity: 1;
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: color-mix(in srgb, currentColor, transparent calc(100% - var(--opacity-hover-light) * 100%));
     }
 
     &:focus-visible {
@@ -73,7 +60,7 @@
 
   // ── VARIANTS: INLINE (default with left border) ──
   &--inline {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--spacing-4);
   }
 
   // ── VARIANTS: MODAL (no left border) ──
@@ -84,25 +71,25 @@
   // ── VARIANTS: TOAST (floating at top) ──
   &--toast {
     position: fixed;
-    top: var(--space-5);
+    top: var(--spacing-5);
     left: 50%;
     transform: translateX(-50%);
     z-index: var(--z-index-alert, 1090);
-    min-width: 400px;
+    min-width: var(--scale-100);
     max-width: 90vw;
     box-shadow: var(--shadow-l);
     animation: slide-down var(--duration-comfortable) var(--easing-standard);
 
     // Mobile: Full width with margin
     @include bp.bp-up(s) {
-      min-width: 400px;
+      min-width: var(--scale-100);
     }
-    
+
     @include bp.bp-down(s) {
-      left: var(--space-3);
-      right: var(--space-3);
+      left: var(--spacing-3);
+      right: var(--spacing-3);
       transform: none;
-      width: calc(100% - var(--space-6));
+      width: calc(100% - var(--spacing-6));
       min-width: unset;
     }
   }
@@ -117,11 +104,11 @@
     .alert__icon {
       color: var(--color-feedback-success-700);
     }
-    
+
     &.alert--modal {
       border-left-width: var(--border-width-1);
     }
-    
+
     &.alert--toast {
       border-left-width: var(--border-width-m);
     }
@@ -137,11 +124,11 @@
     .alert__icon {
       color: var(--color-feedback-info-700);
     }
-    
+
     &.alert--modal {
       border-left-width: var(--border-width-1);
     }
-    
+
     &.alert--toast {
       border-left-width: var(--border-width-m);
     }
@@ -157,11 +144,11 @@
     .alert__icon {
       color: var(--color-feedback-warning-800);
     }
-    
+
     &.alert--modal {
       border-left-width: var(--border-width-1);
     }
-    
+
     &.alert--toast {
       border-left-width: var(--border-width-m);
     }
@@ -177,11 +164,11 @@
     .alert__icon {
       color: var(--color-feedback-error-700);
     }
-    
+
     &.alert--modal {
       border-left-width: var(--border-width-1);
     }
-    
+
     &.alert--toast {
       border-left-width: var(--border-width-m);
     }
@@ -194,6 +181,7 @@
     opacity: 0;
     transform: translateX(-50%) translateY(-100%);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -207,6 +195,7 @@
       opacity: 0;
       transform: translateY(-100%);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
