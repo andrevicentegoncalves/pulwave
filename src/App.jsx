@@ -4,15 +4,12 @@ import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import BaseLayout from './components/layouts/BaseLayout';
-import Auth from './pages/Auth';
-import Home from './pages/Home';
-import ProfileWrapper from './pages/ProfileWrapper';
-import StyleGuide from './pages/style-guide/StyleGuide';
-import Assets from './pages/Assets';
-import BuildingForm from './pages/BuildingForm';
-import Settings from './pages/Settings';
-import TermsAndConditions from './pages/TermsAndConditions';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+import Auth from './pages/auth/Auth';
+import Hub from './pages/app/index';
+import StyleGuide from './pages/dev/style-guide/StyleGuide';
+import Assets from './pages/app/dashboards/Assets';
+import BuildingForm from './pages/app/properties/BuildingForm';
+import Settings from './pages/app/settings/index';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
@@ -67,15 +64,12 @@ function App() {
 
           {/* Protected Routes with Base Layout */}
           <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<ProfileWrapper />} />
+            <Route path="/" element={<Hub />} />
             <Route path="/assets" element={<Assets />} />
             <Route path="/buildings/new" element={<BuildingForm />} />
             <Route path="/buildings/:id/edit" element={<BuildingForm />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/style-guide" element={<StyleGuide />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Route>
 
           {/* Catch all - redirect to home or auth */}

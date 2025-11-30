@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Sidebar from './Sidebar';
+import Sidebar from '../layout/Sidebar';
 
 /**
  * DashboardLayout - Main application layout with sidebar
