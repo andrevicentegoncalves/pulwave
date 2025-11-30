@@ -315,9 +315,9 @@
 
   .sidebar-container {
     position: fixed;
-    top: 60px; // Below mobile header
+    top: 50px; // Below mobile header
     left: 0;
-    height: calc(100vh - 60px);
+    //height: calc(100vh - 60px);
     z-index: 1000;
     transform: translateX(-100%);
     width: 280px !important; // Fixed width on mobile

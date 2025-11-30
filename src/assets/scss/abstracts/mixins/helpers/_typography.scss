@@ -11,7 +11,11 @@
 // -------------------------------------------------------------------------- 
 
 /// Defines which font weights will be loaded into the project by default.
-$font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
+$font-weights-to-load: (
+  'thin',
+  'light',
+  'regular',
+  'bold') !default;
 
 // -------------------------------------------------------------------------- 
 // MIXIN: FONT FACE GENERATOR
@@ -29,11 +33,12 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 @mixin font-face-generator($family, $path, $weight, $style: normal) {
   @font-face {
     font-family: $family;
-    src: url('#{$path}') format('truetype');
-    font-weight: $weight;
-    font-style: $style;
-    font-display: swap;
-  }
+    src: url('#{$path}') format('truetype'
+  );
+  font-weight: $weight;
+  font-style: $style;
+  font-display: swap;
+}
 }
 
 // -------------------------------------------------------------------------- 
@@ -76,22 +81,17 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 ///   @include typography('title', 'xl', 'bold');
 @mixin typography($category, $size, $weight: null) {
   // Mobile-first
-  font-size: var(--typography-#{$category}-#{$size}-size-phone);
-  line-height: var(--typography-#{$category}-#{$size}-line-height);
-  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+  font-size: var(--font-size-#{$category}-#{$size}-phone);
+  line-height: var(--line-height-#{$category}-#{$size});
+  letter-spacing: var(--letter-spacing-#{$category}-#{$size});
 
   @if $weight {
-    font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
-  }
-
-  // Optional text-transform (e.g., for eyebrow styles)
-  @if var(--typography-#{$category}-#{$size}-text-transform) {
-    text-transform: var(--typography-#{$category}-#{$size}-text-transform);
+    font-weight: var(--font-weight-#{$category}-#{$size}-#{$weight});
   }
 
   // Desktop override
   @include bp.bp-up(m) {
-    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+    font-size: var(--font-size-#{$category}-#{$size});
   }
 }
 
@@ -109,17 +109,17 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 /// @example
 ///   @include typography-at('body', 'm', 'regular', 'l');
 @mixin typography-at($category, $size, $weight: null, $breakpoint: 'm') {
-  font-size: var(--typography-#{$category}-#{$size}-size-phone);
-  line-height: var(--typography-#{$category}-#{$size}-line-height);
-  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+  font-size: var(--font-size-#{$category}-#{$size}-phone);
+  line-height: var(--line-height-#{$category}-#{$size});
+  letter-spacing: var(--letter-spacing-#{$category}-#{$size});
 
   @if $weight {
-    font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
+    font-weight: var(--font-weight-#{$category}-#{$size}-#{$weight});
   }
 
   // Desktop override at custom breakpoint
   @include bp.bp-up($breakpoint) {
-    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+    font-size: var(--font-size-#{$category}-#{$size});
   }
 }
 
@@ -135,10 +135,10 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 /// @example
 ///   @include typography-size('body', 's');
 @mixin typography-size($category, $size) {
-  font-size: var(--typography-#{$category}-#{$size}-size-phone);
+  font-size: var(--font-size-#{$category}-#{$size}-phone);
 
   @include bp.bp-up(m) {
-    font-size: var(--typography-#{$category}-#{$size}-size-desktop);
+    font-size: var(--font-size-#{$category}-#{$size});
   }
 }
 
@@ -155,7 +155,7 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 /// @example
 ///   @include typography-weight('title', 'xl', 'bold');
 @mixin typography-weight($category, $size, $weight) {
-  font-weight: var(--typography-#{$category}-#{$size}-weight-#{$weight});
+  font-weight: var(--font-weight-#{$category}-#{$size}-#{$weight});
 }
 
 
@@ -170,7 +170,7 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 /// @example
 ///   @include typography-line-height('body', 'm');
 @mixin typography-line-height($category, $size) {
-  line-height: var(--typography-#{$category}-#{$size}-line-height);
+  line-height: var(--line-height-#{$category}-#{$size});
 }
 
 
@@ -185,5 +185,5 @@ $font-weights-to-load: ('thin', 'light', 'regular', 'bold') !default;
 /// @example
 ///   @include typography-letter-spacing('headline', 'l');
 @mixin typography-letter-spacing($category, $size) {
-  letter-spacing: var(--typography-#{$category}-#{$size}-letter-spacing);
+  letter-spacing: var(--letter-spacing-#{$category}-#{$size});
 }

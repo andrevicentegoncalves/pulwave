@@ -11,13 +11,13 @@ import clsx from 'clsx';
  * - 'pulse-wave': The line-based wave animation (formerly ProfileWave).
  * - 'ring-wave': The rotating ring animation (formerly ProfileRingWave).
  */
-const VisualEffect = ({ variant = 'sidebar-wave', className, ...props }) => {
+const VisualEffect = ({ variant = 'sidebar-wave', size, className, ...props }) => {
 
     // Sidebar Wave Implementation
     if (variant === 'sidebar-wave') {
         return (
             <svg
-                className={clsx("sidebar-wave", className)}
+                className={clsx("visual-effect", "visual-effect--sidebar-wave", className)}
                 viewBox="0 0 280 370"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ const VisualEffect = ({ variant = 'sidebar-wave', className, ...props }) => {
     if (variant === 'pulse-wave') {
         return (
             <svg
-                className={clsx("profile-wave", className)}
+                className={clsx("visual-effect", "visual-effect--pulse-wave", className)}
                 viewBox="0 0 1440 320"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -124,11 +124,14 @@ const VisualEffect = ({ variant = 'sidebar-wave', className, ...props }) => {
     // Ring Wave Implementation (formerly ProfileRingWave)
     if (variant === 'ring-wave') {
         return (
-            <div className={clsx("profile-ring-wave", className)} {...props}>
+            <div
+                className={clsx("visual-effect", "visual-effect--ring-wave", size && `visual-effect--ring-wave--${size}`, className)}
+                {...props}
+            >
                 <svg
                     viewBox="0 0 400 400"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="profile-ring-wave__svg"
+                    className="visual-effect--ring-wave__svg"
                 >
                     <defs>
                         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -185,6 +188,7 @@ const VisualEffect = ({ variant = 'sidebar-wave', className, ...props }) => {
 
 VisualEffect.propTypes = {
     variant: PropTypes.oneOf(['sidebar-wave', 'pulse-wave', 'ring-wave']),
+    size: PropTypes.oneOf(['s', 'm', 'l', 'xl']),
     className: PropTypes.string,
 };
 

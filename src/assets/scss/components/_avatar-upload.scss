@@ -5,7 +5,7 @@
 .avatar-upload {
     position: relative;
     display: inline-block;
-    border-radius: var(--border-radius-circle);
+    border-radius: var(--border-radius-round);
     overflow: hidden;
     cursor: pointer;
     transition: transform var(--duration-base) var(--easing-standard);
@@ -25,14 +25,40 @@
         height: var(--scale-20);
     }
 
-    &--l {
-        width: var(--scale-32); // 128px
+    &--default {
+        width: var(--scale-20);
+        height: var(--scale-20);
+    }
+
+    &--m {
+        width: var(--scale-32);
         height: var(--scale-32);
     }
 
+    &--l {
+        width: var(--scale-40);
+        height: var(--scale-40);
+    }
+
+
     &--xl {
-        width: var(--spacing-56); // 224px
-        height: var(--spacing-56);
+        width: var(--scale-56);
+        height: var(--scale-56);
+        box-shadow: var(--shadow-l);
+
+        &:hover {
+            box-shadow: var(--shadow-xl);
+        }
+    }
+
+    &--2xl {
+        width: var(--scale-64);
+        height: var(--scale-64);
+        box-shadow: var(--shadow-l);
+
+        &:hover {
+            box-shadow: var(--shadow-xl);
+        }
     }
 
     // Image

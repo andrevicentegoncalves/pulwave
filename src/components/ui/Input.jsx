@@ -20,12 +20,13 @@ const Input = forwardRef(({
   rightIcon,
   size = 'md',
   fullWidth = false,
+  variant = 'default', // NEW: 'default' | 'read-only'
   className,
   onChange,
   onBlur,
   onFocus,
-  as = 'input', // NEW: Support select elements
-  children, // NEW: For select options
+  as = 'input', // Support select elements
+  children, // For select options
   ...rest
 }, ref) => {
   const inputId = id || name;
@@ -36,15 +37,44 @@ const Input = forwardRef(({
   // ✅ FIX: Remove fullWidth from rest props to prevent passing to DOM
   const { fullWidth: _, ...domProps } = rest;
 
+  // Read-only variant rendering
+  if (variant === 'read-only') {
+    return (
+      <div className={clsx(
+        'input-wrapper',
+        'input-wrapper--read-only',
+        fullWidth && 'input-wrapper--full-width',
+        className
+      )}>
+        {label && (
+          <label className="input__label">
+            {label}
+          </label>
+        )}
+        <div className="input-container input-container--read-only">
+          <div className="input input--read-only">
+            {value || placeholder || '—'}
+          </div>
+        </div>
+        {helperText && (
+          <div className="input__helper">
+            {helperText}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Default variant rendering
   return (
     <div className={clsx(
-      'input-wrapper', 
+      'input-wrapper',
       fullWidth && 'input-wrapper--full-width',
       className
     )}>
       {/* Label */}
       {label && (
-        <label 
+        <label
           htmlFor={inputId}
           className={clsx(
             'input__label',
@@ -111,7 +141,7 @@ const Input = forwardRef(({
 
       {/* Helper Text / Error / Success Message */}
       {(helperText || error || success) && (
-        <div 
+        <div
           id={`${inputId}-helper`}
           className={clsx(
             'input__helper',
@@ -146,6 +176,7 @@ Input.propTypes = {
   rightIcon: PropTypes.node,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   fullWidth: PropTypes.bool,
+  variant: PropTypes.oneOf(['default', 'read-only']),
   className: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,

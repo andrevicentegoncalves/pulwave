@@ -8,15 +8,15 @@
 .mobile-header {
   display: none; // Hidden on desktop
   position: fixed;
+  justify-content: space-between;
   top: 0;
   left: 0;
   right: 0;
-  height: var(--spacing-15);
+  height: var(--spacing-12);
   padding: 0 var(--spacing-6); // 24px horizontal
   background-color: var(--color-surface-default);
   z-index: 1001; // Above overlay
   align-items: center;
-  justify-content: space-between;
   box-shadow: var(--shadow-s);
   border-bottom: var(--border-width-s) solid var(--color-border-subtle);
   box-sizing: border-box;

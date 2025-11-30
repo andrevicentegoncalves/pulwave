@@ -1,11 +1,17 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import Icon from './Icon';
 import { User, Camera, Spinner } from './iconLibrary';
 
 /**
  * AvatarUpload Component
  * Displays a round avatar with hover edit effect and click-to-upload functionality.
+ * 
+ * @param {string} src - Avatar image URL
+ * @param {string} alt - Alt text for avatar
+ * @param {'s'|'default'|'m'|'l'|'xl'|'2xl'} size - Avatar size
+ * @param {function} onUpload - Upload handler function
+ * @param {boolean} loading - Loading state
+ * @param {string} className - Additional CSS classes
  */
 const AvatarUpload = ({
     src,
@@ -29,6 +35,46 @@ const AvatarUpload = ({
         }
     };
 
+    // Map avatar sizes to icon sizes
+    const getIconSize = () => {
+        switch (size) {
+            case 's':
+                return 's';
+            case 'default':
+                return 'default';
+            case 'm':
+                return 'm';
+            case 'l':
+                return 'l';
+            case 'xl':
+                return 'xl';
+            case '2xl':
+                return '2xl';
+            default:
+                return 'l';
+        }
+    };
+
+    // Map avatar sizes to overlay icon sizes (slightly smaller)
+    const getOverlayIconSize = () => {
+        switch (size) {
+            case 's':
+                return 's';
+            case 'default':
+                return 's';
+            case 'm':
+                return 'm';
+            case 'l':
+                return 'm';
+            case 'xl':
+                return 'l';
+            case '2xl':
+                return 'xl';
+            default:
+                return 'm';
+        }
+    };
+
     return (
         <div
             className={`avatar-upload avatar-upload--${size} ${loading ? 'avatar-upload--loading' : ''} ${className}`}
@@ -46,7 +92,7 @@ const AvatarUpload = ({
                 <img src={src} alt={alt} className="avatar-upload__image" />
             ) : (
                 <div className="avatar-upload__placeholder">
-                    <Icon size={size === 's' ? 's' : size === 'l' ? '2xl' : 'xl'}>
+                    <Icon size={getIconSize()}>
                         <User />
                     </Icon>
                 </div>
@@ -55,11 +101,11 @@ const AvatarUpload = ({
             {/* Overlay with Icon */}
             <div className="avatar-upload__overlay">
                 {loading ? (
-                    <Icon size={size === 's' ? 's' : 'l'} className="animate-spin">
+                    <Icon size={getOverlayIconSize()} className="animate-spin">
                         <Spinner />
                     </Icon>
                 ) : (
-                    <Icon size={size === 's' ? 's' : 'l'}>
+                    <Icon size={getOverlayIconSize()}>
                         <Camera />
                     </Icon>
                 )}
@@ -75,15 +121,6 @@ const AvatarUpload = ({
             />
         </div>
     );
-};
-
-AvatarUpload.propTypes = {
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    size: PropTypes.oneOf(['s', 'default', 'l']),
-    onUpload: PropTypes.func,
-    loading: PropTypes.bool,
-    className: PropTypes.string,
 };
 
 export default AvatarUpload;

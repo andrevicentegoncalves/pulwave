@@ -21,6 +21,7 @@ const Profile = () => {
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Profile Form State
   const [formData, setFormData] = useState({
@@ -92,6 +93,17 @@ const Profile = () => {
   const [countries, setCountries] = useState([]);
   const [regions, setRegions] = useState([]);
   const [billingRegions, setBillingRegions] = useState([]);
+
+  // Handle responsive avatar size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Fetch User & Profile Data
   useEffect(() => {
@@ -500,17 +512,16 @@ const Profile = () => {
 
         {/* Centered Avatar Section */}
         <div className="profile-avatar-section">
-          <div className="profile-avatar">
-            <VisualEffect variant="ring-wave" />
-            <AvatarUpload
-              src={profile?.avatar_url}
-              alt={formData.username || 'User'}
-              size="xl"
-              onUpload={handleAvatarUpload}
-              loading={uploading}
-              className="profile-avatar__preview"
-            />
-          </div>
+          <VisualEffect variant="ring-wave"
+            size={isMobile ? 'm' : 'xl'}
+          />
+          <AvatarUpload
+            src={profile?.avatar_url}
+            alt={formData.username || 'User'}
+            size={isMobile ? 'l' : 'xl'}
+            onUpload={handleAvatarUpload}
+            loading={uploading}
+          />
         </div>
 
         <Form onSubmit={handleSubmit} style={{ width: '100%' }}>

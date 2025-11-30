@@ -94,18 +94,18 @@ const SecuritySection = ({
                 <Card header={<h3>Verification Status</h3>}>
                     <div className="profile-form-grid">
                         <div className="form-row-two">
-                            <div className="read-only-field">
-                                <label className="input__label">Identity Verified</label>
-                                <div className="read-only-value">
-                                    {formData.identity_verified ? '✓ Verified' : '✗ Not Verified'}
-                                </div>
-                            </div>
-                            <div className="read-only-field">
-                                <label className="input__label">Background Check</label>
-                                <div className="read-only-value">
-                                    {formData.background_check_status || 'Not Completed'}
-                                </div>
-                            </div>
+                            <Input
+                                label="Identity Verified"
+                                value={formData.identity_verified ? '✓ Verified' : '✗ Not Verified'}
+                                variant="read-only"
+                                fullWidth
+                            />
+                            <Input
+                                label="Background Check"
+                                value={formData.background_check_status || 'Not Completed'}
+                                variant="read-only"
+                                fullWidth
+                            />
                         </div>
                     </div>
                 </Card>
