@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Alert } from '../../../../components/ui';
+import { Modal, Alert } from '../../../../../components/ui';
 
 export default function Modals() {
   const [showBasicModal, setShowBasicModal] = useState(false);

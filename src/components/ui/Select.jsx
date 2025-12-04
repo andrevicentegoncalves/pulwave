@@ -5,6 +5,8 @@ import Icon from './Icon';
 import { ChevronDown, Search } from './iconLibrary';
 import PropTypes from 'prop-types';
 
+import Skeleton from './Skeleton';
+
 /**
  * Select Component
  * A form select input that uses the custom Dropdown component.
@@ -22,7 +24,8 @@ const Select = ({
     name,
     id,
     searchable = false,
-    searchPlaceholder = "Search..."
+    searchPlaceholder = "Search...",
+    loading = false
 }) => {
     const generatedId = useId();
     const selectId = id || generatedId;
@@ -48,6 +51,15 @@ const Select = ({
         setSearchQuery(e.target.value);
     };
 
+    if (loading) {
+        return (
+            <div className={`form-item ${fullWidth ? 'form-item--full-width' : ''} ${className}`}>
+                {label && <Skeleton variant="text" width="30%" height={20} className="input__skeleton-label" />}
+                <Skeleton variant="rectangular" height={40} width="100%" />
+            </div>
+        );
+    }
+
     return (
         <div className={`form-item ${fullWidth ? 'form-item--full-width' : ''} ${className}`}>
             {label && <label htmlFor={selectId} className="form-label">{label}</label>}
@@ -69,7 +81,7 @@ const Select = ({
             >
                 <div>
                     {searchable && (
-                        <div style={{ padding: '8px', borderBottom: '1px solid var(--border-color)' }}>
+                        <div className="dropdown-select__search-container">
                             <Input
                                 value={searchQuery}
                                 onChange={handleSearchChange}
@@ -80,7 +92,7 @@ const Select = ({
                             />
                         </div>
                     )}
-                    <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                    <div className="dropdown-select__options-container">
                         {filteredOptions.length > 0 ? (
                             filteredOptions.map((opt) => (
                                 <DropdownItem
@@ -96,7 +108,7 @@ const Select = ({
                                 </DropdownItem>
                             ))
                         ) : (
-                            <div style={{ padding: '12px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                            <div className="dropdown-select__empty-state">
                                 No results found
                             </div>
                         )}
@@ -125,7 +137,8 @@ Select.propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
     searchable: PropTypes.bool,
-    searchPlaceholder: PropTypes.string
+    searchPlaceholder: PropTypes.string,
+    loading: PropTypes.bool
 };
 
 export default Select;

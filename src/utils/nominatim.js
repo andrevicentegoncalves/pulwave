@@ -104,9 +104,20 @@ export const searchCity = async (query, countryCode = '') => {
 
         const data = await response.json();
 
-        // Filter to only include cities, towns, villages
+        // Filter to include cities, towns, villages, and smaller localities
+        // This includes parishes (freguesias) and hamlets
         return data.filter(item =>
-            item.type && ['city', 'town', 'village', 'municipality', 'administrative'].includes(item.type)
+            item.type && [
+                'city',
+                'town',
+                'village',
+                'municipality',
+                'administrative',
+                'suburb',      // Parishes/neighborhoods
+                'hamlet',      // Small settlements
+                'locality',    // General localities
+                'neighbourhood' // Alternative spelling
+            ].includes(item.type)
         );
     } catch (error) {
         console.error('Error searching city:', error);
@@ -198,6 +209,73 @@ export const reverseGeocode = async (lat, lon) => {
         return null;
     }
 };
+
+/**
+ * Search for parishes/suburbs within a city
+ * @param {string} cityName - City name
+ * @param {string} countryCode - ISO country code
+ * @returns {Promise<Array>} Array of parish results
+ */
+export const searchParishes = async (cityName, countryCode = '') => {
+    if (!cityName || cityName.trim().length < 2) {
+        return [];
+    }
+
+    try {
+        await waitForRateLimit();
+
+        // Search for suburbs/parishes in the city
+        const params = new URLSearchParams({
+            city: cityName,
+            format: 'json',
+            addressdetails: '1',
+            limit: '50'
+        });
+
+        if (countryCode) {
+            params.append('countrycodes', countryCode.toLowerCase());
+        }
+
+        const response = await fetch(`${NOMINATIM_BASE_URL}/search?${params}`, {
+            headers: {
+                'User-Agent': USER_AGENT
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Nominatim API request failed');
+        }
+
+        const data = await response.json();
+
+        // Extract unique parish names from the results
+        const parishSet = new Set();
+        const parishes = [];
+
+        data.forEach(item => {
+            const addr = item.address || {};
+            // Look for parish indicators in the address
+            const parishName = addr.suburb || addr.neighbourhood || addr.quarter || addr.city_district;
+
+            if (parishName && !parishSet.has(parishName)) {
+                parishSet.add(parishName);
+                parishes.push({
+                    name: parishName,
+                    display_name: `${parishName}, ${cityName}`,
+                    lat: item.lat,
+                    lon: item.lon,
+                    address: addr
+                });
+            }
+        });
+
+        return parishes.sort((a, b) => a.name.localeCompare(b.name));
+    } catch (error) {
+        console.error('Error searching parishes:', error);
+        return [];
+    }
+};
+
 
 /**
  * Debounce function for API calls

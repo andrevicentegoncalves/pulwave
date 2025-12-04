@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '../../variables/foundation/gradient-scale' as scale;
+
+/// Generate gradient utility classes
+/// Creates utilities for gradient directions and common patterns
+@mixin generate-gradient-utilities() {
+
+    /* ========================================================================== */
+    /*                          UTILITIES: GRADIENT                               */
+    /* ========================================================================== */
+
+    /* Gradient direction utilities */
+    /* Usage: .gradient-to-right with custom --gradient-from and --gradient-to */
+    @each $name, $value in scale.$gradient-directions {
+        .gradient-#{$name} {
+            background-image: linear-gradient(#{$value},
+                var(--gradient-from, transparent),
+                var(--gradient-to, transparent));
+        }
+    }
+
+    /* Radial gradient utilities */
+    @each $name, $value in scale.$radial-positions {
+        .gradient-radial-#{$name} {
+            background-image: radial-gradient(circle at #{$value},
+                var(--gradient-from, transparent),
+                var(--gradient-to, transparent));
+        }
+    }
+
+    /* Gradient overlay utilities */
+    .gradient-overlay-top {
+        background-image: linear-gradient(to bottom,
+                var(--gradient-overlay-color, rgba(0, 0, 0, 0.6)),
+                transparent);
+    }
+
+    .gradient-overlay-bottom {
+        background-image: linear-gradient(to top,
+                var(--gradient-overlay-color, rgba(0, 0, 0, 0.6)),
+                transparent);
+    }
+
+    .gradient-overlay-left {
+        background-image: linear-gradient(to right,
+                var(--gradient-overlay-color, rgba(0, 0, 0, 0.6)),
+                transparent);
+    }
+
+    .gradient-overlay-right {
+        background-image: linear-gradient(to left,
+                var(--gradient-overlay-color, rgba(0, 0, 0, 0.6)),
+                transparent);
+    }
+
+    /* Utility: Remove gradient */
+    .gradient-none {
+        background-image: none;
+    }
+}

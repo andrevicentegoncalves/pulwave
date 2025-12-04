@@ -6,3 +6,4 @@ export { default as Dropdowns } from './Dropdowns.jsx';
 export { default as Dividers } from './Dividers.jsx';
 export { default as FormAndInputs } from './FormAndInputs.jsx';
 export { default as Modals } from './Modals.jsx';
+export { default as Skeletons } from './Skeletons.jsx';

@@ -72,4 +72,24 @@
     box-shadow: none;
     border: var(--border-width-xs) solid #cbd5e1;
   }
+
+  // ==========================================
+  // PADDING VARIANTS
+  // ==========================================
+
+  &--padding-sm .card__body {
+    padding: var(--spacing-3);
+  }
+
+  &--padding-md .card__body {
+    padding: var(--spacing-6);
+  }
+
+  &--padding-lg .card__body {
+    padding: var(--spacing-8);
+  }
+
+  &--padding-xl .card__body {
+    padding: var(--spacing-10);
+  }
 }

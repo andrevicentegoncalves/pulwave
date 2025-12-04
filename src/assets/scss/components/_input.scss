@@ -14,10 +14,9 @@
 // ── LABEL ──
 .input__label {
   display: block;
-  font-size: var(--font-size-body-s);
+  font-size: var(--font-size-7xs);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-body-m);
-  margin-bottom: var(--spacing-2);
 
   &--required {
     .input__required {
@@ -92,7 +91,7 @@
 .input {
   width: 100%;
   padding: var(--scale-3) var(--scale-6);
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-6xs);
   font-family: var(--font-family-sans);
   line-height: var(--line-height-body-m);
   color: var(--color-neutral-800);
@@ -105,17 +104,17 @@
   // ── SIZE VARIANTS ──
   &--sm {
     padding: var(--scale-2) var(--scale-3);
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
   }
 
   &--md {
     padding: var(--scale-3) var(--scale-6);
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-6xs);
   }
 
   &--lg {
     padding: var(--scale-4) var(--scale-5);
-    font-size: var(--font-size-body-l);
+    font-size: var(--font-size-5xs);
   }
 
   // ── PLACEHOLDER ──
@@ -204,7 +203,7 @@
     background: transparent;
     padding: 0;
     color: var(--color-on-surface-default);
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-6xs);
     font-weight: var(--font-weight-regular);
     cursor: default;
 
@@ -215,7 +214,7 @@
   }
 
   .input__label {
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
     font-weight: var(--font-weight-medium);
     color: var(--color-on-surface-subtle);
     margin-bottom: var(--spacing-2);

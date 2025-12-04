@@ -59,7 +59,7 @@
   right: 0;
   bottom: 0;
   background: color-mix(in srgb, var(--color-neutral-950), transparent calc(100% - var(--opacity-overlay-light) * 100%));
-  backdrop-filter: blur(s);
+  backdrop-filter: #{'blur(var(--blur-s))'};
   z-index: calc(var(--z-index-fab) - 2); // 898 - Below FAB and actions
   animation: fadeIn var(--duration-fast) var(--easing-standard);
 }
@@ -180,7 +180,7 @@
   }
 
   .fab-action__label {
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
     font-weight: var(--font-weight-medium);
     color: var(--color-on-surface-default);
   }

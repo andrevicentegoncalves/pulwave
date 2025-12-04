@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../../../components/ui/Icon';
+import Icon from '../../../../../components/ui/Icon';
 import { 
   AlertCircle, 
   CheckCircle, 
@@ -16,7 +16,7 @@ import {
   ChevronLeft,
   Menu,
   Search
-} from '../../../../components/ui/iconLibrary';
+} from '../../../../../components/ui/iconLibrary';
 
 export default function Icons() {
   const icons = [

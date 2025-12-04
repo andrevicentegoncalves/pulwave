@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select } from '../../components/ui';
-import Icon from '../../components/ui/Icon';
-import { Building } from '../../components/ui/iconLibrary';
+import { Card, Input, Select } from '../../../../components/ui';
+import Icon from '../../../../components/ui/Icon';
+import { Building } from '../../../../components/ui/iconLibrary';
 
-const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
+const ProfessionalSection = ({ formData, onChange, onSelectChange, loading = false }) => {
     return (
         <div className="profile-section">
             <h2 className="profile-section__title">
@@ -36,6 +36,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 ]}
                                 fullWidth
                                 searchable
+                                loading={loading}
                             />
                         </div>
 
@@ -47,6 +48,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="Your job title"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="Department"
@@ -55,6 +57,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="Department name"
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
                     </div>
@@ -70,6 +73,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                             onChange={onChange}
                             placeholder="Company Name"
                             fullWidth
+                            loading={loading}
                         />
 
                         <div className="form-row-two">
@@ -80,6 +84,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="Tax ID / VAT Number"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="Business Registration Number"
@@ -88,6 +93,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="Registration #"
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
                     </div>
@@ -104,6 +110,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="License #"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="License State"
@@ -112,6 +119,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="State"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="License Expiry"
@@ -120,6 +128,7 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange }) => {
                                 value={formData.license_expiry || ''}
                                 onChange={onChange}
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
                     </div>
@@ -133,6 +142,7 @@ ProfessionalSection.propTypes = {
     formData: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
 };
 
 export default ProfessionalSection;

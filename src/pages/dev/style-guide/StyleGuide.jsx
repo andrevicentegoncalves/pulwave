@@ -1,4 +1,13 @@
-Contrast as ContrastSection
+import React, { useState, useEffect, useCallback } from 'react';
+import { ThemeToggle } from '../../../components/layout/ThemeToggle';
+import { Tabs, TabPanel } from '../../../components/ui';
+import {
+  Colors,
+  Contrast,
+  Surfaces,
+  Typography,
+  Scales,
+  Components
 } from './sections';
 
 const StyleGuide = () => {
@@ -72,27 +81,27 @@ const StyleGuide = () => {
 
       <Tabs defaultTab={0}>
         <TabPanel label="Colors">
-          <ColorSection copyToClipboard={copyToClipboard} />
+          <Colors copyToClipboard={copyToClipboard} />
         </TabPanel>
 
         <TabPanel label="Contrast">
-          <ContrastSection copyToClipboard={copyToClipboard} />
+          <Contrast copyToClipboard={copyToClipboard} />
         </TabPanel>
 
         <TabPanel label="Surfaces">
-          <SurfaceSection />
+          <Surfaces />
         </TabPanel>
 
         <TabPanel label="Typography">
-          <TypographySection />
+          <Typography />
         </TabPanel>
 
         <TabPanel label="Scales">
-          <ScalesSection />
+          <Scales />
         </TabPanel>
 
         <TabPanel label="Components">
-          <ComponentsSection triggerAlert={triggerAlert} />
+          <Components triggerAlert={triggerAlert} />
         </TabPanel>
       </Tabs>
     </div>

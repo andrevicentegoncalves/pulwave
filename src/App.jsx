@@ -10,7 +10,9 @@ import StyleGuide from './pages/dev/style-guide/StyleGuide';
 import Assets from './pages/app/dashboards/Assets';
 import BuildingForm from './pages/app/properties/BuildingForm';
 import Settings from './pages/app/settings/index';
+import ProfileOnboarding from './pages/app/onboarding/ProfileOnboarding';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { ToastProvider } from './contexts/ToastProvider';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -54,31 +56,34 @@ function App() {
 
   return (
     <ThemeProvider user={user}>
-      <Router>
-        <Routes>
-          {/* Public Route */}
-          <Route
-            path="/auth"
-            element={!user ? <Auth /> : <Navigate to="/" replace />}
-          />
+      <ToastProvider>
+        <Router>
+          <Routes>
+            {/* Public Route */}
+            <Route
+              path="/auth"
+              element={!user ? <Auth /> : <Navigate to="/" replace />}
+            />
 
-          {/* Protected Routes with Base Layout */}
-          <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
-            <Route path="/" element={<Hub />} />
-            <Route path="/assets" element={<Assets />} />
-            <Route path="/buildings/new" element={<BuildingForm />} />
-            <Route path="/buildings/:id/edit" element={<BuildingForm />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/style-guide" element={<StyleGuide />} />
-          </Route>
+            {/* Protected Routes with Base Layout */}
+            <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
+              <Route path="/" element={<Hub />} />
+              <Route path="/assets" element={<Assets />} />
+              <Route path="/buildings/new" element={<BuildingForm />} />
+              <Route path="/buildings/:id/edit" element={<BuildingForm />} />
+              <Route path="/onboarding" element={<ProfileOnboarding />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/style-guide" element={<StyleGuide />} />
+            </Route>
 
-          {/* Catch all - redirect to home or auth */}
-          <Route
-            path="*"
-            element={<Navigate to={user ? "/" : "/auth"} replace />}
-          />
-        </Routes>
-      </Router>
+            {/* Catch all - redirect to home or auth */}
+            <Route
+              path="*"
+              element={<Navigate to={user ? "/" : "/auth"} replace />}
+            />
+          </Routes>
+        </Router>
+      </ToastProvider>
     </ThemeProvider>
   );
 }

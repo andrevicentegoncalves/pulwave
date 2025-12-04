@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Card, Input, Button, Modal, Badge } from '../../components/ui';
-import Checkbox from '../../components/ui/Checkbox';
-import Icon from '../../components/ui/Icon';
-import { ShieldCheck } from '../../components/ui/iconLibrary';
-import { TermsContent } from '../TermsAndConditions';
-import { PrivacyContent } from '../PrivacyPolicy';
-import { supabase } from '../../lib/supabaseClient';
+import { Card, Input, Button, Modal, Badge } from '../../../../components/ui';
+import Checkbox from '../../../../components/ui/Checkbox';
+import Icon from '../../../../components/ui/Icon';
+import { ShieldCheck } from '../../../../components/ui/iconLibrary';
+// import { TermsContent } from '../../TermsAndConditions';
+// import { PrivacyContent } from '../../PrivacyPolicy';
+import { supabase } from '../../../../lib/supabaseClient';
 
 const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
     const navigate = useNavigate();
@@ -271,10 +271,20 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     style={{
                         maxHeight: '60vh',
                         overflowY: 'auto',
-                        padding: 'var(--space-4)',
+                        padding: 'var(--spacing-6)',
+                        lineHeight: '1.7',
                     }}
                 >
-                    <TermsContent content={termsData?.content} />
+                    <div
+                        style={{
+                            fontSize: 'var(--font-size-6xs)',
+                            color: 'var(--color-on-surface-default)',
+                        }}
+                        dangerouslySetInnerHTML={{
+                            __html: termsData?.content?.replace(/\n\n/g, '</p><p style="margin-bottom: var(--spacing-4);">') ||
+                                '<p>Terms and Conditions content will be displayed here.</p>'
+                        }}
+                    />
                 </div>
             </Modal>
 
@@ -305,10 +315,20 @@ const PrivacySection = ({ formData, onChange, onCheckboxChange }) => {
                     style={{
                         maxHeight: '60vh',
                         overflowY: 'auto',
-                        padding: 'var(--space-4)',
+                        padding: 'var(--spacing-6)',
+                        lineHeight: '1.7',
                     }}
                 >
-                    <PrivacyContent content={privacyData?.content} />
+                    <div
+                        style={{
+                            fontSize: 'var(--font-size-6xs)',
+                            color: 'var(--color-on-surface-default)',
+                        }}
+                        dangerouslySetInnerHTML={{
+                            __html: privacyData?.content?.replace(/\n\n/g, '</p><p style="margin-bottom: var(--spacing-4);">') ||
+                                '<p>Privacy Policy content will be displayed here.</p>'
+                        }}
+                    />
                 </div>
             </Modal>
         </div>

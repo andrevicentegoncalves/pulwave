@@ -4,7 +4,7 @@ import {
   DropdownItem, 
   DropdownDivider, 
   DropdownLabel 
-} from '../../../../components/ui';
+} from '../../../../../components/ui';
 
 const IconEdit = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

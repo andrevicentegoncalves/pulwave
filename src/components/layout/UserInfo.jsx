@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Power } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabaseClient';
+import Skeleton from '../ui/Skeleton';
 
 /**
  * UserInfo - Flexible user profile component with multiple layout configurations
@@ -119,7 +120,7 @@ const UserInfo = ({
      * Handle profile click - navigate to profile page
      */
     const handleProfileClick = () => {
-        navigate('/profile');
+        navigate('/settings');
     };
 
     /**
@@ -149,9 +150,56 @@ const UserInfo = ({
         }
     };
 
-    // Don't render until data is loaded to prevent flickering
+    // Get avatar size based on size prop
+    const getAvatarSize = () => {
+        switch (size) {
+            case 's':
+                return 32;
+            case 'default':
+                return 40;
+            case 'l':
+                return 48;
+            default:
+                return 40;
+        }
+    };
+
+    // Show skeleton during loading
     if (loading) {
-        return null;
+        const avatarSize = getAvatarSize();
+        return (
+            <div
+                className={`user-info user-info--${orientation} user-info--${size} ${className || ''}`}
+                style={style}
+                role="region"
+                aria-label="User profile loading"
+            >
+                {/* Avatar Skeleton */}
+                {showAvatar && (
+                    <Skeleton
+                        variant="circular"
+                        width={avatarSize}
+                        height={avatarSize}
+                    />
+                )}
+
+                {/* Name Skeleton */}
+                {showName && (
+                    <div className="user-info__details">
+                        <Skeleton variant="text" width={100} height={16} />
+                    </div>
+                )}
+
+                {/* Logout Button Skeleton */}
+                {showLogout && (
+                    <Skeleton
+                        variant="circular"
+                        width={32}
+                        height={32}
+                    />
+                )}
+            </div>
+        );
     }
 
     // Construct display name from profile

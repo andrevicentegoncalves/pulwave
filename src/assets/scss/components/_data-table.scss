@@ -35,50 +35,6 @@
                 background: var(--color-neutral-5);
             }
         }
-    }
-
-    table {
-        width: 100%;
-        min-width: var(--scale-150);
-        border-collapse: separate;
-        border-spacing: 0;
-
-        @include bp-up(m) {
-            min-width: 100%;
-        }
-    }
-
-    thead {
-        background-color: var(--color-neutral-1);
-        border-bottom: var(--border-width-2xs) solid var(--color-neutral-3);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-
-    th {
-        padding: var(--spacing-s) var(--spacing-base);
-        text-align: left;
-        font-size: var(--font-size-9xs);
-        font-weight: 600;
-        color: var(--color-neutral-7);
-        white-space: nowrap;
-        user-select: none;
-        position: relative;
-        border-bottom: var(--border-width-2xs) solid var(--color-neutral-3);
-        background-color: var(--color-neutral-1);
-
-        @include bp-down(s) {
-            padding: var(--spacing-xs) var(--spacing-s);
-            font-size: var(--font-size-9xs);
-        }
-
-        .th-content {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            justify-content: space-between;
-        }
 
         &.sortable {
             cursor: pointer;

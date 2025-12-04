@@ -1,4 +1,10 @@
- */
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
+import { Eye, EyeOff, Loader2 as Spinner } from 'lucide-react';
+import { Card, Alert, Input, Checkbox, Button, Icon, Divider } from '../../components/ui';
+import Form from '../../components/forms/Form';
+
 const Auth = () => {
   const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
@@ -141,7 +147,7 @@ const Auth = () => {
               fullWidth
               rightIcon={
                 <div
-                  style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                  className="cursor-pointer pointer-events-auto"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
@@ -151,7 +157,7 @@ const Auth = () => {
           )}
 
           {!isForgotPassword && !isSignUp && (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-8px', marginBottom: '12px' }}>
+            <div className="flex justify-between items-center -margin-top-2 margin-bottom-3">
               <Checkbox
                 label="Remember me"
                 checked={rememberMe}
@@ -229,7 +235,7 @@ const Auth = () => {
       </Card>
 
       {/* Dev Bypass Button - Temporary */}
-      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+      <div className="margin-top-5 text-center">
         <Button
           variant="text"
           size="s"
@@ -237,7 +243,7 @@ const Auth = () => {
             localStorage.setItem('dev_bypass', 'true');
             window.location.reload();
           }}
-          style={{ opacity: 0.5 }}
+          className="opacity-50"
         >
           Dev Bypass (Temporary)
         </Button>

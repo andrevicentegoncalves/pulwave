@@ -119,7 +119,7 @@
     overflow-y: auto;
     flex-grow: 1;
     color: var(--color-on-surface-variant);
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-6xs);
     line-height: var(--line-height-body);
 
     @include bp-down('s') {

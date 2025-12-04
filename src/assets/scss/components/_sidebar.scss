@@ -9,7 +9,6 @@
   width: var(--scale-20); // 80px
   display: flex;
   flex-direction: column;
-  align-items: center;
   z-index: var(--z-index-fixed);
 
   // Visual - Gradient background using primary color
@@ -40,7 +39,7 @@
   background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-glass-light) * 100%));
   border-radius: var(--radius-m);
   color: var(--color-on-primary);
-  backdrop-filter: blur(10px);
+  backdrop-filter: #{'blur(var(--blur-m))'};
 
   svg {
     width: 24px;
@@ -132,7 +131,7 @@
     background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-glass-light) * 100%));
     border-radius: var(--radius-m);
     color: var(--color-on-primary);
-    backdrop-filter: blur(10px);
+    backdrop-filter: #{'blur(var(--blur-m))'};
 
     svg {
       width: 24px;
@@ -274,7 +273,7 @@
     height: var(--scale-12);
     border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-active) * 100%));
-    backdrop-filter: blur(10px);
+    backdrop-filter: #{'blur(var(--blur-m))'};
     display: flex;
     align-items: center;
     justify-content: center;

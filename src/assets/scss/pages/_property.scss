@@ -22,7 +22,7 @@
   }
 
   &__subtitle {
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-6xs);
     color: var(--color-on-surface-subtle);
     margin: 0;
   }
@@ -54,7 +54,7 @@
     }
 
     p {
-      font-size: var(--font-size-body-m);
+      font-size: var(--font-size-6xs);
       color: var(--color-on-surface-subtle);
       margin: 0 0 var(--spacing-6) 0;
     }
@@ -136,7 +136,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
     color: var(--color-on-surface-subtle);
   }
 
@@ -144,7 +144,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
     color: var(--color-on-surface-default);
     font-weight: var(--font-weight-medium);
   }

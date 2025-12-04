@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select } from '../../components/ui';
-import Textarea from '../../components/ui/TextArea';
-import Icon from '../../components/ui/Icon';
-import { User } from '../../components/ui/iconLibrary';
+import { Card, Input, Select, PhoneSelect } from '../../../../components/ui';
+import Textarea from '../../../../components/ui/TextArea';
+import Icon from '../../../../components/ui/Icon';
+import { User } from '../../../../components/ui/iconLibrary';
 
-const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
+const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = false }) => {
+    // Auto-populate display name from first + last name
+    useEffect(() => {
+        const firstName = formData.first_name?.trim() || '';
+        const lastName = formData.last_name?.trim() || '';
+        const autoDisplayName = [firstName, lastName].filter(Boolean).join(' ');
+
+        // Only auto-update if display_name is empty or matches the previous auto-generated value
+        if (autoDisplayName && !formData.display_name) {
+            onChange({ target: { name: 'display_name', value: autoDisplayName } });
+        }
+    }, [formData.first_name, formData.last_name]);
+
     return (
         <div className="profile-section">
             <h2 className="profile-section__title">
@@ -28,6 +40,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 placeholder="First Name"
                                 fullWidth
                                 required
+                                loading={loading}
                             />
                             <Input
                                 label="Middle Name"
@@ -36,6 +49,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="Middle Name"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="Last Name"
@@ -45,18 +59,23 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 placeholder="Last Name"
                                 fullWidth
                                 required
+                                loading={loading}
                             />
                         </div>
 
-                        <Input
-                            label="Display Name"
-                            name="display_name"
-                            value={formData.display_name || ''}
-                            onChange={onChange}
-                            placeholder="How you'd like to be called"
-                            fullWidth
-                            helperText="Optional: Override your first and last name display"
-                        />
+                        {/* Display Name - Only show after first and last name are filled */}
+                        {(loading || (formData.first_name?.trim() && formData.last_name?.trim())) && (
+                            <Input
+                                label="Display Name"
+                                name="display_name"
+                                value={formData.display_name || ''}
+                                onChange={onChange}
+                                placeholder="How you'd like to be called"
+                                fullWidth
+                                helperText="Auto-populated from first and last name. You can override it here."
+                                loading={loading}
+                            />
+                        )}
 
                         {/* Email Fields */}
                         <div className="form-row-two">
@@ -69,6 +88,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 placeholder="your@email.com"
                                 fullWidth
                                 required
+                                loading={loading}
                             />
                             <Input
                                 label="Secondary Email"
@@ -78,29 +98,65 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="alternate@email.com"
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
 
                         {/* Phone Fields */}
                         <div className="form-row-two">
-                            <Input
-                                label="Primary Phone"
-                                name="phone"
-                                type="tel"
-                                value={formData.phone || ''}
-                                onChange={onChange}
-                                placeholder="+1 (555) 000-0000"
-                                fullWidth
-                            />
-                            <Input
-                                label="Secondary Phone"
-                                name="phone_secondary"
-                                type="tel"
-                                value={formData.phone_secondary || ''}
-                                onChange={onChange}
-                                placeholder="+1 (555) 000-0001"
-                                fullWidth
-                            />
+                            <div className="form-item">
+                                <label className="form-label">Primary Phone</label>
+                                <div style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}>
+                                    <div style={{ width: '140px', flexShrink: 0 }}>
+                                        <PhoneSelect
+                                            label=""
+                                            name="phone_code"
+                                            value={formData.phone_code}
+                                            onChange={(val) => onSelectChange('phone_code', val)}
+                                            placeholder="+1"
+                                            loading={loading}
+                                        />
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <Input
+                                            name="phone_number"
+                                            type="tel"
+                                            value={formData.phone_number || ''}
+                                            onChange={onChange}
+                                            placeholder="(555) 000-0000"
+                                            fullWidth
+                                            loading={loading}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="form-item">
+                                <label className="form-label">Secondary Phone</label>
+                                <div style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}>
+                                    <div style={{ width: '140px', flexShrink: 0 }}>
+                                        <PhoneSelect
+                                            label=""
+                                            name="phone_secondary_code"
+                                            value={formData.phone_secondary_code}
+                                            onChange={(val) => onSelectChange('phone_secondary_code', val)}
+                                            placeholder="+1"
+                                            loading={loading}
+                                        />
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <Input
+                                            name="phone_secondary_number"
+                                            type="tel"
+                                            value={formData.phone_secondary_number || ''}
+                                            onChange={onChange}
+                                            placeholder="(555) 000-0001"
+                                            fullWidth
+                                            loading={loading}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <Select
@@ -113,6 +169,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 { value: 'sms', label: 'SMS' },
                             ]}
                             fullWidth
+                            loading={loading}
                         />
 
                         {/* Demographics */}
@@ -124,6 +181,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 value={formData.date_of_birth || ''}
                                 onChange={onChange}
                                 fullWidth
+                                loading={loading}
                             />
                             <Select
                                 label="Gender"
@@ -137,6 +195,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                     { value: 'other', label: 'Other' },
                                 ]}
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
 
@@ -153,6 +212,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 showCount
                                 maxLength={500}
                                 helperText="Brief description for your profile."
+                                loading={loading}
                             />
                         </div>
                     </div>
@@ -170,6 +230,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="https://yourwebsite.com"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="LinkedIn"
@@ -179,6 +240,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="https://linkedin.com/in/username"
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
 
@@ -191,6 +253,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="https://twitter.com/username"
                                 fullWidth
+                                loading={loading}
                             />
                             <Input
                                 label="Facebook"
@@ -200,6 +263,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange }) => {
                                 onChange={onChange}
                                 placeholder="https://facebook.com/username"
                                 fullWidth
+                                loading={loading}
                             />
                         </div>
                     </div>
@@ -213,6 +277,7 @@ PersonalInfoSection.propTypes = {
     formData: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
 };
 
 export default PersonalInfoSection;

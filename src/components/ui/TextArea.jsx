@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Skeleton from './Skeleton';
 
 const Textarea = ({
   label,
@@ -18,6 +19,7 @@ const Textarea = ({
   showCount = false,
   maxLength,
   className,
+  loading = false,
   ...rest
 }) => {
   // Remove props that shouldn't be passed to DOM
@@ -25,6 +27,25 @@ const Textarea = ({
 
   const charCount = value ? value.length : 0;
   const isOverLimit = maxLength && charCount > maxLength;
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className={clsx(
+        'textarea',
+        fullWidth && 'textarea--full-width',
+        className
+      )}>
+        {label && <Skeleton variant="text" width="30%" height={20} className="textarea__skeleton-label" />}
+        <Skeleton
+          variant="rectangular"
+          height={rows * 24}
+          width="100%"
+        />
+        {helperText && <Skeleton variant="text" width="60%" height={16} className="textarea__skeleton-helper" />}
+      </div>
+    );
+  }
 
   return (
     <div className={clsx(
@@ -100,6 +121,7 @@ Textarea.propTypes = {
   showCount: PropTypes.bool,
   maxLength: PropTypes.number,
   className: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default Textarea;

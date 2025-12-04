@@ -7,23 +7,24 @@ import { searchCity, searchStreet, debounce } from '../../utils/nominatim';
 /**
  * AddressAutocomplete Component
  * Autocomplete input for addresses using Nominatim API
- * Supports city and street address search
+ * Supports city, street, and postal code search with auto-fill
  */
-const AddressAutocomplete = ({
-    value = '',
-    onChange,
-    onSelect,
-    type = 'city', // 'city' or 'street'
-    countryCode = '',
-    city = '',
-    label,
-    placeholder,
-    disabled = false,
-    fullWidth = false,
-    className = '',
-    name,
-    id
-}) => {
+const AddressAutocomplete = (props) => {
+    const {
+        value = '',
+        onChange,
+        onSelect,
+        type = 'city', // 'city' or 'street'
+        countryCode = '',
+        city = '',
+        label,
+        placeholder,
+        disabled = false,
+        fullWidth = false,
+        className = '',
+        name,
+        id
+    } = props;
     const [inputValue, setInputValue] = useState(value);
     const [suggestions, setSuggestions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -47,20 +48,19 @@ const AddressAutocomplete = ({
         }
 
         setLoading(true);
-        console.log('[AddressAutocomplete] Fetching suggestions for:', query, 'type:', type, 'countryCode:', countryCode);
 
         try {
             let results = [];
 
-            if (type === 'city') {
+            if (props.fetchSuggestions) {
+                // Use custom fetcher if provided
+                results = await props.fetchSuggestions(query, { type, countryCode, city });
+            } else if (type === 'city') {
                 results = await searchCity(query, countryCode);
-                console.log('[AddressAutocomplete] City search results:', results);
             } else if (type === 'street') {
                 results = await searchStreet(query, city, countryCode);
-                console.log('[AddressAutocomplete] Street search results:', results);
             }
 
-            console.log('[AddressAutocomplete] Setting suggestions:', results.length, 'results');
             setSuggestions(results);
             setIsOpen(results.length > 0);
         } catch (error) {
@@ -70,7 +70,7 @@ const AddressAutocomplete = ({
         } finally {
             setLoading(false);
         }
-    }, [type, countryCode, city]);
+    }, [type, countryCode, city, props.fetchSuggestions]);
 
     // Debounced search
     const debouncedFetch = useCallback(
@@ -93,15 +93,12 @@ const AddressAutocomplete = ({
 
         let displayValue = '';
         if (type === 'city') {
-            // Try multiple fields to get the city name
             displayValue = address.city || address.town || address.village ||
                 address.municipality || address.county ||
                 suggestion.display_name.split(',')[0].trim();
         } else if (type === 'street') {
             displayValue = address.road || suggestion.display_name.split(',')[0].trim();
         }
-
-        console.log('[AddressAutocomplete] Selected:', displayValue, suggestion);
 
         setInputValue(displayValue);
         onChange(displayValue);
@@ -115,7 +112,8 @@ const AddressAutocomplete = ({
                 address: address,
                 lat: suggestion.lat,
                 lon: suggestion.lon,
-                postalCode: address.postcode || ''
+                postalCode: address.postcode || '',
+                place_id: suggestion.place_id  // Add place_id for deduplication
             });
         }
     };
@@ -165,11 +163,10 @@ const AddressAutocomplete = ({
     }, []);
 
     // Format suggestion display
-    const formatSuggestion = (suggestion) => {
+    const defaultFormatOption = (suggestion) => {
         const address = suggestion.address || {};
 
         if (type === 'city') {
-            // Try multiple fields to get the city name
             const cityName = address.city || address.town || address.village ||
                 address.municipality || address.county ||
                 suggestion.display_name.split(',')[0].trim();
@@ -196,6 +193,8 @@ const AddressAutocomplete = ({
             secondary: suggestion.display_name.split(',').slice(1).join(',')
         };
     };
+
+    const formatOption = props.formatOption || defaultFormatOption;
 
     return (
         <div
@@ -245,7 +244,7 @@ const AddressAutocomplete = ({
                     )}
 
                     {!loading && suggestions.map((suggestion, index) => {
-                        const formatted = formatSuggestion(suggestion);
+                        const formatted = formatOption(suggestion);
                         return (
                             <button
                                 key={suggestion.place_id}
@@ -302,7 +301,9 @@ AddressAutocomplete.propTypes = {
     fullWidth: PropTypes.bool,
     className: PropTypes.string,
     name: PropTypes.string,
-    id: PropTypes.string
+    id: PropTypes.string,
+    fetchSuggestions: PropTypes.func,
+    formatOption: PropTypes.func,
 };
 
 export default AddressAutocomplete;

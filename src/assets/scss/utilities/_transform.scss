@@ -1,0 +1,7 @@
+@use '../abstracts/mixins/generators/transform' as generator;
+
+/* ========================================================================== */
+/*                          UTILITIES: TRANSFORM                              */
+/* ========================================================================== */
+
+@include generator.generate-transform-utilities();

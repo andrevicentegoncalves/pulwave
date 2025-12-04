@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select } from '../../components/ui';
-import Checkbox from '../../components/ui/Checkbox';
-import Icon from '../../components/ui/Icon';
-import { Settings } from '../../components/ui/iconLibrary';
+import { Card, Input, Select } from '../../../../components/ui';
+import { LocaleSelect } from '../../../../components/forms';
+import Checkbox from '../../../../components/ui/Checkbox';
+import Icon from '../../../../components/ui/Icon';
+import { Settings } from '../../../../components/ui/iconLibrary';
 
-const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChange }) => {
+const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChange, onThemePreview }) => {
     return (
         <div className="profile-section">
             <h2 className="profile-section__title">
@@ -20,12 +21,15 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                     <div className="profile-form-grid">
                         <Select
                             label="Theme Preference"
-                            value={formData.theme || 'auto'}
-                            onChange={(val) => onSelectChange('theme', val)}
+                            value={formData.theme || 'system'}
+                            onChange={(val) => {
+                                onSelectChange('theme', val);
+                                if (onThemePreview) onThemePreview(val);
+                            }}
                             options={[
                                 { value: 'light', label: 'Light' },
                                 { value: 'dark', label: 'Dark' },
-                                { value: 'auto', label: 'Auto (System)' },
+                                { value: 'system', label: 'Auto (System)' },
                             ]}
                             fullWidth
                         />
@@ -84,18 +88,19 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                             fullWidth
                         />
 
-                        <Select
+                        <LocaleSelect
                             label="Locale"
                             value={formData.locale || 'en-US'}
                             onChange={(val) => onSelectChange('locale', val)}
                             options={[
-                                { value: 'en-US', label: 'English (US)' },
-                                { value: 'en-GB', label: 'English (UK)' },
-                                { value: 'en-CA', label: 'English (Canada)' },
-                                { value: 'es-ES', label: 'Spanish (Spain)' },
-                                { value: 'fr-FR', label: 'French (France)' },
-                                { value: 'de-DE', label: 'German (Germany)' },
-                                { value: 'pt-BR', label: 'Portuguese (Brazil)' },
+                                { value: 'en-US', label: 'English (US)', countryCode: 'US' },
+                                { value: 'en-GB', label: 'English (UK)', countryCode: 'GB' },
+                                { value: 'en-CA', label: 'English (Canada)', countryCode: 'CA' },
+                                { value: 'es-ES', label: 'Spanish (Spain)', countryCode: 'ES' },
+                                { value: 'fr-FR', label: 'French (France)', countryCode: 'FR' },
+                                { value: 'de-DE', label: 'German (Germany)', countryCode: 'DE' },
+                                { value: 'pt-BR', label: 'Portuguese (Brazil)', countryCode: 'BR' },
+                                { value: 'pt-PT', label: 'Portuguese (Portugal)', countryCode: 'PT' },
                             ]}
                             fullWidth
                         />
@@ -150,11 +155,11 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                     </div>
                 </Card>
 
-                {/* Payment Card */}
-                <Card header={<h3>Payment</h3>}>
+                {/* Profile Visibility Card */}
+                <Card header={<h3>Profile Visibility</h3>}>
                     <div className="profile-form-grid">
                         <Select
-                            label="Profile Visibility"
+                            label="Who can see your profile"
                             value={formData.profile_visibility || 'private'}
                             onChange={(val) => onSelectChange('profile_visibility', val)}
                             options={[

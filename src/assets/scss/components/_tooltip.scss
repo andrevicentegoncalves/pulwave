@@ -1,0 +1,90 @@
+/* ────────────────────── TOOLTIP COMPONENT ────────────────────── */
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: var(--z-index-tooltip, 1000);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--color-neutral-900);
+    color: var(--color-neutral-50);
+    font-size: var(--font-size-8xs);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--border-radius-m);
+    white-space: nowrap;
+    box-shadow: var(--shadow-m);
+    pointer-events: none;
+
+    // Arrow
+    &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+
+    // ==========================================
+    // DIRECTION VARIANTS
+    // ==========================================
+
+    &--top {
+        bottom: calc(100% + var(--spacing-2));
+        left: 50%;
+        transform: translateX(-50%);
+
+        &::before {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0 6px;
+            border-color: var(--color-neutral-900) transparent transparent transparent;
+        }
+    }
+
+    &--bottom {
+        top: calc(100% + var(--spacing-2));
+        left: 50%;
+        transform: translateX(-50%);
+
+        &::before {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-color: transparent transparent var(--color-neutral-900) transparent;
+        }
+    }
+
+    &--left {
+        right: calc(100% + var(--spacing-2));
+        top: 50%;
+        transform: translateY(-50%);
+
+        &::before {
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px 0 6px 6px;
+            border-color: transparent transparent transparent var(--color-neutral-900);
+        }
+    }
+
+    &--right {
+        left: calc(100% + var(--spacing-2));
+        top: 50%;
+        transform: translateY(-50%);
+
+        &::before {
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px 6px 6px 0;
+            border-color: transparent var(--color-neutral-900) transparent transparent;
+        }
+    }
+}

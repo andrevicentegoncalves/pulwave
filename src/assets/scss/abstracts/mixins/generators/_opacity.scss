@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '../../variables/semantics/opacity' as semantics;
+@use '../../variables/foundation/opacity-scale' as scale;
+
+/// Generate opacity utility classes
+/// Creates utilities like .opacity-disabled, .opacity-50, etc.
+@mixin generate-opacity-utilities() {
+
+    /* ========================================================================== */
+    /*                           UTILITIES: OPACITY                               */
+    /* ========================================================================== */
+
+    /* Percentage-based opacity utilities */
+    @each $value, $opacity in scale.$opacity-scale {
+        .opacity-#{$value} {
+            opacity: #{$opacity};
+        }
+    }
+
+    /* Semantic opacity utilities */
+    @each $name, $value in semantics.$opacity-semantic {
+        .opacity-#{$name} {
+            opacity: #{$value};
+        }
+    }
+
+    /* Utility: Full opacity */
+    .opacity-full {
+        opacity: 1;
+    }
+
+    /* Utility: No opacity (transparent) */
+    .opacity-none {
+        opacity: 0;
+    }
+}

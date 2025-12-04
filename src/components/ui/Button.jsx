@@ -48,7 +48,7 @@ Button.displayName = 'Button';
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'ghost', 'destructive']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'outline-primary', 'outline']),
   size: PropTypes.oneOf(['s', 'm', 'l']),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,

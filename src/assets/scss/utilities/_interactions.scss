@@ -1,0 +1,44 @@
+@use '../abstracts/variables/foundation/cursor-scale' as cursor;
+
+/* ==========================================================================*/
+/*                       UTILITY CLASSES: INTERACTIONS                       */
+/* ==========================================================================*/
+
+// Cursor utilities
+.cursor {
+    @each $key, $value in cursor.$cursor-scale {
+        &-#{$key} {
+            cursor: $value;
+        }
+    }
+}
+
+// Pointer events
+.pointer-events {
+    &-none {
+        pointer-events: none;
+    }
+
+    &-auto {
+        pointer-events: auto;
+    }
+}
+
+// User select
+.select {
+    &-none {
+        user-select: none;
+    }
+
+    &-text {
+        user-select: text;
+    }
+
+    &-all {
+        user-select: all;
+    }
+
+    &-auto {
+        user-select: auto;
+    }
+}

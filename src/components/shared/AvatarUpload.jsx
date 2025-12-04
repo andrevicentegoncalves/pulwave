@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import Icon from '../ui/Icon';
 import { User, Camera, Spinner } from '../ui/iconLibrary';
+import Skeleton from '../ui/Skeleton';
 
 /**
  * AvatarUpload Component
@@ -75,6 +76,19 @@ const AvatarUpload = ({
         }
     };
 
+    // Show skeleton during initial loading (when no src yet)
+    if (loading && !src) {
+        return (
+            <div className={`avatar-upload avatar-upload--${size} ${className}`}>
+                <Skeleton
+                    variant="circular"
+                    width="100%"
+                    height="100%"
+                />
+            </div>
+        );
+    }
+
     return (
         <div
             className={`avatar-upload avatar-upload--${size} ${loading ? 'avatar-upload--loading' : ''} ${className}`}
@@ -118,6 +132,7 @@ const AvatarUpload = ({
                 onChange={handleFileChange}
                 accept="image/*"
                 style={{ display: 'none' }}
+                className="hidden"
             />
         </div>
     );

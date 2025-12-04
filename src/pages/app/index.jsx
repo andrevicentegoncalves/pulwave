@@ -1,3 +1,12 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
+import { Building, Home as HomeIcon, MapPin, DollarSign, Calendar, AlertCircle } from 'lucide-react';
+import { Button, Icon, Card, CardGrid, FloatingActionButton } from '../../components/ui';
+
+const Home = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [stats, setStats] = useState({
     totalBuildings: 0,

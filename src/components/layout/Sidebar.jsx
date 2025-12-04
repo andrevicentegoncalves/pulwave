@@ -17,7 +17,7 @@ import {
 import SidebarToggle from './SidebarToggle';
 import Menu from './Menu';
 import UserInfo from './UserInfo';
-import { VisualEffect } from '../ui';
+import VisualEffect from '../ui/VisualEffect.jsx';
 import Header from './Header';
 
 /**

@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
-import { Button, Alert, Form, Tabs, TabPanel } from '../../../components/ui';
+import { Button, Tabs, TabPanel } from '../../../components/ui';
 import { CheckCircle } from '../../../components/ui/iconLibrary';
 import { VisualEffect } from '../../../components/ui';
 import AvatarUpload from '../../../components/shared/AvatarUpload';
 import ContentLayout from '../../../components/layouts/ContentLayout';
+import { useToast } from '../../../contexts/ToastProvider';
+import { useTheme } from '../../../contexts/ThemeContext';
 import {
-  PersonalInfoSection,
-  ProfessionalSection,
-  AddressSection,
-  SecuritySection,
-  PrivacySection,
-  PreferencesSection
+  ProfilePersonal,
+  ProfileProfessional,
+  ProfileAddress,
+  SettingsSecurity,
+  SettingsPrivacy,
+  SettingsPreferences,
+  AccountBilling
 } from './sections';
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const { updateTheme, applyTheme } = useTheme();
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [uploading, setUploading] = useState(false);
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState(() => {
+    const saved = localStorage.getItem('settings-active-tab');
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
 
   // Profile Form State
   const [formData, setFormData] = useState({
@@ -31,23 +41,35 @@ const Profile = () => {
     last_name: '',
     display_name: '',
     email: '',
-    email_secondary: '',
-    phone: '',
-    phone_secondary: '',
-    preferred_contact_method: 'email',
+    phone_code: '',
+    phone_number: '',
+    phone_secondary_code: '',
+    phone_secondary_number: '',
     date_of_birth: '',
     gender: '',
     pronouns: '',
     bio: '',
+    // Social links
     website: '',
     linkedin_url: '',
     twitter_url: '',
     facebook_url: '',
+    // Professional
+    user_type: '',
     company_name: '',
     vat_id: '',
+    tax_id: '',
+    business_registration_number: '',
     job_title: '',
     department: '',
+    license_number: '',
+    license_state: '',
+    license_expiry: '',
     theme: 'light',
+    // Preferences
+    timezone: 'UTC',
+    locale: 'en-US',
+    profile_visibility: 'private',
     // Notification preferences
     notifications_enabled: false,
     email_notifications: false,
@@ -57,7 +79,14 @@ const Profile = () => {
     // Privacy preferences
     data_processing_consent: false,
     marketing_consent: false,
+    // Security - Emergency Contact
+    two_factor_enabled: false,
+    emergency_contact_name: '',
+    emergency_contact_phone: '',
+    emergency_contact_relationship: '',
   });
+
+  const [displayNameManuallyEdited, setDisplayNameManuallyEdited] = useState(false);
 
   // Address Form State
   const [addressData, setAddressData] = useState({
@@ -89,11 +118,6 @@ const Profile = () => {
     confirm_password: '',
   });
 
-  // Dropdown Data
-  const [countries, setCountries] = useState([]);
-  const [regions, setRegions] = useState([]);
-  const [billingRegions, setBillingRegions] = useState([]);
-
   // Handle responsive avatar size
   useEffect(() => {
     const checkMobile = () => {
@@ -108,160 +132,202 @@ const Profile = () => {
   // Fetch User & Profile Data
   useEffect(() => {
     const fetchUserData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
+      try {
+        setIsFetching(true);
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
 
-      if (user) {
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('auth_user_id', user.id)
-          .single();
+        if (user) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('auth_user_id', user.id)
+            .single();
 
-        setProfile(profileData);
-        if (profileData) {
-          setFormData({
-            username: profileData.username || '',
-            first_name: profileData.first_name || '',
-            middle_name: profileData.middle_name || '',
-            last_name: profileData.last_name || '',
-            display_name: profileData.display_name || '',
-            email: user.email || '',
-            email_secondary: profileData.email_secondary || '',
-            phone: profileData.phone || '',
-            phone_secondary: profileData.phone_secondary || '',
-            preferred_contact_method: profileData.preferred_contact_method || 'email',
-            date_of_birth: profileData.date_of_birth || '',
-            gender: profileData.gender || '',
-            pronouns: profileData.pronouns || '',
-            bio: profileData.bio || '',
-            website: profileData.website || '',
-            linkedin_url: profileData.linkedin_url || '',
-            twitter_url: profileData.twitter_url || '',
-            facebook_url: profileData.facebook_url || '',
-            company_name: profileData.company_name || '',
-            vat_id: profileData.vat_id || '',
-            job_title: profileData.job_title || '',
-            department: profileData.department || '',
-            theme: profileData.theme || 'light',
-            // Notification preferences
-            notifications_enabled: profileData.notifications_enabled ?? false,
-            email_notifications: profileData.email_notifications ?? false,
-            sms_notifications: profileData.sms_notifications ?? false,
-            push_notifications: profileData.push_notifications ?? false,
-            marketing_emails: profileData.marketing_emails ?? false,
-            // Privacy preferences
-            data_processing_consent: profileData.data_processing_consent ?? false,
-            marketing_consent: profileData.marketing_consent ?? false,
-          });
+          setProfile(profileData);
 
-          // Fetch Address if exists
-          if (profileData.address_id) {
-            const { data: address } = await supabase
-              .from('addresses')
-              .select('*')
-              .eq('id', profileData.address_id)
+          if (profileData) {
+            // Check if onboarding is completed
+            const { data: onboardingData } = await supabase
+              .from('user_onboarding')
+              .select('completed')
+              .eq('profile_id', profileData.id)
               .single();
 
-            if (address) {
-              setAddressData({
-                country_id: address.country_id || '',
-                region_id: address.region_id || '',
-                city_name: address.city || '',
-                street_name: address.street || '',
-                number: address.number || '',
-                floor: address.floor || '',
-                postal_code: address.postal_code || '',
-                type: address.type || 'home',
+            // Redirect to onboarding if not completed
+            if (!onboardingData || !onboardingData.completed) {
+              navigate('/onboarding', { replace: true });
+              return;
+            }
+
+            // Fetch professional profile data
+            const { data: professionalData } = await supabase
+              .from('professional_profiles')
+              .select('*')
+              .eq('profile_id', profileData.id)
+              .maybeSingle();
+
+            // Fetch profile preferences
+            const { data: preferencesData } = await supabase
+              .from('profile_preferences')
+              .select('*')
+              .eq('profile_id', profileData.id)
+              .maybeSingle();
+
+            // Fetch social profiles
+            const { data: socialProfiles } = await supabase
+              .from('social_profiles')
+              .select('*')
+              .eq('profile_id', profileData.id);
+
+            // Map social profiles to formData
+            const socialData = {
+              website: '',
+              linkedin_url: '',
+              twitter_url: '',
+              facebook_url: '',
+            };
+
+            if (socialProfiles) {
+              socialProfiles.forEach(social => {
+                if (social.platform === 'website') socialData.website = social.profile_url || '';
+                if (social.platform === 'linkedin') socialData.linkedin_url = social.profile_url || '';
+                if (social.platform === 'twitter') socialData.twitter_url = social.profile_url || '';
+                if (social.platform === 'facebook') socialData.facebook_url = social.profile_url || '';
               });
             }
-          }
 
-          // Fetch Billing Address if exists
-          if (profileData.billing_address_id) {
-            const { data: billingAddress } = await supabase
-              .from('addresses')
-              .select('*')
-              .eq('id', profileData.billing_address_id)
-              .single();
+            // Check if display name is manually edited (different from auto-generated)
+            const autoGeneratedName = `${profileData.first_name || ''} ${profileData.last_name || ''}`.trim();
+            const isCustom = profileData.display_name && profileData.display_name !== autoGeneratedName;
+            setDisplayNameManuallyEdited(!!isCustom);
 
-            if (billingAddress) {
-              setBillingAddressData({
-                country_id: billingAddress.country_id || '',
-                region_id: billingAddress.region_id || '',
-                city_name: billingAddress.city || '',
-                street_name: billingAddress.street || '',
-                number: billingAddress.number || '',
-                floor: billingAddress.floor || '',
-                postal_code: billingAddress.postal_code || '',
-                type: billingAddress.type || 'billing',
-              });
+            // Merge data from all tables
+            setFormData({
+              // Core profile fields
+              username: profileData.username || '',
+              first_name: profileData.first_name || '',
+              middle_name: profileData.middle_name || '',
+              last_name: profileData.last_name || '',
+              display_name: profileData.display_name || '',
+              email: user.email || '',
+              date_of_birth: profileData.date_of_birth || '',
+              gender: profileData.gender || '',
+              pronouns: profileData.pronouns || '',
+              bio: profileData.bio || '',
+              // Social links
+              ...socialData,
+              // Professional profile fields
+              user_type: professionalData?.user_type || '',
+              company_name: professionalData?.company_name || '',
+              vat_id: professionalData?.tax_id || '',
+              tax_id: professionalData?.tax_id || '',
+              business_registration_number: professionalData?.business_registration_number || '',
+              job_title: professionalData?.job_title || '',
+              department: professionalData?.department || '',
+              license_number: professionalData?.license_number || '',
+              license_state: professionalData?.license_state || '',
+              license_expiry: professionalData?.license_expiry || '',
+              // Preferences
+              theme: preferencesData?.theme || 'light',
+              timezone: preferencesData?.timezone || 'UTC',
+              locale: preferencesData?.locale || 'en-US',
+              profile_visibility: preferencesData?.profile_visibility || 'private',
+              // Notification preferences
+              notifications_enabled: preferencesData?.notifications_enabled ?? false,
+              email_notifications: preferencesData?.email_notifications ?? false,
+              sms_notifications: preferencesData?.sms_notifications ?? false,
+              push_notifications: preferencesData?.push_notifications ?? false,
+              marketing_emails: preferencesData?.marketing_emails ?? false,
+              // Privacy preferences
+              data_processing_consent: preferencesData?.data_processing_consent ?? false,
+              marketing_consent: preferencesData?.marketing_consent ?? false,
+              // Phone fields
+              phone_code: profileData.phone_code || '',
+              phone_number: profileData.phone_number || '',
+              phone_secondary_code: profileData.phone_secondary_code || '',
+              phone_secondary_number: profileData.phone_secondary_number || '',
+              // Security - Emergency Contact
+              two_factor_enabled: profileData.two_factor_enabled ?? false,
+              emergency_contact_name: profileData.emergency_contact_name || '',
+              emergency_contact_phone: profileData.emergency_contact_phone || '',
+              emergency_contact_relationship: profileData.emergency_contact_relationship || '',
+            });
+
+            // Fetch Address if exists
+            if (profileData.address_id) {
+              const { data: address } = await supabase
+                .from('addresses')
+                .select('*')
+                .eq('id', profileData.address_id)
+                .single();
+
+              if (address) {
+                setAddressData({
+                  country_id: address.country_id || '',
+                  region_id: address.region_id || '',
+                  city_name: address.city_name || '',
+                  street_name: address.street_name || '',
+                  number: address.number || '',
+                  floor: address.floor || '',
+                  postal_code: address.postal_code || '',
+                  type: address.address_type || 'home',
+                });
+              }
+            }
+
+            // Fetch Billing Address if exists
+            if (profileData.billing_address_id) {
+              const { data: billingAddress } = await supabase
+                .from('addresses')
+                .select('*')
+                .eq('id', profileData.billing_address_id)
+                .single();
+
+              if (billingAddress) {
+                setBillingAddressData({
+                  country_id: billingAddress.country_id || '',
+                  region_id: billingAddress.region_id || '',
+                  city_name: billingAddress.city_name || '',
+                  street_name: billingAddress.street_name || '',
+                  number: billingAddress.number || '',
+                  floor: billingAddress.floor || '',
+                  postal_code: billingAddress.postal_code || '',
+                  type: billingAddress.address_type || 'billing',
+                });
+              }
             }
           }
         }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setIsFetching(false);
       }
     };
 
     fetchUserData();
-    fetchCountries();
   }, []);
 
-  // Fetch Countries
-  const fetchCountries = async () => {
-    try {
-      const { data } = await supabase.from('countries').select('id, name').order('name');
-      if (data) setCountries(data);
-    } catch (err) {
-      console.error('Error fetching countries:', err);
-    }
-  };
-
-  // Fetch Regions when Country changes
-  useEffect(() => {
-    const fetchRegions = async () => {
-      if (!addressData.country_id) {
-        setRegions([]);
-        return;
-      }
-      try {
-        const { data } = await supabase
-          .from('regions')
-          .select('id, name')
-          .eq('country_id', addressData.country_id)
-          .order('name');
-        if (data) setRegions(data);
-      } catch (err) {
-        console.error('Error fetching regions:', err);
-      }
-    };
-
-    fetchRegions();
-  }, [addressData.country_id]);
-
-  // Fetch Billing Regions when Billing Country changes
-  useEffect(() => {
-    const fetchBillingRegions = async () => {
-      if (!billingAddressData.country_id) {
-        setBillingRegions([]);
-        return;
-      }
-      try {
-        const { data } = await supabase
-          .from('regions')
-          .select('id, name')
-          .eq('country_id', billingAddressData.country_id)
-          .order('name');
-        if (data) setBillingRegions(data);
-      } catch (err) {
-        console.error('Error fetching billing regions:', err);
-      }
-    };
-
-    fetchBillingRegions();
-  }, [billingAddressData.country_id]);
-
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+
+    if (name === 'display_name') {
+      setDisplayNameManuallyEdited(true);
+    }
+
+    setFormData(prev => {
+      const newData = { ...prev, [name]: value };
+
+      // Auto-populate display name if not manually edited
+      if ((name === 'first_name' || name === 'last_name') && !displayNameManuallyEdited) {
+        const firstName = name === 'first_name' ? value : prev.first_name;
+        const lastName = name === 'last_name' ? value : prev.last_name;
+        newData.display_name = `${firstName || ''} ${lastName || ''}`.trim();
+      }
+
+      return newData;
+    });
   };
 
   const handleSelectChange = (name, value) => {
@@ -278,44 +344,27 @@ const Profile = () => {
     setSecurityData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleAddressChange = (type, e) => {
-    if (e && e.target) {
-      const { name, value } = e.target;
-      if (type === 'billing') {
-        setBillingAddressData(prev => ({ ...prev, [name]: value }));
-      } else {
-        setAddressData(prev => ({ ...prev, [name]: value }));
-      }
-    }
-  };
-
-  const handleAddressSelectChange = (type, name, value) => {
-    if (type === 'billing') {
-      setBillingAddressData(prev => ({ ...prev, [name]: value }));
-    } else {
-      setAddressData(prev => ({ ...prev, [name]: value }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
-    setSuccess(null);
 
     try {
       let addressId = profile?.address_id;
       let billingAddressId = profile?.billing_address_id;
 
       // 1. Upsert Primary Address
-      const { country_id, region_id, street_name, city_name, ...restAddressData } = addressData;
+      const { country_id, region_id, street_name, city_name, type, nominatim_data, ...restAddressData } = addressData;
 
       const addressPayload = {
         ...restAddressData,
         country_id: country_id || null,
-        region_id: region_id || null,
-        city_name,
-        street_name,
+        region_division_id: region_id || null,
+        city_name: city_name,
+        street_name: street_name,
+        address_type: type || 'home',
+        nominatim_data: nominatim_data || null,
+        organization_id: profile?.organization_id || null,
+        is_primary: true,
       };
 
       // Validate city is selected
@@ -340,14 +389,16 @@ const Profile = () => {
       }
 
       // 2. Upsert Billing Address
-      const { country_id: billing_country_id, region_id: billing_region_id, street_name: billing_street_name, city_name: billing_city_name, ...restBillingAddressData } = billingAddressData;
+      const { country_id: billing_country_id, region_id: billing_region_id, street_name: billing_street_name, city_name: billing_city_name, type: billing_type, nominatim_data: billing_nominatim_data, ...restBillingAddressData } = billingAddressData;
 
       const billingAddressPayload = {
         ...restBillingAddressData,
         country_id: billing_country_id || null,
-        region_id: billing_region_id || null,
+        region_division_id: billing_region_id || null,
         city_name: billing_city_name,
         street_name: billing_street_name,
+        address_type: billing_type || 'billing',
+        nominatim_data: billing_nominatim_data || null,
       };
 
       if (billing_city_name) {
@@ -368,20 +419,212 @@ const Profile = () => {
         }
       }
 
-      // 3. Update Profile
-      const { error: updateError } = await supabase
+      // 3. Update Core Profile Data
+      const profilePayload = {
+        username: formData.username,
+        first_name: formData.first_name,
+        middle_name: formData.middle_name,
+        last_name: formData.last_name,
+        display_name: formData.display_name,
+        date_of_birth: formData.date_of_birth || null,
+        gender: formData.gender || null,
+        pronouns: formData.pronouns || null,
+        bio: formData.bio || null,
+        phone_code: formData.phone_code || null,
+        phone_number: formData.phone_number || null,
+        phone_secondary_code: formData.phone_secondary_code || null,
+        phone_secondary_number: formData.phone_secondary_number || null,
+        address_id: addressId,
+        billing_address_id: billingAddressId,
+        updated_at: new Date().toISOString(),
+      };
+
+      const { error: profileError } = await supabase
         .from('profiles')
-        .update({
-          ...formData,
-          address_id: addressId,
-          billing_address_id: billingAddressId,
-          updated_at: new Date().toISOString(),
-        })
+        .update(profilePayload)
         .eq('auth_user_id', user.id);
 
-      if (updateError) throw updateError;
+      if (profileError) throw profileError;
 
-      setSuccess('Profile updated successfully!');
+      // Get organization_id from organization_members
+      const { data: orgMember, error: orgMemberError } = await supabase
+        .from('organization_members')
+        .select('organization_id')
+        .eq('profile_id', profile.id)
+        .maybeSingle();
+
+      if (orgMemberError) {
+        console.error('Error fetching organization membership:', orgMemberError);
+      }
+
+      const organizationId = orgMember?.organization_id || null;
+
+      console.log('Organization ID:', organizationId); // Debug log
+
+      if (!organizationId) {
+        console.warn('No organization_id found. Professional and social profiles will not be saved.');
+        console.warn('Profile ID:', profile.id);
+        console.warn('Organization member data:', orgMember);
+      }
+
+      // 4. Upsert Professional Profile Data
+      if (organizationId) {
+        // Check if professional profile exists
+        const { data: existingProfessional } = await supabase
+          .from('professional_profiles')
+          .select('id')
+          .eq('profile_id', profile.id)
+          .maybeSingle();
+
+        const professionalPayload = {
+          profile_id: profile.id,
+          organization_id: organizationId,
+          user_type: formData.user_type || null,
+          company_name: formData.company_name || null,
+          tax_id: formData.tax_id || formData.vat_id || null,
+          business_registration_number: formData.business_registration_number || null,
+          job_title: formData.job_title || null,
+          department: formData.department || null,
+          license_number: formData.license_number || null,
+          license_state: formData.license_state || null,
+          license_expiry: formData.license_expiry || null,
+          updated_at: new Date().toISOString(),
+          updated_by: profile.id,
+        };
+
+        if (existingProfessional) {
+          const { error: professionalError } = await supabase
+            .from('professional_profiles')
+            .update(professionalPayload)
+            .eq('profile_id', profile.id);
+
+          if (professionalError) throw professionalError;
+        } else {
+          const { error: professionalError } = await supabase
+            .from('professional_profiles')
+            .insert([professionalPayload]);
+
+          if (professionalError) throw professionalError;
+        }
+      }
+
+      // 5. Upsert Social Profiles
+      if (organizationId) {
+        const socialPlatforms = [
+          { platform: 'website', url: formData.website },
+          { platform: 'linkedin', url: formData.linkedin_url },
+          { platform: 'twitter', url: formData.twitter_url },
+          { platform: 'facebook', url: formData.facebook_url },
+        ];
+
+        for (const { platform, url } of socialPlatforms) {
+          if (url) {
+            // Check if social profile exists
+            const { data: existingSocial } = await supabase
+              .from('social_profiles')
+              .select('id')
+              .eq('profile_id', profile.id)
+              .eq('platform', platform)
+              .maybeSingle();
+
+            const socialPayload = {
+              profile_id: profile.id,
+              organization_id: organizationId,
+              platform: platform,
+              profile_url: url,
+              is_public: true,
+              show_on_profile: true,
+              is_active: true,
+              updated_at: new Date().toISOString(),
+            };
+
+            if (existingSocial) {
+              const { error: socialError } = await supabase
+                .from('social_profiles')
+                .update(socialPayload)
+                .eq('id', existingSocial.id);
+              if (socialError) throw socialError;
+            } else {
+              const { error: socialError } = await supabase
+                .from('social_profiles')
+                .insert([{ ...socialPayload, created_at: new Date().toISOString() }]);
+              if (socialError) throw socialError;
+            }
+          } else {
+            // Delete if URL is empty
+            await supabase
+              .from('social_profiles')
+              .delete()
+              .eq('profile_id', profile.id)
+              .eq('platform', platform);
+          }
+        }
+      }
+
+      // 6. Upsert Profile Preferences
+      if (profile.organization_id || organizationId) {
+        const preferencesPayload = {
+          profile_id: profile.id,
+          organization_id: profile.organization_id || organizationId,
+          theme: formData.theme,
+          timezone: formData.timezone,
+          locale: formData.locale,
+          profile_visibility: formData.profile_visibility,
+          notifications_enabled: formData.notifications_enabled,
+          email_notifications: formData.email_notifications,
+          sms_notifications: formData.sms_notifications,
+          push_notifications: formData.push_notifications,
+          marketing_emails: formData.marketing_emails,
+          data_processing_consent: formData.data_processing_consent,
+          marketing_consent: formData.marketing_consent,
+          updated_at: new Date().toISOString(),
+          updated_by: profile.id,
+        };
+
+        // Check if preferences exist
+        const { data: existingPreferences } = await supabase
+          .from('profile_preferences')
+          .select('id')
+          .eq('profile_id', profile.id)
+          .maybeSingle();
+
+        if (existingPreferences) {
+          const { error: preferencesError } = await supabase
+            .from('profile_preferences')
+            .update(preferencesPayload)
+            .eq('profile_id', profile.id);
+
+          if (preferencesError) throw preferencesError;
+        } else {
+          const { error: preferencesError } = await supabase
+            .from('profile_preferences')
+            .insert([preferencesPayload]);
+
+          if (preferencesError) throw preferencesError;
+        }
+      }
+
+      // 7. Upsert Security Settings (Two-Factor & Emergency Contact)
+      if (profile.organization_id || organizationId) {
+        const securityPayload = {
+          two_factor_enabled: formData.two_factor_enabled,
+          emergency_contact_name: formData.emergency_contact_name,
+          emergency_contact_phone: formData.emergency_contact_phone,
+          emergency_contact_relationship: formData.emergency_contact_relationship,
+          updated_at: new Date().toISOString(),
+        };
+
+        const { error: securityError } = await supabase
+          .from('profiles')
+          .update(securityPayload)
+          .eq('id', profile.id);
+
+        if (securityError) {
+          console.error('Error saving security settings:', securityError);
+        }
+      }
+
+
 
       // Refresh profile data
       const { data: updatedProfile } = await supabase
@@ -390,9 +633,16 @@ const Profile = () => {
         .eq('auth_user_id', user.id)
         .single();
       setProfile(updatedProfile);
+
+      // Update theme context if theme changed
+      if (formData.theme) {
+        updateTheme(formData.theme);
+      }
+
+      showToast('Settings saved successfully', 'success');
     } catch (err) {
-      setError(err.message);
       console.error(err);
+      showToast(err.message || 'Failed to update profile', 'error');
     } finally {
       setLoading(false);
     }
@@ -424,6 +674,11 @@ const Profile = () => {
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d');
+
+          // Fill with white background to handle PNG transparency
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+
           ctx.drawImage(img, 0, 0, width, height);
 
           canvas.toBlob((blob) => {
@@ -503,12 +758,14 @@ const Profile = () => {
     }
   };
 
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+    localStorage.setItem('settings-active-tab', index.toString());
+  };
+
   return (
     <ContentLayout className="content-layout--no-top-padding">
       <div className="profile-page">
-
-        {success && <Alert type="success" dismissible onDismiss={() => setSuccess(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{success}</Alert>}
-        {error && <Alert type="error" dismissible onDismiss={() => setError(null)} style={{ marginBottom: 'var(--space-6)', width: '100%' }}>{error}</Alert>}
 
         {/* Centered Avatar Section */}
         <div className="profile-avatar-section">
@@ -520,56 +777,55 @@ const Profile = () => {
             alt={formData.username || 'User'}
             size={isMobile ? 'l' : 'xl'}
             onUpload={handleAvatarUpload}
-            loading={uploading}
+            loading={uploading || isFetching}
           />
         </div>
 
-        <Form onSubmit={handleSubmit} style={{ width: '100%' }}>
-          <Tabs defaultTab={0}>
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          <Tabs defaultTab={activeTab} onChange={handleTabChange}>
             <TabPanel label="Personal Info">
-              <PersonalInfoSection
+              <ProfilePersonal
                 formData={formData}
                 onChange={handleChange}
                 onSelectChange={handleSelectChange}
+                loading={isFetching}
               />
             </TabPanel>
 
             <TabPanel label="Professional">
-              <ProfessionalSection
+              <ProfileProfessional
                 formData={formData}
                 onChange={handleChange}
                 onSelectChange={handleSelectChange}
+                loading={isFetching}
               />
             </TabPanel>
 
             <TabPanel label="Address">
-              <AddressSection
+              <ProfileAddress
                 addressData={addressData}
                 billingAddressData={billingAddressData}
-                onChange={handleAddressChange}
-                onSelectChange={handleAddressSelectChange}
-                countries={countries}
-                regions={regions}
-                billingRegions={billingRegions}
+                onAddressChange={setAddressData}
+                onBillingAddressChange={setBillingAddressData}
+                loading={isFetching}
               />
             </TabPanel>
 
             <TabPanel label="Security">
-              <SecuritySection
+              <SettingsSecurity
                 formData={formData}
                 securityData={securityData}
                 onChange={handleChange}
                 onSelectChange={handleSelectChange}
                 onSecurityChange={handleSecurityChange}
+                loading={isFetching}
                 onCheckboxChange={handleCheckboxChange}
-                setError={setError}
-                setSuccess={setSuccess}
                 user={user}
               />
             </TabPanel>
 
             <TabPanel label="Privacy">
-              <PrivacySection
+              <SettingsPrivacy
                 formData={formData}
                 onChange={handleChange}
                 onCheckboxChange={handleCheckboxChange}
@@ -577,21 +833,30 @@ const Profile = () => {
             </TabPanel>
 
             <TabPanel label="Preferences">
-              <PreferencesSection
+              <SettingsPreferences
                 formData={formData}
                 onChange={handleChange}
                 onSelectChange={handleSelectChange}
                 onCheckboxChange={handleCheckboxChange}
+                onThemePreview={applyTheme}
+              />
+            </TabPanel>
+
+            <TabPanel label="Billing">
+              <AccountBilling
+                formData={formData}
+                onChange={handleChange}
+                onSelectChange={handleSelectChange}
               />
             </TabPanel>
           </Tabs>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--spacing-6)' }}>
             <Button type="submit" variant="primary" disabled={loading} icon={<CheckCircle />}>
               {loading ? 'Saving...' : 'Save All Changes'}
             </Button>
           </div>
-        </Form>
+        </form>
       </div>
     </ContentLayout>
   );

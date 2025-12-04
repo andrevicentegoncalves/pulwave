@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SearchFilter from '../../../components/forms/SearchFilter';
-import Select from '../../../components/ui/Select';
-import Input from '../../../components/ui/Input';
+import SearchFilter from '../../../../components/forms/SearchFilter';
+import Select from '../../../../components/ui/Select';
+import Input from '../../../../components/ui/Input';
 
 const SearchFilterSection = () => {
     const [activeFilters, setActiveFilters] = useState([

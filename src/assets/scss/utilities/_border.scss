@@ -1,6 +1,8 @@
 @use '../abstracts/mixins/helpers/borders' as *;
 @use '../abstracts/variables/foundation/border-scale' as border;
 @use '../abstracts/variables/foundation/radius-scale' as radius;
+@use '../abstracts/variables/colors/theme-mapping' as theme;
+@use '../abstracts/mixins' as *;
 
 /* ==========================================================================*/
 /*                          UTILITY CLASSES: BORDERS                         */
@@ -56,3 +58,6 @@
     @include border-radius-right($size);
   }
 }
+
+// Border color utilities
+@include generate-border-colors(theme.$theme-mappings, 'border', false);

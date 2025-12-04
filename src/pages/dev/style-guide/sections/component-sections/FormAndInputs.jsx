@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Alert } from '../../../../components/ui';
+import { Input, Alert, Select, Button } from '../../../../../components/ui';
 
 export default function FormAndInputs() {
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ export default function FormAndInputs() {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -29,7 +29,7 @@ export default function FormAndInputs() {
 
   const validate = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -46,14 +46,14 @@ export default function FormAndInputs() {
     }
     if (!formData.country) newErrors.country = 'Please select a country';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
-    
+
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validate();
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
@@ -66,7 +66,7 @@ export default function FormAndInputs() {
   return (
     <div className="component-category">
       <h3 className="component-category__title">Forms & Inputs</h3>
-      
+
       <div style={{ maxWidth: '500px' }}>
         {showSuccess && (
           <Alert type="success" variant="modal" style={{ marginBottom: 'var(--space-4)' }}>
@@ -74,7 +74,7 @@ export default function FormAndInputs() {
             Form submitted successfully with all validations passed.
           </Alert>
         )}
-        
+
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
             <Input
@@ -125,7 +125,7 @@ export default function FormAndInputs() {
             />
 
             <div className="input-group">
-              <label 
+              <label
                 htmlFor="country"
                 style={{
                   display: 'block',
@@ -181,7 +181,7 @@ export default function FormAndInputs() {
             </div>
 
             <div className="input-group">
-              <label 
+              <label
                 htmlFor="message"
                 style={{
                   display: 'block',
@@ -241,8 +241,8 @@ export default function FormAndInputs() {
             </div>
 
             <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn--secondary"
                 onClick={() => {
                   setFormData({ name: '', email: '', password: '', confirmPassword: '', country: '', message: '' });
@@ -258,6 +258,29 @@ export default function FormAndInputs() {
             </div>
           </div>
         </form>
+      </div>
+
+      <div style={{ marginTop: 'var(--space-8)', maxWidth: '500px' }}>
+        <h4 className="component-category__subtitle">Loading States</h4>
+        <p className="component-category__description">
+          Inputs and Selects support a <code>loading</code> prop to show a skeleton state.
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <Input
+            label="Username"
+            placeholder="Loading..."
+            loading={true}
+          />
+
+          <Select
+            label="Role"
+            placeholder="Select role"
+            options={[]}
+            onChange={() => { }}
+            loading={true}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,7 @@
+@use '../abstracts/mixins/generators/gradient' as generator;
+
+/* ========================================================================== */
+/*                          UTILITIES: GRADIENT                               */
+/* ========================================================================== */
+
+@include generator.generate-gradient-utilities();

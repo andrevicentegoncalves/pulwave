@@ -1,0 +1,154 @@
+@use '../abstracts/variables/foundation/spacing' as spacing;
+
+/* ==========================================================================*/
+/*                          UTILITY CLASSES: SPACING                         */
+/* ==========================================================================*/
+
+// Margin utilities
+.margin {
+    @each $key, $value in spacing.$spacing {
+        &-#{$key} {
+            margin: var(--spacing-#{$key});
+        }
+    }
+
+    &-top {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-top: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-bottom {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-bottom: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-left {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-left: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-right {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-right: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-x {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-left: var(--spacing-#{$key});
+                margin-right: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-y {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                margin-top: var(--spacing-#{$key});
+                margin-bottom: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    // Auto margins
+    &-auto {
+        margin: auto;
+    }
+
+    &-top-auto {
+        margin-top: auto;
+    }
+
+    &-bottom-auto {
+        margin-bottom: auto;
+    }
+
+    &-left-auto {
+        margin-left: auto;
+    }
+
+    &-right-auto {
+        margin-right: auto;
+    }
+
+    &-x-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-y-auto {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+// Padding utilities
+.padding {
+    @each $key, $value in spacing.$spacing {
+        &-#{$key} {
+            padding: var(--spacing-#{$key});
+        }
+    }
+
+    &-top {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-top: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-bottom {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-bottom: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-left {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-left: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-right {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-right: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-x {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-left: var(--spacing-#{$key});
+                padding-right: var(--spacing-#{$key});
+            }
+        }
+    }
+
+    &-y {
+        @each $key, $value in spacing.$spacing {
+            &-#{$key} {
+                padding-top: var(--spacing-#{$key});
+                padding-bottom: var(--spacing-#{$key});
+            }
+        }
+    }
+}

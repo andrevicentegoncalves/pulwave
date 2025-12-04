@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Divider } from '../../../components/ui';
+import { Divider } from '../../../../components/ui';
 import {
   Alerts,
   Badges,
@@ -8,7 +8,8 @@ import {
   Dropdowns,
   Dividers,
   FormAndInputs,
-  Modals
+  Modals,
+  Skeletons
 } from './component-sections';
 import SearchFilterSection from './SearchFilterSection';
 import DataDisplaySection from './DataDisplaySection';
@@ -24,6 +25,7 @@ export default function Components({ triggerAlert }) {
   const dividersRef = useRef(null);
   const searchFilterRef = useRef(null);
   const dataDisplayRef = useRef(null);
+  const skeletonsRef = useRef(null);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -60,7 +62,8 @@ export default function Components({ triggerAlert }) {
               { name: 'Modals', ref: modalsRef },
               { name: 'Dividers', ref: dividersRef },
               { name: 'Search & Filter', ref: searchFilterRef },
-              { name: 'Data Display', ref: dataDisplayRef }
+              { name: 'Data Display', ref: dataDisplayRef },
+              { name: 'Skeletons', ref: skeletonsRef }
             ].map(({ name, ref }) => (
               <li key={name}>
                 <button
@@ -153,6 +156,12 @@ export default function Components({ triggerAlert }) {
 
         <div ref={dataDisplayRef}>
           <DataDisplaySection />
+        </div>
+
+        <Divider style={{ margin: 'var(--space-10) 0' }} />
+
+        <div ref={skeletonsRef}>
+          <Skeletons />
         </div>
       </section>
     </div>

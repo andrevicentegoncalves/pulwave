@@ -94,7 +94,7 @@
 }
 
 .checkbox__label {
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-6xs);
     font-weight: var(--font-weight-regular);
     color: var(--color-on-surface-default);
     cursor: pointer;
@@ -113,7 +113,7 @@
 }
 
 .checkbox__helper {
-    font-size: var(--font-size-body-s);
+    font-size: var(--font-size-7xs);
     color: var(--color-on-surface-subtle);
     margin-left: calc(var(--scale-6) + var(--spacing-3)); // Align with label
 

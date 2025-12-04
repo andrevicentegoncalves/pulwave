@@ -20,7 +20,7 @@ const MobileHeader = ({ toggleSidebar }) => {
     const navigate = useNavigate();
 
     const handleProfileClick = () => {
-        navigate('/profile');
+        navigate('/settings');
     };
 
     const handleLogout = () => {
@@ -31,8 +31,8 @@ const MobileHeader = ({ toggleSidebar }) => {
     return (
         <header className="mobile-header">
             {/* Menu Toggle */}
-            <button 
-                className="mobile-menu-btn" 
+            <button
+                className="mobile-menu-btn"
                 onClick={toggleSidebar}
                 aria-label="Toggle navigation menu"
                 type="button"
@@ -59,8 +59,8 @@ const MobileHeader = ({ toggleSidebar }) => {
                 />
 
                 {/* Logout Button */}
-                <button 
-                    className="mobile-logout-btn" 
+                <button
+                    className="mobile-logout-btn"
                     onClick={handleLogout}
                     aria-label="Logout"
                     title="Logout"

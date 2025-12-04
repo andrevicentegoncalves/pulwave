@@ -26,14 +26,14 @@
 }
 
 .profile-page__title {
-  font-size: var(--font-size-heading-m);
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-bold);
   color: var(--color-on-surface-default);
   margin-bottom: var(--spacing-2);
 }
 
 .profile-page__subtitle {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-6xs);
   color: var(--color-on-surface-subtle);
 }
 
@@ -69,7 +69,7 @@
 }
 
 .profile-form-title {
-  font-size: var(--font-size-heading-s);
+  font-size: var(--font-size-3xs);
   font-weight: var(--font-weight-semi-bold);
   color: var(--color-on-surface-default);
   margin-bottom: var(--spacing-6);
@@ -130,4 +130,34 @@
     min-height: var(--scale-64); // Larger minimum height for wave visibility (256px)
     padding: var(--spacing-16) var(--spacing-4); // More vertical padding for ring wave
   }
+}
+
+// ---------------------------------------------------------------------------//
+// PROFILE SECTION (for settings tabs)
+// ---------------------------------------------------------------------------//
+
+.profile-section {
+  margin-bottom: var(--spacing-8);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.profile-section__title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-surface-default);
+  margin-bottom: var(--spacing-6);
+  padding-bottom: var(--spacing-4);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.profile-section__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
 }

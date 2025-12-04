@@ -42,7 +42,7 @@
 
 .user-info__name {
   color: var(--color-on-primary); // White text
-  font-size: var(--font-size-body-m); // 16px
+  font-size: var(--font-size-6xs); // 16px
   font-weight: var(--font-weight-semi-bold); // 600
   line-height: var(--line-height-tight); // 1.25
   white-space: nowrap;
@@ -162,7 +162,7 @@
   }
 
   .user-info__name {
-    font-size: var(--font-size-body-s); // 14px
+    font-size: var(--font-size-7xs); // 14px
   }
 
   .user-info__email {
@@ -191,7 +191,7 @@
   }
 
   .user-info__name {
-    font-size: var(--font-size-body-l); // 18px
+    font-size: var(--font-size-5xs); // 18px
   }
 
   .user-info__email {

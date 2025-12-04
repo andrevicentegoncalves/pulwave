@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DataTable from '../../../components/ui/DataTable';
-import DataList from '../../../components/ui/DataList';
-import Badge from '../../../components/ui/Badge';
-import Avatar from '../../../components/ui/Avatar';
+import DataTable from '../../../../components/ui/DataTable';
+import DataList from '../../../../components/ui/DataList';
+import Badge from '../../../../components/ui/Badge';
+import Avatar from '../../../../components/ui/Avatar';
 import { Edit2 } from 'lucide-react';
 
 const DataDisplaySection = () => {

@@ -2,6 +2,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Skeleton from './Skeleton';
 
 const Input = forwardRef(({
   type = 'text',
@@ -27,6 +28,7 @@ const Input = forwardRef(({
   onFocus,
   as = 'input', // Support select elements
   children, // For select options
+  loading = false,
   ...rest
 }, ref) => {
   const inputId = id || name;
@@ -36,6 +38,26 @@ const Input = forwardRef(({
 
   // ✅ FIX: Remove fullWidth from rest props to prevent passing to DOM
   const { fullWidth: _, ...domProps } = rest;
+
+  // Loading state
+  if (loading) {
+    const heightMap = {
+      sm: 32,
+      md: 40,
+      lg: 48
+    };
+    return (
+      <div className={clsx('input-wrapper', fullWidth && 'input-wrapper--full-width', className)}>
+        {label && <Skeleton variant="text" width="30%" height={20} className="input__skeleton-label" />}
+        <Skeleton
+          variant="rectangular"
+          height={heightMap[size] || 40}
+          width="100%"
+        />
+        {helperText && <Skeleton variant="text" width="60%" height={16} className="input__skeleton-helper" />}
+      </div>
+    );
+  }
 
   // Read-only variant rendering
   if (variant === 'read-only') {
@@ -183,6 +205,7 @@ Input.propTypes = {
   onFocus: PropTypes.func,
   as: PropTypes.oneOf(['input', 'select', 'textarea']),
   children: PropTypes.node,
+  loading: PropTypes.bool,
 };
 
 export default Input;

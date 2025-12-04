@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from '../../../../components/ui';
+import { Alert } from '../../../../../components/ui';
 
 export default function Alerts({ triggerAlert }) {
   return (

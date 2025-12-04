@@ -155,7 +155,7 @@
 
         // Title/Name
         .list-item-title {
-            font-size: var(--font-size-body-s); // 14px
+            font-size: var(--font-size-7xs); // 14px
             font-weight: 600;
             color: var(--color-neutral-9);
             margin: 0;
@@ -164,7 +164,7 @@
             white-space: nowrap;
 
             @include bp-down('m') {
-                font-size: var(--font-size-body-xs); // 13px approx
+                font-size: var(--font-size-8xs); // 13px approx
             }
         }
 
@@ -276,7 +276,7 @@
 
             p {
                 margin: 0;
-                font-size: var(--font-size-body-s); // 14px
+                font-size: var(--font-size-7xs); // 14px
             }
         }
     }
@@ -305,7 +305,7 @@
         }
 
         .list-item-title {
-            font-size: var(--font-size-body-xs); // 13px
+            font-size: var(--font-size-8xs); // 13px
 
             @include bp-down('m') {
                 font-size: var(--font-size-caption-m); // 12px

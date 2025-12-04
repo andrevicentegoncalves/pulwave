@@ -1,0 +1,7 @@
+@use '../abstracts/mixins/generators/container' as generator;
+
+/* ========================================================================== */
+/*                          UTILITIES: CONTAINER                              */
+/* ========================================================================== */
+
+@include generator.generate-container-utilities();

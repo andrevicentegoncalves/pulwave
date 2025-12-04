@@ -161,7 +161,7 @@ const DataTable = ({
                                                         <ChevronUp size={12} /> :
                                                         <ChevronDown size={12} />
                                                 ) : (
-                                                    <ChevronDown size={12} style={{ opacity: 0.3 }} />
+                                                    <ChevronDown size={12} className="opacity-30" />
                                                 )}
                                             </span>
                                         )}

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select, Button } from '../../components/ui';
-import Checkbox from '../../components/ui/Checkbox';
-import Icon from '../../components/ui/Icon';
-import { Key } from '../../components/ui/iconLibrary';
-import { supabase } from '../../lib/supabaseClient';
+import { Card, Input, Select, Button } from '../../../../components/ui';
+import Checkbox from '../../../../components/ui/Checkbox';
+import Icon from '../../../../components/ui/Icon';
+import { Key } from '../../../../components/ui/iconLibrary';
+import { supabase } from '../../../../lib/supabaseClient';
 
 const SecuritySection = ({
     formData,
