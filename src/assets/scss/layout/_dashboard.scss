@@ -1,5 +1,7 @@
 @use '../abstracts' as *;
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 /* ========================================================================== */
 /*                          LAYOUT: DASHBOARD                                 */
 /* ========================================================================== */
@@ -69,8 +71,7 @@
 }
 
 .dashboard-layout__logo-text {
-  font-size: var(--font-size-5xs);
-  font-weight: var(--font-weight-bold);
+  @include typography.typography-responsive('title', 's', 'bold');
   color: var(--color-primary-6);
 }
 

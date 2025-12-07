@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { lookupService } from '../../services/lookupService';
 import { Input } from '../ui';
 import { getUserCountry } from '../../utils/geolocation';
 import PropTypes from 'prop-types';
@@ -23,30 +23,8 @@ const renderFlagIcon = (isoCode) => {
     if (!FlagComponent) return null;
 
     return (
-        <div className="country-flag-circle" style={{
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            flexShrink: 0
-        }}>
-            <FlagComponent
-                style={{
-                    width: '150%',
-                    height: 'auto',
-                    minHeight: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)'
-                }}
-            />
+        <div className="country-flag-circle">
+            <FlagComponent />
         </div>
     );
 };
@@ -78,12 +56,7 @@ const CountriesSelect = ({
         const fetchCountries = async () => {
             try {
                 setLoading(true);
-                const { data, error } = await supabase
-                    .from('countries')
-                    .select('id, name, iso_code_2')
-                    .order('name');
-
-                if (error) throw error;
+                const data = await lookupService.fetchCountries();
 
                 setCountries(data || []);
             } catch (err) {

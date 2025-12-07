@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select, Button } from '../../../../components/ui';
-import Checkbox from '../../../../components/ui/Checkbox';
-import Icon from '../../../../components/ui/Icon';
+import { Card, Input, Select, Button, Checkbox, SectionHeader } from '../../../../components/ui';
 import { Key } from '../../../../components/ui/iconLibrary';
-import { supabase } from '../../../../lib/supabaseClient';
+import { authService } from '../../../../services';
+import { EmergencyContactForm } from '../../../../components/shared';
 
 const SecuritySection = ({
     formData,
@@ -19,12 +18,7 @@ const SecuritySection = ({
 }) => {
     return (
         <div className="profile-section">
-            <h2 className="profile-section__title">
-                <Icon size="l">
-                    <Key />
-                </Icon>
-                Security
-            </h2>
+            <SectionHeader icon={Key} title="Security" />
             <div className="profile-section__cards">
                 {/* Change Password Card */}
                 <Card header={<h3>Change Password</h3>}>
@@ -39,7 +33,7 @@ const SecuritySection = ({
                                 placeholder="Required to set new password"
                                 fullWidth
                             />
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                            <div className="flex flex-column gap-2">
                                 <Input
                                     label="New Password"
                                     name="newPassword"
@@ -50,14 +44,14 @@ const SecuritySection = ({
                                     fullWidth
                                     helperText="Leave blank to keep current password."
                                 />
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-3)' }}>
+                                <div className="flex justify-end margin-top-3">
                                     <Button
                                         type="button"
                                         variant="outline"
                                         onClick={async () => {
                                             if (!user?.email) return;
                                             try {
-                                                const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
+                                                const { error } = await authService.resetPasswordForEmail(user.email, {
                                                     redirectTo: `${window.location.origin}/update-password`,
                                                 });
                                                 if (error) throw error;
@@ -110,48 +104,12 @@ const SecuritySection = ({
                     </div>
                 </Card>
 
-                {/* Emergency Contact Card */}
-                <Card header={<h3>Emergency Contact</h3>}>
-                    <div className="profile-form-grid">
-                        <div className="form-row-three">
-                            <Input
-                                label="Contact Name"
-                                name="emergency_contact_name"
-                                value={formData.emergency_contact_name || ''}
-                                onChange={onChange}
-                                placeholder="Full Name"
-                                fullWidth
-                            />
-                            <Input
-                                label="Contact Phone"
-                                name="emergency_contact_phone"
-                                type="tel"
-                                value={formData.emergency_contact_phone || ''}
-                                onChange={onChange}
-                                placeholder="+1 (555) 000-0000"
-                                fullWidth
-                            />
-                            <Select
-                                label="Relationship"
-                                value={formData.emergency_contact_relationship || ''}
-                                onChange={(val) => onSelectChange('emergency_contact_relationship', val)}
-                                options={[
-                                    { value: '', label: 'Select Relationship' },
-                                    { value: 'spouse', label: 'Spouse' },
-                                    { value: 'partner', label: 'Partner' },
-                                    { value: 'parent', label: 'Parent' },
-                                    { value: 'child', label: 'Child' },
-                                    { value: 'sibling', label: 'Sibling' },
-                                    { value: 'friend', label: 'Friend' },
-                                    { value: 'neighbor', label: 'Neighbor' },
-                                    { value: 'colleague', label: 'Colleague' },
-                                    { value: 'other', label: 'Other' },
-                                ]}
-                                fullWidth
-                            />
-                        </div>
-                    </div>
-                </Card>
+                {/* Emergency Contact Card - Using shared component */}
+                <EmergencyContactForm
+                    formData={formData}
+                    onChange={onChange}
+                    onSelectChange={onSelectChange}
+                />
             </div>
         </div>
     );

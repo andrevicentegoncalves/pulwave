@@ -1,5 +1,7 @@
 @use '../abstracts' as *;
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 // src/assets/scss/components/_input.scss
 
 /* ────────────────────── INPUT COMPONENT ────────────────────── */
@@ -14,9 +16,8 @@
 // ── LABEL ──
 .input__label {
   display: block;
-  font-size: var(--font-size-7xs);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-body-m);
+  @include typography.typography-responsive('label', 's', 'medium');
+  color: var(--color-neutral-800);
 
   &--required {
     .input__required {
@@ -91,9 +92,8 @@
 .input {
   width: 100%;
   padding: var(--scale-3) var(--scale-6);
-  font-size: var(--font-size-6xs);
+  @include typography.typography-responsive('body', 'm', 'regular');
   font-family: var(--font-family-sans);
-  line-height: var(--line-height-body-m);
   color: var(--color-neutral-800);
   background-color: var(--color-neutral-0);
   border: var(--border-width-xs) solid var(--color-neutral-300);
@@ -104,17 +104,17 @@
   // ── SIZE VARIANTS ──
   &--sm {
     padding: var(--scale-2) var(--scale-3);
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('body', 's', 'regular');
   }
 
   &--md {
     padding: var(--scale-3) var(--scale-6);
-    font-size: var(--font-size-6xs);
+    @include typography.typography-responsive('body', 'm', 'regular');
   }
 
   &--lg {
     padding: var(--scale-4) var(--scale-5);
-    font-size: var(--font-size-5xs);
+    @include typography.typography-responsive('body', 'l', 'regular');
   }
 
   // ── PLACEHOLDER ──
@@ -145,43 +145,6 @@
     opacity: 1;
   }
 
-  &--success {
-    .input__field {
-      border-color: var(--color-feedback-success-500);
-
-      &:focus {
-        border-color: var(--color-feedback-success-600);
-        box-shadow: 0 0 0 var(--scale-0-75) var(--color-feedback-success-100);
-      }
-    }
-  }
-
-  &--error {
-    .input__field {
-      border-color: var(--color-feedback-danger-500);
-
-      &:focus {
-        border-color: var(--color-feedback-danger-600);
-        box-shadow: 0 0 0 var(--scale-0-75) var(--color-feedback-danger-100);
-      }
-    }
-
-    .input__error {
-      color: var(--color-feedback-danger-600);
-    }
-  }
-
-  &--warning {
-    .input__field {
-      border-color: var(--color-feedback-warning-500);
-
-      &:focus {
-        border-color: var(--color-feedback-warning-600);
-        box-shadow: 0 0 0 var(--scale-0-75) var(--color-feedback-warning-100);
-      }
-    }
-  }
-
   // ── READ-ONLY STATE ──
   &:read-only {
     border-color: var(--color-neutral-300);
@@ -203,8 +166,7 @@
     background: transparent;
     padding: 0;
     color: var(--color-on-surface-default);
-    font-size: var(--font-size-6xs);
-    font-weight: var(--font-weight-regular);
+    @include typography.typography-responsive('body', 'm', 'regular');
     cursor: default;
 
     &:hover {
@@ -214,8 +176,7 @@
   }
 
   .input__label {
-    font-size: var(--font-size-7xs);
-    font-weight: var(--font-weight-medium);
+    @include typography.typography-responsive('label', 's', 'medium');
     color: var(--color-on-surface-subtle);
     margin-bottom: var(--spacing-2);
   }
@@ -238,13 +199,13 @@
 
   &--right {
     right: var(--scale-3);
+    pointer-events: auto; // Allow clicks on clear button
   }
 }
 
 // ── HELPER TEXT ──
 .input__helper {
-  font-size: var(--font-size-caption-m);
-  line-height: var(--line-height-caption);
+  @include typography.typography-responsive('caption', 'm', 'regular');
   color: var(--color-neutral-500);
   display: flex;
   align-items: flex-start;
@@ -269,4 +230,30 @@ textarea.input {
   resize: vertical;
   padding: var(--scale-3) var(--scale-6);
   line-height: var(--line-height-body-m);
+}
+
+// ── SEARCH INPUT CLEAR BUTTON ──
+.search-input__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--scale-6);
+  height: var(--scale-6);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-neutral-400);
+  cursor: pointer;
+  border-radius: var(--border-radius-full);
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--color-neutral-100);
+    color: var(--color-neutral-600);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }

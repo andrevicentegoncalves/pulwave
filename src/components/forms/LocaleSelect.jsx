@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as flags from 'country-flag-icons/react/3x2';
 import IconSelect from './IconSelect';
+import CircleFlag from '../ui/CircleFlag';
 
 /**
  * Helper function to get flag component by ISO code
@@ -15,37 +16,11 @@ const getFlag = (isoCode) => {
 /**
  * Helper to render flag icon
  */
+/**
+ * Helper to render flag icon
+ */
 const renderFlagIcon = (countryCode) => {
-    const FlagComponent = getFlag(countryCode);
-    if (!FlagComponent) return null;
-
-    return (
-        <div className="country-flag-circle" style={{
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            flexShrink: 0
-        }}>
-            <FlagComponent
-                style={{
-                    width: '150%',
-                    height: 'auto',
-                    minHeight: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)'
-                }}
-            />
-        </div>
-    );
+    return <CircleFlag countryCode={countryCode} size="m" />;
 };
 
 /**

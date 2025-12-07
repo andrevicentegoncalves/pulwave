@@ -1,5 +1,7 @@
 @use '../abstracts' as *;
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 /* ────────────────────── TOAST COMPONENT ────────────────────── */
 
 .toast-container {
@@ -32,7 +34,7 @@
     border-left: var(--border-width-m) solid;
     pointer-events: auto;
     animation: fadeIn var(--duration-comfortable) ease;
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('body', 's', 'regular');
 
     &__icon {
         flex-shrink: 0;

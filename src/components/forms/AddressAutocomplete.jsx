@@ -200,7 +200,6 @@ const AddressAutocomplete = (props) => {
         <div
             ref={dropdownRef}
             className={`form-item address-autocomplete ${fullWidth ? 'form-item--full-width' : ''} ${className}`}
-            style={{ position: 'relative' }}
         >
             {label && <label htmlFor={id} className="form-label">{label}</label>}
 
@@ -219,26 +218,9 @@ const AddressAutocomplete = (props) => {
             />
 
             {isOpen && suggestions.length > 0 && (
-                <div
-                    className="address-autocomplete__dropdown"
-                    style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: 0,
-                        right: 0,
-                        marginTop: '4px',
-                        backgroundColor: 'var(--bg-card, #ffffff)',
-                        border: '1px solid var(--border-color)',
-                        borderRadius: 'var(--radius-m)',
-                        boxShadow: 'var(--shadow-xl)',
-                        maxHeight: '300px',
-                        overflowY: 'auto',
-                        zIndex: 9999,
-                        isolation: 'isolate'
-                    }}
-                >
+                <div className="address-autocomplete__dropdown">
                     {loading && (
-                        <div style={{ padding: '12px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                        <div className="address-autocomplete__loading">
                             Loading...
                         </div>
                     )}
@@ -251,31 +233,13 @@ const AddressAutocomplete = (props) => {
                                 type="button"
                                 onClick={() => handleSelect(suggestion)}
                                 className={`address-autocomplete__item ${index === selectedIndex ? 'address-autocomplete__item--selected' : ''}`}
-                                style={{
-                                    width: '100%',
-                                    padding: '12px 16px',
-                                    border: 'none',
-                                    background: index === selectedIndex ? 'var(--hover-color)' : 'transparent',
-                                    textAlign: 'left',
-                                    cursor: 'pointer',
-                                    transition: 'background-color 0.2s',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: '4px'
-                                }}
                                 onMouseEnter={() => setSelectedIndex(index)}
                             >
-                                <div style={{
-                                    fontWeight: 500,
-                                    color: 'var(--text-primary)'
-                                }}>
+                                <div className="address-autocomplete__item-primary">
                                     {formatted.primary}
                                 </div>
                                 {formatted.secondary && (
-                                    <div style={{
-                                        fontSize: '0.875rem',
-                                        color: 'var(--text-secondary)'
-                                    }}>
+                                    <div className="address-autocomplete__item-secondary">
                                         {formatted.secondary}
                                     </div>
                                 )}

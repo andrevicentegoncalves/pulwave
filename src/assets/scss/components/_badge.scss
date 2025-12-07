@@ -1,4 +1,5 @@
-// src/assets/scss/components/_badge.scss
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
 
 /* ────────────────────── BADGE COMPONENT ────────────────────── */
 
@@ -8,9 +9,7 @@
   gap: var(--spacing-2);
   padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--border-radius-l);
-  font-size: var(--font-size-7xs);
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
+  @include typography.typography-responsive('label', 's', 'bold');
   white-space: nowrap;
   transition: var(--transition-smooth);
 
@@ -32,7 +31,7 @@
   // Small Badge
   &--s {
     padding: var(--spacing-1) var(--spacing-3);
-    font-size: var(--font-size-caption-s);
+    @include typography.typography-responsive('caption', 's', 'bold');
     gap: var(--spacing-1);
 
     .badge__icon {
@@ -44,7 +43,7 @@
   // Medium Badge (default)
   &--m {
     padding: var(--spacing-2) var(--spacing-4);
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('label', 's', 'bold');
     gap: var(--spacing-2);
 
     .badge__icon {
@@ -56,7 +55,7 @@
   // Large Badge
   &--l {
     padding: var(--spacing-3) var(--spacing-5);
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('label', 's', 'bold');
     gap: var(--spacing-2);
 
     .badge__icon {

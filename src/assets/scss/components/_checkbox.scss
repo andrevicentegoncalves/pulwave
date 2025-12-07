@@ -1,3 +1,6 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
 // ============================================================================ //
 //                            CHECKBOX COMPONENT STYLES                         //
 // ============================================================================ //
@@ -94,8 +97,7 @@
 }
 
 .checkbox__label {
-    font-size: var(--font-size-6xs);
-    font-weight: var(--font-weight-regular);
+    @include typography.typography-responsive('body', 'm', 'regular');
     color: var(--color-on-surface-default);
     cursor: pointer;
     user-select: none;
@@ -113,7 +115,7 @@
 }
 
 .checkbox__helper {
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('caption', 's', 'regular');
     color: var(--color-on-surface-subtle);
     margin-left: calc(var(--scale-6) + var(--spacing-3)); // Align with label
 

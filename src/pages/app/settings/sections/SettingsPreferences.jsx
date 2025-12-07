@@ -1,36 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select } from '../../../../components/ui';
+import { Card, Input, Select, Checkbox, SectionHeader } from '../../../../components/ui';
 import { LocaleSelect } from '../../../../components/forms';
-import Checkbox from '../../../../components/ui/Checkbox';
-import Icon from '../../../../components/ui/Icon';
 import { Settings } from '../../../../components/ui/iconLibrary';
+import { THEME_PREFERENCE, THEME_PREFERENCE_OPTIONS } from '../../../../constants';
+import { useTimezones } from '../../../../hooks/useTimezones';
 
 const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChange, onThemePreview }) => {
+    const { timezones, loading: timezonesLoading } = useTimezones();
+
     return (
         <div className="profile-section">
-            <h2 className="profile-section__title">
-                <Icon size="l">
-                    <Settings />
-                </Icon>
-                Preferences
-            </h2>
+            <SectionHeader icon={Settings} title="Preferences" />
             <div className="profile-section__cards">
                 {/* Theme Card */}
                 <Card header={<h3>Theme</h3>}>
                     <div className="profile-form-grid">
                         <Select
                             label="Theme Preference"
-                            value={formData.theme || 'system'}
+                            value={formData.theme || THEME_PREFERENCE.SYSTEM}
                             onChange={(val) => {
                                 onSelectChange('theme', val);
                                 if (onThemePreview) onThemePreview(val);
                             }}
-                            options={[
-                                { value: 'light', label: 'Light' },
-                                { value: 'dark', label: 'Dark' },
-                                { value: 'system', label: 'Auto (System)' },
-                            ]}
+                            options={THEME_PREFERENCE_OPTIONS}
                             fullWidth
                         />
                     </div>
@@ -43,48 +36,9 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                             label="Timezone"
                             value={formData.timezone || 'UTC'}
                             onChange={(val) => onSelectChange('timezone', val)}
-                            options={[
-                                { value: 'UTC', label: 'UTC' },
-                                { value: 'Etc/GMT+12', label: 'International Date Line West (GMT-12:00)' },
-                                { value: 'Pacific/Midway', label: 'Midway Island, Samoa (GMT-11:00)' },
-                                { value: 'Pacific/Honolulu', label: 'Hawaii (GMT-10:00)' },
-                                { value: 'America/Anchorage', label: 'Alaska (GMT-09:00)' },
-                                { value: 'America/Los_Angeles', label: 'Pacific Time (US & Canada) (GMT-08:00)' },
-                                { value: 'America/Denver', label: 'Mountain Time (US & Canada) (GMT-07:00)' },
-                                { value: 'America/Phoenix', label: 'Arizona (GMT-07:00)' },
-                                { value: 'America/Chicago', label: 'Central Time (US & Canada) (GMT-06:00)' },
-                                { value: 'America/New_York', label: 'Eastern Time (US & Canada) (GMT-05:00)' },
-                                { value: 'America/Indiana/Indianapolis', label: 'Indiana (East) (GMT-05:00)' },
-                                { value: 'America/Caracas', label: 'Caracas, La Paz (GMT-04:00)' },
-                                { value: 'America/Santiago', label: 'Santiago (GMT-04:00)' },
-                                { value: 'America/St_Johns', label: 'Newfoundland (GMT-03:30)' },
-                                { value: 'America/Sao_Paulo', label: 'Brasilia (GMT-03:00)' },
-                                { value: 'America/Argentina/Buenos_Aires', label: 'Buenos Aires, Georgetown (GMT-03:00)' },
-                                { value: 'Atlantic/Azores', label: 'Azores (GMT-01:00)' },
-                                { value: 'Atlantic/Cape_Verde', label: 'Cape Verde Is. (GMT-01:00)' },
-                                { value: 'Europe/London', label: 'London, Dublin, Edinburgh, Lisbon (GMT+00:00)' },
-                                { value: 'Europe/Berlin', label: 'Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna (GMT+01:00)' },
-                                { value: 'Europe/Paris', label: 'Paris, Brussels, Copenhagen, Madrid (GMT+01:00)' },
-                                { value: 'Africa/Cairo', label: 'Cairo (GMT+02:00)' },
-                                { value: 'Europe/Helsinki', label: 'Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius (GMT+02:00)' },
-                                { value: 'Europe/Istanbul', label: 'Istanbul (GMT+03:00)' },
-                                { value: 'Asia/Dubai', label: 'Abu Dhabi, Muscat (GMT+04:00)' },
-                                { value: 'Asia/Kabul', label: 'Kabul (GMT+04:30)' },
-                                { value: 'Asia/Karachi', label: 'Islamabad, Karachi, Tashkent (GMT+05:00)' },
-                                { value: 'Asia/Kolkata', label: 'Chennai, Kolkata, Mumbai, New Delhi (GMT+05:30)' },
-                                { value: 'Asia/Kathmandu', label: 'Kathmandu (GMT+05:45)' },
-                                { value: 'Asia/Dhaka', label: 'Astana, Dhaka (GMT+06:00)' },
-                                { value: 'Asia/Bangkok', label: 'Bangkok, Hanoi, Jakarta (GMT+07:00)' },
-                                { value: 'Asia/Hong_Kong', label: 'Beijing, Chongqing, Hong Kong, Urumqi (GMT+08:00)' },
-                                { value: 'Asia/Singapore', label: 'Kuala Lumpur, Singapore (GMT+08:00)' },
-                                { value: 'Asia/Tokyo', label: 'Osaka, Sapporo, Tokyo (GMT+09:00)' },
-                                { value: 'Australia/Adelaide', label: 'Adelaide (GMT+09:30)' },
-                                { value: 'Australia/Darwin', label: 'Darwin (GMT+09:30)' },
-                                { value: 'Australia/Brisbane', label: 'Brisbane (GMT+10:00)' },
-                                { value: 'Australia/Sydney', label: 'Canberra, Melbourne, Sydney (GMT+10:00)' },
-                                { value: 'Pacific/Noumea', label: 'Solomon Is., New Caledonia (GMT+11:00)' },
-                                { value: 'Pacific/Auckland', label: 'Auckland, Wellington (GMT+12:00)' },
-                            ]}
+                            options={timezones}
+                            loading={timezonesLoading}
+                            searchable
                             fullWidth
                         />
 

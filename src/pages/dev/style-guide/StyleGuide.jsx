@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ThemeToggle } from '../../../components/layout/ThemeToggle';
+import { ThemeToggle } from '../../../components/navigation/ThemeToggle';
 import { Tabs, TabPanel } from '../../../components/ui';
 import {
   Colors,

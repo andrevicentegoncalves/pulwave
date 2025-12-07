@@ -6,68 +6,40 @@ export default function Surfaces() {
     <section className="styleguide-section">
       <h2 className="styleguide-section__title">Surface Elevation System</h2>
       <p className="styleguide-section__description">Layered surfaces for visual hierarchy and depth</p>
-      
+
       <div className="color-category">
         <h3 className="color-category__title">Surface Layers</h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', 
-          gap: 'var(--space-4)' 
-        }}>
+        <div className="token-grid">
           {[
-            { name: 'Default', token: '--color-surface-default', desc: 'Base application background' },
+            { name: 'Default', token: '--color-surface-default', desc: 'Base application background', bordered: true },
             { name: 'Subtle', token: '--color-surface-subtle', desc: 'First elevation - cards' },
             { name: 'Strong', token: '--color-surface-strong', desc: 'Second elevation - modals' },
             { name: 'Hover', token: '--color-surface-hover', desc: 'Interactive hover state' },
             { name: 'Pressed', token: '--color-surface-pressed', desc: 'Active/pressed state' },
             { name: 'Disabled', token: '--color-surface-disabled', desc: 'Disabled background' },
-          ].map(({ name, token, desc }) => (
-            <Card 
+          ].map(({ name, token, desc, bordered }) => (
+            <Card
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="token-card"
             >
-              <div 
-                style={{ 
-                  height: '100px', 
-                  backgroundColor: `var(${token})`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: name === 'Default' ? '1px solid var(--color-border-default)' : 'none'
-                }}
+              <div
+                className={`token-card__preview swatch-dynamic--bg ${bordered ? 'token-card__preview--bordered' : ''}`}
+                style={{ '--swatch-bg': `var(${token})` }}
               >
-                <span style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+                <span className="token-card__preview-label">
                   {name}
                 </span>
               </div>
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div className="token-card__info">
+                <h4 className="token-card__title">
                   Surface {name}
                 </h4>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0'
-                }}>
+                <p className="token-card__desc">
                   {desc}
                 </p>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="token-card__token">
                   var({token})
                 </p>
               </div>
@@ -76,64 +48,37 @@ export default function Surfaces() {
         </div>
       </div>
 
-      <div className="color-category" style={{ marginTop: 'var(--space-10)' }}>
+      <div className="color-category color-category--spaced-lg">
         <h3 className="color-category__title">Inverse Surfaces</h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', 
-          gap: 'var(--space-4)' 
-        }}>
+        <div className="token-grid">
           {[
             { name: 'Inverse Default', token: '--color-surface-inverse-default', desc: 'High contrast inverted' },
             { name: 'Inverse Subtle', token: '--color-surface-inverse-subtle', desc: 'Subtle inverse variant' },
             { name: 'Inverse Hover', token: '--color-surface-inverse-hover', desc: 'Inverse hover state' },
             { name: 'Inverse Pressed', token: '--color-surface-inverse-pressed', desc: 'Inverse pressed state' },
           ].map(({ name, token, desc }) => (
-            <Card 
+            <Card
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="token-card"
             >
-              <div 
-                style={{ 
-                  height: '100px', 
-                  backgroundColor: `var(${token})`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
+              <div
+                className="token-card__preview swatch-dynamic--bg"
+                style={{ '--swatch-bg': `var(${token})` }}
               >
-                <span style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  color: 'var(--color-on-surface-inverse-default)'
-                }}>
+                <span className="token-card__preview-label token-card__preview-label--inverse">
                   {name}
                 </span>
               </div>
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div className="token-card__info">
+                <h4 className="token-card__title">
                   {name}
                 </h4>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0'
-                }}>
+                <p className="token-card__desc">
                   {desc}
                 </p>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="token-card__token">
                   var({token})
                 </p>
               </div>
@@ -142,63 +87,36 @@ export default function Surfaces() {
         </div>
       </div>
 
-      <div className="color-category" style={{ marginTop: 'var(--space-10)' }}>
+      <div className="color-category color-category--spaced-lg">
         <h3 className="color-category__title">Text on Surfaces</h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', 
-          gap: 'var(--space-4)' 
-        }}>
+        <div className="token-grid">
           {[
             { name: 'On Surface Default', token: '--color-on-surface-default', desc: 'Primary text' },
             { name: 'On Surface Subtle', token: '--color-on-surface-subtle', desc: 'Secondary text' },
             { name: 'On Surface Disabled', token: '--color-on-surface-disabled', desc: 'Disabled text' },
           ].map(({ name, token, desc }) => (
-            <Card 
+            <Card
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="token-card"
             >
-              <div 
-                style={{ 
-                  height: '100px', 
-                  backgroundColor: `var(${token})`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
+              <div
+                className="token-card__preview swatch-dynamic--bg"
+                style={{ '--swatch-bg': `var(${token})` }}
               >
-                <span style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  color: 'var(--color-surface-default)'
-                }}>
+                <span className="token-card__preview-label token-card__preview-label--on-color">
                   Text
                 </span>
               </div>
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{ 
-                  fontSize: 'var(--font-size-7xs)', 
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div className="token-card__info">
+                <h4 className="token-card__title">
                   {name}
                 </h4>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0'
-                }}>
+                <p className="token-card__desc">
                   {desc}
                 </p>
-                <p style={{ 
-                  fontSize: 'var(--font-size-9xs)', 
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="token-card__token">
                   var({token})
                 </p>
               </div>

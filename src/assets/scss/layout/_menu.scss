@@ -1,3 +1,5 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 // ============================================================================ //
 //                           MENU COMPONENT STYLES                              //
 // ============================================================================ //
@@ -37,8 +39,7 @@
   border: none;
   border-radius: var(--border-radius-xl); // 16px
   color: var(--color-on-primary);
-  font-size: var(--font-size-6xs); // 16px
-  font-weight: var(--font-weight-medium); // 500
+  @include typography.typography-responsive('body', 'm', 'medium'); // 16px
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
@@ -90,7 +91,7 @@
 
 .menu__item--collapsed {
   justify-content: center;
-  padding: var(--space-2) var(--space-4); // Center icon, no horizontal padding
+  padding: var(--space-3) var(--space-4); // Center icon, no horizontal padding
 
   .menu__label {
     display: none;
@@ -203,8 +204,7 @@
   margin-bottom: var(--space-1);
 
   // Typography
-  font-size: var(--font-size-caption-m); // 12px
-  font-weight: var(--font-weight-semi-bold); // 600
+  @include typography.typography-responsive('caption', 'm', 'semi-bold'); // 12px
   color: var(--color-on-primary);
   opacity: 0.7;
   text-transform: uppercase;
@@ -223,8 +223,7 @@
   padding: var(--space-1) var(--space-2);
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius-circle);
-  font-size: var(--font-size-caption-s); // 11px
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('caption', 's', 'semi-bold'); // 11px
   color: var(--color-on-primary);
   line-height: 1;
 
@@ -251,8 +250,7 @@
     padding: var(--space-2) var(--space-3);
     background-color: var(--color-surface-default);
     color: var(--color-on-surface-default);
-    font-size: var(--font-size-caption-m);
-    font-weight: var(--font-weight-medium);
+    @include typography.typography-responsive('caption', 'm', 'medium');
     border-radius: var(--bordeer-radius-s);
     box-shadow: var(--shadow-m);
     white-space: nowrap;

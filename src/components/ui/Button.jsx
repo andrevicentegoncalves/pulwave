@@ -18,6 +18,8 @@ const Button = forwardRef(({
   type = 'button',
   className,
   onClick,
+  leftIcon,
+  rightIcon,
   ...rest
 }, ref) => {
   return (
@@ -39,7 +41,9 @@ const Button = forwardRef(({
       aria-busy={loading}
       {...rest}
     >
+      {leftIcon && <span className="btn__icon">{leftIcon}</span>}
       {children}
+      {rightIcon && <span className="btn__icon">{rightIcon}</span>}
     </button>
   );
 });
@@ -48,7 +52,7 @@ Button.displayName = 'Button';
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'outline-primary', 'outline']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'outline-primary', 'outline', 'icon-circle']),
   size: PropTypes.oneOf(['s', 'm', 'l']),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,

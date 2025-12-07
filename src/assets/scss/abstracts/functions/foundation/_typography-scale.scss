@@ -42,6 +42,10 @@
     $category-map: scale.$typography-price;
   }
 
+  @else if $category =='caption' {
+    $category-map: scale.$typography-caption;
+  }
+
   @else {
     @error "Unknown typography category '#{$category}'. Available: headline, title, body, action, label, eyebrow, price";
   }

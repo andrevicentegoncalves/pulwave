@@ -1,3 +1,6 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
 /* ────────────────────── TOOLTIP COMPONENT ────────────────────── */
 
 .tooltip-wrapper {
@@ -12,8 +15,7 @@
     padding: var(--spacing-2) var(--spacing-3);
     background-color: var(--color-neutral-900);
     color: var(--color-neutral-50);
-    font-size: var(--font-size-8xs);
-    font-weight: var(--font-weight-medium);
+    @include typography.typography-responsive('caption', 's', 'medium');
     border-radius: var(--border-radius-m);
     white-space: nowrap;
     box-shadow: var(--shadow-m);

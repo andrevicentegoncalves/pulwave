@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabaseClient';
-import { Building, Home as HomeIcon, MapPin, DollarSign, Calendar, AlertCircle } from 'lucide-react';
-import { Button, Icon, Card, CardGrid, FloatingActionButton } from '../../components/ui';
+import { dashboardService, authService } from '../../services';
+import { Button, Icon, Card, CardGrid, FloatingActionButton, Building, Home as HomeIcon, MapPin, DollarSign, Calendar, AlertCircle } from '../../components/ui';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,53 +20,17 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        setUser(user);
+        const { user: authUser } = await authService.getUser();
+        setUser(authUser);
 
-        if (user) {
+        if (authUser) {
           // Fetch profile
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('auth_user_id', user.id)
-            .single();
-
+          const { data: profileData } = await authService.getProfile(authUser.id);
           setProfile(profileData);
 
-          // Fetch statistics
-          const { data: buildingOwners } = await supabase
-            .from('building_owners')
-            .select('building_id')
-            .eq('owner_id', user.id);
-
-          const buildingIds = buildingOwners?.map(b => b.building_id) || [];
-
-          if (buildingIds.length > 0) {
-            const { data: buildings } = await supabase
-              .from('buildings')
-              .select('id')
-              .in('id', buildingIds);
-
-            const { data: properties } = await supabase
-              .from('units')
-              .select('id, status, monthly_rent, building_id')
-              .in('building_id', buildingIds);
-
-            const rented = properties?.filter(p => p.status === 'rented').length || 0;
-            const available = properties?.filter(p => p.status === 'available').length || 0;
-            const revenue = properties
-              ?.filter(p => p.status === 'rented')
-              .reduce((sum, p) => sum + (parseFloat(p.monthly_rent) || 0), 0) || 0;
-
-            setStats({
-              totalBuildings: buildings?.length || 0,
-              totalProperties: properties?.length || 0,
-              rentedUnits: rented,
-              availableUnits: available,
-              locations: new Set(buildings?.map(b => b.id)).size || 0,
-              monthlyRevenue: revenue,
-            });
-          }
+          // Fetch aggregation stats
+          const dashboardStats = await dashboardService.getDashboardStats();
+          setStats(dashboardStats);
         }
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
@@ -79,23 +42,8 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
-  };
-
-  const getDisplayName = () => {
-    if (!profile) return user?.email?.split('@')[0] || 'there';
-
-    const firstName = profile.first_name || '';
-    const lastName = profile.last_name || '';
-
-    if (firstName) return firstName;
-    if (lastName) return lastName;
-    return user?.email?.split('@')[0] || 'there';
-  };
+  const getGreeting = () => dashboardService.getGreeting();
+  const getDisplayName = () => dashboardService.getDisplayName(user, profile);
 
   // Floating Action Button actions
   const fabActions = [

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SearchFilter from '../../../../components/forms/SearchFilter';
-import Select from '../../../../components/ui/Select';
-import Input from '../../../../components/ui/Input';
+import { Select, Input } from '../../../../components/ui';
 
 const SearchFilterSection = () => {
     const [activeFilters, setActiveFilters] = useState([
@@ -28,7 +27,7 @@ const SearchFilterSection = () => {
                     onReset={() => console.log('Reset')}
                     activeFilters={activeFilters}
                 >
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                    <div className="search-filter-demo">
                         <Select
                             label="Status"
                             options={[

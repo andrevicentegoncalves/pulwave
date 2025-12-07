@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ========================================================================== */
@@ -19,14 +20,13 @@
 }
 
 .settings-page__title {
-  font-size: var(--font-size-3xs);
-  font-weight: var(--font-weight-bold);
+  @include typography.typography-responsive('headline', 's', 'bold');
   color: var(--color-on-surface-default);
   margin: 0 0 var(--spacing-2) 0;
 }
 
 .settings-page__subtitle {
-  font-size: var(--font-size-6xs);
+  @include typography.typography-responsive('body', 'm', 'regular');
   color: var(--color-on-surface-subtle);
   margin: 0;
 }
@@ -50,14 +50,13 @@
 }
 
 .settings-section__title {
-  font-size: var(--font-size-5xs);
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('title', 's', 'semi-bold');
   color: var(--color-on-surface-default);
   margin: 0 0 var(--spacing-2) 0;
 }
 
 .settings-section__description {
-  font-size: var(--font-size-caption-l);
+  @include typography.typography-responsive('body', 's', 'regular');
   color: var(--color-on-surface-subtle);
   margin: 0;
 }
@@ -163,13 +162,12 @@
 }
 
 .theme-option__label {
-  font-size: var(--font-size-6xs);
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('label', 'm', 'semi-bold');
   color: var(--color-on-surface-default);
 }
 
 .theme-option__description {
-  font-size: var(--font-size-caption-m);
+  @include typography.typography-responsive('caption', 'm', 'regular');
   color: var(--color-on-surface-subtle);
   line-height: var(--line-height-normal);
 }
@@ -187,8 +185,7 @@
   border: var(--border-width-1) solid var(--color-success-6);
   border-radius: var(--border-radius-s);
   color: var(--color-success-7);
-  font-size: var(--font-size-caption-l);
-  font-weight: var(--font-weight-medium);
+  @include typography.typography-responsive('label', 'm', 'medium');
   margin-top: var(--spacing-4);
   animation: slideDown var(--duration-normal) var(--easing-standard);
 }
@@ -220,7 +217,7 @@
 
   p {
     margin: var(--spacing-2) 0;
-    font-size: var(--font-size-caption-l);
+    @include typography.typography-responsive('body', 's', 'regular');
     color: var(--color-on-surface-subtle);
 
     &:first-child {
@@ -231,4 +228,101 @@
       margin-bottom: 0;
     }
   }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          PROFILE SECTION BILLING                           */
+/* -------------------------------------------------------------------------- */
+
+.profile-section__billing-address {
+  position: relative;
+}
+
+.profile-section__billing-toggle {
+  position: absolute;
+  top: var(--spacing-5);
+  right: var(--spacing-5);
+  z-index: 10;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          PROFILE SECTION PRIVACY                           */
+/* -------------------------------------------------------------------------- */
+
+.privacy-document {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.privacy-document__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.privacy-document__info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.privacy-document__title {
+  @include typography.typography-responsive('body', 'm', 'semi-bold');
+  margin-bottom: var(--spacing-2);
+}
+
+.privacy-document__meta {
+  @include typography.typography-responsive('caption', 'm', 'regular');
+  color: var(--color-on-surface-subtle);
+}
+
+.privacy-document__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.privacy-modal__footer {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}
+
+.privacy-modal__content {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: var(--spacing-6);
+  line-height: 1.7;
+
+  &--active {
+    background: var(--color-primary-1);
+    border-color: var(--color-primary-6);
+    box-shadow: var(--shadow-s);
+
+    &:hover {
+      background: var(--color-primary-2);
+    }
+  }
+}
+
+.privacy-modal__text {
+  @include typography.typography-responsive('body', 's', 'regular');
+  color: var(--color-on-surface-default);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            SETTINGS FORM                                   */
+/* -------------------------------------------------------------------------- */
+
+.settings-form {
+  width: 100%;
+}
+
+.settings-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-6);
 }

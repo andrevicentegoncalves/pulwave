@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SubscriptionPlans from '../../../../components/shared/SubscriptionPlans';
-import BillingHistory from './BillingHistory';
-import PaymentMethods from './PaymentMethods';
+import { BillingHistory, PaymentMethods } from './payment';
 import { Card, Button, Skeleton } from '../../../../components/ui';
 import { CreditCard, Clock, ArrowUpCircle } from 'lucide-react';
 import { supabase } from '../../../../lib/supabaseClient';

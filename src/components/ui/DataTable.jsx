@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronUp, ChevronDown, Edit2, GripVertical } from 'lucide-react';
+import React, { useRef } from 'react';
+import clsx from 'clsx';
+import { ChevronUp, ChevronDown, GripVertical } from './iconLibrary';
 import Pagination from './Pagination';
+import ScrollArea from './ScrollArea';
+import useDataTable from '../../hooks/useDataTable';
 
 const DataTable = ({
     columns: initialColumns,
@@ -12,130 +15,39 @@ const DataTable = ({
     itemsPerPage = 10,
     className = '',
 }) => {
-    const [columns, setColumns] = useState(initialColumns);
-    const [data, setData] = useState(initialData);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [resizingCol, setResizingCol] = useState(null);
-    const [draggedRowIndex, setDraggedRowIndex] = useState(null);
-    const [draggedColIndex, setDraggedColIndex] = useState(null);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-
     const tableRef = useRef(null);
-    const resizeRef = useRef({ startX: 0, startWidth: 0, colId: null });
 
-    useEffect(() => {
-        setData(initialData);
-    }, [initialData]);
-
-    // Pagination
-    const totalPages = pagination ? Math.ceil(data.length / itemsPerPage) : 1;
-    const paginatedData = pagination
-        ? data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-        : data;
-
-    // Sorting
-    const handleSort = (columnId) => {
-        let direction = 'asc';
-        if (sortConfig.key === columnId && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        setSortConfig({ key: columnId, direction });
-
-        const sorted = [...data].sort((a, b) => {
-            if (a[columnId] < b[columnId]) return direction === 'asc' ? -1 : 1;
-            if (a[columnId] > b[columnId]) return direction === 'asc' ? 1 : -1;
-            return 0;
-        });
-        setData(sorted);
-    };
-
-    // Column Resizing
-    const startResize = (e, colId, currentWidth) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setResizingCol(colId);
-        resizeRef.current = {
-            startX: e.clientX,
-            startWidth: currentWidth || 150,
-            colId,
-        };
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-    };
-
-    const handleMouseMove = (e) => {
-        if (!resizeRef.current.colId) return;
-        const diff = e.clientX - resizeRef.current.startX;
-        const newWidth = Math.max(80, resizeRef.current.startWidth + diff);
-
-        setColumns((prevCols) =>
-            prevCols.map((col) =>
-                col.id === resizeRef.current.colId ? { ...col, width: newWidth } : col
-            )
-        );
-    };
-
-    const handleMouseUp = () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-        setResizingCol(null);
-        if (onColumnResize && resizeRef.current.colId) {
-            onColumnResize(columns);
-        }
-        resizeRef.current = { startX: 0, startWidth: 0, colId: null };
-    };
-
-    // Row Drag & Drop
-    const handleRowDragStart = (e, index) => {
-        setDraggedRowIndex(index);
-        e.dataTransfer.effectAllowed = 'move';
-    };
-
-    const handleRowDragOver = (e, index) => {
-        e.preventDefault();
-        if (draggedRowIndex === null || draggedRowIndex === index) return;
-    };
-
-    const handleRowDrop = (e, dropIndex) => {
-        e.preventDefault();
-        if (draggedRowIndex === null) return;
-
-        const newData = [...data];
-        const [movedItem] = newData.splice(draggedRowIndex, 1);
-        newData.splice(dropIndex, 0, movedItem);
-
-        setData(newData);
-        setDraggedRowIndex(null);
-        if (onRowReorder) onRowReorder(newData);
-    };
-
-    // Column Drag & Drop
-    const handleColDragStart = (e, index) => {
-        setDraggedColIndex(index);
-        e.dataTransfer.effectAllowed = 'move';
-    };
-
-    const handleColDragOver = (e, index) => {
-        e.preventDefault();
-        if (draggedColIndex === null || draggedColIndex === index) return;
-    };
-
-    const handleColDrop = (e, dropIndex) => {
-        e.preventDefault();
-        if (draggedColIndex === null) return;
-
-        const newColumns = [...columns];
-        const [movedCol] = newColumns.splice(draggedColIndex, 1);
-        newColumns.splice(dropIndex, 0, movedCol);
-
-        setColumns(newColumns);
-        setDraggedColIndex(null);
-        if (onColumnReorder) onColumnReorder(newColumns);
-    };
+    const {
+        columns,
+        data,
+        paginatedData,
+        totalPages,
+        currentPage,
+        setCurrentPage,
+        sortConfig,
+        handleSort,
+        resizingCol,
+        startResize,
+        draggedRowIndex,
+        handleRowDragStart,
+        handleRowDragOver,
+        handleRowDrop,
+        handleColDragStart,
+        handleColDragOver,
+        handleColDrop
+    } = useDataTable({
+        initialColumns,
+        initialData,
+        onRowReorder,
+        onColumnReorder,
+        onColumnResize,
+        pagination,
+        itemsPerPage
+    });
 
     return (
-        <div className={`data-table-container ${className}`}>
-            <div className="table-scroll-wrapper">
+        <div className={clsx('data-table-container', className)}>
+            <ScrollArea className="table-scroll-wrapper" orientation="horizontal">
                 <table ref={tableRef}>
                     <thead>
                         <tr>
@@ -145,7 +57,10 @@ const DataTable = ({
                                 <th
                                     key={col.id}
                                     style={{ width: col.width }}
-                                    className={`${col.locked ? 'sticky-col' : ''} ${col.sortable ? 'sortable' : ''}`}
+                                    className={clsx({
+                                        'sticky-col': col.locked,
+                                        'sortable': col.sortable
+                                    })}
                                     onClick={() => col.sortable && handleSort(col.id)}
                                     draggable={!col.locked}
                                     onDragStart={(e) => !col.locked && handleColDragStart(e, colIndex)}
@@ -168,7 +83,7 @@ const DataTable = ({
                                     </div>
                                     {!col.locked && (
                                         <div
-                                            className={`resize-handle ${resizingCol === col.id ? 'resizing' : ''}`}
+                                            className={clsx('resize-handle', { 'resizing': resizingCol === col.id })}
                                             onMouseDown={(e) => startResize(e, col.id, col.width)}
                                             onClick={(e) => e.stopPropagation()}
                                         />
@@ -178,55 +93,55 @@ const DataTable = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedData.map((row, index) => (
-                            <tr
-                                key={row.id || index}
-                                draggable={!!onRowReorder}
-                                onDragStart={(e) => handleRowDragStart(e, index)}
-                                onDragOver={(e) => handleRowDragOver(e, index)}
-                                onDrop={(e) => handleRowDrop(e, index)}
-                                className={draggedRowIndex === index ? 'dragging' : (onRowReorder ? 'draggable' : '')}
-                            >
-                                {onRowReorder && (
-                                    <td className="drag-handle-cell">
-                                        <GripVertical size={14} />
-                                    </td>
-                                )}
+                        {paginatedData.map((row, index) => {
+                            const rowKey = row.id || `row-${index}`;
+                            return (
+                                <tr
+                                    key={rowKey}
+                                    draggable={!!onRowReorder}
+                                    onDragStart={(e) => handleRowDragStart(e, index)}
+                                    onDragOver={(e) => handleRowDragOver(e, index)}
+                                    onDrop={(e) => handleRowDrop(e, index)}
+                                    className={clsx({
+                                        'dragging': draggedRowIndex === index,
+                                        'draggable': onRowReorder && draggedRowIndex !== index
+                                    })}
+                                >
+                                    {onRowReorder && (
+                                        <td className="drag-handle-cell">
+                                            <GripVertical size={14} />
+                                        </td>
+                                    )}
 
-                                {columns.map((col) => (
-                                    <td
-                                        key={`${row.id}-${col.id}`}
-                                        className={`${col.locked ? 'sticky-col' : ''} ${col.type || ''}`}
-                                    >
-                                        {col.render ? col.render(row[col.id], row) : row[col.id]}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
+                                    {columns.map((col) => (
+                                        <td
+                                            key={`${rowKey}-${col.id}`}
+                                            className={clsx(col.type, { 'sticky-col': col.locked })}
+                                        >
+                                            {col.render ? col.render(row[col.id], row) : row[col.id]}
+                                        </td>
+                                    ))}
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
-            </div>
+            </ScrollArea>
 
-            {pagination && (
-                <div className="table-footer">
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={setCurrentPage}
-                        showFirstLast={true}
-                        showInput={false}
-                    />
-
-                    {/* Progress bar */}
-                    <div className="progress-bar">
-                        <div
-                            className="progress-fill"
-                            style={{ width: `${(data.filter(item => item.downloads > 0).length / data.length) * 100}%` }}
+            {
+                pagination && (
+                    <div className="table-footer">
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                            showFirstLast={true}
+                            showInput={false}
                         />
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 

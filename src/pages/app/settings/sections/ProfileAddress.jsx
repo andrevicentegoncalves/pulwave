@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Checkbox, Icon } from '../../../../components/ui';
+import { Checkbox, SectionHeader } from '../../../../components/ui';
 import { MapPin } from '../../../../components/ui/iconLibrary';
 import { AddressForm } from '../../../../components/shared';
 
@@ -24,12 +24,7 @@ const AddressSection = ({
 
     return (
         <div className="profile-section">
-            <h2 className="profile-section__title">
-                <Icon size="l">
-                    <MapPin />
-                </Icon>
-                Address
-            </h2>
+            <SectionHeader icon={MapPin} title="Address" />
             <div className="profile-section__cards">
                 {/* Primary Address */}
                 <AddressForm
@@ -41,13 +36,8 @@ const AddressSection = ({
                 />
 
                 {/* Billing Address */}
-                <div style={{ position: 'relative' }}>
-                    <div style={{
-                        position: 'absolute',
-                        top: '20px',
-                        right: '20px',
-                        zIndex: 10
-                    }}>
+                <div className="profile-section__billing-address">
+                    <div className="profile-section__billing-toggle">
                         <Checkbox
                             label="Same as Primary Address"
                             checked={sameAsPrimary}

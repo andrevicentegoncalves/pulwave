@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select } from '../ui';
-import { supabase } from '../../lib/supabaseClient';
+import { authService, organizationService } from '../../services';
 
 /**
  * OrganizationSelector Component
@@ -17,23 +17,10 @@ const OrganizationSelector = ({ value, onChange, className }) => {
 
     const fetchUserOrganizations = async () => {
         try {
-            const { data: { user } } = await supabase.auth.getUser();
+            const user = await authService.getUser();
+            if (!user) return;
 
-            // Get all organizations the user is a member of
-            const { data: memberships } = await supabase
-                .from('organization_members')
-                .select(`
-                    organization_id,
-                    organizations (
-                        id,
-                        name,
-                        logo_url
-                    )
-                `)
-                .eq('profile_id', user.id)
-                .eq('is_active', true);
-
-            const orgs = memberships?.map(m => m.organizations) || [];
+            const orgs = await organizationService.getUserOrganizations(user.id);
             setOrganizations(orgs);
 
             // Auto-select first org if none selected

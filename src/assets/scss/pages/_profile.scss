@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts/mixins/foundation/breakpoints' as bp;
 @use '../abstracts' as *;
 
@@ -26,14 +27,13 @@
 }
 
 .profile-page__title {
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-bold);
+  @include typography.typography-responsive('headline', 's', 'bold');
   color: var(--color-on-surface-default);
   margin-bottom: var(--spacing-2);
 }
 
 .profile-page__subtitle {
-  font-size: var(--font-size-6xs);
+  @include typography.typography-responsive('body', 'm', 'regular');
   color: var(--color-on-surface-subtle);
 }
 
@@ -69,8 +69,7 @@
 }
 
 .profile-form-title {
-  font-size: var(--font-size-3xs);
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('title', 'm', 'semi-bold');
   color: var(--color-on-surface-default);
   margin-bottom: var(--spacing-6);
   padding-bottom: var(--spacing-4);
@@ -148,8 +147,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
-  font-size: var(--font-size-3xs);
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('title', 'm', 'semi-bold');
   color: var(--color-on-surface-default);
   margin-bottom: var(--spacing-6);
   padding-bottom: var(--spacing-4);

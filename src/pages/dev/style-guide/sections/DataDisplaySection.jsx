@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import DataTable from '../../../../components/ui/DataTable';
-import DataList from '../../../../components/ui/DataList';
-import Badge from '../../../../components/ui/Badge';
-import Avatar from '../../../../components/ui/Avatar';
+import { DataTable, DataList, Badge, Avatar } from '../../../../components/ui';
 import { Edit2 } from 'lucide-react';
 
 const DataDisplaySection = () => {
@@ -320,14 +317,7 @@ const DataDisplaySection = () => {
                                     variant="light"
                                     size="s"
                                 >
-                                    <span style={{
-                                        display: 'inline-block',
-                                        width: '6px',
-                                        height: '6px',
-                                        borderRadius: '50%',
-                                        backgroundColor: item.status === 'Online' ? '#10b981' : '#6b7280',
-                                        marginRight: '6px'
-                                    }}></span>
+                                    <span className={`status-indicator status-indicator--${item.status === 'Online' ? 'online' : 'offline'}`}></span>
                                     {item.status}
                                 </Badge>
                             </div>

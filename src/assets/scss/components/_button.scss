@@ -1,5 +1,7 @@
 // src/assets/scss/components/_button.scss
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 /* ────────────────────── BUTTON COMPONENT ────────────────────── */
 .btn {
   display: inline-flex;
@@ -9,8 +11,10 @@
   padding: 0 var(--spacing-6);
   height: var(--spacing-10);
   min-width: var(--spacing-10);
-  font: var(--font-weight-medium) var(--font-size-7xs)/1 var(--font-family-sans);
-  letter-spacing: var(--letter-spacing-normal);
+  // Replaced manual font shorthand with mixin
+  @include typography.typography-responsive('action', 'button-m', 'medium');
+  font-family: var(--font-family-sans);
+
   border-radius: var(--border-radius-l);
   white-space: nowrap;
   cursor: var(--cursor-pointer);
@@ -42,14 +46,14 @@
     height: var(--spacing-8);
     min-width: var(--spacing-8);
     padding: 0 var(--spacing-4);
-    font-size: var(--font-size-caption-s);
+    @include typography.typography-responsive('action', 'button-s', 'medium');
   }
 
   &--l {
     height: var(--spacing-12);
     min-width: var(--spacing-12);
     padding: 0 var(--spacing-8);
-    font-size: var(--font-size-6xs);
+    @include typography.typography-responsive('action', 'button-l', 'medium');
   }
 
   /* ── FULL WIDTH ── */
@@ -74,24 +78,11 @@
       background-color: var(--color-primary);
       opacity: 0.5;
       cursor: not-allowed;
-      pointer-events: none;
-    }
-  }
-
-  &--secondary {
-    background-color: var(--color-secondary);
-    color: var(--color-on-secondary);
-
-    &:hover:not(:disabled) {
-      background-color: var(--color-secondary-hover);
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--color-secondary-active);
+      background-color: var(--color-neutral-300);
     }
 
     &:disabled {
-      background-color: var(--color-secondary);
+      background-color: var(--color-neutral-100);
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
@@ -201,6 +192,38 @@
       cursor: not-allowed;
       pointer-events: none;
       border-color: var(--color-neutral-200);
+    }
+  }
+
+  &--icon-circle {
+    background-color: transparent;
+    color: var(--color-on-surface-default);
+    border: var(--border-width-xs) solid var(--color-neutral-300);
+    border-radius: 50%;
+    padding: 0;
+    min-width: unset;
+    width: var(--spacing-10); // Matches default height
+
+    &.btn--s {
+      width: var(--spacing-8);
+    }
+
+    &.btn--l {
+      width: var(--spacing-12);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-neutral-200);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-neutral-300);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 

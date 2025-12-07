@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select, PhoneSelect } from '../../../../components/ui';
-import Textarea from '../../../../components/ui/TextArea';
-import Icon from '../../../../components/ui/Icon';
+import { Card, Input, Select, TextArea, SectionHeader } from '../../../../components/ui';
 import { User } from '../../../../components/ui/iconLibrary';
+import { PhoneInputGroup } from '../../../../components/forms';
+import { SocialLinksCard } from '../../../../components/shared';
 
 const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = false }) => {
     // Auto-populate display name from first + last name
@@ -20,12 +20,7 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
 
     return (
         <div className="profile-section">
-            <h2 className="profile-section__title">
-                <Icon size="l">
-                    <User />
-                </Icon>
-                Personal Information
-            </h2>
+            <SectionHeader icon={User} title="Personal Information" />
             <div className="profile-section__cards">
                 {/* Personal Information Card */}
                 <Card header={<h3>Personal Information</h3>}>
@@ -102,61 +97,32 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
                             />
                         </div>
 
-                        {/* Phone Fields */}
+                        {/* Phone Fields - Using new PhoneInputGroup component */}
                         <div className="form-row-two">
-                            <div className="form-item">
-                                <label className="form-label">Primary Phone</label>
-                                <div style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}>
-                                    <div style={{ width: '140px', flexShrink: 0 }}>
-                                        <PhoneSelect
-                                            label=""
-                                            name="phone_code"
-                                            value={formData.phone_code}
-                                            onChange={(val) => onSelectChange('phone_code', val)}
-                                            placeholder="+1"
-                                            loading={loading}
-                                        />
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <Input
-                                            name="phone_number"
-                                            type="tel"
-                                            value={formData.phone_number || ''}
-                                            onChange={onChange}
-                                            placeholder="(555) 000-0000"
-                                            fullWidth
-                                            loading={loading}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="form-item">
-                                <label className="form-label">Secondary Phone</label>
-                                <div style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}>
-                                    <div style={{ width: '140px', flexShrink: 0 }}>
-                                        <PhoneSelect
-                                            label=""
-                                            name="phone_secondary_code"
-                                            value={formData.phone_secondary_code}
-                                            onChange={(val) => onSelectChange('phone_secondary_code', val)}
-                                            placeholder="+1"
-                                            loading={loading}
-                                        />
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <Input
-                                            name="phone_secondary_number"
-                                            type="tel"
-                                            value={formData.phone_secondary_number || ''}
-                                            onChange={onChange}
-                                            placeholder="(555) 000-0001"
-                                            fullWidth
-                                            loading={loading}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+                            <PhoneInputGroup
+                                label="Primary Phone"
+                                codeName="phone_code"
+                                numberName="phone_number"
+                                codeValue={formData.phone_code}
+                                numberValue={formData.phone_number}
+                                onCodeChange={(val) => onSelectChange('phone_code', val)}
+                                onNumberChange={onChange}
+                                codePlaceholder="+1"
+                                numberPlaceholder="(555) 000-0000"
+                                loading={loading}
+                            />
+                            <PhoneInputGroup
+                                label="Secondary Phone"
+                                codeName="phone_secondary_code"
+                                numberName="phone_secondary_number"
+                                codeValue={formData.phone_secondary_code}
+                                numberValue={formData.phone_secondary_number}
+                                onCodeChange={(val) => onSelectChange('phone_secondary_code', val)}
+                                onNumberChange={onChange}
+                                codePlaceholder="+1"
+                                numberPlaceholder="(555) 000-0001"
+                                loading={loading}
+                            />
                         </div>
 
                         <Select
@@ -200,8 +166,8 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
                         </div>
 
                         {/* Bio */}
-                        <div className="form-item--full" style={{ width: '100%' }}>
-                            <Textarea
+                        <div className="form-item--full">
+                            <TextArea
                                 label="Bio"
                                 name="bio"
                                 value={formData.bio || ''}
@@ -218,56 +184,12 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
                     </div>
                 </Card>
 
-                {/* Social Links Card */}
-                <Card header={<h3>Social Links</h3>}>
-                    <div className="profile-form-grid">
-                        <div className="form-row-two">
-                            <Input
-                                label="Website"
-                                name="website"
-                                type="url"
-                                value={formData.website || ''}
-                                onChange={onChange}
-                                placeholder="https://yourwebsite.com"
-                                fullWidth
-                                loading={loading}
-                            />
-                            <Input
-                                label="LinkedIn"
-                                name="linkedin_url"
-                                type="url"
-                                value={formData.linkedin_url || ''}
-                                onChange={onChange}
-                                placeholder="https://linkedin.com/in/username"
-                                fullWidth
-                                loading={loading}
-                            />
-                        </div>
-
-                        <div className="form-row-two">
-                            <Input
-                                label="Twitter"
-                                name="twitter_url"
-                                type="url"
-                                value={formData.twitter_url || ''}
-                                onChange={onChange}
-                                placeholder="https://twitter.com/username"
-                                fullWidth
-                                loading={loading}
-                            />
-                            <Input
-                                label="Facebook"
-                                name="facebook_url"
-                                type="url"
-                                value={formData.facebook_url || ''}
-                                onChange={onChange}
-                                placeholder="https://facebook.com/username"
-                                fullWidth
-                                loading={loading}
-                            />
-                        </div>
-                    </div>
-                </Card>
+                {/* Social Links Card - Using shared component */}
+                <SocialLinksCard
+                    formData={formData}
+                    onChange={onChange}
+                    loading={loading}
+                />
             </div>
         </div>
     );

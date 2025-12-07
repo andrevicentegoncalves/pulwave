@@ -39,6 +39,11 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-on-surface-default);
     margin: 0 0 var(--spacing-2) 0;
+
+    &--subsection {
+      font-size: var(--font-size-4xs);
+      margin-top: var(--spacing-10);
+    }
   }
 
   &__description {
@@ -52,11 +57,25 @@
 .color-category {
   margin-bottom: var(--spacing-8);
 
+  &--spaced {
+    margin-top: var(--spacing-8);
+  }
+
+  &--spaced-lg {
+    margin-top: var(--spacing-10);
+  }
+
   &__title {
     font-size: var(--font-size-5xs);
     font-weight: var(--font-weight-semi-bold);
     color: var(--color-on-surface-default);
     margin: 0 0 var(--spacing-4) 0;
+  }
+
+  &__description {
+    font-size: var(--font-size-7xs);
+    color: var(--color-on-surface-subtle);
+    margin-bottom: var(--spacing-4);
   }
 }
 
@@ -84,6 +103,71 @@
     background: var(--color-surface-default);
     padding: var(--spacing-1) var(--spacing-2);
     border-radius: var(--border-radius-xs);
+  }
+}
+
+// Token Grid (for surfaces, colors etc.)
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacing-4);
+
+  &--3-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Token Cards (surface swatches, color previews)
+.token-card {
+  cursor: pointer;
+
+  &__preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--bordered {
+      border: 1px solid var(--color-border-default);
+    }
+  }
+
+  &__preview-label {
+    font-size: var(--font-size-7xs);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+
+    &--inverse {
+      color: var(--color-on-surface-inverse-default);
+    }
+
+    &--on-color {
+      color: var(--color-surface-default);
+    }
+  }
+
+  &__info {
+    padding: var(--spacing-3);
+  }
+
+  &__title {
+    font-size: var(--font-size-7xs);
+    font-weight: var(--font-weight-semi-bold);
+    margin: 0 0 var(--spacing-1) 0;
+    color: var(--color-on-surface-default);
+  }
+
+  &__desc {
+    font-size: var(--font-size-9xs);
+    color: var(--color-on-surface-subtle);
+    margin: 0 0 var(--spacing-1) 0;
+  }
+
+  &__token {
+    font-size: var(--font-size-9xs);
+    color: var(--color-on-surface-subtle);
+    margin: 0;
+    font-family: monospace;
   }
 }
 
@@ -119,12 +203,37 @@
 
 .typography-sample {
   display: flex;
-  align-items: baseline;
-  gap: var(--spacing-4);
+  flex-direction: column;
+  gap: var(--spacing-1);
   padding: var(--spacing-3);
   background: var(--color-surface-subtle);
   border: var(--border-width-2xs) solid var(--color-border-default);
   border-radius: var(--border-radius-s);
+  color: var(--color-on-surface-default);
+
+  &--display {
+    margin-bottom: var(--spacing-6);
+  }
+
+  &--heading {
+    margin-bottom: var(--spacing-4);
+    font-weight: var(--font-weight-semi-bold);
+  }
+
+  &--body {
+    margin-bottom: var(--spacing-4);
+    line-height: 1.6;
+  }
+
+  &--caption {
+    margin-bottom: var(--spacing-4);
+    color: var(--color-on-surface-subtle);
+  }
+
+  &--weight {
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-4xs);
+  }
 
   &__label {
     font-size: var(--font-size-9xs);
@@ -137,6 +246,28 @@
 
   &__text {
     color: var(--color-on-surface-default);
+  }
+
+  &__code {
+    font-size: var(--font-size-8xs);
+    color: var(--color-on-surface-subtle);
+    margin-top: var(--spacing-1);
+    font-family: monospace;
+    font-weight: var(--font-weight-regular);
+  }
+}
+
+// Dynamic font size classes for typography showcase
+@each $size in (3xl, 2xl, xl, l, m, s, xs, 2xs, 3xs, 4xs, 5xs, 6xs, 7xs, 8xs, 9xs) {
+  .typography-sample--size-#{$size} {
+    font-size: var(--font-size-#{$size});
+  }
+}
+
+// Dynamic font weight classes
+@each $weight in (regular, medium, semi-bold, bold) {
+  .typography-sample--weight-#{$weight} {
+    font-weight: var(--font-weight-#{$weight});
   }
 }
 
@@ -175,6 +306,14 @@
   }
 }
 
+// Dynamic spacing box sizes
+@each $size in (1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24) {
+  .spacing-sample__box--#{$size} {
+    width: #{$size * 4}px;
+    height: #{$size * 4}px;
+  }
+}
+
 // Radius Samples
 .radius-samples {
   display: grid;
@@ -192,6 +331,12 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-on-primary);
   border: var(--border-width-2xs) solid var(--color-border-default);
+
+  @each $size in (none, 2xs, xs, s, m, l, xl, 2xl, round) {
+    &--#{$size} {
+      border-radius: var(--border-radius-#{$size});
+    }
+  }
 }
 
 // Shadow Samples
@@ -211,6 +356,45 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-on-surface-default);
   border-radius: var(--border-radius-m);
+
+  @each $size in (xs, s, m, l, xl) {
+    &--#{$size} {
+      box-shadow: var(--shadow-#{$size});
+    }
+  }
+}
+
+// Border Samples
+.border-samples {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.border-sample {
+  height: var(--scale-20);
+  background: var(--color-surface-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-8xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-on-surface-default);
+  border-radius: var(--border-radius-s);
+  border-style: solid;
+  border-color: var(--color-border-default);
+
+  &--1 {
+    border-width: 1px;
+  }
+
+  &--2 {
+    border-width: 2px;
+  }
+
+  &--4 {
+    border-width: 4px;
+  }
 }
 
 // Component Category
@@ -235,6 +419,12 @@
   flex-wrap: wrap;
   gap: var(--spacing-3);
   align-items: center;
+
+  &--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-4);
+  }
 }
 
 // Divider Examples
@@ -248,5 +438,756 @@
     padding: var(--spacing-2) 0;
     color: var(--color-on-surface-default);
     font-size: var(--font-size-7xs);
+  }
+}
+
+// Search Filter Demo Grid
+.search-filter-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-4);
+}
+
+// Style Guide Layout
+.styleguide-layout {
+  display: flex;
+  gap: var(--spacing-6);
+  position: relative;
+}
+
+.styleguide-sidebar {
+  position: sticky;
+  top: var(--spacing-6);
+  height: fit-content;
+  min-width: 200px;
+  // padding handled by sidebar class slightly differently, but we keep custom padding here?
+  // .sidebar has padding: var(--space-5) 0;
+  // .styleguide-sidebar had padding: var(--spacing-4);
+  // Let's defer to sidebar class for consistency or keep it if needed.
+  // Removing background/border/radius as sidebar--light provides them.
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-on-surface-default);
+    margin: 0 0 var(--spacing-4) 0;
+    padding-bottom: var(--spacing-3);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  &__group-title {
+    font-size: var(--font-size-6xs);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-subtle);
+    margin: var(--spacing-4) 0 var(--spacing-2) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+  }
+
+  &__link {
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-8xs);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-on-surface-default);
+    background-color: transparent;
+    border: none;
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+      background-color: var(--color-surface-hover);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+}
+
+.styleguide-content {
+  flex: 1;
+}
+
+.styleguide-divider {
+  margin: var(--spacing-10) 0;
+}
+
+// ============================================
+// Color Swatch Cards (Colors.jsx)
+// ============================================
+.color-swatch-grid {
+  display: grid;
+  gap: var(--spacing-4);
+
+  &--brand {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  &--neutral {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-3);
+  }
+
+  &--feedback {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-3);
+  }
+}
+
+.color-swatch-card {
+  cursor: pointer;
+
+  &__preview {
+    height: 100px;
+
+    &--small {
+      height: 80px;
+    }
+
+    &--bordered {
+      border: 1px solid var(--color-border-default);
+    }
+  }
+
+  &__info {
+    padding: var(--spacing-3);
+
+    &--compact {
+      padding: var(--spacing-2);
+    }
+  }
+
+  &__title {
+    font-size: var(--font-size-7xs);
+    font-weight: var(--font-weight-semi-bold);
+    margin: 0 0 var(--spacing-1) 0;
+    color: var(--color-on-surface-default);
+
+    &--centered {
+      text-align: center;
+    }
+
+    &--small {
+      font-size: var(--font-size-8xs);
+    }
+  }
+
+  &__value {
+    font-size: var(--font-size-9xs);
+    color: var(--color-on-surface-subtle);
+    margin: 0 0 var(--spacing-1) 0;
+    font-family: monospace;
+
+    &--last {
+      margin: 0;
+    }
+
+    &--centered {
+      text-align: center;
+    }
+
+    &--break {
+      word-break: break-all;
+    }
+  }
+}
+
+// ============================================
+// Icon Demo Section (Icons.jsx)
+// ============================================
+.icon-demo {
+  &__subsection-title {
+    margin-top: var(--spacing-8);
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-5xs);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+
+    &--first {
+      margin-top: var(--spacing-6);
+    }
+  }
+
+  &__sizes-grid {
+    display: flex;
+    gap: var(--spacing-4);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+
+  &__size-label {
+    font-size: var(--font-size-9xs);
+    color: var(--color-on-surface-subtle);
+  }
+
+  &__library-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+  }
+
+  &__library-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-5);
+  }
+
+  &__library-info {
+    text-align: center;
+  }
+
+  &__library-name {
+    font-size: var(--font-size-7xs);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+    margin-bottom: var(--spacing-1);
+  }
+
+  &__library-desc {
+    font-size: var(--font-size-9xs);
+    color: var(--color-on-surface-subtle);
+  }
+
+  &__colors-description {
+    font-size: var(--font-size-body-s);
+    color: var(--color-on-surface-subtle);
+    margin-bottom: var(--spacing-4);
+  }
+
+  &__colors-grid {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__color-item {
+    &--primary {
+      color: var(--color-primary);
+    }
+
+    &--success {
+      color: var(--color-feedback-success);
+    }
+
+    &--warning {
+      color: var(--color-feedback-warning);
+    }
+
+    &--error {
+      color: var(--color-feedback-error);
+    }
+
+    &--info {
+      color: var(--color-feedback-info);
+    }
+  }
+
+  &__color-label {
+    font-size: var(--font-size-9xs);
+    margin-top: var(--spacing-1);
+  }
+
+  &__usage-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  &__inline-text {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin: 0;
+    font-size: var(--font-size-7xs);
+  }
+
+  &__btn-with-icon {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+}
+
+// ============================================
+// Modal Demo Section (Modals.jsx)
+// ============================================
+.modal-demo {
+  &__subsection-title {
+    margin-top: var(--spacing-6);
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-5xs);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--spacing-3);
+    flex-wrap: wrap;
+  }
+
+  &__content {
+    margin: 0;
+
+    &--spaced {
+      margin-bottom: var(--spacing-4);
+    }
+
+    &--spaced-top {
+      margin-top: var(--spacing-4);
+      margin-bottom: 0;
+    }
+  }
+}
+
+// ============================================
+// Skeleton Demo Section (Skeletons.jsx)
+// ============================================
+.skeleton-demo {
+  &__variants-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+  }
+
+  &__animations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 400px;
+  }
+
+  &__flex-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__card-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__card-content {
+    flex: 1;
+  }
+
+  &__skeleton-spaced {
+    margin-top: 0.5rem;
+  }
+
+  &__skeleton-mb-sm {
+    margin-bottom: 0.5rem;
+  }
+
+  &__skeleton-mb-md {
+    margin-bottom: 1rem;
+  }
+}
+
+// ============================================
+// Data Display Section (DataDisplaySection.jsx)
+// ============================================
+.status-indicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+
+  &--online {
+    background-color: #10b981;
+  }
+
+  &--offline {
+    background-color: #6b7280;
+  }
+}
+
+// ============================================
+// Contrast Demo Section (Contrast.jsx)
+// ============================================
+.contrast-preview {
+  &--on-surface-subtle {
+    background-color: var(--color-surface-subtle);
+  }
+
+  &--on-inverse {
+    background-color: var(--color-surface-inverse-default);
+  }
+
+  &--border-demo {
+    background-color: var(--color-surface-subtle);
+    border-width: 4px;
+    border-style: solid;
+  }
+
+  &__label-inherit {
+    color: inherit;
+  }
+}
+
+// ============================================
+// Shared Subsection/Category Title
+// ============================================
+.demo-subsection-title {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-3);
+  font-size: var(--font-size-5xs);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-on-surface-default);
+
+  &--first {
+    margin-top: var(--spacing-6);
+  }
+}
+
+.demo-flex-row {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+
+  &--aligned {
+    align-items: center;
+  }
+
+  &--gap-4 {
+    gap: var(--spacing-4);
+  }
+}
+
+.demo-flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.demo-max-width {
+  &--300 {
+    max-width: 300px;
+  }
+
+  &--500 {
+    max-width: 500px;
+  }
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.demo-spaced-top {
+  &--sm {
+    margin-top: var(--spacing-3);
+  }
+
+  &--md {
+    margin-top: var(--spacing-4);
+  }
+
+  &--lg {
+    margin-top: var(--spacing-8);
+  }
+}
+
+.demo-spaced-bottom {
+  &--sm {
+    margin-bottom: var(--spacing-2);
+  }
+
+  &--md {
+    margin-bottom: var(--spacing-4);
+  }
+}
+
+// ============================================
+// Form Demo Section (FormAndInputs.jsx)
+// ============================================
+.form-demo {
+  &__container {
+    max-width: 500px;
+  }
+
+  &__success-alert {
+    margin-bottom: var(--spacing-4);
+  }
+
+  &__success-title {
+    display: block;
+    margin-bottom: var(--spacing-1);
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: var(--spacing-2);
+    font-size: var(--font-size-body-s);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-on-surface-default);
+  }
+
+  &__select {
+    width: 100%;
+    padding: var(--spacing-3);
+    font-size: var(--font-size-body-s);
+    font-family: var(--font-family-sans);
+    color: var(--color-on-surface-default);
+    background-color: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--easing-standard);
+    outline: none;
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+
+    &--error {
+      border-color: var(--color-feedback-error);
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: var(--spacing-3);
+    font-size: var(--font-size-body-s);
+    font-family: var(--font-family-sans);
+    color: var(--color-on-surface-default);
+    background-color: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-s);
+    resize: vertical;
+    min-height: 120px;
+    transition: border-color var(--duration-fast) var(--easing-standard);
+    outline: none;
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+
+    &--error {
+      border-color: var(--color-feedback-error);
+    }
+  }
+
+  &__helper-text {
+    display: block;
+    margin-top: var(--spacing-1);
+    font-size: var(--font-size-caption-s);
+    color: var(--color-on-surface-subtle);
+
+    &--error {
+      color: var(--color-feedback-error);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-3);
+  }
+
+  &__loading-section {
+    margin-top: var(--spacing-8);
+    max-width: 500px;
+  }
+}
+
+// ============================================
+// Dropdown Demo Section (Dropdowns.jsx)
+// ============================================
+.dropdown-demo {
+  &__select-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-3);
+    background-color: var(--color-surface-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-s);
+    font-size: var(--font-size-body-s);
+    color: var(--color-on-surface-default);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+      border-color: var(--color-border-hover);
+    }
+  }
+
+  &__selected-value {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+
+  &__flag {
+    font-size: 20px;
+
+    &--small {
+      font-size: 16px;
+    }
+  }
+}
+
+// ============================================
+// Divider Demo Section (Dividers.jsx)
+// ============================================
+.divider-demo {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+    padding: var(--spacing-6);
+    background-color: var(--color-surface-default);
+    border-radius: var(--border-radius-m);
+    border: 1px solid var(--color-border-default);
+  }
+
+  &__section-title {
+    font-size: var(--font-size-body-s);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-surface-default);
+    margin: 0 0 var(--spacing-3) 0;
+  }
+
+  &__content-text {
+    margin: 0 0 var(--spacing-3) 0;
+    font-size: var(--font-size-caption-m);
+    color: var(--color-on-surface-subtle);
+
+    &--after {
+      margin: var(--spacing-3) 0 0 0;
+    }
+  }
+
+  &__line {
+    width: 100%;
+    margin: var(--spacing-4) 0;
+
+    &--solid {
+      height: 2px;
+      background-color: var(--color-neutral-300);
+    }
+
+    &--dashed {
+      height: 0;
+      border-top: 2px dashed var(--color-neutral-300);
+    }
+
+    &--dotted {
+      height: 0;
+      border-top: 2px dotted var(--color-neutral-300);
+    }
+  }
+}
+
+// ============================================
+// Card Demo Section (Cards.jsx)
+// ============================================
+.card-demo {
+  &__card-title {
+    margin: 0 0 var(--spacing-2) 0;
+    font-size: var(--font-size-body-s);
+  }
+
+  &__card-text {
+    margin: 0;
+    font-size: var(--font-size-caption-m);
+    color: var(--color-on-surface-subtle);
+  }
+
+  &__clickable {
+    cursor: pointer;
+  }
+}
+
+// ============================================
+// Badge Demo Section (Badges.jsx)
+// ============================================
+.badge-demo {
+  &__size-label {
+    font-size: var(--font-size-body-s);
+    color: var(--color-on-surface-subtle);
+    margin-bottom: var(--spacing-2);
+  }
+
+  &__group {
+    margin-bottom: var(--spacing-4);
+  }
+}
+
+// ============================================
+// Alert Demo Section (Alerts.jsx)
+// ============================================
+.alert-demo {
+  &__description {
+    margin-bottom: var(--spacing-4);
+    font-size: var(--font-size-body-s);
+    color: var(--color-on-surface-subtle);
+  }
+
+  &__btn-success {
+    background-color: var(--color-feedback-success-600);
+  }
+
+  &__btn-warning {
+    background-color: var(--color-feedback-warning-600);
+  }
+}
+
+// ============================================
+// Dynamic Color Swatch (eliminates inline styles)
+// Uses CSS custom properties for dynamic colors
+// ============================================
+.swatch-dynamic {
+
+  // Use these CSS custom properties to set colors dynamically
+  // Example: style={{ '--swatch-bg': `var(${token})` }}
+  &--bg {
+    background-color: var(--swatch-bg);
+  }
+
+  &--color {
+    color: var(--swatch-color);
+  }
+
+  &--border {
+    border-color: var(--swatch-border);
+  }
+
+  // Combined variants
+  &--bg-color {
+    background-color: var(--swatch-bg);
+    color: var(--swatch-color);
   }
 }

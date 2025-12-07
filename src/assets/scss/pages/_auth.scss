@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ==========================================================================*/
@@ -44,8 +45,7 @@ body:has(.auth-page) {
   margin-bottom: var(--spacing-8);
 
   h1 {
-    font-size: var(--font-size-headline-xl);
-    font-weight: var(--font-weight-bold);
+    @include typography.typography-responsive('headline', 'l', 'bold');
     color: var(--color-on-surface-default);
     margin: 0;
     line-height: var(--line-height-heading);

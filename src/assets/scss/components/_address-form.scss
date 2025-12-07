@@ -1,3 +1,5 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 /* ────────────────────── ADDRESS FORM COMPONENT ────────────────────── */
 
 .address-form {
@@ -9,7 +11,7 @@
         display: flex;
         align-items: center;
         gap: var(--spacing-2);
-        font-size: var(--font-size-7xs);
+        @include typography.typography-responsive('caption', 's', 'regular');
         margin-bottom: var(--spacing-4);
         flex-wrap: wrap;
     }
@@ -21,7 +23,7 @@
     }
 
     &__breadcrumb-icon {
-        font-size: 1.1em;
+        // font-size handled by parent or icon class
         cursor: help;
     }
 

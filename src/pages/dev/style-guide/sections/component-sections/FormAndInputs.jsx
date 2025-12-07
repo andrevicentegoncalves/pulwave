@@ -65,18 +65,18 @@ export default function FormAndInputs() {
 
   return (
     <div className="component-category">
-      <h3 className="component-category__title">Forms & Inputs</h3>
+      <h3 className="component-category__title">Forms &amp; Inputs</h3>
 
-      <div style={{ maxWidth: '500px' }}>
+      <div className="form-demo__container">
         {showSuccess && (
-          <Alert type="success" variant="modal" style={{ marginBottom: 'var(--space-4)' }}>
-            <strong style={{ display: 'block', marginBottom: 'var(--space-1)' }}>Success!</strong>
+          <Alert type="success" variant="modal" className="form-demo__success-alert">
+            <strong className="form-demo__success-title">Success!</strong>
             Form submitted successfully with all validations passed.
           </Alert>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <div className="form-demo__fields">
             <Input
               label="Full Name"
               name="name"
@@ -125,16 +125,7 @@ export default function FormAndInputs() {
             />
 
             <div className="input-group">
-              <label
-                htmlFor="country"
-                style={{
-                  display: 'block',
-                  marginBottom: 'var(--space-2)',
-                  fontSize: 'var(--font-size-body-s)',
-                  fontWeight: 'var(--font-weight-medium)',
-                  color: 'var(--color-on-surface-default)'
-                }}
-              >
+              <label htmlFor="country" className="form-demo__label">
                 Country *
               </label>
               <select
@@ -143,21 +134,7 @@ export default function FormAndInputs() {
                 value={formData.country}
                 onChange={handleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: 'var(--space-3)',
-                  fontSize: 'var(--font-size-body-s)',
-                  fontFamily: 'var(--font-family-sans)',
-                  color: 'var(--color-on-surface-default)',
-                  backgroundColor: 'var(--color-surface-default)',
-                  border: `1px solid ${errors.country ? 'var(--color-feedback-error)' : 'var(--color-border-default)'}`,
-                  borderRadius: 'var(--border-radius-s)',
-                  cursor: 'pointer',
-                  transition: 'border-color var(--duration-fast) var(--easing-standard)',
-                  outline: 'none'
-                }}
-                onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                onBlur={(e) => e.target.style.borderColor = errors.country ? 'var(--color-feedback-error)' : 'var(--color-border-default)'}
+                className={`form-demo__select ${errors.country ? 'form-demo__select--error' : ''}`}
               >
                 <option value="">Select a country</option>
                 <option value="PT">🇵🇹 Portugal</option>
@@ -169,28 +146,14 @@ export default function FormAndInputs() {
                 <option value="US">🇺🇸 United States</option>
               </select>
               {errors.country && (
-                <span style={{
-                  display: 'block',
-                  marginTop: 'var(--space-1)',
-                  fontSize: 'var(--font-size-caption-s)',
-                  color: 'var(--color-feedback-error)'
-                }}>
+                <span className="form-demo__helper-text form-demo__helper-text--error">
                   {errors.country}
                 </span>
               )}
             </div>
 
             <div className="input-group">
-              <label
-                htmlFor="message"
-                style={{
-                  display: 'block',
-                  marginBottom: 'var(--space-2)',
-                  fontSize: 'var(--font-size-body-s)',
-                  fontWeight: 'var(--font-weight-medium)',
-                  color: 'var(--color-on-surface-default)'
-                }}
-              >
+              <label htmlFor="message" className="form-demo__label">
                 Message *
               </label>
               <textarea
@@ -201,46 +164,21 @@ export default function FormAndInputs() {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: 'var(--space-3)',
-                  fontSize: 'var(--font-size-body-s)',
-                  fontFamily: 'var(--font-family-sans)',
-                  color: 'var(--color-on-surface-default)',
-                  backgroundColor: 'var(--color-surface-default)',
-                  border: `1px solid ${errors.message ? 'var(--color-feedback-error)' : 'var(--color-border-default)'}`,
-                  borderRadius: 'var(--border-radius-s)',
-                  resize: 'vertical',
-                  minHeight: '120px',
-                  transition: 'border-color var(--duration-fast) var(--easing-standard)',
-                  outline: 'none'
-                }}
-                onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                onBlur={(e) => e.target.style.borderColor = errors.message ? 'var(--color-feedback-error)' : 'var(--color-border-default)'}
+                className={`form-demo__textarea ${errors.message ? 'form-demo__textarea--error' : ''}`}
               />
               {errors.message && (
-                <span style={{
-                  display: 'block',
-                  marginTop: 'var(--space-1)',
-                  fontSize: 'var(--font-size-caption-s)',
-                  color: 'var(--color-feedback-error)'
-                }}>
+                <span className="form-demo__helper-text form-demo__helper-text--error">
                   {errors.message}
                 </span>
               )}
               {!errors.message && (
-                <span style={{
-                  display: 'block',
-                  marginTop: 'var(--space-1)',
-                  fontSize: 'var(--font-size-caption-s)',
-                  color: 'var(--color-on-surface-subtle)'
-                }}>
+                <span className="form-demo__helper-text">
                   Maximum 500 characters
                 </span>
               )}
             </div>
 
-            <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+            <div className="form-demo__actions">
               <button
                 type="button"
                 className="btn btn--secondary"
@@ -260,13 +198,13 @@ export default function FormAndInputs() {
         </form>
       </div>
 
-      <div style={{ marginTop: 'var(--space-8)', maxWidth: '500px' }}>
+      <div className="form-demo__loading-section">
         <h4 className="component-category__subtitle">Loading States</h4>
         <p className="component-category__description">
           Inputs and Selects support a <code>loading</code> prop to show a skeleton state.
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <div className="demo-flex-col">
           <Input
             label="Username"
             placeholder="Loading..."

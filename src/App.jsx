@@ -1,7 +1,5 @@
 // src/App.jsx
 import './assets/scss/main.scss';
-import { useEffect, useState } from 'react';
-import { supabase } from './lib/supabaseClient';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import BaseLayout from './components/layouts/BaseLayout';
 import Auth from './pages/auth/Auth';
@@ -13,78 +11,88 @@ import Settings from './pages/app/settings/index';
 import ProfileOnboarding from './pages/app/onboarding/ProfileOnboarding';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastProvider';
+import { QueryClientProvider } from './contexts/QueryClientProvider';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
-function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+// Admin Backoffice
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/dashboard/index';
+import AdminUsers from './pages/admin/users/index';
+import AdminTranslations from './pages/admin/translations/index';
+import AdminAuditLogs from './pages/admin/audit-logs/index';
+import AdminPermissions from './pages/admin/permissions/index';
+import AdminSettings from './pages/admin/settings/index';
+import AdminFeatureFlags from './pages/admin/feature-flags/index';
+import AdminRetention from './pages/admin/retention/index';
+import AdminConfiguration from './pages/admin/configuration/index';
+import AdminMasterData from './pages/admin/master-data/index';
 
-  useEffect(() => {
-    // Check for dev bypass
-    const devBypass = localStorage.getItem('dev_bypass');
-    if (devBypass) {
-      setUser({ id: 'dev', email: 'dev@example.com' });
-      setLoading(false);
-      return;
-    }
-
-    // Get current session
-    supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Listen to auth changes
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => listener.subscription.unsubscribe();
-  }, []);
+const AppContent = () => {
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh'
-      }}>
+      <div className="app-loading">
         Loading...
       </div>
     );
   }
 
   return (
-    <ThemeProvider user={user}>
-      <ToastProvider>
-        <Router>
-          <Routes>
-            {/* Public Route */}
-            <Route
-              path="/auth"
-              element={!user ? <Auth /> : <Navigate to="/" replace />}
-            />
+    <Router>
+      <Routes>
+        {/* Public Route */}
+        <Route
+          path="/auth"
+          element={!user ? <Auth /> : <Navigate to="/" replace />}
+        />
 
-            {/* Protected Routes with Base Layout */}
-            <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
-              <Route path="/" element={<Hub />} />
-              <Route path="/assets" element={<Assets />} />
-              <Route path="/buildings/new" element={<BuildingForm />} />
-              <Route path="/buildings/:id/edit" element={<BuildingForm />} />
-              <Route path="/onboarding" element={<ProfileOnboarding />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/style-guide" element={<StyleGuide />} />
-            </Route>
+        {/* Admin Backoffice Routes */}
+        <Route path="/admin" element={user ? <AdminLayout /> : <Navigate to="/auth" replace />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="translations" element={<AdminTranslations />} />
+          <Route path="audit-logs" element={<AdminAuditLogs />} />
+          <Route path="permissions" element={<AdminPermissions />} />
+          <Route path="settings" element={<AdminSettings />} />
+          <Route path="feature-flags" element={<AdminFeatureFlags />} />
+          <Route path="retention" element={<AdminRetention />} />
+          <Route path="configuration" element={<AdminConfiguration />} />
+          <Route path="master-data" element={<AdminMasterData />} />
+        </Route>
 
-            {/* Catch all - redirect to home or auth */}
-            <Route
-              path="*"
-              element={<Navigate to={user ? "/" : "/auth"} replace />}
-            />
-          </Routes>
-        </Router>
-      </ToastProvider>
-    </ThemeProvider>
+        {/* Protected Routes with Base Layout */}
+        <Route element={user ? <BaseLayout /> : <Navigate to="/auth" replace />}>
+          <Route path="/" element={<Hub />} />
+          <Route path="/assets" element={<Assets />} />
+          <Route path="/buildings/new" element={<BuildingForm />} />
+          <Route path="/buildings/:id/edit" element={<BuildingForm />} />
+          <Route path="/onboarding" element={<ProfileOnboarding />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/style-guide" element={<StyleGuide />} />
+        </Route>
+
+        {/* Catch all - redirect to home or auth */}
+        <Route
+          path="*"
+          element={<Navigate to={user ? "/" : "/auth"} replace />}
+        />
+      </Routes>
+    </Router>
+  );
+};
+
+function App() {
+  return (
+    <QueryClientProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <ToastProvider>
+            <AppContent />
+          </ToastProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

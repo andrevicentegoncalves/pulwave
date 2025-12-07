@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ==========================================================================*/
@@ -155,8 +156,7 @@
 
         // Title/Name
         .list-item-title {
-            font-size: var(--font-size-7xs); // 14px
-            font-weight: 600;
+            @include typography.typography-responsive('body', 's', 'semi-bold'); // 14px
             color: var(--color-neutral-9);
             margin: 0;
             overflow: hidden;
@@ -164,13 +164,14 @@
             white-space: nowrap;
 
             @include bp-down('m') {
-                font-size: var(--font-size-8xs); // 13px approx
+                // Responsive handled by mixin ideally, but here manual override was present
+                font-size: var(--font-size-8xs); // Keep manual override if semantic mixin doesn't match exactly or rely on mixin's responsiveness
             }
         }
 
         // Subtitle/Description
         .list-item-subtitle {
-            font-size: var(--font-size-caption-m); // 12px
+            @include typography.typography-responsive('caption', 'm', 'regular'); // 14px
             color: var(--color-neutral-6);
             margin: 0;
             overflow: hidden;
@@ -178,7 +179,7 @@
             white-space: nowrap;
 
             @include bp-down('m') {
-                font-size: var(--font-size-caption-s); // 11px
+                font-size: var(--font-size-caption-s); // 13px
             }
         }
 
@@ -186,12 +187,12 @@
         .list-item-meta {
             display: flex;
             gap: var(--spacing-m);
-            font-size: var(--font-size-caption-m); // 12px
+            @include typography.typography-responsive('caption', 'm', 'regular');
             color: var(--color-neutral-7);
 
             @include bp-down('m') {
                 gap: var(--spacing-s);
-                font-size: var(--font-size-caption-s); // 11px
+                font-size: var(--font-size-caption-s);
                 flex-wrap: wrap;
             }
 
@@ -276,7 +277,7 @@
 
             p {
                 margin: 0;
-                font-size: var(--font-size-7xs); // 14px
+                @include typography.typography-responsive('body', 's', 'regular');
             }
         }
     }
@@ -305,7 +306,7 @@
         }
 
         .list-item-title {
-            font-size: var(--font-size-8xs); // 13px
+            @include typography.typography-responsive('caption', 's', 'semi-bold'); // 13px
 
             @include bp-down('m') {
                 font-size: var(--font-size-caption-m); // 12px
@@ -313,7 +314,7 @@
         }
 
         .list-item-subtitle {
-            font-size: var(--font-size-caption-s); // 11px
+            @include typography.typography-responsive('caption', '2xs', 'regular'); // 11px
 
             @include bp-down('m') {
                 font-size: var(--font-size-caption-xs); // 10px

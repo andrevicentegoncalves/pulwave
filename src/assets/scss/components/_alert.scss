@@ -1,4 +1,6 @@
 @use '../abstracts/mixins/foundation/breakpoints' as bp;
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
 
 /* ────────────────────── ALERT COMPONENT ────────────────────── */
 
@@ -9,7 +11,7 @@
   padding: var(--spacing-4);
   border-radius: var(--border-radius-m);
   font-family: var(--font-family-sans);
-  font-size: var(--font-size-7xs);
+  @include typography.typography-responsive('body', 's', 'regular');
   transition: var(--transition-smooth);
   position: relative;
 

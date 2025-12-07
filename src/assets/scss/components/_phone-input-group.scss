@@ -1,0 +1,50 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
+// ============================================================================ //
+//                       PHONE INPUT GROUP COMPONENT                            //
+// ============================================================================ //
+// Grouped phone input with country code selector and number field
+
+.phone-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    &__label {
+        @include typography.typography-responsive('body', 's', 'medium');
+        color: var(--color-on-surface);
+    }
+
+    &__inputs {
+        display: flex;
+        gap: var(--space-2);
+        align-items: flex-start;
+    }
+
+    &__code {
+        width: 140px;
+        flex-shrink: 0;
+    }
+
+    &__number {
+        flex: 1;
+    }
+
+    &__error {
+        @include typography.typography-responsive('caption', 'm', 'regular');
+        color: var(--color-error);
+        margin-top: var(--space-1);
+    }
+
+    // Responsive - stack on very small screens
+    @media (max-width: 400px) {
+        &__inputs {
+            flex-direction: column;
+        }
+
+        &__code {
+            width: 100%;
+        }
+    }
+}

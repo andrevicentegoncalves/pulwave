@@ -8,14 +8,14 @@ import { AlertCircle, CheckCircle, AlertTriangle, XCircle, XClose } from './icon
  * Alert Component with Icon support
  * Uses design system tokens and Icon component for consistent sizing
  */
-const Alert = ({ 
-  type = 'info', 
-  children, 
+const Alert = ({
+  type = 'info',
+  children,
   variant = 'inline',
   dismissible = false,
   onDismiss,
   iconSize = 's',
-  className 
+  className
 }) => {
   const iconMap = {
     info: <AlertCircle />,
@@ -25,7 +25,7 @@ const Alert = ({
   };
 
   return (
-    <div 
+    <div
       className={clsx(
         'alert',
         `alert--${type}`,
@@ -40,11 +40,11 @@ const Alert = ({
           {iconMap[type]}
         </Icon>
       </div>
-      
+
       <div className="alert__content">
         {children}
       </div>
-      
+
       {dismissible && (
         <button
           className="alert__close"

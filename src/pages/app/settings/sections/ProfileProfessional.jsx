@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Select } from '../../../../components/ui';
-import Icon from '../../../../components/ui/Icon';
+import { Card, Input, Select, SectionHeader } from '../../../../components/ui';
 import { Building } from '../../../../components/ui/iconLibrary';
+import { USER_TYPE, USER_TYPE_OPTIONS } from '../../../../constants';
 
 const ProfessionalSection = ({ formData, onChange, onSelectChange, loading = false }) => {
     return (
         <div className="profile-section">
-            <h2 className="profile-section__title">
-                <Icon size="l">
-                    <Building />
-                </Icon>
-                Professional
-            </h2>
+            <SectionHeader icon={Building} title="Professional" />
             <div className="profile-section__cards">
                 {/* General Card */}
                 <Card header={<h3>General</h3>}>
@@ -20,20 +15,9 @@ const ProfessionalSection = ({ formData, onChange, onSelectChange, loading = fal
                         <div className="form-item--full">
                             <Select
                                 label="User Type"
-                                value={formData.user_type || 'homeowner'}
+                                value={formData.user_type || USER_TYPE.HOMEOWNER}
                                 onChange={(val) => onSelectChange('user_type', val)}
-                                options={[
-                                    { value: 'homeowner', label: 'Homeowner' },
-                                    { value: 'contractor', label: 'Contractor' },
-                                    { value: 'vendor', label: 'Vendor' },
-                                    { value: 'real_estate_agent', label: 'Real Estate Agent' },
-                                    { value: 'broker', label: 'Broker' },
-                                    { value: 'investor', label: 'Investor' },
-                                    { value: 'developer', label: 'Developer' },
-                                    { value: 'manager', label: 'Manager' },
-                                    { value: 'designer', label: 'Designer' },
-                                    { value: 'admin', label: 'Admin' },
-                                ]}
+                                options={USER_TYPE_OPTIONS}
                                 fullWidth
                                 searchable
                                 loading={loading}

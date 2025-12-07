@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ==========================================================================*/
@@ -14,15 +15,14 @@
   }
 
   &__title {
-    font-size: var(--font-size-headline-xl);
-    font-weight: var(--font-weight-bold);
+    @include typography.typography-responsive('headline', 'l', 'bold');
     color: var(--color-on-surface-default);
     margin: 0 0 var(--spacing-2) 0;
     line-height: var(--line-height-heading);
   }
 
   &__subtitle {
-    font-size: var(--font-size-6xs);
+    @include typography.typography-responsive('body', 'm', 'regular');
     color: var(--color-on-surface-subtle);
     margin: 0;
   }
@@ -47,14 +47,13 @@
     }
 
     h3 {
-      font-size: var(--font-size-headline-m);
-      font-weight: var(--font-weight-semi-bold);
+      @include typography.typography-responsive('headline', 's', 'semi-bold');
       color: var(--color-on-surface-default);
       margin: 0;
     }
 
     p {
-      font-size: var(--font-size-6xs);
+      @include typography.typography-responsive('body', 'm', 'regular');
       color: var(--color-on-surface-subtle);
       margin: 0 0 var(--spacing-6) 0;
     }
@@ -92,16 +91,14 @@
   }
 
   &__title {
-    font-size: var(--font-size-headline-s);
-    font-weight: var(--font-weight-semi-bold);
+    @include typography.typography-responsive('title', 'm', 'semi-bold');
     color: var(--color-on-surface-default);
     margin: 0;
   }
 
   &__status {
     padding: var(--spacing-1) var(--spacing-3);
-    font-size: var(--font-size-caption-s);
-    font-weight: var(--font-weight-medium);
+    @include typography.typography-responsive('caption', 's', 'medium');
     border-radius: var(--radius-xs);
     text-transform: capitalize;
 
@@ -136,7 +133,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('caption', 'm', 'regular');
     color: var(--color-on-surface-subtle);
   }
 
@@ -144,14 +141,12 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    font-size: var(--font-size-7xs);
+    @include typography.typography-responsive('caption', 'm', 'medium');
     color: var(--color-on-surface-default);
-    font-weight: var(--font-weight-medium);
   }
 
   &__rent {
-    font-size: var(--font-size-headline-s);
-    font-weight: var(--font-weight-bold);
+    @include typography.typography-responsive('title', 'm', 'bold');
     color: var(--color-primary);
     padding-top: var(--spacing-2);
   }

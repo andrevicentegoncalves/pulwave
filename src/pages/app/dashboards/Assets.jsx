@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
-import { Card, Button, Alert } from '../../../components/ui';
-import Icon from '../../../components/ui/Icon';
-import { Building, Home, Plus, Edit, Trash2, MapPin, TrendingUp, DollarSign, Percent } from '../../../components/ui/iconLibrary';
+import { Card, Button, Alert, KpiCard, EmptyState, ConfirmationModal, Icon } from '../../../components/ui';
+import { Building, Home, Plus, Edit, Trash2, MapPin, DollarSign, Percent } from '../../../components/ui/iconLibrary';
 import ContentLayout from '../../../components/layouts/ContentLayout';
 
 const Assets = () => {
@@ -13,6 +12,7 @@ const Assets = () => {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [deleteModal, setDeleteModal] = useState({ isOpen: false, type: null, id: null, name: '' });
 
     useEffect(() => {
         fetchData();
@@ -27,18 +27,18 @@ const Assets = () => {
                 const { data: buildingsData, error: buildingsError } = await supabase
                     .from('buildings')
                     .select(`
-            *,
-            address:addresses (
-              *,
-              city:cities (
-                *,
-                country:countries (*)
-              )
-            ),
-            building_owners!inner (
-              owner_id
-            )
-          `)
+                        *,
+                        address:addresses (
+                            *,
+                            city:cities (
+                                *,
+                                country:countries (*)
+                            )
+                        ),
+                        building_owners!inner (
+                            owner_id
+                        )
+                    `)
                     .eq('building_owners.owner_id', user.id)
                     .order('created_at', { ascending: false });
 
@@ -49,21 +49,21 @@ const Assets = () => {
                 const { data: propertiesData, error: propertiesError } = await supabase
                     .from('units')
                     .select(`
-            *,
-            building:buildings (
-              *,
-              address:addresses (
-                *,
-                city:cities (
-                  *,
-                  country:countries (*)
-                )
-              )
-            ),
-            unit_owners!inner (
-              owner_id
-            )
-          `)
+                        *,
+                        building:buildings (
+                            *,
+                            address:addresses (
+                                *,
+                                city:cities (
+                                    *,
+                                    country:countries (*)
+                                )
+                            )
+                        ),
+                        unit_owners!inner (
+                            owner_id
+                        )
+                    `)
                     .eq('unit_owners.owner_id', user.id)
                     .order('created_at', { ascending: false });
 
@@ -78,31 +78,47 @@ const Assets = () => {
         }
     };
 
-    const handleDeleteBuilding = async (id, name) => {
-        if (!window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
-            return;
-        }
-        try {
-            const { error } = await supabase.from('buildings').delete().eq('id', id);
-            if (error) throw error;
-            setBuildings(buildings.filter(b => b.id !== id));
-        } catch (err) {
-            console.error('Error deleting building:', err);
-            alert('Failed to delete building. It may have associated properties.');
-        }
+    const confirmDeleteBuilding = (id, name) => {
+        setDeleteModal({
+            isOpen: true,
+            type: 'building',
+            id,
+            name,
+            title: 'Delete Building',
+            message: `Are you sure you want to delete "${name}"? This action cannot be undone.`
+        });
     };
 
-    const handleDeleteProperty = async (id, unitNumber) => {
-        if (!window.confirm(`Are you sure you want to delete Unit ${unitNumber}? This action cannot be undone.`)) {
-            return;
-        }
+    const confirmDeleteProperty = (id, unitNumber) => {
+        setDeleteModal({
+            isOpen: true,
+            type: 'property',
+            id,
+            name: `Unit ${unitNumber}`,
+            title: 'Delete Unit',
+            message: `Are you sure you want to delete Unit ${unitNumber}? This action cannot be undone.`
+        });
+    };
+
+    const handleDelete = async () => {
+        const { type, id } = deleteModal;
+        if (!type || !id) return;
+
         try {
-            const { error } = await supabase.from('units').delete().eq('id', id);
-            if (error) throw error;
-            setProperties(properties.filter(p => p.id !== id));
+            if (type === 'building') {
+                const { error } = await supabase.from('buildings').delete().eq('id', id);
+                if (error) throw error;
+                setBuildings(buildings.filter(b => b.id !== id));
+            } else if (type === 'property') {
+                const { error } = await supabase.from('units').delete().eq('id', id);
+                if (error) throw error;
+                setProperties(properties.filter(p => p.id !== id));
+            }
         } catch (err) {
-            console.error('Error deleting property:', err);
-            alert('Failed to delete property.');
+            console.error(`Error deleting ${type}:`, err);
+            setError(`Failed to delete ${type}. ${type === 'building' ? 'It may have associated properties.' : ''}`);
+        } finally {
+            setDeleteModal({ isOpen: false, type: null, id: null, name: '' });
         }
     };
 
@@ -116,7 +132,7 @@ const Assets = () => {
     if (loading) {
         return (
             <ContentLayout title="Assets Overview">
-                <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>Loading assets...</div>
+                <div className="assets-page__loading">Loading assets...</div>
             </ContentLayout>
         );
     }
@@ -126,7 +142,7 @@ const Assets = () => {
             title="Assets Overview"
             subtitle="Manage your real estate portfolio and performance"
             actions={
-                <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+                <div className="assets-page__actions">
                     <Button variant="secondary" size="m" onClick={() => navigate('/buildings/new')}>
                         <Icon size="s"><Plus /></Icon> Add Building
                     </Button>
@@ -139,141 +155,88 @@ const Assets = () => {
             {error && <Alert type="error" dismissible onDismiss={() => setError(null)}>{error}</Alert>}
 
             {/* KPI Section */}
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: 'var(--space-4)',
-                marginBottom: 'var(--space-8)'
-            }}>
-                <Card variant="elevated" style={{ padding: 'var(--space-4)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>
-                        <div style={{ padding: '8px', borderRadius: '8px', background: 'var(--color-primary-container)', color: 'var(--color-primary)' }}>
-                            <Icon size="m"><Building /></Icon>
-                        </div>
-                        <span style={{ color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>Total Buildings</span>
-                    </div>
-                    <div style={{ fontSize: 'var(--font-size-h3)', fontWeight: 'bold' }}>{totalBuildings}</div>
-                </Card>
-
-                <Card variant="elevated" style={{ padding: 'var(--space-4)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>
-                        <div style={{ padding: '8px', borderRadius: '8px', background: 'var(--color-secondary-container)', color: 'var(--color-secondary)' }}>
-                            <Icon size="m"><Home /></Icon>
-                        </div>
-                        <span style={{ color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>Total Units</span>
-                    </div>
-                    <div style={{ fontSize: 'var(--font-size-h3)', fontWeight: 'bold' }}>{totalUnits}</div>
-                </Card>
-
-                <Card variant="elevated" style={{ padding: 'var(--space-4)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>
-                        <div style={{ padding: '8px', borderRadius: '8px', background: 'var(--color-success-container)', color: 'var(--color-success)' }}>
-                            <Icon size="m"><Percent /></Icon>
-                        </div>
-                        <span style={{ color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>Occupancy Rate</span>
-                    </div>
-                    <div style={{ fontSize: 'var(--font-size-h3)', fontWeight: 'bold' }}>{occupancyRate}%</div>
-                    <div style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-on-surface-subtle)' }}>{occupiedUnits} occupied units</div>
-                </Card>
-
-                <Card variant="elevated" style={{ padding: 'var(--space-4)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>
-                        <div style={{ padding: '8px', borderRadius: '8px', background: 'var(--color-tertiary-container)', color: 'var(--color-tertiary)' }}>
-                            <Icon size="m"><DollarSign /></Icon>
-                        </div>
-                        <span style={{ color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>Potential Revenue</span>
-                    </div>
-                    <div style={{ fontSize: 'var(--font-size-h3)', fontWeight: 'bold' }}>${totalPotentialRent.toLocaleString()}</div>
-                    <div style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-on-surface-subtle)' }}>per month</div>
-                </Card>
+            <div className="assets-kpi-grid">
+                <KpiCard
+                    icon={<Building />}
+                    label="Total Buildings"
+                    value={totalBuildings}
+                    colorScheme="primary"
+                    loading={loading}
+                />
+                <KpiCard
+                    icon={<Home />}
+                    label="Total Units"
+                    value={totalUnits}
+                    colorScheme="secondary"
+                    loading={loading}
+                />
+                <KpiCard
+                    icon={<Percent />}
+                    label="Occupancy Rate"
+                    value={`${occupancyRate}%`}
+                    subtext={`${occupiedUnits} occupied units`}
+                    colorScheme="success"
+                    loading={loading}
+                />
+                <KpiCard
+                    icon={<DollarSign />}
+                    label="Potential Revenue"
+                    value={`$${totalPotentialRent.toLocaleString()}`}
+                    subtext="per month"
+                    colorScheme="tertiary"
+                    loading={loading}
+                />
             </div>
 
             {/* Tabs */}
-            <div style={{ marginBottom: 'var(--space-6)', borderBottom: '1px solid var(--color-border)' }}>
+            <div className="assets-tabs">
                 <button
                     onClick={() => setActiveTab('buildings')}
-                    style={{
-                        padding: 'var(--space-3) var(--space-6)',
-                        background: 'none',
-                        border: 'none',
-                        borderBottom: activeTab === 'buildings' ? '2px solid var(--color-primary)' : '2px solid transparent',
-                        color: activeTab === 'buildings' ? 'var(--color-primary)' : 'var(--color-on-surface-subtle)',
-                        fontWeight: activeTab === 'buildings' ? 'bold' : 'normal',
-                        cursor: 'pointer',
-                        fontSize: 'var(--font-size-body-m)'
-                    }}
+                    className={`assets-tabs__tab ${activeTab === 'buildings' ? 'assets-tabs__tab--active' : ''}`}
                 >
                     Buildings
                 </button>
                 <button
                     onClick={() => setActiveTab('units')}
-                    style={{
-                        padding: 'var(--space-3) var(--space-6)',
-                        background: 'none',
-                        border: 'none',
-                        borderBottom: activeTab === 'units' ? '2px solid var(--color-primary)' : '2px solid transparent',
-                        color: activeTab === 'units' ? 'var(--color-primary)' : 'var(--color-on-surface-subtle)',
-                        fontWeight: activeTab === 'units' ? 'bold' : 'normal',
-                        cursor: 'pointer',
-                        fontSize: 'var(--font-size-body-m)'
-                    }}
+                    className={`assets-tabs__tab ${activeTab === 'units' ? 'assets-tabs__tab--active' : ''}`}
                 >
                     Units
                 </button>
             </div>
 
-            {/* Content */}
+            {/* Buildings Content */}
             {activeTab === 'buildings' && (
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                    gap: 'var(--space-6)'
-                }}>
+                <div className="assets-grid">
                     {buildings.map((building) => (
-                        <Card key={building.id} variant="elevated" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                            <div style={{ marginBottom: 'var(--space-4)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2)' }}>
-                                    <h3 style={{ margin: 0, fontSize: 'var(--font-size-h4)' }}>{building.name}</h3>
-                                    <span style={{
-                                        fontSize: 'var(--font-size-caption)',
-                                        padding: '2px 8px',
-                                        borderRadius: '12px',
-                                        background: 'var(--color-surface-variant)',
-                                        color: 'var(--color-on-surface-subtle)'
-                                    }}>
+                        <Card key={building.id} variant="elevated" className="building-card">
+                            <div className="building-card__header">
+                                <div className="building-card__title-row">
+                                    <h3 className="building-card__name">{building.name}</h3>
+                                    <span className="building-card__type-badge">
                                         {building.building_type}
                                     </span>
                                 </div>
 
-                                <div style={{ display: 'flex', alignItems: 'center', color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>
-                                    <Icon size="s" style={{ marginRight: 'var(--space-2)' }}><MapPin /></Icon>
-                                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                <div className="building-card__location">
+                                    <Icon size="s"><MapPin /></Icon>
+                                    <span>
                                         {building.address?.city?.name}, {building.address?.city?.country?.name}
                                     </span>
                                 </div>
                             </div>
 
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: '1fr 1fr',
-                                gap: 'var(--space-2)',
-                                marginBottom: 'var(--space-6)',
-                                padding: 'var(--space-3)',
-                                background: 'var(--color-surface-variant)',
-                                borderRadius: 'var(--radius-m)',
-                                fontSize: 'var(--font-size-caption)'
-                            }}>
-                                <div style={{ textAlign: 'center' }}>
-                                    <strong style={{ display: 'block', fontSize: 'var(--font-size-h4)' }}>{building.total_units || 0}</strong>
-                                    <span style={{ color: 'var(--color-on-surface-subtle)' }}>Units</span>
+                            <div className="building-card__stats">
+                                <div className="building-card__stats-item">
+                                    <strong>{building.total_units || 0}</strong>
+                                    <span>Units</span>
                                 </div>
-                                <div style={{ textAlign: 'center' }}>
-                                    <strong style={{ display: 'block', fontSize: 'var(--font-size-h4)' }}>{building.total_floors || 0}</strong>
-                                    <span style={{ color: 'var(--color-on-surface-subtle)' }}>Floors</span>
+                                <div className="building-card__stats-item">
+                                    <strong>{building.total_floors || 0}</strong>
+                                    <span>Floors</span>
                                 </div>
                             </div>
 
-                            <div style={{ marginTop: 'auto', display: 'flex', gap: 'var(--space-3)' }}>
+                            <div className="building-card__actions">
                                 <Button
                                     variant="secondary"
                                     size="s"
@@ -285,8 +248,8 @@ const Assets = () => {
                                 <Button
                                     variant="ghost"
                                     size="s"
-                                    onClick={() => handleDeleteBuilding(building.id, building.name)}
-                                    style={{ color: 'var(--color-error)' }}
+                                    className="building-card__delete-btn"
+                                    onClick={() => confirmDeleteBuilding(building.id, building.name)}
                                 >
                                     <Icon size="s"><Trash2 /></Icon>
                                 </Button>
@@ -294,87 +257,66 @@ const Assets = () => {
                         </Card>
                     ))}
                     {buildings.length === 0 && (
-                        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: 'var(--space-8)', color: 'var(--color-on-surface-subtle)' }}>
-                            No buildings found. Add your first building to get started.
-                        </div>
+                        <EmptyState
+                            icon={<Building />}
+                            title="No Buildings Yet"
+                            description="Add your first building to get started."
+                            className="assets-empty"
+                        />
                     )}
                 </div>
             )}
 
+            {/* Units Content */}
             {activeTab === 'units' && (
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                    gap: 'var(--space-6)'
-                }}>
+                <div className="assets-grid">
                     {properties.map((property) => (
-                        <Card key={property.id} variant="elevated" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                            <div style={{ marginBottom: 'var(--space-4)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2)' }}>
-                                    <h3 style={{ margin: 0, fontSize: 'var(--font-size-h4)' }}>
+                        <Card key={property.id} variant="elevated" className="unit-card">
+                            <div className="unit-card__header">
+                                <div className="unit-card__title-row">
+                                    <h3 className="unit-card__name">
                                         Unit {property.unit_number}
                                     </h3>
-                                    <span style={{
-                                        fontSize: 'var(--font-size-caption)',
-                                        padding: '2px 8px',
-                                        borderRadius: '12px',
-                                        background: property.status === 'vacant' ? 'var(--color-success-container)' : 'var(--color-surface-variant)',
-                                        color: property.status === 'vacant' ? 'var(--color-on-success-container)' : 'var(--color-on-surface-subtle)',
-                                        textTransform: 'capitalize'
-                                    }}>
+                                    <span className={`unit-card__status-badge unit-card__status-badge--${property.status}`}>
                                         {property.status}
                                     </span>
                                 </div>
 
-                                <div style={{ display: 'flex', alignItems: 'center', color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)', marginBottom: 'var(--space-1)' }}>
-                                    <Icon size="s" style={{ marginRight: 'var(--space-2)' }}><Building /></Icon>
-                                    <span style={{ fontWeight: 'bold' }}>{property.building?.name}</span>
+                                <div className="unit-card__building">
+                                    <Icon size="s"><Building /></Icon>
+                                    <span>{property.building?.name}</span>
                                 </div>
 
-                                <div style={{ display: 'flex', alignItems: 'center', color: 'var(--color-on-surface-subtle)', fontSize: 'var(--font-size-body-s)' }}>
-                                    <Icon size="s" style={{ marginRight: 'var(--space-2)' }}><MapPin /></Icon>
-                                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                <div className="unit-card__location">
+                                    <Icon size="s"><MapPin /></Icon>
+                                    <span>
                                         {property.building?.address?.city?.name}, {property.building?.address?.city?.country?.name}
                                     </span>
                                 </div>
                             </div>
 
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: '1fr 1fr 1fr',
-                                gap: 'var(--space-2)',
-                                marginBottom: 'var(--space-6)',
-                                padding: 'var(--space-3)',
-                                background: 'var(--color-surface-variant)',
-                                borderRadius: 'var(--radius-m)',
-                                fontSize: 'var(--font-size-caption)'
-                            }}>
-                                <div style={{ textAlign: 'center' }}>
-                                    <strong style={{ display: 'block', fontSize: 'var(--font-size-body-m)' }}>{property.bedrooms || '-'}</strong>
-                                    <span style={{ color: 'var(--color-on-surface-subtle)' }}>Bed</span>
+                            <div className="unit-card__stats">
+                                <div className="unit-card__stats-item">
+                                    <strong>{property.bedrooms || '-'}</strong>
+                                    <span>Bed</span>
                                 </div>
-                                <div style={{ textAlign: 'center' }}>
-                                    <strong style={{ display: 'block', fontSize: 'var(--font-size-body-m)' }}>{property.bathrooms || '-'}</strong>
-                                    <span style={{ color: 'var(--color-on-surface-subtle)' }}>Bath</span>
+                                <div className="unit-card__stats-item">
+                                    <strong>{property.bathrooms || '-'}</strong>
+                                    <span>Bath</span>
                                 </div>
-                                <div style={{ textAlign: 'center' }}>
-                                    <strong style={{ display: 'block', fontSize: 'var(--font-size-body-m)' }}>{property.square_meters || '-'}</strong>
-                                    <span style={{ color: 'var(--color-on-surface-subtle)' }}>m²</span>
+                                <div className="unit-card__stats-item">
+                                    <strong>{property.square_meters || '-'}</strong>
+                                    <span>m²</span>
                                 </div>
                             </div>
 
                             {property.monthly_rent && (
-                                <div style={{
-                                    marginBottom: 'var(--space-4)',
-                                    fontSize: 'var(--font-size-h4)',
-                                    fontWeight: 'bold',
-                                    color: 'var(--color-primary)'
-                                }}>
-                                    ${property.monthly_rent.toLocaleString()}<span style={{ fontSize: 'var(--font-size-body-s)', color: 'var(--color-on-surface-subtle)', fontWeight: 'normal' }}>/mo</span>
+                                <div className="unit-card__price">
+                                    ${property.monthly_rent.toLocaleString()}<span>/mo</span>
                                 </div>
                             )}
 
-                            <div style={{ marginTop: 'auto', display: 'flex', gap: 'var(--space-3)' }}>
+                            <div className="unit-card__actions">
                                 <Button
                                     variant="secondary"
                                     size="s"
@@ -386,8 +328,8 @@ const Assets = () => {
                                 <Button
                                     variant="ghost"
                                     size="s"
-                                    onClick={() => handleDeleteProperty(property.id, property.unit_number)}
-                                    style={{ color: 'var(--color-error)' }}
+                                    className="unit-card__delete-btn"
+                                    onClick={() => confirmDeleteProperty(property.id, property.unit_number)}
                                 >
                                     <Icon size="s"><Trash2 /></Icon>
                                 </Button>
@@ -395,12 +337,26 @@ const Assets = () => {
                         </Card>
                     ))}
                     {properties.length === 0 && (
-                        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: 'var(--space-8)', color: 'var(--color-on-surface-subtle)' }}>
-                            No units found. Add your first unit to a building.
-                        </div>
+                        <EmptyState
+                            icon={<Home />}
+                            title="No Units Yet"
+                            description="Add your first unit to a building."
+                            className="assets-empty"
+                        />
                     )}
                 </div>
             )}
+
+            {/* Delete Confirmation Modal */}
+            <ConfirmationModal
+                isOpen={deleteModal.isOpen}
+                onClose={() => setDeleteModal({ isOpen: false, type: null, id: null, name: '' })}
+                onConfirm={handleDelete}
+                title={deleteModal.title}
+                message={deleteModal.message}
+                confirmText="Delete"
+                variant="danger"
+            />
         </ContentLayout>
     );
 };

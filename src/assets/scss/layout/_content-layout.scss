@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 // ============================================================================ //
@@ -44,15 +45,14 @@
 }
 
 .content-layout__title {
-    font-size: var(--font-size-title-m); // 32px
-    font-weight: var(--font-weight-bold);
+    @include typography.typography-responsive('title', 'm', 'bold'); // 32px
     color: var(--color-on-surface);
     margin: 0 0 var(--spacing-2) 0;
     line-height: var(--line-height-tight);
 }
 
 .content-layout__subtitle {
-    font-size: var(--font-size-6xs);
+    @include typography.typography-responsive('body', 'm', 'regular');
     color: var(--color-on-surface-subtle);
     margin: 0;
     line-height: var(--line-height-base);

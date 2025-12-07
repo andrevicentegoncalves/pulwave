@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ========================================================================== */
@@ -139,12 +140,11 @@
 }
 
 .card-grid__empty-title {
-  font-size: var(--font-size-5xs);
-  font-weight: var(--font-weight-semi-bold);
+  @include typography.typography-responsive('label', 'm', 'semi-bold');
   color: var(--color-on-surface-default);
 }
 
 .card-grid__empty-description {
-  font-size: var(--font-size-7xs);
+  @include typography.typography-responsive('caption', 'm', 'regular');
   line-height: var(--line-height-normal);
 }

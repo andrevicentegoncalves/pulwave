@@ -1,0 +1,82 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
+// ============================================================================ //
+// SIDEBAR SECTION COMPONENT
+// ============================================================================ //
+// A generic sidebar sub-navigation component used within cards or panels.
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar-section__header {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+
+    h3 {
+        margin: 0;
+        @include typography.typography-responsive('label', 's', 'semi-bold'); // 13px
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+}
+
+.sidebar-section__nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-section__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-4);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    background: transparent;
+    border-bottom: 1px solid var(--color-border-subtle);
+    transition: all var(--duration-fast) var(--easing-standard);
+    color: var(--color-text-secondary);
+    @include typography.typography-responsive('body', 'm', 'regular'); // 14px
+
+    &:hover {
+        background-color: var(--color-background-hover);
+        color: var(--color-text-primary);
+    }
+
+    &--active {
+        background-color: var(--color-primary-subtle);
+        color: var(--color-primary);
+        font-weight: var(--font-weight-medium);
+        border-left: 3px solid var(--color-primary);
+        padding-left: calc(var(--spacing-4) - 3px); // Compensate border
+
+        // Ensure icons use primary color when active
+        svg {
+            stroke: var(--color-primary);
+        }
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.sidebar-section__label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// ============================================================================ //
+// SIDEBAR SECTION LAYOUT
+// ============================================================================ //
+// Layout styles moved to src/assets/scss/layout/_section-layout.scss

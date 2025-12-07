@@ -8,13 +8,14 @@ export const DropdownContext = React.createContext({
 
 export const useDropdown = () => React.useContext(DropdownContext);
 
-export const Dropdown = ({ trigger, children, align = 'left' }) => {
+export const Dropdown = ({ trigger, children, align = 'left', disabled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const handleToggle = useCallback(() => {
+    if (disabled) return;
     setIsOpen(prev => !prev);
-  }, []);
+  }, [disabled]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);

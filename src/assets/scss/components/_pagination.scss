@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 /* ==========================================================================*/
@@ -20,10 +21,9 @@
     // Pagination counter (showing X-Y of Z items)
     &__counter {
         color: var(--color-neutral-7);
-        font-size: var(--font-size-9xs);
+        @include typography.typography-responsive('caption', 's', 'regular');
 
         @include bp-down(s) {
-            font-size: var(--font-size-9xs);
             order: 2; // Show below buttons on mobile
         }
     }
@@ -48,25 +48,21 @@
         justify-content: center;
         min-width: var(--scale-8); // 32px
         height: var(--scale-8);
-        padding: 0 var(--spacing-s);
+        padding: 0; // Remove horizontal padding for perfect circle
         background-color: var(--color-neutral-0);
         border: var(--border-width-1) solid var(--color-neutral-4);
-        border-radius: var(--border-radius-soft);
+        border-radius: 50%; // Circular
         color: var(--color-neutral-8);
-        font-size: var(--font-size-9xs);
+        @include typography.typography-responsive('caption', 's', 'regular');
         cursor: pointer;
         transition: all 0.2s ease;
         user-select: none;
+        flex-shrink: 0;
 
         // Tablet & Mobile: larger touch targets
         @include bp-down(m) {
             min-width: var(--scale-10); // 40px
             height: var(--scale-10);
-        }
-
-        // Mobile: even larger
-        @include bp-down(s) {
-            font-size: var(--font-size-9xs);
         }
 
         // Hover state (desktop only)
@@ -129,13 +125,12 @@
         align-items: center;
         gap: var(--spacing-s);
         margin-left: var(--spacing-m);
-        font-size: var(--font-size-9xs);
+        @include typography.typography-responsive('caption', 's', 'regular');
         color: var(--color-neutral-7);
 
         @include bp-down(s) {
             margin-left: 0;
             margin-top: var(--spacing-s);
-            font-size: var(--font-size-9xs);
         }
     }
 
@@ -146,7 +141,7 @@
         text-align: center;
         border: var(--border-width-1) solid var(--color-neutral-4);
         border-radius: var(--border-radius-soft);
-        font-size: var(--font-size-9xs);
+        @include typography.typography-responsive('caption', 's', 'regular');
         color: var(--color-neutral-8);
         background-color: var(--color-neutral-0);
         transition: border-color 0.2s ease;

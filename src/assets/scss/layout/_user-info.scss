@@ -1,4 +1,5 @@
 @use '../abstracts/mixins/foundation/breakpoints' as bp;
+@use '../abstracts/mixins/foundation/typography' as typography;
 
 // ============================================================================ //
 //                         USER INFO COMPONENT STYLES                           //
@@ -42,8 +43,7 @@
 
 .user-info__name {
   color: var(--color-on-primary); // White text
-  font-size: var(--font-size-6xs); // 16px
-  font-weight: var(--font-weight-semi-bold); // 600
+  @include typography.typography-responsive('label', 'm', 'semi-bold'); // 16px
   line-height: var(--line-height-tight); // 1.25
   white-space: nowrap;
   overflow: hidden;
@@ -52,7 +52,7 @@
 
 .user-info__email {
   color: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-muted) * 100%)); // Subtle white
-  font-size: var(--font-size-caption-m); // 12px
+  @include typography.typography-responsive('caption', 'm', 'regular'); // 12px
   line-height: var(--line-height-tight); // 1.25
   white-space: nowrap;
   overflow: hidden;
@@ -162,11 +162,11 @@
   }
 
   .user-info__name {
-    font-size: var(--font-size-7xs); // 14px
+    @include typography.typography-responsive('label', 's', 'semi-bold'); // 14px
   }
 
   .user-info__email {
-    font-size: var(--font-size-caption-s); // 11px
+    @include typography.typography-responsive('caption', 's', 'regular'); // 11px
   }
 }
 
@@ -191,11 +191,11 @@
   }
 
   .user-info__name {
-    font-size: var(--font-size-5xs); // 18px
+    @include typography.typography-responsive('title', 's', 'semi-bold'); // 18px
   }
 
   .user-info__email {
-    font-size: var(--font-size-caption-l); // 14px
+    @include typography.typography-responsive('body', 'm', 'regular'); // 14px
   }
 }
 

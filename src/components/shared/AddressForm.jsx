@@ -1,29 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Input, Tooltip } from '../ui';
+import { Card, Input, Tooltip, ChevronDown } from '../ui';
 import { CountriesSelect, AddressAutocomplete } from '../forms';
-import { supabase } from '../../lib/supabaseClient';
 
-/**
- * AddressForm Component
- * Country → District → Street → Auto-populate everything
- */
-
-// Simple Chevron Down Icon
-const ChevronDown = () => (
-    <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-    >
-        <path d="M6 9l6 6 6-6" />
-    </svg>
-);
+import { lookupService } from '../../services/lookupService';
+import { addressService } from '../../services/addressService';
 
 const AddressForm = ({
     value = {},
@@ -43,12 +24,7 @@ const AddressForm = ({
                 return;
             }
 
-            const { data } = await supabase
-                .from('countries')
-                .select('id, name, iso_code_2')
-                .eq('id', value.country_id)
-                .single();
-
+            const data = await lookupService.getCountryById(value.country_id);
             setSelectedCountry(data);
         };
 
@@ -62,26 +38,11 @@ const AddressForm = ({
         }
 
         const addr = value.nominatim_data.address;
-        console.log('Nominatim address data:', addr);
         const hierarchy = [];
-
-        const districtToRegion = {
-            'Viana do Castelo': 'Norte', 'Braga': 'Norte', 'Porto': 'Norte', 'Vila Real': 'Norte', 'Bragança': 'Norte',
-            'Aveiro': 'Centro', 'Viseu': 'Centro', 'Guarda': 'Centro', 'Coimbra': 'Centro', 'Castelo Branco': 'Centro', 'Leiria': 'Centro',
-            'Lisboa': 'Lisboa', 'Santarém': 'Lisboa', 'Setúbal': 'Lisboa',
-            'Portalegre': 'Alentejo', 'Évora': 'Alentejo', 'Beja': 'Alentejo',
-            'Faro': 'Algarve',
-            'Açores': 'Açores',
-            'Madeira': 'Madeira',
-            'Lisbon': 'Lisboa'
-        };
 
         // District is in county field
         const districtName = addr.county;
-        let regionName = null;
-        if (districtName && districtToRegion[districtName]) {
-            regionName = districtToRegion[districtName];
-        }
+        const regionName = addressService.getRegionFromDistrict(districtName);
 
         if (regionName) hierarchy.push({ name: regionName, type: 'Region', level: 1 });
 
@@ -107,7 +68,6 @@ const AddressForm = ({
             hierarchy.push({ name: parish, type: 'Parish', level: 5 });
         }
 
-        console.log('Built hierarchy:', hierarchy);
         setHierarchyDisplay(hierarchy);
     }, [value.nominatim_data]);
 
@@ -237,13 +197,8 @@ const AddressForm = ({
                             as="select"
                             disabled={disabled}
                             fullWidth
-                            rightIcon={<ChevronDown />}
-                            style={{
-                                appearance: 'none',
-                                WebkitAppearance: 'none',
-                                MozAppearance: 'none',
-                                cursor: 'pointer'
-                            }}
+                            rightIcon={<ChevronDown size={20} />}
+                            className="form-input--select-custom"
                         >
                             <option value="home">Home</option>
                             <option value="work">Work</option>

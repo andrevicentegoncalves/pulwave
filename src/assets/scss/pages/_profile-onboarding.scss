@@ -1,3 +1,4 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
 @use '../abstracts' as *;
 
 // Profile Onboarding Styles
@@ -6,92 +7,6 @@
     margin: 0 auto;
     padding: var(--spacing-6) var(--spacing-4);
 
-    .onboarding-progress {
-        margin-bottom: var(--spacing-6);
-
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--spacing-3);
-            position: relative;
-
-            .progress-step {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: var(--spacing-1);
-                flex: 1;
-                position: relative;
-                z-index: 1;
-
-                .step-circle {
-                    width: var(--scale-10);
-                    height: var(--scale-10);
-                    border-radius: 50%;
-                    background: var(--color-background);
-                    border: var(--border-width-xs) solid var(--color-border);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all var(--transition-normal);
-                    color: var(--color-text-secondary);
-                }
-
-                .step-title {
-                    font-size: var(--font-size-xxs);
-                    color: var(--color-text-secondary);
-                    font-weight: var(--font-weight-medium);
-                    text-align: center;
-                }
-
-                &.active {
-                    .step-circle {
-                        border-color: var(--color-primary);
-                        background: var(--color-primary-light);
-                        color: var(--color-primary);
-                    }
-
-                    .step-title {
-                        color: var(--color-primary);
-                    }
-                }
-
-                &.completed {
-                    .step-circle {
-                        border-color: var(--color-success);
-                        background: var(--color-success);
-                        color: var(--color-neutral-0);
-                    }
-
-                    .step-title {
-                        color: var(--color-success);
-                    }
-                }
-            }
-        }
-
-        .progress-bar {
-            height: var(--border-width-m);
-            background: var(--color-border);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-            position: relative;
-
-            .progress-fill {
-                height: 100%;
-                background: var(--color-primary);
-                transition: width var(--transition-slow);
-                border-radius: var(--radius-full);
-            }
-        }
-    }
-
-    .onboarding-card {
-        min-height: var(--scale-88);
-        display: flex;
-        flex-direction: column;
-    }
-
     .onboarding-step {
         flex: 1;
         display: flex;
@@ -99,15 +14,14 @@
         gap: var(--spacing-3);
 
         h3 {
-            font-size: var(--font-size-l);
-            font-weight: var(--font-weight-semibold);
+            @include typography.typography-responsive('headline', 's', 'semi-bold');
             color: var(--color-text-primary);
             margin: 0 0 var(--spacing-1) 0;
         }
 
         .step-description {
             color: var(--color-text-secondary);
-            font-size: var(--font-size-s);
+            @include typography.typography-responsive('body', 's', 'regular');
             margin: 0 0 var(--spacing-3) 0;
         }
 
@@ -143,15 +57,14 @@
                 margin-top: var(--spacing-4);
 
                 h4 {
-                    font-size: var(--font-size-m);
-                    font-weight: var(--font-weight-semibold);
+                    @include typography.typography-responsive('title', 's', 'semi-bold');
                     margin: 0 0 var(--spacing-3) 0;
                     color: var(--color-text-primary);
                 }
 
                 p {
                     margin: var(--spacing-1) 0;
-                    font-size: var(--font-size-s);
+                    @include typography.typography-responsive('body', 's', 'regular');
                     color: var(--color-text-secondary);
 
                     strong {
@@ -163,37 +76,12 @@
             }
         }
     }
-
-    .onboarding-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: var(--spacing-3);
-        margin-top: var(--spacing-4);
-        padding-top: var(--spacing-4);
-        border-top: var(--border-width-2xs) solid var(--color-border);
-    }
 }
 
 // Responsive
 @include bp-down(s) {
     .profile-onboarding {
         padding: var(--spacing-4) var(--spacing-2);
-
-        .onboarding-progress {
-            .progress-steps {
-                .progress-step {
-                    .step-circle {
-                        width: var(--scale-9);
-                        height: var(--scale-9);
-                    }
-
-                    .step-title {
-                        font-size: var(--font-size-9xs);
-                    }
-                }
-            }
-        }
 
         .onboarding-step {
             .form-row-two {

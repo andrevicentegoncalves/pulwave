@@ -10,15 +10,9 @@ export default function Modals() {
   return (
     <div className="component-category">
       <h3 className="component-category__title">Modals</h3>
-      
-      <h4 style={{ 
-        marginTop: 'var(--space-6)', 
-        marginBottom: 'var(--space-3)',
-        fontSize: 'var(--font-size-5xs)',
-        fontWeight: 'var(--font-weight-semi-bold)',
-        color: 'var(--color-on-surface-default)'
-      }}>Modal Sizes</h4>
-      <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+
+      <h4 className="modal-demo__subsection-title">Modal Sizes</h4>
+      <div className="modal-demo__buttons">
         <button className="btn btn--primary" onClick={() => setShowBasicModal(true)}>
           Open Basic Modal
         </button>
@@ -33,33 +27,33 @@ export default function Modals() {
         </button>
       </div>
 
-      <Modal 
-        isOpen={showBasicModal} 
+      <Modal
+        isOpen={showBasicModal}
         onClose={() => setShowBasicModal(false)}
         title="Basic Modal"
         size="md"
       >
-        <p style={{ margin: 0 }}>
+        <p className="modal-demo__content">
           This is a basic modal dialog with a title and close button. Click outside the modal or press ESC to close it.
         </p>
       </Modal>
 
-      <Modal 
-        isOpen={showLargeModal} 
+      <Modal
+        isOpen={showLargeModal}
         onClose={() => setShowLargeModal(false)}
         title="Large Modal"
         size="lg"
       >
-        <p style={{ marginBottom: 'var(--space-4)' }}>
+        <p className="modal-demo__content modal-demo__content--spaced">
           This is a large modal that takes up more screen space. Perfect for forms or detailed content.
         </p>
-        <p style={{ margin: 0 }}>
+        <p className="modal-demo__content">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </Modal>
 
-      <Modal 
-        isOpen={showModalWithFooter} 
+      <Modal
+        isOpen={showModalWithFooter}
         onClose={() => setShowModalWithFooter(false)}
         title="Confirm Action"
         footer={
@@ -76,13 +70,13 @@ export default function Modals() {
           </>
         }
       >
-        <p style={{ margin: 0 }}>
+        <p className="modal-demo__content">
           Are you sure you want to proceed with this action? This cannot be undone.
         </p>
       </Modal>
 
-      <Modal 
-        isOpen={showAlertModal} 
+      <Modal
+        isOpen={showAlertModal}
         onClose={() => setShowAlertModal(false)}
         title="Important Notice"
       >
@@ -90,7 +84,7 @@ export default function Modals() {
           <strong>Warning</strong><br />
           This modal contains an alert using the "modal" variant, which has no left border.
         </Alert>
-        <p style={{ marginTop: 'var(--space-4)', marginBottom: 0 }}>
+        <p className="modal-demo__content modal-demo__content--spaced-top">
           Modal alerts are designed to integrate seamlessly within modal dialogs by removing the left border.
         </p>
       </Modal>

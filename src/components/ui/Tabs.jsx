@@ -104,5 +104,7 @@ export const TabPanel = ({ children, label }) => {
 
 TabPanel.propTypes = {
   children: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
+
+export default Tabs;

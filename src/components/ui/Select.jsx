@@ -64,6 +64,7 @@ const Select = ({
         <div className={`form-item ${fullWidth ? 'form-item--full-width' : ''} ${className}`}>
             {label && <label htmlFor={selectId} className="form-label">{label}</label>}
             <Dropdown
+                disabled={disabled}
                 trigger={
                     <Input
                         id={selectId}

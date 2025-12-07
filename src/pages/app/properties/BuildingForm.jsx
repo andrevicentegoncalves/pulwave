@@ -30,8 +30,7 @@ const BuildingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Building data:', formData);
-    // Add your save logic here
+    // TODO: Add save logic here
   };
 
   return (
@@ -87,7 +86,7 @@ const BuildingForm = () => {
           />
         </div>
 
-        <div style={{ marginTop: '24px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+        <div className="building-form__actions">
           <Button type="button" variant="secondary">
             Cancel
           </Button>

@@ -1,0 +1,52 @@
+// ============================================================================ //
+// SECTION LAYOUT
+// ============================================================================ //
+// Layout for pages using the sidebar section (e.g., Master Data, Settings)
+
+.section-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr; // Increased width (280px -> 380px)
+    gap: var(--spacing-6);
+    align-items: start;
+    min-height: 100vh; // Ensure layout fills screen
+    transition: grid-template-columns var(--duration-comfortable) var(--easing-standard); // Smooth transition
+
+    &--collapsed {
+        grid-template-columns: 80px 1fr; // Collapsed width
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+
+        &--collapsed {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__sidebar {
+        /* Sidebar container specific styles */
+        min-width: 0; // Prevent flex/grid overflow issues
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden; // ScrollArea handles the scroll
+        z-index: 50;
+
+        // Ensure Card fills the height
+        >.card {
+            height: 100%;
+
+            .card__body {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                padding: 0; // Reset padding if needed for edge-to-edge scroll
+            }
+        }
+    }
+
+    &__content {
+        /* Content container specific styles if needed */
+        min-width: 0; // Prevent flex/grid overflow issues
+    }
+}

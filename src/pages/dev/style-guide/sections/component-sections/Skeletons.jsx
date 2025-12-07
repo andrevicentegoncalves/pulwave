@@ -19,16 +19,16 @@ const Skeletons = () => {
                     </p>
 
                     <div className="component-example__demo">
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
+                        <div className="skeleton-demo__variants-container">
                             <div>
                                 <p className="text-sm text-secondary mb-2">Text (Default)</p>
                                 <Skeleton variant="text" width="100%" height="20px" />
-                                <Skeleton variant="text" width="80%" height="20px" style={{ marginTop: '0.5rem' }} />
+                                <Skeleton variant="text" width="80%" height="20px" className="skeleton-demo__skeleton-spaced" />
                             </div>
 
                             <div>
                                 <p className="text-sm text-secondary mb-2">Circular</p>
-                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                <div className="skeleton-demo__flex-row">
                                     <Skeleton variant="circular" width={40} height={40} />
                                     <Skeleton variant="circular" width={64} height={64} />
                                 </div>
@@ -54,7 +54,7 @@ const Skeletons = () => {
                     </p>
 
                     <div className="component-example__demo">
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '400px' }}>
+                        <div className="skeleton-demo__animations-container">
                             <div>
                                 <p className="text-sm text-secondary mb-2">Pulse (Default)</p>
                                 <Skeleton variant="rectangular" width="100%" height={60} animation="pulse" className="border-radius-m" />
@@ -82,15 +82,15 @@ const Skeletons = () => {
                     <div className="component-example__demo">
                         <CardGrid columns={2}>
                             <Card>
-                                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                                <div className="skeleton-demo__card-header">
                                     <Skeleton variant="circular" width={48} height={48} />
-                                    <div style={{ flex: 1 }}>
-                                        <Skeleton variant="text" width="60%" height="20px" style={{ marginBottom: '0.5rem' }} />
+                                    <div className="skeleton-demo__card-content">
+                                        <Skeleton variant="text" width="60%" height="20px" className="skeleton-demo__skeleton-mb-sm" />
                                         <Skeleton variant="text" width="40%" height="16px" />
                                     </div>
                                 </div>
-                                <Skeleton variant="rectangular" width="100%" height={120} style={{ marginBottom: '1rem' }} />
-                                <Skeleton variant="text" width="100%" height="16px" style={{ marginBottom: '0.5rem' }} />
+                                <Skeleton variant="rectangular" width="100%" height={120} className="skeleton-demo__skeleton-mb-md" />
+                                <Skeleton variant="text" width="100%" height="16px" className="skeleton-demo__skeleton-mb-sm" />
                                 <Skeleton variant="text" width="80%" height="16px" />
                             </Card>
                         </CardGrid>

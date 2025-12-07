@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Check } from 'lucide-react';
-import { Button, Card, CardGrid, Skeleton } from '../ui';
-import { supabase } from '../../lib/supabaseClient';
+import { Button, Card, CardGrid, Skeleton, Check } from '../ui';
+import { paymentService } from '../../services';
 
 const SubscriptionPlans = () => {
   const [plans, setPlans] = useState([]);
@@ -12,14 +11,7 @@ const SubscriptionPlans = () => {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
-          .from('subscription_plans')
-          .select('*')
-          .eq('is_active', true)
-          .order('display_order', { ascending: true });
-
-        if (error) throw error;
-
+        const data = await paymentService.getSubscriptionPlans();
         setPlans(data || []);
       } catch (err) {
         console.error('Error fetching subscription plans:', err);

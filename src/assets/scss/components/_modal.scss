@@ -1,5 +1,8 @@
 @use '../abstracts' as *;
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
 // src/assets/scss/components/_modal.scss
 
 /* ────────────────────── MODAL COMPONENT ────────────────────── */
@@ -81,10 +84,8 @@
 
   &__title {
     margin: 0;
-    font-size: var(--font-size-title-m);
-    font-weight: var(--font-weight-semibold);
+    @include typography.typography-responsive('title', 'm', 'semi-bold');
     color: var(--color-on-surface-default);
-    line-height: var(--line-height-title);
   }
 
   &__close {
@@ -99,7 +100,7 @@
     border-radius: var(--border-radius-s);
     cursor: pointer;
     color: var(--color-on-surface-subtle);
-    font-size: var(--font-size-title-s);
+    @include typography.typography-responsive('title', 's', 'regular');
     transition: var(--transition-smooth);
     flex-shrink: 0;
 
@@ -119,7 +120,7 @@
     overflow-y: auto;
     flex-grow: 1;
     color: var(--color-on-surface-variant);
-    font-size: var(--font-size-6xs);
+    @include typography.typography-responsive('body', 'm', 'regular');
     line-height: var(--line-height-body);
 
     @include bp-down('s') {

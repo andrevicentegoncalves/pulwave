@@ -72,7 +72,7 @@ const IconSelectContent = ({
                         onClick={handleAutoLocateClick}
                         disabled={locating}
                         fullWidth
-                        style={{ justifyContent: 'flex-start' }}
+                        className="btn--align-start"
                     >
                         <Icon size="s"><MapPin /></Icon>
                         {locating ? 'Locating...' : 'Locate automatically'}
@@ -95,15 +95,10 @@ const IconSelectContent = ({
                                 onClick={() => handleOptionClick(optionValue)}
                                 icon={optionIcon}
                             >
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    width: '100%'
-                                }}>
+                                <div className="dropdown-item__content">
                                     <span>{optionLabel}</span>
                                     {value === optionValue && (
-                                        <Icon size="s" style={{ color: 'var(--primary-color)' }}>
+                                        <Icon size="s" className="icon--primary">
                                             <Check />
                                         </Icon>
                                     )}
@@ -215,7 +210,7 @@ const IconSelect = ({
             {label && <label htmlFor={selectId} className="form-label">{label}</label>}
             <Dropdown
                 trigger={
-                    <div style={{ position: 'relative', width: '100%' }}>
+                    <div className="dropdown-trigger-wrapper">
                         <Input
                             id={selectId}
                             name={name}

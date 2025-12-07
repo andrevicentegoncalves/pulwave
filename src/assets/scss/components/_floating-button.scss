@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../abstracts/mixins/foundation/typography' as typography;
 
 /* ========================================================================== */
 /*                     COMPONENT: FLOATING ACTION BUTTON                      */
@@ -103,19 +104,19 @@
   &:hover {
     background: var(--color-primary-7);
     box-shadow: 0 var(--scale-2) var(--scale-6) color-mix(in srgb, var(--color-neutral-950), transparent calc(100% - var(--opacity-medium) * 100%));
-    transform: #{unquote('scale(1.08)')};
+    transform: scale(1.08);
   }
 
   // Active state (pressed)
   &:active {
-    transform: #{unquote('scale(0.95)')};
+    transform: scale(0.95);
     box-shadow: var(--shadow-m);
   }
 
   // Active state (when expanded)
   &--active {
     background: var(--color-neutral-8);
-    transform: #{unquote('rotate(45deg)')};
+    transform: rotate(45deg);
 
     .fab__icon {
       color: var(--color-on-surface-inverse);
@@ -123,7 +124,7 @@
 
     &:hover {
       background: var(--color-neutral-9);
-      transform: #{unquote('rotate(45deg) scale(1.08)')};
+      transform: rotate(45deg) scale(1.08);
     }
   }
 
@@ -180,8 +181,7 @@
   }
 
   .fab-action__label {
-    font-size: var(--font-size-7xs);
-    font-weight: var(--font-weight-medium);
+    @include typography.typography-responsive('body', 's', 'medium');
     color: var(--color-on-surface-default);
   }
 
@@ -193,13 +193,13 @@
     border-color: var(--color-primary-3);
 
     .fab-action__icon {
-      transform: #{unquote('scale(1.1)')};
+      transform: scale(1.1);
     }
   }
 
   // Active state
   &:active {
-    transform: translateX(-2px) translateY(0) #{unquote('scale(0.98)')};
+    transform: translateX(-2px) translateY(0) scale(0.98);
     box-shadow: var(--shadow-m);
   }
 

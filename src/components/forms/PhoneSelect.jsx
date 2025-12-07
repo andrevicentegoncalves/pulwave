@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { lookupService } from '../../services/lookupService';
 import { Input, Skeleton } from '../ui';
 import { getUserCountry } from '../../utils/geolocation';
 import PropTypes from 'prop-types';
@@ -55,13 +55,9 @@ const PhoneSelect = ({
         const fetchCountries = async () => {
             try {
                 setInternalLoading(true);
-                const { data, error } = await supabase
-                    .from('countries')
-                    .select('id, name, iso_code_2, phone_code')
-                    .not('phone_code', 'is', null) // Only countries with phone codes
-                    .order('name');
+                const data = await lookupService.getCountriesWithPhoneCodes();
 
-                if (error) throw error;
+
 
                 setCountries(data || []);
             } catch (err) {

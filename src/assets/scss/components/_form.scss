@@ -1,5 +1,7 @@
 @use '../abstracts' as *;
 
+@use '../abstracts/mixins/foundation/typography' as typography;
+
 // src/assets/scss/components/_form.scss
 
 /* ────────────────────── FORM COMPONENT ────────────────────── */
@@ -153,7 +155,7 @@
   border: var(--border-width-1) solid var(--color-feedback-error);
   border-left: var(--border-width-l) solid var(--color-feedback-error);
   border-radius: var(--border-radius-s);
-  font-size: var(--font-size-7xs);
+  @include typography.typography-responsive('caption', 's', 'regular');
   margin-bottom: var(--scale-4);
 }
 
@@ -165,6 +167,53 @@
   border: var(--border-width-1) solid var(--color-feedback-success);
   border-left: var(--border-width-l) solid var(--color-feedback-success);
   border-radius: var(--border-radius-s);
-  font-size: var(--font-size-7xs);
+  @include typography.typography-responsive('caption', 's', 'regular');
   margin-bottom: var(--scale-4);
+}
+
+// ── COUNTRY FLAG CIRCLE ──
+// Used in LocaleSelect and CountriesSelect to display flags in circular containers
+.country-flag-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+
+  // Flag SVG inside (expanded to fill circle)
+  svg,
+  img {
+    width: 150%;
+    height: auto;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  // Size variants
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  &--lg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// ── CUSTOM SELECT INPUT ──
+.form-input--select-custom {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 }

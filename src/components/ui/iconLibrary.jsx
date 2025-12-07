@@ -26,8 +26,11 @@ export const AlertTriangle = LucideIcons.AlertTriangle;
 export const XCircle = LucideIcons.XCircle;
 export const InfoCircle = LucideIcons.Info;
 export const Info = LucideIcons.Info;
+export const HelpCircle = LucideIcons.CircleHelp;
 export const Check = LucideIcons.Check;
 export const XClose = LucideIcons.X;
+export const X = LucideIcons.X; // Added alias
+export const CheckCircle2 = LucideIcons.CheckCircle2; // Added
 export const Spinner = LucideIcons.Loader2;
 
 // ============================================================================
@@ -36,6 +39,7 @@ export const Spinner = LucideIcons.Loader2;
 
 export const Home = LucideIcons.Home;
 export const User = LucideIcons.User;
+export const Users = LucideIcons.Users;
 export const Camera = LucideIcons.Camera;
 export const Settings = LucideIcons.Settings;
 
@@ -60,6 +64,7 @@ export const Plus = LucideIcons.Plus;
 export const Minus = LucideIcons.Minus;
 export const Search = LucideIcons.Search;
 export const Filter = LucideIcons.Filter;
+export const GripVertical = LucideIcons.GripVertical; // Added
 
 // ============================================================================
 // BUILDING & REAL ESTATE ICONS
@@ -166,12 +171,20 @@ export const Key = LucideIcons.Key;
 export const Heart = LucideIcons.Heart;
 export const Star = LucideIcons.Star;
 export const ThumbsUp = LucideIcons.ThumbsUp;
+export const Shield = LucideIcons.Shield; // Added
+export const RefreshCw = LucideIcons.RefreshCw; // Added
+export const Building2 = LucideIcons.Building2; // Added
+export const Wallet = LucideIcons.Wallet; // Added
+export const Smartphone = LucideIcons.Smartphone; // Added
+export const Bitcoin = LucideIcons.Bitcoin; // Added
 
 // ============================================================================
 // MISC ICONS
 // ============================================================================
 
 export const Zap = LucideIcons.Zap;
+export const Activity = LucideIcons.Activity;
+export const ToggleRight = LucideIcons.ToggleRight;
 export const Wifi = LucideIcons.Wifi;
 export const Battery = LucideIcons.Battery;
 export const Globe = LucideIcons.Globe;
@@ -180,6 +193,16 @@ export const Award = LucideIcons.Award;
 export const Trash = LucideIcons.Trash;
 export const Trash2 = LucideIcons.Trash2;
 export const Percent = LucideIcons.Percent;
+export const Languages = LucideIcons.Languages;
+export const Database = LucideIcons.Database;
+export const Type = LucideIcons.Type;
+export const FileJson = LucideIcons.FileJson;
+export const UserX = LucideIcons.UserX;
+export const Edit2 = LucideIcons.Edit2;
+export const ToggleLeft = LucideIcons.ToggleLeft;
+export const History = LucideIcons.History;
+
+export const Tag = LucideIcons.Tag;
 
 // ============================================================================
 // AMENITIES ICONS

@@ -1,3 +1,6 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
 @use '../abstracts' as *;
 
 /* ========================================================================== */
@@ -18,8 +21,7 @@
 
 .textarea__label {
   // Typography
-  font-size: var(--font-size-7xs);
-  font-weight: var(--font-weight-medium);
+  @include typography.typography-responsive('label', 's', 'medium');
   line-height: var(--line-height-tight);
 
   // Required indicator
@@ -45,7 +47,7 @@
   border-radius: var(--border-radius-xl);
   padding: var(--spacing-3) var(--spacing-6);
   font-family: var(--font-family-sans);
-  font-size: var(--font-size-6xs);
+  @include typography.typography-responsive('body', 'm', 'regular');
   line-height: var(--line-height-body);
   color: var(--color-neutral-800);
   resize: vertical;
@@ -152,7 +154,7 @@
 
 .textarea__helper {
   // Typography
-  font-size: var(--font-size-8xs);
+  @include typography.typography-responsive('caption', 's', 'regular');
   line-height: var(--line-height-normal);
   color: var(--color-neutral-500);
   display: block;
@@ -174,7 +176,7 @@
 
 .textarea__count {
   // Typography
-  font-size: var(--font-size-8xs);
+  @include typography.typography-responsive('caption', 's', 'regular');
   color: var(--color-neutral-500);
   text-align: right;
   white-space: nowrap;

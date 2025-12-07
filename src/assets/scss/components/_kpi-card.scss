@@ -1,0 +1,74 @@
+@use '../abstracts/mixins/foundation/typography' as typography;
+@use '../abstracts' as *;
+
+// ============================================================================ //
+//                            KPI CARD COMPONENT                                //
+// ============================================================================ //
+// Compact KPI display card for dashboard grids
+
+.kpi-card {
+    padding: var(--space-4);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-2);
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-10);
+        height: var(--scale-10);
+        border-radius: var(--radius-s);
+
+        // Color variants
+        &--primary {
+            background: var(--color-primary-container);
+            color: var(--color-primary);
+        }
+
+        &--secondary {
+            background: var(--color-secondary-container);
+            color: var(--color-secondary);
+        }
+
+        &--success {
+            background: var(--color-success-container);
+            color: var(--color-success);
+        }
+
+        &--warning {
+            background: var(--color-warning-container);
+            color: var(--color-warning);
+        }
+
+        &--error {
+            background: var(--color-error-container);
+            color: var(--color-error);
+        }
+
+        &--tertiary {
+            background: var(--color-tertiary-container);
+            color: var(--color-tertiary);
+        }
+    }
+
+    &__label {
+        @include typography.typography-responsive('body', 's', 'regular');
+        color: var(--color-on-surface-subtle);
+    }
+
+    &__value {
+        @include typography.typography-responsive('headline', 's', 'bold');
+        color: var(--color-on-surface);
+    }
+
+    &__subtext {
+        @include typography.typography-responsive('caption', 'm', 'regular');
+        color: var(--color-on-surface-subtle);
+        margin-top: var(--space-1);
+    }
+}

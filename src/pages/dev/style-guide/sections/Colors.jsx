@@ -10,11 +10,7 @@ export default function Colors({ copyToClipboard }) {
       {/* Primary Colors */}
       <div className="color-category">
         <h3 className="color-category__title">Primary (Emerald Green)</h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-          gap: 'var(--space-4)'
-        }}>
+        <div className="color-swatch-grid color-swatch-grid--brand">
           {[
             { name: 'Primary', token: '--color-primary', hsl: 'hsl(160, 94%, 30%)', star: true },
             { name: 'Primary Subtle', token: '--color-primary-subtle', hsl: 'hsl(160, 94%, 98%)' },
@@ -27,36 +23,21 @@ export default function Colors({ copyToClipboard }) {
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="color-swatch-card"
               onClick={() => copyToClipboard(`var(${token})`)}
             >
-              <div style={{
-                height: '100px',
-                backgroundColor: `var(${token})`
-              }} />
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{
-                  fontSize: 'var(--font-size-7xs)',
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div
+                className="color-swatch-card__preview swatch-dynamic--bg"
+                style={{ '--swatch-bg': `var(${token})` }}
+              />
+              <div className="color-swatch-card__info">
+                <h4 className="color-swatch-card__title">
                   {name} {star ? '⭐' : ''}
                 </h4>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0',
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value">
                   {hsl}
                 </p>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value color-swatch-card__value--last">
                   var({token})
                 </p>
               </div>
@@ -68,11 +49,7 @@ export default function Colors({ copyToClipboard }) {
       {/* Secondary Colors */}
       <div className="color-category">
         <h3 className="color-category__title">Secondary (Golden Yellow)</h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-          gap: 'var(--space-4)'
-        }}>
+        <div className="color-swatch-grid color-swatch-grid--brand">
           {[
             { name: 'Secondary', token: '--color-secondary', hsl: 'hsl(45, 88%, 50%)', star: true },
             { name: 'Secondary Hover', token: '--color-secondary-hover', hsl: 'hsl(45, 88%, 40%)' },
@@ -84,36 +61,21 @@ export default function Colors({ copyToClipboard }) {
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="color-swatch-card"
               onClick={() => copyToClipboard(`var(${token})`)}
             >
-              <div style={{
-                height: '100px',
-                backgroundColor: `var(${token})`
-              }} />
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{
-                  fontSize: 'var(--font-size-7xs)',
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div
+                className="color-swatch-card__preview swatch-dynamic--bg"
+                style={{ '--swatch-bg': `var(${token})` }}
+              />
+              <div className="color-swatch-card__info">
+                <h4 className="color-swatch-card__title">
                   {name} {star ? '⭐' : ''}
                 </h4>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0',
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value">
                   {hsl}
                 </p>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value color-swatch-card__value--last">
                   var({token})
                 </p>
               </div>
@@ -125,11 +87,7 @@ export default function Colors({ copyToClipboard }) {
       {/* Tertiary Colors */}
       <div className="color-category">
         <h3 className="color-category__title">Tertiary (Coral Red)</h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-          gap: 'var(--space-4)'
-        }}>
+        <div className="color-swatch-grid color-swatch-grid--brand">
           {[
             { name: 'Tertiary', token: '--color-tertiary', hsl: 'hsl(12, 88%, 50%)', star: true },
             { name: 'Tertiary Hover', token: '--color-tertiary-hover', hsl: 'hsl(12, 88%, 45%)' },
@@ -141,36 +99,21 @@ export default function Colors({ copyToClipboard }) {
               key={token}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="color-swatch-card"
               onClick={() => copyToClipboard(`var(${token})`)}
             >
-              <div style={{
-                height: '100px',
-                backgroundColor: `var(${token})`
-              }} />
-              <div style={{ padding: 'var(--space-3)' }}>
-                <h4 style={{
-                  fontSize: 'var(--font-size-7xs)',
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)'
-                }}>
+              <div
+                className="color-swatch-card__preview swatch-dynamic--bg"
+                style={{ '--swatch-bg': `var(${token})` }}
+              />
+              <div className="color-swatch-card__info">
+                <h4 className="color-swatch-card__title">
                   {name} {star ? '⭐' : ''}
                 </h4>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: '0 0 var(--space-1) 0',
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value">
                   {hsl}
                 </p>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace'
-                }}>
+                <p className="color-swatch-card__value color-swatch-card__value--last">
                   var({token})
                 </p>
               </div>
@@ -179,7 +122,7 @@ export default function Colors({ copyToClipboard }) {
         </div>
       </div>
 
-      <Divider style={{ margin: 'var(--space-10) 0' }} />
+      <Divider className="styleguide-divider" />
 
       {/* Neutral Colors */}
       <h2 className="styleguide-section__title">Neutral Colors</h2>
@@ -187,43 +130,24 @@ export default function Colors({ copyToClipboard }) {
 
       <div className="color-category">
         <h3 className="color-category__title">Neutral Scale</h3>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
-          gap: 'var(--space-3)'
-        }}>
+        <div className="color-swatch-grid color-swatch-grid--neutral">
           {[0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => (
             <Card
               key={shade}
               variant="elevated"
               noPadding
-              style={{ cursor: 'pointer' }}
+              className="color-swatch-card"
               onClick={() => copyToClipboard(`var(--color-neutral-${shade})`)}
             >
               <div
-                style={{
-                  height: '80px',
-                  backgroundColor: `var(--color-neutral-${shade})`,
-                  border: shade === 0 ? '1px solid var(--color-border-default)' : 'none'
-                }}
+                className={`color-swatch-card__preview color-swatch-card__preview--small swatch-dynamic--bg ${shade === 0 ? 'color-swatch-card__preview--bordered' : ''}`}
+                style={{ '--swatch-bg': `var(--color-neutral-${shade})` }}
               />
-              <div style={{ padding: 'var(--space-2)' }}>
-                <p style={{
-                  fontSize: 'var(--font-size-8xs)',
-                  fontWeight: 'var(--font-weight-semi-bold)',
-                  margin: '0 0 var(--space-1) 0',
-                  color: 'var(--color-on-surface-default)',
-                  textAlign: 'center'
-                }}>
+              <div className="color-swatch-card__info color-swatch-card__info--compact">
+                <p className="color-swatch-card__title color-swatch-card__title--small color-swatch-card__title--centered">
                   {shade}
                 </p>
-                <p style={{
-                  fontSize: 'var(--font-size-9xs)',
-                  color: 'var(--color-on-surface-subtle)',
-                  margin: 0,
-                  fontFamily: 'monospace',
-                  textAlign: 'center'
-                }}>
+                <p className="color-swatch-card__value color-swatch-card__value--last color-swatch-card__value--centered">
                   var(--color-neutral-{shade})
                 </p>
               </div>
@@ -232,7 +156,7 @@ export default function Colors({ copyToClipboard }) {
         </div>
       </div>
 
-      <Divider style={{ margin: 'var(--space-10) 0' }} />
+      <Divider className="styleguide-divider" />
 
       {/* Feedback Colors */}
       <h2 className="styleguide-section__title">Feedback Colors</h2>
@@ -246,43 +170,24 @@ export default function Colors({ copyToClipboard }) {
       ].map(({ family, label, icon }) => (
         <div key={family} className="color-category">
           <h3 className="color-category__title">{icon} {label}</h3>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
-            gap: 'var(--space-3)'
-          }}>
+          <div className="color-swatch-grid color-swatch-grid--feedback">
             {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => (
               <Card
                 key={shade}
                 variant="elevated"
                 noPadding
-                style={{ cursor: 'pointer' }}
+                className="color-swatch-card"
                 onClick={() => copyToClipboard(`var(--color-feedback-${family}-${shade})`)}
               >
                 <div
-                  style={{
-                    height: '80px',
-                    backgroundColor: `var(--color-feedback-${family}-${shade})`
-                  }}
+                  className="color-swatch-card__preview color-swatch-card__preview--small swatch-dynamic--bg"
+                  style={{ '--swatch-bg': `var(--color-feedback-${family}-${shade})` }}
                 />
-                <div style={{ padding: 'var(--space-2)' }}>
-                  <p style={{
-                    fontSize: 'var(--font-size-8xs)',
-                    fontWeight: 'var(--font-weight-semi-bold)',
-                    margin: '0 0 var(--space-1) 0',
-                    color: 'var(--color-on-surface-default)',
-                    textAlign: 'center'
-                  }}>
+                <div className="color-swatch-card__info color-swatch-card__info--compact">
+                  <p className="color-swatch-card__title color-swatch-card__title--small color-swatch-card__title--centered">
                     {shade}
                   </p>
-                  <p style={{
-                    fontSize: 'var(--font-size-9xs)',
-                    color: 'var(--color-on-surface-subtle)',
-                    margin: 0,
-                    fontFamily: 'monospace',
-                    textAlign: 'center',
-                    wordBreak: 'break-all'
-                  }}>
+                  <p className="color-swatch-card__value color-swatch-card__value--last color-swatch-card__value--centered color-swatch-card__value--break">
                     var(--color-feedback-{family}-{shade})
                   </p>
                 </div>

@@ -1,9 +1,22 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { profileService } from '../services';
 
 const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children, user }) => {
+import { useAuth } from './AuthContext';
+
+export const ThemeProvider = ({ children, user: propUser }) => {
+    // Try to get user from AuthContext, fallback to prop (for migration)
+    let authUser = null;
+    try {
+        const auth = useAuth();
+        authUser = auth.user;
+    } catch (e) {
+        // Ignored: AuthProvider might not be present yet
+    }
+
+    const user = propUser || authUser;
+
     // 'system', 'light', 'dark'
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem('theme-preference') || 'system';
@@ -18,8 +31,6 @@ export const ThemeProvider = ({ children, user }) => {
         } else {
             root.setAttribute('data-theme', theme);
         }
-        console.log('ThemeContext: applied theme to root', theme);
-
         localStorage.setItem('theme-preference', theme);
     }, [theme]);
 
@@ -29,22 +40,11 @@ export const ThemeProvider = ({ children, user }) => {
 
         const fetchPreference = async () => {
             try {
-                // Get profile ID
-                const { data: profileData } = await supabase
-                    .from('profiles')
-                    .select('id')
-                    .eq('auth_user_id', user.id)
-                    .single();
-
-                if (profileData) {
-                    const { data: prefData } = await supabase
-                        .from('profile_preferences')
-                        .select('theme')
-                        .eq('profile_id', profileData.id)
-                        .maybeSingle();
-
-                    if (prefData && prefData.theme) {
-                        setTheme(prefData.theme);
+                const profile = await profileService.getByAuthId(user.id);
+                if (profile) {
+                    const preferences = await profileService.getPreferences(profile.id);
+                    if (preferences && preferences.theme) {
+                        setTheme(preferences.theme);
                     }
                 }
             } catch (error) {
@@ -55,58 +55,15 @@ export const ThemeProvider = ({ children, user }) => {
         fetchPreference();
     }, [user]);
 
-    // Update theme
     const updateTheme = async (newTheme) => {
-        console.log('ThemeContext: updateTheme called with', newTheme);
         setTheme(newTheme);
 
         if (user) {
             try {
-                // Get profile ID
-                const { data: profileData } = await supabase
-                    .from('profiles')
-                    .select('id')
-                    .eq('auth_user_id', user.id)
-                    .single();
-
-                if (profileData) {
-                    // Check if preferences exist
-                    const { data: existingPref } = await supabase
-                        .from('profile_preferences')
-                        .select('id')
-                        .eq('profile_id', profileData.id)
-                        .maybeSingle();
-
-                    if (existingPref) {
-                        // Update existing preference
-                        const { error } = await supabase
-                            .from('profile_preferences')
-                            .update({
-                                theme: newTheme,
-                                updated_at: new Date().toISOString()
-                            })
-                            .eq('profile_id', profileData.id);
-                        if (error) throw error;
-                    } else {
-                        // Insert new preference - get organization_id first
-                        const { data: orgMember } = await supabase
-                            .from('organization_members')
-                            .select('organization_id')
-                            .eq('profile_id', profileData.id)
-                            .eq('is_primary', true)
-                            .maybeSingle();
-
-                        const { error } = await supabase
-                            .from('profile_preferences')
-                            .insert({
-                                profile_id: profileData.id,
-                                organization_id: orgMember?.organization_id,
-                                theme: newTheme,
-                                created_at: new Date().toISOString(),
-                                updated_at: new Date().toISOString()
-                            });
-                        if (error) throw error;
-                    }
+                const profile = await profileService.getByAuthId(user.id);
+                if (profile) {
+                    const orgId = await profileService.getOrganizationId(profile.id);
+                    await profileService.upsertPreferences(profile.id, { theme: newTheme }, orgId);
                 }
             } catch (error) {
                 console.error('Error saving theme preference:', error);
