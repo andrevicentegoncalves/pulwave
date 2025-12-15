@@ -41,6 +41,7 @@ const Sidebar = ({
     items,
     showUserInfo = true,
     variant = 'primary', // 'primary' | 'neutral'
+    compact = false,     // Compact mode for denser item spacing
     position = 'fixed',   // 'fixed' | 'static'
     onSelect,
     activeItem,
@@ -175,7 +176,7 @@ const Sidebar = ({
                 aria-label="Main navigation"
                 style={width ? { width } : {}}
             >
-                <div className={`sidebar ${variant === 'neutral' ? 'sidebar--neutral' : ''}`}>
+                <div className={`sidebar ${variant === 'neutral' ? 'sidebar--neutral' : ''} ${compact ? 'sidebar--compact' : ''}`}>
                     {/* Toggle Button - Desktop only */}
                     <SidebarToggle
                         isExpanded={isExpanded}
@@ -218,11 +219,10 @@ Sidebar.propTypes = {
     items: PropTypes.array,
     showUserInfo: PropTypes.bool,
     variant: PropTypes.oneOf(['primary', 'neutral']),
+    compact: PropTypes.bool,
     position: PropTypes.oneOf(['fixed', 'static']),
-    // Add onItemClick if needed for custom handling, but currently handleItemClick uses navigate.
-    // If we want to support custom actions instead of navigation (e.g. Master Data selection), we might need an onSelect prop passed down?
-    // The Menu component takes onItemClick.
-    onSelect: PropTypes.func, // Optional callback for item selection if not navigating
+    onSelect: PropTypes.func,
+    activeItem: PropTypes.string,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
