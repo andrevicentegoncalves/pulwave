@@ -11,6 +11,7 @@ import {
 import SectionLayout from '../../../components/layouts/SectionLayout';
 import Sidebar from '../../../components/navigation/Sidebar';
 import { adminService } from '../../../services';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 
 const MASTER_DATA_STRUCTURE = {
     geography: {
@@ -35,8 +36,9 @@ const MASTER_DATA_STRUCTURE = {
         label: 'System',
         icon: Database,
         items: [
-            { key: 'locales', label: 'Supported Locales', icon: Languages, table: 'supported_locales', editable: true },
+            { key: 'locales', label: 'Supported Locales', icon: Languages, table: 'locales', editable: true },
             { key: 'timezones', label: 'Timezones', icon: Clock, table: 'timezones', editable: true },
+            { key: 'setting_categories', label: 'Setting Categories', icon: Tag, type: 'master_data', typeKey: 'setting_categories', editable: true },
         ]
     },
     billing: {
@@ -82,17 +84,20 @@ const TABLE_FIELDS = {
         { key: 'block_type', label: 'Type', type: 'text' },
         { key: 'is_active', label: 'Active', type: 'toggle', default: true },
     ],
-    supported_locales: [
-        { key: 'locale', label: 'Locale Code', type: 'text', required: true },
+    locales: [
+        { key: 'code', label: 'Locale Code', type: 'text', required: true },
+        { key: 'language_code', label: 'Language Code', type: 'text', required: true },
+        { key: 'country_code', label: 'Country Code', type: 'text' },
         { key: 'name', label: 'Name', type: 'text', required: true },
         { key: 'native_name', label: 'Native Name', type: 'text' },
-        { key: 'is_default', label: 'Default', type: 'toggle' },
+        { key: 'is_rtl', label: 'Right-to-Left', type: 'toggle' },
         { key: 'is_active', label: 'Active', type: 'toggle', default: true },
     ],
     timezones: [
-        { key: 'name', label: 'Name', type: 'text', required: true },
-        { key: 'offset', label: 'Offset', type: 'text' },
-        { key: 'abbreviation', label: 'Abbreviation', type: 'text' },
+        { key: 'display_name', label: 'Display Name', type: 'text', required: true },
+        { key: 'tz_identifier', label: 'TZ Identifier', type: 'text', required: true },
+        { key: 'utc_offset', label: 'UTC Offset', type: 'text' },
+        { key: 'display_order', label: 'Display Order', type: 'number' },
         { key: 'is_active', label: 'Active', type: 'toggle', default: true },
     ],
     subscription_plans: [
@@ -140,17 +145,17 @@ const TABLE_COLUMNS = {
         { id: 'block_type', title: 'Type', render: (v) => <Badge variant="info">{v}</Badge> },
         { id: 'is_active', title: 'Active', render: (v) => <Badge variant={v ? 'success' : 'neutral'}>{v ? 'Yes' : 'No'}</Badge> },
     ],
-    supported_locales: [
-        { id: 'locale', title: 'Locale', sortable: true, render: (v) => <code>{v}</code> },
+    locales: [
+        { id: 'code', title: 'Code', sortable: true, render: (v) => <code>{v}</code> },
         { id: 'name', title: 'Name', sortable: true },
         { id: 'native_name', title: 'Native Name' },
-        { id: 'is_default', title: 'Default', render: (v) => v ? <Badge variant="info">Default</Badge> : '-' },
+        { id: 'is_rtl', title: 'RTL', render: (v) => v ? <Badge variant="info">RTL</Badge> : '-' },
         { id: 'is_active', title: 'Active', render: (v) => <Badge variant={v ? 'success' : 'neutral'}>{v ? 'Yes' : 'No'}</Badge> },
     ],
     timezones: [
-        { id: 'name', title: 'Name', sortable: true },
-        { id: 'offset', title: 'Offset', render: (v) => v || '-' },
-        { id: 'abbreviation', title: 'Abbrev', render: (v) => v ? <code>{v}</code> : '-' },
+        { id: 'display_name', title: 'Display Name', sortable: true },
+        { id: 'tz_identifier', title: 'TZ Identifier', render: (v) => v ? <code>{v}</code> : '-' },
+        { id: 'utc_offset', title: 'UTC Offset', render: (v) => v || '-' },
         { id: 'is_active', title: 'Active', render: (v) => <Badge variant={v ? 'success' : 'neutral'}>{v ? 'Yes' : 'No'}</Badge> },
     ],
     subscription_plans: [
@@ -283,8 +288,8 @@ const MasterDataManager = () => {
             id: 'actions', title: 'Actions', sortable: false,
             render: (_, row) => (
                 <div className="data-table__actions">
-                    <Button variant="ghost" size="sm" onClick={() => openEditModal(row)} title="Edit"><Edit2 size={14} /></Button>
-                    <Button variant="ghost" size="sm" onClick={() => setDeleteModal({ isOpen: true, record: row })} title="Delete"><Trash2 size={14} /></Button>
+                    <Button variant="icon-circle" size="s" onClick={() => openEditModal(row)} title="Edit"><Edit2 size={14} /></Button>
+                    <Button variant="icon-circle" size="s" onClick={() => setDeleteModal({ isOpen: true, record: row })} title="Delete"><Trash2 size={14} /></Button>
                 </div>
             )
         }]
@@ -358,16 +363,13 @@ const MasterDataManager = () => {
     };
 
     return (
+
         <div className="admin-master-data h-full w-full">
-            {/* Header */}
-            <div className="admin-header margin-bottom-6">
-                <div>
-                    <h1>Master Data Manager</h1>
-                    <p className="admin-header__subtitle">
-                        Manage system-wide reference data, lookup tables, and configuration values.
-                    </p>
-                </div>
-            </div>
+            <AdminPageHeader
+                title="Master Data Manager"
+                subtitle="Manage system-wide reference data, lookup tables, and configuration values."
+                className="margin-bottom-6"
+            />
 
             <SectionLayout
                 sidebar={

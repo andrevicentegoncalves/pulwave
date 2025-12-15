@@ -203,6 +203,7 @@ export const ToggleLeft = LucideIcons.ToggleLeft;
 export const History = LucideIcons.History;
 
 export const Tag = LucideIcons.Tag;
+export const Layers = LucideIcons.Layers;
 
 // ============================================================================
 // AMENITIES ICONS

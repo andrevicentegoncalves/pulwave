@@ -5,6 +5,7 @@ import { ChevronDown, Search, X, Check } from 'lucide-react';
 import { Dropdown } from './Dropdown';
 import Input from './Input';
 import Icon from './Icon';
+import Button from './Button';
 
 /**
  * MultiSelectDropdown Component
@@ -28,13 +29,23 @@ const MultiSelectDropdown = ({
 
     // Filter options based on search query
     const filteredOptions = useMemo(() => {
-        if (!searchQuery.trim()) return options;
-        const query = searchQuery.toLowerCase();
-        return options.filter(opt =>
-            opt.label.toLowerCase().includes(query) ||
-            opt.value.toLowerCase().includes(query)
-        );
-    }, [options, searchQuery]);
+        let result = options;
+        if (searchQuery.trim()) {
+            const query = searchQuery.toLowerCase();
+            result = options.filter(opt =>
+                opt.label.toLowerCase().includes(query) ||
+                opt.value.toLowerCase().includes(query)
+            );
+        }
+        // Sort: selected items first, then alphabetically
+        return [...result].sort((a, b) => {
+            const aSelected = selectedValues.includes(a.value);
+            const bSelected = selectedValues.includes(b.value);
+            if (aSelected && !bSelected) return -1;
+            if (!aSelected && bSelected) return 1;
+            return a.label.localeCompare(b.label);
+        });
+    }, [options, searchQuery, selectedValues]);
 
     // Toggle selection
     const handleToggle = (value, e) => {
@@ -127,18 +138,35 @@ const MultiSelectDropdown = ({
                     </div>
 
                     {/* Selection Summary */}
-                    {selectedValues.length > 0 && (
-                        <div className="multi-select-dropdown__footer">
-                            <span>{selectedValues.length} selected</span>
-                            <button
-                                type="button"
-                                className="multi-select-dropdown__clear-all"
-                                onClick={(e) => { e.stopPropagation(); onChange([]); }}
-                            >
-                                Clear all
-                            </button>
+                    <div className="multi-select-dropdown__footer">
+                        <span>{selectedValues.length} of {filteredOptions.length} selected</span>
+                        <div className="multi-select-dropdown__footer-actions" style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+                            {/* Select All - selects all filtered options */}
+                            {filteredOptions.length > 0 && selectedValues.length < filteredOptions.length && (
+                                <Button
+                                    variant="ghost"
+                                    size="xs"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const allFilteredValues = filteredOptions.map(o => o.value);
+                                        const combined = [...new Set([...selectedValues, ...allFilteredValues])];
+                                        onChange(combined);
+                                    }}
+                                >
+                                    Select all
+                                </Button>
+                            )}
+                            {selectedValues.length > 0 && (
+                                <Button
+                                    variant="ghost"
+                                    size="xs"
+                                    onClick={(e) => { e.stopPropagation(); onChange([]); }}
+                                >
+                                    Clear all
+                                </Button>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
             </Dropdown>
         </div>

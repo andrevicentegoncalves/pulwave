@@ -59,6 +59,41 @@ export const userRepository = {
         if (error) throw error;
         return data;
     },
+
+    /**
+     * Update auth state (2FA, suspension, etc.)
+     * @param {string} profileId - Profile ID
+     * @param {object} updates - Fields to update
+     */
+    async updateAuthState(profileId, updates) {
+        // First check if auth state exists
+        const { data: existing } = await supabase
+            .from('profile_auth_state')
+            .select('profile_id')
+            .eq('profile_id', profileId)
+            .maybeSingle();
+
+        if (existing) {
+            // Update existing
+            const { data, error } = await supabase
+                .from('profile_auth_state')
+                .update({ ...updates, updated_at: new Date().toISOString() })
+                .eq('profile_id', profileId)
+                .select()
+                .single();
+            if (error) throw error;
+            return data;
+        } else {
+            // Create new auth state record
+            const { data, error } = await supabase
+                .from('profile_auth_state')
+                .insert({ profile_id: profileId, ...updates })
+                .select()
+                .single();
+            if (error) throw error;
+            return data;
+        }
+    },
 };
 
 export default userRepository;

@@ -31,7 +31,6 @@ const AddressSection = ({
                     title="Primary Address"
                     value={addressData}
                     onChange={onAddressChange}
-                    required
                     showAddressType
                 />
 

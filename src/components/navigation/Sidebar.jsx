@@ -53,17 +53,20 @@ const Sidebar = ({
     const menuRef = useRef(null);
 
     const handleItemClick = (path) => {
-        // If path is an object (from section items), use its key or handle logic
-        // But Section items usually have onSelect.
-        // Wait, the Sidebar Menu component expects `items` with `id` (path) and `onItemClick` takes the path.
-        // For Master Data, the logic involves `setSelectedItem`.
-        // The main Sidebar uses navigation.
-        // We might need to handle `onItemClick` prop as well if passed.
+        // If onSelect callback is provided, use it instead of navigation
+        // This allows components like Master Data to handle selection without routing
+        if (onSelect && typeof onSelect === 'function') {
+            onSelect(path);
+            // Auto-close sidebar on mobile after selection
+            if (isMobile && isExpanded) {
+                toggleSidebar();
+            }
+            return;
+        }
+
+        // Default behavior: navigate to the path
         if (typeof path === 'string') {
             navigate(path);
-        } else if (items && typeof path === 'object') {
-            // It might be a custom item object if Menu passes it back
-            // But Menu implementation passes `item.id`.
         }
 
         // Auto-close sidebar on mobile after navigation

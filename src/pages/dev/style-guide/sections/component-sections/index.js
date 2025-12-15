@@ -17,3 +17,4 @@ export { default as Tables } from './Tables.jsx';
 export { default as Tooltips } from './Tooltips.jsx';
 export { default as Visuals } from './Visuals.jsx';
 export { default as Wizards } from './Wizards.jsx';
+export { default as TreeSelectSection } from './TreeSelectSection.jsx';

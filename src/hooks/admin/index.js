@@ -15,12 +15,21 @@ export {
     // Schema introspection
     useAdminTables,
     useAdminTableColumns,
+    useAdminTableRecords,
+    // Master Data
+    useAdminMasterDataTypes,
+    useAdminMasterDataValues,
     // Mutations
     useUpdateAdminUser,
     useCreateAdminUser,
     useDeleteAdminUser,
     useSaveAdminTranslation,
     useSaveBatchAdminTranslations,
+    useSaveAdminSchemaTranslation,
+    useSaveAdminEnumTranslation,
+    useSaveAdminContentTranslation,
+    useSaveAdminMasterDataTranslation,
+    useGenerateTranslationBundles,
     useDeleteAdminTranslation,
     useUpdateAdminSetting,
     useUpdateAdminSettings, // Alias for Configuration
@@ -29,3 +38,10 @@ export {
     useDeleteFeatureFlag,
     useUpdateRetentionPolicy,
 } from './useAdmin';
+
+// Helper hooks for common admin patterns
+export {
+    useModalState,
+    usePaginatedList,
+    useDebouncedSearch,
+} from './useAdminHelpers';

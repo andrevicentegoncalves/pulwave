@@ -3,6 +3,7 @@ import './assets/scss/main.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import BaseLayout from './components/layouts/BaseLayout';
 import Auth from './pages/auth/Auth';
+import AuthCallback from './pages/auth/AuthCallback';
 import Hub from './pages/app/index';
 import StyleGuide from './pages/dev/style-guide/StyleGuide';
 import Assets from './pages/app/dashboards/Assets';
@@ -13,6 +14,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastProvider';
 import { QueryClientProvider } from './contexts/QueryClientProvider';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { TranslationProvider } from './contexts/TranslationContext';
 
 // Admin Backoffice
 import AdminLayout from './pages/admin/AdminLayout';
@@ -21,7 +23,6 @@ import AdminUsers from './pages/admin/users/index';
 import AdminTranslations from './pages/admin/translations/index';
 import AdminAuditLogs from './pages/admin/audit-logs/index';
 import AdminPermissions from './pages/admin/permissions/index';
-import AdminSettings from './pages/admin/settings/index';
 import AdminFeatureFlags from './pages/admin/feature-flags/index';
 import AdminRetention from './pages/admin/retention/index';
 import AdminConfiguration from './pages/admin/configuration/index';
@@ -41,11 +42,12 @@ const AppContent = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
+        {/* Auth Routes */}
         <Route
           path="/auth"
           element={!user ? <Auth /> : <Navigate to="/" replace />}
         />
+        <Route path="/auth/callback" element={<AuthCallback />} />
 
         {/* Admin Backoffice Routes */}
         <Route path="/admin" element={user ? <AdminLayout /> : <Navigate to="/auth" replace />}>
@@ -54,7 +56,7 @@ const AppContent = () => {
           <Route path="translations" element={<AdminTranslations />} />
           <Route path="audit-logs" element={<AdminAuditLogs />} />
           <Route path="permissions" element={<AdminPermissions />} />
-          <Route path="settings" element={<AdminSettings />} />
+          <Route path="settings" element={<Navigate to="/admin/configuration" replace />} />
           <Route path="feature-flags" element={<AdminFeatureFlags />} />
           <Route path="retention" element={<AdminRetention />} />
           <Route path="configuration" element={<AdminConfiguration />} />
@@ -86,11 +88,13 @@ function App() {
   return (
     <QueryClientProvider>
       <AuthProvider>
-        <ThemeProvider>
-          <ToastProvider>
-            <AppContent />
-          </ToastProvider>
-        </ThemeProvider>
+        <TranslationProvider>
+          <ThemeProvider>
+            <ToastProvider>
+              <AppContent />
+            </ToastProvider>
+          </ThemeProvider>
+        </TranslationProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

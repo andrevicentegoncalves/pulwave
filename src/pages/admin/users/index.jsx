@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Select, Badge, EmptyState, Spinner, Card, SearchInput, Pagination, DataTable, ConfirmationModal, Modal, UserX, Edit2, Input } from '../../../components/ui';
+import { Button, Select, Badge, EmptyState, Card, SearchInput, Pagination, DataTable, ConfirmationModal, Modal, UserX, Edit2, Input } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import { useAdminUsers, useUpdateAdminUser } from '../../../hooks/admin';
 
 /**
@@ -68,6 +69,7 @@ const UsersList = () => {
 
     // Handle edit save
     const handleEditSave = async () => {
+        if (!editModal.user) return;
         await updateUser.mutateAsync({
             id: editModal.user.id,
             updates: editForm,
@@ -151,8 +153,8 @@ const UsersList = () => {
             render: (_, row) => (
                 <div className="data-table__actions">
                     <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="icon-circle"
+                        size="s"
                         onClick={() => openEditModal(row)}
                     >
                         <Edit2 size={14} />
@@ -171,11 +173,7 @@ const UsersList = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     if (error) {
@@ -191,19 +189,11 @@ const UsersList = () => {
 
     return (
         <div className="admin-users">
-            {/* Header */}
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Users</h1>
-                    <p className="admin-header__subtitle">Manage user accounts and roles</p>
-                </div>
-            </div>
-
-            {/* Table */}
+            <AdminPageHeader title="Users" subtitle="Manage user accounts and roles" />
             <Card variant="elevated" className="admin-users-card">
                 <div className="data-table__header">
                     <h2 className="data-table__title">{totalCount} Users</h2>
-                    <div className="data-table__filters">
+                    <div className="data-table__filters flex flex-row items-center gap-3">
                         <SearchInput
                             value={search}
                             onChange={handleSearch}

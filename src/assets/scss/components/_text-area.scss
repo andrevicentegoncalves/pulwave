@@ -76,6 +76,31 @@
     opacity: 1;
   }
 
+  // Scrollbar styling for rounded corners
+  // Add padding-right so scrollbar doesn't overlap text
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-300) transparent;
+
+  // Webkit scrollbar for Chrome/Safari
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: var(--spacing-2) 0; // Margin to respect rounded corners
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-neutral-300);
+    border-radius: var(--border-radius-m);
+
+    &:hover {
+      background-color: var(--color-neutral-400);
+    }
+  }
+
   // --------------------------------------------------------------------------
   // Variant: Outlined (Default)
   // --------------------------------------------------------------------------
@@ -196,6 +221,31 @@
 // Full width variant
 .textarea--full-width {
   width: 100%;
+}
+
+// Compact variant - hides footer for inline/aligned use
+.textarea--compact {
+  gap: 0;
+
+  .textarea__footer {
+    display: none;
+  }
+
+  .textarea__field {
+    min-height: auto;
+  }
+}
+
+// No extra padding variant - for true flex centering
+.textarea--no-padding {
+  .textarea__container {
+    display: flex;
+    align-items: center;
+  }
+
+  .textarea__field {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
 }
 
 // Auto-resize variant (for dynamic content)

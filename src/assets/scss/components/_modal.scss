@@ -42,6 +42,7 @@
   flex-direction: column;
   animation: scale-in var(--duration-comfortable) var(--easing-standard);
   z-index: var(--z-index-modal, 1050);
+  overflow: hidden; // Hide overflow on modal container to enable scrolling on body
 
   // Mobile: Full screen on small devices
   @include bp-down('s') {
@@ -117,14 +118,25 @@
 
   &__body {
     padding: var(--spacing-6);
-    overflow-y: auto;
     flex-grow: 1;
+    overflow-y: auto; // Enable scrolling on the body
     color: var(--color-on-surface-variant);
     @include typography.typography-responsive('body', 'm', 'regular');
     line-height: var(--line-height-body);
 
     @include bp-down('s') {
       padding: var(--spacing-4) var(--spacing-5);
+    }
+
+    // Scrollable variant
+    &--scrollable {
+      max-height: calc(70vh - 140px); // Account for header + footer
+    }
+
+    // Allow select dropdowns to escape the modal body overflow
+    // This uses a modern CSS trick with clip-path
+    select, .select-wrapper {
+      clip-path: none;
     }
   }
 

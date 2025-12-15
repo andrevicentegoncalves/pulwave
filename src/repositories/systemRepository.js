@@ -232,26 +232,7 @@ export const systemRepository = {
         return data;
     },
 
-    // ==================== CONFIGURATION CATEGORIES ====================
-    async getConfigurationCategories() {
-        const { data, error } = await supabase
-            .from('configuration_categories')
-            .select('*')
-            .eq('is_active', true)
-            .order('display_order');
-        if (error) throw error;
-        return data || [];
-    },
 
-    async upsertConfigurationCategory(category) {
-        const { data, error } = await supabase
-            .from('configuration_categories')
-            .upsert(category, { onConflict: 'name' })
-            .select()
-            .single();
-        if (error) throw error;
-        return data;
-    },
 
     // ==================== GENERIC TABLE DATA ====================
     async getTableData(tableName) {

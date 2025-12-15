@@ -13,6 +13,7 @@ const Modal = ({
   closeOnBackdropClick = true,
   closeOnEscape = true,
   showCloseButton = true,
+  scrollableBody = false,
   className,
 }) => {
   useEffect(() => {
@@ -45,15 +46,16 @@ const Modal = ({
   };
 
   return (
-    <div 
+    <div
       className="modal-backdrop"
       onClick={handleBackdropClick}
       role="presentation"
     >
-      <div 
+      <div
         className={clsx(
           'modal',
           `modal--${size}`,
+          scrollableBody && 'modal--scrollable',
           className
         )}
         role="dialog"
@@ -82,7 +84,10 @@ const Modal = ({
         )}
 
         {/* Modal Body */}
-        <div className="modal__body">
+        <div className={clsx(
+          'modal__body',
+          scrollableBody && 'modal__body--scrollable'
+        )}>
           {children}
         </div>
 
@@ -107,6 +112,7 @@ Modal.propTypes = {
   closeOnBackdropClick: PropTypes.bool,
   closeOnEscape: PropTypes.bool,
   showCloseButton: PropTypes.bool,
+  scrollableBody: PropTypes.bool,
   className: PropTypes.string,
 };
 

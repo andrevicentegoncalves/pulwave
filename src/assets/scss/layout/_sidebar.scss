@@ -33,7 +33,18 @@
     height: 100%; // Fill parent
     margin: 0; // Remove fixed margins
     z-index: 10;
+    width: 100%; // Fill parent specific to static context
   }
+
+  // Mobile hidden state (replaces inline transform)
+  &--mobile-hidden {
+    transform: translateX(-100%);
+  }
+}
+
+// Menu spacing modifier for admin sidebar
+.menu--admin-spacing {
+  gap: var(--space-4);
 }
 
 // ---------------------------------------------------------------------------//
@@ -93,6 +104,25 @@
 
       &:hover {
         color: var(--color-text-primary);
+      }
+    }
+
+    // Scrollbar styling for neutral (light) background
+    .sidebar__menu {
+
+      // On hover: expand width and show dark thumb
+      &:hover {
+        // Firefox
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        // WebKit
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.2);
+        }
       }
     }
   }
@@ -232,9 +262,21 @@
     overflow-x: hidden;
     padding: var(--space-3) 0;
     z-index: 10;
+    flex: 1; // Take remaining space
+    min-height: 0; // Allow scrolling inside flex item
 
+    // Firefox: thin scrollbar, hidden by default
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
+    // Show Firefox scrollbar on hover
+    &:hover {
+      scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+    }
+
+    // WebKit (Chrome, Safari, Edge): custom scrollbar styling
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 0; // Hidden by default, expands on hover
     }
 
     &::-webkit-scrollbar-track {
@@ -242,12 +284,24 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.4);
+      background: transparent; // Hidden by default
       border-radius: var(--border-radius-2xs);
       border-top-left-radius: var(--border-radius-xl);
       border-bottom-left-radius: var(--border-radius-xl);
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      transition: background 0.2s ease;
+    }
+
+    // Show scrollbar only on hover - expand width and show thumb
+    &:hover {
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.4);
+      }
     }
   }
 

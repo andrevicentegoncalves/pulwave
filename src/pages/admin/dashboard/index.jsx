@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useAdminDashboard } from '../../../hooks/admin';
-import { StatCard, Spinner, Users, Building2, Activity, ToggleRight } from '../../../components/ui';
+import { StatCard, Users, Building2, Activity, ToggleRight, EmptyState } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import RecentActivityTable from '../../../components/admin/dashboard/RecentActivityTable';
 
 /**
@@ -11,11 +12,7 @@ const Dashboard = () => {
     const { data, isLoading, error } = useAdminDashboard();
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     if (error) {
@@ -31,7 +28,8 @@ const Dashboard = () => {
 
     const { stats = {}, recentActivity = [] } = data || {};
 
-    const statCards = [
+    // Memoize stat cards to prevent unnecessary re-renders
+    const statCards = useMemo(() => [
         {
             icon: <Users />,
             value: stats.totalUsers || 0,
@@ -56,17 +54,11 @@ const Dashboard = () => {
             label: 'Feature Flags',
             variant: 'primary',
         },
-    ];
+    ], [stats]);
 
     return (
         <div className="admin-dashboard">
-            {/* Header */}
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Dashboard</h1>
-                    <p className="admin-header__subtitle">Overview of your admin backoffice</p>
-                </div>
-            </div>
+            <AdminPageHeader title="Dashboard" subtitle="Overview of your admin backoffice" />
 
             {/* Stats Grid */}
             <div className="admin-stats">

@@ -34,10 +34,9 @@ export const ADMIN_NAV_SECTIONS = [
         title: 'Operations',
         items: [
             { to: '/admin/audit-logs', icon: ScrollText, label: 'Audit Logs' },
-            { to: '/admin/settings', icon: Settings, label: 'Settings' },
+            { to: '/admin/configuration', icon: Settings, label: 'Configuration' },
             { to: '/admin/retention', icon: Database, label: 'Retention' },
             { to: '/admin/feature-flags', icon: ToggleLeft, label: 'Feature Flags' },
-            { to: '/admin/configuration', icon: Settings, label: 'Configuration' },
         ],
     },
 ];

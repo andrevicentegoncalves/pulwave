@@ -89,6 +89,26 @@
     }
   }
 
+  &--secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary-hover);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-secondary-active);
+    }
+
+    &:disabled {
+      background-color: var(--color-secondary);
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
   &--tertiary {
     background-color: var(--color-tertiary);
     color: var(--color-on-tertiary);

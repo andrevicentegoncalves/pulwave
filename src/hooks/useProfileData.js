@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { profileService } from '../services';
+import { profileService, contactService } from '../services';
 
 /**
  * useProfileData Hook
@@ -52,6 +52,7 @@ export const useProfileData = ({ onRedirect } = {}) => {
         license_state: '',
         license_expiry: '',
         theme: 'light',
+        ui_layout: { style: 'pulwave' },
         // Preferences
         timezone: 'UTC',
         locale: 'en-US',
@@ -153,7 +154,8 @@ export const useProfileData = ({ onRedirect } = {}) => {
 
                 if (user) {
                     // Use profileService for optimized single-query fetching
-                    const fullProfile = await profileService.getFullProfile(user.id);
+                    const fullProfile = await profileService.getFullProfile(user.id, user.email);
+
 
                     if (!fullProfile) {
                         setIsFetching(false);
@@ -162,19 +164,30 @@ export const useProfileData = ({ onRedirect } = {}) => {
 
                     setProfile(fullProfile);
 
-                    // Check onboarding status
-                    const onboardingData = await profileService.getOnboardingStatus(fullProfile.id);
-                    if (!onboardingData || !onboardingData.completed) {
-                        onRedirect?.('/onboarding', { replace: true });
-                        return;
+                    // Feature flag to skip onboarding (set to true to disable)
+                    const SKIP_ONBOARDING = true;
+
+                    // Check onboarding status (if not skipped)
+                    if (!SKIP_ONBOARDING) {
+                        const onboardingData = await profileService.getOnboardingStatus(fullProfile.id);
+                        if (!onboardingData || !onboardingData.completed) {
+                            onRedirect?.('/onboarding', { replace: true });
+                            return;
+                        }
                     }
+
 
                     // Extract related data from relational query
                     const professionalData = fullProfile.professional_profiles?.[0] || null;
-                    const preferencesData = fullProfile.profile_preferences?.[0] || null;
+                    const preferencesData = fullProfile.user_preferences?.[0] || null;
                     const socialProfiles = fullProfile.social_profiles || [];
                     const primaryAddress = fullProfile.primary_address || null;
                     const billingAddress = fullProfile.billing_address || null;
+                    const contacts = fullProfile.contacts || [];
+                    const authStateData = fullProfile.auth_state || null;
+
+                    // Map contacts to form data fields
+                    const contactFormData = contactService.mapToFormData(contacts);
 
                     // Map social profiles
                     const socialData = mapSocialProfilesToFormData(socialProfiles);
@@ -212,6 +225,7 @@ export const useProfileData = ({ onRedirect } = {}) => {
                         license_expiry: professionalData?.license_expiry || '',
                         // Preferences
                         theme: preferencesData?.theme || 'light',
+                        ui_layout: preferencesData?.ui_layout || { style: 'pulwave' },
                         timezone: preferencesData?.timezone || 'UTC',
                         locale: preferencesData?.locale || 'en-US',
                         profile_visibility: preferencesData?.profile_visibility || 'private',
@@ -224,16 +238,17 @@ export const useProfileData = ({ onRedirect } = {}) => {
                         // Privacy preferences
                         data_processing_consent: preferencesData?.data_processing_consent ?? false,
                         marketing_consent: preferencesData?.marketing_consent ?? false,
-                        // Phone fields
-                        phone_code: fullProfile.phone_code || '',
-                        phone_number: fullProfile.phone_number || '',
-                        phone_secondary_code: fullProfile.phone_secondary_code || '',
-                        phone_secondary_number: fullProfile.phone_secondary_number || '',
-                        // Security - Emergency Contact
-                        two_factor_enabled: fullProfile.two_factor_enabled ?? false,
-                        emergency_contact_name: fullProfile.emergency_contact_name || '',
-                        emergency_contact_phone: fullProfile.emergency_contact_phone || '',
-                        emergency_contact_relationship: fullProfile.emergency_contact_relationship || '',
+                        // Phone fields - now from contacts table
+                        phone_code: contactFormData.phone_code,
+                        phone_number: contactFormData.phone_number,
+                        phone_secondary_code: contactFormData.phone_secondary_code,
+                        phone_secondary_number: contactFormData.phone_secondary_number,
+                        // Security - now from profile_auth_state table
+                        two_factor_enabled: authStateData?.two_factor_enabled ?? false,
+                        // Emergency Contact - from contacts table
+                        emergency_contact_name: contactFormData.emergency_contact_name,
+                        emergency_contact_phone: contactFormData.emergency_contact_phone,
+                        emergency_contact_relationship: contactFormData.emergency_contact_relationship,
                     });
 
                     // Set address data from relational query results
@@ -298,7 +313,7 @@ export const useProfileData = ({ onRedirect } = {}) => {
         if (!user) return;
 
         try {
-            const updatedProfile = await profileService.getFullProfile(user.id);
+            const updatedProfile = await profileService.getFullProfile(user.id, user.email);
             setProfile(updatedProfile);
         } catch (error) {
             console.error('Error refreshing profile:', error);

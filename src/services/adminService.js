@@ -25,7 +25,8 @@ export const adminService = {
 
     async updateUser(id, updates) {
         // Add any business validation here
-        const allowedFields = ['first_name', 'last_name', 'email', 'app_role', 'is_suspended', 'is_active'];
+        // Note: is_suspended moved to profile_auth_state table
+        const allowedFields = ['first_name', 'last_name', 'email', 'app_role', 'is_active'];
         const sanitized = Object.keys(updates)
             .filter(key => allowedFields.includes(key))
             .reduce((obj, key) => ({ ...obj, [key]: updates[key] }), {});
@@ -34,16 +35,29 @@ export const adminService = {
     },
 
     async deleteUser(id) {
-        // Soft delete - just suspend
-        return userRepository.updateUser(id, { is_suspended: true, deleted_at: new Date().toISOString() });
+        // Soft delete - mark as deleted in profiles + suspend in auth_state
+        await Promise.all([
+            userRepository.updateUser(id, { is_deleted: true, deleted_at: new Date().toISOString() }),
+            userRepository.updateAuthState(id, { is_suspended: true })
+        ]);
     },
 
     async suspendUser(id, reason) {
-        return userRepository.updateUser(id, { is_suspended: true, suspension_reason: reason });
+        // Suspension now goes to profile_auth_state table
+        return userRepository.updateAuthState(id, {
+            is_suspended: true,
+            suspension_reason: reason,
+            suspended_at: new Date().toISOString()
+        });
     },
 
     async activateUser(id) {
-        return userRepository.updateUser(id, { is_suspended: false, suspension_reason: null });
+        // Unsuspend in profile_auth_state
+        return userRepository.updateAuthState(id, {
+            is_suspended: false,
+            suspension_reason: null,
+            suspended_at: null
+        });
     },
 
     // ==================== DASHBOARD ====================
@@ -70,6 +84,50 @@ export const adminService = {
 
     async deleteUITranslation(id) {
         return translationRepository.deleteUITranslation(id);
+    },
+
+    // ==================== SCHEMA & ENUM TRANSLATIONS ====================
+    async getSchemaTranslations(options = {}) {
+        return translationRepository.getSchemaTranslations(options);
+    },
+
+    async saveSchemaTranslation(translation) {
+        return translationRepository.saveSchemaTranslation(translation);
+    },
+
+    async getEnumTranslations(options = {}) {
+        return translationRepository.getEnumTranslations(options);
+    },
+
+    async saveEnumTranslation(translation) {
+        return translationRepository.saveEnumTranslation(translation);
+    },
+
+    // ==================== CONTENT TRANSLATIONS ====================
+    async getContentTranslations(options = {}) {
+        return translationRepository.getContentTranslations(options);
+    },
+
+    async saveContentTranslation(translation) {
+        return translationRepository.saveContentTranslation(translation);
+    },
+
+    // ==================== MASTER DATA TRANSLATIONS ====================
+    async getMasterDataTranslations(options = {}) {
+        return translationRepository.getMasterDataTranslations(options);
+    },
+
+    async saveMasterDataTranslation(translation) {
+        return translationRepository.saveMasterDataTranslation(translation);
+    },
+
+    // ==================== BUNDLES ====================
+    async generateTranslationBundles(locale) {
+        return translationRepository.generateTranslationBundles(locale);
+    },
+
+    async getTranslationBundles(locale) {
+        return translationRepository.getTranslationBundles(locale);
     },
 
     async getSupportedLocales() {
@@ -149,6 +207,13 @@ export const adminService = {
     },
 
     /**
+     * Get database enums
+     */
+    async getDatabaseEnums() {
+        return translationRepository.getDatabaseEnums();
+    },
+
+    /**
      * Get all database tables that can be translated
      * Uses PostgreSQL information_schema
      */
@@ -199,6 +264,11 @@ export const adminService = {
 
     async deleteTableRecord(tableName, id) {
         return systemRepository.deleteTableRecord(tableName, id);
+    },
+
+    // ==================== CONTENT TRANSLATION HELPERS ====================
+    async getTableRecords(tableName, options = {}) {
+        return translationRepository.getTableRecords(tableName, options);
     },
 };
 

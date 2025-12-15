@@ -9,15 +9,15 @@
 .input-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--scale-2);
   width: 100%;
 }
 
 // ── LABEL ──
 .input__label {
   display: block;
-  @include typography.typography-responsive('label', 's', 'medium');
-  color: var(--color-neutral-800);
+  @include typography.typography-responsive('label', 'm', 'medium');
+  color: var(--color-on-surface-default);
 
   &--required {
     .input__required {

@@ -75,7 +75,8 @@ const UserInfo = ({
                     .from('profiles')
                     .select('*')
                     .eq('auth_user_id', currentUser.id)
-                    .single();
+                    .eq('auth_user_id', currentUser.id)
+                    .maybeSingle();
 
                 if (error) {
                     console.error('Error fetching profile:', error);

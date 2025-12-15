@@ -1,16 +1,16 @@
-import React, { useId, useState, useMemo } from 'react';
-import { Dropdown, DropdownItem } from './Dropdown';
+import React, { useId } from 'react';
+import { Dropdown, DropdownSelect } from './Dropdown';
 import Input from './Input';
 import Icon from './Icon';
-import { ChevronDown, Search } from './iconLibrary';
+import { ChevronDown } from './iconLibrary';
 import PropTypes from 'prop-types';
 
 import Skeleton from './Skeleton';
 
 /**
  * Select Component
- * A form select input that uses the custom Dropdown component.
- * Supports optional search functionality and icons for options.
+ * A form select input that uses the custom Dropdown and DropdownSelect components.
+ * Supports optional search functionality, icons for options, and grouped options.
  */
 const Select = ({
     label,
@@ -25,31 +25,14 @@ const Select = ({
     id,
     searchable = false,
     searchPlaceholder = "Search...",
-    loading = false
+    loading = false,
+    grouped = false,
+    groupKey = 'group'
 }) => {
     const generatedId = useId();
     const selectId = id || generatedId;
     const selectedOption = options.find(opt => opt.value === value);
     const displayValue = selectedOption ? selectedOption.label : placeholder;
-
-    const [searchQuery, setSearchQuery] = useState('');
-
-    // Filter options based on search query
-    const filteredOptions = useMemo(() => {
-        if (!searchable || !searchQuery.trim()) {
-            return options;
-        }
-
-        const query = searchQuery.toLowerCase();
-        return options.filter(opt =>
-            opt.label.toLowerCase().includes(query) ||
-            (opt.searchTerms && opt.searchTerms.some(term => term.toLowerCase().includes(query)))
-        );
-    }, [options, searchQuery, searchable]);
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
 
     if (loading) {
         return (
@@ -80,41 +63,14 @@ const Select = ({
                 }
                 align="left"
             >
-                <div>
-                    {searchable && (
-                        <div className="dropdown-select__search-container">
-                            <Input
-                                value={searchQuery}
-                                onChange={handleSearchChange}
-                                placeholder={searchPlaceholder}
-                                leftIcon={<Icon size="s"><Search /></Icon>}
-                                fullWidth
-                                autoFocus
-                            />
-                        </div>
-                    )}
-                    <div className="dropdown-select__options-container">
-                        {filteredOptions.length > 0 ? (
-                            filteredOptions.map((opt) => (
-                                <DropdownItem
-                                    key={opt.value}
-                                    onClick={() => {
-                                        onChange(opt.value);
-                                        setSearchQuery('');
-                                    }}
-                                    disabled={opt.disabled}
-                                    icon={opt.icon}
-                                >
-                                    {opt.label}
-                                </DropdownItem>
-                            ))
-                        ) : (
-                            <div className="dropdown-select__empty-state">
-                                No results found
-                            </div>
-                        )}
-                    </div>
-                </div>
+                <DropdownSelect
+                    options={options}
+                    onSelect={onChange}
+                    searchable={searchable}
+                    searchPlaceholder={searchPlaceholder}
+                    grouped={grouped}
+                    groupKey={groupKey}
+                />
             </Dropdown>
         </div>
     );
@@ -128,7 +84,8 @@ Select.propTypes = {
         label: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
         icon: PropTypes.node,
-        searchTerms: PropTypes.arrayOf(PropTypes.string)
+        searchTerms: PropTypes.arrayOf(PropTypes.string),
+        group: PropTypes.string
     })).isRequired,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -139,8 +96,9 @@ Select.propTypes = {
     id: PropTypes.string,
     searchable: PropTypes.bool,
     searchPlaceholder: PropTypes.string,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    grouped: PropTypes.bool,
+    groupKey: PropTypes.string
 };
 
 export default Select;
-

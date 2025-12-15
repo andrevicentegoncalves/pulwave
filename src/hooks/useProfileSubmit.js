@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { profileService } from '../services';
+import { profileService, addressService, masterDataService, contactService } from '../services';
 import { upsertRecord } from '../services/supabaseUtils';
 
 /**
@@ -49,10 +49,29 @@ export const useProfileSubmit = ({
         }
         if (!city_name) return null;
 
+        // Auto-create/find master data hierarchy if nominatim data is present
+        let hierarchyIds = {};
+        if (nominatim_data && country_id) {
+            try {
+                // Import dynamically to avoid circular dependencies if any, or plain import
+                // Since this is a hook, direct import at top is fine.
+                // Assuming masterDataService is imported at top
+                hierarchyIds = await masterDataService.ensureLocationHierarchy(nominatim_data, country_id);
+                console.log('Hierarchy resolved:', hierarchyIds);
+            } catch (err) {
+                console.error('Error ensuring hierarchy:', err);
+                // Continue saving address even if hierarchy fails, but with nulls
+            }
+        }
+
         const payload = {
             ...restData,
+            profile_id: profile?.id || null,
             country_id: country_id || null,
-            region_division_id: region_id || null,
+            region_division_id: hierarchyIds.regionId || region_id || null,
+            municipality_division_id: hierarchyIds.municipalityId || null,
+            locality_id: hierarchyIds.localityId || null,
+            parish_division_id: hierarchyIds.parishId || null,
             city_name,
             street_name,
             address_type: type || (isPrimary ? 'home' : 'billing'),
@@ -75,6 +94,7 @@ export const useProfileSubmit = ({
                 .select()
                 .single();
             if (error) throw error;
+            if (!newAddress) throw new Error('Failed to create address record. Please try again.');
             return newAddress.id;
         }
     };
@@ -86,6 +106,10 @@ export const useProfileSubmit = ({
         setLoading(true);
 
         try {
+            if (!profile?.id) {
+                throw new Error('Profile data not loaded. Please refresh the page.');
+            }
+
             // Get organization ID for related records
             const organizationId = await profileService.getOrganizationId(profile.id);
 
@@ -95,7 +119,7 @@ export const useProfileSubmit = ({
                 upsertAddress(billingAddressData, profile?.billing_address_id, false),
             ]);
 
-            // === Build profile payload ===
+            // === Build profile payload (phone/emergency moved to contacts table) ===
             const profilePayload = {
                 username: formData.username,
                 first_name: formData.first_name,
@@ -106,17 +130,8 @@ export const useProfileSubmit = ({
                 gender: formData.gender || null,
                 pronouns: formData.pronouns || null,
                 bio: formData.bio || null,
-                phone_code: formData.phone_code || null,
-                phone_number: formData.phone_number || null,
-                phone_secondary_code: formData.phone_secondary_code || null,
-                phone_secondary_number: formData.phone_secondary_number || null,
                 address_id: addressId,
                 billing_address_id: billingAddressId,
-                // Security fields
-                two_factor_enabled: formData.two_factor_enabled,
-                emergency_contact_name: formData.emergency_contact_name,
-                emergency_contact_phone: formData.emergency_contact_phone,
-                emergency_contact_relationship: formData.emergency_contact_relationship,
             };
 
             // === PARALLEL OPERATION 2: Profile + Related Data ===
@@ -138,6 +153,7 @@ export const useProfileSubmit = ({
                 const preferencesPayload = {
                     organization_id: organizationId,
                     theme: formData.theme,
+                    ui_layout: formData.ui_layout,
                     timezone: formData.timezone,
                     locale: formData.locale,
                     profile_visibility: formData.profile_visibility,
@@ -165,12 +181,37 @@ export const useProfileSubmit = ({
                         .from('profiles')
                         .update({ ...profilePayload, updated_at: new Date().toISOString() })
                         .eq('auth_user_id', user.id),
+                    // Auth state (2FA, etc.) - goes to profile_auth_state table
+                    upsertRecord(
+                        'profile_auth_state',
+                        { profile_id: profile.id },
+                        { two_factor_enabled: formData.two_factor_enabled ?? false }
+                    ),
                     // Professional profile
                     profileService.upsertProfessionalProfile(profile.id, professionalPayload),
                     // Preferences
                     profileService.upsertPreferences(profile.id, preferencesPayload, organizationId),
                     // Social profiles (already parallelized internally)
                     profileService.upsertSocialProfiles(profile.id, socialData, organizationId),
+                    // Contacts: Primary phone
+                    formData.phone_number ? contactService.upsertContact(
+                        profile.id, organizationId, 'phone-primary',
+                        { phone: formData.phone_number, phone_country_code: formData.phone_code }
+                    ) : Promise.resolve(),
+                    // Contacts: Secondary phone
+                    formData.phone_secondary_number ? contactService.upsertContact(
+                        profile.id, organizationId, 'phone-secondary',
+                        { phone: formData.phone_secondary_number, phone_country_code: formData.phone_secondary_code }
+                    ) : Promise.resolve(),
+                    // Contacts: Emergency contact
+                    formData.emergency_contact_phone ? contactService.upsertContact(
+                        profile.id, organizationId, 'phone-emergency',
+                        {
+                            phone: formData.emergency_contact_phone,
+                            contact_name: formData.emergency_contact_name,
+                            relationship: formData.emergency_contact_relationship
+                        }
+                    ) : Promise.resolve(),
                 ]);
             } else {
                 // No organization - just update profile
@@ -180,28 +221,24 @@ export const useProfileSubmit = ({
                     .eq('auth_user_id', user.id);
             }
 
-            // Refresh profile data
-            const updatedProfile = await profileService.getFullProfile(user.id);
-            onProfileUpdate?.(updatedProfile);
-
-            // Update theme context if theme changed
-            if (formData.theme) {
-                onThemeUpdate?.(formData.theme);
+            // Update local state via callback
+            if (onProfileUpdate) {
+                onProfileUpdate(prev => ({ ...prev, ...profilePayload }));
+            }
+            if (onThemeUpdate && formData.theme) {
+                onThemeUpdate(formData.theme);
             }
 
-            onSuccess?.('Settings saved successfully');
-        } catch (err) {
-            console.error('Profile submit error:', err);
-            onError?.(err.message || 'Failed to update profile');
+            onSuccess?.('Profile updated successfully');
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            onError?.(error.message || 'Failed to update profile');
         } finally {
             setLoading(false);
         }
     };
 
-    return {
-        loading,
-        handleSubmit,
-    };
+    return { loading, handleSubmit };
 };
 
 export default useProfileSubmit;

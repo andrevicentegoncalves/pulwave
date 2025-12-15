@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ToggleLeft, Plus, Trash2, Save } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import { useAdminFeatureFlags, useToggleFeatureFlag, useCreateFeatureFlag, useDeleteFeatureFlag } from '../../../hooks/admin';
-import { Button, Badge, EmptyState, Spinner, Card, DataTable, Modal, ConfirmationModal } from '../../../components/ui';
+import { Button, Badge, EmptyState, Card, DataTable, Modal, ConfirmationModal } from '../../../components/ui';
 import { Input, TextArea } from '../../../components/ui';
 
 /**
@@ -123,7 +124,7 @@ const FeatureFlagsManager = () => {
                     >
                         {row.is_enabled ? 'Disable' : 'Enable'}
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => openDeleteModal(row)} title="Delete">
+                    <Button variant="icon-circle" size="s" onClick={() => openDeleteModal(row)} title="Delete">
                         <Trash2 size={14} />
                     </Button>
                 </div>
@@ -132,26 +133,20 @@ const FeatureFlagsManager = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     return (
         <div className="admin-feature-flags">
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Feature Flags</h1>
-                    <p className="admin-header__subtitle">Toggle feature availability</p>
-                </div>
-                <div className="admin-header__actions">
+            <AdminPageHeader
+                title="Feature Flags"
+                subtitle="Toggle feature availability"
+                actions={
                     <Button variant="primary" onClick={openCreateModal} leftIcon={<Plus size={16} />}>
                         Add Flag
                     </Button>
-                </div>
-            </div>
+                }
+            />
 
             <Card variant="elevated">
                 {flags.length > 0 ? (

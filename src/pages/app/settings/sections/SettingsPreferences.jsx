@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Input, Select, Checkbox, SectionHeader } from '../../../../components/ui';
 import { LocaleSelect } from '../../../../components/forms';
 import { Settings } from '../../../../components/ui/iconLibrary';
 import { THEME_PREFERENCE, THEME_PREFERENCE_OPTIONS } from '../../../../constants';
 import { useTimezones } from '../../../../hooks/useTimezones';
+import { useAdminLocales } from '../../../../hooks/admin';
 
 const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChange, onThemePreview }) => {
     const { timezones, loading: timezonesLoading } = useTimezones();
+    const { data: localesData, isLoading: localesLoading } = useAdminLocales();
+
+    const localeOptions = useMemo(() => {
+        if (!localesData) return [];
+        return localesData.map((l) => ({
+            value: l.code,
+            label: l.name,
+            countryCode: l.code.includes('-') ? l.code.split('-')[1] : null
+        }));
+    }, [localesData]);
 
     return (
         <div className="profile-section">
@@ -16,16 +27,32 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                 {/* Theme Card */}
                 <Card header={<h3>Theme</h3>}>
                     <div className="profile-form-grid">
-                        <Select
-                            label="Theme Preference"
-                            value={formData.theme || THEME_PREFERENCE.SYSTEM}
-                            onChange={(val) => {
-                                onSelectChange('theme', val);
-                                if (onThemePreview) onThemePreview(val);
-                            }}
-                            options={THEME_PREFERENCE_OPTIONS}
-                            fullWidth
-                        />
+                        <div className="form-row-two">
+                            <Select
+                                label="Theme Preference"
+                                value={formData.theme || THEME_PREFERENCE.SYSTEM}
+                                onChange={(val) => {
+                                    onSelectChange('theme', val);
+                                    if (onThemePreview) onThemePreview(val);
+                                }}
+                                options={THEME_PREFERENCE_OPTIONS}
+                                fullWidth
+                            />
+                            <Select
+                                label="UI Layout Style"
+                                value={formData.ui_layout?.style || 'pulwave'}
+                                onChange={(val) => {
+                                    const currentLayout = formData.ui_layout || {};
+                                    onSelectChange('ui_layout', { ...currentLayout, style: val });
+                                }}
+                                options={[
+                                    { value: 'pulwave', label: 'PulWave (Rich & Dynamic)' },
+                                    { value: 'minimalist', label: 'Minimalist (Clean & Simple)' },
+                                ]}
+                                helperText="Choose your preferred interface style"
+                                fullWidth
+                            />
+                        </div>
                     </div>
                 </Card>
 
@@ -46,16 +73,8 @@ const PreferencesSection = ({ formData, onChange, onSelectChange, onCheckboxChan
                             label="Locale"
                             value={formData.locale || 'en-US'}
                             onChange={(val) => onSelectChange('locale', val)}
-                            options={[
-                                { value: 'en-US', label: 'English (US)', countryCode: 'US' },
-                                { value: 'en-GB', label: 'English (UK)', countryCode: 'GB' },
-                                { value: 'en-CA', label: 'English (Canada)', countryCode: 'CA' },
-                                { value: 'es-ES', label: 'Spanish (Spain)', countryCode: 'ES' },
-                                { value: 'fr-FR', label: 'French (France)', countryCode: 'FR' },
-                                { value: 'de-DE', label: 'German (Germany)', countryCode: 'DE' },
-                                { value: 'pt-BR', label: 'Portuguese (Brazil)', countryCode: 'BR' },
-                                { value: 'pt-PT', label: 'Portuguese (Portugal)', countryCode: 'PT' },
-                            ]}
+                            options={localeOptions}
+                            disabled={localesLoading}
                             fullWidth
                         />
                     </div>

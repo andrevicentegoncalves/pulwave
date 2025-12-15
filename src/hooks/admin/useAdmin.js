@@ -54,11 +54,69 @@ export const useUpdateAdminUser = () => {
  * Hook for UI translations
  */
 export const useAdminTranslations = (options = {}) => {
-    const { page = 1, limit = 50, locale = '', search = '', source_type = '', category = '' } = options;
+    const { page = 1, limit = 50, locale = '', search = '', source_type = '', category = '', table = '', enumName = '', key = '' } = options;
 
     return useQuery({
-        queryKey: ['admin', 'translations', { page, limit, locale, search, source_type, category }],
-        queryFn: () => adminService.getUITranslations({ page, limit, locale, search, source_type, category }),
+        queryKey: ['admin', 'translations', { page, limit, locale, search, source_type, category, table, enumName, key }],
+        queryFn: async () => {
+            let result = { data: [], count: 0 };
+            let sourceTypeValue;
+
+            if (source_type === 'database') {
+                result = await adminService.getSchemaTranslations({ page, limit, locale, search, table });
+                sourceTypeValue = 'database';
+            } else if (source_type === 'enum') {
+                result = await adminService.getEnumTranslations({ page, limit, locale, search, enumName });
+                sourceTypeValue = 'enum';
+            } else if (source_type === 'content') {
+                result = await adminService.getContentTranslations({ page, limit, locale, search, table });
+                sourceTypeValue = 'content';
+            } else if (source_type === 'master_data') {
+                result = await adminService.getMasterDataTranslations({ page, limit, locale, search });
+                sourceTypeValue = 'master_data';
+            } else if (source_type === 'ui') {
+                // Explicit UI type
+                result = await adminService.getUITranslations({ page, limit, locale, search, source_type, category, key });
+                sourceTypeValue = null;
+            } else {
+                // ALL TYPES (source_type === '')
+                // Fetch all in parallel
+                const [ui, schema, enums, content, masterData] = await Promise.all([
+                    adminService.getUITranslations({ page, limit, locale, search, source_type: 'ui', category, key }),
+                    adminService.getSchemaTranslations({ page, limit, locale, search, table }),
+                    adminService.getEnumTranslations({ page, limit, locale, search, enumName }),
+                    adminService.getContentTranslations({ page, limit, locale, search, table }),
+                    adminService.getMasterDataTranslations({ page, limit, locale, search })
+                ]);
+
+                // Combine data
+                // Note: Pagination with combined data is tricky. 
+                // Ideally backend should handle "all", but for now we combine on client.
+                // We'll mark items with their source type.
+
+                const uiItems = (ui.data || []).map(i => ({ ...i, source_type: i.source_type || 'ui' }));
+                const schemaItems = (schema.data || []).map(i => ({ ...i, source_type: 'database' }));
+                const enumItems = (enums.data || []).map(i => ({ ...i, source_type: 'enum' }));
+                const contentItems = (content.data || []).map(i => ({ ...i, source_type: 'content' }));
+                const masterDataItems = (masterData.data || []).map(i => ({ ...i, source_type: 'master_data' }));
+
+                result = {
+                    data: [...uiItems, ...schemaItems, ...enumItems, ...contentItems, ...masterDataItems],
+                    count: (ui.count || 0) + (schema.count || 0) + (enums.count || 0) + (content.count || 0) + (masterData.count || 0)
+                };
+                sourceTypeValue = null; // Already set per item
+            }
+
+            // Add source_type to each item if not already present (for single-source fetches)
+            if (result?.data && sourceTypeValue) {
+                result.data = result.data.map(item => ({
+                    ...item,
+                    source_type: item.source_type || sourceTypeValue
+                }));
+            }
+
+            return result;
+        },
         keepPreviousData: true,
     });
 };
@@ -69,8 +127,24 @@ export const useAdminTranslations = (options = {}) => {
 export const useAdminLocales = () => {
     return useQuery({
         queryKey: ['admin', 'locales'],
-        queryFn: () => adminService.getSupportedLocales(),
+        queryFn: async () => {
+            console.log('[useAdminLocales] Starting locale fetch...');
+            try {
+                const result = await adminService.getSupportedLocales();
+                console.log('[useAdminLocales] ✅ Fetch successful:', result);
+                return result;
+            } catch (error) {
+                console.error('[useAdminLocales] ❌ Fetch failed:', error);
+                throw error;
+            }
+        },
         staleTime: 300000, // 5 minutes
+        onError: (error) => {
+            console.error('[useAdminLocales] React Query onError:', error);
+        },
+        onSuccess: (data) => {
+            console.log('[useAdminLocales] React Query onSuccess:', data?.length, 'locales');
+        }
     });
 };
 
@@ -201,6 +275,61 @@ export const useSaveBatchAdminTranslations = () => {
     });
 };
 
+export const useSaveAdminSchemaTranslation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (translation) => adminService.saveSchemaTranslation(translation),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
+    });
+};
+
+export const useSaveAdminEnumTranslation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (translation) => adminService.saveEnumTranslation(translation),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
+    });
+};
+
+export const useSaveAdminContentTranslation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (translation) => adminService.saveContentTranslation(translation),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
+    });
+};
+
+export const useSaveAdminMasterDataTranslation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (translation) => adminService.saveMasterDataTranslation(translation),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
+    });
+};
+
+export const useAdminMasterDataTypes = () => {
+    return useQuery({
+        queryKey: ['admin', 'master-data-types'],
+        queryFn: () => adminService.getMasterDataTypes(),
+        staleTime: 300000, // 5 minutes
+    });
+};
+
+export const useAdminMasterDataValues = (typeId) => {
+    return useQuery({
+        queryKey: ['admin', 'master-data-values', typeId],
+        queryFn: () => adminService.getMasterDataValues(typeId),
+        enabled: !!typeId,
+        staleTime: 300000, // 5 minutes
+    });
+};
+
+export const useGenerateTranslationBundles = () => {
+    return useMutation({
+        mutationFn: (locale) => adminService.generateTranslationBundles(locale),
+    });
+};
+
 /**
  * Hook for fetching translations by key (for pre-filling)
  */
@@ -307,5 +436,17 @@ export const useAdminTableColumns = (tableName) => {
         queryFn: () => adminService.getTableColumns(tableName),
         enabled: !!tableName,
         staleTime: 600000, // 10 minutes
+    });
+};
+
+/**
+ * Hook for fetching generic table records (for Content Translations)
+ */
+export const useAdminTableRecords = (tableName, options = { limit: 100 }) => {
+    return useQuery({
+        queryKey: ['admin', 'table-records', tableName, options],
+        queryFn: () => adminService.getTableRecords(tableName, options),
+        enabled: !!tableName,
+        staleTime: 60000, // 1 minute
     });
 };

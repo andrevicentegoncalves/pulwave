@@ -9,6 +9,10 @@ export { default as Checkbox } from './Checkbox.jsx';
 export { default as Select } from './Select.jsx';
 export { default as TextArea } from './TextArea.jsx';
 export { default as MultiSelectDropdown } from './MultiSelectDropdown.jsx';
+export { default as TreeSelect } from './TreeSelect.jsx';
+export { default as AccordionSelect } from './AccordionSelect.jsx';
+export { default as TreeDropdown } from './TreeDropdown.jsx';
+export { default as ColumnChips } from './ColumnChips.jsx';
 
 // Feedback - User feedback components
 export { default as Alert } from './Alert.jsx';
@@ -32,6 +36,7 @@ export { default as StatCard } from './StatCard.jsx';
 export { default as EmptyState } from './EmptyState.jsx';
 export { default as SectionHeader } from './SectionHeader.jsx';
 export { default as ScrollArea } from './ScrollArea.jsx';
+export { default as GroupRow } from './GroupRow.jsx';
 
 // Navigation - Navigation UI components
 export { default as Tabs, TabPanel } from './Tabs.jsx';
@@ -47,6 +52,7 @@ export { default as Divider } from './Divider.jsx';
 export { default as Vector } from './Vector.jsx';
 export { default as VisualEffect } from './VisualEffect.jsx';
 export { default as CircleFlag } from './CircleFlag.jsx';
+export { default as LocaleSelector, CompactLocaleSelector } from './LocaleSelector.jsx';
 export * from './iconLibrary.jsx';
 
 // Re-export Floating Action Button from navigation

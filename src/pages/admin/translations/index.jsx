@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { adminService } from '../../../services';
 import {
     useAdminLocales,
@@ -7,15 +7,22 @@ import {
     useSaveBatchAdminTranslations,
     useDeleteAdminTranslation,
     useAdminTranslationsByKey,
-    useAdminSettings
+    useAdminSettings,
+    useSaveAdminSchemaTranslation,
+    useSaveAdminEnumTranslation,
+    useSaveAdminContentTranslation,
+    useGenerateTranslationBundles
 } from '../../../hooks/admin';
 import {
     Button, Input, Select, TextArea, Badge, Spinner, EmptyState, Modal, ConfirmationModal, DataTable,
-    SearchInput, Pagination, Card, CircleFlag,
-    Languages, Type, Database, Edit2, Trash2, Download, Plus, Save, AlertCircle, FileJson
+    SearchInput, Pagination, Card, CircleFlag, Tooltip, Info,
+    Languages, Type, Database, Edit2, Trash2, Download, Plus, Save, AlertCircle, FileJson, Layers, FileText
 } from '../../../components/ui';
 import LocaleSelect from '../../../components/forms/LocaleSelect';
 import GroupedTranslationList from './GroupedTranslationList';
+import SchemaTranslationList from './SchemaTranslationList';
+import AllTranslationsList from './AllTranslationsList';
+import TranslationFormModal from './TranslationFormModal';
 
 const statusOptions = [
     { value: 'draft', label: 'Draft' },
@@ -23,513 +30,569 @@ const statusOptions = [
     { value: 'needs_review', label: 'Needs Review' },
 ];
 
+
+const sourceTypes = [
+    { value: '', label: 'All', icon: Languages },
+    { value: 'ui', label: 'UI Strings', icon: Type },
+    { value: 'database', label: 'Schema', icon: Database },
+    { value: 'enum', label: 'Enums', icon: Layers },
+    { value: 'content', label: 'Content', icon: FileText },
+    { value: 'master_data', label: 'Master Data', icon: Database },
+];
+
 /**
- * Admin Translations Editor - Batch Edit Support
+ * Admin Translations Editor - Comprehensive Management
  */
 const TranslationsEditor = () => {
+    // Filters & Pagination
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
+    const [debouncedSearch, setDebouncedSearch] = useState('');
     const [localeFilter, setLocaleFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');
-    const [sourceType, setSourceType] = useState('');
-    const limit = 50;
+    const [sourceType, setSourceType] = useState(''); // '', 'ui', 'json_config', 'database', 'enum', 'content'
+
+    // Type-specific filters
+    const [tableFilter, setTableFilter] = useState(''); // For Schema & Content & JSON Config
+    const [enumFilter, setEnumFilter] = useState('');   // For Enums
+
+    // Debounce search input (500ms delay)
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedSearch(search);
+        }, 500);
+        return () => clearTimeout(handler);
+    }, [search]);
+
+    // Page size configuration (persisted to localStorage)
+    const [pageSize, setPageSize] = useState(() => {
+        const saved = localStorage.getItem('admin_translations_pageSize');
+        return saved ? parseInt(saved, 10) : 10;
+    });
+
+    const handlePageSizeChange = (e) => {
+        const newSize = parseInt(e.target.value, 10);
+        setPageSize(newSize);
+        localStorage.setItem('admin_translations_pageSize', newSize.toString());
+        setPage(1); // Reset to first page
+    };
+
+    const pageSizeOptions = [
+        { value: 10, label: '10 per page' },
+        { value: 25, label: '25 per page' },
+        { value: 50, label: '50 per page' },
+        { value: 100, label: '100 per page' },
+    ];
+
+    // For schema/grouped views, we need more rows to get enough unique groups
+    // Fetch extra rows to ensure we have enough grouped items to display
+    // UDPATE: Repository now handles Group-Based Pagination (Two-Step Fetch),
+    // so we can request the exact page size.
+    const fetchLimit = pageSize;
 
     // Modal state
     const [editModal, setEditModal] = useState({ isOpen: false, data: null });
     const [deleteModal, setDeleteModal] = useState({ isOpen: false, translation: null });
 
-    // Batch Form State
+    // Form State (Shared structure, adapted logic)
     const [formData, setFormData] = useState({
+        // Common
         translation_key: '',
+        locale_code: '',
+        translated_text: '', // Or translated_label
+        status: 'published',
+
+        // UI / JSON
         category: 'common',
         source_type: 'ui',
-        source_table: '',
-        source_column: '',
-        translations: {}, // { 'en-US': 'Hello', 'pt-PT': 'Olá' }
-        status: 'published'
+
+        // Schema
+        table_name: '',
+        column_name: '',
+        translated_description: '',
+
+        // Enum
+        enum_name: '',
+        enum_value: '',
+
+        // Content
+        record_id: '',
+
+        // Bulk Edits (Locale -> Text map)
+        translations: {},
     });
     const [formErrors, setFormErrors] = useState({});
 
-    // Hooks
-    const { data: localesData } = useAdminLocales();
-    const { data, isLoading, refetch } = useAdminTranslations({ page, limit, search, locale: localeFilter, category: categoryFilter, source_type: sourceType });
-    const saveBatchTranslations = useSaveBatchAdminTranslations();
-    const deleteTranslation = useDeleteAdminTranslation();
+    // Formatting helpers
+    const formatTableName = (t) => t ? t.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : '';
 
-    // Derived Key for pre-fetching
-    const potentialKey = useMemo(() => {
-        if (!editModal.isOpen) return '';
-        if (editModal.data) return ''; // Already editing specific record
+    // ================= DATA FETCHING =================
 
-        if (formData.source_type === 'database') {
-            if (formData.source_table && formData.source_column) {
-                return `db.${formData.source_table}.${formData.source_column}`;
-            }
-        } else {
-            return formData.translation_key;
-        }
-        return '';
-    }, [formData.source_type, formData.translation_key, formData.source_table, formData.source_column, editModal.isOpen, editModal.data]);
+    // 1. Locales
+    const { data: localesData, isLoading: localesLoading, error: localesError } = useAdminLocales();
+    const locales = localesData || [];
 
-    // Fetch existing by key
-    const { data: existingTranslationsByKey } = useAdminTranslationsByKey(potentialKey);
-
-    // Effect to pre-fill
+    // Debug logging
     useEffect(() => {
-        if (existingTranslationsByKey?.data && existingTranslationsByKey.data.length > 0) {
-            setFormData(prev => {
-                const newTranslations = { ...prev.translations };
-                let hasChanges = false;
-                existingTranslationsByKey.data.forEach(t => {
-                    if (!newTranslations[t.locale_code]) {
-                        newTranslations[t.locale_code] = t.translated_text;
-                        hasChanges = true;
-                    }
-                });
+        console.log('[TranslationsEditor] Locales state:', {
+            loading: localesLoading,
+            error: localesError,
+            dataLength: localesData?.length,
+            data: localesData
+        });
+    }, [localesData, localesLoading, localesError]);
 
-                if (hasChanges) {
-                    return { ...prev, translations: newTranslations };
-                }
-                return prev;
-            });
-        }
-    }, [existingTranslationsByKey]);
+    // 2. Translations (Main List)
+    const { data, isLoading, refetch } = useAdminTranslations({
+        page,
+        limit: fetchLimit,
+        search: debouncedSearch,
+        locale: localeFilter,
+        category: categoryFilter,
+        source_type: sourceType,
+        table: tableFilter,
+        enumName: enumFilter
+    });
 
-    // Fetch translation categories
+
+
+    // 3. Configurations (Tables, Cols, Enums)
+    const { data: settings } = useAdminSettings();
+
+    const configuredTables = useMemo(() => {
+        const s = settings?.find(x => x.setting_key === 'TRANSLATABLE_TABLES');
+        let val = s?.setting_value;
+        if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = []; }
+        return Array.isArray(val) ? val : [];
+    }, [settings]);
+
+    const configuredEnums = useMemo(() => {
+        const s = settings?.find(x => x.setting_key === 'TRANSLATABLE_ENUMS');
+        let val = s?.setting_value;
+        if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = []; }
+        return Array.isArray(val) ? val : [];
+    }, [settings]);
+
+    const configuredColumns = useMemo(() => {
+        const s = settings?.find(x => x.setting_key === 'TRANSLATABLE_COLUMNS');
+        let val = s?.setting_value;
+        if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
+        return typeof val === 'object' && !Array.isArray(val) ? val : {};
+    }, [settings]);
+
+    // User-specific translatable tables (for non-admin content translations)
+    const userConfiguredTables = useMemo(() => {
+        const s = settings?.find(x => x.setting_key === 'USER_TRANSLATABLE_TABLES');
+        let val = s?.setting_value;
+        if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
+        return typeof val === 'object' && !Array.isArray(val) ? Object.keys(val) : [];
+    }, [settings]);
+
+    const userConfiguredColumns = useMemo(() => {
+        const s = settings?.find(x => x.setting_key === 'USER_TRANSLATABLE_COLUMNS');
+        let val = s?.setting_value;
+        if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
+        return typeof val === 'object' && !Array.isArray(val) ? val : {};
+    }, [settings]);
+
+
+    // ... hook calls ...
+    const deleteTranslation = useDeleteAdminTranslation();
+    const generateBundles = useGenerateTranslationBundles();
+
+    // ================= OPTIONS =================
+
+    // Translation Categories
     const { data: categoriesData } = useQuery({
         queryKey: ['admin', 'master-data-values', 'translation_categories'],
         queryFn: () => adminService.getMasterDataValues('translation_categories'),
     });
-
-    // Fetch system_settings
-    const { data: settingsData } = useAdminSettings();
-
-    // Get translatable tables and columns from settings
-    const getSettingValue = (key) => {
-        const setting = settingsData?.find(s => s.setting_key === key);
-        if (!setting) return null;
-        let value = setting.setting_value;
-        if (typeof value === 'string') {
-            try { value = JSON.parse(value); } catch { return null; }
-        }
-        return value;
-    };
-
-    const translatableTables = getSettingValue('TRANSLATABLE_TABLES') || [];
-    const translatableColumns = getSettingValue('TRANSLATABLE_COLUMNS') || {};
-
-    // Fetch columns for selected table
-    const columnsForTable = useMemo(() => {
-        if (!formData.source_table) return [];
-        if (translatableColumns[formData.source_table]) {
-            return translatableColumns[formData.source_table];
-        }
-        return [];
-    }, [formData.source_table, translatableColumns]);
-
-    const translations = data?.data || [];
-    const totalCount = data?.count || 0;
-    const totalPages = Math.ceil(totalCount / limit);
-    const locales = localesData || [];
-
-    // Category Options
     const categories = categoriesData || [];
+
     const categoryOptions = [
         { value: '', label: 'All Categories' },
-        ...categories.map(c => ({ value: c.value_key, label: c.value_label }))
+        ...categories.map(c => ({
+            value: c.value_key,
+            label: c.value_label,
+            group: c.value_data?.group || null // Include group for grouped dropdown
+        }))
     ];
 
-    // Locale Options
     const localeOptions = [
         { value: '', label: 'All Locales' },
-        ...locales.map((l) => ({
-            value: l.locale,
-            label: l.name,
-            countryCode: l.locale.includes('-') ? l.locale.split('-')[1] : null
-        })),
+        ...locales.map((l) => ({ value: l.code, label: l.name, countryCode: l.code.includes('-') ? l.code.split('-')[1] : null })),
     ];
 
-    // Table Options
+    // Options from Configuration
     const tableOptions = [
-        { value: '', label: 'Select table...' },
-        ...translatableTables.map((t) => ({ value: t, label: t.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) }))
+        { value: '', label: 'Select Table...' },
+        ...configuredTables.map(t => ({ value: t, label: formatTableName(t) }))
     ];
 
-    // Column Options
-    const columnOptions = [
-        { value: '', label: 'Select column...' },
-        ...columnsForTable.map((c) => ({ value: c, label: c.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) }))
+    // 4. Database Enums (for Dropdown)
+    const { data: dbEnums } = useQuery({
+        queryKey: ['admin', 'database-enums'],
+        queryFn: () => adminService.getDatabaseEnums(),
+    });
+
+    const enumOptions = [
+        { value: '', label: 'Select Enum...' },
+        ...Array.from(new Set((dbEnums || []).map(e => e.enum_name)))
+            .map(name => ({ value: name, label: name }))
     ];
 
+    // Build enum_name -> [enum_values] map
+    const enumValueOptions = useMemo(() => {
+        if (!dbEnums) return {};
+        return dbEnums.reduce((acc, e) => {
+            if (!acc[e.enum_name]) acc[e.enum_name] = [];
+            if (e.enum_value) acc[e.enum_name].push(e.enum_value);
+            return acc;
+        }, {});
+    }, [dbEnums]);
 
+    // ================= ERROR HANDLING =================
+    // Error State Handling
+    if (isLoading) return <div className="admin-loading"><Spinner size="lg" /></div>;
 
-    const getStatusBadgeType = (status) => {
-        switch (status) {
-            case 'published': return 'success';
-            case 'draft': return 'warning';
-            case 'needs_review': return 'error';
-            default: return 'neutral';
-        }
-    };
+    if (data === undefined && !isLoading && sourceType === 'content') {
+        // This handles the specific case where the table might not exist yet (400 error)
+        // calling refetch would just fail again.
+        // We can show a specific empty state or error.
+    }
 
-    // Construct full key
-    const getFullKey = (data) => {
-        if (data.source_type === 'database') {
-            return `db.${data.source_table}.${data.source_column}`;
-        }
-        return data.translation_key;
-    };
+    // ================= HANDLERS =================
 
-    // Validation
-    const validateForm = () => {
-        const errors = {};
-        const key = getFullKey(formData);
-
-        if (!key || key.includes('undefined') || key.endsWith('.')) {
-            if (formData.source_type === 'ui' || formData.source_type === 'json_config') errors.translation_key = 'Valid key is required';
-            else errors.source_table = 'Table and Column are required';
-        }
-
-        // Check if at least one translation is provided
-        const hasTranslation = Object.values(formData.translations).some(v => v && v.trim());
-        if (!hasTranslation) {
-            errors.general = 'Please add at least one translation';
-        }
-
-        setFormErrors(errors);
-        return Object.keys(errors).length === 0;
-    };
-
-    // Open create modal
+    // Open Create
     const openCreateModal = () => {
-        setFormData({
-            translation_key: '',
-            category: 'common',
-            source_type: sourceType,
-            source_table: '',
-            source_column: '',
-            translations: {},
-            status: 'published'
-        });
-        setFormErrors({});
         setEditModal({ isOpen: true, data: null });
     };
 
-    // Open edit modal
-    const openEditModal = (translation) => {
-        // Find sibling translations (same key)
-        const siblingTranslations = translations.filter(t => t.translation_key === translation.translation_key);
+    // Open Edit
+    const openEditModal = (item) => {
+        // Prepare data for the modal
+        let dataToEdit = { ...item };
 
-        // Build translations map
-        const translationsMap = {};
-        siblingTranslations.forEach(t => {
-            translationsMap[t.locale_code] = t.translated_text;
-        });
-
-        // Deconstruct key if database type
-        let source_table = '';
-        let source_column = '';
-        if (translation.source_type === 'database') {
-            const parts = translation.translation_key.split('.');
-            if (parts.length >= 3) {
-                source_table = parts[1];
-                source_column = parts[2];
-            }
-        }
-
-        setFormData({
-            translation_key: translation.translation_key,
-            category: translation.category || 'common',
-            source_type: translation.source_type || 'ui',
-            source_table: translation.source_table || source_table,
-            source_column: translation.source_column || source_column,
-            translations: translationsMap,
-            status: translation.status || 'draft'
-        });
-        setFormErrors({});
-        setEditModal({ isOpen: true, data: translation });
-    };
-
-    // Save Batch
-    const handleSave = async () => {
-        setFormErrors({});
-        if (!validateForm()) {
-            // Ensure internal validation errors are visible
-            return;
-        }
-
-        try {
-            const finalKey = getFullKey(formData);
-
-            // Prepare batch array
-            const batchToSave = Object.entries(formData.translations)
-                .filter(([_, text]) => text && text.trim()) // Only save non-empty
-                .map(([locale, text]) => ({
-                    translation_key: finalKey,
-                    locale_code: locale,
-                    translated_text: text,
-                    status: formData.status,
-                    category: formData.source_type === 'database' ? '' : formData.category, // Clear category for database? Or keep 'common'?
-                    source_type: formData.source_type,
-                    source_table: formData.source_type === 'database' ? formData.source_table : null,
-                    source_column: formData.source_type === 'database' ? formData.source_column : null,
-                }));
-
-            if (batchToSave.length === 0) {
-                setFormErrors({ general: 'No translations content to save.' });
-                return;
+        // Check if items were pre-passed (from GroupRow/SchemaTranslationList)
+        // If so, use them directly instead of recomputing from query result
+        if (item.items && item.items.length > 0) {
+            dataToEdit.items = item.items;
+            dataToEdit.siblings = item.items; // For backward compatibility
+        } else {
+            // Find siblings for bulk editing (all locales) from current query result
+            let siblings = [];
+            if (item.source_type === 'ui') {
+                siblings = data?.data?.filter(t => t.translation_key === item.translation_key) || [];
+            } else if (item.source_type === 'database') {
+                siblings = data?.data?.filter(t => t.table_name === item.table_name && t.column_name === item.column_name) || [];
+            } else if (item.source_type === 'enum') {
+                siblings = data?.data?.filter(t => t.enum_name === item.enum_name && t.enum_value === item.enum_value) || [];
+            } else if (item.source_type === 'content') {
+                siblings = data?.data?.filter(t => t.table_name === item.table_name && t.record_id === item.record_id) || [];
             }
 
-            await saveBatchTranslations.mutateAsync(batchToSave);
+            // Ensure at least the item itself is in siblings
+            if (siblings.length === 0) siblings = [item];
 
-            setEditModal({ isOpen: false, data: null });
-            refetch();
-        } catch (err) {
-            console.error('Save error:', err);
-            setFormErrors({ submit: err.message || 'Failed to save translations. Please check your network or inputs.' });
+            dataToEdit.siblings = siblings;
+            dataToEdit.items = siblings;
         }
+
+        setEditModal({ isOpen: true, data: dataToEdit });
     };
 
-    // Delete
-    const handleDelete = async () => {
-        if (!deleteModal.translation) return;
+    // Regenerate Bundles
+    const handleRegenerate = async () => {
+        if (!confirm("This will regenerate all static translation JSON bundles for the frontend. Continue?")) return;
         try {
-            await deleteTranslation.mutateAsync(deleteModal.translation.id);
-            setDeleteModal({ isOpen: false, translation: null });
-            refetch();
-        } catch (err) {
-            console.error('Delete failed:', err);
+            await generateBundles.mutateAsync(null); // null = all locales
+            alert("Bundles queued for regeneration.");
+        } catch (e) {
+            alert("Failed: " + e.message);
         }
     };
 
-    // Export
+    // Export (Keep simple for now, just current view)
     const handleExport = () => {
-        const exportData = translations.reduce((acc, t) => {
-            if (!acc[t.locale_code]) acc[t.locale_code] = {};
-            acc[t.locale_code][t.translation_key] = t.translated_text;
-            return acc;
-        }, {});
-
-        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const jsonString = JSON.stringify(data?.data || [], null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `translations_${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `translations_export.json`;
         a.click();
-        URL.revokeObjectURL(url);
     };
 
-    const tableColumns = [
+
+    // ================= RENDER HELPERS =================
+
+    const getStatusBadge = (s) => (
+        <Badge type={s === 'published' ? 'success' : s === 'draft' ? 'warning' : 'neutral'} variant="light" size="s">{s}</Badge>
+    );
+
+    // Columns for the generic DataTable (fallback view)
+    const columns = [
         {
-            id: 'translation_key',
-            title: 'Key',
-            sortable: true,
-            render: (value, row) => (
+            id: 'key_info',
+            title: 'Key / Source',
+            render: (_, row) => {
+                if (row.translation_key) return <code>{row.translation_key}</code>;
+                if (row.table_name) return <span>{formatTableName(row.table_name)} {row.column_name ? ` > ${formatTableName(row.column_name)}` : ' (Table Limit)'}</span>;
+                if (row.enum_name) return <code>{row.enum_name}.{row.enum_value}</code>;
+                return '-';
+            }
+        },
+        {
+            id: 'locale',
+            title: 'Locale',
+            render: (_, row) => (
                 <div className="flex items-center gap-2">
-                    {row.source_type === 'json_config' && <FileJson size={14} className="text-neutral-500" />}
-                    {row.source_type === 'ui' && <Type size={14} className="text-neutral-500" />}
-                    {row.source_type === 'database' && <Database size={14} className="text-neutral-500" />}
-                    <code>{value}</code>
+                    <CircleFlag countryCode={(row.locale_code || row.locale || '').split('-')[1]} size="s" />
+                    <span>{row.locale_code || row.locale}</span>
                 </div>
             )
         },
         {
-            id: 'locale_code',
-            title: 'Locale',
-            sortable: true,
-            render: (value) => {
-                const countryCode = value && value.includes('-') ? value.split('-')[1] : null;
-                return (
-                    <div className="flex items-center gap-2">
-                        <CircleFlag countryCode={countryCode} size="s" />
-                        <span>{value}</span>
-                    </div>
-                );
-            }
+            id: 'value',
+            title: 'Translation',
+            render: (_, row) => <span className="font-medium">{row.translated_text || row.translated_label}</span>
         },
-        { id: 'translated_text', title: 'Value', sortable: false, render: (value) => <span className="data-table__truncate">{value}</span> },
-        { id: 'category', title: 'Category', sortable: true, render: (value) => value || '-' },
-        { id: 'status', title: 'Status', sortable: true, render: (value) => <Badge type={getStatusBadgeType(value)} variant="light" size="s">{value}</Badge> },
         {
-            id: 'actions', title: 'Actions', sortable: false,
+            id: 'actions',
+            title: '',
             render: (_, row) => (
-                <div className="data-table__actions">
-                    <Button variant="icon-circle" size="s" onClick={() => openEditModal(row)} title="Edit"><Edit2 size={14} /></Button>
-                    <Button variant="icon-circle" size="s" onClick={() => setDeleteModal({ isOpen: true, translation: row })} title="Delete"><Trash2 size={14} /></Button>
-                </div>
+                <Button variant="icon-circle" size="s" onClick={() => openEditModal(row)}><Edit2 size={14} /></Button>
             )
         }
     ];
 
     if (isLoading) return <div className="admin-loading"><Spinner size="lg" /></div>;
 
+    // Error State
+    if (!data && !isLoading) {
+        return (
+            <div className="admin-translations">
+                <div className="admin-header">
+                    <h1 className="admin-header__title">Translations</h1>
+                </div>
+                <div className="admin-filters-row mb-4">
+                    {/* Render filters even on error so user can switch back */}
+                    <div className="admin-filters-row__toggle flex gap-2 overflow-x-auto pb-2">
+                        {sourceTypes.map(t => (
+                            <Button
+                                key={t.value}
+                                variant={sourceType === t.value ? 'primary' : 'secondary'}
+                                size="sm"
+                                onClick={() => { setSourceType(t.value); setPage(1); }}
+                                leftIcon={<t.icon size={14} />}
+                                className={sourceType === t.value ? '' : 'bg-white border-neutral-200'}
+                            >
+                                {t.label}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
+                <EmptyState
+                    icon={<AlertCircle />}
+                    title="Could not load translations"
+                    description="There was a problem loading the data. The table might be missing or the server is unreachable."
+                    action={<Button onClick={() => refetch()} variant="secondary" leftIcon={<Layers size={14} />}>Retry</Button>}
+                />
+            </div>
+        );
+    }
+
+    // Compute proper counts based on view type
+    const rawCount = data?.count || 0;
+    const displayData = data?.data || [];
+
+    // For grouped views, count unique parent items
+    const getGroupCount = useMemo(() => {
+        if (sourceType === 'database') {
+            // Schema: count unique tables
+            const uniqueTables = new Set(displayData.map(t => t.table_name));
+            return uniqueTables.size;
+        } else if (sourceType === 'ui') {
+            // UI: count unique translation keys
+            const uniqueKeys = new Set(displayData.map(t => t.translation_key));
+            return uniqueKeys.size;
+        } else if (sourceType === 'enum') {
+            // Enum: count unique enum_name (hierarchical grouping)
+            const uniqueEnums = new Set(displayData.map(t => t.enum_name));
+            return uniqueEnums.size;
+        } else if (sourceType === 'content') {
+            // Content: count unique table + record_id pairs
+            const uniqueContent = new Set(displayData.map(t => `${t.table_name}::${t.record_id}`));
+            return uniqueContent.size;
+        } else {
+            // All: sum of UI keys + Schema tables + Enum names + Content items
+            const uiItems = displayData.filter(t => t.source_type === 'ui');
+            const schemaItems = displayData.filter(t => t.source_type === 'database');
+            const enumItems = displayData.filter(t => t.source_type === 'enum');
+            const contentItems = displayData.filter(t => t.source_type === 'content');
+
+            const uniqueKeys = new Set(uiItems.map(t => t.translation_key));
+            const uniqueTables = new Set(schemaItems.map(t => t.table_name));
+            const uniqueEnums = new Set(enumItems.map(t => t.enum_name));
+            const uniqueContent = new Set(contentItems.map(t => `${t.table_name}::${t.record_id}`));
+
+            return uniqueKeys.size + uniqueTables.size + uniqueEnums.size + uniqueContent.size;
+        }
+    }, [displayData, sourceType]);
+
+    // All views now use group counting
+    const totalCount = getGroupCount;
+    const totalPages = Math.ceil(rawCount / fetchLimit); // Use raw count for backend pagination
+
     return (
         <div className="admin-translations">
             <div className="admin-header">
                 <div>
-                    <h1 className="admin-header__title">Translations</h1>
-                    <p className="admin-header__subtitle">Manage UI and database translations</p>
+                    <h1 className="admin-header__title">
+                        Translations
+                        <Tooltip
+                            content={
+                                <div style={{ textAlign: 'left', maxWidth: '320px' }}>
+                                    <p style={{ marginBottom: '8px' }}><strong>Translation Types:</strong></p>
+                                    <p style={{ marginBottom: '6px' }}><strong>UI Strings:</strong> Interface text, buttons, labels, messages. Key-based (e.g., common.save).</p>
+                                    <p style={{ marginBottom: '6px' }}><strong>Schema:</strong> Database table/column names for admin displays and dynamic forms.</p>
+                                    <p style={{ marginBottom: '6px' }}><strong>Enums:</strong> Enum values like status types, roles, categories.</p>
+                                    <p style={{ marginBottom: '6px' }}><strong>Content:</strong> User-generated content from specific records (articles, products).</p>
+                                    <p><strong>Master Data:</strong> Dropdown options, categories, and configurable lists.</p>
+                                </div>
+                            }
+                            position="right"
+                        >
+                            <Info size={18} style={{ marginLeft: '8px', color: 'var(--color-feedback-info)', cursor: 'help', verticalAlign: 'middle' }} />
+                        </Tooltip>
+                    </h1>
+                    <p className="admin-header__subtitle">Manage localized content across the platform</p>
                 </div>
                 <div className="admin-header__actions">
+                    <Button variant="secondary" onClick={handleRegenerate} leftIcon={<Layers size={16} />} loading={generateBundles.isPending}>Regenerate Bundles</Button>
                     <Button variant="secondary" onClick={handleExport} leftIcon={<Download size={16} />}>Export</Button>
                     <Button variant="primary" onClick={openCreateModal} leftIcon={<Plus size={16} />}>Add Translation</Button>
                 </div>
             </div>
 
-            <div className="admin-filters-row">
-                <div className="admin-filters-row__toggle">
-                    <Button variant={sourceType === '' ? 'primary' : 'secondary'} size="sm" onClick={() => { setSourceType(''); setPage(1); }} leftIcon={<Languages size={14} />}>All</Button>
-                    <Button variant={sourceType === 'ui' ? 'primary' : 'secondary'} size="sm" onClick={() => { setSourceType('ui'); setPage(1); }} leftIcon={<Type size={14} />}>UI Strings</Button>
-                    <Button variant={sourceType === 'database' ? 'primary' : 'secondary'} size="sm" onClick={() => { setSourceType('database'); setPage(1); }} leftIcon={<Database size={14} />}>Database</Button>
+            {/* Source Filters */}
+            <div className="admin-filters-row mb-4">
+                <div className="admin-filters-row__toggle flex gap-2 overflow-x-auto pb-2">
+                    {sourceTypes.map(t => {
+                        const Icon = t.icon;
+                        const isActive = sourceType === t.value;
+                        return (
+                            <Button
+                                key={t.value}
+                                variant={isActive ? 'primary' : 'secondary'}
+                                size="sm"
+                                onClick={() => { setSourceType(t.value); setPage(1); }}
+                                leftIcon={<Icon size={14} />}
+                                className={isActive ? '' : 'bg-white border-neutral-200'}
+                            >
+                                {t.label}
+                            </Button>
+                        );
+                    })}
                 </div>
             </div>
 
             <Card variant="elevated">
-                <div className="data-table__header translation-table-header">
-                    <h2 className="data-table__title">{totalCount} Translations</h2>
-                    <div className="data-table__filters translation-table-filters">
-                        <div className="filter-w-180">
-                            <SearchInput value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} onClear={() => { setSearch(''); setPage(1); }} placeholder="Search..." size="sm" />
+                <div className="data-table__header translation-table-header p-4 border-b border-neutral-100 flex justify-between items-center flex-wrap gap-4">
+                    <h2 className="data-table__title text-lg font-semibold">{totalCount} Item{totalCount !== 1 ? 's' : ''}</h2>
+
+                    <div className="data-table__filters flex gap-3 flex-wrap">
+                        {/* Search */}
+                        <div className="w-64">
+                            <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search keys or text..." size="sm" />
                         </div>
-                        <div className="filter-w-200">
-                            <LocaleSelect value={localeFilter} onChange={(value) => { setLocaleFilter(value); setPage(1); }} options={localeOptions} placeholder="Locale..." />
+
+                        {/* Locale Filter */}
+                        <div className="w-40">
+                            <LocaleSelect
+                                value={localeFilter}
+                                onChange={setLocaleFilter}
+                                options={localeOptions}
+                                placeholder="Locale..."
+                                disabled={localesLoading}
+                            />
                         </div>
-                        <div className="filter-w-200">
-                            <Select value={categoryFilter} onChange={(value) => { setCategoryFilter(value); setPage(1); }} options={categoryOptions} placeholder="Category..." />
+
+                        {/* Category Filter (UI Only) */}
+                        {(sourceType === '' || sourceType === 'ui') && (
+                            <div className="w-48">
+                                <Select
+                                    value={categoryFilter}
+                                    onChange={setCategoryFilter}
+                                    options={categoryOptions}
+                                    placeholder="Category..."
+                                    searchable
+                                    grouped
+                                />
+                            </div>
+                        )}
+
+                        {/* Table Filter (Schema/Content) */}
+                        {(sourceType === 'database' || sourceType === 'content') && (
+                            <div className="w-48">
+                                <Select value={tableFilter} onChange={setTableFilter} options={tableOptions} placeholder="Filter by Table..." />
+                            </div>
+                        )}
+
+                        {/* Enum Filter */}
+                        {sourceType === 'enum' && (
+                            <div className="w-48">
+                                <Select value={enumFilter} onChange={setEnumFilter} options={enumOptions} placeholder="Filter by Enum..." />
+                            </div>
+                        )}
+
+                        {/* Page Size Selector */}
+                        <div className="w-36">
+                            <Select
+                                value={pageSize}
+                                onChange={handlePageSizeChange}
+                                options={pageSizeOptions}
+                                size="sm"
+                            />
                         </div>
                     </div>
                 </div>
 
-                {translations.length > 0 ? (
-                    <>
-                        {sourceType === 'database' || sourceType === '' ? (
-                            <GroupedTranslationList
-                                translations={translations}
-                                locales={locales}
-                                onEdit={openEditModal}
-                                onDelete={(item) => setDeleteModal({ isOpen: true, translation: item })}
-                            />
-                        ) : (
-                            <DataTable columns={tableColumns} data={translations} pagination={false} />
-                        )}
-                        {totalPages > 1 && (
-                            <div className="data-table__pagination">
-                                <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} showInfo totalItems={totalCount} itemsPerPage={limit} />
-                            </div>
-                        )}
-                    </>
+                {data?.data?.length > 0 ? (
+                    <AllTranslationsList
+                        translations={data.data}
+                        locales={locales}
+                        onEdit={openEditModal}
+                        onDelete={(item) => setDeleteModal({ isOpen: true, translation: item })}
+                    />
                 ) : (
-                    <EmptyState icon={<Languages />} title="No translations found" description="Add a new translation to get started" size="s" />
+                    <EmptyState icon={<Languages />} title="No translations found" description="Try adjusting your filters" size="s" />
+                )}
+
+                {totalPages > 1 && (
+                    <div className="data-table__pagination p-4 border-t border-neutral-100">
+                        <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} showInfo totalItems={totalCount} itemsPerPage={pageSize} />
+                    </div>
                 )}
             </Card>
 
-            {/* Batch Edit Modal */}
-            <Modal isOpen={editModal.isOpen} onClose={() => setEditModal({ isOpen: false, data: null })} title={editModal.data ? 'Edit Translation' : 'Add Translation'} size="lg">
-                <div className="admin-edit-form">
-                    {/* Header Errors */}
-                    {formErrors.submit && <div className="admin-field-error margin-bottom-4">{formErrors.submit}</div>}
-                    {formErrors.general && <div className="admin-field-error margin-bottom-4"><AlertCircle size={14} className="margin-right-1 display-inline" />{formErrors.general}</div>}
-
-                    {/* Meta Section */}
-                    <div className="admin-meta-section">
-                        <div className="admin-form-field margin-bottom-4">
-                            <div className="admin-form-field__row">
-                                <Button variant={formData.source_type === 'ui' ? 'primary' : 'secondary'} size="sm" onClick={() => setFormData({ ...formData, source_type: 'ui', source_table: '', source_column: '' })} disabled={!!editModal.data} leftIcon={<Type size={14} />}>UI String</Button>
-                                <Button variant={formData.source_type === 'database' ? 'primary' : 'secondary'} size="sm" onClick={() => setFormData({ ...formData, source_type: 'database', translation_key: '' })} disabled={!!editModal.data} leftIcon={<Database size={14} />}>Database Field</Button>
-                            </div>
-                        </div>
-
-                        {formData.source_type === 'ui' || formData.source_type === 'json_config' ? (
-                            <div className="admin-form-grid-3">
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Input
-                                        label={formData.source_type === 'json_config' ? 'JSON Key' : 'Translation Key'}
-                                        value={formData.translation_key}
-                                        onChange={(e) => setFormData({ ...formData, translation_key: e.target.value })}
-                                        placeholder={formData.source_type === 'json_config' ? 'config.key' : 'common.save'}
-                                        disabled={!!editModal.data}
-                                        fullWidth
-                                        error={!!formErrors.translation_key}
-                                    />
-                                </div>
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Select label="Category" value={formData.category} onChange={(value) => setFormData({ ...formData, category: value })} options={categoryOptions.filter(c => c.value !== '')} fullWidth />
-                                </div>
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Select label="Status" value={formData.status} onChange={(value) => setFormData({ ...formData, status: value })} options={statusOptions} fullWidth />
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="admin-form-grid-3">
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Select label="Table" value={formData.source_table} onChange={(value) => setFormData({ ...formData, source_table: value, source_column: '' })} options={tableOptions} fullWidth />
-                                </div>
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Select label="Column" value={formData.source_column} onChange={(value) => setFormData({ ...formData, source_column: value })} options={columnOptions} fullWidth disabled={!formData.source_table} />
-                                </div>
-                                <div className="admin-form-field margin-bottom-0">
-                                    <Select label="Status" value={formData.status} onChange={(value) => setFormData({ ...formData, status: value })} options={statusOptions} fullWidth />
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Translations List */}
-                    <div className="admin-form-field">
-                        <div className="translation-list-header">
-                            <span className="form-label">Translations</span>
-                            <span className="translation-list-hint">Fill at least one</span>
-                        </div>
-                        <div className="translation-list-body">
-                            {locales.map(locale => {
-                                const countryCode = locale.locale?.split('-')[1];
-
-                                return (
-                                    <div key={locale.locale} className="translation-row">
-                                        <div className="translation-locale-info">
-                                            <CircleFlag countryCode={countryCode} />
-                                            <div className="translation-locale-text">
-                                                <span className="translation-locale-name">{locale.name}</span>
-                                                <span className="translation-locale-code">{locale.locale}</span>
-                                            </div>
-                                        </div>
-                                        <div className="translation-input-wrapper">
-                                            <TextArea
-                                                value={formData.translations[locale.locale] || ''}
-                                                onChange={(e) => setFormData(prev => ({
-                                                    ...prev,
-                                                    translations: { ...prev.translations, [locale.locale]: e.target.value }
-                                                }))}
-                                                placeholder={`Translation for ${locale.name}...`}
-                                                fullWidth
-                                                rows={1}
-                                                className="translation-textarea"
-                                            />
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="admin-edit-form__actions">
-                    <Button variant="secondary" onClick={() => setEditModal({ isOpen: false, data: null })}>Cancel</Button>
-                    <Button variant="primary" onClick={handleSave} loading={saveBatchTranslations.isPending} leftIcon={<Save size={16} />}>Save All Changes</Button>
-                </div>
-            </Modal>
-
-            {/* Delete Confirmation */}
-            <ConfirmationModal
-                isOpen={deleteModal.isOpen}
-                onClose={() => setDeleteModal({ isOpen: false, translation: null })}
-                onConfirm={handleDelete}
-                title="Delete Translation"
-                message={deleteModal.translation ? `Delete logic for "${deleteModal.translation.translation_key}" (${deleteModal.translation.locale_code})?` : ''}
-                confirmText="Delete"
-                variant="danger"
-                loading={deleteTranslation.isPending}
+            {/* EDIT MODAL - Now using Encapsulated Component */}
+            <TranslationFormModal
+                isOpen={editModal.isOpen}
+                onClose={() => setEditModal({ isOpen: false, data: null })}
+                editData={editModal.data}
+                onSuccess={refetch}
+                locales={locales}
+                categories={categories}
+                tableOptions={tableOptions}
+                enumOptions={enumOptions}
+                enumValueOptions={enumValueOptions}
+                configuredColumns={configuredColumns}
+                userContext="admin"
+                userTableOptions={userConfiguredTables}
+                userConfiguredColumns={userConfiguredColumns}
             />
+
         </div>
     );
 };

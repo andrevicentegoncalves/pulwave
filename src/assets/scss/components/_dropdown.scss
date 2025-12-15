@@ -165,6 +165,71 @@
     color: var(--color-on-surface-subtle);
     @include typography.typography-responsive('body', 's', 'regular');
   }
+
+  &__group {
+    margin-top: var(--spacing-3);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    // Indent items within group
+    .dropdown__item {
+      padding-left: var(--spacing-5);
+    }
+  }
+
+  &__group-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    @include typography.typography-responsive('caption', 's', 'semi-bold');
+    color: var(--color-on-surface-subtle);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    user-select: none;
+    background: var(--color-surface-subtle);
+    border-radius: var(--border-radius-s);
+    margin: var(--spacing-1) var(--spacing-1) var(--spacing-1) var(--spacing-1);
+
+    // Decorative line before label (like VS Code, Figma)
+    &::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 12px;
+      background: var(--color-primary);
+      border-radius: var(--border-radius-s);
+    }
+  }
+
+  &__empty-state {
+    padding: var(--spacing-4);
+    text-align: center;
+    color: var(--color-on-surface-subtle);
+    @include typography.typography-responsive('body', 's', 'regular');
+  }
+
+  &__search-container {
+    padding: var(--spacing-2);
+    border-bottom: var(--border-width-1) solid var(--color-border-default);
+
+    // Compact input padding for dropdown context
+    .input {
+      padding: var(--scale-1) var(--scale-3);
+
+      // Keep proper padding for icon
+      &--has-left-icon {
+        padding-left: var(--scale-10);
+      }
+    }
+  }
+
+  &__options-container {
+    max-height: 300px;
+    overflow-y: auto;
+  }
 }
 
 @keyframes slideDown {

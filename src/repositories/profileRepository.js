@@ -45,7 +45,7 @@ export const profileRepository = {
                 *,
                 professional_profiles (*),
                 social_profiles (*),
-                profile_preferences (*),
+                user_preferences (*),
                 addresses (*)
             `)
             .eq('auth_user_id', authUserId)
@@ -130,7 +130,7 @@ export const profileRepository = {
      */
     async upsertPreferences(data) {
         const { data: result, error } = await supabase
-            .from('profile_preferences')
+            .from('user_preferences')
             .upsert(data, { onConflict: 'profile_id' })
             .select()
             .single();

@@ -4,8 +4,11 @@ import { Card, Input, Select, TextArea, SectionHeader } from '../../../../compon
 import { User } from '../../../../components/ui/iconLibrary';
 import { PhoneInputGroup } from '../../../../components/forms';
 import { SocialLinksCard } from '../../../../components/shared';
+import { useTranslation } from '../../../../hooks';
 
 const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = false }) => {
+    const { t } = useTranslation();
+
     // Auto-populate display name from first + last name
     useEffect(() => {
         const firstName = formData.first_name?.trim() || '';
@@ -20,40 +23,38 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
 
     return (
         <div className="profile-section">
-            <SectionHeader icon={User} title="Personal Information" />
+            <SectionHeader icon={User} title={t('common.personal_information')} />
             <div className="profile-section__cards">
                 {/* Personal Information Card */}
-                <Card header={<h3>Personal Information</h3>}>
+                <Card header={<h3>{t('common.personal_information')}</h3>}>
                     <div className="profile-form-grid">
                         {/* Names in one row */}
                         <div className="form-row-three">
                             <Input
-                                label="First Name"
+                                label={t('profile.first_name')}
                                 name="first_name"
                                 value={formData.first_name || ''}
                                 onChange={onChange}
-                                placeholder="First Name"
+                                placeholder={t('profile.first_name')}
                                 fullWidth
-                                required
                                 loading={loading}
                             />
                             <Input
-                                label="Middle Name"
+                                label={t('profile.middle_name')}
                                 name="middle_name"
                                 value={formData.middle_name || ''}
                                 onChange={onChange}
-                                placeholder="Middle Name"
+                                placeholder={t('profile.middle_name')}
                                 fullWidth
                                 loading={loading}
                             />
                             <Input
-                                label="Last Name"
+                                label={t('profile.last_name')}
                                 name="last_name"
                                 value={formData.last_name || ''}
                                 onChange={onChange}
-                                placeholder="Last Name"
+                                placeholder={t('profile.last_name')}
                                 fullWidth
-                                required
                                 loading={loading}
                             />
                         </div>
@@ -82,7 +83,6 @@ const PersonalInfoSection = ({ formData, onChange, onSelectChange, loading = fal
                                 onChange={onChange}
                                 placeholder="your@email.com"
                                 fullWidth
-                                required
                                 loading={loading}
                             />
                             <Input

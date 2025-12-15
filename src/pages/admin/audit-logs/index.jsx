@@ -1,5 +1,6 @@
 import React from 'react';
 import { History } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import { useAdminActivity } from '../../../hooks/admin';
 import { Badge, EmptyState, Spinner, Card, DataTable } from '../../../components/ui';
 
@@ -49,21 +50,12 @@ const AuditLogs = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     return (
         <div className="admin-audit-logs">
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Audit Logs</h1>
-                    <p className="admin-header__subtitle">System activity history</p>
-                </div>
-            </div>
+            <AdminPageHeader title="Audit Logs" subtitle="System activity history" />
 
             <Card variant="elevated">
                 {activities.length > 0 ? (

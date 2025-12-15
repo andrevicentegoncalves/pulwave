@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input } from '../../../ui';
+import PhoneSelect from '../../../forms/PhoneSelect';
 
 const PersonalInfoStep = ({ formData, handleChange }) => {
     return (
@@ -38,14 +39,26 @@ const PersonalInfoStep = ({ formData, handleChange }) => {
                     fullWidth
                 />
             </div>
-            <Input
-                label="Phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+1 (555) 000-0000"
-                fullWidth
-            />
+            <div className="form-item form-item--full-width">
+                <PhoneSelect
+                    label="Phone Code"
+                    name="phone_code"
+                    value={formData.phone_code}
+                    onChange={(value) => handleChange({ target: { name: 'phone_code', value } })}
+                    placeholder="Select code..."
+                    fullWidth
+                    className="phone-select-wrapper"
+                />
+                <Input
+                    label="Phone Number"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="123 456 789"
+                    fullWidth
+                    style={{ marginTop: '0.5rem' }}
+                />
+            </div>
         </div>
     );
 };

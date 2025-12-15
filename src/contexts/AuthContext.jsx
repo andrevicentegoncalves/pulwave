@@ -19,10 +19,18 @@ export const AuthProvider = ({ children }) => {
 
         initAuth();
 
-        // Listen to auth changes
-        const subscription = authService.onAuthStateChange((_event, newSession) => {
-            setSession(newSession);
-            setUser(newSession?.user ?? null);
+        // Listen to auth changes (but respect dev bypass)
+        const subscription = authService.onAuthStateChange(async (_event, newSession) => {
+            // Check for dev bypass - don't overwrite if active
+            const devBypass = localStorage.getItem('dev_bypass');
+            if (devBypass) {
+                const { session: bypassSession, user: bypassUser } = await authService.getSession();
+                setSession(bypassSession);
+                setUser(bypassUser);
+            } else {
+                setSession(newSession);
+                setUser(newSession?.user ?? null);
+            }
             setLoading(false);
         });
 
@@ -34,6 +42,8 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const signOut = async () => {
+        // Clear dev bypass if set
+        localStorage.removeItem('dev_bypass');
         await authService.signOut();
         setUser(null);
         setSession(null);

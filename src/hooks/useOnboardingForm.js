@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { profileService, onboardingService } from '../services';
+import { profileService, onboardingService, addressService, masterDataService } from '../services';
 import { useAuth } from '../contexts/AuthContext';
 import { ONBOARDING_STEPS, ACCOUNT_TYPES } from '../constants/onboardingConstants';
 import { User, Briefcase, Building, MapPin, Camera } from '../components/ui';
@@ -20,6 +20,7 @@ export const useOnboardingForm = (navigate) => {
         middle_name: '',
         last_name: '',
         phone: '',
+        phone_code: '',
         account_type: ACCOUNT_TYPES.INDIVIDUAL,
         company_name: '',
         vat_id: '',
@@ -42,13 +43,15 @@ export const useOnboardingForm = (navigate) => {
 
         const fetchProfile = async () => {
             try {
-                const data = await profileService.getByAuthId(user.id);
+                const data = await profileService.getFullProfile(user.id, user.email);
                 if (data) {
                     setProfile(data);
                     setFormData(prev => ({
                         ...prev,
                         first_name: data.first_name || '',
                         last_name: data.last_name || '',
+                        phone: data.phone_number || '',
+                        phone_code: data.phone_code || '',
                         avatar_url: data.avatar_url
                     }));
                     if (data.avatar_url) setAvatarUrl(data.avatar_url);
@@ -148,19 +151,77 @@ export const useOnboardingForm = (navigate) => {
     const handleFinish = async () => {
         setLoading(true);
         try {
-            // Update profile
-            await profileService.update(profile.id, {
-                first_name: formData.first_name,
-                middle_name: formData.middle_name,
-                last_name: formData.last_name,
-                // Add logic for saving other parts
-            });
+            // 1. Update personal info (Profile)
+            if (profile) {
+                await profileService.update(profile.id, {
+                    first_name: formData.first_name,
+                    middle_name: formData.middle_name,
+                    last_name: formData.last_name,
+                    phone_number: formData.phone,
+                    phone_code: formData.phone_code,
+                    avatar_url: avatarUrl || formData.avatar_url,
+                });
+            }
 
-            // Navigate to dashboard or next
+            // 2. Upsert Professional Profile
+            // Only if account type is 'company' OR we have professional data
+            // We need to determine if we should create one.
+            if (formData.account_type === ACCOUNT_TYPES.COMPANY || formData.company_name || formData.vat_id) {
+                await profileService.upsertProfessionalProfile(profile.id, {
+                    company_name: formData.company_name,
+                    tax_id: formData.vat_id,
+                    user_type: formData.account_type,
+                    organization_id: profile.organization_id
+                });
+            }
+
+            // 3. Upsert Address
+            // Ensure location hierarchy exists first (using masterDataService)
+            if (formData.country_id) {
+                // Try to ensure hierarchy if we have minimal data
+                if (formData.country_id && (formData.city_name || formData.region_id)) {
+                    try {
+                        await masterDataService.ensureLocationHierarchy({
+                            country_id: formData.country_id,
+                            region_id: formData.region_id, // Might be null
+                            city_name: formData.city_name
+                        });
+                    } catch (hierarchyErr) {
+                        console.warn('Hierarchy check warning:', hierarchyErr);
+                        // Continue anyway, addressService might complain or just save raw
+                    }
+                }
+
+                const addressData = {
+                    country_id: formData.country_id,
+                    region_division_id: formData.region_id || null, // Correct column name
+                    locality_id: formData.city_id || null,          // Correct column name
+                    city_name: formData.city_name,                  // Fallback text
+                    street_name: formData.street_name,
+                    number: formData.number,
+                    floor: formData.floor,
+                    postal_code: formData.postal_code,
+                    address_type: formData.type || 'home',
+                    is_primary: true,
+                    is_active: true  // Required NOT NULL column
+                };
+
+                const savedAddress = await addressService.upsert(profile.id, addressData.address_type, addressData);
+
+                // Link address to profile if it wasn't already
+                if (savedAddress && savedAddress.id) {
+                    await profileService.update(profile.id, { address_id: savedAddress.id });
+                }
+            }
+
+            // 4. Mark Onboarding as Complete
+            await onboardingService.completeOnboarding(profile.id, steps.length);
+
+            // Navigate to dashboard
             if (navigate) navigate('/app/dashboard');
         } catch (err) {
             console.error('Error saving profile:', err);
-            setError('Failed to save profile');
+            setError('Failed to save profile. Please try again.');
         } finally {
             setLoading(false);
         }

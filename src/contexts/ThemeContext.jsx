@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { profileService } from '../services';
+import { supabase } from '../lib/supabaseClient';
 
 const ThemeContext = createContext();
 
@@ -40,7 +41,12 @@ export const ThemeProvider = ({ children, user: propUser }) => {
 
         const fetchPreference = async () => {
             try {
-                const profile = await profileService.getByAuthId(user.id);
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('id') // Only need ID
+                    .eq('auth_user_id', user.id)
+                    .maybeSingle();
+
                 if (profile) {
                     const preferences = await profileService.getPreferences(profile.id);
                     if (preferences && preferences.theme) {
@@ -60,7 +66,12 @@ export const ThemeProvider = ({ children, user: propUser }) => {
 
         if (user) {
             try {
-                const profile = await profileService.getByAuthId(user.id);
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('id')
+                    .eq('auth_user_id', user.id)
+                    .maybeSingle();
+
                 if (profile) {
                     const orgId = await profileService.getOrganizationId(profile.id);
                     await profileService.upsertPreferences(profile.id, { theme: newTheme }, orgId);

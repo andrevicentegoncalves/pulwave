@@ -10,7 +10,7 @@ import { ADMIN_NAV_SECTIONS } from './sidebarConfig';
  * AdminSidebar - Navigation sidebar for admin backoffice
  * Matches the structure of the main Sidebar component but with admin routing and light styling.
  */
-const AdminSidebar = ({ isCollapsed, onToggle, isMobileOpen, onMobileClose, width }) => {
+const AdminSidebar = ({ isCollapsed, onToggle, isMobileOpen, onMobileClose, width, position = 'fixed' }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
@@ -46,8 +46,8 @@ const AdminSidebar = ({ isCollapsed, onToggle, isMobileOpen, onMobileClose, widt
             />
 
             <aside
-                className={`sidebar-container ${isExpanded ? 'expanded' : 'collapsed'} ${isMobile ? (isMobileOpen ? 'expanded' : '') : ''}`}
-                style={{ ...(isMobile && !isMobileOpen ? { transform: 'translateX(-100%)' } : {}), ...(width ? { width } : {}) }}
+                className={`sidebar-container ${isExpanded ? 'expanded' : 'collapsed'} ${isMobile ? (isMobileOpen ? 'expanded' : '') : ''} ${position === 'static' ? 'sidebar-container--static' : ''} ${isMobile && !isMobileOpen ? 'sidebar-container--mobile-hidden' : ''}`}
+                style={width ? { width } : undefined}
             >
                 <div className="sidebar sidebar--compact">
                     {/* Header / Toggle */}
@@ -59,7 +59,7 @@ const AdminSidebar = ({ isCollapsed, onToggle, isMobileOpen, onMobileClose, widt
 
                     {/* Navigation */}
                     <div className="sidebar__menu">
-                        <div className="menu" style={{ gap: 'var(--space-4)' }}>
+                        <div className="menu menu--admin-spacing">
                             {ADMIN_NAV_SECTIONS.map((section) => (
                                 <div key={section.title} className="menu__section">
                                     {isExpanded && (
@@ -98,6 +98,8 @@ AdminSidebar.propTypes = {
     onToggle: PropTypes.func.isRequired,
     isMobileOpen: PropTypes.bool,
     onMobileClose: PropTypes.func,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    position: PropTypes.oneOf(['fixed', 'static']),
 };
 
 export default AdminSidebar;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SidebarSection, SectionHeader } from '../../../../../components/ui';
+import { SidebarSection } from '../../../../../components/ui';
 import { Users, Globe, Database, Shield } from 'lucide-react';
 
 const SidebarSectionDemo = () => {
@@ -14,10 +14,8 @@ const SidebarSectionDemo = () => {
 
     return (
         <div className="component-section">
-            <SectionHeader
-                title="Sidebar Section"
-                subtitle="Navigation component for sidebar sub-menus or card-based navigation."
-            />
+            <h3 className="style-guide__subtitle">Sidebar Section</h3>
+            <p className="style-guide__description">Navigation component for sidebar sub-menus or card-based navigation.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="demo-block">

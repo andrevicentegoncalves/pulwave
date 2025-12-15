@@ -34,6 +34,13 @@ $theme-mappings: (
   'primary-disabled': ('light': semantics.$color-brand-primary-disabled,
     'dark': semantics.$color-brand-primary-disabled ),
 
+  // Secondary brand color
+  'secondary': ('light': semantics.$color-brand-secondary,
+    'dark': semantics.$color-brand-secondary ),
+
+  'secondary-subtle': ('light': semantics.$color-brand-secondary-subtle,
+    'dark': semantics.$color-brand-secondary-subtle ),
+
   // Secondary interaction states
   'secondary-hover': ('light': semantics.$color-brand-secondary-hover,
     'dark': semantics.$color-brand-secondary-hover ),

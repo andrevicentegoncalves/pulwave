@@ -35,32 +35,121 @@ export const profileService = {
     },
 
     /**
-     * Get full profile with all related data using relational query
-     * This reduces 8+ sequential API calls to a single query
-     * 
-     * @param {string} authUserId - The auth user ID
-     * @returns {Object} Profile with related data
+     * Get full profile with all related data using parallel queries
+     * This avoids PostgREST recursion depth issues and improves reliability
      */
-    async getFullProfile(authUserId) {
-        const { data, error } = await supabase
+    async getFullProfile(authUserId, userEmail) {
+        // 1. Get base profile
+        const { data: profile, error: profileError } = await supabase
             .from('profiles')
-            .select(`
-                *,
-                professional_profiles (*),
-                social_profiles (*),
-                profile_preferences (*),
-                primary_address:addresses!profiles_address_id_fkey (*),
-                billing_address:addresses!profiles_billing_address_id_fkey (*)
-            `)
+            .select('*')
             .eq('auth_user_id', authUserId)
             .single();
 
-        if (error && error.code !== 'PGRST116') throw error;
-        return data;
+        if (profileError) {
+            if (profileError.code === 'PGRST116') {
+                // Profile missing: Auto-create for existing authenticated users
+                console.log('Profile missing, creating new profile for:', authUserId);
+                const { data: newProfile, error: createError } = await supabase
+                    .from('profiles')
+                    .insert([{
+                        auth_user_id: authUserId,
+                        email: userEmail, // Use the passed email
+                        first_name: '',
+                        last_name: ''
+                    }])
+                    .select()
+                    .single();
+
+                if (createError) throw createError;
+                profile = newProfile;
+            } else {
+                throw profileError;
+            }
+        }
+
+        if (!profile) return null;
+
+        // 2. Fetch all related data in parallel
+        const [
+            { data: professional },
+            { data: social },
+            { data: preferences },
+            { data: primaryAddress },
+            { data: billingAddress },
+            { data: organizationMember },
+            { data: contacts },
+            { data: authState }
+        ] = await Promise.all([
+            // Professional Profile
+            supabase
+                .from('professional_profiles')
+                .select('*')
+                .eq('profile_id', profile.id)
+                .maybeSingle(),
+
+            // Social Profiles
+            supabase
+                .from('social_profiles')
+                .select('*')
+                .eq('profile_id', profile.id),
+
+            // Preferences
+            supabase
+                .from('user_preferences')
+                .select('*')
+                .eq('profile_id', profile.id)
+                .maybeSingle(),
+
+            // Primary Address
+            profile.address_id
+                ? supabase.from('addresses').select('*').eq('id', profile.address_id).single()
+                : Promise.resolve({ data: null }),
+
+            // Billing Address
+            profile.billing_address_id
+                ? supabase.from('addresses').select('*').eq('id', profile.billing_address_id).single()
+                : Promise.resolve({ data: null }),
+
+            // Organization Member (for is_primary org)
+            supabase
+                .from('organization_members')
+                .select('organization_id')
+                .eq('profile_id', profile.id)
+                .eq('is_primary', true)
+                .maybeSingle(),
+
+            // Contacts (phones, emergency contacts)
+            supabase
+                .from('contacts')
+                .select('*')
+                .eq('profile_id', profile.id)
+                .eq('is_active', true),
+
+            // Auth State (2FA, suspension, etc.)
+            supabase
+                .from('profile_auth_state')
+                .select('*')
+                .eq('profile_id', profile.id)
+                .maybeSingle()
+        ]);
+
+        // 3. Assemble and return
+        return {
+            ...profile,
+            professional_profiles: professional ? [professional] : [],
+            social_profiles: social || [],
+            user_preferences: preferences ? [preferences] : [],
+            primary_address: primaryAddress,
+            billing_address: billingAddress,
+            organization_id: organizationMember?.organization_id || null,
+            contacts: contacts || [],
+            auth_state: authState || null
+        };
     },
 
     /**
-     * Get onboarding status for a profile
+     * Get onboarding status
      */
     async getOnboardingStatus(profileId) {
         const { data, error } = await supabase
@@ -182,7 +271,7 @@ export const profileService = {
      */
     async getPreferences(profileId) {
         const { data, error } = await supabase
-            .from('profile_preferences')
+            .from('user_preferences')
             .select('*')
             .eq('profile_id', profileId)
             .maybeSingle();
@@ -196,7 +285,7 @@ export const profileService = {
      */
     async upsertPreferences(profileId, preferences, organizationId = null) {
         const result = await upsertRecord(
-            'profile_preferences',
+            'user_preferences',
             { profile_id: profileId },
             { ...preferences, organization_id: organizationId }
         );
@@ -218,6 +307,86 @@ export const profileService = {
         if (error && error.code !== 'PGRST116') throw error;
         return data?.organization_id || null;
     },
+
+    // =========================================================================
+    // GDPR DATA EXPORT (Article 15 - Right of Access)
+    // =========================================================================
+
+    /**
+     * Export all user data for GDPR compliance
+     * Calls the SQL function export_user_data
+     * @param {string} profileId - Profile UUID
+     * @returns {Promise<Object>} - Complete user data export
+     */
+    async exportUserData(profileId) {
+        const { data, error } = await supabase
+            .rpc('export_user_data', { p_profile_id: profileId });
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Export user data as JSON string (downloadable)
+     * @param {string} profileId - Profile UUID
+     * @returns {Promise<string>} - JSON string
+     */
+    async exportAsJson(profileId) {
+        const data = await this.exportUserData(profileId);
+        return JSON.stringify(data, null, 2);
+    },
+
+    /**
+     * Export user data as CSV (flattened)
+     * @param {string} profileId - Profile UUID
+     * @returns {Promise<string>} - CSV string
+     */
+    async exportAsCsv(profileId) {
+        const data = await this.exportUserData(profileId);
+        const rows = [];
+
+        // Flatten profile data
+        const profile = data.data?.profile || {};
+        rows.push(['Section', 'Field', 'Value']);
+
+        Object.entries(profile).forEach(([key, value]) => {
+            if (typeof value !== 'object') {
+                rows.push(['Profile', key, value ?? '']);
+            }
+        });
+
+        // Flatten preferences
+        const prefs = data.data?.preferences?.[0] || {};
+        Object.entries(prefs).forEach(([key, value]) => {
+            if (typeof value !== 'object') {
+                rows.push(['Preferences', key, value ?? '']);
+            }
+        });
+
+        // Flatten contacts
+        (data.data?.contacts || []).forEach((contact, i) => {
+            Object.entries(contact).forEach(([key, value]) => {
+                if (typeof value !== 'object') {
+                    rows.push([`Contact ${i + 1}`, key, value ?? '']);
+                }
+            });
+        });
+
+        // Flatten addresses
+        (data.data?.addresses || []).forEach((addr, i) => {
+            Object.entries(addr).forEach(([key, value]) => {
+                if (typeof value !== 'object') {
+                    rows.push([`Address ${i + 1}`, key, value ?? '']);
+                }
+            });
+        });
+
+        // Convert to CSV
+        return rows.map(row =>
+            row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+        ).join('\n');
+    },
 };
 
 export default profileService;
+

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import { useAdminRetentionPolicies } from '../../../hooks/admin';
 import { Badge, EmptyState, Spinner, Card, DataTable } from '../../../components/ui';
 
@@ -55,21 +56,12 @@ const RetentionPolicies = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     return (
         <div className="admin-retention">
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Data Retention</h1>
-                    <p className="admin-header__subtitle">Manage data retention policies</p>
-                </div>
-            </div>
+            <AdminPageHeader title="Data Retention" subtitle="Manage data retention policies" />
 
             <Card variant="elevated">
                 {policies.length > 0 ? (

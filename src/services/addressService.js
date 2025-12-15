@@ -42,7 +42,7 @@ export const addressService = {
             .select('id')
             .eq('profile_id', profileId)
             .eq('address_type', addressType)
-            .single();
+            .maybeSingle();
 
         const payload = {
             profile_id: profileId,
@@ -51,16 +51,22 @@ export const addressService = {
         };
 
         if (existing) {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('addresses')
                 .update(payload)
-                .eq('id', existing.id);
+                .eq('id', existing.id)
+                .select()
+                .single();
             if (error) throw error;
+            return data;
         } else {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('addresses')
-                .insert([payload]);
+                .insert([payload])
+                .select()
+                .single();
             if (error) throw error;
+            return data;
         }
     },
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Clock } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
+import { lookupService } from '../../services';
 import IconSelect from './IconSelect';
 import { Icon } from '../ui';
 
@@ -23,27 +24,20 @@ const TimezoneSelect = ({
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Fetch timezones from DB
+    // Fetch timezones from DB via service
     useEffect(() => {
         const fetchTimezones = async () => {
             try {
                 setLoading(true);
-                const { data, error } = await supabase
-                    .from('timezones')
-                    .select('*')
-                    .eq('is_active', true)
-                    .order('display_order', { ascending: true });
-
-                if (error) throw error;
-
+                const data = await lookupService.fetchTimezones();
                 if (data) {
                     setOptions(data);
                 }
             } catch (err) {
                 console.error('Error fetching timezones:', err);
-                // Fallback to basic options if DB fails
+                // Fallback handled by service returning [] or cached data
                 setOptions([
-                    { tz_identifier: 'UTC', display_name: 'UTC', utc_offset: '+00:00' }
+                    { value: 'UTC', label: '(GMT+00:00) UTC', utcOffset: '+00:00' }
                 ]);
             } finally {
                 setLoading(false);
@@ -82,8 +76,8 @@ const TimezoneSelect = ({
             onChange={onChange}
             options={options}
             getOptionIcon={() => <Icon size="s"><Clock /></Icon>}
-            getOptionLabel={(option) => option.display_name}
-            getOptionValue={(option) => option.tz_identifier}
+            getOptionLabel={(option) => option.label || option.display_name}
+            getOptionValue={(option) => option.value || option.tz_identifier}
             getSelectedIcon={() => <Icon size="s"><Clock /></Icon>}
             placeholder={loading ? "Loading timezones..." : placeholder}
             searchPlaceholder="Search timezones..."

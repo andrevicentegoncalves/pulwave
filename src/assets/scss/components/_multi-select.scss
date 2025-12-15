@@ -14,6 +14,21 @@
 .multi-select-dropdown__search {
     padding: var(--spacing-2);
     border-bottom: var(--border-width-1) solid var(--color-border-default);
+
+    // Compact input styling for search
+    .input.input--md {
+        padding: var(--scale-1) var(--scale-6);
+
+        // Account for left icon
+        &.input--has-left-icon {
+            padding-left: var(--scale-10);
+        }
+    }
+}
+
+// Footer action buttons
+.multi-select-dropdown__footer-actions .btn {
+    height: var(--spacing-8);
 }
 
 .multi-select-dropdown__clear {
@@ -75,7 +90,7 @@
     user-select: none;
 
     &:hover {
-        background: var(--color-surface-hover);
+        background: var(--color-neutral-200);
     }
 
     &--selected {

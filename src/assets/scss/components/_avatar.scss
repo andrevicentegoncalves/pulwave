@@ -11,7 +11,7 @@
     justify-content: center;
     border-radius: var(--border-radius-circle);
     overflow: hidden;
-    background-color: var(--color-neutral-3);
+    background-color: var(--color-secondary);
     flex-shrink: 0;
     position: relative;
 
@@ -49,8 +49,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-        color: var(--color-neutral-0);
+        background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-active));
+        color: var(--color-on-secondary);
         font-weight: 600;
         text-transform: uppercase;
         user-select: none;

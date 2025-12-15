@@ -1,7 +1,8 @@
 import React from 'react';
-import { Shield } from '../../../components/ui';
+import { Shield, Badge, EmptyState, Card, DataTable } from '../../../components/ui';
+import { AdminPageHeader, AdminLoadingState } from '../../../components/admin';
 import { useAdminPermissions } from '../../../hooks/admin';
-import { Badge, EmptyState, Spinner, Card, DataTable } from '../../../components/ui';
+import { groupBy } from '../../../utils';
 
 /**
  * Admin Permissions Manager
@@ -11,13 +12,8 @@ const PermissionsManager = () => {
     const { data, isLoading } = useAdminPermissions();
     const permissions = data || [];
 
-    // Group permissions by category
-    const groupedPermissions = permissions.reduce((acc, perm) => {
-        const category = perm.permission_category || 'Other';
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(perm);
-        return acc;
-    }, {});
+    // Group permissions by category using utility
+    const groupedPermissions = groupBy(permissions, p => p.permission_category || 'Other');
 
     // DataTable columns
     const columns = [
@@ -46,21 +42,12 @@ const PermissionsManager = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="admin-loading">
-                <Spinner size="lg" />
-            </div>
-        );
+        return <AdminLoadingState />;
     }
 
     return (
         <div className="admin-permissions">
-            <div className="admin-header">
-                <div>
-                    <h1 className="admin-header__title">Permissions</h1>
-                    <p className="admin-header__subtitle">View and manage system permissions</p>
-                </div>
-            </div>
+            <AdminPageHeader title="Permissions" subtitle="View and manage system permissions" />
 
             {Object.keys(groupedPermissions).length > 0 ? (
                 Object.entries(groupedPermissions).map(([category, perms]) => (

@@ -19,7 +19,8 @@ import {
   Tables,
   Flags,
   Icons,
-  Navigation
+  Navigation,
+  TreeSelectSection
 } from './component-sections';
 import SearchFilterSection from './SearchFilterSection';
 import DataDisplaySection from './DataDisplaySection';
@@ -46,6 +47,7 @@ export default function Components({ triggerAlert }) {
   const flagsRef = useRef(null);
   const iconsRef = useRef(null);
   const navigationRef = useRef(null);
+  const treeSelectRef = useRef(null);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -97,6 +99,7 @@ export default function Components({ triggerAlert }) {
                   { name: 'Forms & Inputs', ref: formsRef },
                   { name: 'Selects', ref: selectsRef },
                   { name: 'Dropdowns', ref: dropdownsRef },
+                  { name: 'Tree Selects', ref: treeSelectRef },
                   { name: 'Search & Filter', ref: searchFilterRef },
                   { name: 'Wizards', ref: wizardsRef },
                 ].map(({ name, ref }) => (
@@ -177,6 +180,9 @@ export default function Components({ triggerAlert }) {
         <Divider className="styleguide-divider" />
 
         <div ref={dropdownsRef}><Dropdowns /></div>
+        <Divider className="styleguide-divider" />
+
+        <div ref={treeSelectRef}><TreeSelectSection /></div>
         <Divider className="styleguide-divider" />
 
         <div ref={searchFilterRef}><SearchFilterSection /></div>

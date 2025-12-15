@@ -2,6 +2,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Spinner from './Spinner';
 
 /**
  * Button Component
@@ -22,6 +23,9 @@ const Button = forwardRef(({
   rightIcon,
   ...rest
 }, ref) => {
+  // Spinner size based on button size
+  const spinnerSize = size === 's' ? 14 : size === 'l' ? 20 : 16;
+
   return (
     <button
       ref={ref}
@@ -41,7 +45,14 @@ const Button = forwardRef(({
       aria-busy={loading}
       {...rest}
     >
-      {leftIcon && <span className="btn__icon">{leftIcon}</span>}
+      {/* Show spinner in place of leftIcon when loading, or show leftIcon */}
+      {loading ? (
+        <span className="btn__icon btn__spinner">
+          <Spinner size={spinnerSize} />
+        </span>
+      ) : (
+        leftIcon && <span className="btn__icon">{leftIcon}</span>
+      )}
       {children}
       {rightIcon && <span className="btn__icon">{rightIcon}</span>}
     </button>
