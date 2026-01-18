@@ -80,3 +80,9 @@ tsc_errors.txt
 # Bundle analysis
 stats.html
 bundle-stats.html
+
+# Debug files
+debug-env.*
+
+# Vite cache
+.vite
