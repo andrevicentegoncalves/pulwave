@@ -1,0 +1,42 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--pyramid {
+    &__segment-group {
+        cursor: pointer;
+    }
+
+    &__segment {
+        stroke: var(--color-background-primary);
+        stroke-width: 2px;
+        transition: transform 0.2s ease, filter 0.2s ease;
+
+        &--hovered {
+            filter: brightness(1.1);
+        }
+    }
+
+    &__label {
+        fill: var(--color-text-inverse);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+        transition: font-size 0.2s ease, opacity 0.2s ease;
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+
+        &--hovered {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-bold);
+        }
+    }
+
+    &__value {
+        fill: var(--color-text-secondary);
+        font-size: var(--font-size-body-xs);
+        transition: font-size 0.2s ease, font-weight 0.2s ease;
+
+        &--hovered {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-bold);
+        }
+    }
+}

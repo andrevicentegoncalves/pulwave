@@ -1,0 +1,32 @@
+{
+  "name": "@pulwave/mcp-supabase",
+  "version": "0.0.1",
+  "description": "MCP server for Pulwave Supabase database",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "pulwave-mcp-supabase": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pulwave/mcp-core": "*",
+    "@supabase/supabase-js": "^2.49.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@pulwave/typescript-config": "*",
+    "typescript": "^5.7.2"
+  }
+}

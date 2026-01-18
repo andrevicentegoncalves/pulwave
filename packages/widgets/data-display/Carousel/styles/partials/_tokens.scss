@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.carousel {
+    --carousel-gap: var(--scale-4);
+    --carousel-arrow-size: var(--scale-10);
+    --carousel-dot-size: var(--scale-2);
+    --carousel-transition: 0.4s var(--easing-emphasized-decelerate);
+    --carousel-card-bg: var(--color-surface-elevated);
+    --carousel-card-border: var(--color-border-default);
+    --carousel-arrow-bg: var(--color-surface-elevated);
+    --carousel-arrow-color: var(--color-icon-default);
+    --carousel-dot-color: var(--color-border-default);
+    --carousel-dot-active: var(--color-brand-primary);
+    --carousel-controls-padding: var(--scale-14);
+}

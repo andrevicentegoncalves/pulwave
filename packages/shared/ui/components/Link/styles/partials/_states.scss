@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.link {
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+}

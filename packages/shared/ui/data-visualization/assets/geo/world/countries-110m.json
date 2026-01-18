@@ -1,0 +1,5 @@
+{
+    "type": "Topology",
+    "_placeholder": true,
+    "_download": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+}

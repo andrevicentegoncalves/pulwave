@@ -1,0 +1,22 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.burger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: var(--burger-menu-width);
+    height: var(--burger-menu-height);
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: var(--z-index-overlay-popover);
+    transition: var(--transition-fast);
+
+    &:hover {
+        opacity: var(--burger-menu-hover-opacity);
+    }
+
+    @include interactive.focus-ring;
+}

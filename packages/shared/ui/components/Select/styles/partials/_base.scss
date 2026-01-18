@@ -1,0 +1,22 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    font-family: var(--font-family-body);
+}
+
+// Animation keyframes
+@keyframes selectSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-var(--scale-2));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

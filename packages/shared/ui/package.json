@@ -1,0 +1,46 @@
+{
+    "name": "@pulwave/ui",
+    "version": "0.0.1",
+    "description": "UI Component Library - Design System Migration",
+    "sideEffects": false,
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "scripts": {
+        "build": "tsc --noEmit",
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
+        "@floating-ui/react": "^0.26.28",
+        "@pulwave/hooks": "*",
+        "@tanstack/react-virtual": "^3.0.0",
+        "@visx/axis": "^3.12.0",
+        "@visx/grid": "^3.12.0",
+        "@visx/group": "^3.12.0",
+        "@visx/legend": "^3.12.0",
+        "@visx/responsive": "^3.12.0",
+        "@visx/scale": "^3.12.0",
+        "@visx/shape": "^3.12.0",
+        "@visx/tooltip": "^3.12.0",
+        "@visx/xychart": "^3.12.0",
+        "class-variance-authority": "^0.7.0",
+        "cmdk": "^1.1.1",
+        "colord": "^2.9.3",
+        "country-flag-icons": "^1.6.4",
+        "lucide-react": "*",
+        "react-colorful": "^5.6.1",
+        "react-resizable-panels": "^2.0.0"
+    },
+    "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
+        "recharts": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/prop-types": "^15.7.15"
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "$description": "Transform origin and perspective values",
+    "transformOrigin": {
+        "center": {
+            "$value": "center",
+            "$type": "string"
+        },
+        "top": {
+            "$value": "top",
+            "$type": "string"
+        },
+        "topRight": {
+            "$value": "top right",
+            "$type": "string"
+        },
+        "right": {
+            "$value": "right",
+            "$type": "string"
+        },
+        "bottomRight": {
+            "$value": "bottom right",
+            "$type": "string"
+        },
+        "bottom": {
+            "$value": "bottom",
+            "$type": "string"
+        },
+        "bottomLeft": {
+            "$value": "bottom left",
+            "$type": "string"
+        },
+        "left": {
+            "$value": "left",
+            "$type": "string"
+        },
+        "topLeft": {
+            "$value": "top left",
+            "$type": "string"
+        }
+    },
+    "perspective": {
+        "none": {
+            "$value": "none",
+            "$type": "string"
+        },
+        "xs": {
+            "$value": "500px",
+            "$type": "dimension"
+        },
+        "s": {
+            "$value": "750px",
+            "$type": "dimension"
+        },
+        "m": {
+            "$value": "1000px",
+            "$type": "dimension"
+        },
+        "l": {
+            "$value": "1500px",
+            "$type": "dimension"
+        },
+        "xl": {
+            "$value": "2000px",
+            "$type": "dimension"
+        }
+    }
+}

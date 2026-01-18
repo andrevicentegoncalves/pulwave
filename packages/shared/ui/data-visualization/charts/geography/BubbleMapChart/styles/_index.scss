@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--bubble-map {
+    position: relative;
+    width: 100%;
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+        background: linear-gradient(180deg, #E0F2FE 0%, #BAE6FD 100%);
+        border-radius: var(--border-radius-m);
+    }
+
+    &__continent {
+        opacity: 0.4;
+        fill: #94A3B8;
+    }
+
+    &__bubble-group {
+        cursor: pointer;
+    }
+
+    &__bubble-shadow {
+        fill: rgba(0, 0, 0, 0.2);
+    }
+
+    &__bubble {
+        stroke: white;
+        stroke-width: 2px;
+        transition: r 0.2s cubic-bezier(0.4, 0, 0.2, 1), fill-opacity 0.2s ease;
+    }
+
+    &__bubble-label {
+        font-size: 10px;
+        font-weight: var(--font-weight-semibold);
+        fill: white;
+        text-anchor: middle;
+        pointer-events: none;
+    }
+
+    &__hover-info {
+        text-align: center;
+        margin-top: var(--scale-2);
+        font-size: var(--font-size-body-sm);
+        color: var(--color-text-primary);
+
+        strong {
+            font-weight: var(--font-weight-bold);
+        }
+    }
+}

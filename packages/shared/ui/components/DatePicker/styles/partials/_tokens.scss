@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.date-picker {
+    --date-picker-cell-size: var(--scale-8); // var(--scale-8)
+    --date-picker-nav-size: var(--scale-7); // 28px
+    --date-picker-popover-min-width: var(--scale-70); // Keep pixel for min width to ensure calendar fits
+    --date-picker-gap: var(--scale-1);
+    --date-picker-padding: var(--scale-3);
+}

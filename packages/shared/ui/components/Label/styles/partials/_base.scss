@@ -1,0 +1,31 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+    margin-bottom: var(--scale-2);
+
+    &__text {
+        color: var(--color-text-default);
+        font-weight: var(--font-weight-m);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+    }
+
+    &__required {
+        color: var(--color-status-error);
+    }
+
+    &__optional {
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-regular);
+        font-size: 0.9em;
+    }
+
+    &__description {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-s);
+    }
+}

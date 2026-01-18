@@ -1,0 +1,10 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.tooltip {
+    &--s {
+        --tooltip-arrow-size: 5px;
+        --tooltip-padding-y: var(--scale-1);
+        --tooltip-padding-x: var(--scale-2);
+        font-size: var(--font-size-caption-s);
+    }
+}

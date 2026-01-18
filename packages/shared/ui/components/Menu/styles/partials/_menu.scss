@@ -1,0 +1,215 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+    padding: var(--scale-2) 0;
+    overflow: hidden; // Clip content during sidebar collapse animation
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: var(--scale-3) var(--scale-4);
+        margin: 0 var(--scale-2);
+        border-radius: var(--border-radius-m);
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-m);
+        // Only animate colors, not layout (instant centering)
+        transition: background-color 150ms var(--easing-standard),
+            color 150ms var(--easing-standard);
+        text-decoration: none;
+        overflow: hidden; // Clip text during sidebar collapse animation
+
+        &:hover {
+            background-color: var(--color-surface-strong);
+            color: var(--color-text-primary);
+        }
+
+        &--active {
+            background-color: var(--color-primary-container);
+            color: var(--color-brand-primary);
+
+            &:hover {
+                background-color: var(--color-primary-container-hover);
+            }
+        }
+
+        &--sub {
+            padding-left: var(--scale-8);
+            font-size: var(--font-size-body-s);
+        }
+
+        &--collapsed {
+            justify-content: center;
+            padding: var(--scale-3);
+            margin: 0 var(--scale-2);
+
+            .menu__label {
+                opacity: 0;
+                max-width: 0;
+                flex: 0;
+                overflow: hidden;
+                // Fast fade-out on collapse (no delay)
+                transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1),
+                    max-width 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .menu__icon {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: var(--scale-3);
+        width: var(--scale-5);
+        height: var(--scale-5);
+        flex-shrink: 0;
+        // No transition - instant layout change
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+        max-width: 200px;
+        opacity: 1;
+        // Smooth ease-out for pleasing expand animation
+        transition: opacity 200ms cubic-bezier(0.0, 0, 0.2, 1) 50ms,
+            max-width 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &__category-group {
+        display: flex;
+        flex-direction: column;
+
+        &.collapsed {
+            .menu__category-header {
+                justify-content: center;
+                padding: var(--scale-3);
+
+                .menu__label,
+                .menu__chevron {
+                    opacity: 0;
+                    max-width: 0;
+                    overflow: hidden;
+                    // Fast fade-out on collapse
+                    transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1),
+                        max-width 150ms cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .menu__icon {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    &__category-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--scale-3) var(--scale-4);
+        margin: 0 var(--scale-2);
+        border-radius: var(--border-radius-m);
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-m);
+        // Only animate colors, not layout (instant centering)
+        transition: background-color 150ms var(--easing-standard);
+        overflow: hidden;
+
+        &:hover {
+            background-color: var(--color-surface-strong);
+            color: var(--color-text-primary);
+        }
+
+        &.active-parent {
+            color: var(--color-brand-primary);
+        }
+    }
+
+    &__category-content {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    &__chevron {
+        display: flex;
+        align-items: center;
+        max-width: 24px;
+        opacity: 1;
+        // Smooth ease-out on expand
+        transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 200ms cubic-bezier(0.0, 0, 0.2, 1) 50ms,
+            max-width 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+
+        &.expanded {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__submenu {
+        display: none;
+        flex-direction: column;
+        gap: var(--scale-1);
+        margin-top: var(--scale-1);
+        padding-left: var(--scale-2);
+        animation: slideDown 100ms var(--easing-standard);
+
+        &.expanded {
+            display: flex;
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-var(--scale-1));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .menu {
+        &__item {
+            transition: none;
+        }
+
+        &__category-header {
+            transition: none;
+        }
+
+        &__chevron {
+            transition: none;
+        }
+
+        &__submenu {
+            animation: none;
+        }
+    }
+}

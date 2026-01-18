@@ -1,0 +1,127 @@
+{
+    "$description": "Compact theme for dense UI - reduced spacing and sizing for power users",
+    "$format": "dtcg",
+    "name": "compact",
+    "config": {
+        "$description": "Compact mode configuration - smaller sizes overall",
+        "density": {
+            "$value": "compact",
+            "$type": "string",
+            "$description": "Dense layout mode"
+        }
+    },
+    "component": {
+        "$description": "Component size overrides",
+        "height": {
+            "xs": {
+                "$value": "1.25rem",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "1.5rem",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "2rem",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "2.5rem",
+                "$type": "dimension"
+            }
+        },
+        "borderRadius": {
+            "$value": "0.125rem",
+            "$type": "dimension",
+            "$description": "Minimal border radius"
+        },
+        "iconSize": {
+            "$value": "0.75rem",
+            "$type": "dimension"
+        }
+    },
+    "spacing": {
+        "$description": "Reduced spacing tokens",
+        "inline": {
+            "xs": {
+                "$value": "0.125rem",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "0.25rem",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "0.5rem",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "0.75rem",
+                "$type": "dimension"
+            },
+            "xl": {
+                "$value": "1rem",
+                "$type": "dimension"
+            }
+        },
+        "inset": {
+            "xs": {
+                "$value": "0.25rem",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "0.5rem",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "0.75rem",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "1rem",
+                "$type": "dimension"
+            },
+            "xl": {
+                "$value": "1.5rem",
+                "$type": "dimension"
+            }
+        },
+        "stack": {
+            "xs": {
+                "$value": "0.125rem",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "0.25rem",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "0.5rem",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "0.75rem",
+                "$type": "dimension"
+            },
+            "xl": {
+                "$value": "1rem",
+                "$type": "dimension"
+            },
+            "2xl": {
+                "$value": "1.5rem",
+                "$type": "dimension"
+            }
+        }
+    },
+    "typography": {
+        "$description": "Compact typography",
+        "fontSize": {
+            "$value": "13px",
+            "$type": "dimension"
+        },
+        "lineHeight": {
+            "$value": "1.1",
+            "$type": "number"
+        }
+    }
+}

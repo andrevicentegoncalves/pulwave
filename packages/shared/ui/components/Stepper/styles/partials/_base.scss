@@ -1,0 +1,40 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stepper {
+    display: flex;
+    width: 100%;
+    font-family: var(--stepper-font-family);
+
+    // Orientation
+    &--orientation-horizontal {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    &--orientation-vertical {
+        flex-direction: column;
+        height: 100%;
+
+        .stepper__step {
+            flex-direction: row;
+            flex: 1;
+            padding-bottom: var(--scale-4);
+
+            &:last-child {
+                flex: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        .stepper__connector {
+            position: absolute;
+            // Left offset handled in variants based on size (center of circle)
+            top: var(--scale-8); // This depends on size... simplified in variants
+            bottom: -var(--scale-1);
+            width: var(--scale-0-5);
+            height: auto;
+            border-top: none;
+            border-left: var(--scale-0-5) solid var(--stepper-connector-color);
+        }
+    }
+}

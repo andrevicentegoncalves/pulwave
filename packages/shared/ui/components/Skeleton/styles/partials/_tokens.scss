@@ -1,0 +1,8 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// Tokens partial for Skeleton
+:root {
+    --skeleton-bg: var(--color-surface-alt);
+    --skeleton-highlight: var(--color-surface-default);
+    --skeleton-shimmer: var(--color-surface-hover);
+}

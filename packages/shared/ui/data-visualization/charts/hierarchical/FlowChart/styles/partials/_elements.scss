@@ -1,0 +1,41 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--flow {
+    &__node-group {
+        cursor: pointer;
+    }
+
+    &__node-shape {
+        stroke-width: 2px;
+        transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+
+    &__node-label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        pointer-events: none;
+        transition: fill 0.2s ease;
+    }
+
+    &__edge-group {
+        // Group for edge path, arrow, and label
+    }
+
+    &__edge-path {
+        fill: none;
+        stroke: var(--color-border-default);
+        stroke-width: 2.5px;
+        stroke-opacity: 1;
+    }
+
+    &__edge-arrow {
+        fill: var(--color-border-default);
+        fill-opacity: 1;
+    }
+
+    &__edge-label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+        text-anchor: middle;
+    }
+}

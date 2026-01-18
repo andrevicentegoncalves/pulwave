@@ -1,0 +1,58 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.input {
+
+    // Icons spacing
+    &__container--has-left-icon {
+        .input__icon--left {
+            margin-right: var(--scale-2);
+        }
+    }
+
+    &__container--has-right-icon {
+        .input__icon--right {
+            margin-left: var(--scale-2);
+        }
+    }
+
+    &--error {
+        .input__label {
+            color: var(--color-status-error);
+        }
+
+        .input__container {
+            border-color: var(--color-status-error);
+        }
+
+        .input__helper {
+            color: var(--color-status-error);
+        }
+    }
+
+    &--success {
+        .input__label {
+            color: var(--color-status-success);
+        }
+
+        .input__container {
+            border-color: var(--color-status-success);
+        }
+
+        .input__helper {
+            color: var(--color-status-success);
+        }
+    }
+
+    &--disabled {
+        opacity: 0.5;
+
+        .input__container {
+            background: var(--color-surface-disabled); // Check token
+            cursor: not-allowed;
+        }
+
+        .input__field {
+            cursor: not-allowed;
+        }
+    }
+}

@@ -1,0 +1,769 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: EFFECTS                                */
+/* ========================================================================== */
+
+// BORDER RADIUS
+@each $key, $value in t.$border-radius-tokens {
+    @if string.index($key, 'border-radius-')==1 {
+        $suffix: string.slice($key, 15);
+        $var: var(--#{$key});
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus')) {
+                .#{$utility-prefix}rounded-#{$suffix}#{$utility-suffix} {
+                    border-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-t-#{$suffix}#{$utility-suffix} {
+                    border-top-left-radius: $var;
+                    border-top-right-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-r-#{$suffix}#{$utility-suffix} {
+                    border-top-right-radius: $var;
+                    border-bottom-right-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-b-#{$suffix}#{$utility-suffix} {
+                    border-bottom-right-radius: $var;
+                    border-bottom-left-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-l-#{$suffix}#{$utility-suffix} {
+                    border-top-left-radius: $var;
+                    border-bottom-left-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-tl-#{$suffix}#{$utility-suffix} {
+                    border-top-left-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-tr-#{$suffix}#{$utility-suffix} {
+                    border-top-right-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-br-#{$suffix}#{$utility-suffix} {
+                    border-bottom-right-radius: $var;
+                }
+
+                .#{$utility-prefix}rounded-bl-#{$suffix}#{$utility-suffix} {
+                    border-bottom-left-radius: $var;
+                }
+            }
+        }
+    }
+}
+
+// BORDER WIDTH
+@each $key, $value in t.$border-width-tokens {
+    @if string.index($key, 'border-width-')==1 {
+        $suffix: string.slice($key, 14);
+        $var: var(--#{$key});
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus')) {
+                .#{$utility-prefix}border-w-#{$suffix}#{$utility-suffix} {
+                    border-width: $var;
+                    border-style: solid;
+                }
+
+                .#{$utility-prefix}border-t-#{$suffix}#{$utility-suffix} {
+                    border-top-width: $var;
+                    border-style: solid;
+                }
+
+                .#{$utility-prefix}border-r-#{$suffix}#{$utility-suffix} {
+                    border-right-width: $var;
+                    border-style: solid;
+                }
+
+                .#{$utility-prefix}border-b-#{$suffix}#{$utility-suffix} {
+                    border-bottom-width: $var;
+                    border-style: solid;
+                }
+
+                .#{$utility-prefix}border-l-#{$suffix}#{$utility-suffix} {
+                    border-left-width: $var;
+                    border-style: solid;
+                }
+            }
+        }
+    }
+}
+
+// BOX SHADOW
+@each $key, $value in t.$shadow-tokens {
+    @if string.index($key, 'shadow-')==1 {
+        $suffix: string.slice($key, 8);
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus', 'group-hover', 'dark')) {
+                .#{$utility-prefix}shadow-#{$suffix}#{$utility-suffix} {
+                    box-shadow: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// OPACITY
+@each $key, $value in t.$opacity-tokens {
+    @if string.index($key, 'opacity-')==1 {
+        $suffix: string.slice($key, 9);
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus', 'group-hover', 'active', 'disabled', 'dark')) {
+                .#{$utility-prefix}opacity-#{$suffix}#{$utility-suffix} {
+                    opacity: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// BLUR
+@each $key, $value in t.$blur-tokens {
+    @if string.index($key, 'blur-')==1 {
+        $suffix: string.slice($key, 6);
+
+        @include with-responsive {
+            @include with-states(('hover', 'group-hover')) {
+                .#{$utility-prefix}blur-#{$suffix}#{$utility-suffix} {
+                    filter: blur(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// DROP SHADOW
+@each $key, $value in t.$shadow-tokens {
+    @if string.index($key, 'shadow-')==1 {
+        $suffix: string.slice($key, 8);
+
+        @include with-responsive {
+            @include with-states(('hover', 'group-hover')) {
+                .#{$utility-prefix}drop-shadow-#{$suffix}#{$utility-suffix} {
+                    filter: drop-shadow(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// ELEVATION
+@each $key, $value in t.$elevation-tokens {
+    @if string.index($key, 'elevation-')==1 {
+        $suffix: string.slice($key, 11);
+
+        @include with-responsive {
+            @include with-states(('hover', 'group-hover', 'dark')) {
+                .#{$utility-prefix}elevation-#{$suffix}#{$utility-suffix} {
+                    box-shadow: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// BACKDROP FILTER - BLUR
+@each $key, $value in t.$blur-tokens {
+    @if string.index($key, 'blur-')==1 {
+        $suffix: string.slice($key, 6);
+
+        @include with-responsive {
+            @include with-states(('hover')) {
+                .#{$utility-prefix}backdrop-blur-#{$suffix}#{$utility-suffix} {
+                    backdrop-filter: blur(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// BACKDROP FILTER - OPACITY
+@each $key, $value in t.$opacity-tokens {
+    @if string.index($key, 'opacity-')==1 {
+        $suffix: string.slice($key, 9);
+
+        @include with-responsive {
+            @include with-states(('hover')) {
+                .#{$utility-prefix}backdrop-opacity-#{$suffix}#{$utility-suffix} {
+                    backdrop-filter: opacity(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// BACKDROP FILTER - HUE ROTATE
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'hue-rotate-')==1 {
+        // Reusing hue-rotate tokens
+        // If tokens are shared, this is fine. Assuming they are.
+        // Wait, original file had hue-rotate static defaults in `_effects.scss`? No.
+        // Let's check `_tokens.scss`? No, I can't read tokens directly easily (it's generated).
+        // But I saw `hue-rotate` in `_effects.scss` static block.
+        // Let's assume standard token key `hue-rotate-X`.
+
+        $suffix: string.slice($key, 12); // hue-rotate-15
+
+        // Assuming user wants dynamic token support if available.
+        // If `hue-rotate-` tokens exist (used in `_effects.scss` static block?), 
+        // Wait, I saw static `hue-rotate-15` etc in the `_effects.scss` file I verified earlier. 
+        // Let me check that content again. 
+        // Ah, line 598: .#{$utility-prefix}hue-rotate-15... filter: hue-rotate(15deg);
+        // These were STATIC. There was NO token loop for hue-rotate. 
+        // So I should probably add a static loop for backdrop-hue-rotate OR check if I should use a map.
+        // But the instructions said "Implement backdrop-hue-rotate in _effects.scss". 
+        // I should match the existing `hue-rotate` implementation.
+        // Existing `hue-rotate` was static (lines 594-616).
+        // So I should add static `backdrop-hue-rotate` classes.
+    }
+}
+
+// OUTLINE OFFSET TOKENS
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'focus-offset-')==1 {
+        $suffix: string.slice($key, 14);
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus')) {
+                .#{$utility-prefix}outline-offset-#{$suffix}#{$utility-suffix} {
+                    outline-offset: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// STATIC CLASSES
+@include with-responsive {
+    @include with-states(('hover', 'focus', 'dark', 'group-hover')) {
+        .#{$utility-prefix}border-0#{$utility-suffix} {
+            border-width: 0;
+        }
+
+        // BORDER STYLE
+        .#{$utility-prefix}border-solid#{$utility-suffix} {
+            border-style: solid;
+        }
+
+        .#{$utility-prefix}border-dashed#{$utility-suffix} {
+            border-style: dashed;
+        }
+
+        .#{$utility-prefix}border-dotted#{$utility-suffix} {
+            border-style: dotted;
+        }
+
+        .#{$utility-prefix}border-double#{$utility-suffix} {
+            border-style: double;
+        }
+
+        .#{$utility-prefix}border-none#{$utility-suffix} {
+            border-style: none;
+        }
+
+        // OUTLINE
+        .#{$utility-prefix}outline-none#{$utility-suffix} {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        .#{$utility-prefix}outline#{$utility-suffix} {
+            outline-style: solid;
+        }
+
+        .#{$utility-prefix}outline-dashed#{$utility-suffix} {
+            outline-style: dashed;
+        }
+
+        .#{$utility-prefix}outline-dotted#{$utility-suffix} {
+            outline-style: dotted;
+        }
+
+        .#{$utility-prefix}outline-double#{$utility-suffix} {
+            outline-style: double;
+        }
+
+        .#{$utility-prefix}outline-hidden#{$utility-suffix} {
+            outline: none;
+        }
+
+        .#{$utility-prefix}outline-0#{$utility-suffix} {
+            outline-width: 0px;
+        }
+
+        .#{$utility-prefix}outline-1#{$utility-suffix} {
+            outline-width: 1px;
+        }
+
+        .#{$utility-prefix}outline-2#{$utility-suffix} {
+            outline-width: 2px;
+        }
+
+        .#{$utility-prefix}outline-4#{$utility-suffix} {
+            outline-width: 4px;
+        }
+
+        .#{$utility-prefix}outline-offset-0#{$utility-suffix} {
+            outline-offset: 0px;
+        }
+
+        .#{$utility-prefix}outline-offset-1#{$utility-suffix} {
+            outline-offset: 1px;
+        }
+
+        .#{$utility-prefix}outline-offset-2#{$utility-suffix} {
+            outline-offset: 2px;
+        }
+
+        .#{$utility-prefix}outline-offset-4#{$utility-suffix} {
+            outline-offset: 4px;
+        }
+
+        .#{$utility-prefix}outline-offset-8#{$utility-suffix} {
+            outline-offset: 8px;
+        }
+
+        // RINGS (Static definitions)
+        .#{$utility-prefix}ring-0#{$utility-suffix} {
+            --ring-width: 0px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring-1#{$utility-suffix} {
+            --ring-width: 1px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring-2#{$utility-suffix} {
+            --ring-width: 2px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring#{$utility-suffix} {
+            --ring-width: 3px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring-4#{$utility-suffix} {
+            --ring-width: 4px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring-8#{$utility-suffix} {
+            --ring-width: 8px;
+            box-shadow: var(--ring-inset) var(--ring-offset-shadow), var(--ring-inset) var(--ring-shadow);
+        }
+
+        .#{$utility-prefix}ring-inset#{$utility-suffix} {
+            --ring-inset: inset;
+        }
+
+        .#{$utility-prefix}ring-offset-0#{$utility-suffix} {
+            --ring-offset-width: 0px;
+        }
+
+        .#{$utility-prefix}ring-offset-1#{$utility-suffix} {
+            --ring-offset-width: 1px;
+        }
+
+        .#{$utility-prefix}ring-offset-2#{$utility-suffix} {
+            --ring-offset-width: 2px;
+        }
+
+        .#{$utility-prefix}ring-offset-4#{$utility-suffix} {
+            --ring-offset-width: 4px;
+        }
+
+        .#{$utility-prefix}ring-offset-8#{$utility-suffix} {
+            --ring-offset-width: 8px;
+        }
+
+        .#{$utility-prefix}ring-primary#{$utility-suffix} {
+            --ring-color: var(--color-primary-500);
+        }
+
+        .#{$utility-prefix}ring-secondary#{$utility-suffix} {
+            --ring-color: var(--color-secondary-500);
+        }
+
+        .#{$utility-prefix}ring-success#{$utility-suffix} {
+            --ring-color: var(--color-success-500);
+        }
+
+        .#{$utility-prefix}ring-warning#{$utility-suffix} {
+            --ring-color: var(--color-warning-500);
+        }
+
+        .#{$utility-prefix}ring-error#{$utility-suffix} {
+            --ring-color: var(--color-error-500);
+        }
+
+        .#{$utility-prefix}ring-info#{$utility-suffix} {
+            --ring-color: var(--color-info-500);
+        }
+
+        // BACKDROP FILTERS (Static Keywords)
+        .#{$utility-prefix}backdrop-brightness-0#{$utility-suffix} {
+            backdrop-filter: brightness(0);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-50#{$utility-suffix} {
+            backdrop-filter: brightness(.5);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-75#{$utility-suffix} {
+            backdrop-filter: brightness(.75);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-90#{$utility-suffix} {
+            backdrop-filter: brightness(.9);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-95#{$utility-suffix} {
+            backdrop-filter: brightness(.95);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-100#{$utility-suffix} {
+            backdrop-filter: brightness(1);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-105#{$utility-suffix} {
+            backdrop-filter: brightness(1.05);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-110#{$utility-suffix} {
+            backdrop-filter: brightness(1.1);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-125#{$utility-suffix} {
+            backdrop-filter: brightness(1.25);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-150#{$utility-suffix} {
+            backdrop-filter: brightness(1.5);
+        }
+
+        .#{$utility-prefix}backdrop-brightness-200#{$utility-suffix} {
+            backdrop-filter: brightness(2);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-0#{$utility-suffix} {
+            backdrop-filter: contrast(0);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-50#{$utility-suffix} {
+            backdrop-filter: contrast(.5);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-75#{$utility-suffix} {
+            backdrop-filter: contrast(.75);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-100#{$utility-suffix} {
+            backdrop-filter: contrast(1);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-125#{$utility-suffix} {
+            backdrop-filter: contrast(1.25);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-150#{$utility-suffix} {
+            backdrop-filter: contrast(1.5);
+        }
+
+        .#{$utility-prefix}backdrop-contrast-200#{$utility-suffix} {
+            backdrop-filter: contrast(2);
+        }
+
+        .#{$utility-prefix}backdrop-grayscale-0#{$utility-suffix} {
+            backdrop-filter: grayscale(0);
+        }
+
+        .#{$utility-prefix}backdrop-grayscale#{$utility-suffix} {
+            backdrop-filter: grayscale(100%);
+        }
+
+        .#{$utility-prefix}backdrop-saturate-0#{$utility-suffix} {
+            backdrop-filter: saturate(0);
+        }
+
+        .#{$utility-prefix}backdrop-saturate-50#{$utility-suffix} {
+            backdrop-filter: saturate(.5);
+        }
+
+        .#{$utility-prefix}backdrop-saturate-100#{$utility-suffix} {
+            backdrop-filter: saturate(1);
+        }
+
+        .#{$utility-prefix}backdrop-saturate-150#{$utility-suffix} {
+            backdrop-filter: saturate(1.5);
+        }
+
+        .#{$utility-prefix}backdrop-saturate-200#{$utility-suffix} {
+            backdrop-filter: saturate(2);
+        }
+
+        .#{$utility-prefix}backdrop-sepia-0#{$utility-suffix} {
+            backdrop-filter: sepia(0);
+        }
+
+        .#{$utility-prefix}backdrop-sepia#{$utility-suffix} {
+            backdrop-filter: sepia(100%);
+        }
+
+        .#{$utility-prefix}backdrop-invert-0#{$utility-suffix} {
+            backdrop-filter: invert(0);
+        }
+
+        .#{$utility-prefix}backdrop-invert#{$utility-suffix} {
+            backdrop-filter: invert(100%);
+        }
+
+        // BACKDROP HUE ROTATE (Matches static hue-rotate)
+        .#{$utility-prefix}backdrop-hue-rotate-0#{$utility-suffix} {
+            backdrop-filter: hue-rotate(0deg);
+        }
+
+        .#{$utility-prefix}backdrop-hue-rotate-15#{$utility-suffix} {
+            backdrop-filter: hue-rotate(15deg);
+        }
+
+        .#{$utility-prefix}backdrop-hue-rotate-30#{$utility-suffix} {
+            backdrop-filter: hue-rotate(30deg);
+        }
+
+        .#{$utility-prefix}backdrop-hue-rotate-60#{$utility-suffix} {
+            backdrop-filter: hue-rotate(60deg);
+        }
+
+        .#{$utility-prefix}backdrop-hue-rotate-90#{$utility-suffix} {
+            backdrop-filter: hue-rotate(90deg);
+        }
+
+        .#{$utility-prefix}backdrop-hue-rotate-180#{$utility-suffix} {
+            backdrop-filter: hue-rotate(180deg);
+        }
+
+        // FILTERS (Static Keywords)
+        .#{$utility-prefix}brightness-0#{$utility-suffix} {
+            filter: brightness(0);
+        }
+
+        .#{$utility-prefix}brightness-50#{$utility-suffix} {
+            filter: brightness(.5);
+        }
+
+        .#{$utility-prefix}brightness-75#{$utility-suffix} {
+            filter: brightness(.75);
+        }
+
+        .#{$utility-prefix}brightness-90#{$utility-suffix} {
+            filter: brightness(.9);
+        }
+
+        .#{$utility-prefix}brightness-95#{$utility-suffix} {
+            filter: brightness(.95);
+        }
+
+        .#{$utility-prefix}brightness-100#{$utility-suffix} {
+            filter: brightness(1);
+        }
+
+        .#{$utility-prefix}brightness-105#{$utility-suffix} {
+            filter: brightness(1.05);
+        }
+
+        .#{$utility-prefix}brightness-110#{$utility-suffix} {
+            filter: brightness(1.1);
+        }
+
+        .#{$utility-prefix}brightness-125#{$utility-suffix} {
+            filter: brightness(1.25);
+        }
+
+        .#{$utility-prefix}brightness-150#{$utility-suffix} {
+            filter: brightness(1.5);
+        }
+
+        .#{$utility-prefix}brightness-200#{$utility-suffix} {
+            filter: brightness(2);
+        }
+
+        .#{$utility-prefix}contrast-0#{$utility-suffix} {
+            filter: contrast(0);
+        }
+
+        .#{$utility-prefix}contrast-50#{$utility-suffix} {
+            filter: contrast(.5);
+        }
+
+        .#{$utility-prefix}contrast-75#{$utility-suffix} {
+            filter: contrast(.75);
+        }
+
+        .#{$utility-prefix}contrast-100#{$utility-suffix} {
+            filter: contrast(1);
+        }
+
+        .#{$utility-prefix}contrast-125#{$utility-suffix} {
+            filter: contrast(1.25);
+        }
+
+        .#{$utility-prefix}contrast-150#{$utility-suffix} {
+            filter: contrast(1.5);
+        }
+
+        .#{$utility-prefix}contrast-200#{$utility-suffix} {
+            filter: contrast(2);
+        }
+
+        .#{$utility-prefix}grayscale-0#{$utility-suffix} {
+            filter: grayscale(0);
+        }
+
+        .#{$utility-prefix}grayscale#{$utility-suffix} {
+            filter: grayscale(100%);
+        }
+
+        .#{$utility-prefix}hue-rotate-0#{$utility-suffix} {
+            filter: hue-rotate(0deg);
+        }
+
+        .#{$utility-prefix}hue-rotate-15#{$utility-suffix} {
+            filter: hue-rotate(15deg);
+        }
+
+        .#{$utility-prefix}hue-rotate-30#{$utility-suffix} {
+            filter: hue-rotate(30deg);
+        }
+
+        .#{$utility-prefix}hue-rotate-60#{$utility-suffix} {
+            filter: hue-rotate(60deg);
+        }
+
+        .#{$utility-prefix}hue-rotate-90#{$utility-suffix} {
+            filter: hue-rotate(90deg);
+        }
+
+        .#{$utility-prefix}hue-rotate-180#{$utility-suffix} {
+            filter: hue-rotate(180deg);
+        }
+
+        .#{$utility-prefix}invert-0#{$utility-suffix} {
+            filter: invert(0);
+        }
+
+        .#{$utility-prefix}invert#{$utility-suffix} {
+            filter: invert(100%);
+        }
+
+        .#{$utility-prefix}saturate-0#{$utility-suffix} {
+            filter: saturate(0);
+        }
+
+        .#{$utility-prefix}saturate-50#{$utility-suffix} {
+            filter: saturate(.5);
+        }
+
+        .#{$utility-prefix}saturate-100#{$utility-suffix} {
+            filter: saturate(1);
+        }
+
+        .#{$utility-prefix}saturate-150#{$utility-suffix} {
+            filter: saturate(1.5);
+        }
+
+        .#{$utility-prefix}saturate-200#{$utility-suffix} {
+            filter: saturate(2);
+        }
+
+        .#{$utility-prefix}sepia-0#{$utility-suffix} {
+            filter: sepia(0);
+        }
+
+        .#{$utility-prefix}sepia#{$utility-suffix} {
+            filter: sepia(100%);
+        }
+
+        // SHADOW INNER (P0)
+        .#{$utility-prefix}shadow-inner#{$utility-suffix} {
+            box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .#{$utility-prefix}shadow-inner-sm#{$utility-suffix} {
+            box-shadow: inset 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .#{$utility-prefix}shadow-inner-lg#{$utility-suffix} {
+            box-shadow: inset 0 4px 6px 0 rgb(0 0 0 / 0.1);
+        }
+
+        // BACKGROUND CLIP (P1)
+        .#{$utility-prefix}bg-clip-border#{$utility-suffix} {
+            background-clip: border-box;
+        }
+
+        .#{$utility-prefix}bg-clip-padding#{$utility-suffix} {
+            background-clip: padding-box;
+        }
+
+        .#{$utility-prefix}bg-clip-content#{$utility-suffix} {
+            background-clip: content-box;
+        }
+
+        .#{$utility-prefix}bg-clip-text#{$utility-suffix} {
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    }
+}
+
+// OUTLINE COLOR UTILITIES (P0)
+@each $key, $value in t.$color-tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states(('focus', 'dark')) {
+                .#{$utility-prefix}outline-#{$suffix}#{$utility-suffix} {
+                    outline-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// RING OFFSET COLOR UTILITIES (P1)
+@each $key, $value in t.$color-tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states(('dark')) {
+                .#{$utility-prefix}ring-offset-#{$suffix}#{$utility-suffix} {
+                    --ring-offset-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// Variables for Rings (Outside responsive loop)
+:root {
+    --ring-inset: ;
+    --ring-offset-width: 0px;
+    --ring-offset-color: var(--color-surface-default);
+    --ring-color: var(--color-focus-ring);
+    --ring-offset-shadow: 0 0 0 var(--ring-offset-width) var(--ring-offset-color);
+    --ring-shadow: 0 0 0 calc(var(--ring-width, 3px) + var(--ring-offset-width)) var(--ring-color);
+}

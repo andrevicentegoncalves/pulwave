@@ -1,0 +1,119 @@
+@use 'sass:map';
+
+// ========================================================================== //
+//                    MIXINS: BREAKPOINTS (STYLES2)                           //
+// ========================================================================== //
+
+// Breakpoints mirroring tokens/source/primitives/breakpoints/responsive.json
+$breakpoints: (
+  'xs': 0,
+  's': 640px,
+  'm': 768px,
+  'l': 1024px,
+  'xl': 1280px,
+  '2xl': 1920px) !default;
+
+@mixin bp-up($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $val: map.get($breakpoints, $breakpoint
+    );
+
+  @if $val ==0 {
+    @content;
+  }
+
+  @else {
+    @media (min-width: $val) {
+      @content;
+    }
+  }
+}
+
+@else {
+
+  // allow arbitrary values
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+}
+
+@mixin bp-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $val: map.get($breakpoints, $breakpoint);
+    // Subtract 0.02px to avoid overlap
+    $max: $val - 0.02px;
+
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin bp-between($lower, $upper) {
+  $min: null;
+  $max: null;
+
+  @if map.has-key($breakpoints, $lower) {
+    $min: map.get($breakpoints, $lower);
+  }
+
+  @else {
+    $min: $lower;
+  }
+
+  @if map.has-key($breakpoints, $upper) {
+    $max: map.get($breakpoints, $upper);
+  }
+
+  @else {
+    $max: $upper;
+  }
+
+  // Adjust max
+  $max: $max - 0.02px;
+
+  @if $min !=null and $max !=null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+@mixin bp-only($breakpoint) {
+  // Logic: min-width = current, max-width = next breakpoint - 0.02px
+  $names: map.keys($breakpoints);
+  $index: index($names, $breakpoint);
+
+  @if $index {
+    $min: map.get($breakpoints, $breakpoint);
+
+    // Check if there is a next breakpoint
+    @if $index < length($names) {
+      $next-name: nth($names, $index + 1);
+      $next-val: map.get($breakpoints, $next-name);
+
+      @include bp-between($min, $next-val) {
+        @content;
+      }
+    }
+
+    @else {
+
+      // Last breakpoint, just bp-up
+      @include bp-up($breakpoint) {
+        @content;
+      }
+    }
+  }
+
+  @else {
+    @error "Breakpoint #{$breakpoint} not found in map for bp-only usage.";
+  }
+}

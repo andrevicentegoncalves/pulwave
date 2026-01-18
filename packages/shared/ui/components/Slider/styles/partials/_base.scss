@@ -1,0 +1,185 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--scale-2);
+
+    // ── LABEL ──
+    &__label {
+        font-size: var(--font-size-label-m);
+        color: var(--color-text-default);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    // ── WRAPPER ──
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+        width: 100%;
+        position: relative;
+    }
+
+    // ── TRACK ──
+    &__track {
+        position: relative;
+        flex: 1;
+        height: var(--slider-track-height, var(--scale-1-5));
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-pill);
+        cursor: pointer;
+
+        // Touch target expansion
+        &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            z-index: var(--z-index-default);
+        }
+    }
+
+    // ── FILL ──
+    &__fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--color-brand-primary);
+        border-radius: var(--border-radius-pill);
+    }
+
+    // ── THUMB ──
+    &__thumb {
+        position: absolute;
+        top: 50%;
+        width: var(--slider-thumb-size, var(--scale-5));
+        height: var(--slider-thumb-size, var(--scale-5));
+        background: var(--color-surface-default);
+        border: var(--scale-0-5) solid var(--color-brand-primary);
+        border-radius: var(--border-radius-round);
+        box-shadow: var(--shadow-s);
+        cursor: grab;
+        transform: translate(-50%, -50%);
+        transition: transform var(--duration-fast) var(--easing-standard),
+            box-shadow var(--duration-fast) var(--easing-standard);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // Touch target
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 44px;
+            height: 44px;
+            transform: translate(-50%, -50%);
+        }
+
+        &:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: var(--shadow-m);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    // ── TOOLTIP ──
+    &__tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translate(-50%, -var(--scale-2));
+        padding: var(--scale-1) var(--scale-2);
+        background: var(--color-surface-inverse);
+        color: var(--color-text-inverse-default);
+        font-size: var(--font-size-caption-s);
+        // Need bold override if not in typography mixin, but style handles token
+        font-weight: var(--font-weight-bold);
+        border-radius: var(--border-radius-s);
+        white-space: nowrap;
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: var(--scale-1) solid transparent;
+            border-right: var(--scale-1) solid transparent;
+            border-top: var(--scale-1) solid var(--color-surface-inverse);
+        }
+    }
+
+    // ── MARKS ──
+    &__marks {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    &__mark {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--scale-1);
+        height: var(--scale-1);
+        background-color: var(--color-text-secondary);
+        border-radius: var(--border-radius-round);
+
+        &-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, var(--scale-2));
+            font-size: var(--font-size-caption-s);
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
+    }
+
+    &__value {
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-default);
+        min-width: 3ch;
+        text-align: right;
+    }
+
+    // ── STATES ──
+    &--dragging {
+        .slider__thumb {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 0 var(--scale-1) var(--color-action-focus);
+        }
+    }
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+
+        .slider__thumb {
+            cursor: not-allowed;
+            border-color: var(--color-text-disabled);
+        }
+
+        .slider__fill {
+            background-color: var(--color-text-disabled);
+        }
+    }
+}

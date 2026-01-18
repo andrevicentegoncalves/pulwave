@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.data-list {
+    // Spacing
+    --data-list-gap: var(--scale-2);
+    --data-list-item-padding: var(--scale-3) var(--scale-5);
+    --data-list-item-gap: var(--scale-3);
+
+    // Item
+    --data-list-item-bg: var(--color-surface-default, #fff);
+    --data-list-item-border: 1px solid var(--color-border-subtle);
+    --data-list-item-radius: var(--border-radius-2xl);
+    --data-list-item-shadow-hover: var(--shadow-s);
+    --data-list-item-bg-hover: var(--color-surface-subtle);
+
+    // Dragging
+    --data-list-drag-shadow: var(--shadow-xl);
+    --data-list-drag-bg: var(--color-surface-active);
+    --data-list-drag-border-color: var(--color-brand-primary);
+
+    // Selected
+    --data-list-selected-bg: var(--color-action-selected);
+    --data-list-selected-border-color: var(--color-brand-primary);
+    --data-list-selected-bg-hover: var(--color-action-selected-hover);
+}

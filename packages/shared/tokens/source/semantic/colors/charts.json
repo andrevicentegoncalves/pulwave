@@ -1,0 +1,146 @@
+{
+    "$description": "Semantic Chart Colors for Data Visualization",
+    "color": {
+        "chart": {
+            "$description": "Data visualization palettes",
+            "categorical": {
+                "$description": "Qualitative palette for distinct categories",
+                "1": {
+                    "$value": "{color.primary.500}",
+                    "$type": "color"
+                },
+                "2": {
+                    "$value": "{color.secondary.500}",
+                    "$type": "color"
+                },
+                "3": {
+                    "$value": "{color.tertiary.500}",
+                    "$type": "color"
+                },
+                "4": {
+                    "$value": "{color.indigo.500}",
+                    "$type": "color"
+                },
+                "5": {
+                    "$value": "{color.rose.500}",
+                    "$type": "color"
+                },
+                "6": {
+                    "$value": "{color.cyan.500}",
+                    "$type": "color"
+                },
+                "7": {
+                    "$value": "{color.amber.500}",
+                    "$type": "color"
+                },
+                "8": {
+                    "$value": "{color.emerald.500}",
+                    "$type": "color"
+                },
+                "9": {
+                    "$value": "{color.violet.500}",
+                    "$type": "color"
+                },
+                "10": {
+                    "$value": "{color.fuschia.500}",
+                    "$type": "color"
+                }
+            },
+            "sequential": {
+                "$description": "Sequential palettes for heatmaps/intensity",
+                "blue": {
+                    "100": {
+                        "$value": "{color.blue.100}",
+                        "$type": "color"
+                    },
+                    "300": {
+                        "$value": "{color.blue.300}",
+                        "$type": "color"
+                    },
+                    "500": {
+                        "$value": "{color.blue.500}",
+                        "$type": "color"
+                    },
+                    "700": {
+                        "$value": "{color.blue.700}",
+                        "$type": "color"
+                    },
+                    "900": {
+                        "$value": "{color.blue.900}",
+                        "$type": "color"
+                    }
+                },
+                "green": {
+                    "100": {
+                        "$value": "{color.green.100}",
+                        "$type": "color"
+                    },
+                    "300": {
+                        "$value": "{color.green.300}",
+                        "$type": "color"
+                    },
+                    "500": {
+                        "$value": "{color.green.500}",
+                        "$type": "color"
+                    },
+                    "700": {
+                        "$value": "{color.green.700}",
+                        "$type": "color"
+                    },
+                    "900": {
+                        "$value": "{color.green.900}",
+                        "$type": "color"
+                    }
+                }
+            },
+            "diverging": {
+                "$description": "Diverging palettes for positive/negative or contrasting data",
+                "redGreen": {
+                    "min": {
+                        "$value": "{color.red.700}",
+                        "$type": "color"
+                    },
+                    "midMin": {
+                        "$value": "{color.red.300}",
+                        "$type": "color"
+                    },
+                    "center": {
+                        "$value": "{color.neutral.100}",
+                        "$type": "color"
+                    },
+                    "midMax": {
+                        "$value": "{color.green.300}",
+                        "$type": "color"
+                    },
+                    "max": {
+                        "$value": "{color.green.700}",
+                        "$type": "color"
+                    }
+                },
+                "blueOrange": {
+                    "min": {
+                        "$value": "{color.blue.700}",
+                        "$type": "color"
+                    },
+                    "midMin": {
+                        "$value": "{color.blue.300}",
+                        "$type": "color"
+                    },
+                    "center": {
+                        "$value": "{color.neutral.100}",
+                        "$type": "color"
+                    },
+                    "midMax": {
+                        "$value": "{color.orange.300}",
+                        "$type": "color"
+                    },
+                    "max": {
+                        "$value": "{color.orange.700}",
+                        "$type": "color"
+                    }
+                }
+            }
+        }
+    }
+}
+```

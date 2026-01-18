@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.filterable-data-table {
+    --fdt-search-min-width: var(--scale-60); // 240px
+    --fdt-header-padding: var(--scale-4);
+    --fdt-controls-gap: var(--scale-3);
+}

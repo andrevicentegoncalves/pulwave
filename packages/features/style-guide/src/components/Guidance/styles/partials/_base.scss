@@ -1,0 +1,72 @@
+// ==========================================================================
+// Do's and Don'ts Component
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.dos-donts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--scale-6);
+
+    @include bp-down(m) {
+        grid-template-columns: 1fr;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-3);
+        border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
+        font-weight: var(--font-weight-semi-bold);
+
+        &--do {
+            background: var(--color-status-success-subtle);
+            color: var(--color-status-success);
+        }
+
+        &--dont {
+            background: var(--color-status-error-subtle);
+            color: var(--color-status-error);
+        }
+    }
+
+    &__icon {
+        width: var(--scale-5);
+        height: var(--scale-5);
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background: var(--color-surface-subtle);
+        border-radius: 0 0 var(--border-radius-m) var(--border-radius-m);
+        flex: 1;
+    }
+
+    &__item {
+        padding: var(--scale-3);
+        border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__text {
+        font-size: var(--font-size-body-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        display: block;
+    }
+}
+
+

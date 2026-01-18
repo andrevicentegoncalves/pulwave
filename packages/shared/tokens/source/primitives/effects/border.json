@@ -1,0 +1,89 @@
+{
+    "$description": "Border radius tokens",
+    "borderRadius": {
+        "none": {
+            "$value": "0",
+            "$type": "dimension"
+        },
+        "2xs": {
+            "$value": "0.0625rem",
+            "$type": "dimension",
+            "$description": "1px"
+        },
+        "xs": {
+            "$value": "0.125rem",
+            "$type": "dimension",
+            "$description": "2px"
+        },
+        "s": {
+            "$value": "0.25rem",
+            "$type": "dimension",
+            "$description": "4px"
+        },
+        "m": {
+            "$value": "0.5rem",
+            "$type": "dimension",
+            "$description": "8px"
+        },
+        "l": {
+            "$value": "0.75rem",
+            "$type": "dimension",
+            "$description": "12px"
+        },
+        "xl": {
+            "$value": "1rem",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "2xl": {
+            "$value": "1.5rem",
+            "$type": "dimension",
+            "$description": "24px"
+        },
+        "round": {
+            "$value": "50%",
+            "$type": "dimension",
+            "$description": "Circular (for constrained boxes)"
+        },
+        "circle": {
+            "$value": "50%",
+            "$type": "dimension",
+            "$description": "Alias for round"
+        },
+        "pill": {
+            "$value": "9999px",
+            "$type": "dimension",
+            "$description": "Fully rounded (stadium)"
+        }
+    },
+    "borderWidth": {
+        "0": {
+            "$value": "0",
+            "$type": "dimension"
+        },
+        "2xs": {
+            "$value": "1px",
+            "$type": "dimension"
+        },
+        "xs": {
+            "$value": "2px",
+            "$type": "dimension"
+        },
+        "s": {
+            "$value": "3px",
+            "$type": "dimension"
+        },
+        "m": {
+            "$value": "4px",
+            "$type": "dimension"
+        },
+        "l": {
+            "$value": "6px",
+            "$type": "dimension"
+        },
+        "xl": {
+            "$value": "8px",
+            "$type": "dimension"
+        }
+    }
+}

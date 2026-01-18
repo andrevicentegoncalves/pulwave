@@ -1,0 +1,113 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+/* ────────────────────── TRANSFER LIST ────────────────────── */
+
+.transfer-list {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-4);
+
+    @include bp.bp-down(m) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    // =========================================================================
+    // PANEL
+    // =========================================================================
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        height: 300px; // Default, overridable via props
+        border: var(--border-width-s) solid var(--color-border-subtle);
+        border-radius: var(--border-radius-m);
+        overflow: hidden;
+        background: var(--color-surface-default);
+
+        @include bp.bp-down(m) {
+            width: 100%;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--scale-3);
+        border-bottom: var(--border-width-s) solid var(--color-border-subtle);
+        background: var(--color-surface-subtle);
+
+        &-title {
+            font-size: var(--font-size-body-s);
+            color: var(--color-text-primary);
+        }
+
+        &-count {
+            font-size: var(--font-size-caption-s);
+            color: var(--color-text-secondary);
+        }
+    }
+
+    &__body {
+        flex: 1;
+        overflow-y: auto;
+        padding: var(--scale-2);
+
+        &--with-search {
+            padding-top: var(--scale-0);
+        }
+    }
+
+    &__search {
+        padding: var(--scale-2);
+        border-bottom: var(--border-width-xs) solid var(--color-border-subtle);
+    }
+
+    // =========================================================================
+    // ITEM
+    // =========================================================================
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: var(--scale-2);
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        transition: background-color var(--duration-fast) ease;
+        margin-bottom: var(--scale-1);
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+        }
+
+        // Item Disabled state
+        &--disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    // =========================================================================
+    // ACTIONS
+    // =========================================================================
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-3);
+
+        @include bp.bp-down(m) {
+            flex-direction: row;
+            justify-content: center;
+            padding: var(--scale-2) 0;
+        }
+    }
+}

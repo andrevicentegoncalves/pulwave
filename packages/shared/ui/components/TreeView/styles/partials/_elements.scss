@@ -1,0 +1,97 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.tree-view {
+
+    // Node Row
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2);
+        border-radius: var(--border-radius-s);
+        transition: background var(--duration-fast) ease;
+        text-decoration: none;
+        color: var(--color-text-default);
+
+        &--state-clickable {
+            cursor: pointer;
+
+            &:hover {
+                background: var(--color-action-ghost-hover);
+            }
+        }
+
+        &--state-selected {
+            background: var(--color-action-selected);
+            color: var(--color-brand-primary);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    // Expand Button
+    &__expand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-5);
+        height: var(--scale-5);
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        flex-shrink: 0;
+        border-radius: var(--border-radius-s);
+
+        &:hover {
+            color: var(--color-text-default);
+            background: var(--color-action-ghost-hover);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    &__expand-placeholder {
+        width: var(--scale-5);
+        flex-shrink: 0;
+    }
+
+    // Icon
+    &__icon {
+        display: flex;
+        align-items: center;
+        color: var(--color-text-secondary);
+        flex-shrink: 0;
+
+        .tree-view__row--state-selected & {
+            color: var(--color-brand-primary);
+        }
+    }
+
+    // Label
+    &__label {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // Badge
+    &__badge {
+        font-size: var(--font-size-caption-s);
+        color: var(--color-text-secondary);
+        background: var(--color-surface-alt);
+        padding: var(--scale-0-5) var(--scale-2);
+        border-radius: var(--border-radius-xs);
+    }
+
+    // Empty State
+    &__empty {
+        padding: var(--scale-4);
+        text-align: center;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-s);
+    }
+}

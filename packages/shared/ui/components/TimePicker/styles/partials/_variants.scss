@@ -1,0 +1,20 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.time-picker {
+    // ── VARIANTS ──
+
+    // ERROR
+    &--error &__trigger {
+        border-color: var(--color-status-negative);
+    }
+
+    // DISABLED
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+
+        .time-picker__trigger {
+            background-color: var(--color-surface-disabled);
+        }
+    }
+}

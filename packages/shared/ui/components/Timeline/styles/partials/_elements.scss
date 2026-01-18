@@ -1,0 +1,72 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.timeline {
+    &__item {
+        position: relative;
+        display: flex;
+        gap: var(--scale-4);
+        padding-bottom: var(--scale-6);
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+
+    &__marker {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: var(--scale-6); // var(--scale-6)
+        flex-shrink: 0;
+    }
+
+    &__dot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-6);
+        height: var(--scale-6);
+        color: var(--color-icon-subtle);
+        z-index: var(--z-index-default); // Above connector
+        background-color: var(--color-surface-default); // Mask connector
+    }
+
+    &__default-dot {
+        width: var(--scale-2);
+        height: var(--scale-2);
+        border-radius: var(--border-radius-circle);
+        background-color: currentColor;
+    }
+
+    &__connector {
+        flex-grow: 1;
+        width: var(--scale-0-5);
+        background-color: var(--color-border-subtle);
+        margin-top: -var(--scale-1); // Overlap for continuity
+        margin-bottom: -var(--scale-1);
+        min-height: var(--scale-5);
+    }
+
+    &__content {
+        flex: 1;
+        padding-top: var(--scale-0-5); // Optical alignment with dot
+    }
+
+    &__timestamp {
+        font-size: var(--font-size-body-xs);
+        color: var(--color-text-secondary);
+        display: block;
+        margin-bottom: var(--scale-1);
+    }
+
+    &__title {
+        font-size: var(--font-size-heading-xs);
+        margin: 0 0 var(--scale-1) 0;
+        color: var(--color-text-default);
+    }
+
+    &__description {
+        font-size: var(--font-size-body-s);
+        color: var(--color-text-secondary);
+    }
+}

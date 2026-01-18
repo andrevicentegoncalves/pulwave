@@ -1,0 +1,43 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.input {
+    // Sizes (height)
+    --input-height-xs: var(--scale-7);
+    --input-height-s: var(--scale-8);
+    --input-height-m: var(--scale-10);
+    --input-height-l: var(--scale-12);
+    --input-height-xl: var(--scale-14);
+
+    // Spacing (horizontal padding)
+    --input-padding-xs: var(--scale-1) var(--scale-2);
+    --input-padding-s: var(--scale-1) var(--scale-3);
+    --input-padding-m: var(--scale-2) var(--scale-4);
+    --input-padding-l: var(--scale-3) var(--scale-5);
+    --input-padding-xl: var(--scale-4) var(--scale-6);
+
+    // Gap between label and input
+    --input-gap: var(--scale-2);
+
+    // Transitions
+    --input-transition-duration: var(--duration-fast);
+    --input-transition-easing: var(--easing-ease-out);
+
+    // Colors (defaults)
+    --input-bg: var(--color-surface-subtle);
+    --input-border-color: var(--color-border-strong);
+    --input-border-color-hover: var(--color-border-hover);
+    --input-border-color-focus: var(--color-border-focus);
+    --input-text-color: var(--color-text-primary);
+    --input-placeholder-color: var(--color-text-tertiary);
+    --input-label-color: var(--color-text-secondary);
+    --input-helper-color: var(--color-text-secondary);
+    --input-icon-color: var(--color-text-secondary);
+
+    // Border radius
+    --input-border-radius: var(--border-radius-2xl);
+
+    // Focus ring
+    --input-focus-ring-width: 1.5px;
+    --input-focus-ring-color: var(--color-focus-ring);
+}

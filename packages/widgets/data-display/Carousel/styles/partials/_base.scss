@@ -1,0 +1,33 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.carousel {
+    position: relative;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-brand-primary);
+        outline-offset: var(--scale-1);
+        border-radius: var(--border-radius-m);
+    }
+
+    &__viewport {
+        overflow: hidden;
+    }
+
+    &__track {
+        display: flex;
+        cursor: grab;
+        user-select: none;
+        width: 100%;
+        transition: transform var(--carousel-transition);
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}

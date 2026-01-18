@@ -1,0 +1,93 @@
+// ==========================================================================
+// Component Documentation - Base Styles
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--scale-4);
+        margin-bottom: var(--scale-6);
+
+        @include bp-down(m) {
+            flex-direction: column;
+        }
+    }
+
+    &__description {
+        font-size: var(--font-size-body-l);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        margin: 0;
+        flex: 1;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        flex-shrink: 0;
+    }
+
+    &__version {
+        font-size: var(--font-size-ui-m);
+        color: var(--color-text-tertiary);
+        font-family: var(--font-family-mono);
+    }
+
+    &__section {
+        padding: var(--scale-4) 0;
+    }
+
+    &__subtitle {
+        font-size: var(--font-size-title-m);
+        font-weight: var(--font-weight-bold);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-bottom: var(--scale-3);
+
+        &--success {
+            color: var(--color-status-success-text);
+        }
+
+        &--error {
+            color: var(--color-status-error-text);
+        }
+
+        &--warning {
+            color: var(--color-status-warning-text);
+        }
+    }
+
+    &__overview-text {
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--scale-4);
+    }
+
+    &__demos {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-6);
+        margin-top: var(--scale-4);
+        padding: var(--scale-4);
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        overflow: visible;
+    }
+
+    &__variant-doc {
+        border-left: var(--border-width-s) solid var(--color-border-subtle);
+        padding-left: var(--scale-4);
+        margin-bottom: var(--scale-6);
+    }
+}
+
+

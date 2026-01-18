@@ -1,0 +1,25 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.rating-stars {
+
+    // Colors
+    &--warning {
+        color: var(--color-status-warning);
+    }
+
+    &--primary {
+        color: var(--color-brand-primary);
+    }
+
+    &--neutral {
+        color: var(--color-icon-subtle);
+    }
+
+    &--success {
+        color: var(--color-status-success);
+    }
+
+    &--error {
+        color: var(--color-status-negative);
+    }
+}

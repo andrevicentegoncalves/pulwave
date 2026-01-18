@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.section-header {
+
+    // Sizes
+    &--m {
+        font-size: var(--font-size-title-l);
+        font-weight: var(--font-weight-bold);
+        gap: var(--scale-2);
+    }
+
+    &--l {
+        font-size: var(--font-size-headline-s);
+        font-weight: var(--font-weight-bold);
+        gap: var(--scale-3);
+    }
+
+    &--xl {
+        font-size: var(--font-size-headline-m);
+        font-weight: var(--font-weight-bold);
+        gap: var(--scale-4);
+    }
+}

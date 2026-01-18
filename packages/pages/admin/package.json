@@ -1,0 +1,26 @@
+{
+    "name": "@pulwave/pages-admin",
+    "version": "0.0.1",
+    "description": "Admin Panel - Standalone admin application",
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/features-admin": "*",
+        "@pulwave/features-auth": "*",
+        "@pulwave/features-layout": "*",
+        "@pulwave/features-user": "*",
+        "@pulwave/entity-system": "*",
+        "@pulwave/pages-shell": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/widgets": "*"
+    },
+    "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
+        "react-router-dom": "^6.0.0 || ^7.0.0"
+    }
+}

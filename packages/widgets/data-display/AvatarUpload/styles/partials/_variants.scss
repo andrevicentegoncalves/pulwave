@@ -1,0 +1,56 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.avatar-upload {
+
+    // Size Variants
+    &--s {
+        width: var(--avatar-upload-s);
+        height: var(--avatar-upload-s);
+    }
+
+    &--default {
+        width: var(--avatar-upload-default);
+        height: var(--avatar-upload-default);
+    }
+
+    &--m {
+        width: var(--avatar-upload-m);
+        height: var(--avatar-upload-m);
+    }
+
+    &--l {
+        width: var(--avatar-upload-l);
+        height: var(--avatar-upload-l);
+    }
+
+    &--xl {
+        width: var(--avatar-upload-xl);
+        height: var(--avatar-upload-xl);
+        box-shadow: var(--shadow-l);
+
+        &:hover {
+            box-shadow: var(--shadow-xl);
+        }
+    }
+
+    &--2xl {
+        width: var(--avatar-upload-2xl);
+        height: var(--avatar-upload-2xl);
+        box-shadow: var(--shadow-l);
+
+        &:hover {
+            box-shadow: var(--shadow-xl);
+        }
+    }
+
+    // State Variants
+    &--loading {
+        pointer-events: none;
+
+        .avatar-upload__overlay {
+            opacity: 1;
+            background-color: var(--color-overlay-light);
+            color: var(--color-brand-primary);
+        }
+    }
+}

@@ -1,0 +1,315 @@
+{
+  "generated": "2026-01-12T18:36:19.916Z",
+  "themes": [
+    {
+      "name": "default",
+      "modes": {
+        "light": {
+          "checks": [
+            {
+              "pair": "--color-text-primary on --color-surface-default",
+              "ratio": "17.39",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-secondary on --color-surface-default",
+              "ratio": "5.68",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-disabled on --color-surface-default",
+              "ratio": "5.68",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-text-on-primary on --color-brand-primary",
+              "ratio": "4.60",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-inverse on --color-brand-primary",
+              "ratio": "4.60",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-on-error on --color-status-error",
+              "ratio": "5.43",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-error-text on --color-status-error-subtle",
+              "ratio": "7.05",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-success-text on --color-status-success-subtle",
+              "ratio": "5.66",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-warning-text on --color-status-warning-subtle",
+              "ratio": "6.17",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-status-info-text on --color-status-info-subtle",
+              "ratio": "4.52",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            }
+          ],
+          "passRate": 100
+        },
+        "dark": {
+          "checks": [
+            {
+              "pair": "--color-text-primary on --color-surface-default",
+              "ratio": "19.31",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-secondary on --color-surface-default",
+              "ratio": "5.54",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-disabled on --color-surface-default",
+              "ratio": "5.54",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-text-on-primary on --color-brand-primary",
+              "ratio": "6.38",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-inverse on --color-brand-primary",
+              "ratio": "6.23",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-on-error on --color-status-error",
+              "ratio": "5.43",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-error-text on --color-status-error-subtle",
+              "ratio": "4.78",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-success-text on --color-status-success-subtle",
+              "ratio": "11.04",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-warning-text on --color-status-warning-subtle",
+              "ratio": "6.46",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-status-info-text on --color-status-info-subtle",
+              "ratio": "8.37",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            }
+          ],
+          "passRate": 100
+        }
+      }
+    },
+    {
+      "name": "organizations",
+      "modes": {
+        "light": {
+          "checks": [
+            {
+              "pair": "--color-text-primary on --color-surface-default",
+              "ratio": "17.39",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-secondary on --color-surface-default",
+              "ratio": "5.68",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-disabled on --color-surface-default",
+              "ratio": "5.68",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-text-on-primary on --color-brand-primary",
+              "ratio": "4.60",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-inverse on --color-brand-primary",
+              "ratio": "4.60",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-on-error on --color-status-error",
+              "ratio": "5.43",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-error-text on --color-status-error-subtle",
+              "ratio": "7.05",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-success-text on --color-status-success-subtle",
+              "ratio": "5.66",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-warning-text on --color-status-warning-subtle",
+              "ratio": "6.17",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-status-info-text on --color-status-info-subtle",
+              "ratio": "4.52",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            }
+          ],
+          "passRate": 100
+        },
+        "dark": {
+          "checks": [
+            {
+              "pair": "--color-text-primary on --color-surface-default",
+              "ratio": "19.31",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-secondary on --color-surface-default",
+              "ratio": "10.01",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-disabled on --color-surface-default",
+              "ratio": "10.01",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-text-on-primary on --color-brand-primary",
+              "ratio": "1.75",
+              "wcag": "FAIL",
+              "status": "FAIL",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-inverse on --color-brand-primary",
+              "ratio": "1.75",
+              "wcag": "FAIL",
+              "status": "FAIL",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-text-on-error on --color-status-error",
+              "ratio": "5.43",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-error-text on --color-status-error-subtle",
+              "ratio": "4.78",
+              "wcag": "AA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-success-text on --color-status-success-subtle",
+              "ratio": "11.04",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            },
+            {
+              "pair": "--color-status-warning-text on --color-status-warning-subtle",
+              "ratio": "12.26",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 3
+            },
+            {
+              "pair": "--color-status-info-text on --color-status-info-subtle",
+              "ratio": "8.37",
+              "wcag": "AAA",
+              "status": "PASS",
+              "min": 4.5
+            }
+          ],
+          "passRate": 80
+        }
+      }
+    }
+  ]
+}

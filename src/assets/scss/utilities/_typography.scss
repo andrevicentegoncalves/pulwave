@@ -1,7 +1,0 @@
-@use '../abstracts/mixins/generators' as *;
-
-/* ========================================================================== */
-/*                         UTILITY CLASSES: TYPOGRAPHY                        */
-/* ========================================================================== */
-
-@include generate-all-typography-utilities()

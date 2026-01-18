@@ -1,0 +1,37 @@
+// ============================================================================ //
+// NESTED MENU - SEARCH
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.nested-menu {
+    &__search {
+        padding: var(--scale-3);
+        display: flex;
+        justify-content: stretch;
+
+        &--collapsed {
+            justify-content: center;
+        }
+
+        // Fix for legacy input icon positioning
+        .input__icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--scale-5);
+            height: var(--scale-5);
+            color: var(--color-text-tertiary);
+            pointer-events: none;
+        }
+
+        .input__icon--left {
+            left: var(--scale-4);
+        }
+
+        .input__container--has-left-icon .input__field {
+            padding-left: var(--scale-10); // Ensure text doesn't overlap icon
+        }
+    }
+}

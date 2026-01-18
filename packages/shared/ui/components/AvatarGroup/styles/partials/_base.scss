@@ -1,0 +1,29 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    >* {
+        // Apply ring to create separate effect
+        box-shadow: 0 0 0 var(--avatar-group-ring-width) var(--avatar-group-ring-color);
+        border-radius: var(--border-radius-round); // Ensure ring follows shape
+
+        &:not(:first-child) {
+            margin-left: calc(var(--avatar-group-overlap) * -1);
+        }
+    }
+
+    &__excess {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-surface-subtle); // Or neutral background
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-label-s);
+        border-radius: var(--border-radius-round);
+        position: relative;
+        z-index: var(--z-index-default); // Ensure excess is on top? Or standard stacking context usually puts later elements on top
+    }
+}

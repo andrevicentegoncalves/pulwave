@@ -1,0 +1,79 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.input {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--input-gap);
+    font-family: var(--font-family-base);
+
+    &--full-width {
+        display: flex;
+        width: 100%;
+    }
+
+    &__label {
+        font-size: var(--font-size-ui-s);
+        font-weight: var(--font-weight-m);
+        color: var(--input-label-color);
+    }
+
+    &__required-mark {
+        color: var(--color-status-error);
+        margin-left: var(--scale-1);
+    }
+
+    &__container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border-color);
+        border-radius: var(--input-border-radius);
+        transition: border-color var(--input-transition-duration) var(--input-transition-easing),
+            box-shadow var(--input-transition-duration) var(--input-transition-easing),
+            background-color var(--input-transition-duration) var(--input-transition-easing);
+        width: 100%;
+
+        &:hover {
+            border-color: var(--input-border-color-hover);
+        }
+
+        &:focus-within {
+            border-color: var(--input-border-color-focus);
+            box-shadow: 0 0 0 var(--input-focus-ring-width) var(--input-focus-ring-color);
+        }
+    }
+
+    &__field {
+        flex: 1;
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: var(--input-text-color);
+        font-family: inherit;
+        outline: none;
+        padding: 0;
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        &::placeholder {
+            color: var(--input-placeholder-color);
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--input-icon-color);
+        flex-shrink: 0;
+    }
+
+    &__helper {
+        font-size: var(--font-size-body-s);
+        color: var(--input-helper-color);
+        margin-top: var(--scale-1);
+    }
+}

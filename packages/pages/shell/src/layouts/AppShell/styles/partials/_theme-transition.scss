@@ -1,0 +1,28 @@
+// ============================================================================ //
+// THEME TRANSITION OVERRIDES
+// Ensures instant color changes during theme switching
+// ============================================================================ //
+
+// Global override: Exclude color-related properties from transitions
+// This makes theme switching feel instantaneous while preserving
+// other animations (transforms, hover effects, etc.)
+*,
+*::before,
+*::after {
+    // Only allow non-color transitions
+    transition-property: transform, opacity, width, height, max-height,
+        padding, margin, gap, left, right, top, bottom !important;
+}
+
+// Reset for elements that need specific transitions
+.transition-colors {
+    transition-property: color, background-color, border-color !important;
+}
+
+.transition-all {
+    transition-property: all !important;
+}
+
+.transition-none {
+    transition-property: none !important;
+}

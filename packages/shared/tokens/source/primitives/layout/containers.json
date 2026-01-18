@@ -1,0 +1,234 @@
+{
+    "$description": "Layout tokens - containers, grids, aspect ratios",
+    "container": {
+        "$description": "Container max-widths",
+        "s": {
+            "$value": "40rem",
+            "$type": "dimension",
+            "$description": "640px"
+        },
+        "m": {
+            "$value": "48rem",
+            "$type": "dimension",
+            "$description": "768px"
+        },
+        "l": {
+            "$value": "64rem",
+            "$type": "dimension",
+            "$description": "1024px"
+        },
+        "xl": {
+            "$value": "80rem",
+            "$type": "dimension",
+            "$description": "1280px"
+        },
+        "2xl": {
+            "$value": "120rem",
+            "$type": "dimension",
+            "$description": "1920px"
+        },
+        "prose": {
+            "$value": "65ch",
+            "$type": "dimension",
+            "$description": "Optimal reading width"
+        },
+        "narrow": {
+            "$value": "30rem",
+            "$type": "dimension",
+            "$description": "480px - Forms/modals"
+        },
+        "wide": {
+            "$value": "90rem",
+            "$type": "dimension",
+            "$description": "1440px"
+        },
+        "dashboard": {
+            "$value": "100rem",
+            "$type": "dimension",
+            "$description": "1600px"
+        },
+        "full": {
+            "$value": "100%",
+            "$type": "dimension"
+        },
+        "screen": {
+            "$value": "100vw",
+            "$type": "dimension"
+        }
+    },
+    "containerPadding": {
+        "$description": "Container horizontal padding",
+        "xs": {
+            "$value": "1rem",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "s": {
+            "$value": "1.5rem",
+            "$type": "dimension",
+            "$description": "24px"
+        },
+        "m": {
+            "$value": "2rem",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "l": {
+            "$value": "3rem",
+            "$type": "dimension",
+            "$description": "48px"
+        },
+        "xl": {
+            "$value": "4rem",
+            "$type": "dimension",
+            "$description": "64px"
+        }
+    },
+    "grid": {
+        "$description": "Grid system configuration",
+        "columns": {
+            "xs": {
+                "$value": "4",
+                "$type": "number",
+                "$description": "Mobile portrait"
+            },
+            "s": {
+                "$value": "4",
+                "$type": "number",
+                "$description": "Mobile landscape"
+            },
+            "m": {
+                "$value": "8",
+                "$type": "number",
+                "$description": "Tablets"
+            },
+            "l": {
+                "$value": "12",
+                "$type": "number",
+                "$description": "Laptops"
+            },
+            "xl": {
+                "$value": "12",
+                "$type": "number",
+                "$description": "Desktops"
+            },
+            "2xl": {
+                "$value": "12",
+                "$type": "number",
+                "$description": "Ultra-wide"
+            }
+        },
+        "gutter": {
+            "xs": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "s": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "m": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "l": {
+                "$value": "1.5rem",
+                "$type": "dimension",
+                "$description": "24px"
+            },
+            "xl": {
+                "$value": "1.5rem",
+                "$type": "dimension",
+                "$description": "24px"
+            },
+            "2xl": {
+                "$value": "2rem",
+                "$type": "dimension",
+                "$description": "32px"
+            }
+        },
+        "margin": {
+            "xs": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "s": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "m": {
+                "$value": "1.5rem",
+                "$type": "dimension",
+                "$description": "24px"
+            },
+            "l": {
+                "$value": "1.5rem",
+                "$type": "dimension",
+                "$description": "24px"
+            },
+            "xl": {
+                "$value": "0",
+                "$type": "dimension",
+                "$description": "Fixed centered"
+            },
+            "2xl": {
+                "$value": "2rem",
+                "$type": "dimension",
+                "$description": "32px"
+            }
+        }
+    },
+    "aspectRatio": {
+        "$description": "Common aspect ratios",
+        "square": {
+            "$value": "1 / 1",
+            "$type": "string",
+            "$description": "1:1 - Avatars, square content"
+        },
+        "landscape": {
+            "$value": "4 / 3",
+            "$type": "string",
+            "$description": "4:3 - Traditional photos"
+        },
+        "widescreen": {
+            "$value": "16 / 9",
+            "$type": "string",
+            "$description": "16:9 - Video, hero banners"
+        },
+        "ultrawide": {
+            "$value": "21 / 9",
+            "$type": "string",
+            "$description": "21:9 - Cinematic"
+        },
+        "portrait": {
+            "$value": "3 / 4",
+            "$type": "string",
+            "$description": "3:4 - Vertical mobile"
+        },
+        "photo": {
+            "$value": "3 / 2",
+            "$type": "string",
+            "$description": "3:2 - Photography"
+        },
+        "story": {
+            "$value": "9 / 16",
+            "$type": "string",
+            "$description": "9:16 - Stories/TikTok"
+        },
+        "golden": {
+            "$value": "1.618 / 1",
+            "$type": "string",
+            "$description": "Golden ratio"
+        },
+        "auto": {
+            "$value": "auto",
+            "$type": "string",
+            "$description": "Natural ratio"
+        }
+    }
+}

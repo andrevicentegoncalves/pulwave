@@ -1,0 +1,25 @@
+{
+    "$description": "Keyframe animation definitions",
+    "keyframes": {
+        "spin": {
+            "$value": "spin 1s linear infinite",
+            "$type": "string"
+        },
+        "ping": {
+            "$value": "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
+            "$type": "string"
+        },
+        "pulse": {
+            "$value": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            "$type": "string"
+        },
+        "bounce": {
+            "$value": "bounce 1s infinite",
+            "$type": "string"
+        },
+        "shimmer": {
+            "$value": "shimmer 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            "$type": "string"
+        }
+    }
+}

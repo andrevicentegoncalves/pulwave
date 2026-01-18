@@ -1,0 +1,84 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--gantt {
+    width: 100%;
+
+    &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-sm);
+    }
+
+    &__container {
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-color: var(--chart-color-brand) var(--color-background-secondary);
+        scrollbar-width: thin;
+    }
+
+    &__header {
+        pointer-events: none;
+
+        &-line {
+            stroke: var(--color-border-subtle);
+            stroke-opacity: 0.3;
+        }
+
+        &-text {
+            font-size: 11px;
+            fill: var(--color-text-primary);
+        }
+    }
+
+    &__row-background {
+        fill-opacity: 0.1;
+    }
+
+    &__task-label {
+        font-size: 12px;
+        fill: var(--color-text-primary);
+        dominant-baseline: middle;
+    }
+
+    &__task-bar {
+        rx: 4;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__task-status {
+        font-size: 10px;
+        font-weight: var(--font-weight-medium);
+        fill: white;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+    }
+
+    &__group-header {
+        rx: 4;
+    }
+
+    &__group-text {
+        font-size: 11px;
+        font-weight: var(--font-weight-semibold);
+        fill: white;
+        dominant-baseline: middle;
+    }
+
+    &__today-line {
+        stroke: var(--color-danger);
+        stroke-width: 2px;
+        stroke-dasharray: 4 4;
+    }
+
+    &__end-marker {
+        stroke: white;
+        stroke-width: 2px;
+    }
+}

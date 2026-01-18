@@ -1,0 +1,95 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--world-map {
+    position: relative;
+    width: 100%;
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+        background: linear-gradient(180deg, #DBEAFE 0%, #BFDBFE 100%);
+        border-radius: var(--border-radius-m);
+    }
+
+    &__continent {
+        opacity: 0.9;
+        fill: #E5E7EB;
+        stroke: #9CA3AF;
+        stroke-width: 0.5px;
+    }
+
+    &__country {
+        transition: fill 0.2s ease, stroke 0.2s ease, opacity 0.2s ease;
+        cursor: pointer;
+
+        &--hovered {
+            z-index: 10;
+        }
+
+        &--dimmed {
+            opacity: 0.4;
+        }
+    }
+
+    &__marker {
+        cursor: pointer;
+        transition: r 0.2s ease, fill-opacity 0.2s ease;
+    }
+
+    &__country-label {
+        font-size: 8px;
+        font-weight: var(--font-weight-semibold);
+        fill: #374151;
+        text-anchor: middle;
+        pointer-events: none;
+    }
+
+    &__legend {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-top: var(--scale-3);
+        font-size: 11px;
+        color: var(--color-text-secondary);
+
+        &-bar {
+            display: flex;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            boxShadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &-stop {
+            width: 35px;
+        }
+    }
+
+    &__tooltip {
+        position: absolute;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.95);
+        color: white;
+        padding: var(--scale-2) var(--scale-3);
+        border-radius: var(--border-radius-s);
+        font-size: 12px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+        strong {
+            font-weight: var(--font-weight-bold);
+        }
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .chart--world-map {
+        &__country {
+            transition: none;
+        }
+    }
+}

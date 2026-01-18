@@ -1,0 +1,110 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.carousel {
+
+    // Slide
+    &__slide {
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: transform var(--carousel-transition), opacity var(--carousel-transition), filter var(--carousel-transition);
+
+        &--scale:hover {
+            transform: scale(1.03);
+            z-index: var(--z-index-default);
+        }
+
+        &--shadow:hover .carousel__card {
+            box-shadow: var(--shadow-l);
+        }
+
+        &--tilt {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+
+            &:hover {
+                transform: rotateY(-3deg) rotateX(3deg) scale(1.02);
+            }
+        }
+    }
+
+    // Arrow
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: var(--carousel-arrow-size);
+        height: var(--carousel-arrow-size);
+        border-radius: var(--border-radius-round);
+        background: var(--carousel-arrow-bg);
+        border: 1px solid var(--carousel-card-border);
+        box-shadow: var(--shadow-m);
+        color: var(--carousel-arrow-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: var(--z-index-overlay);
+        transition: var(--transition-smooth);
+
+        &:hover:not(:disabled) {
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse-default);
+            box-shadow: var(--shadow-l);
+        }
+
+        &:active:not(:disabled) {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        &:disabled {
+            @include interactive.disabled-state(0.4);
+        }
+
+        &--prev {
+            left: 0;
+        }
+
+        &--next {
+            right: 0;
+        }
+    }
+
+    // Controls
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--scale-4);
+        margin-top: var(--scale-5);
+        padding: 0 var(--scale-4);
+    }
+
+    &__dots {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+    }
+
+    &__dot {
+        width: var(--carousel-dot-size);
+        height: var(--carousel-dot-size);
+        border-radius: var(--border-radius-round);
+        background: var(--carousel-dot-color);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: var(--transition-fast);
+
+        &:hover {
+            background: var(--color-border-strong);
+            transform: scale(1.2);
+        }
+
+        &--active {
+            background: var(--carousel-dot-active);
+            transform: scale(1.3);
+        }
+    }
+}

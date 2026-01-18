@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.circle-flag {
+    &--s {
+        width: var(--circle-flag-s);
+        height: var(--circle-flag-s);
+    }
+
+    &--m {
+        width: var(--circle-flag-m);
+        height: var(--circle-flag-m);
+    }
+
+    &--l {
+        width: var(--circle-flag-l);
+        height: var(--circle-flag-l);
+    }
+}

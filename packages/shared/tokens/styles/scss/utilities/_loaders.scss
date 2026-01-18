@@ -1,0 +1,429 @@
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                            UTILITIES: LOADERS                              */
+/* ========================================================================== */
+
+@include with-responsive {
+
+  /* -------------------------------------------------------------------------- */
+  /*                        UTILITIES: LOADERS - PLANE                          */
+  /* -------------------------------------------------------------------------- */
+
+  .#{$utility-prefix}loader-plane#{$utility-suffix} {
+    // Layout
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    // Default size using scale tokens (40px = scale-10)
+    width: var(--scale-10);
+    height: var(--scale-10);
+
+    // Target the SVG path directly with OutSystems structure
+    .osui-inline-svg {
+      svg {
+        width: 100%;
+        height: 100%;
+
+        path {
+          // Stroke configuration
+          fill: none;
+          stroke-width: 7;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-miterlimit: 10;
+
+          // Animation setup
+          stroke-dasharray: 425.59;
+          stroke-dashoffset: 425.59;
+
+          // Apply animation using motion tokens
+          animation: dash var(--duration-slow) linear infinite;
+
+          // Default stroke color (neutral)
+          stroke: var(--color-neutral-900);
+        }
+      }
+    }
+
+    // Size variants
+    &--small {
+      width: var(--scale-6); // 24px
+      height: var(--scale-6);
+
+      .osui-inline-svg svg path {
+        stroke-width: 7;
+      }
+    }
+
+    &--medium {
+      width: var(--scale-10); // 40px (default)
+      height: var(--scale-10);
+
+      .osui-inline-svg svg path {
+        stroke-width: 7;
+      }
+    }
+
+    &--large {
+      width: var(--scale-20); // 80px
+      height: var(--scale-20);
+
+      .osui-inline-svg svg path {
+        stroke-width: 4; // Thinner stroke for large size
+      }
+    }
+
+    &--xl {
+      width: var(--scale-24); // 96px
+      height: var(--scale-24);
+
+      .osui-inline-svg svg path {
+        stroke-width: 3; // Even thinner for XL
+      }
+    }
+
+    // Responsive variants
+    &--responsive-small {
+      @include bp-down(xs) {
+        width: var(--scale-6);
+        height: var(--scale-6);
+      }
+    }
+
+    &--responsive-medium {
+      width: var(--scale-6); // Small on mobile (24px)
+      height: var(--scale-6);
+
+      @include bp-up(m) {
+        width: var(--scale-10); // Medium on tablet+ (40px)
+        height: var(--scale-10);
+      }
+    }
+
+    &--responsive-large {
+      width: var(--scale-10); // Medium on mobile (40px)
+      height: var(--scale-10);
+
+      @include bp-up(l) {
+        width: var(--scale-20); // Large on desktop+ (80px)
+        height: var(--scale-20);
+
+        .osui-inline-svg svg path {
+          stroke-width: 4;
+        }
+      }
+    }
+
+    // Color variants
+    &--primary {
+      .osui-inline-svg svg path {
+        stroke: var(--color-primary-500);
+      }
+    }
+
+    &--secondary {
+      .osui-inline-svg svg path {
+        stroke: var(--color-secondary-500);
+      }
+    }
+
+    &--tertiary {
+      .osui-inline-svg svg path {
+        stroke: var(--color-tertiary-500);
+      }
+    }
+
+    &--white {
+      .osui-inline-svg svg path {
+        stroke: var(--color-neutral-0);
+      }
+    }
+
+    &--black {
+      .osui-inline-svg svg path {
+        stroke: var(--color-neutral-900);
+      }
+    }
+
+    &--success {
+      .osui-inline-svg svg path {
+        stroke: var(--color-success-500);
+      }
+    }
+
+    &--error {
+      .osui-inline-svg svg path {
+        stroke: var(--color-error-500);
+      }
+    }
+
+    &--warning {
+      .osui-inline-svg svg path {
+        stroke: var(--color-warning-500);
+      }
+    }
+
+    &--info {
+      .osui-inline-svg svg path {
+        stroke: var(--color-info-500);
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                      UTILITIES: LOADERS - CONTAINERS                       */
+  /* -------------------------------------------------------------------------- */
+
+  // Loading container with label
+  .#{$utility-prefix}loader-container#{$utility-suffix} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--scale-4);
+
+    &__label {
+      font-size: var(--font-size-ui-s);
+      color: var(--color-text-tertiary);
+      animation: pulse var(--duration-slow) var(--easing-ease-in-out) infinite;
+    }
+
+    // Size variants
+    &--small {
+      gap: var(--scale-2);
+
+      .loader-container__label {
+        font-size: var(--font-size-ui-xs);
+      }
+    }
+
+    &--large {
+      gap: var(--scale-6);
+
+      .loader-container__label {
+        font-size: var(--font-size-ui-m);
+      }
+    }
+  }
+
+  // Inline loader (for buttons, etc.)
+  .#{$utility-prefix}loader-inline#{$utility-suffix} {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scale-2);
+
+    .loader-plane,
+    .loader-spinner,
+    .loader-pulse {
+      width: var(--scale-4); // 16px for inline use
+      height: var(--scale-4);
+    }
+
+    // Size variant
+    &--small {
+      gap: var(--scale-1);
+
+      .loader-plane,
+      .loader-spinner,
+      .loader-pulse {
+        width: var(--scale-3);
+        height: var(--scale-3);
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                       UTILITIES: LOADERS - SPINNER                         */
+  /* -------------------------------------------------------------------------- */
+
+  .#{$utility-prefix}loader-spinner#{$utility-suffix} {
+    width: var(--scale-10);
+    height: var(--scale-10);
+    border: var(--border-width-m) solid var(--color-neutral-300);
+    border-top-color: var(--color-primary-500);
+    border-radius: var(--border-radius-round);
+    animation: rotate var(--duration-slow) linear infinite;
+
+    // Size variants
+    &--small {
+      width: var(--scale-6);
+      height: var(--scale-6);
+      border-width: var(--border-width-xs);
+    }
+
+    &--large {
+      width: var(--scale-20);
+      height: var(--scale-20);
+      border-width: var(--border-width-s);
+    }
+
+    &--xl {
+      width: var(--scale-24);
+      height: var(--scale-24);
+      border-width: var(--border-width-l);
+    }
+
+    // Color variants
+    &--primary {
+      border-top-color: var(--color-primary-500);
+    }
+
+    &--success {
+      border-top-color: var(--color-success-500);
+    }
+
+    &--error {
+      border-top-color: var(--color-error-500);
+    }
+
+    &--warning {
+      border-top-color: var(--color-warning-500);
+    }
+
+    &--info {
+      border-top-color: var(--color-info-500);
+    }
+
+    &--white {
+      border-color: rgba(255, 255, 255, 0.3);
+      border-top-color: var(--color-neutral-0);
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                        UTILITIES: LOADERS - DOTS                           */
+  /* -------------------------------------------------------------------------- */
+
+  .#{$utility-prefix}loader-dots#{$utility-suffix} {
+    display: flex;
+    gap: var(--scale-2);
+
+    &__dot {
+      width: var(--scale-2);
+      height: var(--scale-2);
+      background-color: var(--color-primary-500);
+      border-radius: var(--border-radius-round);
+      animation: bounce var(--duration-slow) var(--easing-bounce) infinite;
+
+      &:nth-child(2) {
+        animation-delay: var(--delay-short);
+      }
+
+      &:nth-child(3) {
+        animation-delay: var(--delay-base);
+      }
+    }
+
+    // Size variants
+    &--small {
+      gap: var(--scale-1);
+
+      .loader-dots__dot {
+        width: var(--scale-1);
+        height: var(--scale-1);
+      }
+    }
+
+    &--large {
+      gap: var(--scale-3);
+
+      .loader-dots__dot {
+        width: var(--scale-3);
+        height: var(--scale-3);
+      }
+    }
+
+    &--xl {
+      gap: var(--scale-4);
+
+      .loader-dots__dot {
+        width: var(--scale-4);
+        height: var(--scale-4);
+      }
+    }
+
+    // Color variants
+    &--success {
+      .loader-dots__dot {
+        background-color: var(--color-success-500);
+      }
+    }
+
+    &--error {
+      .loader-dots__dot {
+        background-color: var(--color-error-500);
+      }
+    }
+
+    &--warning {
+      .loader-dots__dot {
+        background-color: var(--color-warning-500);
+      }
+    }
+
+    &--info {
+      .loader-dots__dot {
+        background-color: var(--color-info-500);
+      }
+    }
+
+    &--white {
+      .loader-dots__dot {
+        background-color: var(--color-neutral-0);
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                        UTILITIES: LOADERS - PULSE                          */
+  /* -------------------------------------------------------------------------- */
+
+  .#{$utility-prefix}loader-pulse#{$utility-suffix} {
+    width: var(--scale-10);
+    height: var(--scale-10);
+    background-color: var(--color-primary-500);
+    border-radius: var(--border-radius-round);
+    animation: pulse var(--duration-slow) var(--easing-ease-in-out) infinite;
+
+    // Size variants
+    &--small {
+      width: var(--scale-6);
+      height: var(--scale-6);
+    }
+
+    &--large {
+      width: var(--scale-20);
+      height: var(--scale-20);
+    }
+
+    &--xl {
+      width: var(--scale-24);
+      height: var(--scale-24);
+    }
+
+    // Color variants
+    &--success {
+      background-color: var(--color-success-500);
+    }
+
+    &--error {
+      background-color: var(--color-error-500);
+    }
+
+    &--warning {
+      background-color: var(--color-warning-500);
+    }
+
+    &--info {
+      background-color: var(--color-info-500);
+    }
+
+    &--white {
+      background-color: var(--color-neutral-0);
+    }
+  }
+}
+
+// Note: All @keyframes are now consolidated in _keyframes.scss

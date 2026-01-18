@@ -1,0 +1,12 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.input {
+    &__container:focus-within {
+        border-color: var(--color-brand-primary);
+        box-shadow: 0 0 0 3px var(--color-brand-primary-subtle);
+    }
+
+    &:hover:not(.input--disabled) .input__container {
+        border-color: var(--color-border-hover);
+    }
+}

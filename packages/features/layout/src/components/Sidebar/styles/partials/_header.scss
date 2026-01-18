@@ -1,0 +1,99 @@
+// ============================================================================ //
+// SIDEBAR HEADER & TOGGLE
+// ============================================================================ //
+// Header area with toggle button
+
+.sidebar {
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--scale-3);
+        position: relative;
+        z-index: var(--z-index-sticky);
+        min-height: var(--scale-16);
+        padding: 0 var(--scale-3);
+        gap: var(--scale-2);
+
+        // Smooth transition for position changes synced with sidebar collapse
+        transition: justify-content var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+                    padding var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate));
+    }
+
+    .toggle-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--color-on-primary);
+        padding: 0;
+        transition:
+            background-color var(--duration-fast) var(--easing-standard),
+            transform var(--duration-fast) var(--easing-spring);
+        outline: none;
+        border-radius: var(--border-radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // Fixed dimensions for perfect circle
+        width: var(--scale-10);
+        height: var(--scale-10);
+        min-width: var(--scale-10);
+        min-height: var(--scale-10);
+        flex-shrink: 0;
+
+        svg {
+            width: var(--icon-size-s);
+            height: var(--icon-size-s);
+            transform: rotate(0deg);
+            transition: var(--sidebar-icon-transition, transform 320ms var(--easing-spring));
+            will-change: transform; // GPU acceleration for smooth rotation
+        }
+
+        // Collapsed state - rotate icon 180deg
+        &.toggle-btn--collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-on-primary);
+            outline-offset: var(--focus-offset);
+        }
+
+        &:hover {
+            background-color: var(--color-overlay-light-subtle);
+            transform: scale(1.08);
+        }
+
+        &:active {
+            background-color: var(--color-overlay-light-default);
+            transform: scale(0.95);
+        }
+    }
+
+    // Collapsed state - center toggle and hide logo
+    &--collapsed {
+        .sidebar-header {
+            justify-content: center;
+
+            .logo {
+                display: none;
+            }
+        }
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        .sidebar-header {
+            transition: none;
+        }
+
+        .toggle-btn {
+            transition: none;
+
+            svg {
+                transition: none;
+                will-change: auto; // Release GPU resources
+            }
+        }
+    }
+}

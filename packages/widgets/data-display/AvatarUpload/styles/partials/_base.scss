@@ -1,0 +1,58 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.avatar-upload {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--border-radius-round);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    background-color: var(--color-surface-subtle);
+    border: var(--avatar-upload-border);
+    box-shadow: var(--shadow-m);
+
+    // Elements
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-primary); // Using gradient token if available, or brand color
+        color: var(--color-text-inverse-default);
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--avatar-upload-overlay-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition-fast);
+        color: var(--avatar-upload-overlay-text);
+    }
+
+    // Interactive
+    &:hover {
+        transform: scale(1.02);
+
+        .avatar-upload__overlay {
+            opacity: 1;
+        }
+    }
+
+    @include interactive.focus-ring;
+}

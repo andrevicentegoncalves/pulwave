@@ -1,0 +1,20 @@
+{
+    "name": "@pulwave/pages-auth",
+    "version": "0.0.1",
+    "private": true,
+    "main": "./index.ts",
+    "types": "./index.ts",
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "react": "*",
+        "react-dom": "*",
+        "react-router-dom": "*",
+        "lucide-react": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/hooks": "*",
+        "@pulwave/features-auth": "*",
+        "@pulwave/entity-infrastructure": "*"
+    }
+}

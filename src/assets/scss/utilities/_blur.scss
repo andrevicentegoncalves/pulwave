@@ -1,7 +1,0 @@
-@use '../abstracts/mixins/generators/blur' as generator;
-
-/* ========================================================================== */
-/*                            UTILITIES: BLUR                                 */
-/* ========================================================================== */
-
-@include generator.generate-blur-utilities();

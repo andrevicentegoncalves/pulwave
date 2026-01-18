@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.select {
+    &--full-width {
+        width: 100%;
+
+        .select__trigger-content {
+            width: 100%;
+        }
+    }
+
+    &--disabled {
+        .select__trigger {
+            @include interactive.disabled-state;
+        }
+
+        .select__label {
+            color: var(--color-text-disabled);
+        }
+    }
+
+    // SIZES
+    &--size-s {
+        .select__trigger {
+            min-height: var(--select-trigger-height-s);
+            padding: var(--select-trigger-padding-s);
+        }
+
+        .select__value {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-regular);
+        }
+    }
+
+    &--size-m {
+        // Default
+    }
+
+    &--size-l {
+        .select__trigger {
+            min-height: var(--select-trigger-height-l);
+            padding: var(--select-trigger-padding-l);
+        }
+
+        .select__value {
+            font-size: var(--font-size-body-l);
+            font-weight: var(--font-weight-regular);
+        }
+    }
+}

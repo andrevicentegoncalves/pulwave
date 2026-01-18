@@ -1,0 +1,69 @@
+.typography-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-8);
+
+    &__card {
+        // defined for potential future usage or overrides
+    }
+
+    &__section-title {
+        margin-bottom: var(--scale-4);
+        color: var(--color-brand-primary);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-4);
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: 100px 60px 1fr;
+        align-items: baseline;
+        gap: var(--scale-3);
+        padding-bottom: var(--scale-3);
+        border-bottom: 1px solid var(--color-border-subtle);
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    &__meta {
+        font-size: var(--font-size-ui-xs);
+        color: var(--color-text-tertiary);
+        font-family: monospace;
+        background: transparent;
+    }
+}
+
+.font-weights-demo {
+    &__row {
+        display: flex;
+        align-items: baseline;
+        gap: var(--scale-4);
+        border-bottom: 1px solid var(--color-border-subtle);
+        padding-bottom: var(--scale-3);
+        margin-bottom: var(--scale-3);
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &__label {
+        width: var(--scale-30);
+        font-size: var(--font-size-ui-xs);
+        color: var(--color-text-tertiary);
+        font-family: monospace;
+    }
+
+    &__sample {
+        font-size: var(--font-size-l);
+    }
+}

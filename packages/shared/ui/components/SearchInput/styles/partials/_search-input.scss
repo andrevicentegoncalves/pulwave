@@ -1,0 +1,65 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.search-input {
+    &__clear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        transition: color var(--duration-fast) var(--easing-out);
+        height: 100%; // Fill container height (relative to input container)
+        // width handled by flex or grid in container
+
+        border-radius: var(--border-radius-round);
+
+        &:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-surface-subtle);
+        }
+
+        &:focus-visible {
+            outline: var(--scale-0-5) solid var(--color-brand-primary);
+            outline-offset: 1px;
+        }
+
+        svg {
+            // Sizing handled by variants if needed, or default
+            width: 1em;
+            height: 1em;
+        }
+
+        &--size-s {
+            width: var(--scale-5);
+            height: var(--scale-5);
+
+            svg {
+                width: var(--scale-3);
+                height: var(--scale-3);
+            }
+        }
+
+        &--size-m {
+            width: var(--scale-6);
+            height: var(--scale-6);
+
+            svg {
+                width: var(--scale-4); // Upgraded from 14px to var(--scale-4) to fit grid
+                height: var(--scale-4);
+            }
+        }
+
+        &--size-l {
+            width: var(--scale-7);
+            height: var(--scale-7);
+
+            svg {
+                width: var(--scale-4);
+                height: var(--scale-4);
+            }
+        }
+    }
+}

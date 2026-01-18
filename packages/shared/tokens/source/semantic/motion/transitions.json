@@ -1,0 +1,79 @@
+{
+    "$description": "Semantic transition presets - composite motion tokens",
+    "transition": {
+        "$description": "Pre-configured transition values (property duration easing)",
+        "base": {
+            "$value": "all 200ms ease-in-out",
+            "$type": "string",
+            "$description": "Default transition"
+        },
+        "fast": {
+            "$value": "all 100ms ease-out",
+            "$type": "string",
+            "$description": "Quick interactions"
+        },
+        "slow": {
+            "$value": "all 300ms ease-in-out",
+            "$type": "string",
+            "$description": "Comfortable pace"
+        },
+        "smooth": {
+            "$value": "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "string",
+            "$description": "Material standard curve"
+        },
+        "color": {
+            "$value": "color 200ms ease-in-out",
+            "$type": "string"
+        },
+        "background": {
+            "$value": "background-color 200ms ease-in-out",
+            "$type": "string"
+        },
+        "opacity": {
+            "$value": "opacity 100ms ease-out",
+            "$type": "string"
+        },
+        "transform": {
+            "$value": "transform 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "string"
+        },
+        "shadow": {
+            "$value": "box-shadow 200ms ease-in-out",
+            "$type": "string"
+        },
+        "border": {
+            "$value": "border-color 100ms ease-in-out",
+            "$type": "string"
+        },
+        "hover": {
+            "$value": "all 100ms ease-out",
+            "$type": "string"
+        },
+        "active": {
+            "$value": "all 50ms ease-in",
+            "$type": "string"
+        },
+        "focus": {
+            "$value": "all 100ms ease-out",
+            "$type": "string"
+        },
+        "modal": {
+            "$value": "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "string"
+        },
+        "drawer": {
+            "$value": "all 300ms cubic-bezier(0, 0, 0.2, 1)",
+            "$type": "string",
+            "$description": "Decelerate curve"
+        },
+        "tooltip": {
+            "$value": "all 100ms ease-out",
+            "$type": "string"
+        },
+        "dropdown": {
+            "$value": "all 200ms cubic-bezier(0, 0, 0.2, 1)",
+            "$type": "string"
+        }
+    }
+}

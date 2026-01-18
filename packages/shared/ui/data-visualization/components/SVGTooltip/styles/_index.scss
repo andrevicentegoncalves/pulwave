@@ -1,0 +1,41 @@
+@use '../../../theme/styles' as theme;
+
+.svg-tooltip {
+    pointer-events: none;
+    user-select: none;
+    animation: tooltipFadeIn 0.15s ease-out;
+
+    &__content {
+        background: var(--chart-tooltip-bg);
+        color: var(--chart-text-color);
+        border: 1px solid var(--chart-border-color);
+        border-radius: var(--chart-tooltip-radius);
+        padding: var(--chart-tooltip-padding);
+        box-shadow: var(--chart-tooltip-shadow);
+        font-size: var(--chart-font-size-label);
+        white-space: nowrap;
+    }
+
+    &__arrow {
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid var(--chart-border-color);
+    }
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-100% - 4px));
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -100%);
+    }
+}

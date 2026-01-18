@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// Tokens partial for Switch
+:root {
+    --switch-width: var(--scale-10);
+    --switch-height: var(--scale-6);
+}

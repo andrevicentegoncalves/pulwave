@@ -1,0 +1,42 @@
+// Radio Component - Base Styles
+// ==========================================================================
+
+@use 'tokens';
+
+.radio {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--radio-gap);
+    cursor: pointer;
+    position: relative;
+
+    &:hover .radio__control {
+        border-color: var(--radio-border-color-hover);
+    }
+}
+
+.radio__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:focus-visible+.radio__control {
+        outline: var(--scale-0-5) solid var(--radio-focus-ring-color);
+        outline-offset: var(--scale-0-5);
+    }
+
+    &:checked+.radio__control {
+        border-color: var(--color-brand-primary);
+        background-color: var(--color-brand-primary);
+
+        &::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    &:disabled+.radio__control {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

@@ -1,0 +1,9 @@
+@use 'sass:map';
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.wizard-container {
+    --wizard-gap: var(--scale-4);
+    --wizard-step-circle-size: var(--scale-8); // var(--scale-8)
+    --wizard-bar-height: var(--scale-1);
+    --wizard-content-min-height: 200px;
+}

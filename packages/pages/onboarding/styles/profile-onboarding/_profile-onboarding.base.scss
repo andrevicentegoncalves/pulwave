@@ -1,0 +1,100 @@
+@use '../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/typography' as typography;
+@use '../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+// Profile Onboarding Styles
+.profile-onboarding {
+    max-width: var(--scale-175);
+    margin: 0 auto;
+    padding: var(--scale-6) var(--scale-4);
+
+    .onboarding-step {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-3);
+
+        h3 {
+            font-size: var(--font-size-headline-s);
+            line-height: var(--line-height-tight);
+            font-weight: var(--font-weight-semi-bold);
+            color: var(--color-text-primary);
+            margin: 0 0 var(--scale-1) 0;
+        }
+
+        .step-description {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-body-s);
+            line-height: var(--line-height-normal);
+            font-weight: var(--font-weight-regular);
+            margin: 0 0 var(--scale-3) 0;
+        }
+
+        .form-row-two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--scale-3);
+        }
+
+        .avatar-upload-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--scale-6) 0;
+        }
+
+        &.completion-step {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+
+            .completion-icon {
+                color: var(--color-status-success);
+                margin-bottom: var(--scale-3);
+            }
+
+            .completion-summary {
+                background: var(--color-background-secondary);
+                padding: var(--scale-4);
+                border-radius: var(--border-radius-m);
+                text-align: left;
+                max-width: var(--scale-125);
+                margin-top: var(--scale-4);
+
+                h4 {
+                    font-size: var(--font-size-title-s);
+                    line-height: var(--line-height-tight);
+                    font-weight: var(--font-weight-semi-bold);
+                    margin: 0 0 var(--scale-3) 0;
+                    color: var(--color-text-primary);
+                }
+
+                p {
+                    margin: var(--scale-1) 0;
+                    font-size: var(--font-size-body-s);
+                    line-height: var(--line-height-normal);
+                    font-weight: var(--font-weight-regular);
+                    color: var(--color-text-secondary);
+
+                    strong {
+                        color: var(--color-text-primary);
+                        font-weight: var(--font-weight-m);
+                        margin-right: var(--scale-2);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+@include bp-down(s) {
+    .profile-onboarding {
+        padding: var(--scale-4) var(--scale-2);
+
+        .onboarding-step {
+            .form-row-two {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

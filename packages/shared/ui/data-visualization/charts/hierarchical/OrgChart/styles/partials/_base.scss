@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--org {
+    position: relative;
+    width: 100%;
+    overflow: auto;
+}

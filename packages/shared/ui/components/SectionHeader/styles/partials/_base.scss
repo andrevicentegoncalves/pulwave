@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-3);
+    margin: 0 0 var(--scale-4) 0;
+    color: var(--color-text-primary);
+}

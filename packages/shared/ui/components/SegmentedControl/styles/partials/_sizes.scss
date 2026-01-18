@@ -1,0 +1,26 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.segmented-control {
+
+    // SIZE VARIANTS
+    &--s {
+        .segmented-control__item {
+            padding: var(--scale-1) var(--scale-3);
+            font-size: var(--font-size-label-s);
+        }
+    }
+
+    &--m {
+        .segmented-control__item {
+            padding: var(--scale-2) var(--scale-4);
+            font-size: var(--font-size-label-m);
+        }
+    }
+
+    &--l {
+        .segmented-control__item {
+            padding: var(--scale-3) var(--scale-6);
+            font-size: var(--font-size-body-m);
+        }
+    }
+}

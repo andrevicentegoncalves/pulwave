@@ -1,0 +1,106 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+    &__trigger {
+        cursor: pointer;
+    }
+
+    &__menu {
+        position: absolute;
+        top: 100%;
+        margin-top: var(--scale-1);
+        background-color: var(--color-surface-default);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--border-radius-m);
+        box-shadow: var(--shadow-m);
+        min-width: var(--scale-45); // 1var(--scale-20)
+        z-index: var(--z-index-overlay-dropdown);
+        padding: var(--scale-1) 0;
+        animation: fadeIn var(--duration-fast) var(--easing-standard);
+
+        &--align-left {
+            left: 0;
+        }
+
+        &--align-right {
+            right: 0;
+        }
+
+        &--align-center {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: var(--scale-2) var(--scale-3);
+        background: transparent;
+        border: none;
+        text-align: left;
+        color: var(--color-text-primary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body-s);
+        cursor: pointer;
+        transition: background-color var(--duration-fast);
+
+        &:hover:not(:disabled) {
+            background-color: var(--color-surface-hover);
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &--danger {
+            color: var(--color-status-error);
+
+            &:hover:not(:disabled) {
+                background-color: var(--color-status-error-subtle);
+            }
+        }
+    }
+
+    &__item-icon {
+        margin-right: var(--scale-2);
+        display: flex;
+        align-items: center;
+    }
+
+    &__label {
+        padding: var(--scale-2) var(--scale-3);
+        font-size: var(--font-size-label-s);
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__divider {
+        height: 1px;
+        background-color: var(--color-border-subtle);
+        margin: var(--scale-1) 0;
+
+        &--light {
+            opacity: 0.5;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-var(--scale-1));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

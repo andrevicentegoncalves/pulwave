@@ -1,0 +1,47 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.rating-stars {
+
+    // Sizes
+    &--s {
+        gap: var(--scale-1);
+
+        .rating-stars__numeric {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-m);
+        }
+
+        .rating-stars__star-wrapper {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    &--m {
+        gap: var(--scale-2);
+
+        .rating-stars__numeric {
+            font-size: var(--font-size-body-m);
+            font-weight: var(--font-weight-m);
+        }
+
+        .rating-stars__star-wrapper {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    &--l {
+        gap: var(--scale-3);
+
+        .rating-stars__numeric {
+            font-size: var(--font-size-body-l);
+            font-weight: var(--font-weight-m);
+        }
+
+        .rating-stars__star-wrapper {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}

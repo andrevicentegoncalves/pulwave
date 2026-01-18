@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.text-area {
+    &__container {
+        &:hover:not(:has(:disabled)) {
+            background-color: var(--color-surface-container);
+            border-color: var(--color-border-hover);
+        }
+
+        &:focus-within:not(:has(:disabled)) {
+            background-color: var(--color-surface-default);
+            border-color: var(--color-brand-primary);
+            box-shadow: 0 0 0 var(--scale-0-5) var(--color-brand-primary-subtle);
+        }
+    }
+
+    &__field {
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    }
+}

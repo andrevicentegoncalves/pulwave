@@ -1,0 +1,77 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.split-pane {
+
+    // Panel
+    &__panel {
+        display: flex;
+        overflow: hidden;
+    }
+
+    // Handle Container
+    &__handle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        transition: background-color var(--duration-fast) ease;
+        z-index: var(--z-index-overlay);
+
+        // Direction-specific handle styles
+        .split-pane--direction-horizontal & {
+            width: var(--split-pane-handle-hit-area);
+            cursor: col-resize;
+            margin: 0 calc(var(--scale-2) * -1);
+        }
+
+        .split-pane--direction-vertical & {
+            height: var(--split-pane-handle-hit-area);
+            cursor: row-resize;
+            margin: calc(var(--scale-2) * -1) 0;
+        }
+
+        // visible bar
+        &-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--split-pane-bar-color);
+            border-radius: var(--border-radius-s);
+            transition: background-color var(--duration-fast) ease;
+
+            .split-pane--direction-horizontal & {
+                width: var(--split-pane-bar-size);
+                height: 100%;
+            }
+
+            .split-pane--direction-vertical & {
+                width: 100%;
+                height: var(--split-pane-bar-size);
+            }
+        }
+
+        // Hover / Active States
+        &:hover &-bar,
+        &:active &-bar {
+            background-color: var(--split-pane-bar-color-active);
+        }
+
+        // Icon
+        &-icon {
+            color: var(--color-text-secondary);
+            opacity: 0;
+            transition: opacity var(--duration-fast) ease;
+            position: absolute;
+            background: var(--split-pane-icon-bg);
+            border-radius: var(--border-radius-xs);
+            padding: var(--scale-0-5);
+            box-shadow: var(--shadow-s);
+        }
+
+        &:hover &-icon,
+        &:active &-icon {
+            opacity: 1;
+        }
+    }
+}

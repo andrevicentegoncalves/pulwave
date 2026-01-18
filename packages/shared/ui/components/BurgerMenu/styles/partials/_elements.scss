@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.burger-menu {
+    &__line {
+        width: 100%;
+        height: var(--burger-menu-line-height);
+        background-color: var(--burger-menu-color);
+        border-radius: 99px;
+        transition: transform var(--burger-menu-anim-duration) ease,
+            opacity var(--burger-menu-anim-duration) ease;
+        transform-origin: center;
+    }
+}

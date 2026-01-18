@@ -1,0 +1,92 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ==========================================================================*/
+/*                           UTILITY CLASSES: ICONS                          */
+/* ==========================================================================*/
+
+// Icon Sizes Loop
+@each $key, $value in t.$tokens {
+  @if string.index($key, 'icon-size-')==1 {
+    $suffix: string.slice($key, 11);
+
+    @include with-responsive {
+      .#{$utility-prefix}icon-#{$suffix}#{$utility-suffix} {
+        width: var(--#{$key});
+        height: var(--#{$key});
+        font-size: var(--#{$key});
+      }
+    }
+  }
+}
+
+
+@include with-responsive {
+  .#{$utility-prefix}icon#{$utility-suffix} {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    flex-shrink: 0;
+
+    // Alignment variants
+    &-align-top {
+      vertical-align: top;
+    }
+
+    &-align-middle {
+      vertical-align: middle;
+    }
+
+    &-align-bottom {
+      vertical-align: bottom;
+    }
+
+    &-align-baseline {
+      vertical-align: baseline;
+    }
+
+    // Spacing with text
+    &-gap-tight {
+      margin-right: var(--icon-text-gap-tight);
+    }
+
+    &-gap-default {
+      margin-right: var(--icon-text-gap-default);
+    }
+
+    &-gap-comfortable {
+      margin-right: var(--icon-text-gap-comfortable);
+    }
+
+    &-gap-left-tight {
+      margin-left: var(--icon-text-gap-tight);
+    }
+
+    &-gap-left-default {
+      margin-left: var(--icon-text-gap-default);
+    }
+
+    &-gap-left-comfortable {
+      margin-left: var(--icon-text-gap-comfortable);
+    }
+
+    &-inherit {
+      color: inherit;
+    }
+
+    &-circle {
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-square {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

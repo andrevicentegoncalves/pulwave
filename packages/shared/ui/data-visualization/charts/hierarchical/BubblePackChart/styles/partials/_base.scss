@@ -1,0 +1,22 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--bubble-pack {
+    position: relative;
+    width: 100%;
+
+    &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__empty-text {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-s);
+    }
+
+    &__tooltip {
+        position: absolute;
+        pointer-events: none;
+    }
+}

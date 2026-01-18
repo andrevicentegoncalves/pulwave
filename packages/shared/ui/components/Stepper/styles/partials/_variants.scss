@@ -1,0 +1,44 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stepper {
+
+    // Sizes
+    &--size-s {
+        .stepper__circle {
+            width: var(--scale-6);
+            height: var(--scale-6);
+            font-size: var(--font-size-body-xs);
+        }
+
+        &.stepper--orientation-vertical .stepper__connector {
+            left: 11px;
+            top: var(--scale-6);
+        }
+    }
+
+    &--size-m {
+        .stepper__circle {
+            width: var(--scale-8);
+            height: var(--scale-8);
+            font-size: var(--font-size-body-s);
+        }
+
+        &.stepper--orientation-vertical .stepper__connector {
+            left: 15px;
+            top: var(--scale-8);
+        }
+    }
+
+    &--size-l {
+        .stepper__circle {
+            width: var(--scale-10);
+            height: var(--scale-10);
+            font-size: var(--font-size-body-m);
+        }
+
+        &.stepper--orientation-vertical .stepper__connector {
+            left: 19px;
+            top: var(--scale-10);
+        }
+    }
+}

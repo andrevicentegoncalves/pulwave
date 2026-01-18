@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.breadcrumbs {
+    --breadcrumbs-gap: var(--scale-2);
+    --breadcrumbs-item-gap: var(--scale-2);
+    --breadcrumbs-link-gap: var(--scale-1);
+    --breadcrumbs-icon-gap: var(--scale-2); // Space between icon and text (8px)
+    --breadcrumbs-link-color: var(--color-text-secondary);
+    --breadcrumbs-link-hover-color: var(--color-text-default);
+    --breadcrumbs-active-color: var(--color-text-default);
+    --breadcrumbs-separator-color: var(--color-icon-subtle);
+
+    // Collapsed
+    --breadcrumbs-collapsed-size: var(--scale-6); // var(--scale-6)
+    --breadcrumbs-collapsed-bg-hover: var(--color-surface-hover);
+    --breadcrumbs-collapsed-color: var(--color-text-secondary);
+    --breadcrumbs-collapsed-color-hover: var(--color-text-default);
+}

@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}

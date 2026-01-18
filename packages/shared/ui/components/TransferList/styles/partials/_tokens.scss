@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.transfer-list {
+    --transfer-list-height: 300px; // Default
+    --transfer-list-border: 1px solid var(--color-border-default);
+    --transfer-list-radius: var(--border-radius-m);
+    --transfer-list-bg: var(--color-surface-default);
+    --transfer-list-gap: var(--scale-4);
+
+    // Panel
+    --transfer-list-panel-border: 1px solid var(--color-border-subtle);
+    --transfer-list-panel-radius: var(--border-radius-m);
+    --transfer-list-header-bg: var(--color-surface-subtle);
+    --transfer-list-header-padding: var(--scale-3);
+
+    // Item
+    --transfer-list-item-padding: var(--scale-2) var(--scale-3);
+    --transfer-list-item-hover-bg: var(--color-action-ghost-hover);
+
+    // Actions
+    --transfer-list-actions-gap: var(--scale-2);
+}

@@ -1,0 +1,27 @@
+// ============================================================================ //
+// SIDEBAR BASE - BASE STYLES
+// ============================================================================ //
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-base {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width-expanded);
+    height: 100%;
+    border-radius: var(--sidebar-border-radius);
+    overflow: hidden;
+    transition: var(--sidebar-transition);
+    will-change: width; // GPU acceleration for smooth width transition
+
+    // Collapsed state
+    &--collapsed {
+        width: var(--sidebar-width-collapsed);
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        will-change: auto; // Release GPU resources
+    }
+}

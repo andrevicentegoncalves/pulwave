@@ -1,0 +1,83 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.timeline {
+
+    // Orientation
+    &--orientation-horizontal {
+        flex-direction: row;
+        align-items: flex-start;
+
+        .timeline__item {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline__connector {
+            width: 100%;
+            height: var(--timeline-connector-width);
+            top: var(--scale-1); // Half of dot (10px) - 1px correction? Or generic centering. 10px/2 = 5px.
+            // Original was top: var(--scale-1).
+            left: 50%;
+        }
+
+        .timeline__marker {
+            margin-right: 0;
+            margin-bottom: var(--timeline-marker-gap);
+        }
+    }
+
+    &--orientation-vertical {
+        .timeline__item {
+            flex-direction: row;
+        }
+
+        .timeline__connector {
+            width: var(--timeline-connector-width);
+            height: 100%;
+            left: var(--scale-1); // 10px/2 - 1px = var(--scale-1).
+            top: var(--scale-3); // 10px + var(--scale-0-5) buffer?
+        }
+    }
+
+    // Alignment
+    &--align-right {
+        .timeline__item {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .timeline__marker {
+            margin-left: var(--timeline-marker-gap);
+            margin-right: 0;
+        }
+    }
+
+    &--align-alternate {
+        .timeline__item:nth-child(even) {
+            flex-direction: row-reverse;
+            text-align: right;
+
+            .timeline__marker {
+                margin-left: var(--timeline-marker-gap);
+                margin-right: 0;
+            }
+        }
+    }
+
+    // Item Variants
+    &__item--variant-success .timeline__dot {
+        background-color: var(--color-status-success);
+    }
+
+    &__item--variant-warning .timeline__dot {
+        background-color: var(--color-status-warning);
+    }
+
+    &__item--variant-error .timeline__dot {
+        background-color: var(--color-status-error);
+    }
+
+    &__item--variant-info .timeline__dot {
+        background-color: var(--color-status-info);
+    }
+}

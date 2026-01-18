@@ -1,0 +1,48 @@
+// ==========================================================================
+// Component Documentation - Responsive Behavior
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__responsive {
+        margin-top: var(--scale-6);
+    }
+
+    &__responsive-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-2);
+    }
+
+    &__responsive-item {
+        display: grid;
+        grid-template-columns: var(--scale-30) 1fr;
+        gap: var(--scale-4);
+        padding: var(--scale-3);
+        background-color: var(--color-surface-secondary);
+        border-radius: var(--border-radius-m);
+
+        @include bp-down(m) {
+            grid-template-columns: 1fr;
+            gap: var(--scale-2);
+        }
+    }
+
+    &__responsive-breakpoint {
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-m);
+        color: var(--color-brand-primary);
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-code);
+    }
+
+    &__responsive-behavior {
+        font-size: var(--font-size-body-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-content-secondary);
+    }
+}
+
+

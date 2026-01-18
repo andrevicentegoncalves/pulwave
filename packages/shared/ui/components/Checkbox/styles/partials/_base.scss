@@ -1,0 +1,133 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ==========================================================================
+// CHECKBOX COMPONENT - BASE
+// ==========================================================================
+
+.checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-2);
+
+    @include bp-down('s') {
+        width: 100%;
+    }
+}
+
+.checkbox__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    gap: var(--scale-2);
+}
+
+.checkbox__input {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    flex-shrink: 0;
+    width: var(--scale-6);
+    height: var(--scale-6);
+
+    // Box
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: var(--border-width-xs) solid var(--color-border-default);
+        border-radius: var(--radius-xs);
+        background-color: var(--color-surface-default);
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+        box-sizing: border-box;
+    }
+
+    // Checkmark
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 10px;
+        border: solid var(--color-white);
+        border-width: 0 var(--border-width-m) var(--border-width-m) 0;
+        transform: translate(-50%, -60%) rotate(45deg) scale(0);
+        transform-origin: center;
+        transition: transform 0.15s ease;
+    }
+
+    // States
+    &:checked::before {
+        background-color: var(--color-brand-primary);
+        border-color: var(--color-brand-primary);
+    }
+
+    &:checked::after {
+        transform: translate(-50%, -60%) rotate(45deg) scale(1);
+    }
+
+    &:hover:not(:disabled)::before {
+        border-color: var(--color-brand-primary);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-border-focus);
+        outline-offset: var(--scale-0-5);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+
+        &::before {
+            background-color: var(--color-surface-disabled);
+            border-color: var(--color-border-disabled);
+            opacity: 0.5;
+        }
+    }
+}
+
+// Indeterminate State
+.checkbox__input--indeterminate {
+    &::before {
+        background-color: var(--color-brand-primary);
+        border-color: var(--color-brand-primary);
+    }
+
+    &::after {
+        width: 50%;
+        height: 0;
+        border: none;
+        border-bottom: var(--border-width-m) solid var(--color-white);
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+}
+
+// Error State
+.checkbox__input--error {
+    &::before {
+        border-color: var(--color-status-error);
+    }
+}
+
+// Round Variant
+.checkbox__input--round {
+    &::before {
+        border-radius: 50%;
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .checkbox__input {
+        &::before,
+        &::after {
+            transition: none;
+        }
+    }
+}

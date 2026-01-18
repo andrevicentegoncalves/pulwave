@@ -1,0 +1,20 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.popover {
+    &__content {
+        padding: var(--popover-padding);
+    }
+
+    &__trigger {
+        display: inline-flex;
+    }
+
+    &__arrow {
+        position: absolute;
+        width: var(--popover-arrow-size);
+        height: var(--popover-arrow-size);
+        background-color: var(--popover-bg);
+        border: 1px solid var(--popover-border-color);
+        transform: rotate(45deg);
+    }
+}

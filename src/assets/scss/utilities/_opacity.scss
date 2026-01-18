@@ -1,7 +1,0 @@
-@use '../abstracts/mixins/generators/opacity' as generator;
-
-/* ========================================================================== */
-/*                           UTILITIES: OPACITY                               */
-/* ========================================================================== */
-
-@include generator.generate-opacity-utilities();

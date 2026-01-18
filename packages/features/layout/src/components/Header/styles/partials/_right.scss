@@ -1,0 +1,95 @@
+// ============================================================================ //
+// HEADER - RIGHT SIDE
+// ============================================================================ //
+// User info area for mobile header
+
+.mobile-header__right {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: 100%;
+
+    .user-info {
+        background: transparent;
+        padding: 0;
+        gap: var(--scale-2);
+    }
+
+    .user-info__avatar {
+        border: var(--border-width-2) solid var(--color-border-subtle);
+        width: var(--scale-9);
+        height: var(--scale-9);
+    }
+
+    .user-info__logout {
+        background: transparent;
+        color: var(--color-text-tertiary);
+        width: var(--scale-9);
+        height: var(--scale-9);
+
+        svg {
+            width: var(--scale-5);
+            height: var(--scale-5);
+            color: inherit;
+        }
+
+        &:hover {
+            background: var(--color-surface-hover);
+            color: var(--color-status-error);
+        }
+    }
+}
+
+.mobile-header__avatar {
+    width: var(--scale-9);
+    height: var(--scale-9);
+    border-radius: var(--border-radius-circle);
+    object-fit: cover;
+    border: var(--border-width-2) solid var(--color-border-subtle);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        transform: scale(1.05);
+        border-color: var(--color-brand-primary);
+    }
+
+    &:focus-visible {
+        outline: var(--focus-width) solid var(--color-focus);
+        outline-offset: var(--focus-offset);
+    }
+}
+
+.mobile-header__logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--scale-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    border-radius: var(--border-radius-s);
+    transition: background-color var(--duration-fast) var(--easing-standard),
+        color var(--duration-fast) var(--easing-standard);
+
+    svg {
+        width: var(--scale-5);
+        height: var(--scale-5);
+    }
+
+    &:hover {
+        background-color: var(--color-surface-hover);
+        color: var(--color-status-error);
+    }
+
+    &:active {
+        background-color: var(--color-surface-pressed);
+    }
+
+    &:focus-visible {
+        outline: var(--focus-width) solid var(--color-focus);
+        outline-offset: var(--focus-offset);
+    }
+}

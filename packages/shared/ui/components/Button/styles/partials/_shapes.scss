@@ -1,0 +1,30 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.button {
+
+    // Shapes
+    &--shape-pill {
+        border-radius: var(--border-radius-pill);
+    }
+
+    &--shape-circle {
+        border-radius: 50%;
+        padding: 0 !important; // Force override sizing padding
+        width: var(--button-height, auto) !important; // Force width to match height
+        min-width: var(--button-height, auto) !important;
+        aspect-ratio: 1;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0; // Prevent squashing in flex containers
+    }
+
+    &--shape-square {
+        border-radius: var(--border-radius-m);
+        padding: 0 !important; // Force override sizing padding
+        width: var(--button-height, auto) !important;
+        aspect-ratio: 1;
+        min-width: unset;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+}

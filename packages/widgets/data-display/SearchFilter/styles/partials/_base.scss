@@ -1,0 +1,94 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.search-and-filter {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2);
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        color: var(--color-icon-subtle);
+        cursor: pointer;
+        border-radius: var(--border-radius-m);
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            color: var(--color-icon-default);
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    &__input-wrapper {
+        flex: 1;
+        min-width: 0;
+
+        .sf-clear-btn {
+            // Replicating button reset since it's a small internal button
+            appearance: none;
+            background: transparent;
+            border: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--scale-0-5);
+            color: var(--color-icon-subtle);
+            border-radius: var(--border-radius-round);
+            cursor: pointer;
+
+            &:hover {
+                color: var(--color-icon-default);
+                background-color: var(--color-action-ghost-hover);
+            }
+        }
+    }
+
+    &__placeholder-wrapper {
+        display: grid;
+        grid-template-rows: 0fr; // Collapsed state
+        transition: grid-template-rows 0.3s ease, border 0.3s ease;
+        border-bottom: 1px solid transparent;
+
+        &--is-expanded {
+            grid-template-rows: 1fr; // Expanded state
+            border-bottom-color: var(--color-border-subtle);
+        }
+    }
+
+    &__placeholder {
+        overflow: hidden;
+        padding: 0 var(--scale-4);
+    }
+
+    // Add specific padding when expanded for visual spacing
+    &__placeholder-wrapper--is-expanded .search-and-filter__placeholder {
+        padding-top: var(--scale-4);
+        padding-bottom: var(--scale-4);
+    }
+
+    &__button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-4) var(--scale-4);
+        overflow: hidden; // For grid transition
+    }
+
+    &__active-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-4);
+        background-color: var(--color-surface-alt);
+    }
+}

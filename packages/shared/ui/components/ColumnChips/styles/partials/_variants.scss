@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.column-chips {
+    &--empty {
+        color: var(--color-text-secondary);
+        font-style: italic;
+        font-size: var(--font-size-body-s);
+    }
+}

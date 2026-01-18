@@ -1,0 +1,16 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--violin-plot {
+    &__stub {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: var(--space-4);
+        background: var(--color-surface-subtle);
+        color: var(--color-text-muted);
+        border-radius: var(--border-radius-m);
+        border: 1px dashed var(--color-border-neutral-default);
+        font-weight: var(--font-weight-medium);
+    }
+}

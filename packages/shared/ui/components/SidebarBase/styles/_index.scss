@@ -1,0 +1,10 @@
+// ============================================================================ //
+// SIDEBAR BASE STYLES
+// ============================================================================ //
+// Pure structural sidebar primitive with scoped tokens.
+// Features/Experience layers extend this with business-specific styling.
+
+@forward '../_tokens';
+@forward 'partials/base';
+@forward 'partials/elements';
+@forward 'partials/variants';

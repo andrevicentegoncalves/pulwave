@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.color-picker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--color-picker-gap);
+}
+
+// React Colorful overrides
+.react-colorful {
+    width: 100% !important;
+    height: var(--scale-37-5) !important; // 150px
+}

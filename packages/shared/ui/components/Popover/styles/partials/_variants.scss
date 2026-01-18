@@ -1,0 +1,62 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.popover {
+
+    // Modifiers (Placement) - Note: JS handles positioning, this handles arrow orientation/borders
+    &--top {
+        .popover__arrow {
+            bottom: calc(var(--popover-arrow-size) / -2);
+            border-top: none;
+            border-left: none;
+        }
+    }
+
+    &--bottom {
+        .popover__arrow {
+            top: calc(var(--popover-arrow-size) / -2);
+            border-bottom: none;
+            border-right: none;
+        }
+    }
+
+    &--left {
+        .popover__arrow {
+            right: calc(var(--popover-arrow-size) / -2);
+            border-left: none;
+            border-bottom: none;
+        }
+    }
+
+    &--right {
+        .popover__arrow {
+            left: calc(var(--popover-arrow-size) / -2);
+            border-right: none;
+            border-top: none;
+        }
+    }
+
+    // Corner placements map to main sides for arrow styling
+    &--top-start,
+    &--top-end {
+        @extend .popover--top;
+    }
+
+    &--bottom-start,
+    &--bottom-end {
+        @extend .popover--bottom;
+    }
+
+    &--left-start,
+    &--left-end {
+        @extend .popover--left;
+    }
+
+    &--right-start,
+    &--right-end {
+        @extend .popover--right;
+    }
+
+    &--with-arrow {
+        // Special styles if needed
+    }
+}

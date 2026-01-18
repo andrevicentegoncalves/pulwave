@@ -1,0 +1,9 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.file-upload {
+    --file-upload-dropzone-min-height: 150px;
+    --file-upload-preview-size: var(--scale-10); // var(--scale-10)
+    --file-upload-gap: var(--scale-3);
+    --file-upload-dropzone-padding: var(--scale-6);
+}

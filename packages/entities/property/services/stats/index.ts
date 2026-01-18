@@ -1,0 +1,3 @@
+export { propertyStatsService } from './propertyStatsService';
+
+

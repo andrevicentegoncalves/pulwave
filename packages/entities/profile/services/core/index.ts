@@ -1,0 +1,2 @@
+export { coreProfileService } from './coreProfileService';
+

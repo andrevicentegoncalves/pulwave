@@ -1,0 +1,141 @@
+{
+    "$description": "Font sizes - desktop and mobile scales",
+    "fontSize": {
+        "display": {
+            "hero": {
+                "$value": "80px",
+                "$type": "dimension",
+                "$description": "Hero headlines"
+            },
+            "marketing": {
+                "$value": "64px",
+                "$type": "dimension",
+                "$description": "Large marketing"
+            },
+            "section": {
+                "$value": "56px",
+                "$type": "dimension",
+                "$description": "Marketing headlines"
+            }
+        },
+        "title": {
+            "xl": {
+                "$value": "32px",
+                "$type": "dimension",
+                "$description": "H1"
+            },
+            "l": {
+                "$value": "24px",
+                "$type": "dimension",
+                "$description": "H2"
+            },
+            "m": {
+                "$value": "20px",
+                "$type": "dimension",
+                "$description": "H3"
+            },
+            "s": {
+                "$value": "18px",
+                "$type": "dimension",
+                "$description": "H4"
+            },
+            "xs": {
+                "$value": "16px",
+                "$type": "dimension",
+                "$description": "H5"
+            },
+            "2xs": {
+                "$value": "14px",
+                "$type": "dimension",
+                "$description": "H6"
+            }
+        },
+        "body": {
+            "xl": {
+                "$value": "20px",
+                "$type": "dimension",
+                "$description": "Lead paragraphs"
+            },
+            "l": {
+                "$value": "18px",
+                "$type": "dimension",
+                "$description": "Emphasized body"
+            },
+            "m": {
+                "$value": "16px",
+                "$type": "dimension",
+                "$description": "Default (base)"
+            },
+            "s": {
+                "$value": "14px",
+                "$type": "dimension",
+                "$description": "Secondary text"
+            }
+        },
+        "ui": {
+            "l": {
+                "$value": "16px",
+                "$type": "dimension",
+                "$description": "Large UI"
+            },
+            "m": {
+                "$value": "14px",
+                "$type": "dimension",
+                "$description": "Default UI"
+            },
+            "s": {
+                "$value": "13px",
+                "$type": "dimension",
+                "$description": "Dense UI"
+            },
+            "xs": {
+                "$value": "12px",
+                "$type": "dimension",
+                "$description": "Captions"
+            }
+        }
+    },
+    "fontSizeMobile": {
+        "$description": "Mobile sizes (0.85x on titles)",
+        "display": {
+            "hero": {
+                "$value": "56px",
+                "$type": "dimension"
+            },
+            "marketing": {
+                "$value": "48px",
+                "$type": "dimension"
+            },
+            "section": {
+                "$value": "40px",
+                "$type": "dimension"
+            }
+        },
+        "title": {
+            "xl": {
+                "$value": "28px",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "22px",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "20px",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "16px",
+                "$type": "dimension"
+            },
+            "xs": {
+                "$value": "16px",
+                "$type": "dimension"
+            },
+            "2xs": {
+                "$value": "14px",
+                "$type": "dimension"
+            }
+        }
+    }
+}

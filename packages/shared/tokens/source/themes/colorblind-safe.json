@@ -1,0 +1,213 @@
+{
+    "$description": "Colorblind-safe theme - uses colors distinguishable by people with color vision deficiencies (CVD)",
+    "$format": "dtcg",
+    "name": "colorblind-safe",
+    "config": {
+        "$description": "Colorblind accessibility configuration",
+        "accessibility": {
+            "$value": "cvd-safe",
+            "$type": "string",
+            "$description": "Color Vision Deficiency safe palette"
+        },
+        "notes": {
+            "$description": "Designed for deuteranopia (red-green), protanopia (red), and tritanopia (blue-yellow)"
+        }
+    },
+    "brand": {
+        "$description": "CVD-safe brand colors using blue-orange palette",
+        "primary": {
+            "$description": "Blue - safe for all CVD types",
+            "h": 210,
+            "s": "85%",
+            "lightness": {
+                "50": {
+                    "$value": "97%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "93%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "85%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "70%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "55%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "45%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "38%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "30%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "22%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "15%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "8%",
+                    "$type": "string"
+                }
+            }
+        },
+        "secondary": {
+            "$description": "Orange - contrasts well with blue for CVD",
+            "h": 30,
+            "s": "90%",
+            "lightness": {
+                "50": {
+                    "$value": "97%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "92%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "82%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "68%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "55%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "48%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "40%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "32%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "24%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "16%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "8%",
+                    "$type": "string"
+                }
+            }
+        }
+    },
+    "feedback": {
+        "$description": "CVD-safe feedback colors - avoid red/green confusion",
+        "success": {
+            "$description": "Blue-green (teal) instead of pure green",
+            "h": 180,
+            "s": "70%"
+        },
+        "error": {
+            "$description": "Orange-red with high saturation for visibility",
+            "h": 15,
+            "s": "90%"
+        },
+        "warning": {
+            "$description": "Pure yellow - visible to all",
+            "h": 50,
+            "s": "95%"
+        },
+        "info": {
+            "$description": "Blue - universally distinguishable",
+            "h": 210,
+            "s": "85%"
+        }
+    },
+    "semantic": {
+        "$description": "Additional visual cues beyond color",
+        "patterns": {
+            "$description": "Use patterns/icons alongside colors",
+            "success": "checkmark icon + teal",
+            "error": "x icon + orange-red",
+            "warning": "exclamation icon + yellow",
+            "info": "i icon + blue"
+        },
+        "shapes": {
+            "$description": "Distinct shapes for chart data",
+            "series1": "circle",
+            "series2": "square",
+            "series3": "triangle",
+            "series4": "diamond"
+        }
+    },
+    "overrides": {
+        "$description": "Specific color overrides for CVD safety",
+        "status": {
+            "success": {
+                "$value": "hsl(180, 70%, 35%)",
+                "$type": "color",
+                "$description": "Teal instead of green"
+            },
+            "error": {
+                "$value": "hsl(15, 90%, 45%)",
+                "$type": "color",
+                "$description": "Orange-red instead of pure red"
+            }
+        },
+        "chart": {
+            "$description": "CVD-safe chart color palette (8 colors)",
+            "palette": [
+                {
+                    "$value": "#0077BB",
+                    "$description": "Blue"
+                },
+                {
+                    "$value": "#EE7733",
+                    "$description": "Orange"
+                },
+                {
+                    "$value": "#009988",
+                    "$description": "Teal"
+                },
+                {
+                    "$value": "#CC3311",
+                    "$description": "Red-orange"
+                },
+                {
+                    "$value": "#33BBEE",
+                    "$description": "Cyan"
+                },
+                {
+                    "$value": "#EE3377",
+                    "$description": "Magenta"
+                },
+                {
+                    "$value": "#BBBBBB",
+                    "$description": "Grey"
+                },
+                {
+                    "$value": "#000000",
+                    "$description": "Black"
+                }
+            ]
+        }
+    }
+}

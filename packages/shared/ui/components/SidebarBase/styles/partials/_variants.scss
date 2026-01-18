@@ -1,0 +1,68 @@
+// ============================================================================ //
+// SIDEBAR BASE - VARIANTS
+// ============================================================================ //
+// Position, collapsed, and color variants
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-base {
+    // -------------------------------------------------------------------------
+    // Collapsed State
+    // -------------------------------------------------------------------------
+    &--collapsed {
+        width: var(--sidebar-width-collapsed);
+    }
+
+    // -------------------------------------------------------------------------
+    // Position Variants
+    // -------------------------------------------------------------------------
+    &--fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: calc(100vh - var(--sidebar-margin) * 2);
+        margin: var(--sidebar-margin) 0 var(--sidebar-margin) var(--sidebar-margin);
+        z-index: var(--sidebar-z-index);
+    }
+
+    &--static {
+        position: static;
+        height: 100%;
+        margin: 0;
+    }
+
+    &--sticky {
+        position: sticky;
+        top: var(--sidebar-margin);
+        height: calc(100vh - var(--sidebar-margin) * 2);
+        z-index: var(--sidebar-z-index);
+    }
+
+    // -------------------------------------------------------------------------
+    // Color Variants
+    // -------------------------------------------------------------------------
+    &--primary {
+        background-color: var(--color-brand-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    &--neutral {
+        background-color: var(--color-surface-elevated);
+        color: var(--color-text-primary);
+    }
+
+    &--white {
+        background-color: var(--color-white);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border-default);
+    }
+}
+
+// -------------------------------------------------------------------------
+// Accessibility: Respect user's motion preferences
+// -------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+    .sidebar-base {
+        transition: none;
+    }
+}

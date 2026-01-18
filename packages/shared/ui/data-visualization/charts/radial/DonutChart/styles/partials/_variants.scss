@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--donut-wrapper {
+    &--sm {
+        .chart--donut-wrapper__value {
+            font-size: var(--font-size-heading-s);
+        }
+
+        .chart--donut-wrapper__subtext {
+            font-size: var(--font-size-body-xs);
+        }
+    }
+
+    &--lg {
+        .chart--donut-wrapper__value {
+            font-size: var(--font-size-display-m);
+        }
+
+        .chart--donut-wrapper__subtext {
+            font-size: var(--font-size-body-m);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--box-plot {
+    &--vertical {
+        // Vertical specific overrides if any
+    }
+
+    &--horizontal {
+        // Horizontal specific overrides if any
+    }
+}

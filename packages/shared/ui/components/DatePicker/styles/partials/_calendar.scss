@@ -1,0 +1,132 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.date-picker {
+
+    // ── GRID ──
+    &__weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--scale-1);
+        margin-bottom: var(--scale-2);
+    }
+
+    &__weekday {
+        font-size: var(--font-size-caption-s);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-secondary);
+        text-align: center;
+    }
+
+    &__grid {
+        display: grid;
+        gap: var(--scale-1);
+
+        &--days {
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        &--months,
+        &--years {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--date-picker-cell-size);
+        height: var(--date-picker-cell-size);
+        padding: 0;
+        background: transparent;
+        border: none;
+        border-radius: var(--border-radius-s);
+        font-size: var(--font-size-body-s);
+        color: var(--color-text-default);
+        cursor: pointer;
+        transition: var(--transition-smooth);
+
+        &:hover:not(&--disabled):not(&--selected):not(:disabled) {
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        &--empty {
+            cursor: default;
+        }
+
+        &--today {
+            font-weight: var(--font-weight-bold);
+            color: var(--color-brand-primary);
+        }
+
+        &--selected {
+            background-color: var(--color-brand-primary);
+            color: var(--color-text-inverse-default);
+            font-weight: var(--font-weight-m);
+
+            &:hover {
+                background-color: var(--color-brand-primary); // Stick to selected color, maybe darker
+                filter: brightness(0.9);
+            }
+        }
+
+        &--disabled,
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+
+    &__month,
+    &__year {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        background: transparent;
+        border: none;
+        border-radius: var(--border-radius-s);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-m);
+        color: var(--color-text-default);
+        cursor: pointer;
+        transition: var(--transition-smooth);
+
+        &:hover:not(&--selected) {
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        &--selected {
+            background-color: var(--color-brand-primary);
+            color: var(--color-text-inverse-default);
+        }
+    }
+
+    &__year--outside {
+        color: var(--color-text-secondary);
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--scale-3);
+        padding-top: var(--scale-3);
+        border-top: var(--border-width-1) solid var(--color-border-default);
+    }
+
+    &__today {
+        font-size: var(--font-size-label-s);
+        color: var(--color-brand-primary);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: var(--scale-1) var(--scale-2);
+        border-radius: var(--border-radius-s);
+
+        &:hover {
+            background-color: var(--color-brand-primary-subtle);
+        }
+    }
+}

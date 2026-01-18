@@ -1,0 +1,199 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.icon-library-page {
+
+    // Title row - badge and description side by side
+    &__title-row {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-6);
+        margin-bottom: var(--scale-8);
+        flex-wrap: wrap;
+    }
+
+    // Controls row - Appearance side by side with bottom margin
+    &__controls-row {
+        display: flex;
+        flex-direction: row;
+        gap: var(--scale-6);
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: var(--scale-8);
+
+        @include bp-up(m) {
+            flex-wrap: nowrap;
+        }
+    }
+
+    // Filters row - Search (flex-1) and Select side by side
+    &__filters-row {
+        display: flex;
+        flex-direction: row;
+        gap: var(--scale-6);
+        align-items: center;
+        width: 100%;
+        margin-bottom: var(--scale-6);
+        position: relative;
+        z-index: 10; // Ensure Select dropdown appears above other content
+    }
+
+    &__search-wrapper {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+    }
+
+    // Search input - full width within wrapper, 2xl border radius
+    &__search-input {
+        width: 100%;
+
+        // Target the actual input inside SearchInput component
+        .search-input__input,
+        input {
+            border-radius: var(--border-radius-2xl);
+        }
+    }
+
+    &__category-select {
+        width: var(--scale-60);
+        flex-shrink: 0;
+
+        // Ensure dropdown appears above icon grid
+        .select__dropdown,
+        .select__options,
+        .select__listbox {
+            z-index: 100;
+        }
+    }
+
+    // Icon grid with proper gaps and alignment
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--scale-4);
+        margin-top: var(--scale-8);
+    }
+
+    // Icon button - outlined with brand primary color
+    // Using higher specificity instead of !important
+    &__icon-button.button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        background: transparent;
+        border-color: var(--color-brand-primary);
+        color: var(--color-brand-primary);
+        transition: background-color var(--duration-fast) var(--easing-standard),
+            border-color var(--duration-fast) var(--easing-standard);
+
+        // Ensure perfect circles
+        aspect-ratio: 1;
+        border-radius: 50%;
+        padding: 0;
+
+        svg {
+            display: block;
+            color: inherit;
+        }
+
+        &:hover {
+            background-color: var(--color-brand-primary-subtle);
+        }
+    }
+
+    // Stroke width modifiers
+    &__icon-button.icon-lib-stroke-1 svg {
+        stroke-width: 1px;
+    }
+
+    &__icon-button.icon-lib-stroke-1-5 svg {
+        stroke-width: 1.5px;
+    }
+
+    &__icon-button.icon-lib-stroke-2 svg {
+        stroke-width: 2px;
+    }
+
+    &__icon-button.icon-lib-stroke-2-5 svg {
+        stroke-width: 2.5px;
+    }
+
+    // Appearance card
+    &__appearance-card {
+        flex: 1;
+        min-width: var(--scale-80);
+        max-width: var(--scale-120);
+        background: var(--color-surface-base);
+        border: var(--border-width-s) solid var(--color-surface-border);
+    }
+
+    &__appearance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--scale-6);
+
+        // Reset button - ensure perfect circle
+        .button--shape-circle {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            padding: 0;
+        }
+    }
+
+    &__appearance-stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-8);
+    }
+
+    // Color preset grid
+    &__color-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-3);
+        margin-top: var(--scale-3);
+    }
+
+    // Color dot button - using higher specificity
+    &__color-dot.button {
+        // Explicit size for color dots
+        width: var(--scale-6);
+        height: var(--scale-6);
+        min-width: var(--scale-6);
+        min-height: var(--scale-6);
+        padding: 0;
+        border: none; // Remove border for filled dots
+
+        // Active state (ring effect)
+        &.button--active {
+            box-shadow: 0 0 0 2px var(--color-surface-base), 0 0 0 4px var(--color-brand-primary);
+            z-index: 1;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+    }
+
+    // Size and stroke button groups
+    &__size-buttons,
+    &__stroke-buttons {
+        display: flex;
+        gap: var(--scale-3);
+        flex-wrap: wrap;
+        margin-top: var(--scale-3);
+    }
+
+    // Inactive control buttons - using higher specificity
+    &__control-button-inactive.button {
+        background-color: var(--color-surface-neutral-subtle);
+
+        &:hover {
+            background-color: var(--color-surface-neutral);
+        }
+    }
+}

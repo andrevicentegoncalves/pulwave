@@ -1,0 +1,150 @@
+// ==========================================================================
+// Foundation Documentation - Base Styles
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.foundation-doc {
+    max-width: 100%;
+    padding: var(--scale-6);
+
+    &__header {
+        margin-bottom: var(--scale-8);
+        padding-bottom: var(--scale-6);
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    &__title {
+        font-size: var(--font-size-headline-l);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0 0 var(--scale-3) 0;
+    }
+
+    &__description {
+        font-size: var(--font-size-body-l);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        margin: 0;
+    }
+
+    &__toc {
+        background-color: var(--color-surface-subtle);
+        border-radius: var(--border-radius-2xl);
+        padding: var(--scale-4);
+        margin-bottom: var(--scale-8);
+    }
+
+    &__toc-title {
+        font-size: var(--font-size-title-s);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0 0 var(--scale-3) 0;
+    }
+
+    &__toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: var(--scale-1) 0;
+        }
+
+        a {
+            font-size: var(--font-size-body-m);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-brand-primary);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__section {
+        margin-bottom: var(--scale-10);
+        scroll-margin-top: var(--scale-6);
+    }
+
+    &__section-title {
+        font-size: var(--font-size-title-l);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0 0 var(--scale-4) 0;
+        padding-bottom: var(--scale-2);
+        border-bottom: var(--scale-0-5) solid var(--color-brand-primary);
+    }
+
+    &__section-content {
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+    }
+
+    &__subsection {
+        margin-top: var(--scale-6);
+        scroll-margin-top: var(--scale-6);
+    }
+
+    &__subsection-title {
+        font-size: var(--font-size-title-m);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0 0 var(--scale-3) 0;
+    }
+
+    &__code {
+        background-color: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+        padding: var(--scale-4);
+        overflow-x: auto;
+        margin: var(--scale-4) 0;
+
+        code {
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-code);
+            line-height: 1.5;
+        }
+    }
+
+    &__text {
+        p {
+            margin: var(--scale-3) 0;
+        }
+
+        code {
+            background-color: var(--color-surface-subtle);
+            padding: var(--scale-0-5) var(--scale-2);
+            border-radius: var(--border-radius-s);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-code);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--scale-4) 0;
+
+            td,
+            th {
+                padding: var(--scale-2) var(--scale-3);
+                border: 1px solid var(--color-border-subtle);
+                text-align: left;
+            }
+
+            tr:first-child td {
+                background-color: var(--color-surface-subtle);
+                font-weight: var(--font-weight-m);
+            }
+        }
+    }
+
+    &__demo {
+        margin: var(--scale-6) 0;
+        padding: var(--scale-6);
+    }
+}
+
+

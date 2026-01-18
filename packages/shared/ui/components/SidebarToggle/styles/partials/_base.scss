@@ -1,0 +1,129 @@
+// ============================================================================ //
+// SIDEBAR TOGGLE
+// ============================================================================ //
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: var(--scale-3);
+    margin-bottom: 0;
+
+    // Fix for animation overflow
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+
+    // Smooth transition for position changes synced with sidebar collapse
+    transition: justify-content var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+                padding var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate));
+
+    // Default (Primary) colors
+    .toggle-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--color-text-on-primary); // Default to white (Primary sidebar)
+        padding: var(--scale-2);
+        transition:
+            background-color var(--duration-fast) var(--easing-standard),
+            color var(--duration-fast) var(--easing-standard),
+            transform var(--duration-fast) var(--easing-spring);
+        outline: none;
+        border-radius: var(--border-radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // Fixed dimensions
+        width: var(--scale-10);
+        height: var(--scale-10);
+        min-width: var(--scale-10);
+        min-height: var(--scale-10);
+        flex-shrink: 0;
+
+        // SVG icon - smooth spring rotation synced with sidebar width transition
+        svg {
+            width: var(--scale-5);
+            height: var(--scale-5);
+            flex-shrink: 0;
+            transform: rotate(0deg);
+            transition: var(--sidebar-icon-transition, transform 320ms var(--easing-spring));
+            will-change: transform; // GPU acceleration for smooth rotation
+        }
+
+        // Collapsed state - rotate icon to point right (expand direction)
+        &--collapsed svg {
+            transform: rotate(180deg);
+        }
+
+        &:hover {
+            background-color: var(--color-brand-primary-hover);
+            transform: scale(1.08);
+        }
+
+        &:active {
+            background-color: var(--color-brand-primary-active);
+            transform: scale(0.95);
+        }
+
+        &:focus-visible {
+            outline: var(--scale-0-5) solid var(--color-text-on-primary);
+            outline-offset: var(--scale-0-5);
+        }
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        .toggle-btn {
+            transition: none;
+
+            svg {
+                transition: none;
+                will-change: auto; // Release GPU resources
+            }
+        }
+    }
+
+    // Neutral Variant
+    &--neutral {
+        .toggle-btn {
+            color: var(--color-text-primary);
+
+            &:hover {
+                background-color: var(--color-surface-hover);
+            }
+
+            &:active {
+                background-color: var(--color-surface-pressed);
+            }
+
+            &:focus-visible {
+                outline-color: var(--color-brand-primary);
+            }
+        }
+    }
+
+    // White Variant - for use on surface-default backgrounds
+    &--white {
+        .toggle-btn {
+            color: var(--color-text-primary);
+
+            &:hover {
+                background-color: var(--color-surface-hover);
+            }
+
+            &:active {
+                background-color: var(--color-surface-pressed);
+            }
+
+            &:focus-visible {
+                outline-color: var(--color-brand-primary);
+            }
+        }
+    }
+}

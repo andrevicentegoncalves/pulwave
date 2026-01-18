@@ -1,0 +1,17 @@
+/**
+ * GanttChart Base Styles
+ */
+
+.chart-gantt {
+    width: 100%;
+
+    &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.gantt-header {
+    pointer-events: none;
+}

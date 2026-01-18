@@ -1,0 +1,14 @@
+@use '../transition' as t;
+
+// Effects Helpers
+@mixin shadow-s {
+    box-shadow: var(--shadow-s);
+}
+
+@mixin shadow-m {
+    box-shadow: var(--shadow-m);
+}
+
+@mixin transition($property: all, $duration: normal, $timing: standard) {
+    @include t.transition($property, $duration, $timing);
+}

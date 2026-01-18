@@ -1,0 +1,377 @@
+{
+    "$description": "Semantic typography presets - composite tokens for text styling",
+    "text": {
+        "display": {
+            "$description": "Marketing/hero section text",
+            "hero": {
+                "size": {
+                    "$value": "{fontSize.display.hero}",
+                    "$type": "dimension"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.display.hero}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tighter}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.bold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "marketing": {
+                "size": {
+                    "$value": "{fontSize.display.marketing}",
+                    "$type": "dimension"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.display.marketing}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tighter}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.bold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "section": {
+                "size": {
+                    "$value": "{fontSize.display.section}",
+                    "$type": "dimension"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.display.section}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tight}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.bold}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "title": {
+            "$description": "Product UI headings (H1-H6)",
+            "xl": {
+                "size": {
+                    "$value": "{fontSize.title.xl}",
+                    "$type": "dimension",
+                    "$description": "H1"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.title.xl}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tight}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.bold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "l": {
+                "size": {
+                    "$value": "{fontSize.title.l}",
+                    "$type": "dimension",
+                    "$description": "H2"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.title.l}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tight}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.bold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "m": {
+                "size": {
+                    "$value": "{fontSize.title.m}",
+                    "$type": "dimension",
+                    "$description": "H3"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.title.m}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.tight}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.semiBold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "s": {
+                "size": {
+                    "$value": "{fontSize.title.s}",
+                    "$type": "dimension",
+                    "$description": "H4"
+                },
+                "mobileSize": {
+                    "$value": "{fontSizeMobile.title.s}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.normal}",
+                    "$type": "dimension"
+                },
+                "weight": {
+                    "$value": "{fontWeight.semiBold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "xs": {
+                "size": {
+                    "$value": "{fontSize.title.xs}",
+                    "$type": "dimension",
+                    "$description": "H5"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.semiBold}",
+                    "$type": "fontWeight"
+                }
+            },
+            "2xs": {
+                "size": {
+                    "$value": "{fontSize.title.2xs}",
+                    "$type": "dimension",
+                    "$description": "H6"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.snug}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.medium}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "body": {
+            "$description": "Body text",
+            "xl": {
+                "size": {
+                    "$value": "{fontSize.body.xl}",
+                    "$type": "dimension",
+                    "$description": "Lead paragraphs"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.normal}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "l": {
+                "size": {
+                    "$value": "{fontSize.body.l}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.normal}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "m": {
+                "size": {
+                    "$value": "{fontSize.body.m}",
+                    "$type": "dimension",
+                    "$description": "Default body"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.base}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "s": {
+                "size": {
+                    "$value": "{fontSize.body.s}",
+                    "$type": "dimension",
+                    "$description": "Secondary text"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.base}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "ui": {
+            "$description": "UI text (buttons, labels, inputs)",
+            "l": {
+                "size": {
+                    "$value": "{fontSize.ui.l}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.medium}",
+                    "$type": "fontWeight"
+                }
+            },
+            "m": {
+                "size": {
+                    "$value": "{fontSize.ui.m}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.medium}",
+                    "$type": "fontWeight"
+                }
+            },
+            "s": {
+                "size": {
+                    "$value": "{fontSize.ui.s}",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.medium}",
+                    "$type": "fontWeight"
+                }
+            },
+            "xs": {
+                "size": {
+                    "$value": "{fontSize.ui.xs}",
+                    "$type": "dimension",
+                    "$description": "Captions"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.normal}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "caption": {
+            "$description": "Captions and helper text",
+            "m": {
+                "size": {
+                    "$value": "14px",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.normal}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            },
+            "s": {
+                "size": {
+                    "$value": "13px",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.base}",
+                    "$type": "number"
+                },
+                "weight": {
+                    "$value": "{fontWeight.regular}",
+                    "$type": "fontWeight"
+                }
+            }
+        },
+        "overline": {
+            "$description": "Section labels, category headers",
+            "m": {
+                "size": {
+                    "$value": "12px",
+                    "$type": "dimension"
+                },
+                "lineHeight": {
+                    "$value": "{lineHeight.tight}",
+                    "$type": "number"
+                },
+                "spacing": {
+                    "$value": "{letterSpacing.widest}",
+                    "$type": "dimension"
+                },
+                "textTransform": {
+                    "$value": "{textTransform.uppercase}",
+                    "$type": "string"
+                },
+                "weight": {
+                    "$value": "{fontWeight.semiBold}",
+                    "$type": "fontWeight"
+                }
+            }
+        }
+    }
+}

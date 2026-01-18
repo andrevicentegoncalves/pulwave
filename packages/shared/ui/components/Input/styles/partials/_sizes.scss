@@ -1,0 +1,56 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.input {
+    &__container {
+
+        // Extra Small
+        &--xs {
+            height: var(--scale-7);
+            padding: 0 var(--scale-2);
+
+            .input__field {
+                font-size: var(--font-size-body-xs);
+            }
+        }
+
+        // Small
+        &--s {
+            height: var(--scale-8);
+            padding: 0 var(--scale-3);
+
+            .input__field {
+                font-size: var(--font-size-body-s);
+            }
+        }
+
+        // Medium (default)
+        &--m {
+            height: var(--scale-10);
+            padding: 0 var(--scale-4);
+
+            .input__field {
+                font-size: var(--font-size-body-m);
+            }
+        }
+
+        // Large
+        &--l {
+            height: var(--scale-12);
+            padding: 0 var(--scale-5);
+
+            .input__field {
+                font-size: var(--font-size-body-l);
+            }
+        }
+
+        // Extra Large
+        &--xl {
+            height: var(--scale-14);
+            padding: 0 var(--scale-6);
+
+            .input__field {
+                font-size: var(--font-size-body-xl);
+            }
+        }
+    }
+}

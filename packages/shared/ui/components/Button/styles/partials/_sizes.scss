@@ -1,0 +1,76 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.button {
+    &--xs {
+        --button-height: var(--scale-6);
+        height: var(--button-height);
+        padding: 0 var(--scale-2);
+        font-size: var(--font-size-ui-xs);
+        gap: var(--scale-1);
+
+        .button__icon svg {
+            width: var(--scale-3);
+            height: var(--scale-3);
+        }
+    }
+
+    &--s {
+        --button-height: var(--scale-8);
+        height: var(--button-height);
+        padding: 0 var(--scale-3);
+        font-size: var(--font-size-ui-s);
+
+        .button__icon svg {
+            width: var(--scale-4);
+            height: var(--scale-4);
+        }
+    }
+
+    &--m {
+        --button-height: var(--scale-10);
+        height: var(--button-height);
+        padding: 0 var(--scale-4);
+        font-size: var(--font-size-ui-m);
+
+        .button__icon svg {
+            width: var(--scale-5);
+            height: var(--scale-5);
+        }
+    }
+
+    &--l {
+        --button-height: var(--scale-12);
+        height: var(--button-height);
+        padding: 0 var(--scale-6);
+        font-size: var(--font-size-ui-l);
+
+        .button__icon svg {
+            width: var(--scale-6);
+            height: var(--scale-6);
+        }
+    }
+
+    &--xl {
+        --button-height: var(--scale-14);
+        height: var(--button-height);
+        padding: 0 var(--scale-8);
+        font-size: var(--font-size-ui-xl);
+
+        .button__icon svg {
+            width: var(--scale-7);
+            height: var(--scale-7);
+        }
+    }
+
+    &--2xl {
+        --button-height: var(--scale-16);
+        height: var(--button-height);
+        padding: 0 var(--scale-10);
+        font-size: var(--font-size-ui-xl);
+
+        .button__icon svg {
+            width: var(--scale-8);
+            height: var(--scale-8);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--chord {
+    position: relative;
+    width: 100%;
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+}

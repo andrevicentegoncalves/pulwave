@@ -1,0 +1,2 @@
+export { contentService } from './contentService';
+

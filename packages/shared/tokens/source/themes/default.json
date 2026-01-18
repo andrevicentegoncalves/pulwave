@@ -1,0 +1,305 @@
+{
+    "$description": "Pulwave Design System - Default Theme (Real Estate)",
+    "$format": "dtcg",
+    "theme": {
+        "name": "default",
+        "primary": {
+            "$description": "Emerald green",
+            "h": {
+                "$value": "160",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "94%",
+                "$type": "string"
+            },
+            "lightness": {
+                "50": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "90%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "80%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "65%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "45%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "30%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "27%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "22%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "16%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "10%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "5%",
+                    "$type": "string"
+                }
+            }
+        },
+        "secondary": {
+            "$description": "Mustard yellow",
+            "h": {
+                "$value": "45",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "88%",
+                "$type": "string"
+            },
+            "lightness": {
+                "50": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "90%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "82%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "72%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "62%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "50%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "42%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "38%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "30%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "20%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "10%",
+                    "$type": "string"
+                }
+            }
+        },
+        "tertiary": {
+            "$description": "Coral/Salmon",
+            "h": {
+                "$value": "12",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "88%",
+                "$type": "string"
+            },
+            "lightness": {
+                "50": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "90%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "80%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "68%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "55%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "50%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "45%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "38%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "28%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "18%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "8%",
+                    "$type": "string"
+                }
+            }
+        },
+        "neutral": {
+            "$description": "Warm neutral with slight beige undertone",
+            "h": {
+                "$value": "30",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "5%",
+                "$type": "string"
+            },
+            "lightness": {
+                "0": {
+                    "$value": "100%",
+                    "$type": "string"
+                },
+                "50": {
+                    "$value": "99%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "97%",
+                    "$type": "string"
+                },
+                "150": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "92%",
+                    "$type": "string"
+                },
+                "250": {
+                    "$value": "89%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "84%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "72%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "54%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "40%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "28%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "18%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "10%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "4%",
+                    "$type": "string"
+                }
+            }
+        },
+        "success": {
+            "h": {
+                "$value": "142",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "76%",
+                "$type": "string"
+            }
+        },
+        "warning": {
+            "h": {
+                "$value": "45",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "100%",
+                "$type": "string"
+            }
+        },
+        "error": {
+            "h": {
+                "$value": "0",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "84%",
+                "$type": "string"
+            }
+        },
+        "info": {
+            "h": {
+                "$value": "202",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "100%",
+                "$type": "string"
+            }
+        }
+    },
+    "fontFamily": {
+        "display": {
+            "$value": "{fontFamily.montserrat}",
+            "$type": "fontFamily"
+        },
+        "heading": {
+            "$value": "{fontFamily.montserrat}",
+            "$type": "fontFamily"
+        },
+        "base": {
+            "$value": "{fontFamily.roboto}",
+            "$type": "fontFamily"
+        },
+        "default": {
+            "$value": "{fontFamily.roboto}",
+            "$type": "fontFamily"
+        }
+    }
+}

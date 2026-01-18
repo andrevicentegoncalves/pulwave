@@ -1,0 +1,20 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.tag {
+
+    // SIZES
+    &--s {
+        padding: var(--scale-0-5) var(--scale-1-5);
+        font-size: var(--font-size-label-xs);
+    }
+
+    &--m {
+        padding: var(--scale-1) var(--scale-2);
+        font-size: var(--font-size-label-s);
+    }
+
+    &--l {
+        padding: var(--scale-1-5) var(--scale-3);
+        font-size: var(--font-size-label-m);
+    }
+}

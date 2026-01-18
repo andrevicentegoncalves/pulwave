@@ -1,0 +1,12 @@
+/* ========================================================================== */
+/*                           STYLES2 ENTRY POINT                              */
+/* ========================================================================== */
+
+// ABSTRACTS (Variables, Mixins, Functions)
+@use 'abstracts' as *;
+
+// BASE (Reset, Typography, Global)
+@use 'base';
+
+// UTILITIES (Functional Classes)
+@use 'utilities';

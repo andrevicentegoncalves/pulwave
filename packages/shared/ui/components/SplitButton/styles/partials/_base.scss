@@ -1,0 +1,31 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.split-button {
+    display: inline-flex;
+    align-items: stretch;
+    white-space: nowrap;
+
+    &__main {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-right: 0;
+        border-right: 1px solid var(--split-button-divider-color-light); // Default for filled/primary
+    }
+
+    &__trigger {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding-left: var(--split-button-padding-x);
+        padding-right: var(--split-button-padding-x);
+        min-width: auto;
+    }
+
+    // Variant-specific dividers
+    &--secondary &__main {
+        border-right: 1px solid var(--color-border-subtle);
+    }
+
+    &--outline &__main {
+        border-right: 1px solid transparent; // Or subtle border
+    }
+}

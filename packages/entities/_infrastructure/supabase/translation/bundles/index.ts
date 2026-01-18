@@ -1,0 +1,2 @@
+export { SupabaseBundlesProvider } from './SupabaseBundlesProvider';
+

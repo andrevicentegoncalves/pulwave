@@ -1,0 +1,36 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--venn {
+    &__set-group {
+        cursor: pointer;
+    }
+
+    &__circle {
+        stroke-width: 2px;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__set-label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-semibold);
+        text-anchor: middle;
+    }
+
+    &__value-label {
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-medium);
+        fill: var(--color-text-primary);
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+    }
+
+    &__intersection-label {
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-semibold);
+        fill: var(--color-text-primary);
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+    }
+}

@@ -1,10 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx supabase:*)",
-      "Bash(find:*)",
-      "Bash(ls:*)",
-      "Bash(cat:*)"
+      "Bash",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "Skill",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Read(.env.local)",
+      "Write(.env.local)",
+      "Edit(.env.local)"
     ]
   }
 }

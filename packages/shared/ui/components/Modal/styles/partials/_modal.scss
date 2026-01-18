@@ -1,0 +1,157 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-overlay-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-overlay-modal);
+    backdrop-filter: blur(var(--scale-0-5));
+    animation: fadeIn var(--duration-fast) var(--easing-standard);
+    // Safe-area support for mobile devices
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+
+.modal {
+    overscroll-behavior: contain;
+    background-color: var(--color-surface-container);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    margin: var(--scale-4);
+    position: relative;
+    animation: slideUpFade var(--duration-normal) var(--easing-standard);
+    outline: none;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 var(--scale-1) var(--color-brand-primary-subtle);
+    }
+
+    &__header {
+        padding: var(--scale-4) var(--scale-5);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--color-outline-variant);
+        flex-shrink: 0;
+    }
+
+    &__title {
+        font-family: var(--font-family-base);
+        font-weight: var(--font-weight-semi-bold);
+        font-size: var(--font-size-title-m);
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    &__close {
+        background: transparent;
+        border: none;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        padding: var(--scale-1);
+        border-radius: var(--border-radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--duration-fast);
+
+        &:hover {
+            background-color: var(--color-surface-container-high);
+            color: var(--color-text-primary);
+        }
+
+        &:focus-visible {
+            outline: var(--scale-0-5) solid var(--color-brand-primary);
+        }
+    }
+
+    &__body {
+        padding: var(--scale-5);
+        color: var(--color-text-secondary);
+        overflow-y: auto;
+
+        &--scrollable {
+            flex: 1;
+        }
+    }
+
+    &__footer {
+        padding: var(--scale-4) var(--scale-5);
+        border-top: 1px solid var(--color-outline-variant);
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--scale-3);
+        background-color: var(--color-surface-container-low);
+        border-bottom-left-radius: var(--border-radius-xl);
+        border-bottom-right-radius: var(--border-radius-xl);
+        flex-shrink: 0;
+    }
+
+    // Sizes
+    &--s {
+        max-width: 400px;
+    }
+
+    &--m {
+        max-width: 600px;
+    }
+
+    &--l {
+        max-width: 800px;
+    }
+
+    &--xl {
+        max-width: 1024px;
+    }
+
+    &--full {
+        max-width: 95vw;
+        height: 95vh;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(var(--scale-5)) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .modal-backdrop {
+        animation: none;
+    }
+
+    .modal {
+        animation: none;
+    }
+
+    .modal__close {
+        transition: none;
+    }
+}

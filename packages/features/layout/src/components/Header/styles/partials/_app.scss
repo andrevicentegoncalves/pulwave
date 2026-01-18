@@ -1,0 +1,55 @@
+// ============================================================================ //
+// APP HEADER - DESKTOP/UNIVERSAL
+// ============================================================================ //
+// Flexible header component with title, theme toggle, and actions
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // Don't use width: 100% - let flex handle it
+    flex-shrink: 0;
+    padding: 0 var(--scale-4);
+    background-color: var(--color-surface-default);
+    border-bottom: var(--border-width-2) solid var(--color-border-subtle);
+    box-sizing: border-box;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+    }
+
+    &__menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: var(--border-radius-m);
+        color: var(--color-text-primary);
+        transition: background-color var(--duration-fast) var(--easing-standard);
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+        }
+    }
+
+    &__title {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+}

@@ -1,0 +1,129 @@
+// ==========================================================================
+// TAG VARIANTS - Color × Style combinations
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// NEUTRAL
+// --------------------------------------------------------------------------
+.tag--neutral {
+    &.tag--solid {
+        background-color: var(--color-surface-moderate);
+        color: var(--color-text-primary);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-border-default);
+        color: var(--color-text-primary);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-surface-subtle);
+        color: var(--color-text-secondary);
+    }
+}
+
+// --------------------------------------------------------------------------
+// PRIMARY
+// --------------------------------------------------------------------------
+.tag--primary {
+    &.tag--solid {
+        background-color: var(--color-brand-primary);
+        color: var(--color-on-primary);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-brand-primary);
+        color: var(--color-brand-primary);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-primary-subtle);
+        color: var(--color-primary-800);
+    }
+}
+
+// --------------------------------------------------------------------------
+// SUCCESS
+// --------------------------------------------------------------------------
+.tag--success {
+    &.tag--solid {
+        background-color: var(--color-status-success);
+        color: var(--color-on-feedback-success);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-status-success);
+        color: var(--color-feedback-success-700);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-status-success-subtle);
+        color: var(--color-feedback-success-700);
+    }
+}
+
+// --------------------------------------------------------------------------
+// WARNING
+// --------------------------------------------------------------------------
+.tag--warning {
+    &.tag--solid {
+        background-color: var(--color-status-warning);
+        color: var(--color-on-feedback-warning);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-status-warning);
+        color: var(--color-feedback-warning-700);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-status-warning-subtle);
+        color: var(--color-feedback-warning-700);
+    }
+}
+
+// --------------------------------------------------------------------------
+// ERROR
+// --------------------------------------------------------------------------
+.tag--error {
+    &.tag--solid {
+        background-color: var(--color-status-error);
+        color: var(--color-on-feedback-error);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-status-error);
+        color: var(--color-feedback-error-700);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-status-error-subtle);
+        color: var(--color-feedback-error-700);
+    }
+}
+
+// --------------------------------------------------------------------------
+// INFO
+// --------------------------------------------------------------------------
+.tag--info {
+    &.tag--solid {
+        background-color: var(--color-status-info);
+        color: var(--color-on-feedback-info);
+    }
+
+    &.tag--outline {
+        background-color: transparent;
+        border-color: var(--color-status-info);
+        color: var(--color-feedback-info-700);
+    }
+
+    &.tag--subtle {
+        background-color: var(--color-status-info-subtle);
+        color: var(--color-feedback-info-700);
+    }
+}

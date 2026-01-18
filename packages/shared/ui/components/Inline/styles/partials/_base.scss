@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

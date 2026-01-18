@@ -1,0 +1,36 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+// ==========================================================================
+// TAG BASE STYLES
+// ==========================================================================
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scale-1);
+    padding: var(--scale-1) var(--scale-2);
+    border-radius: var(--border-radius-s);
+    font-size: var(--font-size-label-s);
+    font-weight: var(--font-weight-m);
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+    cursor: default;
+    border: var(--border-width-xs) solid transparent;
+
+    // States
+    &--clickable {
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(0.95);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}

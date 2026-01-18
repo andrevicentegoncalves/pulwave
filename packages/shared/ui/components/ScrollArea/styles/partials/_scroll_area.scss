@@ -1,0 +1,47 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.scroll-area {
+    width: 100%;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-border-subtle);
+        border-radius: var(--border-radius-pill);
+
+        &:hover {
+            background-color: var(--color-border-default);
+        }
+    }
+
+    &--vertical {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &--horizontal {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    &--both {
+        overflow: auto;
+    }
+
+    &--hide-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

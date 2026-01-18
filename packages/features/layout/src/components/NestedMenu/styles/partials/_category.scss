@@ -1,0 +1,47 @@
+// ============================================================================ //
+// NESTED MENU - CATEGORY (Level 2)
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.nested-menu {
+    &__categories {
+        display: flex;
+        flex-direction: column;
+        padding-left: var(--scale-4);
+        margin-top: var(--scale-1);
+    }
+
+    &__category {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__category-header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-3);
+        background: transparent;
+        border: none;
+        border-radius: var(--border-radius-2xl);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-m);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--easing-standard),
+            color var(--duration-fast) var(--easing-standard);
+        text-align: left;
+        width: 100%;
+
+        &:hover {
+            background: var(--color-neutral-150);
+            color: var(--color-text-primary);
+        }
+
+        &--active {
+            color: var(--color-brand-primary);
+            background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+        }
+    }
+}

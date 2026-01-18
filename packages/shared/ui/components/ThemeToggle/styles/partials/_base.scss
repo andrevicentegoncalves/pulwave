@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.theme-toggle {
+    @include interactive.button-reset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--theme-toggle-padding);
+    width: var(--theme-toggle-size);
+    height: var(--theme-toggle-size);
+    border-radius: var(--border-radius-round);
+    color: var(--color-icon-default);
+    transition: background-color var(--duration-fast) ease,
+        color var(--duration-fast) ease;
+
+    &:hover {
+        background-color: var(--color-action-ghost-hover);
+        color: var(--color-icon-active);
+    }
+
+    @include interactive.focus-ring;
+}

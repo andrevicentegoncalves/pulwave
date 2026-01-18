@@ -1,0 +1,72 @@
+// ==========================================================================
+// Keyboard Shortcuts Component
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.keyboard-shortcuts {
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-bottom: var(--scale-4);
+
+        h4 {
+            font-size: var(--font-size-caption-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-semi-bold);
+            margin: 0;
+            color: var(--color-text-primary);
+        }
+
+        svg {
+            color: var(--color-brand-primary);
+        }
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: var(--border-radius-m);
+        overflow: hidden;
+        border: var(--border-width-2xs) solid var(--color-border-subtle);
+
+        th,
+        td {
+            padding: var(--scale-3);
+            text-align: left;
+        }
+
+        th {
+            font-size: var(--font-size-caption-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-semi-bold);
+            background: var(--color-surface-subtle);
+            color: var(--color-text-primary);
+            border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
+        }
+
+        tr:not(:last-child) td {
+            border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
+        }
+    }
+
+    &__key {
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-caption-s);
+        padding: var(--scale-1) var(--scale-2);
+        background: var(--color-surface-strong);
+        border: var(--border-width-2xs) solid var(--color-border-default);
+        border-radius: var(--border-radius-s);
+        box-shadow: 0 1px var(--scale-0-5) color-mix(in srgb, var(--color-black), transparent 90%);
+    }
+
+    &__action {
+        font-size: var(--font-size-body-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+    }
+}
+
+

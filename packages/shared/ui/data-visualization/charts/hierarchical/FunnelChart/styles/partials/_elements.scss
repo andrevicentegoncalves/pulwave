@@ -1,0 +1,15 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--funnel {
+    &__stage {
+        // Styles for Recharts Cell/Funnel Trapezoid
+    }
+
+    &__label {
+        font-size: var(--font-size-body-xs);
+        font-family: var(--font-family-primary);
+        fill: var(--color-text-primary);
+        stroke: none;
+        pointer-events: none;
+    }
+}

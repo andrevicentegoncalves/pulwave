@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use 'abstracts/mixins/variants' as *;
+@use 'abstracts/mixins/breakpoints' as *;
+
+// Mock breakpoints if not loaded
+$breakpoints: (
+    's': 640px,
+    'm': 768px) !default;
+
+@include with-responsive {
+    .#{$utility-prefix}test-class {
+        color: red;
+    }
+}

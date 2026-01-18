@@ -1,0 +1,67 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--sunburst {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+        width: 100%;
+    }
+
+    &__layout {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-6);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__svg {
+        display: block;
+    }
+
+    &__segment {
+        cursor: pointer;
+        stroke: var(--color-background-primary);
+        stroke-width: 1.5px;
+        fill-opacity: 0.85;
+        transition: fill-opacity 0.2s ease;
+
+        &--hovered {
+            fill-opacity: 1;
+        }
+    }
+
+    &__label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        fill: var(--color-text-inverse);
+        pointer-events: none;
+    }
+
+    &__center-circle {
+        fill: var(--color-surface-default);
+    }
+
+    &__center-label-top {
+        font-size: var(--font-size-body-s);
+        fill: var(--color-text-secondary);
+    }
+
+    &__center-label-bottom {
+        font-size: var(--font-size-heading-s);
+        font-weight: var(--font-weight-bold);
+        fill: var(--color-text-primary);
+    }
+
+    &__hover-info {
+        text-align: center;
+        font-size: var(--font-size-body-s);
+        min-height: 1.5em;
+
+        strong {
+            font-weight: var(--font-weight-bold);
+        }
+    }
+}

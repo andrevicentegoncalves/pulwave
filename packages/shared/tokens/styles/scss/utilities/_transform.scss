@@ -1,0 +1,364 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: TRANSFORMS                             */
+/* ========================================================================== */
+
+// SCALE LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'transform-scale-')==1 {
+        $suffix: string.slice($key, 17);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}scale-#{$suffix}#{$utility-suffix} {
+                    transform: scale(var(--#{$key}));
+                }
+
+                .#{$utility-prefix}scale-x-#{$suffix}#{$utility-suffix} {
+                    transform: scaleX(var(--#{$key}));
+                }
+
+                .#{$utility-prefix}scale-y-#{$suffix}#{$utility-suffix} {
+                    transform: scaleY(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// ROTATE LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'rotate-')==1 {
+        $suffix: string.slice($key, 8);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}rotate-#{$suffix}#{$utility-suffix} {
+                    transform: rotate(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// TRANSLATE LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'translate-')==1 {
+        $suffix: string.slice($key, 11);
+
+        // Handle fractions for 1/2 etc.
+        @if $key =='translate-half' {
+            $suffix: '1\\/2';
+        }
+
+        @else if $key =='translate-quarter' {
+            $suffix: '1\\/4';
+        }
+
+        @else if $key =='translate-full' {
+            $suffix: 'full';
+        }
+
+        @else if $key =='translate--half' {
+            $suffix: '-1\\/2';
+        }
+
+        @else if $key =='translate--full' {
+            $suffix: '-full';
+        }
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}translate-x-#{$suffix}#{$utility-suffix} {
+                    transform: translateX(var(--#{$key}));
+                }
+
+                .#{$utility-prefix}translate-y-#{$suffix}#{$utility-suffix} {
+                    transform: translateY(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// SKEW LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'skew-')==1 {
+        $suffix: string.slice($key, 6);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}skew-x-#{$suffix}#{$utility-suffix} {
+                    transform: skewX(var(--#{$key}));
+                }
+
+                .#{$utility-prefix}skew-y-#{$suffix}#{$utility-suffix} {
+                    transform: skewY(var(--#{$key}));
+                }
+            }
+        }
+    }
+}
+
+// TRANSFORM ORIGIN LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'transform-origin-')==1 {
+        $suffix: string.slice($key, 18);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}origin-#{$suffix}#{$utility-suffix} {
+                    transform-origin: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// PERSPECTIVE LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'perspective-')==1 {
+        $suffix: string.slice($key, 13);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}perspective-#{$suffix}#{$utility-suffix} {
+                    perspective: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// PERSPECTIVE ORIGIN (Static)
+@include with-responsive {
+    @include with-states {
+        .#{$utility-prefix}perspective-origin-center#{$utility-suffix} {
+            perspective-origin: center;
+        }
+
+        .#{$utility-prefix}perspective-origin-top#{$utility-suffix} {
+            perspective-origin: top;
+        }
+
+        .#{$utility-prefix}perspective-origin-top-right#{$utility-suffix} {
+            perspective-origin: top right;
+        }
+
+        .#{$utility-prefix}perspective-origin-right#{$utility-suffix} {
+            perspective-origin: right;
+        }
+
+        .#{$utility-prefix}perspective-origin-bottom-right#{$utility-suffix} {
+            perspective-origin: bottom right;
+        }
+
+        .#{$utility-prefix}perspective-origin-bottom#{$utility-suffix} {
+            perspective-origin: bottom;
+        }
+
+        .#{$utility-prefix}perspective-origin-bottom-left#{$utility-suffix} {
+            perspective-origin: bottom left;
+        }
+
+        .#{$utility-prefix}perspective-origin-left#{$utility-suffix} {
+            perspective-origin: left;
+        }
+
+        .#{$utility-prefix}perspective-origin-top-left#{$utility-suffix} {
+            perspective-origin: top left;
+        }
+
+        // TRANSFORM NONE & GPU
+        .#{$utility-prefix}transform-none#{$utility-suffix} {
+            transform: none;
+        }
+
+        .#{$utility-prefix}transform-gpu#{$utility-suffix} {
+            transform: translateZ(0);
+        }
+
+        .#{$utility-prefix}transform-cpu#{$utility-suffix} {
+            transform: translateZ(0);
+            will-change: auto;
+        }
+
+        // BACKFACE VISIBILITY
+        .#{$utility-prefix}backface-visible#{$utility-suffix} {
+            backface-visibility: visible;
+        }
+
+        .#{$utility-prefix}backface-hidden#{$utility-suffix} {
+            backface-visibility: hidden;
+        }
+
+        // TRANSFORM STYLE (3D)
+        .#{$utility-prefix}preserve-3d#{$utility-suffix} {
+            transform-style: preserve-3d;
+        }
+
+        .#{$utility-prefix}flat#{$utility-suffix} {
+            transform-style: flat;
+        }
+
+        // NEGATIVE ROTATIONS
+        .#{$utility-prefix}-rotate-1#{$utility-suffix} {
+            transform: rotate(-1deg);
+        }
+
+        .#{$utility-prefix}-rotate-2#{$utility-suffix} {
+            transform: rotate(-2deg);
+        }
+
+        .#{$utility-prefix}-rotate-3#{$utility-suffix} {
+            transform: rotate(-3deg);
+        }
+
+        .#{$utility-prefix}-rotate-6#{$utility-suffix} {
+            transform: rotate(-6deg);
+        }
+
+        .#{$utility-prefix}-rotate-12#{$utility-suffix} {
+            transform: rotate(-12deg);
+        }
+
+        .#{$utility-prefix}-rotate-45#{$utility-suffix} {
+            transform: rotate(-45deg);
+        }
+
+        .#{$utility-prefix}-rotate-90#{$utility-suffix} {
+            transform: rotate(-90deg);
+        }
+
+        .#{$utility-prefix}-rotate-180#{$utility-suffix} {
+            transform: rotate(-180deg);
+        }
+
+        // 3D ROTATIONS
+        .#{$utility-prefix}rotate-x-0#{$utility-suffix} {
+            transform: rotateX(0deg);
+        }
+
+        .#{$utility-prefix}rotate-x-1#{$utility-suffix} {
+            transform: rotateX(1deg);
+        }
+
+        .#{$utility-prefix}rotate-x-2#{$utility-suffix} {
+            transform: rotateX(2deg);
+        }
+
+        .#{$utility-prefix}rotate-x-3#{$utility-suffix} {
+            transform: rotateX(3deg);
+        }
+
+        .#{$utility-prefix}rotate-x-6#{$utility-suffix} {
+            transform: rotateX(6deg);
+        }
+
+        .#{$utility-prefix}rotate-x-12#{$utility-suffix} {
+            transform: rotateX(12deg);
+        }
+
+        .#{$utility-prefix}rotate-x-45#{$utility-suffix} {
+            transform: rotateX(45deg);
+        }
+
+        .#{$utility-prefix}rotate-x-90#{$utility-suffix} {
+            transform: rotateX(90deg);
+        }
+
+        .#{$utility-prefix}rotate-x-180#{$utility-suffix} {
+            transform: rotateX(180deg);
+        }
+
+        .#{$utility-prefix}rotate-y-0#{$utility-suffix} {
+            transform: rotateY(0deg);
+        }
+
+        .#{$utility-prefix}rotate-y-1#{$utility-suffix} {
+            transform: rotateY(1deg);
+        }
+
+        .#{$utility-prefix}rotate-y-2#{$utility-suffix} {
+            transform: rotateY(2deg);
+        }
+
+        .#{$utility-prefix}rotate-y-3#{$utility-suffix} {
+            transform: rotateY(3deg);
+        }
+
+        .#{$utility-prefix}rotate-y-6#{$utility-suffix} {
+            transform: rotateY(6deg);
+        }
+
+        .#{$utility-prefix}rotate-y-12#{$utility-suffix} {
+            transform: rotateY(12deg);
+        }
+
+        .#{$utility-prefix}rotate-y-45#{$utility-suffix} {
+            transform: rotateY(45deg);
+        }
+
+        .#{$utility-prefix}rotate-y-90#{$utility-suffix} {
+            transform: rotateY(90deg);
+        }
+
+        .#{$utility-prefix}rotate-y-180#{$utility-suffix} {
+            transform: rotateY(180deg);
+        }
+
+        // NEGATIVE SKEW
+        .#{$utility-prefix}-skew-x-1#{$utility-suffix} {
+            transform: skewX(-1deg);
+        }
+
+        .#{$utility-prefix}-skew-x-2#{$utility-suffix} {
+            transform: skewX(-2deg);
+        }
+
+        .#{$utility-prefix}-skew-x-3#{$utility-suffix} {
+            transform: skewX(-3deg);
+        }
+
+        .#{$utility-prefix}-skew-x-6#{$utility-suffix} {
+            transform: skewX(-6deg);
+        }
+
+        .#{$utility-prefix}-skew-x-12#{$utility-suffix} {
+            transform: skewX(-12deg);
+        }
+
+        .#{$utility-prefix}-skew-y-1#{$utility-suffix} {
+            transform: skewY(-1deg);
+        }
+
+        .#{$utility-prefix}-skew-y-2#{$utility-suffix} {
+            transform: skewY(-2deg);
+        }
+
+        .#{$utility-prefix}-skew-y-3#{$utility-suffix} {
+            transform: skewY(-3deg);
+        }
+
+        .#{$utility-prefix}-skew-y-6#{$utility-suffix} {
+            transform: skewY(-6deg);
+        }
+
+        .#{$utility-prefix}-skew-y-12#{$utility-suffix} {
+            transform: skewY(-12deg);
+        }
+
+        // FLIP HELPERS
+        .#{$utility-prefix}flip-x#{$utility-suffix} {
+            transform: scaleX(-1);
+        }
+
+        .#{$utility-prefix}flip-y#{$utility-suffix} {
+            transform: scaleY(-1);
+        }
+    }
+}

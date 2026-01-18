@@ -1,0 +1,223 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: FILTERS                               */
+/* ========================================================================== */
+
+// Filter value scales (matching Tailwind)
+$brightness-scale: (
+    '0': 0,
+    '50': 0.5,
+    '75': 0.75,
+    '90': 0.9,
+    '95': 0.95,
+    '100': 1,
+    '105': 1.05,
+    '110': 1.1,
+    '125': 1.25,
+    '150': 1.5,
+    '200': 2
+);
+
+$contrast-scale: (
+    '0': 0,
+    '50': 0.5,
+    '75': 0.75,
+    '100': 1,
+    '125': 1.25,
+    '150': 1.5,
+    '200': 2
+);
+
+$saturate-scale: (
+    '0': 0,
+    '50': 0.5,
+    '100': 1,
+    '150': 1.5,
+    '200': 2
+);
+
+$hue-rotate-scale: (
+    '0': 0deg,
+    '15': 15deg,
+    '30': 30deg,
+    '60': 60deg,
+    '90': 90deg,
+    '180': 180deg
+);
+
+// BRIGHTNESS
+@each $key, $value in $brightness-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}brightness-#{$key}#{$utility-suffix} {
+                filter: brightness(#{$value});
+            }
+        }
+    }
+}
+
+// CONTRAST
+@each $key, $value in $contrast-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}contrast-#{$key}#{$utility-suffix} {
+                filter: contrast(#{$value});
+            }
+        }
+    }
+}
+
+// SATURATE
+@each $key, $value in $saturate-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}saturate-#{$key}#{$utility-suffix} {
+                filter: #{'saturate'}(#{$value});
+            }
+        }
+    }
+}
+
+// HUE ROTATE
+@each $key, $value in $hue-rotate-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}hue-rotate-#{$key}#{$utility-suffix} {
+                filter: hue-rotate(#{$value});
+            }
+
+            // Negative hue rotate
+            .#{$utility-prefix}-hue-rotate-#{$key}#{$utility-suffix} {
+                filter: hue-rotate(-#{$value});
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+    @include with-states {
+
+        // GRAYSCALE
+        .#{$utility-prefix}grayscale#{$utility-suffix} {
+            filter: grayscale(100%);
+        }
+
+        .#{$utility-prefix}grayscale-0#{$utility-suffix} {
+            filter: grayscale(0);
+        }
+
+        // INVERT
+        .#{$utility-prefix}invert#{$utility-suffix} {
+            filter: invert(100%);
+        }
+
+        .#{$utility-prefix}invert-0#{$utility-suffix} {
+            filter: invert(0);
+        }
+
+        // SEPIA
+        .#{$utility-prefix}sepia#{$utility-suffix} {
+            filter: sepia(100%);
+        }
+
+        .#{$utility-prefix}sepia-0#{$utility-suffix} {
+            filter: sepia(0);
+        }
+
+        // FILTER RESET
+        .#{$utility-prefix}filter-none#{$utility-suffix} {
+            filter: none;
+        }
+    }
+}
+
+// ============================================================================
+// BACKDROP FILTERS
+// ============================================================================
+
+// BACKDROP BRIGHTNESS
+@each $key, $value in $brightness-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}backdrop-brightness-#{$key}#{$utility-suffix} {
+                backdrop-filter: brightness(#{$value});
+            }
+        }
+    }
+}
+
+// BACKDROP CONTRAST
+@each $key, $value in $contrast-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}backdrop-contrast-#{$key}#{$utility-suffix} {
+                backdrop-filter: contrast(#{$value});
+            }
+        }
+    }
+}
+
+// BACKDROP SATURATE
+@each $key, $value in $saturate-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}backdrop-saturate-#{$key}#{$utility-suffix} {
+                backdrop-filter: #{'saturate'}(#{$value});
+            }
+        }
+    }
+}
+
+// BACKDROP HUE ROTATE
+@each $key, $value in $hue-rotate-scale {
+    @include with-responsive {
+        @include with-states {
+            .#{$utility-prefix}backdrop-hue-rotate-#{$key}#{$utility-suffix} {
+                backdrop-filter: hue-rotate(#{$value});
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+    @include with-states {
+
+        // BACKDROP GRAYSCALE
+        .#{$utility-prefix}backdrop-grayscale#{$utility-suffix} {
+            backdrop-filter: grayscale(100%);
+        }
+
+        .#{$utility-prefix}backdrop-grayscale-0#{$utility-suffix} {
+            backdrop-filter: grayscale(0);
+        }
+
+        // BACKDROP INVERT
+        .#{$utility-prefix}backdrop-invert#{$utility-suffix} {
+            backdrop-filter: invert(100%);
+        }
+
+        .#{$utility-prefix}backdrop-invert-0#{$utility-suffix} {
+            backdrop-filter: invert(0);
+        }
+
+        // BACKDROP SEPIA
+        .#{$utility-prefix}backdrop-sepia#{$utility-suffix} {
+            backdrop-filter: sepia(100%);
+        }
+
+        .#{$utility-prefix}backdrop-sepia-0#{$utility-suffix} {
+            backdrop-filter: sepia(0);
+        }
+
+        // BACKDROP FILTER RESET
+        .#{$utility-prefix}backdrop-filter-none#{$utility-suffix} {
+            backdrop-filter: none;
+        }
+    }
+}

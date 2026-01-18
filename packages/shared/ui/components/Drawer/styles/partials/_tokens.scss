@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.drawer {
+    --drawer-z-index-backdrop: 1040;
+    --drawer-z-index: 1050;
+
+    --drawer-backdrop-bg: var(--color-overlay-default);
+    --drawer-bg: var(--color-surface-default);
+    --drawer-shadow: var(--shadow-xl);
+
+    --drawer-width-s: var(--scale-70); // var(--scale-70)
+    --drawer-width-m: var(--scale-90);
+    --drawer-width-l: var(--scale-120);
+
+    --drawer-height-s: 30vh;
+    --drawer-height-m: 50vh;
+    --drawer-height-l: 75vh;
+
+    --drawer-border-color: var(--color-border-subtle);
+
+    --drawer-padding-header: var(--scale-4) var(--scale-5);
+    --drawer-padding-body: var(--scale-5);
+    --drawer-padding-footer: var(--scale-4) var(--scale-5);
+
+    --drawer-title-color: var(--color-text-default);
+
+    --drawer-close-size: var(--scale-8); // var(--scale-8)
+    --drawer-close-color: var(--color-text-secondary);
+    --drawer-close-bg-hover: var(--color-action-ghost-hover);
+    --drawer-close-color-hover: var(--color-text-default);
+}

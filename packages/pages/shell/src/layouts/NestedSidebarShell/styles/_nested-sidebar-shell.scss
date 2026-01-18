@@ -1,0 +1,181 @@
+/**
+ * NestedSidebarShell Component Styles
+ * Matches SectionLayout sidebar styling with NestedMenu support
+ */
+
+.nested-sidebar-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: visible; // Don't clip content - parent .section-layout__sidebar handles overflow
+    transition: width 150ms var(--easing-standard);
+
+    // Header area for toggle button
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: var(--scale-12);
+        padding: var(--scale-4) var(--scale-3) var(--scale-2);
+        position: relative;
+        z-index: var(--z-index-sticky);
+        transition: justify-content var(--duration-normal) var(--easing-decelerate);
+    }
+
+    // Toggle button - matches Sidebar component styling
+    &__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-10);
+        height: var(--scale-10);
+        min-width: var(--scale-10);
+        min-height: var(--scale-10);
+        padding: 0;
+        border: none;
+        border-radius: var(--border-radius-round); // Circular button
+        background: transparent;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        flex-shrink: 0;
+        outline: none;
+        transition:
+            background-color var(--duration-fast) var(--easing-standard),
+            transform var(--duration-fast) var(--easing-spring),
+            color var(--duration-fast) var(--easing-standard);
+
+        svg {
+            width: var(--icon-size-s);
+            height: var(--icon-size-s);
+            transition: transform 320ms var(--easing-spring);
+        }
+
+        &:hover {
+            background: var(--color-surface-hover);
+            color: var(--color-text-default);
+            transform: scale(1.08);
+        }
+
+        &:active {
+            background: var(--color-surface-active);
+            transform: scale(0.95);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-focus-ring);
+            outline-offset: var(--focus-offset);
+        }
+    }
+
+    // Content area for menu
+    &__content {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: visible; // Allow content to extend if needed (e.g., tooltips)
+        padding: 0 var(--scale-3) var(--scale-3);
+        min-width: 0;
+
+        // Match NestedMenu's tighter spacing
+        .menu {
+            gap: var(--scale-1); // Override Menu's default scale-2 to match NestedMenu
+        }
+
+        // Custom scrollbar styling (matches NestedMenu)
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-text-disabled) transparent;
+
+        &::-webkit-scrollbar {
+            width: 0.25rem; // var(--scale-1)
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-text-disabled);
+            border-radius: var(--border-radius-xs);
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    }
+
+    // Menu placeholder
+    &__menu-placeholder {
+        padding: var(--spacing-4);
+        text-align: center;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+    }
+
+    // Drag and drop states (optional enhancement)
+    &__item {
+        transition: all 150ms var(--easing-standard);
+
+        &--dragging {
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+
+        &--drag-over {
+            border-top: 2px solid var(--color-brand-primary);
+        }
+    }
+
+    // Variants - Note: SectionLayout's sidebar already applies background/border/radius
+    // These are here for standalone use outside of SectionLayout
+    &--white {
+        background: transparent; // Let parent .section-layout__sidebar handle background
+        border: none; // Let parent handle border
+        border-radius: 0; // Let parent handle border-radius
+    }
+
+    &--neutral {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+    }
+
+    &--primary {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+    }
+
+    // Collapsed state
+    &--collapsed {
+        .nested-sidebar-shell__header {
+            justify-content: center;
+        }
+
+        .nested-sidebar-shell__content {
+            overflow-y: hidden; // Hide scrollbar when collapsed
+            overflow-x: visible; // Prevent icon clipping
+            padding: 0; // No padding - Menu fills full grid column width (64px)
+        }
+
+        // Match NestedMenu's tighter spacing
+        .menu {
+            gap: var(--scale-1); // Reduce gap from scale-2 to scale-1 to match NestedMenu
+        }
+
+        // Ensure Menu items use full available width
+        .menu__item {
+            width: calc(100% - var(--scale-2)); // Full width minus small margin for visual breathing room
+            margin-left: var(--scale-1);
+            margin-right: var(--scale-1);
+        }
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        .nested-sidebar-shell__header,
+        .nested-sidebar-shell__toggle {
+            transition: none;
+        }
+
+        .nested-sidebar-shell__toggle svg {
+            transition: none;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.theme-toggle {
+    --theme-toggle-padding: var(--scale-2);
+    --theme-toggle-size: var(--scale-10); // var(--scale-10)
+}

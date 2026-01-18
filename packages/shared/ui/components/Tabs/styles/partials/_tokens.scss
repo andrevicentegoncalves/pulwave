@@ -1,0 +1,62 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/* ────────────────────────────────────────────────────────────────────────────
+   TABS TOKENS
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.tabs {
+    // ── Base ──
+    --tabs-border-color: var(--color-border-primary);
+    --tabs-border-width: 1px;
+    --tabs-gap: var(--scale-0);
+
+    // ── Tab ──
+    --tab-padding-y: var(--scale-3);
+    --tab-padding-x: var(--scale-5);
+    --tab-color: var(--color-text-secondary);
+    --tab-color-hover: var(--color-text-primary);
+    --tab-color-active: var(--color-brand-primary);
+    --tab-border-width: var(--border-width-m);
+    --tab-transition: var(--duration-fast) var(--ease-out);
+    --tab-indicator-border-radius: var(--border-radius-2xl);
+
+    // ── Color Schemes ──
+    --tab-scheme-primary-bg: var(--color-brand-primary);
+    --tab-scheme-primary-text: var(--color-on-primary);
+    --tab-scheme-secondary-bg: var(--color-secondary-500);
+    --tab-scheme-secondary-text: var(--color-on-secondary);
+    --tab-scheme-tertiary-bg: var(--color-tertiary-500);
+    --tab-scheme-tertiary-text: var(--color-on-tertiary);
+
+    // ── Pills Variant ──
+    --tab-pills-bg: var(--color-surface-subtle);
+    --tab-pills-bg-active: var(--color-brand-primary);
+    --tab-pills-color-active: var(--color-on-primary);
+    --tab-pills-padding-y: var(--scale-2);
+    --tab-pills-padding-x: var(--scale-5);
+    --tab-pills-border-radius: var(--border-radius-2xl);
+
+    // ── Segmented Variant ──
+    --tab-segmented-bg: var(--color-surface-subtle);
+    --tab-segmented-bg-active: var(--color-surface-default);
+    --tab-segmented-border-radius: var(--border-radius-2xl);
+    --tab-segmented-indicator-offset: var(--scale-1);
+
+    // ── Slider Variant ──
+    --tab-slider-bg: var(--color-surface-strong);
+    --tab-slider-padding-y: var(--scale-3);
+    --tab-slider-padding-x: var(--scale-6);
+    --tab-slider-border-radius: var(--border-radius-2xl);
+    --tab-slider-shadow: 0 var(--scale-0-5) var(--scale-2) color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+
+    // ── Contained Variant ──
+    --tab-contained-bg: var(--color-surface-subtle);
+    --tab-contained-bg-active: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+    --tab-contained-border-radius: var(--border-radius-2xl);
+    --tab-contained-padding: var(--scale-2);
+
+    // ── Icon Variant ──
+    --tab-icon-gap: var(--scale-2);
+    --tab-icon-size: var(--scale-7);
+    --tab-icon-label-size: var(--font-size-xs);
+}

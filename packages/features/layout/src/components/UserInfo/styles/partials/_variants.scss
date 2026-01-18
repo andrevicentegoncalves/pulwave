@@ -1,0 +1,114 @@
+// ============================================================================ //
+// USER INFO - VARIANTS
+// ============================================================================ //
+// Orientation and size variants
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+// Horizontal orientation (default)
+.user-info--horizontal {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+// Vertical orientation
+.user-info--vertical {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: var(--scale-2);
+
+    .user-info__avatar {
+        margin-bottom: var(--scale-1);
+    }
+
+    .user-info__details {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .user-info__logout {
+        margin-top: var(--scale-1);
+    }
+}
+
+// Small size
+.user-info--s {
+    padding: var(--scale-2);
+    gap: var(--scale-2);
+
+    .user-info__avatar {
+        width: var(--scale-8);
+        height: var(--scale-8);
+    }
+
+    .user-info__logout {
+        width: var(--scale-8);
+        height: var(--scale-8);
+
+        svg {
+            width: var(--scale-4);
+            height: var(--scale-4);
+        }
+    }
+
+    .user-info__name {
+        font-size: var(--font-size-ui-s);
+        font-weight: var(--font-weight-semi-bold);
+    }
+
+    .user-info__email {
+        font-size: var(--font-size-ui-s);
+        font-weight: var(--font-weight-regular);
+    }
+}
+
+// Large size
+.user-info--l {
+    padding: var(--scale-5);
+    gap: var(--scale-4);
+
+    .user-info__avatar {
+        width: var(--scale-14);
+        height: var(--scale-14);
+    }
+
+    .user-info__logout {
+        width: var(--scale-12);
+        height: var(--scale-12);
+
+        svg {
+            width: var(--icon-size-m);
+            height: var(--icon-size-m);
+        }
+    }
+
+    .user-info__name {
+        font-size: var(--font-size-title-s);
+        font-weight: var(--font-weight-semi-bold);
+    }
+
+    .user-info__email {
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-regular);
+    }
+}
+
+// Special cases: Single element
+.user-info:has(.user-info__avatar):not(:has(.user-info__details)):not(:has(.user-info__logout)) {
+    justify-content: center;
+    padding: var(--scale-2);
+}
+
+.user-info:has(.user-info__logout):not(:has(.user-info__avatar)):not(:has(.user-info__details)) {
+    justify-content: center;
+    padding: var(--scale-2);
+}
+
+.user-info:has(.user-info__details):not(:has(.user-info__avatar)):not(:has(.user-info__logout)) {
+    justify-content: center;
+    padding: var(--scale-3) var(--scale-4);
+}

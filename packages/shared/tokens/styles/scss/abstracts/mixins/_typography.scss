@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use 'sass:string';
+
+// Compatible V2 typography mixin
+// Maps legacy (category, size) args to new token structure
+@mixin typography-responsive($category, $size, $weight: null) {
+    $token-base: #{$category}-#{$size};
+
+    font-size: var(--#{$token-base}-size);
+    line-height: var(--#{$token-base}-line-height);
+    letter-spacing: var(--#{$token-base}-spacing);
+    font-weight: var(--#{$token-base}-weight);
+
+    // V2 uses clamped fluid typography in tokens, so explicit media queries 
+    // for mobile are often unnecessary, but can be added if tokens splits exist.
+}

@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "stylelint-config-standard-scss"
+    ],
+    "plugins": [
+        "./packages/foundation/styles/lint/stylelint-plugin-tokens.cjs"
+    ],
+    "rules": {
+        "pulwave/no-legacy-tokens": true,
+        "scss/at-import-partial-extension": null,
+        "scss/dollar-variable-pattern": null,
+        "scss/at-mixin-pattern": null,
+        "selector-class-pattern": null,
+        "custom-property-pattern": null,
+        "declaration-block-no-redundant-longhand-properties": null,
+        "no-descending-specificity": null
+    },
+    "ignoreFiles": [
+        "node_modules/**",
+        "dist/**",
+        "build/**",
+        "**/vendor/**"
+    ]
+}

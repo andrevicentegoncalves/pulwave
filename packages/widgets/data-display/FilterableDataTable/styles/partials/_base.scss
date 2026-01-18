@@ -1,0 +1,28 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.filterable-data-table {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        padding: var(--fdt-header-padding);
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    &__title {
+        margin: 0;
+        font-size: var(--font-size-headline-s);
+        color: var(--color-text-default);
+    }
+
+    &__controls-wrapper {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: var(--fdt-controls-gap);
+    }
+
+    &__search {
+        min-width: var(--fdt-search-min-width);
+    }
+}

@@ -1,0 +1,84 @@
+@use '@pulwave/tokens/styles/tokens/generated/_tokens.scss' as *;
+
+.inline-edit {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+    font-family: var(--font-family-base);
+
+    &--full-width {
+        width: 100%;
+    }
+
+    &__label {
+        color: var(--color-text-secondary);
+        font-weight: 500;
+    }
+
+    &__view {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-1) var(--scale-2);
+        border-radius: var(--border-radius-m);
+        border: 1px solid transparent; // Reserve space so no jump
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        min-height: var(--scale-10); // Match standard input height
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+            border-color: var(--color-border-hover);
+
+            .inline-edit__icon {
+                opacity: 1;
+            }
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 var(--scale-0-5) var(--color-brand-primary);
+        }
+    }
+
+    &__text {
+        flex: 1;
+        overflow-wrap: break-word;
+
+        &--placeholder {
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-secondary);
+        opacity: 0; // Hides by default
+        transition: opacity 0.2s ease;
+    }
+
+    &__input-wrapper {
+        width: 100%;
+    }
+
+    &__input {
+        // Base input styles are handled by Input component
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+
+        .inline-edit__view {
+            cursor: default;
+
+            &:hover {
+                background: none;
+                border-color: transparent;
+            }
+        }
+    }
+}

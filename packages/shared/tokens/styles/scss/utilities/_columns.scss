@@ -1,0 +1,234 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: COLUMNS                               */
+/* ========================================================================== */
+
+// COLUMN GAP LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'scale-')==1 {
+        // Escape dot if present (e.g. 0.5 -> 0\.5)
+        $suffix: string.slice($key, 7);
+        $dot-index: string.index($suffix, '.');
+
+        @if $dot-index {
+            $suffix: string.insert($suffix, '\\', $dot-index);
+        }
+
+        @include with-responsive {
+            .#{$utility-prefix}column-gap-#{$suffix}#{$utility-suffix} {
+                column-gap: var(--#{$key});
+            }
+        }
+    }
+}
+
+// COLUMN RULE COLOR LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            .#{$utility-prefix}column-rule-#{$suffix}#{$utility-suffix} {
+                column-rule-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+    .#{$utility-prefix}columns-1#{$utility-suffix} {
+        columns: 1;
+    }
+
+    .#{$utility-prefix}columns-2#{$utility-suffix} {
+        columns: 2;
+    }
+
+    .#{$utility-prefix}columns-3#{$utility-suffix} {
+        columns: 3;
+    }
+
+    .#{$utility-prefix}columns-4#{$utility-suffix} {
+        columns: 4;
+    }
+
+    .#{$utility-prefix}columns-5#{$utility-suffix} {
+        columns: 5;
+    }
+
+    .#{$utility-prefix}columns-6#{$utility-suffix} {
+        columns: 6;
+    }
+
+    .#{$utility-prefix}columns-7#{$utility-suffix} {
+        columns: 7;
+    }
+
+    .#{$utility-prefix}columns-8#{$utility-suffix} {
+        columns: 8;
+    }
+
+    .#{$utility-prefix}columns-9#{$utility-suffix} {
+        columns: 9;
+    }
+
+    .#{$utility-prefix}columns-10#{$utility-suffix} {
+        columns: 10;
+    }
+
+    .#{$utility-prefix}columns-11#{$utility-suffix} {
+        columns: 11;
+    }
+
+    .#{$utility-prefix}columns-12#{$utility-suffix} {
+        columns: 12;
+    }
+
+    .#{$utility-prefix}columns-auto#{$utility-suffix} {
+        columns: auto;
+    }
+
+    // COLUMN WIDTH
+    .#{$utility-prefix}columns-3xs#{$utility-suffix} {
+        columns: 16rem;
+    }
+
+    .#{$utility-prefix}columns-2xs#{$utility-suffix} {
+        columns: 18rem;
+    }
+
+    .#{$utility-prefix}columns-xs#{$utility-suffix} {
+        columns: 20rem;
+    }
+
+    .#{$utility-prefix}columns-s#{$utility-suffix} {
+        columns: 24rem;
+    }
+
+    .#{$utility-prefix}columns-m#{$utility-suffix} {
+        columns: 28rem;
+    }
+
+    .#{$utility-prefix}columns-l#{$utility-suffix} {
+        columns: 32rem;
+    }
+
+    .#{$utility-prefix}columns-xl#{$utility-suffix} {
+        columns: 36rem;
+    }
+
+    .#{$utility-prefix}columns-2xl#{$utility-suffix} {
+        columns: 42rem;
+    }
+
+    .#{$utility-prefix}columns-3xl#{$utility-suffix} {
+        columns: 48rem;
+    }
+
+    .#{$utility-prefix}columns-4xl#{$utility-suffix} {
+        columns: 56rem;
+    }
+
+    .#{$utility-prefix}columns-5xl#{$utility-suffix} {
+        columns: 64rem;
+    }
+
+    .#{$utility-prefix}columns-6xl#{$utility-suffix} {
+        columns: 72rem;
+    }
+
+    .#{$utility-prefix}columns-7xl#{$utility-suffix} {
+        columns: 80rem;
+    }
+
+    // COLUMN GAP (Static)
+    .#{$utility-prefix}column-gap-0#{$utility-suffix} {
+        column-gap: 0;
+    }
+
+    .#{$utility-prefix}column-gap-normal#{$utility-suffix} {
+        column-gap: normal;
+    }
+
+    // COLUMN RULE (WIDTH)
+    .#{$utility-prefix}column-rule-0#{$utility-suffix} {
+        column-rule-width: 0;
+    }
+
+    .#{$utility-prefix}column-rule-1#{$utility-suffix} {
+        column-rule-width: 1px;
+    }
+
+    .#{$utility-prefix}column-rule-2#{$utility-suffix} {
+        column-rule-width: 2px;
+    }
+
+    .#{$utility-prefix}column-rule-4#{$utility-suffix} {
+        column-rule-width: 4px;
+    }
+
+    .#{$utility-prefix}column-rule-8#{$utility-suffix} {
+        column-rule-width: 8px;
+    }
+
+    // COLUMN RULE (STYLE)
+    .#{$utility-prefix}column-rule-solid#{$utility-suffix} {
+        column-rule-style: solid;
+    }
+
+    .#{$utility-prefix}column-rule-dashed#{$utility-suffix} {
+        column-rule-style: dashed;
+    }
+
+    .#{$utility-prefix}column-rule-dotted#{$utility-suffix} {
+        column-rule-style: dotted;
+    }
+
+    .#{$utility-prefix}column-rule-double#{$utility-suffix} {
+        column-rule-style: double;
+    }
+
+    .#{$utility-prefix}column-rule-none#{$utility-suffix} {
+        column-rule-style: none;
+    }
+
+    // COLUMN RULE (COLOR) (Static defaults)
+    .#{$utility-prefix}column-rule-default#{$utility-suffix} {
+        column-rule-color: var(--color-border-default);
+    }
+
+    .#{$utility-prefix}column-rule-subtle#{$utility-suffix} {
+        column-rule-color: var(--color-border-subtle);
+    }
+
+    .#{$utility-prefix}column-rule-strong#{$utility-suffix} {
+        column-rule-color: var(--color-border-strong);
+    }
+
+    // COLUMN FILL
+    .#{$utility-prefix}column-fill-auto#{$utility-suffix} {
+        column-fill: auto;
+    }
+
+    .#{$utility-prefix}column-fill-balance#{$utility-suffix} {
+        column-fill: balance;
+    }
+
+    .#{$utility-prefix}column-fill-balance-all#{$utility-suffix} {
+        column-fill: balance-all;
+    }
+
+    // COLUMN SPAN
+    .#{$utility-prefix}column-span-all#{$utility-suffix} {
+        column-span: all;
+    }
+
+    .#{$utility-prefix}column-span-none#{$utility-suffix} {
+        column-span: none;
+    }
+}

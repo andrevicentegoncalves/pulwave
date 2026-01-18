@@ -1,0 +1,8 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scale-2);
+    vertical-align: middle;
+}

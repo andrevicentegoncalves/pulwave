@@ -1,0 +1,23 @@
+// ==========================================================================
+// Component Documentation - Anatomy Section
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__anatomy-image {
+        margin-bottom: var(--scale-4);
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-m);
+        }
+    }
+
+    &__anatomy-parts {
+        margin-bottom: var(--scale-4);
+    }
+}
+
+

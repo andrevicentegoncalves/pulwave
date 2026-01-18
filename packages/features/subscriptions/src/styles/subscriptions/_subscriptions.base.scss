@@ -1,0 +1,150 @@
+@use '../../abstracts/variables/colors/theme-mapping' as colors;
+@use '../../abstracts/tokens/shadows' as shadows;
+@use '../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/typography' as typography;
+@use '../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.subscription-plans {
+    &__header {
+        margin-bottom: var(--scale-6);
+        text-align: center;
+
+        h3 {
+            font-size: var(--font-size-title-l);
+            font-weight: var(--font-weight-semi-bold);
+            margin-bottom: var(--scale-2);
+            color: var(--color-text-primary);
+        }
+
+        p {
+            color: var(--color-text-secondary);
+        }
+    }
+
+    // Mobile responsiveness - make cards stack
+    .card-grid--3-col {
+        @include bp-down('s') {
+            grid-template-columns: 1fr;
+        }
+
+        @include bp-down('xs') {
+            gap: var(--scale-4);
+        }
+    }
+
+    // Empty state
+    &__empty {
+        text-align: center;
+        padding: var(--scale-8);
+        box-sizing: border-box;
+        max-width: 100%;
+
+        @include bp-down('xs') {
+            padding: var(--scale-4);
+        }
+    }
+}
+
+.plan-card {
+    position: relative;
+    transition: transform var(--duration-normal) var(--easing-standard),
+        box-shadow var(--duration-normal) var(--easing-standard),
+        border-color var(--duration-normal) var(--easing-standard);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(calc(-1 * var(--scale-1)));
+        box-shadow: var(--shadow-l);
+        border-color: var(--color-brand-primary);
+    }
+
+    &--highlight {
+        border-color: var(--color-brand-primary);
+        box-shadow: var(--shadow-m);
+        background: linear-gradient(to bottom, var(--color-surface-default), var(--color-surface-subtle));
+    }
+
+    &__badge {
+        position: absolute;
+        top: calc(-1 * var(--scale-3));
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--color-brand-primary);
+        color: var(--color-text-on-primary);
+        padding: var(--scale-1) var(--scale-3);
+        border-radius: var(--border-radius-pill);
+        font-size: var(--font-size-ui-s);
+        font-weight: var(--font-weight-semi-bold);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    &__header {
+        margin-bottom: var(--scale-6);
+        text-align: center;
+    }
+
+    &__title {
+        font-size: var(--font-size-title-m);
+        font-weight: var(--font-weight-semi-bold);
+        margin-bottom: var(--scale-4);
+        color: var(--color-text-primary);
+    }
+
+    &__price {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: var(--scale-1);
+        margin-bottom: var(--scale-4);
+
+        .amount {
+            font-size: var(--font-size-headline-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+        }
+
+        .period {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-body-m);
+            font-weight: var(--font-weight-regular);
+        }
+    }
+
+    &__description {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-regular);
+    }
+
+    &__features {
+        margin-bottom: var(--scale-6);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-3);
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: var(--scale-3);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-regular);
+
+            .feature-icon {
+                color: var(--color-brand-primary);
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+    }
+
+    .button--glow {
+        box-shadow: var(--shadow-glow-primary);
+    }
+}

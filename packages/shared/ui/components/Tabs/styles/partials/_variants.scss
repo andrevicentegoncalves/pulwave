@@ -1,0 +1,358 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/* ────────────────────────────────────────────────────────────────────────────
+   TABS VARIANTS
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.tabs {
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // COLOR SCHEMES (applies to pills, slider, slider-soft)
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--color-primary {
+        --tab-active-bg: var(--tab-scheme-primary-bg, var(--color-brand-primary));
+        --tab-active-text: var(--tab-scheme-primary-text, var(--color-on-primary));
+        --tab-active-tint: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+    }
+
+    &--color-secondary {
+        --tab-active-bg: var(--tab-scheme-secondary-bg, var(--color-secondary-500));
+        --tab-active-text: var(--tab-scheme-secondary-text, var(--color-on-secondary));
+        --tab-active-tint: color-mix(in srgb, var(--color-secondary-500) 12%, transparent);
+    }
+
+    &--color-tertiary {
+        --tab-active-bg: var(--tab-scheme-tertiary-bg, var(--color-tertiary-500));
+        --tab-active-text: var(--tab-scheme-tertiary-text, var(--color-on-tertiary));
+        --tab-active-tint: color-mix(in srgb, var(--color-tertiary-500) 12%, transparent);
+    }
+
+    &--color-neutral {
+        --tab-active-bg: var(--color-surface-strong);
+        --tab-active-text: var(--color-text-primary);
+        --tab-active-tint: var(--color-surface-subtle);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // PILLS VARIANT
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--pills {
+        display: inline-flex;
+
+        .tabs__header {
+            border-bottom: none;
+            gap: var(--scale-2);
+            padding: 0; // Removed padding
+            background: transparent; // Removed background
+            border-radius: var(--tab-pills-border-radius);
+            width: fit-content;
+        }
+
+        .tabs__tab {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding: var(--tab-pills-padding-y) var(--tab-pills-padding-x);
+            border-radius: var(--tab-pills-border-radius);
+
+            &::after {
+                display: none;
+            }
+
+            &:hover:not(&--active) {
+                background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+            }
+
+            &--active {
+                background: var(--tab-active-bg, var(--tab-pills-bg-active));
+                color: var(--tab-active-text, var(--tab-pills-color-active));
+                border-bottom-color: transparent;
+                box-shadow: var(--shadow-s);
+            }
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SEGMENTED VARIANT
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--segmented {
+        display: inline-flex;
+
+        .tabs__header {
+            border-bottom: none;
+            gap: 0;
+            padding: var(--tab-segmented-indicator-offset);
+            background: var(--tab-segmented-bg);
+            border-radius: var(--tab-segmented-border-radius);
+            width: fit-content;
+        }
+
+        .tabs__tab {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding: var(--scale-2) var(--scale-5);
+            border-radius: calc(var(--tab-segmented-border-radius) - var(--tab-segmented-indicator-offset));
+            z-index: var(--z-index-default);
+
+            &::after {
+                display: none;
+            }
+
+            &:hover:not(&--active) {
+                background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+            }
+
+            &--active {
+                background: var(--tab-segmented-bg-active);
+                color: var(--color-text-primary);
+                border-bottom-color: transparent;
+                box-shadow: var(--shadow-s);
+            }
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SLIDER VARIANT
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--slider {
+        display: inline-flex;
+
+        .tabs__header {
+            border-bottom: none;
+            gap: 0;
+            padding: var(--scale-1);
+            background: var(--tab-slider-bg);
+            border-radius: var(--tab-slider-border-radius);
+            width: fit-content;
+        }
+
+        .tabs__tab {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding: var(--tab-slider-padding-y) var(--tab-slider-padding-x);
+            border-radius: calc(var(--tab-slider-border-radius) - var(--scale-1));
+            font-weight: var(--font-weight-m);
+
+            &::after {
+                display: none;
+            }
+
+            &:hover:not(&--active) {
+                background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+                border-radius: var(--border-radius-2xl); // XL radius on hover
+            }
+
+            &--active {
+                background: var(--tab-active-bg, var(--color-brand-primary));
+                color: var(--tab-active-text, var(--color-on-primary));
+                border-bottom-color: transparent;
+                box-shadow: var(--tab-slider-shadow);
+            }
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SLIDER SOFT VARIANT (formerly Contained)
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--slider-soft {
+        .tabs__header {
+            border-bottom: none;
+            gap: 0;
+            padding: var(--tab-slider-soft-padding, var(--scale-2)); // added fallback
+            background: var(--tab-slider-soft-bg, var(--color-surface-subtle)); // added fallback
+            border-radius: var(--tab-slider-soft-border-radius, var(--border-radius-2xl)); // added fallback
+            width: 100%;
+
+            // Flush variant
+            .tabs--slider-soft-full & {
+                padding: 0;
+            }
+        }
+
+        .tabs__tab {
+            flex: 1;
+            justify-content: center;
+            border-bottom: none;
+            margin-bottom: 0;
+            padding: var(--scale-3) var(--scale-4);
+            border-radius: calc(var(--tab-slider-soft-border-radius, var(--border-radius-2xl)) - var(--tab-slider-soft-padding, var(--scale-2)));
+            font-weight: var(--font-weight-m);
+
+            // Flush variant
+            .tabs--slider-soft-full & {
+                border-radius: var(--tab-slider-soft-border-radius, var(--border-radius-2xl));
+            }
+
+            // Hide the line indicator pseudo-element
+            &::after {
+                display: none;
+            }
+
+            &:hover:not(&--active) {
+                background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+                border-radius: calc(var(--tab-slider-soft-border-radius, var(--border-radius-2xl)) - var(--tab-slider-soft-padding, var(--scale-2)));
+            }
+
+            &--active {
+                background: var(--tab-active-tint);
+                color: var(--tab-active-bg, var(--color-brand-primary));
+                border-bottom-color: transparent;
+                box-shadow: var(--shadow-xs);
+            }
+        }
+
+        .tabs__tab-icon {
+            color: currentColor;
+            font-size: var(--scale-5);
+
+            svg {
+                width: var(--scale-5);
+                height: var(--scale-5);
+            }
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // ICON VARIANT
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--icon {
+        .tabs__header {
+            gap: var(--scale-0);
+            justify-content: center;
+        }
+
+        .tabs__tab {
+            flex-direction: column;
+            gap: var(--tab-icon-gap);
+            padding: var(--scale-4) var(--scale-6);
+            border-bottom: none;
+            margin-bottom: 0;
+
+            font-size: var(--font-size-ui-s);
+            font-weight: var(--font-weight-m);
+
+            &::after {
+                left: var(--scale-3);
+                right: var(--scale-3);
+                height: 3px;
+            }
+        }
+
+        .tabs__tab-icon {
+            font-size: var(--tab-icon-size);
+            color: currentColor;
+
+            svg {
+                width: var(--tab-icon-size);
+                height: var(--tab-icon-size);
+            }
+        }
+
+        .tabs__tab--active {
+            color: var(--tab-active-bg, var(--color-brand-primary));
+
+            &::after {
+                background: var(--tab-active-bg, var(--color-brand-primary));
+            }
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // VERTICAL ORIENTATION
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &--vertical {
+        display: flex;
+        flex-direction: row;
+        gap: var(--scale-6);
+
+        .tabs__header {
+            flex-direction: column;
+            border-bottom: none;
+            border-right: var(--tabs-border-width) solid var(--tabs-border-color);
+            margin-bottom: 0;
+            padding-right: var(--scale-4);
+            min-width: 1var(--scale-20);
+            overflow-x: visible;
+            overflow-y: auto;
+            gap: var(--scale-2); // Added gap between items
+        }
+
+        .tabs__tab {
+            border-bottom: none;
+            padding-left: var(--scale-3);
+            justify-content: flex-start;
+            position: relative;
+            border-left: var(--tab-border-width) solid transparent;
+            border-radius: var(--border-radius-2xl); // Applied to base state for smooth transition
+
+            &::after {
+                display: none;
+            }
+
+            &::before {
+                display: none;
+            }
+
+            &--active {
+                border-left-color: var(--color-brand-primary);
+                border-bottom-color: transparent;
+                background: var(--color-surface-subtle);
+            }
+        }
+
+        .tabs__content {
+            flex: 1;
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // SIZE VARIANTS, ETC.
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    &.tabs--size-s {
+        .tabs__tab {
+            padding: var(--scale-2) var(--scale-3);
+            font-size: var(--font-size-ui-s);
+            font-weight: var(--font-weight-m);
+        }
+
+        .tabs__tab-icon svg {
+            width: var(--scale-4);
+            height: var(--scale-4);
+        }
+    }
+
+    &.tabs--size-m {
+        // Default styles apply
+    }
+
+    &.tabs--size-l {
+        .tabs__tab {
+            padding: var(--scale-4) var(--scale-6);
+            font-size: var(--font-size-body-l);
+            font-weight: var(--font-weight-m);
+        }
+
+        .tabs__tab-icon svg {
+            width: var(--scale-6);
+            height: var(--scale-6);
+        }
+    }
+
+    &--full-width {
+        .tabs__header {
+            width: 100%;
+        }
+
+        .tabs__tab {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+}

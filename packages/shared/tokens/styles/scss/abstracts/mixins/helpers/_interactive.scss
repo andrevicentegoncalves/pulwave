@@ -1,0 +1,28 @@
+// Interactive Helpers
+
+// Updated signature to accept legacy arguments ($color, $width, $offset)
+@mixin focus-ring($color: var(--color-primary-500), $width: 2px, $offset: 2px) {
+    outline: none;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 $width $color;
+        outline-offset: $offset;
+    }
+}
+
+@mixin button-reset {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+}
+
+@mixin disabled-state($opacity: 0.5) {
+    opacity: $opacity;
+    pointer-events: none;
+    cursor: not-allowed;
+}

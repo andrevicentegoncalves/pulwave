@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.mobile-header {
+    --mobile-header-height: var(--scale-16); // 64px
+    --mobile-header-padding: var(--scale-4);
+    --mobile-header-bg: var(--color-surface-default);
+    --mobile-header-border: var(--color-border-subtle);
+    --mobile-header-gap: var(--scale-3);
+
+    // Menu Button
+    --mobile-header-btn-size: var(--scale-10); // var(--scale-10)
+    --mobile-header-btn-bg-hover: var(--color-action-ghost-hover);
+    --mobile-header-btn-color: var(--color-icon-default);
+
+    // Avatar
+    --mobile-header-avatar-size: var(--scale-8); // var(--scale-8)
+    --mobile-header-avatar-border: var(--color-border-subtle);
+
+    // Logout
+    --mobile-header-logout-size: var(--scale-8); // var(--scale-8)
+    --mobile-header-logout-color: var(--color-icon-subtle);
+    --mobile-header-logout-bg-hover: var(--color-status-negative-subtle);
+    --mobile-header-logout-color-hover: var(--color-status-negative);
+}

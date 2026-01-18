@@ -1,0 +1,177 @@
+@use '../../abstracts/mixins/foundation/typography' as typography;
+@use '../../abstracts/mixins/foundation/breakpoints' as bp;
+@use '../../../../shared/tokens/styles/scss/abstracts' as *;
+
+// ============================================================================ //
+//                              PROFILE PAGE STYLES                             //
+// ============================================================================ //
+// Modern profile page with centered avatar and large wave animation
+
+// ---------------------------------------------------------------------------//
+// MAIN CONTAINER
+// ---------------------------------------------------------------------------//
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-l); // 900px approx
+  margin: 0 auto;
+  padding-bottom: var(--scale-12);
+}
+
+.profile-page__header {
+  text-align: center;
+  margin-bottom: var(--scale-8);
+}
+
+.profile-page__title {
+  font-size: var(--font-size-headline-s);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--scale-2);
+}
+
+.profile-page__subtitle {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+}
+
+// ---------------------------------------------------------------------------//
+// AVATAR SECTION (CENTERED)
+// ---------------------------------------------------------------------------//
+
+.profile-avatar-section {
+  @include flex-center;
+  position: relative;
+  width: 100%;
+  height: var(--scale-112); // 450px
+  padding-top: var(--scale-12); // Extra space to clear sticky header
+  overflow: visible; // Allow rings to extend if needed
+}
+
+// ---------------------------------------------------------------------------//
+// FORM SECTION
+// ---------------------------------------------------------------------------//
+
+.profile-form-section {
+  width: 100%;
+  background-color: var(--color-surface-default);
+  border-radius: var(--border-radius-l);
+  padding: var(--scale-6);
+  box-shadow: var(--shadow-s);
+  border: var(--border-width-1) solid var(--color-border-subtle);
+  margin-bottom: var(--scale-6);
+
+  @include bp.bp-up('m') {
+    padding: var(--scale-8);
+  }
+}
+
+.profile-form-title {
+  font-size: var(--font-size-title-m);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--scale-6);
+  padding-bottom: var(--scale-4);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--scale-4); // Reduced gap on mobile
+
+  @include bp.bp-up('m') {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--scale-8);
+    row-gap: var(--scale-8);
+  }
+}
+
+// Three column row for names
+.form-row-three {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--scale-4); // Reduced gap on mobile
+  grid-column: 1 / -1;
+
+  @include bp.bp-up('m') {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--scale-6);
+  }
+}
+
+// Two column row
+.form-row-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--scale-4); // Reduced gap on mobile
+  grid-column: 1 / -1;
+
+  @include bp.bp-up('m') {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--scale-6);
+  }
+}
+
+// Full width items
+.form-item--full {
+  grid-column: 1 / -1;
+}
+
+// ---------------------------------------------------------------------------//
+// RESPONSIVE
+// ---------------------------------------------------------------------------//
+
+@include bp.bp-down('s') {
+  .profile-avatar-section {
+    height: auto; // Auto-adjust based on avatar size
+    min-height: var(--scale-64); // Larger minimum height for wave visibility (256px)
+    padding: var(--scale-16) var(--scale-4); // More vertical padding for ring wave
+  }
+}
+
+// ---------------------------------------------------------------------------//
+// PROFILE SECTION (for settings tabs)
+// ---------------------------------------------------------------------------//
+
+.profile-section {
+  margin-bottom: var(--scale-8);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.profile-section__title {
+  display: flex;
+  align-items: center;
+  gap: var(--scale-3);
+  font-size: var(--font-size-title-m);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--scale-2);
+  padding-bottom: var(--scale-4);
+  border-bottom: var(--border-width-1) solid var(--color-border-subtle);
+}
+
+.profile-section__subtitle {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--scale-4);
+}
+
+.profile-section__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scale-6);
+}

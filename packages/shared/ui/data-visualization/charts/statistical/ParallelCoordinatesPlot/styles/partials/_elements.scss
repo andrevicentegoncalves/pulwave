@@ -1,0 +1,39 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--parallel-coordinates {
+    &__axis-line {
+        stroke: var(--color-text-secondary);
+        stroke-width: 2px;
+    }
+
+    &__axis-label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        fill: var(--color-text-primary);
+        text-anchor: middle;
+    }
+
+    &__tick-line {
+        stroke: var(--color-border-secondary);
+        stroke-width: 1px;
+    }
+
+    &__tick-label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+        opacity: 0.7;
+        text-anchor: end;
+    }
+
+    &__data-path {
+        fill: none;
+        cursor: pointer;
+        transition: stroke-opacity 0.2s ease, stroke-width 0.2s ease;
+
+        &--legend-hovered {
+            stroke-opacity: 1 !important;
+            stroke-width: 3px !important;
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+    }
+}

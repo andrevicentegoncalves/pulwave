@@ -1,0 +1,122 @@
+{
+    "$description": "Rotation values",
+    "rotate": {
+        "0": {
+            "$value": "0deg",
+            "$type": "string"
+        },
+        "1": {
+            "$value": "1deg",
+            "$type": "string"
+        },
+        "2": {
+            "$value": "2deg",
+            "$type": "string"
+        },
+        "3": {
+            "$value": "3deg",
+            "$type": "string"
+        },
+        "6": {
+            "$value": "6deg",
+            "$type": "string"
+        },
+        "12": {
+            "$value": "12deg",
+            "$type": "string"
+        },
+        "45": {
+            "$value": "45deg",
+            "$type": "string"
+        },
+        "90": {
+            "$value": "90deg",
+            "$type": "string",
+            "$description": "Quarter turn"
+        },
+        "180": {
+            "$value": "180deg",
+            "$type": "string",
+            "$description": "Half turn"
+        },
+        "270": {
+            "$value": "270deg",
+            "$type": "string"
+        },
+        "360": {
+            "$value": "360deg",
+            "$type": "string",
+            "$description": "Full turn"
+        },
+        "-1": {
+            "$value": "-1deg",
+            "$type": "string"
+        },
+        "-2": {
+            "$value": "-2deg",
+            "$type": "string"
+        },
+        "-3": {
+            "$value": "-3deg",
+            "$type": "string"
+        },
+        "-45": {
+            "$value": "-45deg",
+            "$type": "string"
+        },
+        "-90": {
+            "$value": "-90deg",
+            "$type": "string"
+        },
+        "-180": {
+            "$value": "-180deg",
+            "$type": "string"
+        }
+    },
+    "skew": {
+        "0": {
+            "$value": "0deg",
+            "$type": "string"
+        },
+        "1": {
+            "$value": "1deg",
+            "$type": "string"
+        },
+        "2": {
+            "$value": "2deg",
+            "$type": "string"
+        },
+        "3": {
+            "$value": "3deg",
+            "$type": "string"
+        },
+        "6": {
+            "$value": "6deg",
+            "$type": "string"
+        },
+        "12": {
+            "$value": "12deg",
+            "$type": "string"
+        },
+        "-1": {
+            "$value": "-1deg",
+            "$type": "string"
+        },
+        "-2": {
+            "$value": "-2deg",
+            "$type": "string"
+        },
+        "-3": {
+            "$value": "-3deg",
+            "$type": "string"
+        },
+        "-6": {
+            "$value": "-6deg",
+            "$type": "string"
+        },
+        "-12": {
+            "$value": "-12deg",
+            "$type": "string"
+        }
+    }
+}

@@ -1,0 +1,154 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/**
+ * Recharts Overrides
+ * 
+ * Global Recharts library overrides for design system consistency.
+ * Uses chart-specific tokens from _tokens.scss.
+ */
+
+// ============================================================================
+// RECHARTS WRAPPER
+// ============================================================================
+
+.recharts-wrapper {
+    font-family: var(--font-family) !important;
+}
+
+.recharts-surface {
+    overflow: visible;
+    background: transparent;
+}
+
+// ============================================================================
+// RECHARTS TEXT
+// ============================================================================
+
+.recharts-text {
+    font-family: inherit;
+    font-size: var(--chart-font-size-tick);
+    fill: var(--chart-text-muted-color);
+}
+
+.recharts-label {
+    font-size: var(--chart-font-size-label);
+    fill: var(--chart-text-color);
+}
+
+// ============================================================================
+// RECHARTS AXIS
+// ============================================================================
+
+.recharts-cartesian-axis-line {
+    stroke: var(--chart-axis-stroke);
+}
+
+.recharts-cartesian-axis-tick-line {
+    stroke: var(--chart-axis-stroke);
+}
+
+.recharts-cartesian-axis-tick-value {
+    fill: var(--chart-axis-tick-color);
+}
+
+.recharts-yAxis .recharts-cartesian-axis-line {
+    display: none; // Y-axis line typically hidden
+}
+
+// ============================================================================
+// RECHARTS GRID
+// ============================================================================
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+    stroke: var(--chart-grid-stroke);
+    stroke-opacity: var(--chart-grid-opacity);
+}
+
+// ============================================================================
+// RECHARTS TOOLTIP
+// ============================================================================
+
+.recharts-tooltip-wrapper {
+    z-index: 100;
+}
+
+// ============================================================================
+// RECHARTS LEGEND
+// ============================================================================
+
+.recharts-legend-wrapper {
+    // Custom legend wrapper if using Recharts default legend
+}
+
+// ============================================================================
+// RECHARTS REFERENCE LINE
+// ============================================================================
+
+.recharts-reference-line-line {
+    stroke: var(--chart-axis-stroke);
+    stroke-dasharray: 4 4;
+}
+
+// ============================================================================
+// RECHARTS CURSOR
+// ============================================================================
+
+.recharts-cursor {
+    fill: var(--chart-grid-stroke);
+    fill-opacity: 0.1;
+}
+
+// ============================================================================
+// RECHARTS ACTIVE DOT
+// ============================================================================
+
+.recharts-active-dot {
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+// ============================================================================
+// RECHARTS RADIAL/POLAR CHARTS
+// ============================================================================
+
+// Ensure radar/polar chart backgrounds are transparent
+.recharts-polar-grid-concentric-polygon,
+.recharts-polar-radius-axis-tick,
+.recharts-polar-angle-axis-tick {
+    fill: none !important;
+}
+
+// Specifically target the background polygon that appears in radar charts
+.recharts-polar-grid polygon {
+    fill: none !important;
+    stroke: var(--chart-grid-stroke);
+    stroke-opacity: var(--chart-grid-opacity);
+}
+
+// Polar grid lines should use chart grid color
+.recharts-polar-grid-angle line,
+.recharts-polar-grid-concentric line {
+    stroke: var(--chart-grid-stroke);
+    stroke-opacity: var(--chart-grid-opacity);
+}
+
+// Ensure polar angle axis text uses proper color
+.recharts-polar-angle-axis-tick text,
+.recharts-polar-radius-axis-tick text {
+    fill: var(--chart-text-muted-color);
+}
+
+// ============================================================================
+// RECHARTS RADAR - Fix black polygon issue
+// ============================================================================
+
+// Override any default black fills on radar polygons
+.recharts-radar-polygon {
+    // Let the fill be controlled by component props, not CSS
+    // This ensures our color palette is used
+}
+
+// Ensure radar dots use proper colors
+.recharts-radar-dot {
+    // Controlled by component
+}

@@ -1,0 +1,253 @@
+@use '@pulwave/tokens/styles/tokens/generated/_tokens.scss' as *;
+
+.combobox {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    font-family: var(--font-family-base);
+
+    &__control {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: var(--scale-10);
+        padding: var(--scale-1) var(--scale-3);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--border-radius-m);
+        background-color: var(--color-surface-default);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        cursor: text;
+
+        &:hover {
+            border-color: var(--color-border-hover);
+        }
+    }
+
+    &--open &__control,
+    &__control:focus-within {
+        border-color: var(--color-brand-primary);
+        box-shadow: 0 0 0 var(--scale-0-5) var(--color-brand-primary-subtle);
+    }
+
+    &--error &__control {
+        border-color: var(--color-status-error);
+
+        &:focus-within {
+            box-shadow: 0 0 0 var(--scale-0-5) var(--color-status-error-subtle);
+        }
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+
+        .combobox__control {
+            background-color: var(--color-surface-disabled);
+        }
+    }
+
+    // Input Wrapper & Input
+    &__input-wrapper {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-2);
+        align-items: center;
+        min-width: 0;
+    }
+
+    &__input {
+        flex: 1;
+        min-width: 60px;
+        border: none;
+        outline: none;
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        background: transparent;
+        color: var(--color-text-primary);
+        font-size: var(--font-size-body-m);
+        padding: var(--scale-1) 0;
+
+        &::placeholder {
+            color: var(--color-text-secondary);
+        }
+    }
+
+    // Indicators
+    &__indicators {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-left: var(--scale-2);
+        color: var(--color-text-primary);
+    }
+
+    &__spinner {
+        margin-right: var(--scale-2);
+    }
+
+    &__clear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: none;
+        padding: var(--scale-1);
+        margin-right: var(--scale-1);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        border-radius: var(--border-radius-pill);
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+            color: var(--color-text-primary);
+        }
+    }
+
+    &__chevron {
+        transition: transform 0.2s ease;
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    // Dropdown
+    &__dropdown {
+        position: fixed;
+        z-index: var(--z-index-overlay-dropdown);
+        background-color: var(--color-surface-default);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--border-radius-m);
+        box-shadow: var(--shadow-l);
+        margin-top: var(--scale-1);
+        padding: var(--scale-1);
+        overflow-y: auto;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-0-5); // var(--scale-0-5)
+
+        // Mode: Portal (styles handled by JS inline mostly, but basic reset here)
+        box-sizing: border-box;
+    }
+
+    &__empty {
+        padding: var(--scale-3) var(--scale-4);
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-body-s);
+        text-align: center;
+    }
+
+    // Options
+    &__option {
+        display: flex;
+        align-items: center;
+        padding: var(--scale-2) var(--scale-3);
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        font-size: var(--font-size-body-m);
+        color: var(--color-text-primary);
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: none;
+        gap: 10px;
+
+        &:hover,
+        &--highlighted {
+            background-color: var(--color-surface-hover);
+        }
+
+        &--selected {
+            background-color: var(--color-brand-primary-subtle);
+            color: var(--color-brand-primary);
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &-checkbox {
+            width: var(--scale-4);
+            height: var(--scale-4);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--border-radius-s);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            &--checked {
+                background-color: var(--color-brand-primary);
+                border-color: var(--color-brand-primary);
+                color: var(--color-text-inverse);
+            }
+        }
+
+        &-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-primary);
+        }
+
+        &-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        &-label {
+            font-weight: 400;
+        }
+
+        &-description {
+            font-size: var(--font-size-body-xs);
+            color: var(--color-text-secondary);
+        }
+
+        &-check {
+            color: var(--color-brand-primary);
+            margin-left: auto;
+            width: var(--scale-4);
+            height: var(--scale-4);
+        }
+
+        // Create option special style
+        &--create {
+            border-top: 1px solid var(--color-border-subtle);
+            margin-top: var(--scale-1);
+            color: var(--color-brand-primary);
+        }
+    }
+
+    // Tags (Multi)
+    &__tag {
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--color-surface-subtle);
+        padding: var(--scale-0-5) var(--scale-2);
+        border-radius: var(--border-radius-s);
+        gap: 6px;
+        font-size: var(--font-size-body-s);
+
+        &-remove {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: var(--scale-0-5);
+            border-radius: var(--border-radius-pill);
+
+            &:hover {
+                background-color: var(--color-surface-hover);
+            }
+        }
+    }
+}

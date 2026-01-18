@@ -1,0 +1,40 @@
+// Radio Component - Sizes (s, m, l)
+// ==========================================================================
+
+.radio {
+    &--s {
+        .radio__control {
+            width: 14px;
+            height: 14px;
+
+            &::after {
+                width: 6px;
+                height: 6px;
+            }
+        }
+    }
+
+    &--m {
+        .radio__control {
+            width: 18px;
+            height: 18px;
+
+            &::after {
+                width: var(--scale-2);
+                height: var(--scale-2);
+            }
+        }
+    }
+
+    &--l {
+        .radio__control {
+            width: 22px;
+            height: 22px;
+
+            &::after {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+}

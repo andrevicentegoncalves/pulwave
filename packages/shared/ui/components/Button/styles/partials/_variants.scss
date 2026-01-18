@@ -1,0 +1,154 @@
+@use '@pulwave/tokens/styles/scss' as *;
+@use 'sass:map';
+
+// Kind Configurations
+$button-kinds: (
+    primary: (bg: var(--color-brand-primary),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-brand-primary-subtle),
+        hover: var(--color-brand-primary-hover)),
+    secondary: (bg: var(--color-brand-secondary),
+        text: var(--color-text-on-secondary), // or text-primary
+        subtle: var(--color-brand-secondary-subtle),
+        hover: var(--color-brand-secondary-hover)),
+    tertiary: (bg: var(--color-brand-tertiary),
+        text: var(--color-text-on-primary), // Assuming tertiary is dark/colorful
+        subtle: var(--color-brand-tertiary-subtle),
+        hover: var(--color-brand-tertiary) // hover same?
+    ),
+    neutral: (bg: var(--color-neutral-600),
+        text: var(--color-text-inverse),
+        subtle: var(--color-neutral-100),
+        hover: var(--color-neutral-700)),
+    success: (bg: var(--color-status-success),
+        text: var(--color-text-on-success),
+        subtle: var(--color-status-success-subtle),
+        hover: var(--color-status-success-hover)),
+    warning: (bg: var(--color-status-warning),
+        text: var(--color-text-on-warning),
+        subtle: var(--color-status-warning-subtle),
+        hover: var(--color-status-warning-hover)),
+    error: (bg: var(--color-status-error),
+        text: var(--color-text-on-error),
+        subtle: var(--color-status-error-subtle),
+        hover: var(--color-status-error-hover)),
+    info: (bg: var(--color-status-info),
+        text: var(--color-text-on-info),
+        subtle: var(--color-status-info-subtle),
+        hover: var(--color-status-info-hover)),
+    critical: (bg: var(--color-critical-500),
+        text: var(--color-text-on-error),
+        subtle: var(--color-critical-50),
+        hover: var(--color-critical-900)),
+    urgent: (bg: var(--color-urgent-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-urgent-50),
+        hover: var(--color-urgent-900)),
+    promotion: (bg: var(--color-promotion-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-promotion-50),
+        hover: var(--color-promotion-900)),
+    premium: (bg: var(--color-premium-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-premium-50),
+        hover: var(--color-premium-600)),
+    discovery: (bg: var(--color-discovery-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-discovery-50),
+        hover: var(--color-discovery-900)),
+    maintenance: (bg: var(--color-maintenance-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-maintenance-50),
+        hover: var(--color-maintenance-900)),
+    growth: (bg: var(--color-growth-500),
+        text: var(--color-text-on-primary),
+        subtle: var(--color-growth-50),
+        hover: var(--color-growth-900))
+);
+
+.button {
+    @each $kind, $config in $button-kinds {
+        &--kind-#{$kind} {
+
+            // Filled (Default)
+            &.button--variant-filled {
+                background-color: map.get($config, bg);
+                color: map.get($config, text);
+
+                &:hover:not(:disabled) {
+                    background-color: map.get($config, hover);
+                    // Add slight darken/lighten logic if explicit hover token missing
+                }
+
+                &:disabled {
+                    background-color: var(--color-surface-disabled);
+                    color: var(--color-text-disabled);
+                }
+            }
+
+            // Outlined
+            &.button--variant-outlined {
+                background-color: transparent;
+                border: 1px solid map.get($config, bg);
+                color: map.get($config, bg);
+
+                &:hover:not(:disabled) {
+                    background-color: map.get($config, subtle);
+                }
+
+                &:disabled {
+                    border-color: var(--color-border-disabled);
+                    color: var(--color-text-disabled);
+                }
+            }
+
+            // Ghost
+            &.button--variant-ghost {
+                background-color: transparent;
+                color: map.get($config, bg);
+
+                &:hover:not(:disabled) {
+                    background-color: map.get($config, subtle);
+                }
+
+                &:disabled {
+                    color: var(--color-text-disabled);
+                }
+            }
+
+            // Soft
+            &.button--variant-soft {
+                background-color: map.get($config, subtle);
+                color: map.get($config, bg); // Strong color text on subtle bg
+
+                &:hover:not(:disabled) {
+                    // Darken background slightly? Or mix?
+                    // Using brightness filter or just assuming subtle is light enough
+                    filter: brightness(0.95);
+                }
+
+                &:disabled {
+                    background-color: var(--color-surface-disabled);
+                    color: var(--color-text-disabled);
+                }
+            }
+
+            // Link
+            &.button--variant-link {
+                background-color: transparent;
+                color: map.get($config, bg);
+                padding: 0;
+                height: auto;
+                min-height: auto;
+
+                &:hover:not(:disabled) {
+                    text-decoration: underline;
+                }
+
+                &:disabled {
+                    color: var(--color-text-disabled);
+                }
+            }
+        }
+    }
+}

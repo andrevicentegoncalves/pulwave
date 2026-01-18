@@ -1,0 +1,492 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITY CLASSES: SIZING                          */
+/* ========================================================================== */
+
+// SCALE TOKENS (Width/Height/Min/Max)
+@each $key, $value in t.$scale-tokens {
+    $suffix: string.slice($key, 7); // remove 'scale-'
+    $var: var(--#{$key});
+
+    @include with-responsive {
+        .#{$utility-prefix}w-#{$suffix}#{$utility-suffix} {
+            width: $var;
+        }
+
+        .#{$utility-prefix}h-#{$suffix}#{$utility-suffix} {
+            height: $var;
+        }
+
+        .#{$utility-prefix}min-w-#{$suffix}#{$utility-suffix} {
+            min-width: $var;
+        }
+
+        .#{$utility-prefix}max-w-#{$suffix}#{$utility-suffix} {
+            max-width: $var;
+        }
+
+        .#{$utility-prefix}min-h-#{$suffix}#{$utility-suffix} {
+            min-height: $var;
+        }
+
+        .#{$utility-prefix}max-h-#{$suffix}#{$utility-suffix} {
+            max-height: $var;
+        }
+
+        .#{$utility-prefix}size-#{$suffix}#{$utility-suffix} {
+            width: $var;
+            height: $var;
+        }
+    }
+}
+
+// CONTAINER TOKENS (w-full, w-screen)
+@each $key, $value in t.$container-tokens {
+    $suffix: null;
+    $var: null;
+
+    @if $key =='container-full' {
+        $suffix: 'full';
+        $var: 100%;
+    }
+
+    @else if $key =='container-screen' {
+        $suffix: 'screen';
+        $var: var(--#{$key});
+    }
+
+    @if $suffix {
+        @include with-responsive {
+            .#{$utility-prefix}w-#{$suffix}#{$utility-suffix} {
+                width: $var;
+            }
+
+            .#{$utility-prefix}h-#{$suffix}#{$utility-suffix} {
+                height: $var;
+            }
+
+            .#{$utility-prefix}min-w-#{$suffix}#{$utility-suffix} {
+                min-width: $var;
+            }
+
+            .#{$utility-prefix}max-w-#{$suffix}#{$utility-suffix} {
+                max-width: $var;
+            }
+
+            .#{$utility-prefix}min-h-#{$suffix}#{$utility-suffix} {
+                min-height: $var;
+            }
+
+            .#{$utility-prefix}max-h-#{$suffix}#{$utility-suffix} {
+                max-height: $var;
+            }
+
+            .#{$utility-prefix}size-#{$suffix}#{$utility-suffix} {
+                width: $var;
+                height: $var;
+            }
+        }
+    }
+}
+
+// ASPECT RATIO
+@each $key, $value in t.$aspect-ratio-tokens {
+    $suffix: string.slice($key, 14);
+
+    @include with-responsive {
+        .#{$utility-prefix}aspect-#{$suffix}#{$utility-suffix} {
+            aspect-ratio: var(--#{$key});
+        }
+    }
+}
+
+// MAX-WIDTH (from all container tokens)
+@each $key, $value in t.$container-tokens {
+    $suffix: string.slice($key, 11);
+
+    @include with-responsive {
+        .#{$utility-prefix}max-w-#{$suffix}#{$utility-suffix} {
+            max-width: var(--#{$key});
+        }
+    }
+}
+
+// STATIC CLASSES (Fractional, Keywords)
+@include with-responsive {
+
+    // FULL / SCREEN / AUTO
+    .#{$utility-prefix}w-full#{$utility-suffix} {
+        width: 100%;
+    }
+
+    .#{$utility-prefix}h-full#{$utility-suffix} {
+        height: 100%;
+    }
+
+    .#{$utility-prefix}w-screen#{$utility-suffix} {
+        width: 100vw;
+    }
+
+    .#{$utility-prefix}h-screen#{$utility-suffix} {
+        height: 100vh;
+    }
+
+    .#{$utility-prefix}w-auto#{$utility-suffix} {
+        width: auto;
+    }
+
+    .#{$utility-prefix}h-auto#{$utility-suffix} {
+        height: auto;
+    }
+
+    .#{$utility-prefix}min-h-screen#{$utility-suffix} {
+        min-height: 100vh;
+    }
+
+    // FRACTIONAL WIDTHS (Escaped slash)
+    .#{$utility-prefix}w-1\/2#{$utility-suffix} {
+        width: 50%;
+    }
+
+    .#{$utility-prefix}w-1\/3#{$utility-suffix} {
+        width: 33.333333%;
+    }
+
+    .#{$utility-prefix}w-2\/3#{$utility-suffix} {
+        width: 66.666667%;
+    }
+
+    .#{$utility-prefix}w-1\/4#{$utility-suffix} {
+        width: 25%;
+    }
+
+    .#{$utility-prefix}w-2\/4#{$utility-suffix} {
+        width: 50%;
+    }
+
+    .#{$utility-prefix}w-3\/4#{$utility-suffix} {
+        width: 75%;
+    }
+
+    .#{$utility-prefix}w-1\/5#{$utility-suffix} {
+        width: 20%;
+    }
+
+    .#{$utility-prefix}w-2\/5#{$utility-suffix} {
+        width: 40%;
+    }
+
+    .#{$utility-prefix}w-3\/5#{$utility-suffix} {
+        width: 60%;
+    }
+
+    .#{$utility-prefix}w-4\/5#{$utility-suffix} {
+        width: 80%;
+    }
+
+    .#{$utility-prefix}w-1\/6#{$utility-suffix} {
+        width: 16.666667%;
+    }
+
+    .#{$utility-prefix}w-2\/6#{$utility-suffix} {
+        width: 33.333333%;
+    }
+
+    .#{$utility-prefix}w-3\/6#{$utility-suffix} {
+        width: 50%;
+    }
+
+    .#{$utility-prefix}w-4\/6#{$utility-suffix} {
+        width: 66.666667%;
+    }
+
+    .#{$utility-prefix}w-5\/6#{$utility-suffix} {
+        width: 83.333333%;
+    }
+
+    .#{$utility-prefix}w-1\/12#{$utility-suffix} {
+        width: 8.333333%;
+    }
+
+    .#{$utility-prefix}w-2\/12#{$utility-suffix} {
+        width: 16.666667%;
+    }
+
+    .#{$utility-prefix}w-3\/12#{$utility-suffix} {
+        width: 25%;
+    }
+
+    .#{$utility-prefix}w-4\/12#{$utility-suffix} {
+        width: 33.333333%;
+    }
+
+    .#{$utility-prefix}w-5\/12#{$utility-suffix} {
+        width: 41.666667%;
+    }
+
+    .#{$utility-prefix}w-6\/12#{$utility-suffix} {
+        width: 50%;
+    }
+
+    .#{$utility-prefix}w-7\/12#{$utility-suffix} {
+        width: 58.333333%;
+    }
+
+    .#{$utility-prefix}w-8\/12#{$utility-suffix} {
+        width: 66.666667%;
+    }
+
+    .#{$utility-prefix}w-9\/12#{$utility-suffix} {
+        width: 75%;
+    }
+
+    .#{$utility-prefix}w-10\/12#{$utility-suffix} {
+        width: 83.333333%;
+    }
+
+    .#{$utility-prefix}w-11\/12#{$utility-suffix} {
+        width: 91.666667%;
+    }
+
+    // MIN-WIDTH KEYWORDS
+    .#{$utility-prefix}min-w-0#{$utility-suffix} {
+        min-width: 0px;
+    }
+
+    .#{$utility-prefix}min-w-full#{$utility-suffix} {
+        min-width: 100%;
+    }
+
+    .#{$utility-prefix}min-w-min#{$utility-suffix} {
+        min-width: min-content;
+    }
+
+    .#{$utility-prefix}min-w-max#{$utility-suffix} {
+        min-width: max-content;
+    }
+
+    .#{$utility-prefix}min-w-fit#{$utility-suffix} {
+        min-width: fit-content;
+    }
+
+    // MAX-WIDTH KEYWORDS
+    .#{$utility-prefix}max-w-0#{$utility-suffix} {
+        max-width: 0px;
+    }
+
+    .#{$utility-prefix}max-w-none#{$utility-suffix} {
+        max-width: none;
+    }
+
+    .#{$utility-prefix}max-w-full#{$utility-suffix} {
+        max-width: 100%;
+    }
+
+    .#{$utility-prefix}max-w-min#{$utility-suffix} {
+        max-width: min-content;
+    }
+
+    .#{$utility-prefix}max-w-max#{$utility-suffix} {
+        max-width: max-content;
+    }
+
+    .#{$utility-prefix}max-w-fit#{$utility-suffix} {
+        max-width: fit-content;
+    }
+
+    .#{$utility-prefix}max-w-prose#{$utility-suffix} {
+        max-width: 65ch;
+    }
+
+    // HEIGHT KEYWORDS
+    .#{$utility-prefix}h-fit#{$utility-suffix} {
+        height: fit-content;
+    }
+
+    .#{$utility-prefix}h-min#{$utility-suffix} {
+        height: min-content;
+    }
+
+    .#{$utility-prefix}h-max#{$utility-suffix} {
+        height: max-content;
+    }
+
+    .#{$utility-prefix}h-dvh#{$utility-suffix} {
+        height: 100dvh;
+    }
+
+    .#{$utility-prefix}h-lvh#{$utility-suffix} {
+        height: 100lvh;
+    }
+
+    .#{$utility-prefix}h-svh#{$utility-suffix} {
+        height: 100svh;
+    }
+
+    // MIN-HEIGHT KEYWORDS
+    .#{$utility-prefix}min-h-0#{$utility-suffix} {
+        min-height: 0px;
+    }
+
+    .#{$utility-prefix}min-h-full#{$utility-suffix} {
+        min-height: 100%;
+    }
+
+    .#{$utility-prefix}min-h-min#{$utility-suffix} {
+        min-height: min-content;
+    }
+
+    .#{$utility-prefix}min-h-max#{$utility-suffix} {
+        min-height: max-content;
+    }
+
+    .#{$utility-prefix}min-h-fit#{$utility-suffix} {
+        min-height: fit-content;
+    }
+
+    .#{$utility-prefix}min-h-dvh#{$utility-suffix} {
+        min-height: 100dvh;
+    }
+
+    .#{$utility-prefix}min-h-lvh#{$utility-suffix} {
+        min-height: 100lvh;
+    }
+
+    .#{$utility-prefix}min-h-svh#{$utility-suffix} {
+        min-height: 100svh;
+    }
+
+    // MAX-HEIGHT KEYWORDS
+    .#{$utility-prefix}max-h-0#{$utility-suffix} {
+        max-height: 0px;
+    }
+
+    .#{$utility-prefix}max-h-none#{$utility-suffix} {
+        max-height: none;
+    }
+
+    .#{$utility-prefix}max-h-full#{$utility-suffix} {
+        max-height: 100%;
+    }
+
+    .#{$utility-prefix}max-h-min#{$utility-suffix} {
+        max-height: min-content;
+    }
+
+    .#{$utility-prefix}max-h-max#{$utility-suffix} {
+        max-height: max-content;
+    }
+
+    .#{$utility-prefix}max-h-fit#{$utility-suffix} {
+        max-height: fit-content;
+    }
+
+    .#{$utility-prefix}max-h-screen#{$utility-suffix} {
+        max-height: 100vh;
+    }
+
+    .#{$utility-prefix}max-h-dvh#{$utility-suffix} {
+        max-height: 100dvh;
+    }
+
+    .#{$utility-prefix}max-h-lvh#{$utility-suffix} {
+        max-height: 100lvh;
+    }
+
+    .#{$utility-prefix}max-h-svh#{$utility-suffix} {
+        max-height: 100svh;
+    }
+
+    // FIELD SIZING
+    .#{$utility-prefix}field-sizing-content#{$utility-suffix} {
+        field-sizing: content;
+    }
+
+    .#{$utility-prefix}field-sizing-fixed#{$utility-suffix} {
+        field-sizing: fixed;
+    }
+
+    // DYNAMIC VIEWPORT WIDTH (responds to browser chrome)
+    .#{$utility-prefix}w-dvw#{$utility-suffix} {
+        width: 100dvw;
+    }
+
+    .#{$utility-prefix}max-w-dvw#{$utility-suffix} {
+        max-width: 100dvw;
+    }
+
+    .#{$utility-prefix}min-w-dvw#{$utility-suffix} {
+        min-width: 100dvw;
+    }
+
+    // Dynamic viewport inline/block (for RTL support)
+    .#{$utility-prefix}w-dvi#{$utility-suffix} {
+        width: 100dvi;
+    }
+
+    .#{$utility-prefix}h-dvb#{$utility-suffix} {
+        height: 100dvb;
+    }
+
+    // SMALL VIEWPORT WIDTH (browser chrome visible)
+    .#{$utility-prefix}w-svw#{$utility-suffix} {
+        width: 100svw;
+    }
+
+    .#{$utility-prefix}max-w-svw#{$utility-suffix} {
+        max-width: 100svw;
+    }
+
+    .#{$utility-prefix}min-w-svw#{$utility-suffix} {
+        min-width: 100svw;
+    }
+
+    .#{$utility-prefix}max-h-svh#{$utility-suffix} {
+        max-height: 100svh;
+    }
+
+    // Small viewport inline/block
+    .#{$utility-prefix}w-svi#{$utility-suffix} {
+        width: 100svi;
+    }
+
+    .#{$utility-prefix}h-svb#{$utility-suffix} {
+        height: 100svb;
+    }
+
+    // LARGE VIEWPORT WIDTH (browser chrome hidden)
+    .#{$utility-prefix}w-lvw#{$utility-suffix} {
+        width: 100lvw;
+    }
+
+    .#{$utility-prefix}max-w-lvw#{$utility-suffix} {
+        max-width: 100lvw;
+    }
+
+    .#{$utility-prefix}min-w-lvw#{$utility-suffix} {
+        min-width: 100lvw;
+    }
+
+    .#{$utility-prefix}max-h-lvh#{$utility-suffix} {
+        max-height: 100lvh;
+    }
+
+    // Large viewport inline/block
+    .#{$utility-prefix}w-lvi#{$utility-suffix} {
+        width: 100lvi;
+    }
+
+    .#{$utility-prefix}h-lvb#{$utility-suffix} {
+        height: 100lvb;
+    }
+
+    // ASPECT RATIO RESET
+    .#{$utility-prefix}aspect-auto#{$utility-suffix} {
+        aspect-ratio: auto;
+    }
+
+}

@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.tooltip {
+    --tooltip-bg: var(--color-surface-inverse);
+    --tooltip-color: var(--color-text-inverse-default);
+    --tooltip-border-radius: var(--border-radius-s);
+    --tooltip-shadow: var(--shadow-m);
+
+    --tooltip-padding-y: var(--scale-2);
+    --tooltip-padding-x: var(--scale-3);
+
+    --tooltip-arrow-size: var(--scale-1-5); // 6px
+    --tooltip-max-width: var(--scale-75); // 300px
+    --tooltip-min-width: 0;
+
+    --tooltip-z-index: var(--z-index-tooltip);
+}

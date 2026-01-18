@@ -1,0 +1,12 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/* ────────────────────────────────────────────────────────────────────────────
+   TABS BASE
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.tabs {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: var(--scale-6);
+    box-sizing: border-box;
+}

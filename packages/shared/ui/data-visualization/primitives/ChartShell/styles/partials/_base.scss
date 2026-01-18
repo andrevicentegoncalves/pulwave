@@ -1,0 +1,12 @@
+/**
+ * ChartShell Base Styles
+ */
+
+.chart-shell {
+    position: relative;
+    width: 100%;
+    // Ensure proper sizing in flex containers
+    flex: 1 1 100%;
+    min-width: 0;
+    font-family: var(--font-family);
+}

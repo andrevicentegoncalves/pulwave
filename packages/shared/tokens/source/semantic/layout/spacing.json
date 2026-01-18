@@ -1,0 +1,87 @@
+{
+    "$description": "Semantic layout tokens - containers, grid, positioning",
+    "stack": {
+        "$description": "Vertical spacing between elements",
+        "xs": {
+            "$value": "{scale.1}",
+            "$type": "dimension",
+            "$description": "4px"
+        },
+        "s": {
+            "$value": "{scale.2}",
+            "$type": "dimension",
+            "$description": "8px"
+        },
+        "m": {
+            "$value": "{scale.4}",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "l": {
+            "$value": "{scale.6}",
+            "$type": "dimension",
+            "$description": "24px"
+        },
+        "xl": {
+            "$value": "{scale.8}",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "2xl": {
+            "$value": "{scale.12}",
+            "$type": "dimension",
+            "$description": "48px"
+        }
+    },
+    "inline": {
+        "$description": "Horizontal spacing between elements",
+        "xs": {
+            "$value": "{scale.1}",
+            "$type": "dimension"
+        },
+        "s": {
+            "$value": "{scale.2}",
+            "$type": "dimension"
+        },
+        "m": {
+            "$value": "{scale.3}",
+            "$type": "dimension"
+        },
+        "l": {
+            "$value": "{scale.4}",
+            "$type": "dimension"
+        },
+        "xl": {
+            "$value": "{scale.6}",
+            "$type": "dimension"
+        }
+    },
+    "inset": {
+        "$description": "Padding inside elements",
+        "xs": {
+            "$value": "{scale.2}",
+            "$type": "dimension",
+            "$description": "8px"
+        },
+        "s": {
+            "$value": "{scale.4}",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "m": {
+            "$value": "{scale.6}",
+            "$type": "dimension",
+            "$description": "24px"
+        },
+        "l": {
+            "$value": "{scale.8}",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "xl": {
+            "$value": "{scale.12}",
+            "$type": "dimension",
+            "$description": "48px"
+        }
+    }
+}

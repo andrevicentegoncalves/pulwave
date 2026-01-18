@@ -1,0 +1,2 @@
+export { SupabaseContentTranslationProvider } from './SupabaseContentTranslationProvider';
+

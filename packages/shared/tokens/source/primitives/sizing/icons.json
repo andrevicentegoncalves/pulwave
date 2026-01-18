@@ -1,0 +1,239 @@
+{
+    "$description": "Sizing tokens - icons, images, avatars, thumbnails",
+    "iconSize": {
+        "$description": "Icon dimensions",
+        "xs": {
+            "$value": "1rem",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "s": {
+            "$value": "1.25rem",
+            "$type": "dimension",
+            "$description": "20px"
+        },
+        "m": {
+            "$value": "1.5rem",
+            "$type": "dimension",
+            "$description": "24px - base"
+        },
+        "l": {
+            "$value": "2rem",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "xl": {
+            "$value": "3rem",
+            "$type": "dimension",
+            "$description": "48px"
+        }
+    },
+    "iconContext": {
+        "$description": "Context-specific icon sizes",
+        "inlineText": {
+            "$value": "{iconSize.xs}",
+            "$type": "dimension"
+        },
+        "heading": {
+            "$value": "{iconSize.l}",
+            "$type": "dimension"
+        },
+        "buttonSmall": {
+            "$value": "{iconSize.xs}",
+            "$type": "dimension"
+        },
+        "buttonDefault": {
+            "$value": "{iconSize.s}",
+            "$type": "dimension"
+        },
+        "buttonLarge": {
+            "$value": "{iconSize.m}",
+            "$type": "dimension"
+        },
+        "input": {
+            "$value": "{iconSize.s}",
+            "$type": "dimension"
+        },
+        "listItem": {
+            "$value": "{iconSize.s}",
+            "$type": "dimension"
+        },
+        "navigation": {
+            "$value": "{iconSize.m}",
+            "$type": "dimension"
+        },
+        "toolbar": {
+            "$value": "{iconSize.m}",
+            "$type": "dimension"
+        },
+        "avatarSmall": {
+            "$value": "{iconSize.m}",
+            "$type": "dimension"
+        },
+        "avatarDefault": {
+            "$value": "{iconSize.l}",
+            "$type": "dimension"
+        },
+        "avatarLarge": {
+            "$value": "{iconSize.xl}",
+            "$type": "dimension"
+        },
+        "hero": {
+            "$value": "{iconSize.xl}",
+            "$type": "dimension"
+        },
+        "feature": {
+            "$value": "{iconSize.l}",
+            "$type": "dimension"
+        },
+        "badge": {
+            "$value": "{iconSize.xs}",
+            "$type": "dimension"
+        }
+    },
+    "iconTextGap": {
+        "$description": "Gap between icon and text",
+        "tight": {
+            "$value": "0.25rem",
+            "$type": "dimension",
+            "$description": "4px"
+        },
+        "default": {
+            "$value": "0.5rem",
+            "$type": "dimension",
+            "$description": "8px"
+        },
+        "comfortable": {
+            "$value": "0.75rem",
+            "$type": "dimension",
+            "$description": "12px"
+        }
+    },
+    "avatarSize": {
+        "$description": "Avatar/profile image dimensions",
+        "xs": {
+            "$value": "2rem",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "s": {
+            "$value": "2.5rem",
+            "$type": "dimension",
+            "$description": "40px"
+        },
+        "m": {
+            "$value": "3rem",
+            "$type": "dimension",
+            "$description": "48px"
+        },
+        "l": {
+            "$value": "4rem",
+            "$type": "dimension",
+            "$description": "64px"
+        },
+        "xl": {
+            "$value": "6rem",
+            "$type": "dimension",
+            "$description": "96px"
+        },
+        "2xl": {
+            "$value": "8rem",
+            "$type": "dimension",
+            "$description": "128px"
+        }
+    },
+    "thumbnailSize": {
+        "$description": "Thumbnail dimensions",
+        "xs": {
+            "$value": "4rem",
+            "$type": "dimension",
+            "$description": "64px"
+        },
+        "s": {
+            "$value": "5rem",
+            "$type": "dimension",
+            "$description": "80px"
+        },
+        "m": {
+            "$value": "7.5rem",
+            "$type": "dimension",
+            "$description": "120px"
+        },
+        "l": {
+            "$value": "10rem",
+            "$type": "dimension",
+            "$description": "160px"
+        },
+        "xl": {
+            "$value": "12.5rem",
+            "$type": "dimension",
+            "$description": "200px"
+        }
+    },
+    "imageWidth": {
+        "$description": "Image width presets",
+        "xs": {
+            "$value": "9rem",
+            "$type": "dimension",
+            "$description": "144px"
+        },
+        "s": {
+            "$value": "12rem",
+            "$type": "dimension",
+            "$description": "192px"
+        },
+        "sm": {
+            "$value": "16rem",
+            "$type": "dimension",
+            "$description": "256px"
+        },
+        "m": {
+            "$value": "20rem",
+            "$type": "dimension",
+            "$description": "320px"
+        },
+        "l": {
+            "$value": "28rem",
+            "$type": "dimension",
+            "$description": "448px"
+        },
+        "xl": {
+            "$value": "36rem",
+            "$type": "dimension",
+            "$description": "576px"
+        },
+        "2xl": {
+            "$value": "48rem",
+            "$type": "dimension",
+            "$description": "768px"
+        }
+    },
+    "imageHeight": {
+        "$description": "Image height presets",
+        "xs": {
+            "$value": "5rem",
+            "$type": "dimension",
+            "$description": "80px"
+        },
+        "s": {
+            "$value": "7rem",
+            "$type": "dimension",
+            "$description": "112px"
+        },
+        "m": {
+            "$value": "12rem",
+            "$type": "dimension",
+            "$description": "192px"
+        },
+        "l": {
+            "$value": "16rem",
+            "$type": "dimension",
+            "$description": "256px"
+        },
+        "xl": {
+            "$value": "24rem",
+            "$type": "dimension",
+            "$description": "384px"
+        }
+    }
+}

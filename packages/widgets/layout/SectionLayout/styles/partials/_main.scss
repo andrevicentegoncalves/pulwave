@@ -1,0 +1,145 @@
+// ============================================================================ //
+// SECTION LAYOUT - MAIN
+// ============================================================================ //
+// Core grid layout for pages with secondary sidebar
+
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/breakpoints' as *;
+
+.section-layout {
+    box-sizing: border-box; // Critical: prevents padding from expanding beyond parent width
+    display: grid;
+    grid-template-columns: var(--section-sidebar-width-expanded) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr); // Constrain row height for scroll
+    gap: var(--scale-6);
+    align-items: start;
+    padding-left: var(--scale-6);
+    padding-right: var(--scale-6);
+    transition: grid-template-columns 150ms var(--easing-standard);
+
+    // Prevent horizontal overflow while allowing notch to extend above content
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+    min-width: 0;
+
+    &--collapsed {
+        grid-template-columns: var(--section-sidebar-width-collapsed) minmax(0, 1fr);
+    }
+
+    // Content wrapper - provides position context for the notch
+    &__content-wrapper {
+        position: relative; // Allows notch to position relative to wrapper
+        z-index: var(--z-index-overlay-sticky); // Allow notch to overlap header
+        margin-top: var(--scale-5);
+        margin-bottom: var(--scale-5);
+        height: calc(100% - var(--scale-10)); // Account for top + bottom margin
+        min-height: 0; // Critical for grid/flex scroll
+    }
+
+    &__content {
+        box-sizing: border-box; // Critical: prevents padding from expanding beyond grid column
+        padding: var(--scale-6);
+        height: 100%; // Fill the wrapper
+        min-height: 0; // Critical for grid/flex scroll
+        overflow-y: auto; // Scroll only when content overflows
+        scrollbar-width: auto; // Use standard width
+        scrollbar-color: var(--color-brand-primary) var(--color-surface-subtle); // Primary thumb, subtle track
+        background-color: var(--color-surface-default);
+        border-radius: var(--border-radius-2xl);
+        border: var(--border-width-s) solid var(--color-border-subtle);
+
+        &::-webkit-scrollbar {
+            width: var(--scale-3); // var(--scale-3)
+            display: block;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-brand-primary);
+            border-radius: var(--border-radius-s);
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: var(--color-surface-subtle);
+        }
+    }
+
+    &__content-inner {
+        padding: 0;
+    }
+
+    &__sidebar--sticky {
+        position: sticky;
+        top: 0;
+        max-height: 100%; // Fill available height in grid
+        overflow-y: auto;
+        align-self: start;
+
+        // Ensure scrollbar is nice
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: var(--scale-1); // var(--scale-1)
+        }
+    }
+
+    // Fixed layout mode (independent scrolling)
+    &--fixed {
+        // Use flex: 1 to fill remaining space in flex container
+        // height: 100% respects parent constraints vs calc(100vh - X) which is absolute
+        height: 100%;
+        min-height: 0; // Allow shrinking
+        flex: 1; // Grow to fill remaining space
+        overflow-x: hidden; // Prevent horizontal scroll
+        overflow-y: visible; // Allow notch to extend above content
+        align-items: stretch; // Ensure sidebar/content full height
+        position: relative;
+
+        // Content wrapper fills available space
+        .section-layout__content-wrapper {
+            height: 100%;
+        }
+
+        // Ensure content area scrolls
+        .section-layout__content {
+            height: 100%;
+            overflow-y: auto;
+            scrollbar-width: thin;
+
+            &::-webkit-scrollbar {
+                width: var(--scale-2); // var(--scale-2)
+            }
+        }
+
+
+
+
+
+        // Ensure content inner also stretches or behaves well
+        // .section-layout__content-inner { min-height: 100%; }
+    }
+
+    @include bp-down('m') {
+        grid-template-columns: 1fr;
+        gap: var(--scale-4);
+
+        &--collapsed {
+            grid-template-columns: 1fr;
+        }
+
+        // On mobile, fixed layout might be tricky or undesired?
+        // Usually we want normal scroll on mobile.
+        // Let's reset height on mobile if needed, but sidebar is usually hidden/modal on mobile.
+        &--fixed {
+            height: auto;
+            overflow: visible;
+
+            .section-layout__sidebar,
+            .section-layout__content-wrapper,
+            .section-layout__content {
+                height: auto;
+                overflow: visible;
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+// ============================================================================ //
+// BASE SIDEBAR LAYOUT - RESPONSIVE
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+@include bp-down(m) {
+    .base-sidebar-layout__sidebar {
+        display: none; // Mobile uses MobileShell
+    }
+}

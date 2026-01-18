@@ -1,0 +1,25 @@
+{
+    "$description": "Font family stacks",
+    "fontFamily": {
+        "sans": {
+            "$value": "'Arial', 'Helvetica Neue', 'Helvetica', sans-serif",
+            "$type": "fontFamily"
+        },
+        "serif": {
+            "$value": "'Georgia', 'Times New Roman', serif",
+            "$type": "fontFamily"
+        },
+        "mono": {
+            "$value": "'Courier New', 'Courier', monospace",
+            "$type": "fontFamily"
+        },
+        "roboto": {
+            "$value": "'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            "$type": "fontFamily"
+        },
+        "montserrat": {
+            "$value": "'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            "$type": "fontFamily"
+        }
+    }
+}

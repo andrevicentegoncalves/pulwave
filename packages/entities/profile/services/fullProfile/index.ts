@@ -1,0 +1,2 @@
+export { fullProfileService } from './fullProfileService';
+

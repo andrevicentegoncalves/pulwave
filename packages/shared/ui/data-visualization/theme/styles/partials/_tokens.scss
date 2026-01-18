@@ -1,0 +1,153 @@
+/**
+ * Chart Tokens SCSS - SINGLE SOURCE OF TRUTH
+ * 
+ * All chart-specific CSS custom properties.
+ * theme.ts references these variables.
+ * 
+ * Usage: var(--chart-color-primary)
+ */
+
+:root {
+    // =========================================================================
+    // CATEGORICAL COLORS - For distinguishing data series (1-9)
+    // =========================================================================
+
+    --chart-color-1: var(--color-brand-primary);
+    --chart-color-2: var(--color-info-500);
+    --chart-color-3: var(--color-success-500);
+    --chart-color-4: var(--color-warning-500);
+    --chart-color-5: var(--color-error-500);
+    --chart-color-6: var(--color-brand-secondary);
+    --chart-color-7: var(--color-brand-tertiary);
+    --chart-color-8: var(--color-purple-500);
+    --chart-color-9: var(--color-violet-500);
+
+    // =========================================================================
+    // STATUS COLORS - For semantic meaning
+    // =========================================================================
+
+    --chart-status-success: var(--color-success-500);
+    --chart-status-warning: var(--color-warning-500);
+    --chart-status-error: var(--color-error-500);
+    --chart-status-critical: var(--color-error-700);
+    --chart-status-info: var(--color-info-500);
+    --chart-status-neutral: var(--color-neutral-400);
+    --chart-status-active: var(--color-brand-primary);
+
+    // =========================================================================
+    // SEQUENTIAL COLORS - For gradients/scales (low to high)
+    // =========================================================================
+
+    // Primary sequence
+    --chart-sequential-primary-1: var(--color-primary-200);
+    --chart-sequential-primary-2: var(--color-primary-500);
+    --chart-sequential-primary-3: var(--color-primary-700);
+
+    // Neutral sequence
+    --chart-sequential-neutral-1: var(--color-neutral-200);
+    --chart-sequential-neutral-2: var(--color-neutral-400);
+    --chart-sequential-neutral-3: var(--color-neutral-600);
+
+    // =========================================================================
+    // DIVERGING COLORS - For negative to positive (5-point scale)
+    // =========================================================================
+
+    --chart-diverging-1: var(--color-error-500); // Strong negative
+    --chart-diverging-2: var(--color-error-300); // Weak negative
+    --chart-diverging-3: var(--color-neutral-300); // Neutral (lighter gray)
+    --chart-diverging-4: var(--color-success-300); // Weak positive
+    --chart-diverging-5: var(--color-success-500); // Strong positive
+
+    // =========================================================================
+    // SEMANTIC UI COLORS
+    // =========================================================================
+
+    --chart-text-color: var(--color-text-primary);
+    --chart-text-muted-color: var(--color-text-secondary);
+    --chart-text-inverse-color: var(--color-text-inverse);
+    --chart-axis-color: var(--color-text-secondary);
+    --chart-grid-color: var(--color-border-subtle);
+    --chart-border-color: var(--color-border-default);
+    --chart-background-color: var(--color-surface-default);
+    --chart-background-elevated-color: var(--color-surface-strong);
+    --chart-background-subtle-color: var(--color-surface-subtle);
+
+    // Special purpose colors
+    --chart-color-inactive: var(--color-neutral-300);
+    --chart-color-empty: var(--color-neutral-200);
+    --chart-color-brand: var(--color-brand-primary);
+    --chart-overlay-color: var(--color-overlay-strong);
+
+    // =========================================================================
+    // TYPOGRAPHY
+    // =========================================================================
+
+    --chart-font-size-tick: var(--font-size-caption-s);
+    --chart-font-size-label: var(--font-size-caption-m);
+    --chart-font-size-title: var(--font-size-body-m);
+    --chart-font-size-legend: var(--font-size-caption-m);
+    --chart-font-weight-normal: var(--font-weight-regular);
+    --chart-font-weight-medium: var(--font-weight-medium);
+    --chart-font-weight-bold: var(--font-weight-bold);
+
+    // =========================================================================
+    // SPACING (uses scale tokens)
+    // =========================================================================
+
+    --chart-spacing-xs: var(--scale-1);
+    --chart-spacing-s: var(--scale-2);
+    --chart-spacing-m: var(--scale-3);
+    --chart-spacing-l: var(--scale-4);
+    --chart-spacing-xl: var(--scale-5);
+
+    // =========================================================================
+    // BORDER RADIUS
+    // =========================================================================
+
+    --chart-radius-s: var(--border-radius-s);
+    --chart-radius-m: var(--border-radius-m);
+    --chart-radius-l: var(--border-radius-l);
+
+    // =========================================================================
+    // SHADOWS
+    // =========================================================================
+
+    --chart-shadow-tooltip: var(--shadow-m);
+    --chart-shadow-legend: var(--shadow-s);
+
+    // =========================================================================
+    // TOOLTIP
+    // =========================================================================
+
+    --chart-tooltip-bg: var(--chart-background-color);
+    --chart-tooltip-border: var(--chart-border-color);
+    --chart-tooltip-radius: var(--chart-radius-m);
+    --chart-tooltip-padding: var(--chart-spacing-m);
+    --chart-tooltip-shadow: var(--chart-shadow-tooltip);
+
+    // =========================================================================
+    // LEGEND
+    // =========================================================================
+
+    --chart-legend-gap: var(--chart-spacing-s);
+    --chart-legend-item-padding: var(--chart-spacing-xs) var(--chart-spacing-m);
+    --chart-legend-item-radius: var(--border-radius-xl);
+    --chart-legend-icon-size: 10px;
+    --chart-legend-hover-bg: var(--chart-background-subtle-color);
+
+    // =========================================================================
+    // GRID & AXIS
+    // =========================================================================
+
+    --chart-grid-stroke: var(--chart-grid-color);
+    --chart-grid-opacity: 0.5;
+    --chart-axis-stroke: var(--chart-axis-color);
+    --chart-axis-tick-color: var(--chart-text-muted-color);
+
+    // =========================================================================
+    // ANIMATION
+    // =========================================================================
+
+    --chart-animation-duration: 400ms;
+    --chart-animation-easing: ease-out;
+}

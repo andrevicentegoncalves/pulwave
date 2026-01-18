@@ -1,0 +1,93 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--timeline {
+    position: relative;
+    width: 100%;
+
+    &__container {
+        width: 100%;
+        overflow: auto;
+    }
+
+    &__svg {
+        display: block;
+    }
+
+    &__axis {
+        stroke: var(--color-border-subtle);
+        stroke-width: 2px;
+    }
+
+    &__grid-line {
+        stroke: var(--color-border-subtle);
+        stroke-opacity: 0.2;
+        stroke-dasharray: 3 3;
+    }
+
+    &__tick {
+        &-line {
+            stroke: var(--color-border-subtle);
+            stroke-width: 1px;
+        }
+
+        &-text {
+            font-size: 10px;
+            fill: var(--color-text-secondary);
+            text-anchor: middle;
+        }
+    }
+
+    &__event-label {
+        font-size: 11px;
+        fill: var(--color-text-primary);
+        text-anchor: end;
+
+        &--hovered {
+            font-weight: var(--font-weight-semibold);
+        }
+    }
+
+    &__event-bar {
+        rx: 4;
+        stroke: white;
+        stroke-width: 1px;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__event-group {
+        cursor: pointer;
+    }
+
+    &__milestone {
+        stroke: white;
+        stroke-width: 2px;
+    }
+
+    &__event--legend-hovered {
+
+        .chart--timeline__event-bar,
+        .chart--timeline__milestone {
+            filter: brightness(1.2);
+            stroke-width: 3px;
+        }
+
+        .chart--timeline__event-label {
+            font-weight: var(--font-weight-bold);
+        }
+    }
+
+    &__today {
+        &-line {
+            stroke: var(--color-danger);
+            stroke-width: 2px;
+            stroke-dasharray: 4 4;
+        }
+
+        &-text {
+            font-size: 10px;
+            fill: var(--color-danger);
+            font-weight: var(--font-weight-semibold);
+            text-anchor: middle;
+        }
+    }
+}

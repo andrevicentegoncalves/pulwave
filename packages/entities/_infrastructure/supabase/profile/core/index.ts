@@ -1,0 +1,2 @@
+export { SupabaseCoreProfileProvider } from './SupabaseCoreProfileProvider';
+

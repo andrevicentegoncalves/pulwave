@@ -1,0 +1,55 @@
+// ============================================================================ //
+// SECTION LAYOUT - DARK MODE
+// ============================================================================ //
+// Dark mode overrides for section layout (secondary sidebar only)
+// Using !important to override base nested-sidebar styles
+
+[data-theme='dark'] .section-layout__sidebar {
+
+    // All icons - white
+    .nested-sidebar svg,
+    .menu__icon svg,
+    .toggle-btn svg {
+        color: var(--color-text-primary) !important;
+    }
+
+    // Section headers - white
+    .nested-sidebar__section-header,
+    .nested-sidebar__section-header span {
+        color: var(--color-text-primary) !important;
+    }
+
+    // Category headers - white
+    .nested-sidebar__category-header {
+        color: var(--color-text-primary) !important;
+    }
+
+    // All text items - white for maximum contrast
+    .menu__label,
+    .nested-sidebar__item {
+        color: var(--color-text-primary) !important;
+    }
+
+    // Hover state - visible background
+    .nested-sidebar__section-header:hover,
+    .nested-sidebar__category-header:hover,
+    .nested-sidebar__item:hover {
+        background: var(--color-surface-hover) !important;
+        color: var(--color-text-primary) !important;
+    }
+
+    // Icon button hover
+    .nested-sidebar__icon-btn:hover {
+        background: var(--color-surface-active) !important;
+        color: var(--color-text-primary) !important;
+    }
+
+    // Active items - primary color for emphasis
+    .nested-sidebar__item--active,
+    .nested-sidebar__section-header--active,
+    .nested-sidebar__category-header--active {
+        color: var(--color-brand-primary) !important;
+        font-weight: var(--font-weight-semi-bold);
+        background: var(--color-brand-primary-subtle) !important;
+    }
+}

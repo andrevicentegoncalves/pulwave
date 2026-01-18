@@ -1,0 +1,15 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--area {
+    &--stack-none {
+        // Non-stacked layout styles
+    }
+
+    &--stack-normal {
+        // Stacked layout styles
+    }
+
+    &--stack-percent {
+        // Percent-stacked layout styles
+    }
+}

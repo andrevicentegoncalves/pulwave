@@ -1,0 +1,49 @@
+// ============================================================================ //
+// HEADER - LEFT SIDE
+// ============================================================================ //
+// Sidebar toggle area for mobile header
+
+.mobile-header__left {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+
+    .sidebar-header {
+        margin-bottom: 0;
+        min-height: auto;
+    }
+
+    .toggle-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--color-text-primary);
+        border-radius: var(--border-radius-s);
+        transition: background-color var(--duration-fast) var(--easing-standard);
+        min-width: auto;
+        min-height: auto;
+
+        svg {
+            width: var(--scale-6);
+            height: var(--scale-6);
+        }
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+            transform: none;
+        }
+
+        &:active {
+            background-color: var(--color-surface-pressed);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-focus);
+            outline-offset: var(--focus-offset);
+        }
+    }
+}

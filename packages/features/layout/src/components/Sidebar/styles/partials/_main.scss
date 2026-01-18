@@ -1,0 +1,20 @@
+// ============================================================================ //
+// SIDEBAR MAIN
+// ============================================================================ //
+// Core sidebar element styling
+
+.sidebar {
+    background-color: var(--color-brand-primary);
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--scale-4);
+    padding: var(--scale-5) 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-m);
+}

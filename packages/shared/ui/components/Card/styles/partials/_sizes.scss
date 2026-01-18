@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.card {
+    &--padding-none {
+        padding: 0;
+    }
+
+    &--padding-s {
+        padding: var(--scale-2);
+    }
+
+    &--padding-m {
+        padding: var(--scale-5);
+    }
+
+    &--padding-l {
+        padding: var(--scale-6);
+    }
+
+    &--padding-xl {
+        padding: var(--scale-8);
+    }
+}

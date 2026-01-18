@@ -1,0 +1,6 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// Tokens partial for Grid
+:root {
+    --grid-gap: var(--scale-4);
+}

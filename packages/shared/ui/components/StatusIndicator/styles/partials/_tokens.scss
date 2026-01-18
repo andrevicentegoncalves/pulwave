@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+$status-indicator-tokens: (
+    'dot-size-s': var(--scale-2),
+    'dot-size-m': 10px,
+    'dot-size-l': var(--scale-3),
+);

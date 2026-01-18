@@ -1,0 +1,135 @@
+// Skeleton Component - Modular BEM SCSS
+// ==========================================================================
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ── KEYFRAMES ──
+@keyframes skeleton-pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes skeleton-wave {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes skeleton-wave-ltr {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+// ── BASE ──
+.skeleton {
+    display: block;
+    background-color: var(--skeleton-bg);
+    border-radius: var(--border-radius-xl);
+    position: relative;
+    overflow: hidden;
+
+    // ── SHAPE VARIANTS ──
+    &--text {
+        margin-top: 0;
+        margin-bottom: 0;
+        height: auto;
+        transform-origin: 0 55%;
+        transform: scale(1, 0.60);
+        border-radius: var(--border-radius-m);
+
+        &:empty::before {
+            content: "\00a0";
+        }
+    }
+
+    &--circular {
+        border-radius: var(--border-radius-round);
+    }
+
+    &--line {
+        border-radius: var(--border-radius-xl);
+    }
+
+    &--rounded {
+        border-radius: var(--border-radius-m);
+    }
+
+    &--rectangular {
+        border-radius: var(--border-radius-s);
+    }
+
+    // ── ANIMATIONS ──
+    &--pulse {
+        animation: skeleton-pulse 2.5s ease-in-out 0.5s infinite;
+    }
+
+    &--wave {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg,
+                    transparent 0,
+                    var(--skeleton-highlight, rgba(255, 255, 255, 0.3)) 20%,
+                    var(--skeleton-shimmer, rgba(255, 255, 255, 0.5)) 60%,
+                    transparent);
+            animation: skeleton-wave 3s infinite;
+        }
+    }
+
+    &--wave-ltr {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg,
+                    transparent 0,
+                    var(--skeleton-highlight) 20%,
+                    var(--skeleton-shimmer) 60%,
+                    transparent);
+            animation: skeleton-wave-ltr 2.5s ease-in-out infinite;
+        }
+    }
+
+    &--none {
+        animation: none;
+    }
+
+    // ── COLOR VARIANTS ──
+    &--dark {
+        background-color: var(--color-border-default);
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        &--pulse {
+            animation: none;
+        }
+
+        &--wave::after,
+        &--wave-ltr::after {
+            animation: none;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "$description": "Line height and letter spacing for vertical rhythm",
+    "lineHeight": {
+        "none": {
+            "$value": "1",
+            "$type": "number",
+            "$description": "Display headlines only"
+        },
+        "tight": {
+            "$value": "1.1",
+            "$type": "number",
+            "$description": "Large headings"
+        },
+        "snug": {
+            "$value": "1.2",
+            "$type": "number",
+            "$description": "Titles, subheadings"
+        },
+        "normal": {
+            "$value": "1.4",
+            "$type": "number",
+            "$description": "Comfortable body"
+        },
+        "base": {
+            "$value": "1.5",
+            "$type": "number",
+            "$description": "Body text default"
+        },
+        "relaxed": {
+            "$value": "1.6",
+            "$type": "number",
+            "$description": "Long-form content"
+        },
+        "loose": {
+            "$value": "1.8",
+            "$type": "number",
+            "$description": "Very spacious"
+        }
+    },
+    "letterSpacing": {
+        "tighter": {
+            "$value": "-0.02em",
+            "$type": "dimension",
+            "$description": "Large headlines (48px+)"
+        },
+        "tight": {
+            "$value": "-0.01em",
+            "$type": "dimension",
+            "$description": "Titles"
+        },
+        "snug": {
+            "$value": "-0.005em",
+            "$type": "dimension",
+            "$description": "UI text"
+        },
+        "normal": {
+            "$value": "0",
+            "$type": "dimension",
+            "$description": "Body text"
+        },
+        "wide": {
+            "$value": "0.01em",
+            "$type": "dimension",
+            "$description": "Labels"
+        },
+        "wider": {
+            "$value": "0.04em",
+            "$type": "dimension",
+            "$description": "Uppercase"
+        },
+        "widest": {
+            "$value": "0.08em",
+            "$type": "dimension",
+            "$description": "All caps"
+        }
+    }
+}

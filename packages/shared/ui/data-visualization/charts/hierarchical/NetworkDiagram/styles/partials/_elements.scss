@@ -1,0 +1,46 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--network {
+    &__link {
+        stroke: var(--color-border-default);
+        stroke-width: 2px;
+        stroke-opacity: 1;
+        transition: stroke-opacity 0.2s ease;
+    }
+
+    &__node-group {
+        &--dragging {
+            cursor: grabbing;
+        }
+
+        &--idle {
+            cursor: grab;
+        }
+
+        &--legend-hovered {
+            .chart--network__node-circle {
+                fill-opacity: 1 !important;
+                filter: brightness(1.1);
+                stroke-width: 3px;
+            }
+
+            .chart--network__node-label {
+                fill-opacity: 1 !important;
+                font-weight: var(--font-weight-semibold);
+            }
+        }
+    }
+
+    &__node-circle {
+        stroke: var(--color-background-primary);
+        stroke-width: 2px;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__node-label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        pointer-events: none;
+        transition: fill-opacity 0.2s ease;
+    }
+}

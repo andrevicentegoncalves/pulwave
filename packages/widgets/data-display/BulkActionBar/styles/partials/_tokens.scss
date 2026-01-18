@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.bulk-action-bar {
+    --bab-bottom-offset: var(--scale-6);
+    --bab-max-width: 600px;
+    --bab-padding: var(--scale-3) var(--scale-4);
+    --bab-radius: var(--border-radius-round); // Pill shape
+    --bab-bg: var(--color-surface-inverse);
+    --bab-text: var(--color-text-inverse-default);
+    --bab-count-bg: var(--color-text-inverse-default);
+    --bab-count-text: var(--color-surface-inverse);
+    --bab-divider: var(--color-overlay-light);
+}

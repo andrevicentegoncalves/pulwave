@@ -1,0 +1,86 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.transfer-list {
+    // =========================================================================
+    // PANEL
+    // =========================================================================
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        height: var(--transfer-list-height);
+        border: var(--transfer-list-panel-border);
+        border-radius: var(--transfer-list-panel-radius);
+        overflow: hidden;
+        background: var(--transfer-list-bg);
+
+        @include bp.bp-down(m) {
+            width: 100%;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--transfer-list-header-padding);
+        border-bottom: 1px solid var(--color-border-subtle);
+        background: var(--transfer-list-header-bg);
+
+        &-title {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-m);
+            color: var(--color-text-default);
+        }
+
+        &-count {
+            font-size: var(--font-size-caption-s);
+            color: var(--color-text-secondary);
+        }
+    }
+
+    &__body {
+        flex: 1;
+        overflow-y: auto;
+        padding: var(--scale-2);
+
+        &--with-search {
+            padding-top: 0;
+        }
+    }
+
+    &__search {
+        padding: var(--scale-2);
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    // =========================================================================
+    // ITEM
+    // =========================================================================
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: var(--transfer-list-item-padding);
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        transition: var(--transition-fast);
+        margin-bottom: var(--scale-1);
+
+        &:hover {
+            background-color: var(--transfer-list-item-hover-bg);
+        }
+
+        // Item Disabled state
+        &--disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.icon {
+    &--xs {
+        font-size: var(--icon-size-xs);
+    }
+
+    &--s {
+        font-size: var(--icon-size-s);
+    }
+
+    &--m {
+        font-size: var(--icon-size-m);
+    }
+
+    &--l {
+        font-size: var(--icon-size-l);
+    }
+
+    &--xl {
+        font-size: var(--icon-size-xl);
+    }
+}

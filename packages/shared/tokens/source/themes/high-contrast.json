@@ -1,0 +1,89 @@
+{
+    "$description": "High contrast theme for accessibility (WCAG AAA)",
+    "$format": "dtcg",
+    "brand": {
+        "primary": {
+            "h": 160,
+            "s": "100%",
+            "l-50": "97%",
+            "l-500": "25%",
+            "l-600": "20%",
+            "l-900": "8%"
+        },
+        "secondary": {
+            "h": 45,
+            "s": "100%",
+            "l-50": "97%",
+            "l-500": "40%",
+            "l-600": "35%",
+            "l-900": "15%"
+        }
+    },
+    "config": {
+        "$description": "High contrast mode configuration",
+        "contrastRatio": {
+            "text": {
+                "$value": "7:1",
+                "$type": "string",
+                "$description": "WCAG AAA"
+            },
+            "ui": {
+                "$value": "4.5:1",
+                "$type": "string",
+                "$description": "WCAG AA for UI"
+            }
+        },
+        "borderWidth": {
+            "$value": "2px",
+            "$type": "dimension",
+            "$description": "Thicker borders for visibility"
+        },
+        "focusWidth": {
+            "$value": "3px",
+            "$type": "dimension",
+            "$description": "Prominent focus rings"
+        },
+        "textWeight": {
+            "$value": "500",
+            "$type": "fontWeight",
+            "$description": "Slightly bolder text"
+        }
+    },
+    "overrides": {
+        "$description": "Color overrides for high contrast",
+        "text": {
+            "primary": {
+                "$value": "#000000",
+                "$type": "color"
+            },
+            "secondary": {
+                "$value": "#1a1a1a",
+                "$type": "color"
+            },
+            "disabled": {
+                "$value": "#666666",
+                "$type": "color"
+            }
+        },
+        "surface": {
+            "default": {
+                "$value": "#ffffff",
+                "$type": "color"
+            },
+            "subtle": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+            }
+        },
+        "border": {
+            "default": {
+                "$value": "#000000",
+                "$type": "color"
+            },
+            "subtle": {
+                "$value": "#333333",
+                "$type": "color"
+            }
+        }
+    }
+}

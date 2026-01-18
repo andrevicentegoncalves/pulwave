@@ -1,0 +1,62 @@
+// ============================================================================ //
+// MOBILE SHELL - HEADER
+// ============================================================================ //
+// Mobile header with hamburger, title, and avatar
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.mobile-shell__header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--scale-14); // 56px
+    padding: 0 var(--scale-3);
+    background-color: var(--color-surface-default);
+    border-bottom: 1px solid var(--color-border-subtle);
+
+    &-left,
+    &-right {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+    }
+
+    &-center {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+.mobile-shell__title {
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-body-m);
+    color: var(--color-text-primary);
+}
+
+// Unified icon button style - touch target compliant
+.mobile-shell__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target-min); // 44px
+    height: var(--touch-target-min);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        background-color: var(--color-surface-subtle);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-brand-primary);
+        outline-offset: var(--scale-0-5);
+    }
+}

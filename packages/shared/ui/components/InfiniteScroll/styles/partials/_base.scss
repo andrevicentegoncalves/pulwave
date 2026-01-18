@@ -1,0 +1,19 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.infinite-scroll {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+        padding: var(--scale-4);
+    }
+
+    &__end-message {
+        text-align: center;
+        padding: var(--scale-4);
+        color: var(--color-text-secondary);
+    }
+}

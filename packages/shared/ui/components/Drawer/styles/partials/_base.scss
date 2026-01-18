@@ -1,0 +1,33 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--drawer-backdrop-bg);
+    z-index: var(--drawer-z-index-backdrop);
+    animation: drawer-fade-in var(--duration-base) var(--ease-out);
+}
+
+.drawer {
+    overscroll-behavior: contain;
+    position: fixed;
+    background-color: var(--drawer-bg);
+    box-shadow: var(--drawer-shadow);
+    display: flex;
+    flex-direction: column;
+    z-index: var(--drawer-z-index);
+    overflow: hidden;
+}
+
+@keyframes drawer-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

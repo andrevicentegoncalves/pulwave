@@ -1,0 +1,145 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/effects' as effects;
+
+.data-list {
+
+    // =========================================================================
+    // ITEM
+    // =========================================================================
+    &__item {
+        @include effects.transition(all, fast);
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: var(--data-list-item-padding);
+        background-color: var(--data-list-item-bg);
+        border: var(--data-list-item-border);
+        border-radius: var(--data-list-item-radius);
+        overflow: hidden;
+        gap: var(--data-list-item-gap);
+
+        // Interactions
+        &:hover {
+            background-color: var(--data-list-item-bg-hover);
+            border-color: var(--color-border-default);
+            box-shadow: var(--data-list-item-shadow-hover);
+
+            .data-list__actions {
+                opacity: 1;
+            }
+        }
+
+        &:focus-within .data-list__actions {
+            opacity: 1;
+        }
+
+        @include bp-down(m) {
+            flex-wrap: wrap;
+            gap: var(--scale-2);
+        }
+
+        // State: Dragging
+        &--state-dragging {
+            z-index: 50;
+            box-shadow: var(--data-list-drag-shadow);
+            opacity: 0.95;
+            background-color: var(--data-list-drag-bg);
+            border-color: var(--data-list-drag-border-color);
+            cursor: grabbing;
+        }
+
+        // State: Selected
+        &--state-selected {
+            background-color: var(--data-list-selected-bg);
+            border-color: var(--data-list-selected-border-color);
+
+            &:hover {
+                background-color: var(--data-list-selected-bg-hover);
+            }
+        }
+    }
+
+    // =========================================================================
+    // CONTENT
+    // =========================================================================
+    &__content {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+        cursor: pointer;
+
+        @include bp-down(m) {
+            flex-direction: column;
+            align-items: stretch;
+            gap: var(--scale-2);
+        }
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+
+        @include bp-down(m) {
+            width: 100%;
+        }
+    }
+
+    // =========================================================================
+    // ACTIONS & CONTROLS
+    // =========================================================================
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-left: auto;
+        flex-shrink: 0;
+        opacity: 0; // Default hidden unless hover/focus
+        @include effects.transition(opacity, fast);
+
+        // Always show on touch or mobile if needed? 
+        @include bp-down(m) {
+            opacity: 1; // Always show on mobile
+            margin-left: 0;
+            width: 100%;
+            justify-content: flex-end;
+            margin-top: var(--scale-2);
+        }
+
+        @include bp-down(s) {
+            flex-basis: 100%;
+        }
+    }
+
+    &__selection {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: var(--scale-2);
+    }
+
+    &__selection-checkbox {
+        pointer-events: none;
+    }
+
+    &__handle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        color: var(--color-text-tertiary);
+        cursor: grab;
+        border-radius: var(--border-radius-s);
+
+        &:hover {
+            color: var(--color-text-default);
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}

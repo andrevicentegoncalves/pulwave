@@ -1,0 +1,13 @@
+// ==========================================================================
+// BADGE TOKENS - CSS Custom Properties
+// ==========================================================================
+
+.badge {
+    --badge-padding-y: var(--scale-2);
+    --badge-padding-x: var(--scale-4);
+    --badge-gap: var(--scale-2);
+    --badge-border-radius: var(--border-radius-2xl);
+    --badge-icon-size: var(--scale-4);
+    --badge-close-size: var(--scale-4);
+    --badge-height: var(--scale-8);
+}

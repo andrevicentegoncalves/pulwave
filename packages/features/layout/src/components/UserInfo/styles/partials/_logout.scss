@@ -1,0 +1,40 @@
+// ============================================================================ //
+// USER INFO - LOGOUT
+// ============================================================================ //
+// Logout button styles
+
+.user-info__logout {
+    background: color-mix(in srgb, var(--color-on-primary), transparent 85%);
+    border: none;
+    width: var(--scale-10);
+    height: var(--scale-10);
+    border-radius: var(--border-radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-primary);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard),
+        transform var(--duration-fast) var(--easing-standard);
+    flex-shrink: 0;
+
+    svg {
+        width: var(--icon-size-s);
+        height: var(--icon-size-s);
+    }
+
+    &:hover {
+        background: color-mix(in srgb, var(--color-on-primary), transparent 75%);
+        transform: scale(1.05);
+    }
+
+    &:focus-visible {
+        outline: var(--focus-width) solid var(--color-on-primary);
+        outline-offset: var(--focus-offset);
+    }
+
+    &:active {
+        background: color-mix(in srgb, var(--color-on-primary), transparent 70%);
+        transform: scale(1.0);
+    }
+}

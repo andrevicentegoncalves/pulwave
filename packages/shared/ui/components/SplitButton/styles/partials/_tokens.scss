@@ -1,0 +1,7 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.split-button {
+    --split-button-padding-x: var(--scale-2);
+    --split-button-divider-color-light: rgba(255, 255, 255, 0.2); // Keep for now or find semantic equivalent for overlay
+}

@@ -1,0 +1,16 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--parallel-coordinates {
+    position: relative;
+    width: 100%;
+
+    &__scroll-container {
+        width: 100%;
+        overflow: auto;
+    }
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+}

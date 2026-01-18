@@ -1,0 +1,101 @@
+{
+    "$description": "Semantic effect tokens - elevation, opacity states",
+    "elevation": {
+        "$description": "Shadow-based elevation levels",
+        "none": {
+            "$value": "{shadow.none}",
+            "$type": "shadow"
+        },
+        "raised": {
+            "$value": "{shadow.xs}",
+            "$type": "shadow",
+            "$description": "Subtle lift"
+        },
+        "floating": {
+            "$value": "{shadow.s}",
+            "$type": "shadow",
+            "$description": "Cards, dropdowns"
+        },
+        "overlay": {
+            "$value": "{shadow.m}",
+            "$type": "shadow",
+            "$description": "Modals, dialogs"
+        },
+        "popup": {
+            "$value": "{shadow.l}",
+            "$type": "shadow",
+            "$description": "Popovers"
+        },
+        "toast": {
+            "$value": "{shadow.xl}",
+            "$type": "shadow",
+            "$description": "Notifications"
+        },
+        "card": {
+            "$value": "{shadow.xs}",
+            "$type": "shadow",
+            "$description": "Cards at rest"
+        },
+        "dropdown": {
+            "$value": "{shadow.s}",
+            "$type": "shadow",
+            "$description": "Dropdown menus"
+        },
+        "modal": {
+            "$value": "{shadow.m}",
+            "$type": "shadow",
+            "$description": "Modal dialogs"
+        },
+        "popover": {
+            "$value": "{shadow.l}",
+            "$type": "shadow",
+            "$description": "Popovers, tooltips"
+        }
+    },
+    "state": {
+        "$description": "Opacity for UI states",
+        "disabled": {
+            "$value": "{opacity.40}",
+            "$type": "number"
+        },
+        "hover": {
+            "$value": "{opacity.80}",
+            "$type": "number"
+        },
+        "pressed": {
+            "$value": "{opacity.70}",
+            "$type": "number"
+        },
+        "focus": {
+            "$value": "{opacity.100}",
+            "$type": "number"
+        },
+        "subtle": {
+            "$value": "{opacity.60}",
+            "$type": "number"
+        },
+        "muted": {
+            "$value": "{opacity.30}",
+            "$type": "number"
+        }
+    },
+    "backdrop": {
+        "$description": "Backdrop blur for glassmorphism",
+        "subtle": {
+            "$value": "{blur.xs}",
+            "$type": "dimension"
+        },
+        "default": {
+            "$value": "{blur.s}",
+            "$type": "dimension"
+        },
+        "strong": {
+            "$value": "{blur.m}",
+            "$type": "dimension"
+        },
+        "heavy": {
+            "$value": "{blur.l}",
+            "$type": "dimension"
+        }
+    }
+}

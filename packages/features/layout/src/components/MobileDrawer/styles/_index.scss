@@ -1,0 +1,80 @@
+// ============================================================================ //
+// MOBILE SHELL - DRAWER
+// ============================================================================ //
+// Slide-out drawer with backdrop
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.mobile-shell__drawer-backdrop {
+    position: fixed;
+    top: var(--scale-14); // Below header
+    left: 0;
+    right: 0;
+    bottom: var(--scale-16); // Above bottom nav
+    z-index: var(--z-index-overlay);
+    background-color: transparent;
+    pointer-events: none;
+    transition: background-color var(--duration-normal) var(--easing-standard);
+
+    &--open {
+        background-color: var(--color-overlay-default);
+        pointer-events: auto;
+    }
+}
+
+.mobile-shell__drawer {
+    position: fixed;
+    top: var(--scale-14);
+    left: 0;
+    bottom: var(--scale-16);
+    z-index: var(--z-index-overlay);
+    width: 17.5rem; // var(--scale-70)
+    max-width: 85vw;
+    background: linear-gradient(135deg, var(--color-brand-primary-subtle) 0%, var(--color-surface-default) 100%);
+    box-shadow: var(--shadow-xl);
+    transform: translateX(-100%);
+    border-radius: 0 var(--border-radius-2xl) var(--border-radius-2xl) 0;
+    transition: transform var(--duration-comfortable) var(--easing-standard);
+    overflow: hidden;
+
+    &--open {
+        transform: translateX(0);
+    }
+}
+
+.mobile-shell__drawer-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--scale-2);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.mobile-shell__drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        background-color: var(--color-surface-subtle);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-brand-primary);
+        outline-offset: var(--scale-0-5);
+    }
+}
+
+.mobile-shell__drawer-content {
+    height: calc(100% - var(--scale-15)); // 60px header
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}

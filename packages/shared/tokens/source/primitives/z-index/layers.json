@@ -1,0 +1,116 @@
+{
+    "$description": "Pulwave Design System - Z-Index Tokens",
+    "$format": "dtcg",
+    "zIndex": {
+        "$description": "Z-index layers for stacking context",
+        "content": {
+            "$description": "Content layers (0-100)",
+            "below": {
+                "$value": "-1",
+                "$type": "number"
+            },
+            "base": {
+                "$value": "0",
+                "$type": "number"
+            },
+            "content": {
+                "$value": "1",
+                "$type": "number"
+            },
+            "hover": {
+                "$value": "1",
+                "$type": "number"
+            },
+            "active": {
+                "$value": "2",
+                "$type": "number"
+            },
+            "focus": {
+                "$value": "3",
+                "$type": "number"
+            },
+            "raised": {
+                "$value": "10",
+                "$type": "number"
+            },
+            "elevated": {
+                "$value": "100",
+                "$type": "number"
+            }
+        },
+        "overlay": {
+            "$description": "Overlay layers (1000-10000)",
+            "dropdown": {
+                "$value": "1000",
+                "$type": "number"
+            },
+            "sticky": {
+                "$value": "1020",
+                "$type": "number"
+            },
+            "fixed": {
+                "$value": "1030",
+                "$type": "number"
+            },
+            "modal-backdrop": {
+                "$value": "1040",
+                "$type": "number"
+            },
+            "modal": {
+                "$value": "1050",
+                "$type": "number"
+            },
+            "popover": {
+                "$value": "1060",
+                "$type": "number"
+            },
+            "tooltip": {
+                "$value": "1070",
+                "$type": "number"
+            },
+            "notification": {
+                "$value": "1080",
+                "$type": "number"
+            },
+            "alert": {
+                "$value": "1090",
+                "$type": "number"
+            },
+            "skip-link": {
+                "$value": "9998",
+                "$type": "number"
+            },
+            "debug": {
+                "$value": "9999",
+                "$type": "number"
+            },
+            "max": {
+                "$value": "10000",
+                "$type": "number"
+            }
+        },
+        "component": {
+            "$description": "Component-specific semantic aliases",
+            "header": {
+                "$value": "{zIndex.overlay.sticky}",
+                "$type": "number"
+            },
+            "sidebar": {
+                "$value": "{zIndex.overlay.fixed}",
+                "$type": "number"
+            },
+            "dropdown-menu": {
+                "$value": "{zIndex.overlay.dropdown}",
+                "$type": "number"
+            },
+            "modal-dialog": {
+                "$value": "{zIndex.overlay.modal}",
+                "$type": "number"
+            },
+            "toast": {
+                "$value": "{zIndex.overlay.notification}",
+                "$type": "number"
+            }
+        }
+    }
+}

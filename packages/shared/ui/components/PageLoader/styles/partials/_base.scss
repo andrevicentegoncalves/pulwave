@@ -1,0 +1,27 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.page-loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-surface-subtle);
+    gap: var(--scale-4);
+    flex: 1;
+
+    &--fullscreen {
+        height: 100vh;
+    }
+
+    &:not(&--fullscreen) {
+        height: 100%;
+    }
+
+    &__message {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-m);
+        line-height: var(--line-height-normal);
+    }
+}

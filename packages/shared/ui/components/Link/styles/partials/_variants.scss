@@ -1,0 +1,44 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.link {
+
+    // Underline variants
+    &--underline-hover {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &--underline-always {
+        text-decoration: underline;
+    }
+
+    &--underline-none {
+        text-decoration: none;
+    }
+
+    // Color Variants
+    &--default {
+        color: var(--link-color);
+
+        &:hover {
+            color: var(--link-color-hover);
+        }
+    }
+
+    &--neutral {
+        color: var(--color-text-default);
+
+        &:hover {
+            color: var(--link-color);
+        }
+    }
+
+    &--subtle {
+        color: var(--color-text-secondary);
+
+        &:hover {
+            color: var(--color-text-default);
+        }
+    }
+}

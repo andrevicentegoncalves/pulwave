@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.color-picker {
+    --color-picker-swatch-size: var(--scale-5);
+    --color-picker-input-swatch-size: var(--scale-4);
+    --color-picker-popover-width: var(--scale-50);
+    --color-picker-popover-padding: var(--scale-3);
+    --color-picker-gap: var(--scale-2);
+}

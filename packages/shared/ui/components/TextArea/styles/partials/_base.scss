@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.text-area {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+}

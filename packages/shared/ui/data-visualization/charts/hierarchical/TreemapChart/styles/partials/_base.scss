@@ -1,0 +1,12 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--treemap {
+    position: relative;
+    width: 100%;
+
+    &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

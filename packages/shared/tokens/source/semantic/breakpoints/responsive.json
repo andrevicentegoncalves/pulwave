@@ -1,0 +1,112 @@
+{
+    "$description": "Semantic breakpoint tokens with device context",
+    "breakpoint": {
+        "$description": "Responsive breakpoints with semantic context",
+        "xs": {
+            "min": {
+                "$value": "0",
+                "$type": "dimension",
+                "$description": "Portrait phones (320-639px)"
+            },
+            "max": {
+                "$value": "639px",
+                "$type": "dimension"
+            },
+            "columns": {
+                "$value": "4",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "Extra Small (Portrait Phones)",
+                "$type": "string"
+            }
+        },
+        "s": {
+            "min": {
+                "$value": "640px",
+                "$type": "dimension",
+                "$description": "Landscape phones (640-767px)"
+            },
+            "max": {
+                "$value": "767px",
+                "$type": "dimension"
+            },
+            "columns": {
+                "$value": "4",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "Small (Landscape Phones)",
+                "$type": "string"
+            }
+        },
+        "m": {
+            "min": {
+                "$value": "768px",
+                "$type": "dimension",
+                "$description": "Tablets (768-1023px)"
+            },
+            "max": {
+                "$value": "1023px",
+                "$type": "dimension"
+            },
+            "columns": {
+                "$value": "8",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "Medium (Tablets)",
+                "$type": "string"
+            }
+        },
+        "l": {
+            "min": {
+                "$value": "1024px",
+                "$type": "dimension",
+                "$description": "Laptops (1024-1279px)"
+            },
+            "max": {
+                "$value": "1279px",
+                "$type": "dimension"
+            },
+            "columns": {
+                "$value": "12",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "Large (Laptops)",
+                "$type": "string"
+            }
+        },
+        "xl": {
+            "min": {
+                "$value": "1280px",
+                "$type": "dimension",
+                "$description": "Desktops (1280px+)"
+            },
+            "columns": {
+                "$value": "12",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "Extra Large (Desktops)",
+                "$type": "string"
+            }
+        },
+        "2xl": {
+            "min": {
+                "$value": "1920px",
+                "$type": "dimension",
+                "$description": "Ultra-wide (1920px+)"
+            },
+            "columns": {
+                "$value": "12",
+                "$type": "number"
+            },
+            "label": {
+                "$value": "2X Large (Ultra-Wide)",
+                "$type": "string"
+            }
+        }
+    }
+}

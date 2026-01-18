@@ -1,0 +1,3 @@
+import { BREAKPOINTS as FOUNDATION_BREAKPOINTS } from '@pulwave/utils';
+
+export const BREAKPOINTS = FOUNDATION_BREAKPOINTS;

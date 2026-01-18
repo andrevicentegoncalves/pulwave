@@ -1,0 +1,102 @@
+// ============================================================================ //
+// SIDEBAR MOBILE & OVERLAY
+// ============================================================================ //
+// Mobile responsive styles and overlay
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+// ---------------------------------------------------------------------------//
+// MOBILE OVERLAY
+// ---------------------------------------------------------------------------//
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-overlay-solid);
+    z-index: var(--z-index-overlay);
+    opacity: 0;
+    transition: opacity var(--duration-comfortable) var(--easing-standard);
+    pointer-events: none;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+// ---------------------------------------------------------------------------//
+// MOBILE RESPONSIVE STYLES (phones only, max 767px)
+// ---------------------------------------------------------------------------//
+
+@include bp-down('s') {
+    .sidebar-overlay {
+        display: block;
+    }
+
+    .sidebar-container {
+        position: fixed;
+        top: var(--scale-12); // 50px approx
+        left: 0;
+        z-index: var(--z-index-overlay);
+        transform: translateX(-100%);
+        width: var(--scale-70) !important; // var(--scale-70)
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        transition: transform var(--duration-comfortable) cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.expanded {
+            transform: translateX(0);
+        }
+
+        &.collapsed {
+            width: var(--scale-70) !important; // var(--scale-70)
+
+            .sidebar-user {
+                .user-profile-section {
+                    flex-direction: row;
+                    padding: var(--scale-3);
+                }
+
+                .user-details {
+                    display: flex;
+                }
+
+                .user-avatar {
+                    width: var(--scale-10);
+                    height: var(--scale-10);
+                }
+            }
+        }
+
+        .sidebar {
+            border-radius: 0 var(--border-radius-2xl) var(--border-radius-2xl) 0;
+            height: 100%;
+            box-shadow: none;
+        }
+
+        &.expanded .sidebar {
+            box-shadow: var(--shadow-m);
+        }
+
+        .sidebar-header .toggle-btn {
+            display: none;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------//
+// PRINT STYLES
+// ---------------------------------------------------------------------------//
+
+@media print {
+
+    .sidebar-container,
+    .sidebar-overlay {
+        display: none;
+    }
+}

@@ -1,0 +1,19 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ============================================================================
+// CHART AXIS TICK - BEM Structure
+// Uses chart-specific tokens from theme/_chart-tokens.scss
+// ============================================================================
+
+.chart-axis-tick {
+    font-size: var(--chart-font-size-tick);
+    fill: var(--chart-axis-tick-color);
+
+    &__text {
+        transition: fill 0.15s ease;
+    }
+
+    &--truncated {
+        cursor: help;
+    }
+}

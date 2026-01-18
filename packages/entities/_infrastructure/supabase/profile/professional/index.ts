@@ -1,0 +1,2 @@
+export { SupabaseProfessionalProvider } from './SupabaseProfessionalProvider';
+

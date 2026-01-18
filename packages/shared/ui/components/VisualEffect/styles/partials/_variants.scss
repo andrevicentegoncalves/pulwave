@@ -1,0 +1,56 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.visual-effect {
+    &--sidebar-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 370px;
+        opacity: 0.6;
+        z-index: var(--z-index-base);
+
+        // Dark mode: reduce opacity for better text readability
+        [data-theme='dark'] & {
+            opacity: 0.3;
+        }
+    }
+
+    &--pulse-wave {
+        width: 100%;
+        height: auto;
+    }
+
+    &--ring-wave {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__svg {
+            width: 100%;
+            height: 100%;
+            max-width: 400px;
+            max-height: 400px;
+        }
+
+        &--s {
+            width: var(--scale-25); // 100px
+            height: var(--scale-25); // 100px
+        }
+
+        &--m {
+            width: var(--scale-50); // 200px
+            height: var(--scale-50); // 200px
+        }
+
+        &--l {
+            width: var(--scale-75); // 300px
+            height: var(--scale-75); // 300px
+        }
+
+        &--xl {
+            width: var(--scale-100); // 400px
+            height: var(--scale-100); // 400px
+        }
+    }
+}

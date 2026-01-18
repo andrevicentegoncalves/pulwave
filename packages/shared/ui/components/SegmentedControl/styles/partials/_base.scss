@@ -1,0 +1,58 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.segmented-control {
+    display: inline-flex;
+    padding: var(--scale-1);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--border-radius-m);
+    border: 1px solid var(--color-border-subtle);
+    gap: var(--scale-1);
+
+    &--full-width {
+        display: flex;
+        width: 100%;
+
+        .segmented-control__item {
+            flex: 1;
+        }
+    }
+
+    // ── ITEM ──
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        transition:
+            background-color var(--duration-fast) ease,
+            color var(--duration-fast) ease,
+            box-shadow var(--duration-fast) ease;
+        white-space: nowrap;
+
+        &:hover:not(:disabled):not(&--selected) {
+            color: var(--color-text-default);
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        &--selected {
+            background-color: var(--color-surface-default);
+            color: var(--color-brand-primary);
+            box-shadow: var(--shadow-s);
+            cursor: default;
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: var(--color-text-disabled);
+        }
+
+        @include interactive.focus-ring;
+    }
+}

@@ -1,0 +1,34 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// SIZES
+.badge {
+    &--xs {
+        --badge-height: var(--scale-5);
+        --badge-padding-x: var(--scale-2);
+        font-size: var(--font-size-2xs);
+    }
+
+    &--s {
+        --badge-height: var(--scale-6);
+        --badge-padding-x: var(--scale-3);
+        font-size: var(--font-size-xs);
+    }
+
+    &--m {
+        --badge-height: var(--scale-8);
+        --badge-padding-x: var(--scale-4);
+        font-size: var(--font-size-s);
+    }
+
+    &--l {
+        --badge-height: var(--scale-10);
+        --badge-padding-x: var(--scale-5);
+        font-size: var(--font-size-m);
+    }
+
+    &--xl {
+        --badge-height: var(--scale-12);
+        --badge-padding-x: var(--scale-6);
+        font-size: var(--font-size-l);
+    }
+}

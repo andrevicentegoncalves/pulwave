@@ -1,0 +1,17 @@
+.demo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.demo-grid-card {
+    flex: 0 0 auto;
+    background: var(--color-surface-default, #ffffff);
+    border-radius: var(--border-radius-xl);
+    padding: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}

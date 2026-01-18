@@ -1,0 +1,79 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.switch {
+
+    // ── SIZES ──
+    &--s {
+        width: var(--scale-9); // 36px
+        height: var(--scale-5); // var(--scale-5)
+        padding: var(--scale-0-5);
+    }
+
+    &--m {
+        width: var(--scale-11); // 44px
+        height: var(--scale-6); // var(--scale-6)
+        padding: 3px;
+    }
+
+    &--l {
+        width: var(--scale-13); // 52px
+        height: var(--scale-7); // 28px
+        padding: 3px;
+    }
+
+    // ── THUMB SIZES ──
+    &__thumb {
+        &--s {
+            width: var(--scale-4); // var(--scale-4)
+            height: var(--scale-4);
+        }
+
+        &--m {
+            width: var(--scale-4-5); // 18px (var(--scale-5) - 2*padding? No, thumb is usually height minus padding)
+            // Original was var(--scale-5) thumb in var(--scale-6) switch? That leaves var(--scale-0-5) padding.
+            // var(--scale-5) = scale-5
+            width: var(--scale-5);
+            height: var(--scale-5);
+        }
+
+        &--l {
+            width: var(--scale-6); // var(--scale-6)
+            height: var(--scale-6); // var(--scale-6) (Original var(--scale-6) in 28px switch, padding var(--scale-0-5)? Original padding was 3px. 28 - 6 = 22. Wait original thumb was 24? 28-24=4. var(--scale-0-5) padding per side. Refactoring implies logic check.)
+            // Let's stick to original sizes but use scale tokens.
+        }
+
+        // Thumb translation
+        &--checked {
+            transform: translateX(100%);
+        }
+    }
+
+    // ── HELPER SIZES ──
+    &__helper {
+        &--s {
+            margin-left: var(--scale-11);
+        }
+
+        &--m {
+            margin-left: var(--scale-13);
+        }
+
+        &--l {
+            margin-left: var(--scale-15);
+        }
+    }
+}
+
+.switch-container {
+    &--s {
+        min-height: var(--scale-6);
+    }
+
+    &--m {
+        min-height: var(--scale-8);
+    }
+
+    &--l {
+        min-height: var(--scale-10);
+    }
+}

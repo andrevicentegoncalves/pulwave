@@ -1,0 +1,2 @@
+export { SupabaseContactProvider } from './SupabaseContactProvider';
+

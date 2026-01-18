@@ -1,0 +1,39 @@
+// ============================================================================ //
+// NESTED MENU - SECTION (Level 1)
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.nested-menu {
+    &__section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__section-header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+        padding: var(--scale-3) var(--scale-4);
+        background: transparent;
+        border: none;
+        border-radius: var(--border-radius-2xl);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--easing-standard),
+            color var(--duration-fast) var(--easing-standard);
+        text-align: left;
+        width: 100%;
+
+        &:hover {
+            background: var(--color-neutral-150);
+        }
+
+        &--active {
+            color: var(--color-brand-primary);
+            background: color-mix(in srgb, var(--color-brand-primary) 8%, transparent);
+        }
+    }
+}

@@ -1,0 +1,137 @@
+{
+    "$description": "Extended color palette for data viz, tags, and badges. Excludes colors covered by status (green→success, amber→warning, orange→urgent)",
+    "color": {
+        "indigo": {
+            "$description": "Data viz, tags (H:231-244)",
+            "50": {
+                "$value": "hsl(231, 100%, 97%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(239, 84%, 67%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(244, 57%, 51%)",
+                "$type": "color"
+            }
+        },
+        "rose": {
+            "$description": "Data viz, tags (H:345-351)",
+            "50": {
+                "$value": "hsl(351, 100%, 97%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(350, 89%, 60%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(345, 82%, 41%)",
+                "$type": "color"
+            }
+        },
+        "cyan": {
+            "$description": "Data viz, tags (H:186-192)",
+            "50": {
+                "$value": "hsl(186, 100%, 96%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(189, 94%, 43%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(192, 82%, 31%)",
+                "$type": "color"
+            }
+        },
+        "emerald": {
+            "$description": "Data viz, tags (H:152-163)",
+            "50": {
+                "$value": "hsl(152, 80%, 96%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(160, 84%, 39%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(163, 94%, 24%)",
+                "$type": "color"
+            }
+        },
+        "violet": {
+            "$description": "Data viz, tags (H:252-263)",
+            "50": {
+                "$value": "hsl(252, 100%, 98%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(258, 90%, 66%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(263, 70%, 50%)",
+                "$type": "color"
+            }
+        },
+        "fuschia": {
+            "$description": "Data viz, tags (H:289-295)",
+            "50": {
+                "$value": "hsl(289, 100%, 98%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(292, 84%, 61%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(295, 72%, 40%)",
+                "$type": "color"
+            }
+        },
+        "blue": {
+            "$description": "Data viz, distinct from info (H:212-224)",
+            "50": {
+                "$value": "hsl(214, 100%, 97%)",
+                "$type": "color"
+            },
+            "100": {
+                "$value": "hsl(214, 94%, 92%)",
+                "$type": "color"
+            },
+            "300": {
+                "$value": "hsl(212, 96%, 78%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(217, 91%, 60%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(224, 76%, 48%)",
+                "$type": "color"
+            },
+            "900": {
+                "$value": "hsl(224, 64%, 33%)",
+                "$type": "color"
+            }
+        },
+        "purple": {
+            "$description": "Data viz, tags (H:270-271)",
+            "50": {
+                "$value": "hsl(270, 100%, 99%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(271, 91%, 65%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(271, 71%, 47%)",
+                "$type": "color"
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.group-row {
+    width: 100%;
+
+    // Performance: Skip rendering off-screen groups (10× faster for 1000+ items)
+    content-visibility: auto;
+    contain-intrinsic-size: 0 48px; // Reserve ~48px height for hidden groups
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--scale-3);
+        cursor: pointer;
+        transition: var(--transition-fast);
+        border-bottom: 1px solid var(--color-border-subtle);
+
+        &:hover {
+            background-color: var(--color-action-ghost-hover);
+        }
+
+        &--top-level {
+            background-color: var(--color-surface-subtle);
+            font-weight: var(--font-weight-m);
+        }
+
+        &--nested {
+            background-color: var(--color-surface-default);
+            border-left: var(--scale-1) solid var(--color-border-default);
+        }
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+        flex: 1;
+    }
+
+    &__expand-btn {
+        @include interactive.button-reset;
+        color: var(--color-icon-subtle);
+
+        &:hover {
+            color: var(--color-icon-default);
+        }
+    }
+
+    &__title {
+        color: var(--color-text-default);
+        font-size: var(--font-size-body-m);
+
+        &--nested {
+            font-size: var(--font-size-body-s);
+            font-weight: var(--font-weight-m);
+            color: var(--color-text-secondary);
+        }
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-4);
+    }
+
+    &__count {
+        font-size: var(--font-size-caption-xs);
+        color: var(--color-text-secondary);
+    }
+
+    &__body {
+        // Child content container
+    }
+
+    // Flat Row Styles (Single Item)
+    &--single {
+        display: flex;
+        align-items: center;
+        padding: var(--scale-3);
+        border-bottom: 1px solid var(--color-border-subtle);
+        gap: var(--scale-4);
+        background-color: var(--color-surface-default);
+        transition: var(--transition-fast);
+
+        &:hover {
+            background-color: var(--color-action-ghost-hover);
+        }
+    }
+
+    &__bullet {
+        width: var(--scale-1);
+        height: var(--scale-1);
+        border-radius: var(--border-radius-round);
+        background-color: var(--color-border-default);
+        margin-right: var(--scale-1);
+    }
+
+    &__locale-badge {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        width: var(--scale-30);
+        flex-shrink: 0;
+
+        span {
+            font-size: var(--font-size-body-s);
+            color: var(--color-text-secondary);
+        }
+    }
+}

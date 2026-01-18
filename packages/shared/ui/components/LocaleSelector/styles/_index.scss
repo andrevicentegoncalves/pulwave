@@ -1,0 +1,65 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.locale-selector {
+    display: inline-block;
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-3);
+        border-radius: var(--border-radius-m);
+        transition: background-color var(--duration-fast) ease,
+            color var(--duration-fast) ease,
+            border-color var(--duration-fast) ease;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--color-text-primary);
+
+        &--default {
+            background: var(--color-surface-default);
+            border-color: var(--color-border-subtle);
+
+            &:hover {
+                background: var(--color-surface-hover);
+            }
+        }
+
+        &--minimal {
+            color: var(--color-text-secondary);
+
+            &:hover {
+                background: var(--color-surface-hover);
+                color: var(--color-text-primary);
+            }
+        }
+
+        &--button {
+            background: var(--color-brand-primary);
+            color: var(--color-text-on-primary);
+
+            &:hover {
+                background: var(--color-brand-primary-hover);
+            }
+        }
+
+        &--icon {
+            padding: var(--scale-2);
+
+            &:hover {
+                background: var(--color-surface-hover);
+            }
+        }
+    }
+
+    &__label {
+        @include typography-responsive('body', 's', 'medium');
+    }
+
+    &__option-content {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+    }
+}

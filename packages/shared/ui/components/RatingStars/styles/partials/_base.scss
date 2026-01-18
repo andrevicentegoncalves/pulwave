@@ -1,0 +1,45 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scale-2);
+
+    &__stars {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-0-5);
+        color: currentColor; // Ensure icons inherit color
+    }
+
+    &__numeric {
+        font-size: var(--font-size-body-m);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-m);
+    }
+
+    &__star-wrapper {
+        position: relative;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+
+    &__star-half-crop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    &__star-layered {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__star-bg {
+        opacity: 0.2;
+    }
+}

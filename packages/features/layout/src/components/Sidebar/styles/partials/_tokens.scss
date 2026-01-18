@@ -1,0 +1,26 @@
+// ============================================================================ //
+// SIDEBAR TOKENS
+// ============================================================================ //
+// Custom properties and variables for sidebar dimensions
+
+// Sidebar dimensions are inherited from section-layout for the secondary sidebar.
+// Main sidebar uses slightly different dimensions defined here.
+
+// Menu spacing modifier for compact sidebars (used in neutral/secondary sidebars)
+.menu--compact-spacing {
+    gap: var(--scale-2);
+}
+
+.sidebar {
+    // Local tokens for Primary Sidebar (Dark/Brand theme)
+    --color-on-primary: var(--color-white);
+    --color-overlay-light-subtle: rgba(255, 255, 255, 0.1);
+    --color-overlay-light-default: rgba(255, 255, 255, 0.15);
+    --color-overlay-light-strong: rgba(255, 255, 255, 0.25);
+
+    // Explicit text colors
+    --color-on-primary-subtle: rgba(255, 255, 255, 0.7);
+
+    // Ensure header/toggle visibility
+    --icon-color: var(--color-on-primary);
+}

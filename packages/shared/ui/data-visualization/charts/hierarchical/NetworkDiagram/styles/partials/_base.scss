@@ -1,0 +1,39 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--network {
+    position: relative;
+    width: 100%;
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+
+        &--dragging {
+            cursor: grabbing;
+        }
+
+        &--idle {
+            cursor: default;
+        }
+    }
+
+    &__legend {
+        display: flex;
+        justify-content: center;
+        gap: var(--scale-4);
+        margin-top: var(--scale-3);
+        font-size: var(--font-size-body-xs);
+    }
+
+    &__legend-item {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+    }
+
+    &__legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+}

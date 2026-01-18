@@ -1,0 +1,53 @@
+// ============================================================================ //
+// NESTED MENU - ITEM (Level 3)
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.nested-menu {
+    &__items {
+        list-style: none;
+        margin: 0;
+        padding: var(--scale-1) 0 var(--scale-1) var(--scale-6);
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--border-radius-2xl);
+    }
+
+    &__item {
+        display: block;
+        width: 100%;
+        padding: var(--scale-2) var(--scale-3);
+        background: none;
+        border: none;
+        border-left: var(--border-width-1) solid var(--color-border-subtle);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        text-align: left;
+        transition: color var(--duration-fast) var(--easing-standard),
+            background-color var(--duration-fast) var(--easing-standard),
+            border-color var(--duration-fast) var(--easing-standard);
+        border-radius: var(--border-radius-s); // Add radius for hover state
+
+        &:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-surface-hover); // Add hover background
+            border-left-color: var(--color-brand-primary);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-focus-ring);
+            outline-offset: -var(--scale-0-5);
+        }
+
+        &--active {
+            color: var(--color-brand-primary);
+            border-left-color: var(--color-brand-primary);
+            font-weight: var(--font-weight-m);
+            background: color-mix(in srgb, var(--color-brand-primary) 5%, transparent);
+            border-radius: var(--border-radius-2xl);
+        }
+    }
+}

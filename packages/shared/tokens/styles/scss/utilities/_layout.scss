@@ -1,0 +1,551 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: LAYOUT                                 */
+/* ========================================================================== */
+
+// POSITION (Static)
+@include with-responsive {
+    .#{$utility-prefix}static#{$utility-suffix} {
+        position: static;
+    }
+
+    .#{$utility-prefix}fixed#{$utility-suffix} {
+        position: fixed;
+    }
+
+    .#{$utility-prefix}absolute#{$utility-suffix} {
+        position: absolute;
+    }
+
+    .#{$utility-prefix}relative#{$utility-suffix} {
+        position: relative;
+    }
+
+    .#{$utility-prefix}sticky#{$utility-suffix} {
+        position: sticky;
+    }
+}
+
+// COORDINATES (Top/Right/Bottom/Left)
+@each $key, $value in t.$tokens {
+    $suffix: null;
+    $val: var(--#{$key});
+
+    @if string.index($key, 'scale-')==1 {
+        $suffix: string.slice($key, 7);
+    }
+
+    @else if $key =='translate-half' {
+        $suffix: '1\\/2';
+    }
+
+    @else if $key =='translate-full' {
+        $suffix: 'full';
+    }
+
+    @else if $key =='translate-0' {
+        $suffix: '0';
+    }
+
+    @if $suffix {
+        @include with-responsive {
+            .#{$utility-prefix}top-#{$suffix}#{$utility-suffix} {
+                top: $val;
+            }
+
+            .#{$utility-prefix}right-#{$suffix}#{$utility-suffix} {
+                right: $val;
+            }
+
+            .#{$utility-prefix}bottom-#{$suffix}#{$utility-suffix} {
+                bottom: $val;
+            }
+
+            .#{$utility-prefix}left-#{$suffix}#{$utility-suffix} {
+                left: $val;
+            }
+
+            .#{$utility-prefix}inset-#{$suffix}#{$utility-suffix} {
+                top: $val;
+                right: $val;
+                bottom: $val;
+                left: $val;
+            }
+
+            .#{$utility-prefix}inset-x-#{$suffix}#{$utility-suffix} {
+                left: $val;
+                right: $val;
+            }
+
+            .#{$utility-prefix}inset-y-#{$suffix}#{$utility-suffix} {
+                top: $val;
+                bottom: $val;
+            }
+
+            .#{$utility-prefix}inset-inline-#{$suffix}#{$utility-suffix} {
+                inset-inline: $val;
+            }
+
+            .#{$utility-prefix}inset-block-#{$suffix}#{$utility-suffix} {
+                inset-block: $val;
+            }
+
+            .#{$utility-prefix}start-#{$suffix}#{$utility-suffix} {
+                inset-inline-start: $val;
+            }
+
+            .#{$utility-prefix}end-#{$suffix}#{$utility-suffix} {
+                inset-inline-end: $val;
+            }
+        }
+    }
+}
+
+// Z-INDEX
+@each $key, $value in t.$z-index-tokens {
+    @if string.index($key, 'z-index-')==1 {
+        $suffix: string.slice($key, 9);
+
+        @include with-responsive {
+            .#{$utility-prefix}z-#{$suffix}#{$utility-suffix} {
+                z-index: var(--#{$key});
+            }
+        }
+    }
+}
+
+// CONTAINER
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'container-')==1 {
+        $suffix: string.slice($key, 11);
+
+        @include with-responsive {
+            .#{$utility-prefix}container-#{$suffix}#{$utility-suffix} {
+                max-width: var(--#{$key});
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+// OTHER LAYOUT
+@include with-responsive {
+
+    // OVERFLOW
+    .#{$utility-prefix}overflow-auto#{$utility-suffix} {
+        overflow: auto;
+    }
+
+    .#{$utility-prefix}overflow-hidden#{$utility-suffix} {
+        overflow: hidden;
+    }
+
+    .#{$utility-prefix}overflow-visible#{$utility-suffix} {
+        overflow: visible;
+    }
+
+    .#{$utility-prefix}overflow-scroll#{$utility-suffix} {
+        overflow: scroll;
+    }
+
+    .#{$utility-prefix}overflow-x-auto#{$utility-suffix} {
+        overflow-x: auto;
+    }
+
+    .#{$utility-prefix}overflow-y-auto#{$utility-suffix} {
+        overflow-y: auto;
+    }
+
+    .#{$utility-prefix}overflow-x-hidden#{$utility-suffix} {
+        overflow-x: hidden;
+    }
+
+    .#{$utility-prefix}overflow-y-hidden#{$utility-suffix} {
+        overflow-y: hidden;
+    }
+
+    // OVERSCROLL BEHAVIOR
+    .#{$utility-prefix}overscroll-auto#{$utility-suffix} {
+        overscroll-behavior: auto;
+    }
+
+    .#{$utility-prefix}overscroll-contain#{$utility-suffix} {
+        overscroll-behavior: contain;
+    }
+
+    .#{$utility-prefix}overscroll-none#{$utility-suffix} {
+        overscroll-behavior: none;
+    }
+
+    .#{$utility-prefix}overscroll-x-auto#{$utility-suffix} {
+        overscroll-behavior-x: auto;
+    }
+
+    .#{$utility-prefix}overscroll-x-contain#{$utility-suffix} {
+        overscroll-behavior-x: contain;
+    }
+
+    .#{$utility-prefix}overscroll-x-none#{$utility-suffix} {
+        overscroll-behavior-x: none;
+    }
+
+    .#{$utility-prefix}overscroll-y-auto#{$utility-suffix} {
+        overscroll-behavior-y: auto;
+    }
+
+    .#{$utility-prefix}overscroll-y-contain#{$utility-suffix} {
+        overscroll-behavior-y: contain;
+    }
+
+    .#{$utility-prefix}overscroll-y-none#{$utility-suffix} {
+        overscroll-behavior-y: none;
+    }
+
+    // OBJECT FIT
+    .#{$utility-prefix}object-contain#{$utility-suffix} {
+        object-fit: contain;
+    }
+
+    .#{$utility-prefix}object-cover#{$utility-suffix} {
+        object-fit: cover;
+    }
+
+    .#{$utility-prefix}object-fill#{$utility-suffix} {
+        object-fit: fill;
+    }
+
+    .#{$utility-prefix}object-none#{$utility-suffix} {
+        object-fit: none;
+    }
+
+    .#{$utility-prefix}object-scale-down#{$utility-suffix} {
+        object-fit: scale-down;
+    }
+
+    // OBJECT POSITION
+    .#{$utility-prefix}object-bottom#{$utility-suffix} {
+        object-position: bottom;
+    }
+
+    .#{$utility-prefix}object-center#{$utility-suffix} {
+        object-position: center;
+    }
+
+    .#{$utility-prefix}object-left#{$utility-suffix} {
+        object-position: left;
+    }
+
+    .#{$utility-prefix}object-left-bottom#{$utility-suffix} {
+        object-position: left bottom;
+    }
+
+    .#{$utility-prefix}object-left-top#{$utility-suffix} {
+        object-position: left top;
+    }
+
+    .#{$utility-prefix}object-right#{$utility-suffix} {
+        object-position: right;
+    }
+
+    .#{$utility-prefix}object-right-bottom#{$utility-suffix} {
+        object-position: right bottom;
+    }
+
+    .#{$utility-prefix}object-right-top#{$utility-suffix} {
+        object-position: right top;
+    }
+
+    .#{$utility-prefix}object-top#{$utility-suffix} {
+        object-position: top;
+    }
+
+    // VISIBILITY
+    .#{$utility-prefix}visible#{$utility-suffix} {
+        visibility: visible;
+    }
+
+    .#{$utility-prefix}invisible#{$utility-suffix} {
+        visibility: hidden;
+    }
+
+    .#{$utility-prefix}collapse#{$utility-suffix} {
+        visibility: collapse;
+    }
+
+    // ISOLATION
+    .#{$utility-prefix}isolate#{$utility-suffix} {
+        isolation: isolate;
+    }
+
+    .#{$utility-prefix}isolation-auto#{$utility-suffix} {
+        isolation: auto;
+    }
+
+    // FLOAT
+    .#{$utility-prefix}float-right#{$utility-suffix} {
+        float: right;
+    }
+
+    .#{$utility-prefix}float-left#{$utility-suffix} {
+        float: left;
+    }
+
+    .#{$utility-prefix}float-none#{$utility-suffix} {
+        float: none;
+    }
+
+    .#{$utility-prefix}float-start#{$utility-suffix} {
+        float: inline-start;
+    }
+
+    .#{$utility-prefix}float-end#{$utility-suffix} {
+        float: inline-end;
+    }
+
+    // CLEAR
+    .#{$utility-prefix}clear-left#{$utility-suffix} {
+        clear: left;
+    }
+
+    .#{$utility-prefix}clear-right#{$utility-suffix} {
+        clear: right;
+    }
+
+    .#{$utility-prefix}clear-both#{$utility-suffix} {
+        clear: both;
+    }
+
+    .#{$utility-prefix}clear-none#{$utility-suffix} {
+        clear: none;
+    }
+
+    .#{$utility-prefix}clear-start#{$utility-suffix} {
+        clear: inline-start;
+    }
+
+    .#{$utility-prefix}clear-end#{$utility-suffix} {
+        clear: inline-end;
+    }
+
+    // BOX SIZING
+    .#{$utility-prefix}box-border#{$utility-suffix} {
+        box-sizing: border-box;
+    }
+
+    .#{$utility-prefix}box-content#{$utility-suffix} {
+        box-sizing: content-box;
+    }
+
+    // DISPLAY (additional)
+    .#{$utility-prefix}contents#{$utility-suffix} {
+        display: contents;
+    }
+
+    .#{$utility-prefix}flow-root#{$utility-suffix} {
+        display: flow-root;
+    }
+
+    // BOX DECORATION BREAK
+    .#{$utility-prefix}box-decoration-clone#{$utility-suffix} {
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+
+    .#{$utility-prefix}box-decoration-slice#{$utility-suffix} {
+        -webkit-box-decoration-break: slice;
+        box-decoration-break: slice;
+    }
+
+    // DISPLAY TABLE
+    .#{$utility-prefix}table#{$utility-suffix} {
+        display: table;
+    }
+
+    .#{$utility-prefix}table-caption#{$utility-suffix} {
+        display: table-caption;
+    }
+
+    .#{$utility-prefix}table-cell#{$utility-suffix} {
+        display: table-cell;
+    }
+
+    .#{$utility-prefix}table-column#{$utility-suffix} {
+        display: table-column;
+    }
+
+    .#{$utility-prefix}table-column-group#{$utility-suffix} {
+        display: table-column-group;
+    }
+
+    .#{$utility-prefix}table-footer-group#{$utility-suffix} {
+        display: table-footer-group;
+    }
+
+    .#{$utility-prefix}table-header-group#{$utility-suffix} {
+        display: table-header-group;
+    }
+
+    .#{$utility-prefix}table-row#{$utility-suffix} {
+        display: table-row;
+    }
+
+    .#{$utility-prefix}table-row-group#{$utility-suffix} {
+        display: table-row-group;
+    }
+
+    // BREAK
+    .#{$utility-prefix}break-before-auto#{$utility-suffix} {
+        break-before: auto;
+    }
+
+    .#{$utility-prefix}break-before-avoid#{$utility-suffix} {
+        break-before: avoid;
+    }
+
+    .#{$utility-prefix}break-before-all#{$utility-suffix} {
+        break-before: all;
+    }
+
+    .#{$utility-prefix}break-before-avoid-page#{$utility-suffix} {
+        break-before: avoid-page;
+    }
+
+    .#{$utility-prefix}break-before-page#{$utility-suffix} {
+        break-before: page;
+    }
+
+    .#{$utility-prefix}break-before-column#{$utility-suffix} {
+        break-before: column;
+    }
+
+    .#{$utility-prefix}break-after-auto#{$utility-suffix} {
+        break-after: auto;
+    }
+
+    .#{$utility-prefix}break-after-avoid#{$utility-suffix} {
+        break-after: avoid;
+    }
+
+    .#{$utility-prefix}break-after-all#{$utility-suffix} {
+        break-after: all;
+    }
+
+    .#{$utility-prefix}break-after-avoid-page#{$utility-suffix} {
+        break-after: avoid-page;
+    }
+
+    .#{$utility-prefix}break-after-page#{$utility-suffix} {
+        break-after: page;
+    }
+
+    .#{$utility-prefix}break-after-column#{$utility-suffix} {
+        break-after: column;
+    }
+
+    .#{$utility-prefix}break-inside-auto#{$utility-suffix} {
+        break-inside: auto;
+    }
+
+    .#{$utility-prefix}break-inside-avoid#{$utility-suffix} {
+        break-inside: avoid;
+    }
+
+    .#{$utility-prefix}break-inside-avoid-page#{$utility-suffix} {
+        break-inside: avoid-page;
+    }
+
+    .#{$utility-prefix}break-inside-avoid-column#{$utility-suffix} {
+        break-inside: avoid-column;
+    }
+
+    // CONTAINMENT
+    .#{$utility-prefix}contain-none#{$utility-suffix} {
+        contain: none;
+    }
+
+    .#{$utility-prefix}contain-strict#{$utility-suffix} {
+        contain: strict;
+    }
+
+    .#{$utility-prefix}contain-content#{$utility-suffix} {
+        contain: content;
+    }
+
+    .#{$utility-prefix}contain-size#{$utility-suffix} {
+        contain: size;
+    }
+
+    .#{$utility-prefix}contain-layout#{$utility-suffix} {
+        contain: layout;
+    }
+
+    .#{$utility-prefix}contain-paint#{$utility-suffix} {
+        contain: paint;
+    }
+
+    // SCROLLBAR GUTTER
+    .#{$utility-prefix}scrollbar-gutter-auto#{$utility-suffix} {
+        scrollbar-gutter: auto;
+    }
+
+    .#{$utility-prefix}scrollbar-gutter-stable#{$utility-suffix} {
+        scrollbar-gutter: stable;
+    }
+
+    .#{$utility-prefix}scrollbar-gutter-both#{$utility-suffix} {
+        scrollbar-gutter: stable both-edges;
+    }
+
+    // CONTENT VISIBILITY
+    .#{$utility-prefix}content-auto#{$utility-suffix} {
+        content-visibility: auto;
+    }
+
+    .#{$utility-prefix}content-hidden#{$utility-suffix} {
+        content-visibility: hidden;
+    }
+
+    .#{$utility-prefix}content-visible#{$utility-suffix} {
+        content-visibility: visible;
+    }
+
+    // SHAPE OUTSIDE
+    .#{$utility-prefix}shape-none#{$utility-suffix} {
+        shape-outside: none;
+    }
+
+    .#{$utility-prefix}shape-margin#{$utility-suffix} {
+        shape-outside: margin-box;
+    }
+
+    .#{$utility-prefix}shape-content#{$utility-suffix} {
+        shape-outside: content-box;
+    }
+
+    .#{$utility-prefix}shape-border#{$utility-suffix} {
+        shape-outside: border-box;
+    }
+
+    .#{$utility-prefix}shape-padding#{$utility-suffix} {
+        shape-outside: padding-box;
+    }
+
+    // ANCHOR POSITIONING (Bleeding Edge)
+    .#{$utility-prefix}anchor-name-auto#{$utility-suffix} {
+        anchor-name: auto;
+    }
+
+    .#{$utility-prefix}position-anchor-auto#{$utility-suffix} {
+        position-anchor: auto;
+    }
+
+    .#{$utility-prefix}anchor-default#{$utility-suffix} {
+        position-anchor: --default;
+    }
+}

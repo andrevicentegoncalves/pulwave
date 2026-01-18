@@ -1,0 +1,150 @@
+// ==========================================================================
+// Component Documentation - When to Use Section
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__when-to-use-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(var(--scale-70), 1fr));
+        gap: var(--scale-4);
+        margin-bottom: var(--scale-6);
+    }
+
+    &__when-to-use,
+    &__when-not-to-use {
+        padding: var(--scale-4);
+        border-radius: var(--border-radius-xl);
+        background-color: var(--color-surface-subtle);
+    }
+
+    &__when-to-use {
+        border-left: 3px solid var(--color-status-success);
+    }
+
+    &__when-not-to-use {
+        border-left: 3px solid var(--color-status-error);
+    }
+
+    &__when-header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin-bottom: var(--scale-4);
+
+        svg {
+            flex-shrink: 0;
+        }
+
+        h4 {
+            margin: 0;
+            font-size: var(--font-size-title-s);
+            line-height: var(--line-height-tight);
+            font-weight: var(--font-weight-semi-bold);
+        }
+    }
+
+    &__when-to-use &__when-header {
+        svg {
+            color: var(--color-status-success);
+        }
+
+        h4 {
+            color: var(--color-text-primary);
+        }
+    }
+
+    &__when-not-to-use &__when-header {
+        svg {
+            color: var(--color-status-error);
+        }
+
+        h4 {
+            color: var(--color-text-primary);
+        }
+    }
+
+    &__when-list {
+        list-style: disc;
+        padding-left: var(--scale-5);
+        margin: 0;
+    }
+
+    &__when-item {
+        font-size: var(--font-size-body-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        padding: var(--scale-2) 0;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &--alternative {
+            gap: var(--scale-1);
+        }
+    }
+
+    &__when-caption {
+        display: block;
+        font-size: var(--font-size-body-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        margin-top: var(--scale-1);
+    }
+
+    &__when-content {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--scale-2);
+
+        svg {
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+    }
+
+    &__when-to-use &__when-content svg {
+        color: var(--color-status-success);
+    }
+
+    &__when-not-to-use &__when-content svg {
+        color: var(--color-status-error);
+    }
+
+    &__alternative {
+        font-size: var(--font-size-caption-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+
+        strong {
+            color: var(--color-text-primary);
+        }
+    }
+
+    &__alternative-link {
+        color: var(--color-brand-primary);
+        font-weight: var(--font-weight-semi-bold);
+        text-decoration: none;
+        transition: var(--transition-smooth);
+
+        &:hover {
+            color: var(--color-brand-primary-active);
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: var(--scale-0-5) solid var(--color-focus);
+            outline-offset: var(--scale-0-5);
+            border-radius: var(--border-radius-xs);
+        }
+    }
+}
+
+

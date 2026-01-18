@@ -1,0 +1,114 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.accordion {
+
+    // Item
+    &__item {
+        overflow: hidden;
+        margin-bottom: var(--scale-1);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Header (Trigger)
+    &__header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+        user-select: none;
+        border: none;
+        border-radius: var(--border-radius-m); // Was 2xl, but scale fits better
+        text-align: left;
+        transition: var(--transition-smooth);
+        padding: var(--accordion-header-padding);
+        background-color: var(--accordion-header-bg);
+        color: var(--accordion-header-color);
+
+        &:hover {
+            background-color: var(--accordion-header-bg-hover);
+        }
+
+        @include interactive.focus-ring;
+
+        // State: Disabled
+        &:disabled {
+            @include interactive.disabled-state;
+        }
+    }
+
+    // Icon
+    &__icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+        transition: var(--transition-smooth);
+        margin-right: var(--scale-3);
+    }
+
+    // Title Group
+    &__title-group {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-1);
+    }
+
+    &__title {
+        color: inherit;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: var(--font-weight-m);
+    }
+
+    &__subtitle {
+        color: var(--color-text-secondary);
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--font-size-body-s);
+    }
+
+    // Badge
+    &__badge {
+        margin-left: var(--scale-2);
+    }
+
+    // Chevron
+    &__chevron {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-icon-subtle);
+        transition: transform var(--transition-smooth), color var(--transition-smooth);
+        margin-left: var(--scale-2);
+
+        &--state-expanded {
+            transform: rotate(180deg);
+        }
+    }
+
+    // Panel
+    &__panel {
+        overflow: hidden;
+    }
+
+    // Content
+    &__content {
+        background-color: var(--accordion-content-bg);
+        padding: var(--accordion-content-padding);
+        border-radius: 0 0 var(--border-radius-m) var(--border-radius-m);
+    }
+}

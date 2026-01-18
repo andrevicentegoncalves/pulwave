@@ -1,0 +1,15 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.radio {
+    --radio-size: var(--scale-4-5); // 18px
+    --radio-dot-size: var(--scale-2); // var(--scale-2)
+    --radio-gap: var(--scale-2);
+    --radio-content-gap: var(--scale-0-5);
+
+    --radio-border-color: var(--color-border-default);
+    --radio-border-color-hover: var(--color-brand-primary);
+    --radio-bg: var(--color-surface-default);
+    --radio-dot-color: var(--color-text-inverse-default);
+
+    --radio-focus-ring-color: var(--color-action-focus);
+}

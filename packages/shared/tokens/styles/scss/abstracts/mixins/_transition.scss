@@ -1,0 +1,53 @@
+@use 'sass:map';
+
+// ========================================================================== //
+//                          MIXIN: TRANSITION                                 //
+// ========================================================================== //
+
+/// Apply transition with V2 token mapping
+/// @param {List} $property - Property or properties to transition
+/// @param {String|Number} $duration - Duration token key (fast, normal, slow) or value
+/// @param {String} $timing - Easing token key (standard, emphasize, decelerate, accelerate) or value
+@mixin transition($property: all, $duration: normal, $timing: standard) {
+
+    // Map duration keywords to tokens
+    $duration-value: $duration;
+
+    @if $duration =='fast' {
+        $duration-value: var(--duration-fast);
+    }
+
+    @else if $duration =='normal' {
+        $duration-value: var(--duration-normal);
+    }
+
+    @else if $duration =='slow' {
+        $duration-value: var(--duration-slow);
+    }
+
+    // Map timing keywords to tokens
+    $timing-value: $timing;
+
+    @if $timing =='standard' {
+        $timing-value: var(--easing-standard);
+    }
+
+    @else if $timing =='emphasize' {
+        $timing-value: var(--easing-emphasize);
+    }
+
+    @else if $timing =='decelerate' {
+        $timing-value: var(--easing-decelerate);
+    }
+
+    @else if $timing =='accelerate' {
+        $timing-value: var(--easing-accelerate);
+    }
+
+    // Legacy fallback
+    @else if $timing =='ease-in-out' {
+        $timing-value: var(--easing-standard);
+    }
+
+    transition: $property $duration-value $timing-value;
+}

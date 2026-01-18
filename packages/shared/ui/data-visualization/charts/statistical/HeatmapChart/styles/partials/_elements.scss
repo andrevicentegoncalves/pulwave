@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--heatmap {
+    &__grid {
+        display: grid;
+    }
+
+    &__cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-xs);
+        transition: transform 0.2s ease, filter 0.2s ease;
+
+        &--hovered {
+            filter: brightness(1.1);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+    }
+
+    &__value {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        pointer-events: none;
+    }
+
+    &__legend {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--scale-2);
+        margin-top: var(--scale-3);
+        font-size: var(--font-size-body-xs);
+        width: 100%;
+        max-width: 100%;
+
+        &-bar {
+            flex: 1;
+            min-width: 100px;
+            max-width: 200px;
+            height: 10px;
+            border-radius: var(--border-radius-xs);
+        }
+
+        &-text {
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+    }
+}

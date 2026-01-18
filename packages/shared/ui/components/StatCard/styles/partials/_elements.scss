@@ -1,0 +1,60 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stat-card {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-2);
+        border-radius: var(--border-radius-m);
+        background: var(--stat-card-icon-bg);
+        background-color: var(--color-surface-subtle);
+
+        &--variant-primary {
+            background: var(--color-primary-subtle);
+            color: var(--stat-card-icon-color-primary);
+        }
+
+        &--variant-success {
+            background: var(--color-status-success-subtle);
+            color: var(--stat-card-icon-color-success);
+        }
+
+        &--variant-warning {
+            background: var(--color-status-warning-subtle);
+            color: var(--stat-card-icon-color-warning);
+        }
+
+        &--variant-error {
+            background: var(--color-critical-subtle);
+            color: var(--stat-card-icon-color-critical);
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__value {
+        font-size: var(--font-size-title-l);
+        color: var(--stat-card-value-color);
+    }
+
+    &__label {
+        font-size: var(--font-size-label-m);
+        color: var(--stat-card-label-color);
+    }
+
+    &__subtext {
+        font-size: var(--font-size-body-s);
+        color: var(--stat-card-subtext-color);
+        margin-top: var(--scale-1);
+    }
+}

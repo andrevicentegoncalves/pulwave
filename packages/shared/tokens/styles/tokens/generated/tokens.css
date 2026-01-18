@@ -1,0 +1,1892 @@
+/* Auto-generated from JSON tokens - DO NOT EDIT */
+
+:root {
+
+  /* ANIMATION */
+    /* Duration */
+  --animation-duration-fast: 100ms;
+  --animation-duration-normal: 150ms;
+
+  /* ASPECT-RATIO */
+    /* Auto */
+  --aspect-ratio-auto: auto;
+    /* Golden */
+  --aspect-ratio-golden: 1.618/1;
+    /* Landscape */
+  --aspect-ratio-landscape: 4/3;
+    /* Photo */
+  --aspect-ratio-photo: 3 / 2;
+    /* Portrait */
+  --aspect-ratio-portrait: 3/4;
+    /* Square */
+  --aspect-ratio-square: 1/1;
+    /* Story */
+  --aspect-ratio-story: 9 / 16;
+    /* Ultrawide */
+  --aspect-ratio-ultrawide: 21/9;
+    /* Widescreen */
+  --aspect-ratio-widescreen: 16/9;
+
+  /* AVATAR-SIZE */
+    /* 2xl */
+  --avatar-size-2xl: 8rem;
+    /* L */
+  --avatar-size-l: 4rem;
+    /* M */
+  --avatar-size-m: 3rem;
+    /* S */
+  --avatar-size-s: 2.5rem;
+    /* Xl */
+  --avatar-size-xl: 6rem;
+    /* Xs */
+  --avatar-size-xs: 2rem;
+
+  /* BACKDROP */
+    /* Default */
+  --backdrop-default: 4px;
+    /* Heavy */
+  --backdrop-heavy: 12px;
+    /* Strong */
+  --backdrop-strong: 8px;
+    /* Subtle */
+  --backdrop-subtle: 2px;
+
+  /* BLUR */
+    /* 2xl */
+  --blur-2xl: 24px;
+    /* 3xl */
+  --blur-3xl: 40px;
+    /* L */
+  --blur-l: 12px;
+    /* M */
+  --blur-m: 8px;
+    /* None */
+  --blur-none: 0;
+    /* S */
+  --blur-s: 4px;
+    /* Xl */
+  --blur-xl: 16px;
+    /* Xs */
+  --blur-xs: 2px;
+
+  /* BORDER-RADIUS */
+    /* 2xl */
+  --border-radius-2xl: 1.5rem;
+    /* 2xs */
+  --border-radius-2xs: 0.0625rem;
+    /* Circle */
+  --border-radius-circle: 50%;
+    /* L */
+  --border-radius-l: 0.75rem;
+    /* M */
+  --border-radius-m: 0.5rem;
+    /* None */
+  --border-radius-none: 0;
+    /* Pill */
+  --border-radius-pill: 9999px;
+    /* Round */
+  --border-radius-round: 50%;
+    /* S */
+  --border-radius-s: 0.25rem;
+    /* Xl */
+  --border-radius-xl: 1rem;
+    /* Xs */
+  --border-radius-xs: 0.125rem;
+
+  /* BORDER-WIDTH */
+    /* 0 */
+  --border-width-0: 0;
+    /* 2xs */
+  --border-width-2xs: 1px;
+    /* L */
+  --border-width-l: 6px;
+    /* M */
+  --border-width-m: 4px;
+    /* S */
+  --border-width-s: 3px;
+    /* Xl */
+  --border-width-xl: 8px;
+    /* Xs */
+  --border-width-xs: 2px;
+
+  /* BRAND */
+    /* Primary */
+  --brand-primary-lightness-100: 93%;
+  --brand-primary-lightness-200: 85%;
+  --brand-primary-lightness-300: 70%;
+  --brand-primary-lightness-400: 55%;
+  --brand-primary-lightness-50: 97%;
+  --brand-primary-lightness-500: 45%;
+  --brand-primary-lightness-600: 38%;
+  --brand-primary-lightness-700: 30%;
+  --brand-primary-lightness-800: 22%;
+  --brand-primary-lightness-900: 15%;
+  --brand-primary-lightness-950: 8%;
+    /* Secondary */
+  --brand-secondary-lightness-100: 92%;
+  --brand-secondary-lightness-200: 82%;
+  --brand-secondary-lightness-300: 68%;
+  --brand-secondary-lightness-400: 55%;
+  --brand-secondary-lightness-50: 97%;
+  --brand-secondary-lightness-500: 48%;
+  --brand-secondary-lightness-600: 40%;
+  --brand-secondary-lightness-700: 32%;
+  --brand-secondary-lightness-800: 24%;
+  --brand-secondary-lightness-900: 16%;
+  --brand-secondary-lightness-950: 8%;
+
+  /* BREAKPOINT */
+    /* 2xl */
+  --breakpoint-2xl: 1920px;
+    /* L */
+  --breakpoint-l: 1024px;
+    /* M */
+  --breakpoint-m: 768px;
+    /* S */
+  --breakpoint-s: 640px;
+    /* Xl */
+  --breakpoint-xl: 1280px;
+    /* Xs */
+  --breakpoint-xs: 0px;
+
+  /* BREAKPOINT-MAX */
+    /* L */
+  --breakpoint-max-l: 1279px;
+    /* M */
+  --breakpoint-max-m: 1023px;
+    /* S */
+  --breakpoint-max-s: 767px;
+    /* Xl */
+  --breakpoint-max-xl: 1919px;
+    /* Xs */
+  --breakpoint-max-xs: 639px;
+
+  /* COLOR */
+    /* Black */
+  --color-black: hsl(0, 0%, 0%);
+    /* Blue */
+  --color-blue-100: hsl(214, 94%, 92%);
+  --color-blue-300: hsl(212, 96%, 78%);
+  --color-blue-50: hsl(214, 100%, 97%);
+  --color-blue-500: hsl(217, 91%, 60%);
+  --color-blue-700: hsl(224, 76%, 48%);
+  --color-blue-900: hsl(224, 64%, 33%);
+    /* Border */
+  --color-border-active: hsl(160, 94%, 27%);
+  --color-border-default: hsl(30, 5%, 84%);
+  --color-border-disabled: hsl(30, 5%, 92%);
+  --color-border-error: hsl(0, 84%, 45%);
+  --color-border-focus: hsl(160, 94%, 30%);
+  --color-border-hover: hsl(30, 5%, 72%);
+  --color-border-info: hsl(202, 100%, 55%);
+  --color-border-selected: hsl(160, 94%, 30%);
+  --color-border-strong: hsl(30, 5%, 84%);
+  --color-border-subtle: hsl(30, 5%, 97%);
+  --color-border-success: hsl(142, 76%, 36%);
+  --color-border-warning: hsl(45, 100%, 55%);
+    /* Brand */
+  --color-brand-primary: hsl(160, 94%, 27%);
+  --color-brand-primary-active: hsl(160, 94%, 16%);
+  --color-brand-primary-hover: hsl(160, 94%, 22%);
+  --color-brand-primary-subtle: hsl(160, 94%, 95%);
+  --color-brand-secondary: hsl(45, 88%, 50%);
+  --color-brand-secondary-hover: hsl(45, 88%, 42%);
+  --color-brand-secondary-subtle: hsl(45, 88%, 95%);
+  --color-brand-tertiary: hsl(12, 88%, 50%);
+  --color-brand-tertiary-subtle: hsl(12, 88%, 95%);
+    /* Critical */
+  --color-critical-50: hsl(340, 85%, 93%);
+  --color-critical-500: hsl(340, 85%, 45%);
+  --color-critical-900: hsl(340, 85%, 15%);
+  --color-critical-950: hsl(340, 85%, 5%);
+    /* Cyan */
+  --color-cyan-50: hsl(186, 100%, 96%);
+  --color-cyan-500: hsl(189, 94%, 43%);
+  --color-cyan-700: hsl(192, 82%, 31%);
+    /* Discovery */
+  --color-discovery-50: hsl(240, 90%, 93%);
+  --color-discovery-500: hsl(240, 90%, 50%);
+  --color-discovery-900: hsl(240, 90%, 12%);
+  --color-discovery-950: hsl(240, 90%, 5%);
+    /* Emerald */
+  --color-emerald-50: hsl(152, 80%, 96%);
+  --color-emerald-500: hsl(160, 84%, 39%);
+  --color-emerald-700: hsl(163, 94%, 24%);
+    /* Error */
+  --color-error-100: hsl(0, 84%, 90%);
+  --color-error-200: hsl(0, 84%, 80%);
+  --color-error-300: hsl(0, 84%, 70%);
+  --color-error-400: hsl(0, 84%, 55%);
+  --color-error-50: hsl(0, 84%, 93%);
+  --color-error-500: hsl(0, 84%, 45%);
+  --color-error-600: hsl(0, 84%, 38%);
+  --color-error-700: hsl(0, 84%, 32%);
+  --color-error-800: hsl(0, 84%, 25%);
+  --color-error-900: hsl(0, 84%, 15%);
+  --color-error-950: hsl(0, 84%, 5%);
+    /* Focus */
+  --color-focus-ring: hsl(160, 94%, 30%);
+  --color-focus-ring-error: hsl(0, 84%, 45%);
+  --color-focus-ring-inverse: hsl(0, 0%, 100%);
+  --color-focus-ring-offset: hsl(30, 5%, 100%);
+  --color-focus-ring-success: hsl(142, 76%, 36%);
+    /* Fuschia */
+  --color-fuschia-50: hsl(289, 100%, 98%);
+  --color-fuschia-500: hsl(292, 84%, 61%);
+  --color-fuschia-700: hsl(295, 72%, 40%);
+    /* Growth */
+  --color-growth-50: hsl(85, 85%, 94%);
+  --color-growth-500: hsl(85, 85%, 45%);
+  --color-growth-900: hsl(85, 85%, 12%);
+  --color-growth-950: hsl(85, 85%, 5%);
+    /* Indigo */
+  --color-indigo-50: hsl(231, 100%, 97%);
+  --color-indigo-500: hsl(239, 84%, 67%);
+  --color-indigo-700: hsl(244, 57%, 51%);
+    /* Info */
+  --color-info-100: hsl(202, 100%, 90%);
+  --color-info-200: hsl(202, 100%, 80%);
+  --color-info-300: hsl(202, 100%, 70%);
+  --color-info-400: hsl(202, 100%, 60%);
+  --color-info-50: hsl(202, 100%, 93%);
+  --color-info-500: hsl(202, 100%, 55%);
+  --color-info-600: hsl(202, 100%, 45%);
+  --color-info-700: hsl(202, 100%, 35%);
+  --color-info-800: hsl(202, 100%, 25%);
+  --color-info-900: hsl(202, 100%, 15%);
+  --color-info-950: hsl(202, 100%, 5%);
+    /* Link */
+  --color-link-active: hsl(160, 94%, 16%);
+  --color-link-default: hsl(160, 94%, 27%);
+  --color-link-disabled: hsl(30, 5%, 72%);
+  --color-link-hover: hsl(160, 94%, 22%);
+  --color-link-visited: hsl(270, 85%, 40%);
+    /* Maintenance */
+  --color-maintenance-50: hsl(185, 90%, 93%);
+  --color-maintenance-500: hsl(185, 90%, 45%);
+  --color-maintenance-900: hsl(185, 90%, 12%);
+  --color-maintenance-950: hsl(185, 90%, 5%);
+    /* Neutral */
+  --color-neutral-0: hsl(30, 5%, 100%);
+  --color-neutral-100: hsl(30, 5%, 97%);
+  --color-neutral-150: hsl(30, 5%, 95%);
+  --color-neutral-200: hsl(30, 5%, 92%);
+  --color-neutral-250: hsl(30, 5%, 89%);
+  --color-neutral-300: hsl(30, 5%, 84%);
+  --color-neutral-400: hsl(30, 5%, 72%);
+  --color-neutral-50: hsl(30, 5%, 99%);
+  --color-neutral-500: hsl(30, 5%, 54%);
+  --color-neutral-600: hsl(30, 5%, 40%);
+  --color-neutral-700: hsl(30, 5%, 28%);
+  --color-neutral-800: hsl(30, 5%, 18%);
+  --color-neutral-850: hsl(30, 5%, 14%);
+  --color-neutral-900: hsl(30, 5%, 10%);
+  --color-neutral-950: hsl(30, 5%, 4%);
+    /* Overlay */
+  --color-overlay-default: rgba(0, 0, 0, 0.3);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.7);
+  --color-overlay-solid: rgba(0, 0, 0, 0.9);
+  --color-overlay-strong: rgba(0, 0, 0, 0.5);
+  --color-overlay-subtle: rgba(0, 0, 0, 0.1);
+    /* Premium */
+  --color-premium-400: hsl(270, 85%, 60%);
+  --color-premium-50: hsl(270, 85%, 93%);
+  --color-premium-500: hsl(270, 85%, 50%);
+  --color-premium-600: hsl(270, 85%, 40%);
+  --color-premium-900: hsl(270, 85%, 12%);
+  --color-premium-950: hsl(270, 85%, 5%);
+    /* Primary */
+  --color-primary-100: hsl(160, 94%, 90%);
+  --color-primary-200: hsl(160, 94%, 80%);
+  --color-primary-300: hsl(160, 94%, 65%);
+  --color-primary-400: hsl(160, 94%, 45%);
+  --color-primary-50: hsl(160, 94%, 95%);
+  --color-primary-500: hsl(160, 94%, 30%);
+  --color-primary-600: hsl(160, 94%, 27%);
+  --color-primary-700: hsl(160, 94%, 22%);
+  --color-primary-800: hsl(160, 94%, 16%);
+  --color-primary-900: hsl(160, 94%, 10%);
+  --color-primary-950: hsl(160, 94%, 5%);
+    /* Promotion */
+  --color-promotion-50: hsl(310, 85%, 93%);
+  --color-promotion-500: hsl(310, 85%, 50%);
+  --color-promotion-900: hsl(310, 85%, 12%);
+  --color-promotion-950: hsl(310, 85%, 5%);
+    /* Purple */
+  --color-purple-50: hsl(270, 100%, 99%);
+  --color-purple-500: hsl(271, 91%, 65%);
+  --color-purple-700: hsl(271, 71%, 47%);
+    /* Rose */
+  --color-rose-50: hsl(351, 100%, 97%);
+  --color-rose-500: hsl(350, 89%, 60%);
+  --color-rose-700: hsl(345, 82%, 41%);
+    /* Secondary */
+  --color-secondary-100: hsl(45, 88%, 90%);
+  --color-secondary-200: hsl(45, 88%, 82%);
+  --color-secondary-300: hsl(45, 88%, 72%);
+  --color-secondary-400: hsl(45, 88%, 62%);
+  --color-secondary-50: hsl(45, 88%, 95%);
+  --color-secondary-500: hsl(45, 88%, 50%);
+  --color-secondary-600: hsl(45, 88%, 42%);
+  --color-secondary-700: hsl(45, 88%, 38%);
+  --color-secondary-800: hsl(45, 88%, 30%);
+  --color-secondary-900: hsl(45, 88%, 20%);
+  --color-secondary-950: hsl(45, 88%, 10%);
+    /* Shadow */
+  --color-shadow-default: rgba(0, 0, 0, 0.1);
+  --color-shadow-heavy: rgba(0, 0, 0, 0.25);
+  --color-shadow-medium: rgba(0, 0, 0, 0.15);
+  --color-shadow-strong: rgba(0, 0, 0, 0.2);
+  --color-shadow-subtle: rgba(0, 0, 0, 0.05);
+    /* Skeleton */
+  --color-skeleton-base: hsl(30, 5%, 97%);
+  --color-skeleton-highlight: hsl(30, 5%, 92%);
+  --color-skeleton-shimmer: hsl(30, 5%, 99%);
+    /* Status */
+  --color-status-error: hsl(0, 84%, 45%);
+  --color-status-error-hover: hsl(0, 84%, 38%);
+  --color-status-error-subtle: hsl(0, 84%, 93%);
+  --color-status-error-text: hsl(0, 84%, 32%);
+  --color-status-info: hsl(202, 100%, 45%);
+  --color-status-info-hover: hsl(202, 100%, 35%);
+  --color-status-info-subtle: hsl(202, 100%, 93%);
+  --color-status-info-text: hsl(202, 100%, 35%);
+  --color-status-success: hsl(142, 76%, 30%);
+  --color-status-success-hover: hsl(142, 76%, 25%);
+  --color-status-success-subtle: hsl(142, 76%, 93%);
+  --color-status-success-text: hsl(142, 76%, 25%);
+  --color-status-warning: hsl(45, 100%, 55%);
+  --color-status-warning-hover: hsl(45, 100%, 45%);
+  --color-status-warning-subtle: hsl(45, 100%, 93%);
+  --color-status-warning-text: hsl(45, 100%, 23%);
+    /* Success */
+  --color-success-100: hsl(142, 76%, 90%);
+  --color-success-200: hsl(142, 76%, 80%);
+  --color-success-300: hsl(142, 76%, 70%);
+  --color-success-400: hsl(142, 76%, 55%);
+  --color-success-50: hsl(142, 76%, 93%);
+  --color-success-500: hsl(142, 76%, 36%);
+  --color-success-600: hsl(142, 76%, 30%);
+  --color-success-700: hsl(142, 76%, 25%);
+  --color-success-800: hsl(142, 76%, 18%);
+  --color-success-900: hsl(142, 76%, 10%);
+  --color-success-950: hsl(142, 76%, 5%);
+    /* Surface */
+  --color-surface-default: hsl(30, 5%, 100%);
+  --color-surface-dim: hsl(30, 5%, 95%);
+  --color-surface-disabled: hsl(30, 5%, 92%);
+  --color-surface-heavy: hsl(30, 5%, 84%);
+  --color-surface-hover: hsl(30, 5%, 97%);
+  --color-surface-inverse: hsl(30, 5%, 10%);
+  --color-surface-muted: hsl(30, 5%, 99%);
+  --color-surface-pressed: hsl(30, 5%, 92%);
+  --color-surface-selected: hsl(160, 94%, 95%);
+  --color-surface-strong: hsl(30, 5%, 92%);
+  --color-surface-subtle: hsl(30, 5%, 97%);
+    /* Tertiary */
+  --color-tertiary-100: hsl(12, 88%, 90%);
+  --color-tertiary-200: hsl(12, 88%, 80%);
+  --color-tertiary-300: hsl(12, 88%, 68%);
+  --color-tertiary-400: hsl(12, 88%, 55%);
+  --color-tertiary-50: hsl(12, 88%, 95%);
+  --color-tertiary-500: hsl(12, 88%, 50%);
+  --color-tertiary-600: hsl(12, 88%, 45%);
+  --color-tertiary-700: hsl(12, 88%, 38%);
+  --color-tertiary-800: hsl(12, 88%, 28%);
+  --color-tertiary-900: hsl(12, 88%, 18%);
+  --color-tertiary-950: hsl(12, 88%, 8%);
+    /* Text */
+  --color-text-disabled: hsl(30, 5%, 40%);
+  --color-text-inverse: hsl(30, 5%, 100%);
+  --color-text-on-error: hsl(0, 0%, 100%);
+  --color-text-on-info: hsl(0, 0%, 100%);
+  --color-text-on-primary: hsl(0, 0%, 100%);
+  --color-text-on-secondary: hsl(30, 5%, 10%);
+  --color-text-on-success: hsl(0, 0%, 100%);
+  --color-text-on-warning: hsl(30, 5%, 10%);
+  --color-text-primary: hsl(30, 5%, 10%);
+  --color-text-secondary: hsl(30, 5%, 40%);
+  --color-text-tertiary: hsl(30, 5%, 54%);
+    /* Transparent */
+  --color-transparent: transparent;
+    /* Urgent */
+  --color-urgent-50: hsl(25, 95%, 94%);
+  --color-urgent-500: hsl(25, 95%, 50%);
+  --color-urgent-900: hsl(25, 95%, 14%);
+  --color-urgent-950: hsl(25, 95%, 5%);
+    /* Violet */
+  --color-violet-50: hsl(252, 100%, 98%);
+  --color-violet-500: hsl(258, 90%, 66%);
+  --color-violet-700: hsl(263, 70%, 50%);
+    /* Warning */
+  --color-warning-100: hsl(45, 100%, 90%);
+  --color-warning-200: hsl(45, 100%, 80%);
+  --color-warning-300: hsl(45, 100%, 70%);
+  --color-warning-400: hsl(45, 100%, 60%);
+  --color-warning-50: hsl(45, 100%, 93%);
+  --color-warning-500: hsl(45, 100%, 55%);
+  --color-warning-600: hsl(45, 100%, 45%);
+  --color-warning-700: hsl(45, 100%, 32%);
+  --color-warning-800: hsl(45, 100%, 23%);
+  --color-warning-900: hsl(45, 100%, 13%);
+  --color-warning-950: hsl(45, 100%, 5%);
+    /* White */
+  --color-white: hsl(0, 0%, 100%);
+
+  /* COMPONENT */
+    /* Border radius */
+  --component-border-radius: 0.125rem;
+    /* Height */
+  --component-height-l: 2.5rem;
+  --component-height-m: 2rem;
+  --component-height-s: 1.5rem;
+  --component-height-xs: 1.25rem;
+    /* Icon size */
+  --component-icon-size: 0.75rem;
+
+  /* CONFIG */
+    /* Accessibility */
+  --config-accessibility: cvd-safe;
+    /* Border width */
+  --config-border-width: 2px;
+    /* Contrast ratio */
+  --config-contrast-ratio-text: 7:1;
+  --config-contrast-ratio-ui: 4.5:1;
+    /* Density */
+  --config-density: compact;
+    /* Focus width */
+  --config-focus-width: 3px;
+    /* Style */
+  --config-style: minimalist;
+    /* Text weight */
+  --config-text-weight: 500;
+
+  /* CONTAINER */
+    /* 2xl */
+  --container-2xl: 120rem;
+    /* Dashboard */
+  --container-dashboard: 100rem;
+    /* Full */
+  --container-full: 100%;
+    /* L */
+  --container-l: 64rem;
+    /* M */
+  --container-m: 48rem;
+    /* Narrow */
+  --container-narrow: 30rem;
+    /* Prose */
+  --container-prose: 65ch;
+    /* S */
+  --container-s: 40rem;
+    /* Screen */
+  --container-screen: 100vw;
+    /* Wide */
+  --container-wide: 90rem;
+    /* Xl */
+  --container-xl: 80rem;
+    /* Xs */
+  --container-xs: 100%;
+
+  /* CONTAINER-PADDING */
+    /* L */
+  --container-padding-l: 3rem;
+    /* M */
+  --container-padding-m: 2rem;
+    /* S */
+  --container-padding-s: 1.5rem;
+    /* Xl */
+  --container-padding-xl: 4rem;
+    /* Xs */
+  --container-padding-xs: 1rem;
+
+  /* CURSOR */
+    /* Auto */
+  --cursor-auto: auto;
+    /* Col resize */
+  --cursor-col-resize: col-resize;
+    /* Copy */
+  --cursor-copy: copy;
+    /* Crosshair */
+  --cursor-crosshair: crosshair;
+    /* Default */
+  --cursor-default: default;
+    /* Grab */
+  --cursor-grab: grab;
+    /* Grabbing */
+  --cursor-grabbing: grabbing;
+    /* Help */
+  --cursor-help: help;
+    /* Move */
+  --cursor-move: move;
+    /* None */
+  --cursor-none: none;
+    /* Not allowed */
+  --cursor-not-allowed: not-allowed;
+    /* Pointer */
+  --cursor-pointer: pointer;
+    /* Progress */
+  --cursor-progress: progress;
+    /* Row resize */
+  --cursor-row-resize: row-resize;
+    /* Text */
+  --cursor-text: text;
+    /* Wait */
+  --cursor-wait: wait;
+    /* Zoom in */
+  --cursor-zoom-in: zoom-in;
+    /* Zoom out */
+  --cursor-zoom-out: zoom-out;
+
+  /* DELAY */
+    /* Base */
+  --delay-base: 100ms;
+    /* Long */
+  --delay-long: 300ms;
+    /* Longer */
+  --delay-longer: 500ms;
+    /* Medium */
+  --delay-medium: 200ms;
+    /* None */
+  --delay-none: 0ms;
+    /* Short */
+  --delay-short: 50ms;
+
+  /* DENSE */
+    /* Component */
+  --dense-component-border-radius: 0.125rem;
+  --dense-component-height-l: 2.5rem;
+  --dense-component-height-m: 2rem;
+  --dense-component-height-s: 1.5rem;
+  --dense-component-height-xs: 1.25rem;
+  --dense-component-icon-size: 0.75rem;
+    /* Inline */
+  --dense-inline-l: 0.75rem;
+  --dense-inline-m: 0.5rem;
+  --dense-inline-s: 0.25rem;
+  --dense-inline-xl: 1rem;
+  --dense-inline-xs: 0.125rem;
+    /* Inset */
+  --dense-inset-l: 1rem;
+  --dense-inset-m: 0.75rem;
+  --dense-inset-s: 0.5rem;
+  --dense-inset-xl: 1.5rem;
+  --dense-inset-xs: 0.25rem;
+    /* Stack */
+  --dense-stack-2xl: 1.5rem;
+  --dense-stack-l: 0.75rem;
+  --dense-stack-m: 0.5rem;
+  --dense-stack-s: 0.25rem;
+  --dense-stack-xl: 1rem;
+  --dense-stack-xs: 0.125rem;
+    /* Text */
+  --dense-text-font-size: 13px;
+  --dense-text-line-height: 1.1;
+
+  /* DURATION */
+    /* Comfortable */
+  --duration-comfortable: 300ms;
+    /* Fast */
+  --duration-fast: 150ms;
+    /* Immediate */
+  --duration-immediate: 50ms;
+    /* Instant */
+  --duration-instant: 0ms;
+    /* Moderate */
+  --duration-moderate: 400ms;
+    /* Normal */
+  --duration-normal: 200ms;
+    /* Slow */
+  --duration-slow: 500ms;
+    /* Slower */
+  --duration-slower: 750ms;
+    /* Slowest */
+  --duration-slowest: 1000ms;
+
+  /* EASING */
+    /* Accelerate */
+  --easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+    /* Bounce */
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Decelerate */
+  --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+    /* Ease */
+  --easing-ease: ease;
+    /* Ease in */
+  --easing-ease-in: ease-in;
+    /* Ease in out */
+  --easing-ease-in-out: ease-in-out;
+    /* Ease out */
+  --easing-ease-out: ease-out;
+    /* Gentle */
+  --easing-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Linear */
+  --easing-linear: linear;
+    /* Sharp */
+  --easing-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+    /* Smooth */
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    /* Spring */
+  --easing-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Standard */
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* EFFECTS */
+    /* Border radius */
+  --effects-border-radius-l: 0.375rem;
+  --effects-border-radius-m: 0.25rem;
+  --effects-border-radius-s: 0.125rem;
+  --effects-border-radius-xl: 0.5rem;
+    /* Shadow */
+  --effects-shadow-card: none;
+  --effects-shadow-dropdown: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --effects-shadow-modal: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --effects-shadow-none: none;
+
+  /* ELEVATION */
+    /* Card */
+  --elevation-card: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
+    /* Dropdown */
+  --elevation-dropdown: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.12);
+    /* Floating */
+  --elevation-floating: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.12);
+    /* Modal */
+  --elevation-modal: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /* None */
+  --elevation-none: none;
+    /* Overlay */
+  --elevation-overlay: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /* Popover */
+  --elevation-popover: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+    /* Popup */
+  --elevation-popup: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+    /* Raised */
+  --elevation-raised: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
+    /* Toast */
+  --elevation-toast: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+
+  /* FOCUS */
+    /* Offset */
+  --focus-offset-base: 4px;
+  --focus-offset-none: 0px;
+  --focus-offset-s: 2px;
+    /* Style */
+  --focus-style-dashed: dashed;
+  --focus-style-dotted: dotted;
+  --focus-style-solid: solid;
+    /* Width */
+  --focus-width-hairline: 1px;
+  --focus-width-medium: 3px;
+  --focus-width-thick: 4px;
+  --focus-width-thin: 2px;
+
+  /* FONT-FAMILY */
+    /* Base */
+  --font-family-base: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Default */
+  --font-family-default: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Display */
+  --font-family-display: 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Heading */
+  --font-family-heading: 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Mono */
+  --font-family-mono: 'Courier New', 'Courier', monospace;
+    /* Montserrat */
+  --font-family-montserrat: 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Roboto */
+  --font-family-roboto: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* Sans */
+  --font-family-sans: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+    /* Serif */
+  --font-family-serif: 'Georgia', 'Times New Roman', serif;
+
+  /* FONT-SIZE */
+    /* Body */
+  --font-size-body-l: 18px;
+  --font-size-body-m: 16px;
+  --font-size-body-s: 14px;
+  --font-size-body-xl: 20px;
+    /* Display */
+  --font-size-display-hero: 80px;
+  --font-size-display-marketing: 64px;
+  --font-size-display-section: 56px;
+    /* Title */
+  --font-size-title-2xs: 14px;
+  --font-size-title-l: 24px;
+  --font-size-title-m: 20px;
+  --font-size-title-s: 18px;
+  --font-size-title-xl: 32px;
+  --font-size-title-xs: 16px;
+    /* Ui */
+  --font-size-ui-l: 16px;
+  --font-size-ui-m: 14px;
+  --font-size-ui-s: 13px;
+  --font-size-ui-xs: 12px;
+
+  /* FONT-SIZE-MOBILE */
+    /* Display */
+  --font-size-mobile-display-hero: 56px;
+  --font-size-mobile-display-marketing: 48px;
+  --font-size-mobile-display-section: 40px;
+    /* Title */
+  --font-size-mobile-title-2xs: 14px;
+  --font-size-mobile-title-l: 22px;
+  --font-size-mobile-title-m: 20px;
+  --font-size-mobile-title-s: 16px;
+  --font-size-mobile-title-xl: 28px;
+  --font-size-mobile-title-xs: 16px;
+
+  /* FONT-STYLE */
+    /* Italic */
+  --font-style-italic: italic;
+    /* Normal */
+  --font-style-normal: normal;
+    /* Oblique */
+  --font-style-oblique: oblique;
+
+  /* FONT-WEIGHT */
+    /* Black */
+  --font-weight-black: 900;
+    /* Bold */
+  --font-weight-bold: 700;
+    /* Extra bold */
+  --font-weight-extra-bold: 800;
+    /* Extra light */
+  --font-weight-extra-light: 200;
+    /* Light */
+  --font-weight-light: 300;
+    /* Medium */
+  --font-weight-medium: 500;
+    /* Regular */
+  --font-weight-regular: 400;
+    /* Semi bold */
+  --font-weight-semi-bold: 600;
+    /* Thin */
+  --font-weight-thin: 100;
+
+  /* GRADIENT */
+    /* Direction */
+  --gradient-direction-135deg: 135deg;
+  --gradient-direction-180deg: 180deg;
+  --gradient-direction-45deg: 45deg;
+  --gradient-direction-90deg: 90deg;
+  --gradient-direction-to-bottom: to bottom;
+  --gradient-direction-to-bottom-left: to bottom left;
+  --gradient-direction-to-bottom-right: to bottom right;
+  --gradient-direction-to-left: to left;
+  --gradient-direction-to-right: to right;
+  --gradient-direction-to-top: to top;
+  --gradient-direction-to-top-left: to top left;
+  --gradient-direction-to-top-right: to top right;
+    /* Radial position */
+  --gradient-radial-position-bottom: bottom;
+  --gradient-radial-position-bottom-left: bottom left;
+  --gradient-radial-position-bottom-right: bottom right;
+  --gradient-radial-position-center: center;
+  --gradient-radial-position-left: left;
+  --gradient-radial-position-right: right;
+  --gradient-radial-position-top: top;
+  --gradient-radial-position-top-left: top left;
+  --gradient-radial-position-top-right: top right;
+    /* Radial size */
+  --gradient-radial-size-closest-corner: closest-corner;
+  --gradient-radial-size-closest-side: closest-side;
+  --gradient-radial-size-farthest-corner: farthest-corner;
+  --gradient-radial-size-farthest-side: farthest-side;
+
+  /* GRID */
+    /* Columns */
+  --grid-columns-2xl: 12;
+  --grid-columns-desktop: 12;
+  --grid-columns-l: 12;
+  --grid-columns-m: 8;
+  --grid-columns-mobile: 4;
+  --grid-columns-s: 4;
+  --grid-columns-tablet: 8;
+  --grid-columns-xl: 12;
+  --grid-columns-xs: 4;
+    /* Gutter */
+  --grid-gutter-2xl: 2rem;
+  --grid-gutter-l: 1.5rem;
+  --grid-gutter-m: 1rem;
+  --grid-gutter-s: 1rem;
+  --grid-gutter-xl: 1.5rem;
+  --grid-gutter-xs: 1rem;
+    /* Margin */
+  --grid-margin-2xl: 2rem;
+  --grid-margin-l: 1.5rem;
+  --grid-margin-m: 1.5rem;
+  --grid-margin-s: 1rem;
+  --grid-margin-xl: 0;
+  --grid-margin-xs: 1rem;
+
+  /* ICON-CONTEXT */
+    /* Avatar default */
+  --icon-context-avatar-default: 2rem;
+    /* Avatar large */
+  --icon-context-avatar-large: 3rem;
+    /* Avatar small */
+  --icon-context-avatar-small: 1.5rem;
+    /* Badge */
+  --icon-context-badge: 1rem;
+    /* Button default */
+  --icon-context-button-default: 1.25rem;
+    /* Button large */
+  --icon-context-button-large: 1.5rem;
+    /* Button small */
+  --icon-context-button-small: 1rem;
+    /* Feature */
+  --icon-context-feature: 2rem;
+    /* Heading */
+  --icon-context-heading: 2rem;
+    /* Hero */
+  --icon-context-hero: 3rem;
+    /* Inline text */
+  --icon-context-inline-text: 1rem;
+    /* Input */
+  --icon-context-input: 1.25rem;
+    /* List item */
+  --icon-context-list-item: 1.25rem;
+    /* Navigation */
+  --icon-context-navigation: 1.5rem;
+    /* Toolbar */
+  --icon-context-toolbar: 1.5rem;
+
+  /* ICON-SIZE */
+    /* L */
+  --icon-size-l: 2rem;
+    /* M */
+  --icon-size-m: 1.5rem;
+    /* S */
+  --icon-size-s: 1.25rem;
+    /* Xl */
+  --icon-size-xl: 3rem;
+    /* Xs */
+  --icon-size-xs: 1rem;
+
+  /* ICON-TEXT-GAP */
+    /* Comfortable */
+  --icon-text-gap-comfortable: 0.75rem;
+    /* Default */
+  --icon-text-gap-default: 0.5rem;
+    /* Tight */
+  --icon-text-gap-tight: 0.25rem;
+
+  /* IMAGE-HEIGHT */
+    /* L */
+  --image-height-l: 16rem;
+    /* M */
+  --image-height-m: 12rem;
+    /* S */
+  --image-height-s: 7rem;
+    /* Xl */
+  --image-height-xl: 24rem;
+    /* Xs */
+  --image-height-xs: 5rem;
+
+  /* IMAGE-WIDTH */
+    /* 2xl */
+  --image-width-2xl: 48rem;
+    /* L */
+  --image-width-l: 28rem;
+    /* M */
+  --image-width-m: 20rem;
+    /* S */
+  --image-width-s: 12rem;
+    /* Sm */
+  --image-width-sm: 16rem;
+    /* Xl */
+  --image-width-xl: 36rem;
+    /* Xs */
+  --image-width-xs: 9rem;
+
+  /* INLINE */
+    /* L */
+  --inline-l: 1rem;
+    /* M */
+  --inline-m: 0.75rem;
+    /* S */
+  --inline-s: 0.5rem;
+    /* Xl */
+  --inline-xl: 1.5rem;
+    /* Xs */
+  --inline-xs: 0.25rem;
+
+  /* INSET */
+    /* L */
+  --inset-l: 2rem;
+    /* M */
+  --inset-m: 1.5rem;
+    /* S */
+  --inset-s: 1rem;
+    /* Xl */
+  --inset-xl: 3rem;
+    /* Xs */
+  --inset-xs: 0.5rem;
+
+  /* KEYFRAMES */
+    /* Bounce */
+  --keyframes-bounce: bounce 1s infinite;
+    /* Ping */
+  --keyframes-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    /* Pulse */
+  --keyframes-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    /* Shimmer */
+  --keyframes-shimmer: shimmer 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    /* Spin */
+  --keyframes-spin: spin 1s linear infinite;
+
+  /* LETTER-SPACING */
+    /* Normal */
+  --letter-spacing-normal: 0;
+    /* Snug */
+  --letter-spacing-snug: -0.005em;
+    /* Tight */
+  --letter-spacing-tight: -0.01em;
+    /* Tighter */
+  --letter-spacing-tighter: -0.02em;
+    /* Wide */
+  --letter-spacing-wide: 0.01em;
+    /* Wider */
+  --letter-spacing-wider: 0.04em;
+    /* Widest */
+  --letter-spacing-widest: 0.08em;
+
+  /* LINE-HEIGHT */
+    /* Base */
+  --line-height-base: 1.5;
+    /* Loose */
+  --line-height-loose: 1.8;
+    /* None */
+  --line-height-none: 1;
+    /* Normal */
+  --line-height-normal: 1.4;
+    /* Relaxed */
+  --line-height-relaxed: 1.6;
+    /* Snug */
+  --line-height-snug: 1.2;
+    /* Tight */
+  --line-height-tight: 1.1;
+
+  /* MEASURE */
+    /* 2xl */
+  --measure-2xl: 85ch;
+    /* L */
+  --measure-l: 65ch;
+    /* M */
+  --measure-m: 45ch;
+    /* S */
+  --measure-s: 30ch;
+    /* Xl */
+  --measure-xl: 75ch;
+    /* Xs */
+  --measure-xs: 20ch;
+
+  /* MOTION */
+    /* Bounce */
+  --motion-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Collapse */
+  --motion-collapse: 250ms ease-in-out;
+    /* Enter element */
+  --motion-enter-element: 200ms cubic-bezier(0, 0, 0.2, 1);
+    /* Enter screen */
+  --motion-enter-screen: 300ms cubic-bezier(0, 0, 0.2, 1);
+    /* Enter subtle */
+  --motion-enter-subtle: 150ms ease-out;
+    /* Exit element */
+  --motion-exit-element: 150ms cubic-bezier(0.4, 0, 1, 1);
+    /* Exit screen */
+  --motion-exit-screen: 200ms cubic-bezier(0.4, 0, 1, 1);
+    /* Exit subtle */
+  --motion-exit-subtle: 100ms ease-in;
+    /* Expand */
+  --motion-expand: 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Focus */
+  --motion-focus: 150ms ease-out;
+    /* Hover */
+  --motion-hover: 150ms ease-out;
+    /* Press */
+  --motion-press: 100ms ease-in;
+    /* Slow reveal */
+  --motion-slow-reveal: 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Transition element */
+  --motion-transition-element: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transition screen */
+  --motion-transition-screen: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* OPACITY */
+    /* 0 */
+  --opacity-0: 0;
+    /* 10 */
+  --opacity-10: 0.1;
+    /* 100 */
+  --opacity-100: 1;
+    /* 15 */
+  --opacity-15: 0.15;
+    /* 20 */
+  --opacity-20: 0.2;
+    /* 25 */
+  --opacity-25: 0.25;
+    /* 30 */
+  --opacity-30: 0.3;
+    /* 40 */
+  --opacity-40: 0.4;
+    /* 5 */
+  --opacity-5: 0.05;
+    /* 50 */
+  --opacity-50: 0.5;
+    /* 60 */
+  --opacity-60: 0.6;
+    /* 70 */
+  --opacity-70: 0.7;
+    /* 75 */
+  --opacity-75: 0.75;
+    /* 80 */
+  --opacity-80: 0.8;
+    /* 90 */
+  --opacity-90: 0.9;
+    /* 95 */
+  --opacity-95: 0.95;
+
+  /* OVERRIDES */
+    /* Border */
+  --overrides-border-default: transparent;
+  --overrides-border-subtle: rgba(0, 0, 0, 0.05);
+    /* Chart */
+  --overrides-chart-palette-0: #0077BB;
+  --overrides-chart-palette-1: #EE7733;
+  --overrides-chart-palette-2: #009988;
+  --overrides-chart-palette-3: #CC3311;
+  --overrides-chart-palette-4: #33BBEE;
+  --overrides-chart-palette-5: #EE3377;
+  --overrides-chart-palette-6: #BBBBBB;
+  --overrides-chart-palette-7: #000000;
+    /* Status */
+  --overrides-status-error: hsl(15, 90%, 45%);
+  --overrides-status-success: hsl(180, 70%, 35%);
+    /* Surface */
+  --overrides-surface-default: #ffffff;
+  --overrides-surface-hover: rgba(0, 0, 0, 0.02);
+  --overrides-surface-pressed: rgba(0, 0, 0, 0.04);
+  --overrides-surface-subtle: #f5f5f5;
+    /* Text */
+  --overrides-text-disabled: #666666;
+  --overrides-text-primary: #000000;
+  --overrides-text-secondary: #1a1a1a;
+
+  /* PERSPECTIVE */
+    /* L */
+  --perspective-l: 1500px;
+    /* M */
+  --perspective-m: 1000px;
+    /* None */
+  --perspective-none: none;
+    /* S */
+  --perspective-s: 750px;
+    /* Xl */
+  --perspective-xl: 2000px;
+    /* Xs */
+  --perspective-xs: 500px;
+
+  /* POSITION */
+    /* 0 */
+  --position-0: 0;
+    /* 1 */
+  --position-1: 0.25rem;
+    /* 10 */
+  --position-10: 2.5rem;
+    /* 100percent */
+  --position-100percent: 100%;
+    /* 12 */
+  --position-12: 3rem;
+    /* 16 */
+  --position-16: 4rem;
+    /* 2 */
+  --position-2: 0.5rem;
+    /* 20 */
+  --position-20: 5rem;
+    /* 25percent */
+  --position-25percent: 25%;
+    /* 3 */
+  --position-3: 0.75rem;
+    /* 4 */
+  --position-4: 1rem;
+    /* 50percent */
+  --position-50percent: 50%;
+    /* 6 */
+  --position-6: 1.5rem;
+    /* 8 */
+  --position-8: 2rem;
+    /* Auto */
+  --position-auto: auto;
+
+  /* ROTATE */
+    /*  1 */
+  --rotate--1: -1deg;
+    /*  180 */
+  --rotate--180: -180deg;
+    /*  2 */
+  --rotate--2: -2deg;
+    /*  3 */
+  --rotate--3: -3deg;
+    /*  45 */
+  --rotate--45: -45deg;
+    /*  90 */
+  --rotate--90: -90deg;
+    /* 0 */
+  --rotate-0: 0deg;
+    /* 1 */
+  --rotate-1: 1deg;
+    /* 12 */
+  --rotate-12: 12deg;
+    /* 180 */
+  --rotate-180: 180deg;
+    /* 2 */
+  --rotate-2: 2deg;
+    /* 270 */
+  --rotate-270: 270deg;
+    /* 3 */
+  --rotate-3: 3deg;
+    /* 360 */
+  --rotate-360: 360deg;
+    /* 45 */
+  --rotate-45: 45deg;
+    /* 6 */
+  --rotate-6: 6deg;
+    /* 90 */
+  --rotate-90: 90deg;
+
+  /* SCALE */
+    /* 0 */
+  --scale-0: 0;
+  --scale-0-25: 0.0625rem;
+  --scale-0-5: 0.125rem;
+    /* 1 */
+  --scale-1: 0.25rem;
+    /* 10 */
+  --scale-10: 2.5rem;
+    /* 100 */
+  --scale-100: 25rem;
+    /* 104 */
+  --scale-104: 26rem;
+    /* 112 */
+  --scale-112: 28rem;
+    /* 12 */
+  --scale-12: 3rem;
+    /* 120 */
+  --scale-120: 30rem;
+    /* 125 */
+  --scale-125: 31.25rem;
+    /* 128 */
+  --scale-128: 32rem;
+    /* 14 */
+  --scale-14: 3.5rem;
+    /* 144 */
+  --scale-144: 36rem;
+    /* 15 */
+  --scale-15: 3.75rem;
+    /* 150 */
+  --scale-150: 37.5rem;
+    /* 16 */
+  --scale-16: 4rem;
+    /* 160 */
+  --scale-160: 40rem;
+    /* 175 */
+  --scale-175: 43.75rem;
+    /* 192 */
+  --scale-192: 48rem;
+    /* 2 */
+  --scale-2: 0.5rem;
+    /* 20 */
+  --scale-20: 5rem;
+    /* 22 */
+  --scale-22: 5.5rem;
+    /* 224 */
+  --scale-224: 56rem;
+    /* 24 */
+  --scale-24: 6rem;
+    /* 256 */
+  --scale-256: 64rem;
+    /* 28 */
+  --scale-28: 7rem;
+    /* 3 */
+  --scale-3: 0.75rem;
+    /* 30 */
+  --scale-30: 7.5rem;
+    /* 300 */
+  --scale-300: 75rem;
+    /* 32 */
+  --scale-32: 8rem;
+    /* 320 */
+  --scale-320: 80rem;
+    /* 36 */
+  --scale-36: 9rem;
+    /* 38 */
+  --scale-38: 9.5rem;
+    /* 384 */
+  --scale-384: 96rem;
+    /* 4 */
+  --scale-4: 1rem;
+    /* 40 */
+  --scale-40: 10rem;
+    /* 48 */
+  --scale-48: 12rem;
+    /* 480 */
+  --scale-480: 120rem;
+    /* 5 */
+  --scale-5: 1.25rem;
+    /* 50 */
+  --scale-50: 12.5rem;
+    /* 56 */
+  --scale-56: 14rem;
+    /* 6 */
+  --scale-6: 1.5rem;
+    /* 64 */
+  --scale-64: 16rem;
+    /* 70 */
+  --scale-70: 17.5rem;
+    /* 72 */
+  --scale-72: 18rem;
+    /* 75 */
+  --scale-75: 18.75rem;
+    /* 8 */
+  --scale-8: 2rem;
+    /* 80 */
+  --scale-80: 20rem;
+    /* 88 */
+  --scale-88: 22rem;
+    /* 9 */
+  --scale-9: 2.25rem;
+    /* 96 */
+  --scale-96: 24rem;
+
+  /* SHADOW */
+    /* Inner */
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    /* L */
+  --shadow-l: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+    /* M */
+  --shadow-m: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /* None */
+  --shadow-none: none;
+    /* S */
+  --shadow-s: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.12);
+    /* Xl */
+  --shadow-xl: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+    /* Xs */
+  --shadow-xs: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
+
+  /* SKEW */
+    /*  1 */
+  --skew--1: -1deg;
+    /*  12 */
+  --skew--12: -12deg;
+    /*  2 */
+  --skew--2: -2deg;
+    /*  3 */
+  --skew--3: -3deg;
+    /*  6 */
+  --skew--6: -6deg;
+    /* 0 */
+  --skew-0: 0deg;
+    /* 1 */
+  --skew-1: 1deg;
+    /* 12 */
+  --skew-12: 12deg;
+    /* 2 */
+  --skew-2: 2deg;
+    /* 3 */
+  --skew-3: 3deg;
+    /* 6 */
+  --skew-6: 6deg;
+
+  /* SPACING */
+    /* Base */
+  --spacing-base: 1rem;
+    /* Comfortable */
+  --spacing-comfortable: 1.25rem;
+    /* Compact */
+  --spacing-compact: 0.75rem;
+    /* Component gap */
+  --spacing-component-gap: 4rem;
+    /* Container */
+  --spacing-container: 12rem;
+    /* Generous */
+  --spacing-generous: 2rem;
+    /* Hero */
+  --spacing-hero: 10rem;
+    /* Inline */
+  --spacing-inline-l: 0.75rem;
+  --spacing-inline-m: 0.5rem;
+  --spacing-inline-s: 0.25rem;
+  --spacing-inline-xl: 1rem;
+  --spacing-inline-xs: 0.125rem;
+    /* Inset */
+  --spacing-inset-l: 1rem;
+  --spacing-inset-m: 0.75rem;
+  --spacing-inset-s: 0.5rem;
+  --spacing-inset-xl: 1.5rem;
+  --spacing-inset-xs: 0.25rem;
+    /* Large gap */
+  --spacing-large-gap: 6rem;
+    /* Micro */
+  --spacing-micro: 0.25rem;
+    /* None */
+  --spacing-none: 0;
+    /* Page section */
+  --spacing-page-section: 8rem;
+    /* Section */
+  --spacing-section: 2.5rem;
+    /* Section break */
+  --spacing-section-break: 5rem;
+    /* Section large */
+  --spacing-section-large: 3rem;
+    /* Spacious */
+  --spacing-spacious: 1.5rem;
+    /* Stack */
+  --spacing-stack-2xl: 1.5rem;
+  --spacing-stack-l: 0.75rem;
+  --spacing-stack-m: 0.5rem;
+  --spacing-stack-s: 0.25rem;
+  --spacing-stack-xl: 1rem;
+  --spacing-stack-xs: 0.125rem;
+    /* Tight */
+  --spacing-tight: 0.5rem;
+
+  /* STACK */
+    /* 2xl */
+  --stack-2xl: 3rem;
+    /* L */
+  --stack-l: 1.5rem;
+    /* M */
+  --stack-m: 1rem;
+    /* S */
+  --stack-s: 0.5rem;
+    /* Xl */
+  --stack-xl: 2rem;
+    /* Xs */
+  --stack-xs: 0.25rem;
+
+  /* STATE */
+    /* Disabled */
+  --state-disabled: 0.4;
+    /* Focus */
+  --state-focus: 1;
+    /* Hover */
+  --state-hover: 0.8;
+    /* Muted */
+  --state-muted: 0.3;
+    /* Pressed */
+  --state-pressed: 0.7;
+    /* Subtle */
+  --state-subtle: 0.6;
+
+  /* TEXT */
+    /* Body */
+  --text-body-l-line-height: 1.4;
+  --text-body-l-size: 18px;
+  --text-body-l-weight: 400;
+  --text-body-m-line-height: 1.5;
+  --text-body-m-size: 16px;
+  --text-body-m-weight: 400;
+  --text-body-s-line-height: 1.5;
+  --text-body-s-size: 14px;
+  --text-body-s-weight: 400;
+  --text-body-xl-line-height: 1.4;
+  --text-body-xl-size: 20px;
+  --text-body-xl-weight: 400;
+    /* Caption */
+  --text-caption-m-line-height: 1.4;
+  --text-caption-m-size: 14px;
+  --text-caption-m-weight: 400;
+  --text-caption-s-line-height: 1.5;
+  --text-caption-s-size: 13px;
+  --text-caption-s-weight: 400;
+    /* Display */
+  --text-display-hero-line-height: 1.1;
+  --text-display-hero-mobile-size: 56px;
+  --text-display-hero-size: 80px;
+  --text-display-hero-spacing: -0.02em;
+  --text-display-hero-weight: 700;
+  --text-display-marketing-line-height: 1.1;
+  --text-display-marketing-mobile-size: 48px;
+  --text-display-marketing-size: 64px;
+  --text-display-marketing-spacing: -0.02em;
+  --text-display-marketing-weight: 700;
+  --text-display-section-line-height: 1.2;
+  --text-display-section-mobile-size: 40px;
+  --text-display-section-size: 56px;
+  --text-display-section-spacing: -0.01em;
+  --text-display-section-weight: 700;
+    /* Overline */
+  --text-overline-m-line-height: 1.1;
+  --text-overline-m-size: 12px;
+  --text-overline-m-spacing: 0.08em;
+  --text-overline-m-text-transform: uppercase;
+  --text-overline-m-weight: 600;
+    /* Title */
+  --text-title-2xs-line-height: 1.2;
+  --text-title-2xs-size: 14px;
+  --text-title-2xs-weight: 500;
+  --text-title-l-line-height: 1.2;
+  --text-title-l-mobile-size: 22px;
+  --text-title-l-size: 24px;
+  --text-title-l-spacing: -0.01em;
+  --text-title-l-weight: 700;
+  --text-title-m-line-height: 1.2;
+  --text-title-m-mobile-size: 20px;
+  --text-title-m-size: 20px;
+  --text-title-m-spacing: -0.01em;
+  --text-title-m-weight: 600;
+  --text-title-s-line-height: 1.2;
+  --text-title-s-mobile-size: 16px;
+  --text-title-s-size: 18px;
+  --text-title-s-spacing: 0;
+  --text-title-s-weight: 600;
+  --text-title-xl-line-height: 1.2;
+  --text-title-xl-mobile-size: 28px;
+  --text-title-xl-size: 32px;
+  --text-title-xl-spacing: -0.01em;
+  --text-title-xl-weight: 700;
+  --text-title-xs-line-height: 1.2;
+  --text-title-xs-size: 16px;
+  --text-title-xs-weight: 600;
+    /* Ui */
+  --text-ui-l-line-height: 1.1;
+  --text-ui-l-size: 16px;
+  --text-ui-l-weight: 500;
+  --text-ui-m-line-height: 1.1;
+  --text-ui-m-size: 14px;
+  --text-ui-m-weight: 500;
+  --text-ui-s-line-height: 1.1;
+  --text-ui-s-size: 13px;
+  --text-ui-s-weight: 500;
+  --text-ui-xs-line-height: 1.4;
+  --text-ui-xs-size: 12px;
+  --text-ui-xs-weight: 400;
+
+  /* TEXT-DECORATION */
+    /* Line through */
+  --text-decoration-line-through: line-through;
+    /* None */
+  --text-decoration-none: none;
+    /* Overline */
+  --text-decoration-overline: overline;
+    /* Underline */
+  --text-decoration-underline: underline;
+
+  /* TEXT-TRANSFORM */
+    /* Capitalize */
+  --text-transform-capitalize: capitalize;
+    /* Lowercase */
+  --text-transform-lowercase: lowercase;
+    /* None */
+  --text-transform-none: none;
+    /* Uppercase */
+  --text-transform-uppercase: uppercase;
+
+  /* THEME */
+    /* Error */
+  --theme-error-h: 0;
+  --theme-error-s: 84%;
+    /* Info */
+  --theme-info-h: 202;
+  --theme-info-s: 100%;
+    /* Neutral */
+  --theme-neutral-h: 30;
+  --theme-neutral-lightness-0: 100%;
+  --theme-neutral-lightness-100: 97%;
+  --theme-neutral-lightness-150: 95%;
+  --theme-neutral-lightness-200: 92%;
+  --theme-neutral-lightness-250: 89%;
+  --theme-neutral-lightness-300: 84%;
+  --theme-neutral-lightness-400: 72%;
+  --theme-neutral-lightness-50: 99%;
+  --theme-neutral-lightness-500: 54%;
+  --theme-neutral-lightness-600: 40%;
+  --theme-neutral-lightness-700: 28%;
+  --theme-neutral-lightness-800: 18%;
+  --theme-neutral-lightness-900: 10%;
+  --theme-neutral-lightness-950: 4%;
+  --theme-neutral-s: 5%;
+    /* Primary */
+  --theme-primary-h: 160;
+  --theme-primary-lightness-100: 90%;
+  --theme-primary-lightness-200: 80%;
+  --theme-primary-lightness-300: 65%;
+  --theme-primary-lightness-400: 45%;
+  --theme-primary-lightness-50: 95%;
+  --theme-primary-lightness-500: 30%;
+  --theme-primary-lightness-600: 27%;
+  --theme-primary-lightness-700: 22%;
+  --theme-primary-lightness-800: 16%;
+  --theme-primary-lightness-900: 10%;
+  --theme-primary-lightness-950: 5%;
+  --theme-primary-s: 94%;
+    /* Secondary */
+  --theme-secondary-h: 45;
+  --theme-secondary-lightness-100: 90%;
+  --theme-secondary-lightness-200: 82%;
+  --theme-secondary-lightness-300: 72%;
+  --theme-secondary-lightness-400: 62%;
+  --theme-secondary-lightness-50: 95%;
+  --theme-secondary-lightness-500: 50%;
+  --theme-secondary-lightness-600: 42%;
+  --theme-secondary-lightness-700: 38%;
+  --theme-secondary-lightness-800: 30%;
+  --theme-secondary-lightness-900: 20%;
+  --theme-secondary-lightness-950: 10%;
+  --theme-secondary-s: 88%;
+    /* Success */
+  --theme-success-h: 142;
+  --theme-success-s: 76%;
+    /* Tertiary */
+  --theme-tertiary-h: 12;
+  --theme-tertiary-lightness-100: 90%;
+  --theme-tertiary-lightness-200: 80%;
+  --theme-tertiary-lightness-300: 68%;
+  --theme-tertiary-lightness-400: 55%;
+  --theme-tertiary-lightness-50: 95%;
+  --theme-tertiary-lightness-500: 50%;
+  --theme-tertiary-lightness-600: 45%;
+  --theme-tertiary-lightness-700: 38%;
+  --theme-tertiary-lightness-800: 28%;
+  --theme-tertiary-lightness-900: 18%;
+  --theme-tertiary-lightness-950: 8%;
+  --theme-tertiary-s: 88%;
+    /* Warning */
+  --theme-warning-h: 45;
+  --theme-warning-s: 100%;
+
+  /* THUMBNAIL-SIZE */
+    /* L */
+  --thumbnail-size-l: 10rem;
+    /* M */
+  --thumbnail-size-m: 7.5rem;
+    /* S */
+  --thumbnail-size-s: 5rem;
+    /* Xl */
+  --thumbnail-size-xl: 12.5rem;
+    /* Xs */
+  --thumbnail-size-xs: 4rem;
+
+  /* TOUCH */
+    /* Target */
+  --touch-target-comfortable: 48px;
+  --touch-target-min: 44px;
+
+  /* TRANSFORM-ORIGIN */
+    /* Bottom */
+  --transform-origin-bottom: bottom;
+    /* Bottom left */
+  --transform-origin-bottom-left: bottom left;
+    /* Bottom right */
+  --transform-origin-bottom-right: bottom right;
+    /* Center */
+  --transform-origin-center: center;
+    /* Left */
+  --transform-origin-left: left;
+    /* Right */
+  --transform-origin-right: right;
+    /* Top */
+  --transform-origin-top: top;
+    /* Top left */
+  --transform-origin-top-left: top left;
+    /* Top right */
+  --transform-origin-top-right: top right;
+
+  /* TRANSFORM-SCALE */
+    /* 0 */
+  --transform-scale-0: 0;
+    /* 100 */
+  --transform-scale-100: 1;
+    /* 105 */
+  --transform-scale-105: 1.05;
+    /* 110 */
+  --transform-scale-110: 1.1;
+    /* 125 */
+  --transform-scale-125: 1.25;
+    /* 150 */
+  --transform-scale-150: 1.5;
+    /* 200 */
+  --transform-scale-200: 2;
+    /* 25 */
+  --transform-scale-25: 0.25;
+    /* 50 */
+  --transform-scale-50: 0.5;
+    /* 75 */
+  --transform-scale-75: 0.75;
+    /* 90 */
+  --transform-scale-90: 0.9;
+    /* 95 */
+  --transform-scale-95: 0.95;
+
+  /* TRANSITION */
+    /* Active */
+  --transition-active: all 50ms ease-in;
+    /* Background */
+  --transition-background: background-color 200ms ease-in-out;
+    /* Base */
+  --transition-base: all 200ms ease-in-out;
+    /* Border */
+  --transition-border: border-color 100ms ease-in-out;
+    /* Color */
+  --transition-color: color 200ms ease-in-out;
+    /* Drawer */
+  --transition-drawer: all 300ms cubic-bezier(0, 0, 0.2, 1);
+    /* Dropdown */
+  --transition-dropdown: all 200ms cubic-bezier(0, 0, 0.2, 1);
+    /* Fast */
+  --transition-fast: all 100ms ease-out;
+    /* Focus */
+  --transition-focus: all 100ms ease-out;
+    /* Hover */
+  --transition-hover: all 100ms ease-out;
+    /* Modal */
+  --transition-modal: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Opacity */
+  --transition-opacity: opacity 100ms ease-out;
+    /* Shadow */
+  --transition-shadow: box-shadow 200ms ease-in-out;
+    /* Slow */
+  --transition-slow: all 300ms ease-in-out;
+    /* Smooth */
+  --transition-smooth: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Tooltip */
+  --transition-tooltip: all 100ms ease-out;
+    /* Transform */
+  --transition-transform: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* TRANSLATE */
+    /*  1 */
+  --translate--1: -0.25rem;
+    /*  2 */
+  --translate--2: -0.5rem;
+    /*  4 */
+  --translate--4: -1rem;
+    /*  full */
+  --translate--full: -100%;
+    /*  half */
+  --translate--half: -50%;
+    /* 0 */
+  --translate-0: 0;
+    /* 1 */
+  --translate-1: 0.25rem;
+    /* 12 */
+  --translate-12: 3rem;
+    /* 16 */
+  --translate-16: 4rem;
+    /* 2 */
+  --translate-2: 0.5rem;
+    /* 24 */
+  --translate-24: 6rem;
+    /* 3 */
+  --translate-3: 0.75rem;
+    /* 4 */
+  --translate-4: 1rem;
+    /* 6 */
+  --translate-6: 1.5rem;
+    /* 8 */
+  --translate-8: 2rem;
+    /* Full */
+  --translate-full: 100%;
+    /* Half */
+  --translate-half: 50%;
+    /* Quarter */
+  --translate-quarter: 25%;
+
+  /* TYPOGRAPHY */
+    /* Font size */
+  --typography-font-size: 13px;
+    /* Font weight */
+  --typography-font-weight-heading: 500;
+    /* Letter spacing */
+  --typography-letter-spacing-wide: 0.025em;
+    /* Line height */
+  --typography-line-height: 1.1;
+
+  /* Z-INDEX */
+    /* Component */
+  --z-index-component-dropdown-menu: 1000;
+  --z-index-component-header: 1020;
+  --z-index-component-modal-dialog: 1050;
+  --z-index-component-sidebar: 1030;
+  --z-index-component-toast: 1080;
+    /* Content */
+  --z-index-content-active: 2;
+  --z-index-content-base: 0;
+  --z-index-content-below: -1;
+  --z-index-content-content: 1;
+  --z-index-content-elevated: 100;
+  --z-index-content-focus: 3;
+  --z-index-content-hover: 1;
+  --z-index-content-raised: 10;
+    /* Overlay */
+  --z-index-overlay-alert: 1090;
+  --z-index-overlay-debug: 9999;
+  --z-index-overlay-dropdown: 1000;
+  --z-index-overlay-fixed: 1030;
+  --z-index-overlay-max: 10000;
+  --z-index-overlay-modal: 1050;
+  --z-index-overlay-modal-backdrop: 1040;
+  --z-index-overlay-notification: 1080;
+  --z-index-overlay-popover: 1060;
+  --z-index-overlay-skip-link: 9998;
+  --z-index-overlay-sticky: 1020;
+  --z-index-overlay-tooltip: 1070;
+}
+
+/* Dark mode */
+/* Dark mode */
+:root[data-theme="dark"] {
+
+    /* COLOR */
+      /* Border */
+    --color-border-active: hsl(160, 94%, 45%);
+    --color-border-default: hsl(30, 5%, 28%);
+    --color-border-disabled: hsl(30, 5%, 18%);
+    --color-border-hover: hsl(30, 5%, 54%);
+    --color-border-strong: hsl(30, 5%, 40%);
+    --color-border-subtle: hsl(30, 5%, 18%);
+      /* Brand */
+    --color-brand-primary: hsl(160, 94%, 45%);
+    --color-brand-primary-active: hsl(160, 94%, 80%);
+    --color-brand-primary-hover: hsl(160, 94%, 65%);
+    --color-brand-primary-subtle: hsl(160, 94%, 5%);
+    --color-brand-secondary: hsl(45, 88%, 62%);
+    --color-brand-secondary-hover: hsl(45, 88%, 72%);
+    --color-brand-secondary-subtle: hsl(45, 88%, 10%);
+    --color-brand-tertiary: hsl(12, 88%, 55%);
+    --color-brand-tertiary-subtle: hsl(12, 88%, 8%);
+      /* Link */
+    --color-link-active: hsl(160, 94%, 80%);
+    --color-link-default: hsl(160, 94%, 45%);
+    --color-link-disabled: hsl(30, 5%, 40%);
+    --color-link-hover: hsl(160, 94%, 65%);
+    --color-link-visited: hsl(270, 85%, 60%);
+      /* Overlay */
+    --color-overlay-default: rgba(0, 0, 0, 0.5);
+    --color-overlay-heavy: rgba(0, 0, 0, 0.85);
+    --color-overlay-solid: rgba(0, 0, 0, 0.95);
+    --color-overlay-strong: rgba(0, 0, 0, 0.7);
+    --color-overlay-subtle: rgba(0, 0, 0, 0.2);
+      /* Shadow */
+    --color-shadow-default: rgba(0, 0, 0, 0.4);
+    --color-shadow-heavy: rgba(0, 0, 0, 0.7);
+    --color-shadow-medium: rgba(0, 0, 0, 0.5);
+    --color-shadow-strong: rgba(0, 0, 0, 0.6);
+    --color-shadow-subtle: rgba(0, 0, 0, 0.3);
+      /* Skeleton */
+    --color-skeleton-base: hsl(30, 5%, 18%);
+    --color-skeleton-highlight: hsl(30, 5%, 28%);
+    --color-skeleton-shimmer: hsl(30, 5%, 10%);
+      /* Status */
+    --color-status-error-hover: hsl(0, 84%, 55%);
+    --color-status-error-subtle: hsl(0, 84%, 5%);
+    --color-status-error-text: hsl(0, 84%, 55%);
+    --color-status-info-hover: hsl(202, 100%, 60%);
+    --color-status-info-subtle: hsl(202, 100%, 5%);
+    --color-status-info-text: hsl(202, 100%, 60%);
+    --color-status-success-hover: hsl(142, 76%, 55%);
+    --color-status-success-subtle: hsl(142, 76%, 5%);
+    --color-status-success-text: hsl(142, 76%, 55%);
+    --color-status-warning-hover: hsl(45, 100%, 60%);
+    --color-status-warning-subtle: hsl(45, 100%, 5%);
+    --color-status-warning-text: hsl(45, 100%, 60%);
+      /* Surface */
+    --color-surface-default: hsl(30, 5%, 4%);
+    --color-surface-dim: hsl(30, 5%, 18%);
+    --color-surface-disabled: hsl(30, 5%, 18%);
+    --color-surface-heavy: hsl(30, 5%, 40%);
+    --color-surface-hover: hsl(30, 5%, 18%);
+    --color-surface-inverse: hsl(30, 5%, 97%);
+    --color-surface-muted: hsl(30, 5%, 10%);
+    --color-surface-pressed: hsl(30, 5%, 28%);
+    --color-surface-selected: hsl(160, 94%, 5%);
+    --color-surface-strong: hsl(30, 5%, 28%);
+    --color-surface-subtle: hsl(30, 5%, 14%);
+      /* Text */
+    --color-text-disabled: hsl(30, 5%, 72%);
+    --color-text-inverse: hsl(30, 5%, 100%);
+    --color-text-on-primary: hsl(0, 0%, 100%);
+    --color-text-primary: hsl(30, 5%, 99%);
+    --color-text-secondary: hsl(30, 5%, 72%);
+    --color-text-tertiary: hsl(30, 5%, 54%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+
+    /* COLOR */
+      /* Border */
+    --color-border-active: hsl(160, 94%, 45%);
+    --color-border-default: hsl(30, 5%, 28%);
+    --color-border-disabled: hsl(30, 5%, 18%);
+    --color-border-hover: hsl(30, 5%, 54%);
+    --color-border-strong: hsl(30, 5%, 40%);
+    --color-border-subtle: hsl(30, 5%, 18%);
+      /* Brand */
+    --color-brand-primary: hsl(160, 94%, 45%);
+    --color-brand-primary-active: hsl(160, 94%, 80%);
+    --color-brand-primary-hover: hsl(160, 94%, 65%);
+    --color-brand-primary-subtle: hsl(160, 94%, 5%);
+    --color-brand-secondary: hsl(45, 88%, 62%);
+    --color-brand-secondary-hover: hsl(45, 88%, 72%);
+    --color-brand-secondary-subtle: hsl(45, 88%, 10%);
+    --color-brand-tertiary: hsl(12, 88%, 55%);
+    --color-brand-tertiary-subtle: hsl(12, 88%, 8%);
+      /* Link */
+    --color-link-active: hsl(160, 94%, 80%);
+    --color-link-default: hsl(160, 94%, 45%);
+    --color-link-disabled: hsl(30, 5%, 40%);
+    --color-link-hover: hsl(160, 94%, 65%);
+    --color-link-visited: hsl(270, 85%, 60%);
+      /* Overlay */
+    --color-overlay-default: rgba(0, 0, 0, 0.5);
+    --color-overlay-heavy: rgba(0, 0, 0, 0.85);
+    --color-overlay-solid: rgba(0, 0, 0, 0.95);
+    --color-overlay-strong: rgba(0, 0, 0, 0.7);
+    --color-overlay-subtle: rgba(0, 0, 0, 0.2);
+      /* Shadow */
+    --color-shadow-default: rgba(0, 0, 0, 0.4);
+    --color-shadow-heavy: rgba(0, 0, 0, 0.7);
+    --color-shadow-medium: rgba(0, 0, 0, 0.5);
+    --color-shadow-strong: rgba(0, 0, 0, 0.6);
+    --color-shadow-subtle: rgba(0, 0, 0, 0.3);
+      /* Skeleton */
+    --color-skeleton-base: hsl(30, 5%, 18%);
+    --color-skeleton-highlight: hsl(30, 5%, 28%);
+    --color-skeleton-shimmer: hsl(30, 5%, 10%);
+      /* Status */
+    --color-status-error-hover: hsl(0, 84%, 55%);
+    --color-status-error-subtle: hsl(0, 84%, 5%);
+    --color-status-error-text: hsl(0, 84%, 55%);
+    --color-status-info-hover: hsl(202, 100%, 60%);
+    --color-status-info-subtle: hsl(202, 100%, 5%);
+    --color-status-info-text: hsl(202, 100%, 60%);
+    --color-status-success-hover: hsl(142, 76%, 55%);
+    --color-status-success-subtle: hsl(142, 76%, 5%);
+    --color-status-success-text: hsl(142, 76%, 55%);
+    --color-status-warning-hover: hsl(45, 100%, 60%);
+    --color-status-warning-subtle: hsl(45, 100%, 5%);
+    --color-status-warning-text: hsl(45, 100%, 60%);
+      /* Surface */
+    --color-surface-default: hsl(30, 5%, 4%);
+    --color-surface-dim: hsl(30, 5%, 18%);
+    --color-surface-disabled: hsl(30, 5%, 18%);
+    --color-surface-heavy: hsl(30, 5%, 40%);
+    --color-surface-hover: hsl(30, 5%, 18%);
+    --color-surface-inverse: hsl(30, 5%, 97%);
+    --color-surface-muted: hsl(30, 5%, 10%);
+    --color-surface-pressed: hsl(30, 5%, 28%);
+    --color-surface-selected: hsl(160, 94%, 5%);
+    --color-surface-strong: hsl(30, 5%, 28%);
+    --color-surface-subtle: hsl(30, 5%, 14%);
+      /* Text */
+    --color-text-disabled: hsl(30, 5%, 72%);
+    --color-text-inverse: hsl(30, 5%, 100%);
+    --color-text-on-primary: hsl(0, 0%, 100%);
+    --color-text-primary: hsl(30, 5%, 99%);
+    --color-text-secondary: hsl(30, 5%, 72%);
+    --color-text-tertiary: hsl(30, 5%, 54%);
+  }
+}

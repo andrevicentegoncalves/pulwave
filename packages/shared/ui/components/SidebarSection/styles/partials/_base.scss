@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

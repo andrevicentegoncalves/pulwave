@@ -1,0 +1,42 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ==========================================================================
+// BADGE BASE STYLES
+// ==========================================================================
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--badge-gap);
+    padding: 0 var(--badge-padding-x);
+    height: var(--badge-height);
+    border-radius: var(--badge-border-radius);
+    font-size: var(--font-size-ui-s);
+    font-weight: var(--font-weight-m);
+    line-height: var(--line-height-normal);
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    // Modifiers
+    &--circle {
+        width: var(--badge-height);
+        padding: 0;
+        border-radius: 50%;
+
+        .badge__text {
+            display: none;
+        }
+    }
+
+    &--clickable {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}

@@ -1,0 +1,78 @@
+// Sidebar container within section layout
+
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/breakpoints' as *;
+
+.section-layout {
+
+    // Mobile Close Button
+    &__mobile-close {
+        display: none; // Hidden by default (desktop)
+        position: absolute;
+        top: var(--scale-2);
+        right: var(--scale-2);
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        padding: var(--scale-1);
+
+        @include bp-down('m') {
+            display: flex;
+        }
+    }
+
+    &__sidebar {
+        min-width: 0;
+        position: sticky;
+        top: var(--scale-5);
+        // Use 100% to fill grid cell height, not absolute calc
+        height: 100%;
+        max-height: calc(100% - var(--scale-10)); // Leave some margin
+        overflow: hidden; // Prevent content overflow during collapse/expand animation
+        z-index: var(--z-index-sticky);
+        align-self: start;
+        margin-bottom: var(--scale-5);
+        // Fast, smooth width transition
+        transition: width 150ms var(--easing-standard);
+
+        // Border radius xl and border all around
+        border-radius: var(--border-radius-2xl);
+
+        // Neutral variant (BEM modifier)
+        &--neutral {
+            background-color: var(--color-surface-subtle);
+            border: var(--border-width-s) solid var(--color-border-subtle);
+        }
+
+        // White variant (BEM modifier) - uses surface-default for proper dark mode support
+        &--white {
+            background-color: var(--color-surface-default);
+            border: var(--border-width-s) solid var(--color-border-subtle);
+        }
+
+
+        // Card inside sidebar
+        >.card {
+            height: 100%;
+
+            .card__body {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+            }
+        }
+
+        // Sidebar component inside (neutral variant)
+        >.sidebar-container {
+            height: calc(100% - var(--scale-16)); // Match bottom spacing with main sidebar
+            width: 100%;
+            overflow-y: auto;
+
+            .sidebar {
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+}

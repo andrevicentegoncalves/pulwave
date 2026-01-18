@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--donut-wrapper {
+    position: relative;
+    width: 100%;
+    // Ensure proper sizing in flex containers
+    flex: 1 1 100%;
+    min-width: 0;
+    // Allow expanded active shapes to show
+    overflow: visible;
+}

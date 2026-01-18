@@ -1,0 +1,2 @@
+export { SupabaseSettingsProvider } from './SupabaseSettingsProvider';
+

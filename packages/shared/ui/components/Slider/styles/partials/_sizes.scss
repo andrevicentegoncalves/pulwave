@@ -1,0 +1,20 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.slider {
+
+    // ── SIZES ──
+    &--s {
+        --slider-track-height: var(--scale-1); // var(--scale-1)
+        --slider-thumb-size: var(--scale-4); // var(--scale-4)
+    }
+
+    &--m {
+        --slider-track-height: var(--scale-1-5); // 6px
+        --slider-thumb-size: var(--scale-5); // var(--scale-5)
+    }
+
+    &--l {
+        --slider-track-height: var(--scale-2); // var(--scale-2)
+        --slider-thumb-size: var(--scale-6); // var(--scale-6)
+    }
+}

@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-section {
+    --sidebar-section-header-padding: var(--scale-3) var(--scale-4);
+    --sidebar-section-header-min-height: var(--scale-12);
+    --sidebar-section-title-color: var(--color-text-primary);
+
+    --sidebar-section-toggle-size: var(--scale-6);
+    --sidebar-section-toggle-color: var(--color-text-secondary);
+    --sidebar-section-toggle-bg-hover: var(--color-surface-hover);
+    --sidebar-section-toggle-color-hover: var(--color-text-primary);
+
+    --sidebar-section-item-padding: var(--scale-2) var(--scale-3);
+    --sidebar-section-item-gap: var(--scale-3);
+    --sidebar-section-item-color: var(--color-text-secondary);
+    --sidebar-section-item-bg-hover: var(--color-surface-hover);
+    --sidebar-section-item-color-hover: var(--color-text-primary);
+
+    --sidebar-section-active-bg: var(--color-primary-subtle);
+    --sidebar-section-active-color: var(--color-primary-on-subtle);
+    --sidebar-section-active-bg-hover: var(--color-primary-subtle-hover);
+}

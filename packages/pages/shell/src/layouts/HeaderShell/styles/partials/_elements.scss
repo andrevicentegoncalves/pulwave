@@ -1,0 +1,43 @@
+// ============================================================================ //
+// HEADER SHELL - ELEMENTS
+// ============================================================================ //
+// Title, actions, breadcrumbs
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.header-shell__title {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-3);
+    font-size: var(--font-size-title-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: var(--line-height-tight);
+}
+
+.header-shell__title-icon {
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+}
+
+.header-shell__title-text {
+    flex: 1;
+}
+
+.header-shell__actions {
+    display: flex;
+    gap: var(--scale-3);
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-shell__breadcrumbs {
+    padding: 0 var(--scale-6);
+    font-size: var(--font-size-body-s);
+    flex-shrink: 0;
+
+    @include bp-down(s) {
+        padding: 0 var(--scale-4);
+    }
+}

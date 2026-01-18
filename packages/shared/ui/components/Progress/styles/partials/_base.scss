@@ -1,0 +1,9 @@
+// Progress Component - Base Styles
+// ==========================================================================
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-2);
+    width: 100%;
+}

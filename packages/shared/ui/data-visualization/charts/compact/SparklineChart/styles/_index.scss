@@ -1,0 +1,15 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--sparkline {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    &__svg {
+        display: block;
+    }
+
+    &--area {
+        // Area specific styles if any
+    }
+}

@@ -1,0 +1,2 @@
+export { SupabaseSocialProvider } from './SupabaseSocialProvider';
+

@@ -1,0 +1,43 @@
+// ============================================================================ //
+// MENU - VARIANTS
+// ============================================================================ //
+// Menu item variants: danger, disabled, badge
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+// Danger variant (e.g., Logout, Delete)
+.menu__item--danger {
+    &:hover {
+        background-color: var(--color-status-error-subtle);
+        color: var(--color-status-error);
+    }
+
+    &.menu__item--active {
+        background-color: var(--color-status-error);
+        color: var(--color-on-error);
+    }
+}
+
+// Disabled state
+.menu__item--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+// Badge
+.menu__badge {
+    margin-left: auto;
+    padding: var(--scale-1) var(--scale-2);
+    background-color: var(--color-overlay-light-default);
+    border-radius: var(--border-radius-round);
+    font-size: var(--font-size-ui-s);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-primary);
+    line-height: 1;
+
+    // Hide in collapsed state
+    .menu__item--collapsed & {
+        display: none;
+    }
+}

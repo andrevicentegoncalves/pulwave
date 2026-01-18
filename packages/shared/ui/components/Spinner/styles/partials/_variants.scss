@@ -1,0 +1,35 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.spinner {
+    &--primary {
+        color: var(--color-brand-primary);
+    }
+
+    &--secondary {
+        color: var(--color-text-secondary);
+    }
+
+    &--neutral {
+        color: var(--color-text-default);
+    }
+
+    &--inherit {
+        color: inherit;
+    }
+
+    &--success {
+        color: var(--color-status-success);
+    }
+
+    &--error {
+        color: var(--color-status-negative);
+    }
+
+    &--warning {
+        color: var(--color-status-warning);
+    }
+
+    &--info {
+        color: var(--color-status-info);
+    }
+}

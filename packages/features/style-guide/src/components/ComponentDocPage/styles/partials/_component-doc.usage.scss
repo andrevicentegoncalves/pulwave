@@ -1,0 +1,47 @@
+// ==========================================================================
+// Component Documentation - Usage Guidelines (Do/Don't)
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__usage-block {
+        margin-bottom: var(--scale-4);
+        padding: var(--scale-4);
+        background-color: var(--color-surface-secondary);
+        border-radius: var(--border-radius-l);
+    }
+
+    &__usage-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            padding: var(--scale-2) 0;
+            padding-left: var(--scale-4);
+            position: relative;
+
+            &::before {
+                position: absolute;
+                left: 0;
+                font-weight: var(--font-weight-bold);
+            }
+        }
+
+        &--do li::before {
+            content: '✓';
+            color: var(--color-status-success);
+        }
+
+        &--dont li::before {
+            content: '✗';
+            color: var(--color-status-error);
+        }
+    }
+}
+
+

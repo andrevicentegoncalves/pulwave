@@ -1,0 +1,38 @@
+// Shared demo styles for iconography demos
+.iconography-demo {
+    &__scale-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-6);
+    }
+
+    &__scale-item {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__scale-box {
+        width: var(--scale-20);
+        height: var(--scale-20);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-surface-subtle);
+        border-radius: 50%;
+    }
+
+    &__scale-label {
+        margin-top: var(--scale-2);
+        font-weight: 600;
+        font-size: var(--font-size-s);
+    }
+
+    &__scale-label-default {
+        font-size: var(--font-size-ui-xs);
+        color: var(--color-text-tertiary);
+        font-weight: 400;
+        margin-top: var(--scale-1);
+    }
+}

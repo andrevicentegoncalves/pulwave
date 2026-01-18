@@ -1,0 +1,173 @@
+// ============================================================================ //
+// SECTION LAYOUT - COLLAPSED STATE
+// ============================================================================ //
+// Collapsed sidebar state fixes for neutral sidebars
+
+// When sidebar container is collapsed, center items in sidebar
+.sidebar-container.collapsed .sidebar--neutral {
+    .sidebar__menu {
+        padding: var(--scale-1);
+
+        // Regular menu items - center icons
+        .menu__item {
+            justify-content: center;
+            padding: var(--scale-2);
+            min-height: var(--scale-8);
+            gap: 0;
+            margin: 0;
+
+            .menu__icon {
+                margin: 0;
+
+                svg {
+                    width: var(--icon-size-s);
+                    height: var(--icon-size-s);
+                }
+            }
+
+            .menu__label {
+                display: none !important;
+            }
+        }
+
+        // Category headers - show icon only
+        .menu__category-header {
+            justify-content: center;
+            padding: var(--scale-2);
+            min-height: var(--scale-8);
+            background: transparent !important;
+            border: none !important;
+            margin: var(--scale-1) 0;
+            border-radius: var(--border-radius-round);
+            transition: background-color var(--duration-fast) var(--easing-standard);
+
+            &.active-parent {
+                background: var(--color-surface-hover) !important;
+
+                .menu__icon {
+                    color: var(--color-brand-primary);
+                }
+            }
+
+            &:hover:not(.active-parent) {
+                background: var(--color-surface-subtle) !important;
+            }
+
+            .menu__category-content {
+                justify-content: center;
+
+                .menu__icon {
+                    margin: 0;
+                    display: flex !important;
+
+                    svg {
+                        width: var(--icon-size-s);
+                        height: var(--icon-size-s);
+                    }
+                }
+
+                .menu__label {
+                    display: none !important;
+                }
+            }
+
+            .menu__chevron {
+                display: none !important;
+            }
+        }
+
+        // Hide submenus when collapsed
+        .menu__submenu {
+            display: none !important;
+        }
+
+        // Remove group borders when collapsed
+        .menu__section {
+            border-top: none !important;
+            margin-top: var(--scale-1);
+            padding-top: 0;
+        }
+    }
+
+    // Center toggle button
+    .sidebar-header {
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+// Compact variant for neutral sidebars
+.sidebar--compact {
+    padding: var(--scale-3) 0;
+
+    .sidebar-header {
+        margin-bottom: var(--scale-2);
+        min-height: var(--scale-9);
+        padding-top: var(--scale-2);
+
+        .toggle-btn {
+            padding: var(--scale-1);
+            min-height: var(--scale-8);
+            min-width: var(--scale-8);
+
+            svg {
+                width: var(--icon-size-s);
+                height: var(--icon-size-s);
+            }
+        }
+    }
+
+    .sidebar__menu {
+        padding: 0;
+
+        .menu {
+            gap: var(--scale-1);
+        }
+
+        .menu__section {
+            margin-bottom: var(--scale-3);
+        }
+
+        .menu__section-title {
+            margin-bottom: var(--scale-1);
+            font-size: var(--font-size-caption-s);
+            padding-left: var(--scale-3);
+        }
+
+        .menu__item {
+            padding: var(--scale-1) var(--scale-3);
+            min-height: var(--scale-8);
+            font-size: var(--font-size-label-s);
+
+            svg {
+                width: var(--scale-4);
+                height: var(--scale-4);
+                margin-right: var(--scale-2);
+            }
+        }
+    }
+
+    .sidebar-user {
+        margin-top: auto;
+        margin-bottom: var(--scale-2);
+        padding: 0 var(--scale-2);
+
+        .user-profile-section {
+            padding: var(--scale-2);
+            min-height: var(--scale-12);
+        }
+
+        .user-avatar {
+            width: var(--scale-8);
+            height: var(--scale-8);
+        }
+
+        .user-name {
+            font-size: var(--font-size-caption-m);
+        }
+
+        .user-email {
+            font-size: var(--font-size-caption-s);
+        }
+    }
+}

@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.link {
+    --link-color: var(--color-brand-primary);
+    --link-color-hover: var(--color-action-link-hover);
+    --link-gap: var(--scale-1);
+}

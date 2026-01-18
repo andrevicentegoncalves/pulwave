@@ -1,0 +1,21 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.form-row {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--form-gap-m); // Default gap
+
+    >* {
+        flex: 1;
+        min-width: 0; // Prevent flex overflow
+    }
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--form-gap-s);
+    margin-top: var(--form-gap-l);
+    width: 100%;
+}

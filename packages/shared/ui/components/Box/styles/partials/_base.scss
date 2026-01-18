@@ -1,0 +1,48 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.box {
+    // Base resets
+    display: block; // Default
+    box-sizing: border-box;
+
+    // Variants
+    &--card {
+        background-color: var(--color-surface-default);
+        border: 1px solid var(--color-border-subtle);
+
+        // Shadow default for card if not overridden
+        &:not([class*="shadow-"]) {
+            box-shadow: var(--shadow-s);
+        }
+    }
+
+    &--glass {
+        background-color: var(--color-overlay-glass);
+        backdrop-filter: blur(var(--blur-m));
+        -webkit-backdrop-filter: blur(var(--blur-m));
+        border: 1px solid var(--color-border-glass);
+
+        // Dark mode adaptation checked via tokens
+    }
+
+    &--outlined {
+        background-color: transparent;
+        border: 1px solid var(--color-border-default);
+    }
+
+    // Interactive
+    &--interactive {
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-var(--scale-0-5));
+            // Enhance shadow on hover if using shadow
+            // Logic handled via specific hover utility or implicitly here
+        }
+
+        &.box--card:hover {
+            box-shadow: var(--shadow-m);
+        }
+    }
+}

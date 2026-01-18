@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.card-grid {
+    // Spacing
+    --card-grid-gap: var(--scale-6); // Default m
+
+    // Sizing
+    --card-grid-min: var(--scale-70); // Default standard
+}

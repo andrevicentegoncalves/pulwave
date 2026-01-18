@@ -1,0 +1,40 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.time-picker {
+
+    // ── SIZES ──
+    &--xs &__trigger {
+        padding: var(--scale-1) var(--scale-2);
+        min-height: 28px;
+        min-width: var(--time-picker-min-width-xs);
+        font-size: var(--font-size-body-s);
+    }
+
+    &--s &__trigger {
+        padding: 6px var(--scale-2);
+        min-height: var(--scale-8);
+        min-width: var(--time-picker-min-width-s);
+        font-size: var(--font-size-body-s);
+    }
+
+    &--m &__trigger {
+        padding: var(--scale-2) var(--scale-3);
+        min-height: var(--scale-10);
+        min-width: var(--time-picker-min-width-m);
+        font-size: var(--font-size-body-m);
+    }
+
+    &--l &__trigger {
+        padding: var(--scale-3) var(--scale-4);
+        min-height: var(--scale-12);
+        min-width: var(--time-picker-min-width-l);
+        font-size: var(--font-size-body-l);
+    }
+
+    &--xl &__trigger {
+        padding: var(--scale-4) var(--scale-5);
+        min-height: 56px;
+        min-width: var(--time-picker-min-width-xl);
+        font-size: var(--font-size-body-l);
+    }
+}

@@ -1,0 +1,121 @@
+{
+    "$description": "Pulwave Design System - Breakpoints & Layout Tokens",
+    "$format": "dtcg",
+    "breakpoint": {
+        "$description": "Responsive breakpoints (mobile-first)",
+        "xs": {
+            "$value": "0px",
+            "$type": "dimension",
+            "$description": "Mobile first - no min-width needed"
+        },
+        "s": {
+            "$value": "640px",
+            "$type": "dimension",
+            "$description": "Landscape phones, small tablets"
+        },
+        "m": {
+            "$value": "768px",
+            "$type": "dimension",
+            "$description": "Tablets, medium devices"
+        },
+        "l": {
+            "$value": "1024px",
+            "$type": "dimension",
+            "$description": "Laptops, small desktops"
+        },
+        "xl": {
+            "$value": "1280px",
+            "$type": "dimension",
+            "$description": "Large desktops, monitors"
+        },
+        "2xl": {
+            "$value": "1920px",
+            "$type": "dimension",
+            "$description": "Ultra-wide, 4K displays"
+        }
+    },
+    "breakpointMax": {
+        "$description": "Maximum breakpoint values (for bp-down queries)",
+        "xs": {
+            "$value": "639px",
+            "$type": "dimension"
+        },
+        "s": {
+            "$value": "767px",
+            "$type": "dimension"
+        },
+        "m": {
+            "$value": "1023px",
+            "$type": "dimension"
+        },
+        "l": {
+            "$value": "1279px",
+            "$type": "dimension"
+        },
+        "xl": {
+            "$value": "1919px",
+            "$type": "dimension"
+        }
+    },
+    "container": {
+        "$description": "Container max-widths per breakpoint",
+        "xs": {
+            "$value": "100%",
+            "$type": "dimension"
+        },
+        "s": {
+            "$value": "640px",
+            "$type": "dimension"
+        },
+        "m": {
+            "$value": "768px",
+            "$type": "dimension"
+        },
+        "l": {
+            "$value": "1024px",
+            "$type": "dimension"
+        },
+        "xl": {
+            "$value": "1280px",
+            "$type": "dimension"
+        },
+        "2xl": {
+            "$value": "1536px",
+            "$type": "dimension"
+        }
+    },
+    "grid": {
+        "$description": "Grid system configuration",
+        "columns": {
+            "mobile": {
+                "$value": "4",
+                "$type": "number"
+            },
+            "tablet": {
+                "$value": "8",
+                "$type": "number"
+            },
+            "desktop": {
+                "$value": "12",
+                "$type": "number"
+            }
+        },
+        "gutter": {
+            "xs": {
+                "$value": "1rem",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "s": {
+                "$value": "1.5rem",
+                "$type": "dimension",
+                "$description": "24px"
+            },
+            "m": {
+                "$value": "2rem",
+                "$type": "dimension",
+                "$description": "32px"
+            }
+        }
+    }
+}

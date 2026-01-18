@@ -1,0 +1,103 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ==========================================================================
+// AVATAR COMPONENT - BEM STYLES
+// ==========================================================================
+
+.avatar {
+    --avatar-size-xs: var(--scale-6);
+    --avatar-size-s: var(--scale-8);
+    --avatar-size-m: var(--scale-10);
+    --avatar-size-l: var(--scale-12);
+    --avatar-size-xl: 64px;
+
+    // Default size (m)
+    width: var(--avatar-size-m);
+    height: var(--avatar-size-m);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 50%;
+    background-color: var(--color-surface-subtle);
+    color: var(--color-text-secondary);
+
+    // Sizes
+    &--xs {
+        width: var(--avatar-size-xs);
+        height: var(--avatar-size-xs);
+        font-size: var(--body-xs-size);
+        line-height: var(--body-xs-line-height);
+        letter-spacing: var(--body-xs-spacing);
+        font-weight: var(--body-xs-weight);
+    }
+
+    &--s {
+        width: var(--avatar-size-s);
+        height: var(--avatar-size-s);
+        font-size: var(--body-s-size);
+        line-height: var(--body-s-line-height);
+        letter-spacing: var(--body-s-spacing);
+        font-weight: var(--body-s-weight);
+    }
+
+    &--m {
+        width: var(--avatar-size-m);
+        height: var(--avatar-size-m);
+        font-size: var(--body-s-size);
+        line-height: var(--body-s-line-height);
+        letter-spacing: var(--body-s-spacing);
+        font-weight: var(--body-s-weight);
+    }
+
+    &--l {
+        width: var(--avatar-size-l);
+        height: var(--avatar-size-l);
+        font-size: var(--body-m-size);
+        line-height: var(--body-m-line-height);
+        letter-spacing: var(--body-m-spacing);
+        font-weight: var(--body-m-weight);
+    }
+
+    &--xl {
+        width: var(--avatar-size-xl);
+        height: var(--avatar-size-xl);
+        font-size: var(--title-m-size);
+        line-height: var(--title-m-line-height);
+        letter-spacing: var(--title-m-spacing);
+        font-weight: var(--title-m-weight);
+    }
+
+    // Elements
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+    }
+
+    &__initials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        text-transform: uppercase;
+        background-color: var(--color-brand-primary-subtle);
+        color: var(--color-brand-primary);
+    }
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-surface-subtle);
+        color: var(--color-text-tertiary);
+    }
+}

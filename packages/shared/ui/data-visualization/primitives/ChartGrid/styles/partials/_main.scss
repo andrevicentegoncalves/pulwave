@@ -1,0 +1,31 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ============================================================================
+// CHART GRID - BEM Structure
+// Uses chart-specific tokens from theme/_chart-tokens.scss
+// ============================================================================
+
+.chart-grid {
+    &__line {
+        stroke: var(--chart-grid-stroke);
+        stroke-opacity: var(--chart-grid-opacity);
+    }
+
+    &--dashed {
+        .chart-grid__line {
+            stroke-dasharray: 3 3;
+        }
+    }
+
+    &--horizontal {
+        .chart-grid__line {
+            // Horizontal grid lines
+        }
+    }
+
+    &--vertical {
+        .chart-grid__line {
+            // Vertical grid lines
+        }
+    }
+}

@@ -1,0 +1,493 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                         UTILITY CLASSES: TYPOGRAPHY                        */
+/* ========================================================================== */
+
+// PRESETS (Composite classes)
+@each $key, $value in t.$text-tokens {
+    @if string.index($key, 'text-')==1 and string.index($key, '-size') {
+        $end-index: string.length($key) - 5;
+        $prefix: string.slice($key, 1, $end-index);
+
+        @include with-responsive {
+            .#{$utility-prefix}#{$prefix}#{$utility-suffix} {
+                font-size: var(--#{$prefix}-size);
+                font-weight: var(--#{$prefix}-weight);
+                line-height: var(--#{$prefix}-line-height);
+                letter-spacing: var(--#{$prefix}-spacing);
+            }
+        }
+    }
+}
+
+// FONT WEIGHTS
+@each $key, $value in t.$font-weight-tokens {
+    $suffix: string.slice($key, 13); // remove 'font-weight-'
+
+    @include with-responsive {
+        .#{$utility-prefix}font-#{$suffix}#{$utility-suffix} {
+            font-weight: var(--#{$key});
+        }
+    }
+}
+
+// LINE HEIGHTS
+@each $key, $value in t.$line-height-tokens {
+    $suffix: string.slice($key, 13); // remove 'line-height-'
+
+    @include with-responsive {
+        .#{$utility-prefix}leading-#{$suffix}#{$utility-suffix} {
+            line-height: var(--#{$key});
+        }
+    }
+}
+
+// LETTER SPACING
+@each $key, $value in t.$letter-spacing-tokens {
+    $suffix: string.slice($key, 16); // remove 'letter-spacing-'
+
+    @include with-responsive {
+        .#{$utility-prefix}tracking-#{$suffix}#{$utility-suffix} {
+            letter-spacing: var(--#{$key});
+        }
+    }
+}
+
+// FONT FAMILY
+@each $key, $value in t.$font-family-tokens {
+    $suffix: string.slice($key, 13); // remove 'font-family-'
+
+    @include with-responsive {
+        .#{$utility-prefix}font-#{$suffix}#{$utility-suffix} {
+            font-family: var(--#{$key});
+        }
+    }
+}
+
+// TEXT INDENT
+@each $key, $value in t.$scale-tokens {
+    @if string.index($key, 'scale-')==1 {
+        $suffix: string.slice($key, 7);
+
+        // Escape dot if present (e.g. 0.5 -> 0\.5)
+        $dot-index: string.index($suffix, '.');
+
+        @if $dot-index {
+            $suffix: string.insert($suffix, '\\', $dot-index);
+        }
+
+        @include with-responsive {
+            .#{$utility-prefix}indent-#{$suffix}#{$utility-suffix} {
+                text-indent: var(--#{$key});
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+
+    // TEXT TRANSFORM
+    .#{$utility-prefix}uppercase#{$utility-suffix} {
+        text-transform: uppercase;
+    }
+
+    .#{$utility-prefix}lowercase#{$utility-suffix} {
+        text-transform: lowercase;
+    }
+
+    .#{$utility-prefix}capitalize#{$utility-suffix} {
+        text-transform: capitalize;
+    }
+
+    .#{$utility-prefix}normal-case#{$utility-suffix} {
+        text-transform: none;
+    }
+
+    // ALIGNMENT
+    .#{$utility-prefix}text-left#{$utility-suffix} {
+        text-align: left;
+    }
+
+    .#{$utility-prefix}text-center#{$utility-suffix} {
+        text-align: center;
+    }
+
+    .#{$utility-prefix}text-right#{$utility-suffix} {
+        text-align: right;
+    }
+
+    .#{$utility-prefix}text-justify#{$utility-suffix} {
+        text-align: justify;
+    }
+
+    // DECORATION
+    .#{$utility-prefix}underline#{$utility-suffix} {
+        text-decoration: underline;
+    }
+
+    .#{$utility-prefix}line-through#{$utility-suffix} {
+        text-decoration: line-through;
+    }
+
+    .#{$utility-prefix}no-underline#{$utility-suffix} {
+        text-decoration: none;
+    }
+
+    // OVERFLOW & TRUNCATION
+    .#{$utility-prefix}truncate#{$utility-suffix} {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .#{$utility-prefix}text-ellipsis#{$utility-suffix} {
+        text-overflow: ellipsis;
+    }
+
+    .#{$utility-prefix}text-clip#{$utility-suffix} {
+        text-overflow: clip;
+    }
+
+    .#{$utility-prefix}break-normal#{$utility-suffix} {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .#{$utility-prefix}break-words#{$utility-suffix} {
+        overflow-wrap: break-word;
+    }
+
+    .#{$utility-prefix}break-all#{$utility-suffix} {
+        word-break: break-all;
+    }
+
+    // LINE CLAMP
+    @for $i from 1 through 6 {
+        .#{$utility-prefix}line-clamp-#{$i}#{$utility-suffix} {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: $i;
+        }
+    }
+
+    .#{$utility-prefix}line-clamp-none#{$utility-suffix} {
+        overflow: visible;
+        display: block;
+        -webkit-box-orient: horizontal;
+        -webkit-line-clamp: none;
+    }
+
+    // WHITESPACE
+    .#{$utility-prefix}whitespace-normal#{$utility-suffix} {
+        white-space: normal;
+    }
+
+    .#{$utility-prefix}whitespace-nowrap#{$utility-suffix} {
+        white-space: nowrap;
+    }
+
+    .#{$utility-prefix}whitespace-pre#{$utility-suffix} {
+        white-space: pre;
+    }
+
+    .#{$utility-prefix}whitespace-pre-line#{$utility-suffix} {
+        white-space: pre-line;
+    }
+
+    .#{$utility-prefix}whitespace-pre-wrap#{$utility-suffix} {
+        white-space: pre-wrap;
+    }
+
+    .#{$utility-prefix}whitespace-break-spaces#{$utility-suffix} {
+        white-space: break-spaces;
+    }
+
+    // VERTICAL ALIGNMENT
+    .#{$utility-prefix}align-baseline#{$utility-suffix} {
+        vertical-align: baseline;
+    }
+
+    .#{$utility-prefix}align-top#{$utility-suffix} {
+        vertical-align: top;
+    }
+
+    .#{$utility-prefix}align-middle#{$utility-suffix} {
+        vertical-align: middle;
+    }
+
+    .#{$utility-prefix}align-bottom#{$utility-suffix} {
+        vertical-align: bottom;
+    }
+
+    .#{$utility-prefix}align-text-top#{$utility-suffix} {
+        vertical-align: text-top;
+    }
+
+    .#{$utility-prefix}align-text-bottom#{$utility-suffix} {
+        vertical-align: text-bottom;
+    }
+
+    .#{$utility-prefix}align-sub#{$utility-suffix} {
+        vertical-align: sub;
+    }
+
+    .#{$utility-prefix}align-super#{$utility-suffix} {
+        vertical-align: super;
+    }
+
+    // FONT STYLE
+    .#{$utility-prefix}italic#{$utility-suffix} {
+        font-style: italic;
+    }
+
+    .#{$utility-prefix}not-italic#{$utility-suffix} {
+        font-style: normal;
+    }
+
+    .#{$utility-prefix}oblique#{$utility-suffix} {
+        font-style: oblique;
+    }
+
+    // TEXT RENDERING
+    .#{$utility-prefix}antialiased#{$utility-suffix} {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .#{$utility-prefix}subpixel-antialiased#{$utility-suffix} {
+        -webkit-font-smoothing: auto;
+        -moz-osx-font-smoothing: auto;
+    }
+
+    // TEXT DECORATION STYLE
+    .#{$utility-prefix}decoration-solid#{$utility-suffix} {
+        text-decoration-style: solid;
+    }
+
+    .#{$utility-prefix}decoration-double#{$utility-suffix} {
+        text-decoration-style: double;
+    }
+
+    .#{$utility-prefix}decoration-dotted#{$utility-suffix} {
+        text-decoration-style: dotted;
+    }
+
+    .#{$utility-prefix}decoration-dashed#{$utility-suffix} {
+        text-decoration-style: dashed;
+    }
+
+    .#{$utility-prefix}decoration-wavy#{$utility-suffix} {
+        text-decoration-style: wavy;
+    }
+
+    // TEXT DECORATION THICKNESS
+    .#{$utility-prefix}decoration-auto#{$utility-suffix} {
+        text-decoration-thickness: auto;
+    }
+
+    .#{$utility-prefix}decoration-from-font#{$utility-suffix} {
+        text-decoration-thickness: from-font;
+    }
+
+    .#{$utility-prefix}decoration-0#{$utility-suffix} {
+        text-decoration-thickness: 0px;
+    }
+
+    .#{$utility-prefix}decoration-1#{$utility-suffix} {
+        text-decoration-thickness: 1px;
+    }
+
+    .#{$utility-prefix}decoration-2#{$utility-suffix} {
+        text-decoration-thickness: 2px;
+    }
+
+    .#{$utility-prefix}decoration-4#{$utility-suffix} {
+        text-decoration-thickness: 4px;
+    }
+
+    .#{$utility-prefix}decoration-8#{$utility-suffix} {
+        text-decoration-thickness: 8px;
+    }
+
+    // UNDERLINE OFFSET
+    .#{$utility-prefix}underline-offset-auto#{$utility-suffix} {
+        text-underline-offset: auto;
+    }
+
+    .#{$utility-prefix}underline-offset-0#{$utility-suffix} {
+        text-underline-offset: 0px;
+    }
+
+    .#{$utility-prefix}underline-offset-1#{$utility-suffix} {
+        text-underline-offset: 1px;
+    }
+
+    .#{$utility-prefix}underline-offset-2#{$utility-suffix} {
+        text-underline-offset: 2px;
+    }
+
+    .#{$utility-prefix}underline-offset-4#{$utility-suffix} {
+        text-underline-offset: 4px;
+    }
+
+    .#{$utility-prefix}underline-offset-8#{$utility-suffix} {
+        text-underline-offset: 8px;
+    }
+
+    // HYPHENS
+    .#{$utility-prefix}hyphens-none#{$utility-suffix} {
+        hyphens: none;
+    }
+
+    .#{$utility-prefix}hyphens-manual#{$utility-suffix} {
+        hyphens: manual;
+    }
+
+    .#{$utility-prefix}hyphens-auto#{$utility-suffix} {
+        hyphens: auto;
+    }
+
+    .#{$utility-prefix}indent-0#{$utility-suffix} {
+        text-indent: 0;
+    }
+
+    // CONTENT
+    .#{$utility-prefix}content-none#{$utility-suffix} {
+        content: none;
+    }
+
+    // TEXT WRAP
+    .#{$utility-prefix}text-wrap#{$utility-suffix} {
+        text-wrap: wrap;
+    }
+
+    .#{$utility-prefix}text-nowrap#{$utility-suffix} {
+        text-wrap: nowrap;
+    }
+
+    .#{$utility-prefix}text-balance#{$utility-suffix} {
+        text-wrap: balance;
+    }
+
+    .#{$utility-prefix}text-pretty#{$utility-suffix} {
+        text-wrap: pretty;
+    }
+
+    // FONT VARIANT NUMERIC
+    .#{$utility-prefix}normal-nums#{$utility-suffix} {
+        font-variant-numeric: normal;
+    }
+
+    .#{$utility-prefix}ordinal#{$utility-suffix} {
+        font-variant-numeric: ordinal;
+    }
+
+    .#{$utility-prefix}slashed-zero#{$utility-suffix} {
+        font-variant-numeric: slashed-zero;
+    }
+
+    .#{$utility-prefix}lining-nums#{$utility-suffix} {
+        font-variant-numeric: lining-nums;
+    }
+
+    .#{$utility-prefix}oldstyle-nums#{$utility-suffix} {
+        font-variant-numeric: oldstyle-nums;
+    }
+
+    .#{$utility-prefix}proportional-nums#{$utility-suffix} {
+        font-variant-numeric: proportional-nums;
+    }
+
+    .#{$utility-prefix}tabular-nums#{$utility-suffix} {
+        font-variant-numeric: tabular-nums;
+    }
+
+    .#{$utility-prefix}diagonal-fractions#{$utility-suffix} {
+        font-variant-numeric: diagonal-fractions;
+    }
+
+    .#{$utility-prefix}stacked-fractions#{$utility-suffix} {
+        font-variant-numeric: stacked-fractions;
+    }
+
+    // HANGING PUNCTUATION
+    .#{$utility-prefix}hanging-none#{$utility-suffix} {
+        hanging-punctuation: none;
+    }
+
+    .#{$utility-prefix}hanging-first#{$utility-suffix} {
+        hanging-punctuation: first;
+    }
+
+    .#{$utility-prefix}hanging-last#{$utility-suffix} {
+        hanging-punctuation: last;
+    }
+
+    .#{$utility-prefix}hanging-allow-end#{$utility-suffix} {
+        hanging-punctuation: allow-end;
+    }
+
+    // WRITING MODE
+    .#{$utility-prefix}writing-vertical-rl#{$utility-suffix} {
+        writing-mode: vertical-rl;
+    }
+
+    .#{$utility-prefix}writing-horizontal-tb#{$utility-suffix} {
+        writing-mode: horizontal-tb;
+    }
+
+    // TEXT UNDERLINE POSITION
+    .#{$utility-prefix}underline-under#{$utility-suffix} {
+        text-underline-position: under;
+    }
+
+    .#{$utility-prefix}underline-from-font#{$utility-suffix} {
+        text-underline-position: from-font;
+    }
+
+    .#{$utility-prefix}underline-left#{$utility-suffix} {
+        text-underline-position: left;
+    }
+
+    .#{$utility-prefix}underline-right#{$utility-suffix} {
+        text-underline-position: right;
+    }
+
+    // FONT SYNTHESIS
+    .#{$utility-prefix}font-synthesis-none#{$utility-suffix} {
+        font-synthesis: none;
+    }
+
+    .#{$utility-prefix}font-synthesis-weight#{$utility-suffix} {
+        font-synthesis: weight;
+    }
+
+    .#{$utility-prefix}font-synthesis-style#{$utility-suffix} {
+        font-synthesis: style;
+    }
+
+    // TEXT SIZE ADJUST (Mobile)
+    .#{$utility-prefix}text-size-adjust-none#{$utility-suffix} {
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+
+    .#{$utility-prefix}text-size-adjust-auto#{$utility-suffix} {
+        -webkit-text-size-adjust: auto;
+        -moz-text-size-adjust: auto;
+        text-size-adjust: auto;
+    }
+
+    .#{$utility-prefix}text-size-adjust-100#{$utility-suffix} {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+}

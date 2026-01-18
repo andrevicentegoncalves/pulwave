@@ -1,0 +1,69 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.tooltip {
+    &__arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+
+        &--top {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: var(--scale-2) var(--scale-2) 0 var(--scale-2);
+            border-color: var(--tooltip-bg) transparent transparent transparent;
+        }
+
+        &--bottom {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 var(--scale-2) var(--scale-2) var(--scale-2);
+            border-color: transparent transparent var(--tooltip-bg) transparent;
+        }
+
+        &--left {
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: var(--scale-2) 0 var(--scale-2) var(--scale-2);
+            border-color: transparent transparent transparent var(--tooltip-bg);
+        }
+
+        &--right {
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: var(--scale-2) var(--scale-2) var(--scale-2) 0;
+            border-color: transparent var(--tooltip-bg) transparent transparent;
+        }
+
+        // Corner variants uses standard arrow styles but different positioning
+        &--top-left {
+            @extend .tooltip__arrow--top;
+            left: var(--scale-3);
+            transform: none;
+        }
+
+        &--top-right {
+            @extend .tooltip__arrow--top;
+            left: auto;
+            right: var(--scale-3);
+            transform: none;
+        }
+
+        &--bottom-left {
+            @extend .tooltip__arrow--bottom;
+            left: var(--scale-3);
+            transform: none;
+        }
+
+        &--bottom-right {
+            @extend .tooltip__arrow--bottom;
+            left: auto;
+            right: var(--scale-3);
+            transform: none;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+// ============================================================================ //
+// USER INFO - AVATAR
+// ============================================================================ //
+// Avatar styles
+
+.user-info__avatar {
+    width: var(--scale-12);
+    height: var(--scale-12);
+    border-radius: var(--border-radius-round);
+    object-fit: cover;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--easing-standard),
+        border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        transform: scale(1.05);
+        border-color: color-mix(in srgb, var(--color-on-primary), transparent calc(100% - var(--opacity-m) * 100%));
+    }
+
+    &:focus-visible {
+        outline: var(--focus-width) solid var(--color-on-primary);
+        outline-offset: var(--focus-offset);
+    }
+
+    &:active {
+        transform: scale(1.0);
+    }
+}

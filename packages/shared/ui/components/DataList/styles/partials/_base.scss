@@ -1,0 +1,8 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.data-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--data-list-gap);
+    width: 100%;
+}

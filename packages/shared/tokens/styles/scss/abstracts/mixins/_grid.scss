@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use '../mixins/breakpoints' as bp;
+
+// ========================================================================== //
+//                    MIXIN: RESPONSIVE GRID                                  //
+// ========================================================================== //
+
+/// Responsive grid layout
+/// @param {Map} $columns - Map of breakpoint (xs, s, m, l, xl) to column count
+/// @param {String} $gap - Optional gap override (default: varies by theme/density)
+@mixin responsive-grid($columns, $gap: null) {
+  display: grid;
+  
+  @if $gap {
+    gap: $gap;
+  } @else {
+    gap: var(--spacing-base);
+  }
+  
+  // Mobile-first default (xs)
+  $default-cols: map.get($columns, 'xs') or 1;
+  grid-template-columns: repeat($default-cols, 1fr);
+  
+  @each $breakpoint, $cols in $columns {
+    @if $breakpoint != 'xs' {
+      @include bp.bp-up($breakpoint) {
+        grid-template-columns: repeat($cols, 1fr);
+      }
+    }
+  }
+}
+
+/// Auto-fit grid
+/// @param {String} $min-width - Minimum width for items (e.g. 250px)
+/// @param {String} $gap - Gap override
+@mixin auto-fit-grid($min-width: 250px, $gap: null) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  
+  @if $gap {
+    gap: $gap;
+  } @else {
+    gap: var(--spacing-base);
+  }
+}
+
+/// Simple Responsive Columns Shorthand
+/// @param {Number} $mobile - Columns on mobile (default: 1)
+/// @param {Number} $tablet - Columns on tablet (default: 2)
+/// @param {Number} $desktop - Columns on desktop (default: 3)
+@mixin responsive-columns($mobile: 1, $tablet: 2, $desktop: 3, $gap: null) {
+  @include responsive-grid((
+    'xs': $mobile,
+    'm': $tablet,
+    'l': $desktop
+  ), $gap);
+}

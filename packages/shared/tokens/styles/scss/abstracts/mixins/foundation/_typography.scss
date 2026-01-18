@@ -1,0 +1,26 @@
+@use 'sass:string';
+@use '../typography' as t;
+@forward '../typography';
+
+// Shim for legacy typography mixin usage
+@mixin typography($category, $size, $weight: null) {
+    @include t.typography-responsive($category, $size, $weight);
+}
+
+// New style mixin that accepts 'category-size' format (e.g., 'body-m', 'label-s')
+// Used by ui2 components
+@mixin style($token) {
+    // Parse the token string to extract category and size
+    // Format: 'category-size' e.g., 'body-m', 'label-s', 'headline-l'
+    $hyphen-pos: string.index($token, '-');
+
+    @if $hyphen-pos {
+        $category: string.slice($token, 1, $hyphen-pos - 1);
+        $size: string.slice($token, $hyphen-pos + 1);
+        @include t.typography-responsive($category, $size);
+    }
+
+    @else {
+        @warn "Invalid typography token format: #{$token}. Expected 'category-size' format.";
+    }
+}

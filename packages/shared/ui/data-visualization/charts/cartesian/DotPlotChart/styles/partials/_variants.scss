@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--dot-plot {
+    &--horizontal {
+        // Horizontal layout specific styles
+    }
+
+    &--vertical {
+        // Vertical layout specific styles
+    }
+}

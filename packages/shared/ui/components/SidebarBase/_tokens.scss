@@ -1,0 +1,32 @@
+// ============================================================================ //
+// SIDEBAR BASE - TOKENS
+// ============================================================================ //
+// Scoped tokens for sidebar dimensions, animation, and structure.
+// Components using SidebarBase inherit these tokens via CSS cascade.
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-base {
+    // Dimensions
+    --sidebar-width-expanded: var(--scale-70);
+    --sidebar-width-collapsed: var(--scale-20);
+
+    // Animation - smoother transitions
+    --sidebar-transition-duration: 280ms;
+    --sidebar-transition-timing: var(--easing-decelerate); // Natural slowdown
+    --sidebar-transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+
+    // Icon animation - playful spring effect
+    --sidebar-icon-transition-duration: 320ms;
+    --sidebar-icon-transition-timing: var(--easing-spring);
+    --sidebar-icon-transition: transform var(--sidebar-icon-transition-duration) var(--sidebar-icon-transition-timing);
+
+    // Structure
+    --sidebar-border-radius: var(--border-radius-2xl);
+    --sidebar-z-index: var(--z-index-sticky);
+    --sidebar-margin: var(--scale-5);
+
+    // Spacing
+    --sidebar-padding-x: var(--scale-4);
+    --sidebar-padding-y: var(--scale-4);
+}

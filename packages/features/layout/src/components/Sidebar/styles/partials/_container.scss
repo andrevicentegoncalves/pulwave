@@ -1,0 +1,66 @@
+// ============================================================================ //
+// SIDEBAR CONTAINER
+// ============================================================================ //
+// Wraps the sidebar with positioning and width states
+
+.sidebar-container {
+    // Animation tokens (can be inherited from SidebarBase or use defaults)
+    --sidebar-transition-duration: 280ms;
+    --sidebar-transition-timing: var(--easing-decelerate);
+    --sidebar-icon-transition-duration: 320ms;
+    --sidebar-icon-transition-timing: var(--easing-spring);
+    --sidebar-icon-transition: transform var(--sidebar-icon-transition-duration) var(--sidebar-icon-transition-timing);
+
+    height: calc(100vh - var(--scale-5) * 2);
+    display: flex;
+    flex-direction: column;
+    transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    will-change: width; // GPU acceleration
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: var(--scale-5) 0 var(--scale-5) var(--scale-5);
+    z-index: var(--z-index-sticky);
+    border-radius: var(--border-radius-2xl);
+    overflow: hidden; // Prevent content overflow during collapse/expand animation
+
+    // Width states
+    width: var(--scale-70); // var(--scale-70) Expanded width
+
+
+
+    &--static {
+        position: static;
+        height: auto; // Fill parent minus margin
+        margin: 0 0 var(--scale-5) 0; // Add bottom margin to match main sidebar
+        z-index: var(--z-index-overlay);
+        width: auto; // Adapt to content width
+        min-width: var(--scale-50); // 200px minimum
+        max-width: var(--scale-70); // var(--scale-70) maximum
+    }
+
+    &.collapsed {
+        width: var(--scale-20); // var(--scale-20)
+        min-width: 0; // Override static min-width
+
+        .sidebar-header {
+            justify-content: center;
+        }
+    }
+
+    // Mobile hidden state (replaces inline transform)
+    &--mobile-hidden {
+        transform: translateX(-100%);
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        will-change: auto; // Release GPU resources
+    }
+}
+
+// Header alignment when Expanded (padding-right removed as it's handled by base padding)
+.sidebar-container.expanded .sidebar-header {
+    justify-content: flex-end;
+}

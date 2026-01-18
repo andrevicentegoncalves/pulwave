@@ -1,0 +1,2 @@
+export { SupabaseDashboardProvider } from './SupabaseDashboardProvider';
+

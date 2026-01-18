@@ -1,0 +1,68 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ==========================================================================
+// CHECKBOX COMPONENT - LABEL & HELPER
+// ==========================================================================
+
+.checkbox__label {
+    font-size: var(--font-size-body-s);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    line-height: var(--line-height-normal);
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+// Label Sizes
+.checkbox__label--size-s {
+    font-size: var(--font-size-caption-m);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-regular);
+}
+
+.checkbox__label--size-m {
+    font-size: var(--font-size-body-s);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-regular);
+}
+
+.checkbox__label--size-l {
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-regular);
+}
+
+// Required Asterisk
+.checkbox__required {
+    color: var(--color-status-error);
+    margin-left: var(--scale-1);
+}
+
+// Helper Text
+.checkbox__helper {
+    font-size: var(--font-size-caption-s);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+
+    &--error {
+        color: var(--color-status-error-text);
+    }
+}
+
+// Helper Indentation
+.checkbox__helper--size-s {
+    margin-left: calc(var(--scale-5) + var(--scale-2));
+}
+
+.checkbox__helper--size-m {
+    margin-left: calc(var(--scale-6) + var(--scale-3));
+}
+
+.checkbox__helper--size-l {
+    margin-left: calc(var(--scale-8) + var(--scale-3));
+}

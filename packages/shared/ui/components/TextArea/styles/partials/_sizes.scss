@@ -1,0 +1,17 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.text-area {
+    &__container {
+        &--s {
+            min-height: var(--scale-20);
+        }
+
+        &--m {
+            min-height: var(--scale-30);
+        }
+
+        &--l {
+            min-height: 160px;
+        }
+    }
+}

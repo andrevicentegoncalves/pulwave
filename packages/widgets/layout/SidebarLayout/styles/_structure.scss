@@ -1,0 +1,56 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.sidebar-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+
+    // Fixed mode (app-like)
+    &--fixed {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &__sidebar {
+        flex-shrink: 0;
+        width: var(--sidebar-width, var(--scale-70)); // approx var(--scale-70)
+        transition: width var(--duration-fast) var(--easing-standard);
+        z-index: var(--z-index-sticky);
+        overflow-x: hidden;
+
+        // Collapsed state
+        .sidebar-layout--collapsed & {
+            width: var(--sidebar-collapsed-width, var(--scale-20)); // approx var(--scale-20)
+        }
+    }
+
+    &__main {
+        flex: 1;
+        min-width: 0; // Prevent flex child overflow
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        // In fixed mode, main area scrolls internally
+        .sidebar-layout--fixed & {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    }
+
+    @include bp-down('m') {
+        &__sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            transform: translateX(-100%);
+
+            &.is-open {
+                transform: translateX(0);
+            }
+        }
+    }
+}

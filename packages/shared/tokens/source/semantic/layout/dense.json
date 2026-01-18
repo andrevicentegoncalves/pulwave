@@ -1,0 +1,132 @@
+{
+    "$description": "Dense mode - compact spacing for data-heavy UIs",
+    "dense": {
+        "$description": "Reduced spacing multipliers for compact layouts",
+        "stack": {
+            "xs": {
+                "$value": "0.125rem",
+                "$type": "dimension",
+                "$description": "2px"
+            },
+            "s": {
+                "$value": "{scale.1}",
+                "$type": "dimension",
+                "$description": "4px"
+            },
+            "m": {
+                "$value": "{scale.2}",
+                "$type": "dimension",
+                "$description": "8px"
+            },
+            "l": {
+                "$value": "{scale.3}",
+                "$type": "dimension",
+                "$description": "12px"
+            },
+            "xl": {
+                "$value": "{scale.4}",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "2xl": {
+                "$value": "{scale.6}",
+                "$type": "dimension",
+                "$description": "24px"
+            }
+        },
+        "inline": {
+            "xs": {
+                "$value": "0.125rem",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "{scale.1}",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "{scale.2}",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "{scale.3}",
+                "$type": "dimension"
+            },
+            "xl": {
+                "$value": "{scale.4}",
+                "$type": "dimension"
+            }
+        },
+        "inset": {
+            "xs": {
+                "$value": "{scale.1}",
+                "$type": "dimension",
+                "$description": "4px"
+            },
+            "s": {
+                "$value": "{scale.2}",
+                "$type": "dimension",
+                "$description": "8px"
+            },
+            "m": {
+                "$value": "{scale.3}",
+                "$type": "dimension",
+                "$description": "12px"
+            },
+            "l": {
+                "$value": "{scale.4}",
+                "$type": "dimension",
+                "$description": "16px"
+            },
+            "xl": {
+                "$value": "{scale.6}",
+                "$type": "dimension",
+                "$description": "24px"
+            }
+        },
+        "text": {
+            "$description": "Tighter typography for dense UIs",
+            "lineHeight": {
+                "$value": "{lineHeight.tight}",
+                "$type": "number"
+            },
+            "fontSize": {
+                "$value": "{fontSize.ui.s}",
+                "$type": "dimension"
+            }
+        },
+        "component": {
+            "$description": "Smaller component sizing",
+            "height": {
+                "xs": {
+                    "$value": "{scale.5}",
+                    "$type": "dimension",
+                    "$description": "20px"
+                },
+                "s": {
+                    "$value": "{scale.6}",
+                    "$type": "dimension",
+                    "$description": "24px"
+                },
+                "m": {
+                    "$value": "{scale.8}",
+                    "$type": "dimension",
+                    "$description": "32px"
+                },
+                "l": {
+                    "$value": "{scale.10}",
+                    "$type": "dimension",
+                    "$description": "40px"
+                }
+            },
+            "iconSize": {
+                "$value": "{scale.3}",
+                "$type": "dimension",
+                "$description": "12px"
+            },
+            "borderRadius": {
+                "$value": "{borderRadius.xs}",
+                "$type": "dimension"
+            }
+        }
+    }
+}

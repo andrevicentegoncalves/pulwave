@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.burger-menu {
+    &--state-active {
+        .burger-menu__line--top {
+            transform: translateY(var(--scale-2)) rotate(45deg);
+        }
+
+        .burger-menu__line--middle {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .burger-menu__line--bottom {
+            transform: translateY(-var(--scale-2)) rotate(-45deg);
+        }
+    }
+}

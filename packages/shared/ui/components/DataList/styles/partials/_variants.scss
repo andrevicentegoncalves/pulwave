@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.data-list {
+    &--compact {
+        gap: var(--scale-1);
+    }
+
+    &--cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--scale-70), 1fr));
+        gap: var(--scale-4);
+    }
+}

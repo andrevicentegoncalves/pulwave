@@ -1,0 +1,107 @@
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+@use '../../../../../shared/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.carousel {
+
+    // With Arrows Modifier (affects viewport margin)
+    &--with-arrows .carousel__viewport {
+        margin: 0 var(--carousel-controls-padding);
+
+        @include bp.bp-down('m') {
+            margin: 0 var(--scale-10);
+        }
+
+        @include bp.bp-down('s') {
+            margin: 0;
+        }
+    }
+
+    // Variants
+    &--variant-default {
+        .carousel__slide:not(.carousel__slide--active) {
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+
+    &--variant-hero {
+        .carousel__viewport {
+            margin: 0;
+            border-radius: var(--border-radius-2xl);
+        }
+
+        .carousel__controls {
+            position: absolute;
+            bottom: var(--scale-6);
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 0;
+            z-index: var(--z-index-overlay);
+        }
+
+        .carousel__dot {
+            background: var(--color-overlay-light-default);
+
+            &--active {
+                background: var(--color-surface-default);
+            }
+        }
+    }
+
+    &--variant-wallet {
+        --carousel-card-bg: transparent;
+        padding: var(--scale-6) 0;
+
+        .carousel__viewport {
+            overflow: visible;
+            padding: var(--scale-4) 0;
+        }
+
+        .carousel__slide {
+            &:not(.carousel__slide--active) {
+                opacity: 0.5;
+                transform: scale(0.85);
+
+                &:hover {
+                    opacity: 0.75;
+                    transform: scale(0.9);
+                }
+            }
+
+            &--active {
+                transform: scale(1);
+                z-index: var(--z-index-default);
+            }
+        }
+    }
+
+    &--variant-fullscreen {
+        height: 100vh;
+        height: 100dvh;
+
+        .carousel__viewport,
+        .carousel__track,
+        .carousel__slide {
+            height: 100%;
+            margin: 0;
+        }
+
+        .carousel__controls {
+            position: absolute;
+            bottom: var(--scale-24);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .carousel__dot {
+            background: var(--color-overlay-light-default);
+
+            &--active {
+                background: var(--color-surface-default);
+            }
+        }
+    }
+}

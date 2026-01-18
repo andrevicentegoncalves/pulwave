@@ -1,0 +1,48 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.accordion {
+
+    // Variant: Neutral
+    &--variant-neutral {
+        --accordion-bg: transparent;
+        --accordion-header-bg: var(--accordion-neutral-bg, transparent);
+        --accordion-header-bg-hover: var(--accordion-neutral-bg-hover, var(--accordion-neutral-header-bg-hover));
+        --accordion-content-bg: var(--accordion-neutral-content-bg, var(--color-surface-subtle));
+
+        .accordion__item--state-expanded {
+            .accordion__header {
+                border-radius: var(--border-radius-2xl) var(--border-radius-2xl) 0 0;
+            }
+
+            .accordion__icon {
+                color: var(--color-brand-primary);
+            }
+        }
+
+        .accordion__icon {
+            color: var(--color-text-secondary);
+        }
+    }
+
+    // Variant: Primary
+    &--variant-primary {
+        --accordion-bg: transparent;
+        --accordion-header-bg: var(--accordion-primary-header-bg);
+        --accordion-header-bg-hover: var(--color-surface-hover);
+        --accordion-content-bg: var(--accordion-primary-content-bg);
+
+        .accordion__header {
+            .accordion__icon {
+                color: var(--color-brand-primary);
+            }
+        }
+
+        .accordion__item--state-expanded {
+            .accordion__header {
+                background-color: var(--accordion-primary-header-bg-expanded);
+                color: var(--color-brand-primary);
+                border-radius: var(--border-radius-2xl) var(--border-radius-2xl) 0 0;
+            }
+        }
+    }
+}

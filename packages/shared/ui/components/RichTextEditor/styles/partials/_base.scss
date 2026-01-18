@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.rich-text-editor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--border-radius-m);
+    background: var(--color-surface-default);
+    overflow: hidden;
+    transition: border-color var(--duration-fast) ease;
+
+    &:focus-within {
+        border-color: var(--color-brand-primary);
+        @include interactive.focus-ring(var(--color-brand-primary), var(--scale-0-5), var(--scale-0-5));
+    }
+}

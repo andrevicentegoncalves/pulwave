@@ -1,0 +1,57 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--performance-gauge {
+    position: relative;
+    width: 100%;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__background-arc {
+        stroke: var(--chart-color-empty);
+    }
+
+    &__tick-line {
+        stroke: var(--color-text-secondary);
+        stroke-width: 2px;
+    }
+
+    &__tick-label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+
+    &__needle-line {
+        stroke-width: 3px;
+        stroke-linecap: round;
+        transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform-origin: center;
+    }
+
+    &__needle-center {
+        fill: var(--color-text-primary);
+    }
+
+    &__label-text {
+        font-size: var(--font-size-body-sm);
+        font-weight: var(--font-weight-semibold);
+        fill: var(--chart-color-brand);
+        text-anchor: middle;
+    }
+
+    &__value-text {
+        font-size: var(--font-size-display-sm);
+        font-weight: var(--font-weight-bold);
+        fill: var(--color-text-primary);
+        text-anchor: middle;
+    }
+}

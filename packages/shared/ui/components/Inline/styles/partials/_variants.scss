@@ -1,0 +1,64 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.inline {
+
+    // Align
+    &--align-start {
+        align-items: flex-start;
+    }
+
+    &--align-center {
+        align-items: center;
+    }
+
+    &--align-end {
+        align-items: flex-end;
+    }
+
+    &--align-stretch {
+        align-items: stretch;
+    }
+
+    &--align-baseline {
+        align-items: baseline;
+    }
+
+    // Justify
+    &--justify-start {
+        justify-content: flex-start;
+    }
+
+    &--justify-center {
+        justify-content: center;
+    }
+
+    &--justify-end {
+        justify-content: flex-end;
+    }
+
+    &--justify-between {
+        justify-content: space-between;
+    }
+
+    &--justify-around {
+        justify-content: space-around;
+    }
+
+    &--justify-evenly {
+        justify-content: space-evenly;
+    }
+
+    // Wrap
+    &--wrap {
+        flex-wrap: wrap;
+    }
+
+    &--nowrap {
+        flex-wrap: nowrap;
+    }
+
+    // Reverse
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+}

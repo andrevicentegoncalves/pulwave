@@ -1,0 +1,184 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.fab-container {
+    z-index: var(--z-index-overlay);
+
+    &--fixed {
+        position: fixed;
+    }
+
+    &--absolute {
+        position: absolute;
+    }
+
+    // Position handling with safe-area support for mobile
+    &--bottom-right {
+        bottom: calc(var(--scale-6) + env(safe-area-inset-bottom, 0px));
+        right: calc(var(--scale-6) + env(safe-area-inset-right, 0px));
+    }
+
+    &--bottom-left {
+        bottom: calc(var(--scale-6) + env(safe-area-inset-bottom, 0px));
+        left: calc(var(--scale-6) + env(safe-area-inset-left, 0px));
+    }
+
+    &--bottom-center {
+        bottom: calc(var(--scale-6) + env(safe-area-inset-bottom, 0px));
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    // Demo overrides - allow absolute positioning
+    &.absolute {
+        position: absolute;
+    }
+
+    // Overlay
+    .fab-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: var(--color-backdrop);
+        z-index: -1; // Behind FAB but above content
+        animation: fade-in 0.2s ease-out;
+    }
+}
+
+.fab {
+    @include flex-center;
+    width: var(--scale-14);
+    height: var(--scale-14);
+    border-radius: var(--border-radius-round);
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-on-brand);
+    border: none;
+    box-shadow: var(--shadow-l);
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-out),
+        box-shadow 0.2s var(--ease-out),
+        background-color 0.2s var(--ease-out),
+        color 0.2s var(--ease-out);
+
+    &:hover {
+        background-color: var(--color-brand-primary-hover);
+        transform: translateY(-var(--scale-0-5));
+        box-shadow: var(--shadow-xl);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-m);
+    }
+
+    &--active {
+        background-color: var(--color-surface-default);
+        color: var(--color-text-primary);
+    }
+
+    &--extended {
+        width: auto;
+        padding: 0 var(--scale-4);
+        border-radius: var(--border-radius-pill);
+        gap: var(--scale-2);
+
+        .fab__label {
+            font-weight: var(--font-weight-m);
+            white-space: nowrap;
+        }
+    }
+}
+
+.fab-actions {
+    position: absolute;
+    bottom: 100%;
+    right: 0; // Default for bottom-right
+    margin-bottom: var(--scale-4);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--scale-3);
+    pointer-events: none; // Prevent blocking clicks
+
+    // Allow pointer events on children
+    >* {
+        pointer-events: auto;
+    }
+}
+
+.fab-action {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-3);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    animation: slide-up-fade 0.2s ease-out forwards;
+    opacity: 0;
+
+    &__label {
+        background-color: var(--color-surface-default);
+        padding: var(--scale-1) var(--scale-3);
+        border-radius: var(--border-radius-s);
+        box-shadow: var(--shadow-s);
+        font-size: var(--font-size-s);
+        font-weight: var(--font-weight-m);
+        white-space: nowrap;
+        pointer-events: none; // Click goes to button
+    }
+
+    &__icon {
+        @include flex-center;
+        width: var(--scale-10);
+        height: var(--scale-10);
+        border-radius: var(--border-radius-round);
+        background-color: var(--color-surface-default);
+        box-shadow: var(--shadow-m);
+        color: var(--color-current); // Or specific
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+        }
+    }
+}
+
+@keyframes slide-up-fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .fab-container .fab-overlay {
+        animation: none;
+    }
+
+    .fab {
+        transition: none;
+    }
+
+    .fab-action {
+        animation: none;
+        opacity: 1;
+    }
+
+    .fab-action__icon {
+        transition: none;
+    }
+}

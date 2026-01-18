@@ -1,0 +1,11 @@
+export { default as TabsBasicLineDemo } from './TabsBasicLineDemo';
+export { default as TabsBasicStackedDemo } from './TabsBasicStackedDemo';
+export { default as TabsBorderedDemo } from './TabsBorderedDemo';
+export { default as TabsPillsDemo } from './TabsPillsDemo';
+export { default as TabsSliderDemo } from './TabsSliderDemo';
+export { default as TabsSliderSoftDemo } from './TabsSliderSoftDemo';
+export { default as TabsFlushDemo } from './TabsFlushDemo';
+export { default as TabsIconsDemo } from './TabsIconsDemo';
+export { default as TabsVerticalDemo } from './TabsVerticalDemo';
+export { default as TabsSizeDemo } from './TabsSizeDemo';
+export { default as TabsFullWidthDemo } from './TabsFullWidthDemo';

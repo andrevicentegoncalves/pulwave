@@ -1,0 +1,8 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.kpi-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--scale-4);
+    height: 100%;
+}

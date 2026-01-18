@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.popover {
+    --popover-z-index: var(--z-index-overlay);
+    --popover-bg: var(--color-surface-default);
+    --popover-border-color: var(--color-border-default);
+    --popover-radius: var(--border-radius-m);
+    --popover-shadow: var(--shadow-l);
+    --popover-padding: var(--scale-4);
+    --popover-arrow-size: var(--scale-2); // var(--scale-2)
+}

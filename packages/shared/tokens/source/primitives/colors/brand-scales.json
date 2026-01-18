@@ -1,0 +1,152 @@
+{
+    "$description": "Brand colors - Primary, Secondary, Tertiary",
+    "color": {
+        "primary": {
+            "$description": "Emerald green (H:160, S:94%)",
+            "h": 160,
+            "s": "94%",
+            "50": {
+                "$value": "hsl(160, 94%, 95%)",
+                "$type": "color"
+            },
+            "100": {
+                "$value": "hsl(160, 94%, 90%)",
+                "$type": "color"
+            },
+            "200": {
+                "$value": "hsl(160, 94%, 80%)",
+                "$type": "color"
+            },
+            "300": {
+                "$value": "hsl(160, 94%, 65%)",
+                "$type": "color"
+            },
+            "400": {
+                "$value": "hsl(160, 94%, 45%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(160, 94%, 30%)",
+                "$type": "color"
+            },
+            "600": {
+                "$value": "hsl(160, 94%, 27%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(160, 94%, 22%)",
+                "$type": "color"
+            },
+            "800": {
+                "$value": "hsl(160, 94%, 16%)",
+                "$type": "color"
+            },
+            "900": {
+                "$value": "hsl(160, 94%, 10%)",
+                "$type": "color"
+            },
+            "950": {
+                "$value": "hsl(160, 94%, 5%)",
+                "$type": "color"
+            }
+        },
+        "secondary": {
+            "$description": "Mustard yellow (H:45, S:88%)",
+            "h": 45,
+            "s": "88%",
+            "50": {
+                "$value": "hsl(45, 88%, 95%)",
+                "$type": "color"
+            },
+            "100": {
+                "$value": "hsl(45, 88%, 90%)",
+                "$type": "color"
+            },
+            "200": {
+                "$value": "hsl(45, 88%, 82%)",
+                "$type": "color"
+            },
+            "300": {
+                "$value": "hsl(45, 88%, 72%)",
+                "$type": "color"
+            },
+            "400": {
+                "$value": "hsl(45, 88%, 62%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(45, 88%, 50%)",
+                "$type": "color"
+            },
+            "600": {
+                "$value": "hsl(45, 88%, 42%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(45, 88%, 38%)",
+                "$type": "color"
+            },
+            "800": {
+                "$value": "hsl(45, 88%, 30%)",
+                "$type": "color"
+            },
+            "900": {
+                "$value": "hsl(45, 88%, 20%)",
+                "$type": "color"
+            },
+            "950": {
+                "$value": "hsl(45, 88%, 10%)",
+                "$type": "color"
+            }
+        },
+        "tertiary": {
+            "$description": "Coral/Salmon (H:12, S:88%)",
+            "h": 12,
+            "s": "88%",
+            "50": {
+                "$value": "hsl(12, 88%, 95%)",
+                "$type": "color"
+            },
+            "100": {
+                "$value": "hsl(12, 88%, 90%)",
+                "$type": "color"
+            },
+            "200": {
+                "$value": "hsl(12, 88%, 80%)",
+                "$type": "color"
+            },
+            "300": {
+                "$value": "hsl(12, 88%, 68%)",
+                "$type": "color"
+            },
+            "400": {
+                "$value": "hsl(12, 88%, 55%)",
+                "$type": "color"
+            },
+            "500": {
+                "$value": "hsl(12, 88%, 50%)",
+                "$type": "color"
+            },
+            "600": {
+                "$value": "hsl(12, 88%, 45%)",
+                "$type": "color"
+            },
+            "700": {
+                "$value": "hsl(12, 88%, 38%)",
+                "$type": "color"
+            },
+            "800": {
+                "$value": "hsl(12, 88%, 28%)",
+                "$type": "color"
+            },
+            "900": {
+                "$value": "hsl(12, 88%, 18%)",
+                "$type": "color"
+            },
+            "950": {
+                "$value": "hsl(12, 88%, 8%)",
+                "$type": "color"
+            }
+        }
+    }
+}

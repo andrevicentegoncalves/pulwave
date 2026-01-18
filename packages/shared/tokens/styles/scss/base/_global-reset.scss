@@ -1,0 +1,97 @@
+// ============================================================================ //
+// GLOBAL RESET
+// ============================================================================ //
+// Essential resets for AppShell-based applications
+// Apply at app entry point, not in design system
+
+// Box-sizing reset (universal consensus from all major systems)
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Root elements
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; // AppShell manages all scroll
+}
+
+// Font smoothing (matches Material, Carbon, Fluent)
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-family: var(--font-family-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-default);
+}
+
+// React root
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+// Remove default margins from typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+// Remove list styles
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Remove focus outline (custom focus styles applied per component)
+:focus {
+    outline: none;
+}
+
+// Visible focus for keyboard navigation
+:focus-visible {
+    outline: var(--focus-width-thin) solid var(--color-focus-ring);
+    outline-offset: var(--focus-offset-s);
+}
+
+// To improve touch interaction (removes 300ms delay on older mobile browsers and improves panning)
+button,
+a,
+[role="button"],
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
+
+// Skip link (hidden by default, visible on focus)
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: var(--scale-3) var(--scale-4);
+    background: var(--color-surface-default);
+    color: var(--color-text-primary);
+    z-index: var(--z-index-overlay-skip-link);
+    text-decoration: none;
+    border-radius: var(--border-radius-m);
+
+    &:focus {
+        top: var(--scale-3);
+        left: var(--scale-3);
+    }
+}

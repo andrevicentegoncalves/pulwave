@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--flow {
+    position: relative;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+
+    &__svg {
+        display: block;
+    }
+}

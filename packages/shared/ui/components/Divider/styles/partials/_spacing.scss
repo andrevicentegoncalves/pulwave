@@ -1,0 +1,35 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.divider {
+    &--spacing-none {
+        margin: 0;
+    }
+
+    &--horizontal {
+        &.divider--spacing-s {
+            margin: var(--scale-2) 0;
+        }
+
+        &.divider--spacing-m {
+            margin: var(--scale-4) 0;
+        }
+
+        &.divider--spacing-l {
+            margin: var(--scale-6) 0;
+        }
+    }
+
+    &--vertical {
+        &.divider--spacing-s {
+            margin: 0 var(--scale-2);
+        }
+
+        &.divider--spacing-m {
+            margin: 0 var(--scale-4);
+        }
+
+        &.divider--spacing-l {
+            margin: 0 var(--scale-6);
+        }
+    }
+}

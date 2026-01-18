@@ -1,0 +1,21 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.breadcrumbs {
+    &--size-s {
+        .breadcrumbs__item {
+            font-size: var(--font-size-body-xs);
+        }
+    }
+
+    &--size-m {
+        .breadcrumbs__item {
+            font-size: var(--font-size-body-s);
+        }
+    }
+
+    &--size-l {
+        .breadcrumbs__item {
+            font-size: var(--font-size-body-m);
+        }
+    }
+}

@@ -1,0 +1,337 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                       UTILITY CLASSES: INTERACTIONS                        */
+/* ========================================================================== */
+
+// CURSOR LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'cursor-')==1 {
+        $suffix: string.slice($key, 8);
+
+        @include with-responsive {
+            .#{$utility-prefix}cursor-#{$suffix}#{$utility-suffix} {
+                cursor: var(--#{$key});
+            }
+        }
+    }
+}
+
+// SCROLL MARGIN/PADDING LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'scale-')==1 {
+        // Escape dot if present (e.g. 0.5 -> 0\.5)
+        $suffix: string.slice($key, 7);
+        $dot-index: string.index($suffix, '.');
+
+        @if $dot-index {
+            $suffix: string.insert($suffix, '\\', $dot-index);
+        }
+
+        $var: var(--#{$key});
+
+        @include with-responsive {
+            .#{$utility-prefix}scroll-m-#{$suffix}#{$utility-suffix} {
+                scroll-margin: $var;
+            }
+
+            .#{$utility-prefix}scroll-mt-#{$suffix}#{$utility-suffix} {
+                scroll-margin-top: $var;
+            }
+
+            .#{$utility-prefix}scroll-mr-#{$suffix}#{$utility-suffix} {
+                scroll-margin-right: $var;
+            }
+
+            .#{$utility-prefix}scroll-mb-#{$suffix}#{$utility-suffix} {
+                scroll-margin-bottom: $var;
+            }
+
+            .#{$utility-prefix}scroll-ml-#{$suffix}#{$utility-suffix} {
+                scroll-margin-left: $var;
+            }
+
+            .#{$utility-prefix}scroll-mx-#{$suffix}#{$utility-suffix} {
+                scroll-margin-left: $var;
+                scroll-margin-right: $var;
+            }
+
+            .#{$utility-prefix}scroll-my-#{$suffix}#{$utility-suffix} {
+                scroll-margin-top: $var;
+                scroll-margin-bottom: $var;
+            }
+
+            .#{$utility-prefix}scroll-p-#{$suffix}#{$utility-suffix} {
+                scroll-padding: $var;
+            }
+
+            .#{$utility-prefix}scroll-pt-#{$suffix}#{$utility-suffix} {
+                scroll-padding-top: $var;
+            }
+
+            .#{$utility-prefix}scroll-pr-#{$suffix}#{$utility-suffix} {
+                scroll-padding-right: $var;
+            }
+
+            .#{$utility-prefix}scroll-pb-#{$suffix}#{$utility-suffix} {
+                scroll-padding-bottom: $var;
+            }
+
+            .#{$utility-prefix}scroll-pl-#{$suffix}#{$utility-suffix} {
+                scroll-padding-left: $var;
+            }
+
+            .#{$utility-prefix}scroll-px-#{$suffix}#{$utility-suffix} {
+                scroll-padding-left: $var;
+                scroll-padding-right: $var;
+            }
+
+            .#{$utility-prefix}scroll-py-#{$suffix}#{$utility-suffix} {
+                scroll-padding-top: $var;
+                scroll-padding-bottom: $var;
+            }
+        }
+    }
+}
+
+// ACCENT COLOR LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-primary-')==1 or string.index($key, 'color-success-')==1 or string.index($key, 'color-error-')==1 or string.index($key, 'color-warning-')==1 or string.index($key, 'color-info-')==1 {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}accent-#{$suffix}#{$utility-suffix} {
+                    accent-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// CARET COLOR LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-primary-')==1 or string.index($key, 'color-text-')==1 {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}caret-#{$suffix}#{$utility-suffix} {
+                    caret-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+
+    // USER SELECT
+    .#{$utility-prefix}select-none#{$utility-suffix} {
+        user-select: none;
+    }
+
+    .#{$utility-prefix}select-text#{$utility-suffix} {
+        user-select: text;
+    }
+
+    .#{$utility-prefix}select-all#{$utility-suffix} {
+        user-select: all;
+    }
+
+    .#{$utility-prefix}select-auto#{$utility-suffix} {
+        user-select: auto;
+    }
+
+    // POINTER EVENTS
+    .#{$utility-prefix}pointer-events-none#{$utility-suffix} {
+        pointer-events: none;
+    }
+
+    .#{$utility-prefix}pointer-events-auto#{$utility-suffix} {
+        pointer-events: auto;
+    }
+
+    // RESIZE
+    .#{$utility-prefix}resize-none#{$utility-suffix} {
+        resize: none;
+    }
+
+    .#{$utility-prefix}resize-y#{$utility-suffix} {
+        resize: vertical;
+    }
+
+    .#{$utility-prefix}resize-x#{$utility-suffix} {
+        resize: horizontal;
+    }
+
+    .#{$utility-prefix}resize#{$utility-suffix} {
+        resize: both;
+    }
+
+    // APPEARANCE
+    .#{$utility-prefix}appearance-none#{$utility-suffix} {
+        appearance: none;
+    }
+
+    // ANIMATED INTERACTIONS
+    .#{$utility-prefix}interactive#{$utility-suffix} {
+        transition: transform var(--duration-normal, 200ms) var(--easing-default, ease);
+
+        &:hover {
+            transform: translateY(var(--scale-0-25));
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    .#{$utility-prefix}hover-lift#{$utility-suffix} {
+        transition: transform var(--duration-normal, 200ms) var(--easing-default, ease), box-shadow var(--duration-normal, 200ms) var(--easing-default, ease);
+
+        &:hover {
+            transform: translateY(var(--scale-0-5));
+        }
+    }
+
+    // SCROLL BEHAVIOR
+    .#{$utility-prefix}scroll-auto#{$utility-suffix} {
+        scroll-behavior: auto;
+    }
+
+    .#{$utility-prefix}scroll-smooth#{$utility-suffix} {
+        scroll-behavior: smooth;
+    }
+
+    // SCROLL SNAP TYPE
+    .#{$utility-prefix}snap-none#{$utility-suffix} {
+        scroll-snap-type: none;
+    }
+
+    .#{$utility-prefix}snap-x#{$utility-suffix} {
+        scroll-snap-type: x var(--scroll-snap-strictness, mandatory);
+    }
+
+    .#{$utility-prefix}snap-y#{$utility-suffix} {
+        scroll-snap-type: y var(--scroll-snap-strictness, mandatory);
+    }
+
+    .#{$utility-prefix}snap-both#{$utility-suffix} {
+        scroll-snap-type: both var(--scroll-snap-strictness, mandatory);
+    }
+
+    .#{$utility-prefix}snap-mandatory#{$utility-suffix} {
+        --scroll-snap-strictness: mandatory;
+    }
+
+    .#{$utility-prefix}snap-proximity#{$utility-suffix} {
+        --scroll-snap-strictness: proximity;
+    }
+
+    // SCROLL SNAP ALIGN
+    .#{$utility-prefix}snap-start#{$utility-suffix} {
+        scroll-snap-align: start;
+    }
+
+    .#{$utility-prefix}snap-end#{$utility-suffix} {
+        scroll-snap-align: end;
+    }
+
+    .#{$utility-prefix}snap-center#{$utility-suffix} {
+        scroll-snap-align: center;
+    }
+
+    .#{$utility-prefix}snap-align-none#{$utility-suffix} {
+        scroll-snap-align: none;
+    }
+
+    // SCROLL SNAP STOP
+    .#{$utility-prefix}snap-normal#{$utility-suffix} {
+        scroll-snap-stop: normal;
+    }
+
+    .#{$utility-prefix}snap-always#{$utility-suffix} {
+        scroll-snap-stop: always;
+    }
+
+    // TOUCH ACTION
+    .#{$utility-prefix}touch-auto#{$utility-suffix} {
+        touch-action: auto;
+    }
+
+    .#{$utility-prefix}touch-none#{$utility-suffix} {
+        touch-action: none;
+    }
+
+    .#{$utility-prefix}touch-pan-x#{$utility-suffix} {
+        touch-action: pan-x;
+    }
+
+    .#{$utility-prefix}touch-pan-left#{$utility-suffix} {
+        touch-action: pan-left;
+    }
+
+    .#{$utility-prefix}touch-pan-right#{$utility-suffix} {
+        touch-action: pan-right;
+    }
+
+    .#{$utility-prefix}touch-pan-y#{$utility-suffix} {
+        touch-action: pan-y;
+    }
+
+    .#{$utility-prefix}touch-pan-up#{$utility-suffix} {
+        touch-action: pan-up;
+    }
+
+    .#{$utility-prefix}touch-pan-down#{$utility-suffix} {
+        touch-action: pan-down;
+    }
+
+    .#{$utility-prefix}touch-pinch-zoom#{$utility-suffix} {
+        touch-action: pinch-zoom;
+    }
+
+    .#{$utility-prefix}touch-manipulation#{$utility-suffix} {
+        touch-action: manipulation;
+    }
+
+    // WILL CHANGE
+    .#{$utility-prefix}will-change-auto#{$utility-suffix} {
+        will-change: auto;
+    }
+
+    .#{$utility-prefix}will-change-scroll#{$utility-suffix} {
+        will-change: scroll-position;
+    }
+
+    .#{$utility-prefix}will-change-contents#{$utility-suffix} {
+        will-change: contents;
+    }
+
+    .#{$utility-prefix}will-change-transform#{$utility-suffix} {
+        will-change: transform;
+    }
+
+    @include with-states {
+        .#{$utility-prefix}accent-auto#{$utility-suffix} {
+            accent-color: auto;
+        }
+
+        .#{$utility-prefix}accent-inherit#{$utility-suffix} {
+            accent-color: inherit;
+        }
+
+        .#{$utility-prefix}caret-auto#{$utility-suffix} {
+            caret-color: auto;
+        }
+
+        .#{$utility-prefix}caret-transparent#{$utility-suffix} {
+            caret-color: transparent;
+        }
+    }
+}

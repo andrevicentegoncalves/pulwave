@@ -1,0 +1,55 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: MASKS                                  */
+/* ========================================================================== */
+
+@include with-responsive {
+
+    // MASK IMAGE (Linear Gradient Defaults)
+    .#{$utility-prefix}mask-linear#{$utility-suffix} {
+        mask-image: linear-gradient(to bottom, transparent, black);
+    }
+
+    .#{$utility-prefix}mask-none#{$utility-suffix} {
+        mask-image: none;
+    }
+
+    // MASK SIZE
+    .#{$utility-prefix}mask-cover#{$utility-suffix} {
+        mask-size: cover;
+    }
+
+    .#{$utility-prefix}mask-contain#{$utility-suffix} {
+        mask-size: contain;
+    }
+
+    // MASK REPEAT
+    .#{$utility-prefix}mask-no-repeat#{$utility-suffix} {
+        mask-repeat: no-repeat;
+    }
+
+    .#{$utility-prefix}mask-repeat#{$utility-suffix} {
+        mask-repeat: repeat;
+    }
+
+    // MASK COMPOSITE
+    .#{$utility-prefix}mask-add#{$utility-suffix} {
+        mask-composite: add;
+    }
+
+    .#{$utility-prefix}mask-subtract#{$utility-suffix} {
+        mask-composite: subtract;
+    }
+
+    .#{$utility-prefix}mask-intersect#{$utility-suffix} {
+        mask-composite: intersect;
+    }
+
+    .#{$utility-prefix}mask-exclude#{$utility-suffix} {
+        mask-composite: exclude;
+    }
+}

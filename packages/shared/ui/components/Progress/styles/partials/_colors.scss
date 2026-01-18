@@ -1,0 +1,28 @@
+// Progress Component - Colors
+// ==========================================================================
+
+.progress {
+    &--primary {
+        --progress-fill-color: var(--color-brand-primary);
+    }
+
+    &--secondary {
+        --progress-fill-color: var(--color-secondary-500);
+    }
+
+    &--success {
+        --progress-fill-color: var(--color-status-success);
+    }
+
+    &--warning {
+        --progress-fill-color: var(--color-status-warning);
+    }
+
+    &--error {
+        --progress-fill-color: var(--color-status-error);
+    }
+
+    &--info {
+        --progress-fill-color: var(--color-status-info);
+    }
+}

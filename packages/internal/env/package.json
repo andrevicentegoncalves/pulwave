@@ -1,0 +1,33 @@
+{
+    "name": "@pulwave/internal-env",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "description": "Type-safe environment variable validation - INTERNAL USE ONLY",
+    "type": "module",
+    "main": "./index.ts",
+    "module": "./index.ts",
+    "types": "./index.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./index.ts",
+            "import": "./index.ts"
+        },
+        "./server": {
+            "types": "./server.ts",
+            "import": "./server.ts"
+        }
+    },
+    "files": [
+        "index.ts",
+        "server.ts",
+        "src"
+    ],
+    "dependencies": {
+        "zod": "^3.23.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.6.3"
+    }
+}

@@ -1,0 +1,54 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.combobox {
+    &--xs {
+        .combobox__control {
+            min-height: var(--scale-7);
+            padding: var(--scale-1) var(--scale-2);
+            font-size: var(--font-size-body-xs);
+        }
+
+        .combobox__option {
+            padding: var(--scale-1) var(--scale-2);
+            font-size: var(--font-size-body-xs);
+        }
+    }
+
+    &--s {
+        .combobox__control {
+            min-height: var(--scale-8);
+            padding: var(--scale-1) var(--scale-3);
+            font-size: var(--font-size-body-s);
+        }
+
+        .combobox__option {
+            padding: var(--scale-2) var(--scale-3);
+            font-size: var(--font-size-body-s);
+        }
+    }
+
+    &--m {
+        // Default, defined in base
+    }
+
+    &--l {
+        .combobox__control {
+            min-height: var(--scale-12);
+            padding: var(--scale-2) var(--scale-4);
+            font-size: var(--font-size-body-l);
+        }
+
+        .combobox__option {
+            padding: var(--scale-3) var(--scale-4);
+            font-size: var(--font-size-body-l);
+        }
+    }
+
+    &--xl {
+        .combobox__control {
+            min-height: var(--scale-14);
+            padding: var(--scale-2) var(--scale-5);
+            font-size: var(--font-size-body-xl);
+        }
+    }
+}

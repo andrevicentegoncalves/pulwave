@@ -1,0 +1,37 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--population-pyramid {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__legend {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--scale-4);
+        margin-bottom: var(--scale-3);
+        flex-shrink: 0;
+    }
+
+    &__legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--scale-2);
+    }
+
+    &__legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: var(--border-radius-xs);
+        flex-shrink: 0;
+    }
+
+    &__legend-label {
+        font-size: var(--font-size-body-xs);
+        color: var(--color-text-secondary);
+        line-height: 1;
+        white-space: nowrap;
+    }
+}

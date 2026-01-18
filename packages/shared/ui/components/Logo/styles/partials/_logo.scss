@@ -1,0 +1,109 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-3);
+    color: var(--color-brand-primary);
+    user-select: none;
+    // Animation - sync with sidebar for smooth collapse
+    // Gap uses faster timing to close quickly on collapse
+    transition:
+        opacity var(--duration-normal) var(--easing-standard),
+        gap 220ms ease-in;
+
+    &__mark {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        opacity: 1;
+        max-width: 150px; // Explicit max for transition
+        // Animation - sync with sidebar for smooth collapse
+        // Use ease-in for opacity (fade out quickly on collapse)
+        // Use decelerate for max-width (smooth with sidebar width)
+        transition:
+            opacity 240ms ease-in,
+            max-width var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate));
+    }
+
+    &__title {
+        font-family: var(--font-family-base);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+    }
+
+    &__subtitle {
+        font-size: var(--font-size-ui-xs);
+        color: var(--color-text-tertiary);
+        margin-top: var(--scale-0-5);
+    }
+
+    // Sizes
+    &--s {
+        .logo__mark {
+            width: var(--scale-6);
+            height: var(--scale-6);
+        }
+
+        .logo__title {
+            font-size: var(--font-size-title-2xs);
+        }
+    }
+
+    &--m {
+        .logo__mark {
+            width: var(--scale-8);
+            height: var(--scale-8);
+        }
+
+        .logo__title {
+            font-size: var(--font-size-title-s);
+        }
+    }
+
+    &--l {
+        .logo__mark {
+            width: var(--scale-10);
+            height: var(--scale-10);
+        }
+
+        .logo__title {
+            font-size: var(--font-size-title-m);
+        }
+    }
+
+    // Collapsed State
+    &--collapsed {
+        justify-content: center;
+        gap: 0; // Remove gap when collapsed
+
+        .logo__text {
+            max-width: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        .logo__text {
+            transition: none;
+        }
+    }
+}

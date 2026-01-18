@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.switch {
+
+    // ── CHECKED STATE ──
+    &--checked {
+        background-color: var(--color-brand-primary);
+    }
+
+    // ── COLOR VARIANTS (when checked) ──
+    &--primary.switch--checked {
+        background-color: var(--color-brand-primary);
+    }
+
+    &--success.switch--checked {
+        background-color: var(--color-status-success);
+    }
+
+    &--warning.switch--checked {
+        background-color: var(--color-status-warning);
+    }
+
+    &--error.switch--checked {
+        background-color: var(--color-status-negative);
+    }
+
+    &--neutral.switch--checked {
+        background-color: var(--color-text-secondary);
+    }
+
+    // ── DISABLED STATE ──
+    &--disabled {
+        background-color: var(--color-surface-disabled);
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    // ── HELPER TEXT ──
+    &__helper {
+        &--error {
+            color: var(--color-status-negative);
+        }
+    }
+
+    &__label {
+        &--disabled {
+            color: var(--color-text-disabled);
+            cursor: not-allowed;
+        }
+    }
+}

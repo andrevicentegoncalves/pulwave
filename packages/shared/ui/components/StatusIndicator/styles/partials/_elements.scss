@@ -1,0 +1,14 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.status-indicator {
+    &__dot {
+        display: inline-block;
+        border-radius: 50%;
+        background-color: var(--color-border-default);
+    }
+
+    &__label {
+        color: var(--color-text-primary);
+        font-size: var(--font-size-body-s);
+    }
+}

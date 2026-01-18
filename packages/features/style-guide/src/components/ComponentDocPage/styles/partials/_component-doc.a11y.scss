@@ -1,0 +1,51 @@
+// ==========================================================================
+// Component Documentation - Accessibility Section
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__accessibility {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-6);
+    }
+
+    &__a11y-section {
+        .component-doc__subtitle {
+            margin-bottom: var(--scale-3);
+        }
+    }
+
+    &__a11y-table {
+        max-width: var(--breakpoint-m); // ~600px
+    }
+
+    &__a11y-text {
+        font-size: var(--font-size-body-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        padding: var(--scale-3);
+        background-color: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+    }
+
+    &__a11y-status {
+        border-left: var(--border-width-s) solid var(--color-brand-primary);
+    }
+
+    &__kbd {
+        font-size: var(--font-size-caption-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        font-family: var(--font-family-mono);
+        background-color: var(--color-surface-moderate);
+        padding: var(--scale-1) var(--scale-2);
+        border-radius: var(--border-radius-s);
+        border: var(--border-width-s) solid var(--color-border-subtle);
+        box-shadow: inset 0 calc(var(--border-width-s) * -1) 0 var(--color-border-default);
+    }
+}
+
+

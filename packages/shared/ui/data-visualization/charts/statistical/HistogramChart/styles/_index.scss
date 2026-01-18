@@ -1,0 +1,32 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--histogram {
+    position: relative;
+    width: 100%;
+
+    &__stats {
+        display: flex;
+        justify-content: center;
+        gap: var(--scale-6);
+        margin-top: var(--scale-2);
+        margin-bottom: var(--scale-4);
+        font-size: var(--font-size-body-xs);
+
+        span {
+            color: var(--color-text-primary);
+        }
+
+        strong {
+            font-weight: var(--font-weight-semibold);
+        }
+    }
+
+    &__bar-cell {
+        cursor: pointer;
+        transition: filter 0.2s ease;
+
+        &--hovered {
+            filter: brightness(1.15);
+        }
+    }
+}

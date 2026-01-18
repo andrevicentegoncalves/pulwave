@@ -1,0 +1,25 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/foundation/breakpoints' as bp;
+
+.transfer-list {
+    display: flex;
+    align-items: center;
+    gap: var(--transfer-list-gap);
+
+    @include bp.bp-down(m) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--transfer-list-actions-gap);
+
+        @include bp.bp-down(m) {
+            flex-direction: row;
+            justify-content: center;
+            padding: var(--scale-2) 0;
+        }
+    }
+}

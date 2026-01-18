@@ -1,0 +1,17 @@
+// ============================================================================ //
+// BASE SIDEBAR LAYOUT - VARIANTS
+// ============================================================================ //
+
+.base-sidebar-layout {
+    &--structural {
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    &--no-sidebar {
+        .base-sidebar-layout__main {
+            margin-left: 0;
+        }
+    }
+}

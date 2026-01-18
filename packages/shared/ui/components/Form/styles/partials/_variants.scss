@@ -1,0 +1,61 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.form {
+    &--vertical {
+        gap: var(--form-gap-m);
+    }
+
+    &--horizontal {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--form-gap-m);
+        align-items: flex-end;
+    }
+
+    &--inline {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--form-gap-s);
+
+        .form-group {
+            margin-bottom: 0;
+            flex: initial;
+        }
+    }
+}
+
+.form-row {
+
+    // Gap variants
+    &--gap-sm {
+        gap: var(--form-gap-xsmall);
+    }
+
+    &--gap-md {
+        gap: var(--form-gap-m);
+    }
+
+    &--gap-lg {
+        gap: var(--form-gap-l);
+    }
+}
+
+.form-actions {
+
+    // Align variants
+    &--left {
+        justify-content: flex-start;
+    }
+
+    &--center {
+        justify-content: center;
+    }
+
+    &--right {
+        justify-content: flex-end;
+    }
+
+    &--space-between {
+        justify-content: space-between;
+    }
+}

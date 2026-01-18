@@ -1,0 +1,42 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart-legend {
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--chart-spacing-s);
+        padding: var(--chart-legend-item-padding);
+        border: none;
+        background: transparent;
+        cursor: default;
+        font-size: var(--chart-font-size-legend);
+        color: var(--chart-text-muted-color);
+        border-radius: var(--chart-legend-item-radius);
+        transition: background-color 0.15s ease, opacity 0.15s ease;
+        flex-shrink: 0; // Prevent items from shrinking
+        max-width: 100%; // Allow text to wrap if needed
+    }
+
+    &__icon {
+        flex-shrink: 0;
+
+        &--circle {
+            width: var(--chart-legend-icon-size);
+            height: var(--chart-legend-icon-size);
+            border-radius: 50%;
+        }
+
+        &--square {
+            width: var(--chart-legend-icon-size);
+            height: var(--chart-legend-icon-size);
+            border-radius: var(--chart-radius-s);
+        }
+    }
+
+    &__text {
+        color: inherit;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

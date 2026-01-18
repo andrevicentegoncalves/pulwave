@@ -1,0 +1,46 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--parliament {
+    position: relative;
+    width: 100%;
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__party-group {
+        cursor: pointer;
+        contain: layout style paint;
+        transition: opacity 0.1s ease-out;
+
+        // Dim non-hovered groups when ANY group is hovered (pure CSS)
+        .chart--parliament__svg:hover &:not(:hover) {
+            opacity: 0.4;
+        }
+    }
+
+    // Legend hover: single attribute triggers all styling via CSS
+    @for $i from 0 through 15 {
+        &__svg[data-active-party='#{$i}'] {
+            .chart--parliament__party-group:not([data-party-index='#{$i}']) {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    &__dot {
+        // Pointer events enabled so parent group receives hover
+    }
+
+    // Inline tooltip
+    &__tooltip {
+        background: var(--color-surface-elevated, #1a1a1a);
+        color: var(--color-text-primary, #fff);
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+}

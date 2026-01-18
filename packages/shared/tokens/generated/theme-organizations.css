@@ -1,0 +1,41 @@
+/* Organization Theme Overrides */
+/* Auto-generated - DO NOT EDIT */
+
+/* Organization Theme: acme */
+:root[data-organization="acme"] {
+  --primary-h: 220;
+  --primary-s: 90%;
+  --secondary-h: 25;
+  --secondary-s: 95%;
+  --tertiary-h: 180;
+  --tertiary-s: 70%;
+  --neutral-h: 220;
+  --neutral-s: 10%;
+}
+
+/* Organization Theme: colorblind-safe */
+:root[data-organization="colorblind-safe"] {
+  --primary-h: 210;
+  --primary-s: 85%;
+  --secondary-h: 30;
+  --secondary-s: 90%;
+}
+
+/* Organization Theme: compact */
+:root[data-organization="compact"] {
+
+}
+
+/* Organization Theme: high-contrast */
+:root[data-organization="high-contrast"] {
+  --primary-h: 160;
+  --primary-s: 100%;
+  --secondary-h: 45;
+  --secondary-s: 100%;
+}
+
+/* Organization Theme: minimalist */
+:root[data-organization="minimalist"] {
+
+}
+

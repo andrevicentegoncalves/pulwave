@@ -1,0 +1,19 @@
+{
+    "name": "@pulwave/widgets",
+    "version": "1.0.0",
+    "description": "Reusable UI widgets (composite patterns) built on @pulwave/ui components",
+    "main": "index.ts",
+    "types": "index.ts",
+    "sideEffects": false,
+    "peerDependencies": {
+        "react": ">=18.0.0",
+        "@pulwave/ui": "*",
+        "@pulwave/hooks": "*"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    }
+}

@@ -1,0 +1,22 @@
+// ============================================================================ //
+// HEADER - RESPONSIVE
+// ============================================================================ //
+// Mobile responsive and print styles
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+@include bp-down(s) {
+    .mobile-header {
+        display: flex;
+    }
+
+    .app-shell__main {
+        padding-top: var(--scale-14);
+    }
+}
+
+@media print {
+    .mobile-header {
+        display: none;
+    }
+}

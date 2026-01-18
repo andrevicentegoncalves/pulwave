@@ -1,0 +1,71 @@
+// ============================================================================ //
+// USER INFO - RESPONSIVE
+// ============================================================================ //
+// Responsive, accessibility, and print styles
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as bp;
+
+// Collapsed sidebar state
+:global(.sidebar-container.collapsed) {
+    .user-info {
+        flex-direction: column;
+        padding: var(--scale-2);
+        gap: var(--scale-2);
+
+        .user-info__details {
+            display: none;
+        }
+
+        .user-info__avatar {
+            width: var(--scale-10);
+            height: var(--scale-10);
+        }
+
+        .user-info__logout {
+            width: var(--scale-8);
+            height: var(--scale-8);
+
+            svg {
+                width: var(--scale-5);
+                height: var(--scale-5);
+            }
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .user-info {
+        border: var(--border-width-1) solid var(--color-overlay-light-strong);
+    }
+
+    .user-info__avatar {
+        border-width: var(--border-width-2);
+    }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+
+    .user-info,
+    .user-info__avatar,
+    .user-info__logout {
+        transition: none;
+    }
+}
+
+// Print styles
+@media print {
+    .user-info {
+        display: none;
+    }
+}
+
+// Mobile responsive
+@include bp.bp-down('m') {
+
+    .sidebar-container .user-info,
+    .sidebar .user-info {
+        display: none !important;
+    }
+}

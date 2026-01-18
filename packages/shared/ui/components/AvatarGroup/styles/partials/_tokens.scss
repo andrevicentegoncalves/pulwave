@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.avatar-group {
+    --avatar-group-overlap: var(--scale-3); // -var(--scale-3) usually, or relative to size
+    --avatar-group-ring-color: var(--color-surface-default);
+    --avatar-group-ring-width: var(--scale-0-5);
+}

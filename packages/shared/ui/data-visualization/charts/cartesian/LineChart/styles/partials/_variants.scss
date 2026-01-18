@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--line {
+    &--line-only {
+        // Line chart specific variants
+    }
+
+    &--line-area {
+        // Line chart with area fill
+    }
+}

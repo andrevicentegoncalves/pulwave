@@ -1,0 +1,145 @@
+// ============================================================================ //
+// SIDEBAR USER PROFILE
+// ============================================================================ //
+// User info section at the bottom of sidebar
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+.sidebar {
+    // ---------------------------------------------------------------------------//
+    // USER PROFILE SECTION
+    // ---------------------------------------------------------------------------//
+
+    .sidebar-user {
+        width: 100%;
+        z-index: var(--z-index-overlay);
+        position: relative;
+        padding: 0 var(--scale-8);
+        box-sizing: border-box;
+        margin-bottom: var(--scale-5);
+        margin-top: var(--scale-6);
+    }
+
+    .user-profile-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--scale-3);
+        padding: var(--scale-3);
+        background-color: var(--color-overlay-light-subtle);
+        border-radius: var(--border-radius-2xl);
+        backdrop-filter: blur(var(--scale-2-5));
+        transition: background-color var(--duration-comfortable) var(--easing-standard),
+            backdrop-filter var(--duration-comfortable) var(--easing-standard);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        gap: var(--scale-3);
+    }
+
+    .user-avatar {
+        width: var(--scale-10);
+        height: var(--scale-10);
+        border-radius: var(--border-radius-circle);
+        object-fit: cover;
+        border: var(--border-width-2) solid var(--color-overlay-light-default);
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: transform var(--duration-fast) var(--easing-standard);
+
+        &:hover {
+            transform: scale(1.05);
+            border-color: var(--color-overlay-light-strong);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-on-primary);
+            outline-offset: var(--focus-offset);
+        }
+    }
+
+    .user-details {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .user-name {
+        color: var(--color-on-primary);
+        font-size: var(--font-size-ui-m);
+        font-weight: var(--font-weight-m);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .user-email {
+        color: var(--color-overlay-light-strong);
+        font-size: var(--font-size-ui-m);
+        font-weight: var(--font-weight-regular);
+        line-height: var(--line-height-tight);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .user-logout {
+        flex-shrink: 0;
+    }
+
+    .user-info__logout {
+        background: var(--color-overlay-light-subtle);
+        border: none;
+        width: var(--scale-9);
+        height: var(--scale-9);
+        border-radius: var(--border-radius-circle);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-on-primary);
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--easing-standard),
+            transform var(--duration-fast) var(--easing-standard);
+
+        svg {
+            width: var(--icon-size-s);
+            height: var(--icon-size-s);
+        }
+
+        &:hover {
+            background: var(--color-overlay-light-default);
+            transform: scale(1.05);
+        }
+
+        &:focus-visible {
+            outline: var(--focus-width) solid var(--color-on-primary);
+            outline-offset: var(--focus-offset);
+        }
+
+        &:active {
+            background: var(--color-overlay-light-default);
+            transform: scale(1.0);
+        }
+    }
+}
+
+// Collapsed state logic
+.sidebar-container.collapsed .sidebar-user {
+    .user-profile-section {
+        flex-direction: column;
+        padding: var(--scale-2);
+    }
+
+    .user-details {
+        display: none;
+    }
+
+    .user-avatar {
+        width: var(--scale-9);
+        height: var(--scale-9);
+    }
+}

@@ -1,0 +1,147 @@
+// ============================================================================ //
+// NESTED MENU - VARIANTS (Collapsed)
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.nested-menu {
+    &--collapsed {
+        width: auto;
+        min-width: var(--scale-14); // spacing-14 ~ 56px
+
+        .nested-menu__content {
+            padding: var(--scale-2);
+            align-items: center;
+        }
+
+        .nested-menu__section-header {
+            justify-content: center;
+            padding: var(--scale-2);
+            width: auto;
+            min-width: var(--scale-10);
+            min-height: var(--scale-10);
+            border-radius: var(--border-radius-2xl);
+
+            &:hover {
+                background: var(--color-surface-strong);
+
+                .nested-menu__icon {
+                    transform: scale(1.1);
+                }
+            }
+
+            &--active {
+                background: color-mix(in srgb, var(--color-brand-primary) 15%, transparent);
+
+                .nested-menu__icon {
+                    color: var(--color-brand-primary);
+                }
+            }
+        }
+
+        .nested-menu__categories,
+        .nested-menu__label,
+        .nested-menu__chevron {
+            display: none;
+        }
+
+        .nested-menu__icon {
+            opacity: 1;
+            transition: transform 150ms var(--easing-standard);
+        }
+
+        .sidebar-header {
+            justify-content: center;
+            padding: var(--scale-6) var(--scale-2) var(--scale-2) var(--scale-2);
+        }
+    }
+
+    // ========================================================================
+    // SIZE VARIANTS
+    // ========================================================================
+    // Controls icon size
+
+    &--size-sm {
+        // Default: 18px icons (already set in base)
+        // No changes needed
+    }
+
+    &--size-md {
+        .nested-menu__icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .nested-menu__section-header {
+            min-height: var(--scale-12); // Slightly larger touch target
+        }
+
+        .nested-menu__section-header--flat {
+            min-height: var(--scale-12);
+        }
+    }
+
+    &--size-lg {
+        .nested-menu__icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nested-menu__section-header {
+            min-height: var(--scale-14); // Larger touch target
+        }
+
+        .nested-menu__section-header--flat {
+            min-height: var(--scale-14);
+        }
+    }
+
+    // ========================================================================
+    // SPACING VARIANTS
+    // ========================================================================
+    // Controls gap between items
+
+    &--spacing-tight {
+        .nested-menu__content {
+            gap: var(--scale-1); // 4px - default
+        }
+    }
+
+    &--spacing-normal {
+        .nested-menu__content {
+            gap: var(--scale-2); // 8px
+        }
+    }
+
+    &--spacing-relaxed {
+        .nested-menu__content {
+            gap: var(--scale-3); // 12px
+        }
+    }
+
+    // ========================================================================
+    // FLAT LIST MODE
+    // ========================================================================
+    // For sections without categories (direct items)
+
+    .nested-menu__section--flat {
+        .nested-menu__section-header--flat {
+            // Remove chevron padding since no chevron
+            padding-right: var(--scale-3);
+
+            // Add hover/active states similar to menu items
+            &:hover {
+                background: var(--color-surface-hover);
+            }
+
+            &--active {
+                background: var(--color-surface-selected);
+                color: var(--color-brand-primary);
+
+                .nested-menu__icon {
+                    color: var(--color-brand-primary);
+                }
+            }
+        }
+    }
+}

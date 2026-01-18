@@ -1,0 +1,108 @@
+{
+    "$description": "Minimalist theme - clean, simplified UI with reduced visual noise",
+    "$format": "dtcg",
+    "name": "minimalist",
+    "config": {
+        "$description": "Minimalist mode configuration",
+        "style": {
+            "$value": "minimalist",
+            "$type": "string",
+            "$description": "Clean, simplified aesthetics"
+        }
+    },
+    "effects": {
+        "$description": "Reduced visual effects",
+        "shadow": {
+            "none": {
+                "$value": "none",
+                "$type": "shadow",
+                "$description": "No shadows in minimalist mode"
+            },
+            "card": {
+                "$value": "none",
+                "$type": "shadow"
+            },
+            "dropdown": {
+                "$value": "0 1px 2px rgba(0, 0, 0, 0.05)",
+                "$type": "shadow"
+            },
+            "modal": {
+                "$value": "0 2px 8px rgba(0, 0, 0, 0.1)",
+                "$type": "shadow"
+            }
+        },
+        "borderRadius": {
+            "s": {
+                "$value": "0.125rem",
+                "$type": "dimension"
+            },
+            "m": {
+                "$value": "0.25rem",
+                "$type": "dimension"
+            },
+            "l": {
+                "$value": "0.375rem",
+                "$type": "dimension"
+            },
+            "xl": {
+                "$value": "0.5rem",
+                "$type": "dimension"
+            }
+        }
+    },
+    "overrides": {
+        "$description": "Color simplifications",
+        "border": {
+            "default": {
+                "$value": "transparent",
+                "$type": "color",
+                "$description": "Borderless by default"
+            },
+            "subtle": {
+                "$value": "rgba(0, 0, 0, 0.05)",
+                "$type": "color"
+            }
+        },
+        "surface": {
+            "hover": {
+                "$value": "rgba(0, 0, 0, 0.02)",
+                "$type": "color",
+                "$description": "Subtle hover states"
+            },
+            "pressed": {
+                "$value": "rgba(0, 0, 0, 0.04)",
+                "$type": "color"
+            }
+        }
+    },
+    "typography": {
+        "$description": "Clean typography settings",
+        "fontWeight": {
+            "heading": {
+                "$value": "500",
+                "$type": "fontWeight",
+                "$description": "Lighter headings"
+            }
+        },
+        "letterSpacing": {
+            "wide": {
+                "$value": "0.025em",
+                "$type": "dimension",
+                "$description": "Subtle letter spacing"
+            }
+        }
+    },
+    "animation": {
+        "$description": "Reduced motion",
+        "duration": {
+            "fast": {
+                "$value": "100ms",
+                "$type": "duration"
+            },
+            "normal": {
+                "$value": "150ms",
+                "$type": "duration"
+            }
+        }
+    }
+}

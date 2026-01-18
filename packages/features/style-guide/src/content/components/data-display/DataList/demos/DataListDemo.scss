@@ -1,0 +1,110 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.demo-card-container {
+    border-radius: var(--border-radius-xl);
+}
+
+.demo-list-item {
+    // Row 1: Avatar + Details
+    &__row-primary {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        flex: 1; // Take remaining space
+        min-width: 0;
+
+        >* {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @include bp-down(m) {
+            >* {
+                white-space: normal;
+                overflow: visible;
+                text-overflow: clip;
+            }
+        }
+    }
+
+    // Row 2: Flag + Status
+    &__row-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+
+        @include bp-down(m) {
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    &__flag {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    &__status {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+}
+
+// Modal content styles
+.demo-list-modal {
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-4);
+        margin-bottom: var(--scale-6);
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-1);
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-4);
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-3);
+    }
+
+    &__label {
+        min-width: 100px;
+        color: var(--color-text-tertiary);
+    }
+
+    &__actions {
+        display: flex;
+        gap: var(--scale-2);
+        margin-top: var(--scale-6);
+        padding-top: var(--scale-4);
+        border-top: 1px solid var(--color-border-subtle);
+    }
+}

@@ -1,0 +1,9 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.form {
+    --form-gap-large: var(--scale-6);
+    --form-gap-medium: var(--scale-4);
+    --form-gap-small: var(--scale-3);
+    --form-gap-xsmall: var(--scale-2);
+}

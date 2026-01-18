@@ -1,0 +1,68 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-1-5, 0.375rem);
+    width: 100%;
+
+    // Label Position Modifiers
+    &--label-left,
+    &--label-right {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--scale-4, var(--scale-4));
+
+        .form-field__label {
+            flex: 0 0 var(--scale-30);
+        }
+    }
+
+    &--label-right {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    // Label
+    &__label {
+        font-size: var(--font-size-ui-s, 13px);
+        line-height: 1.4;
+        color: var(--color-text-secondary);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+
+        // Required asterisk
+        .form-field__required {
+            color: var(--color-status-error);
+            margin-left: var(--scale-0-5, 0.125rem);
+        }
+    }
+
+    // Control Wrapper
+    &__control {
+        position: relative;
+        width: 100%;
+
+        // Ensure inputs inside fill the wrapper
+        >* {
+            width: 100%;
+        }
+    }
+
+    // Message Helper/Error
+    &__message {
+        font-size: var(--font-size-ui-xs, var(--scale-3));
+        line-height: 1.4;
+        color: var(--color-text-tertiary);
+        margin-top: var(--scale-0-5, 0.125rem);
+
+        &--error {
+            color: var(--color-status-error);
+        }
+
+        &--success {
+            color: var(--color-status-success);
+        }
+    }
+}

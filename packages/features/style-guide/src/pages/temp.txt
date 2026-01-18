@@ -1,0 +1,20 @@
+/**
+ * Style Guide Shell - Layout and Navigation Logic
+ */
+import React, { useState, useEffect, useMemo } from 'react';
+import { AppShell, BaseSidebarLayout, HeaderShell, SidebarShell, NestedSidebarShell, MobileShell, type UserData, type MobileBottomNavItem } from '@pulwave/pages-shell';
+import { Text, Breadcrumbs, ThemeToggle, ToastProvider, LayoutDashboard, Shield } from '@pulwave/ui';
+import { SectionLayout } from '@pulwave/widgets';
+import { NestedMenu, Sidebar } from '@pulwave/features-layout';
+import {
+    ComponentDocPage,
+    FoundationDocPage,
+    RegistryContext,
+    DemoCard,
+    useStyleGuideNavigation,
+    type ComponentRegistry,
+    type ComponentRegistration
+} from '../index';
+
+export interface StyleGuideShellProps {
+    navigationData: any[];

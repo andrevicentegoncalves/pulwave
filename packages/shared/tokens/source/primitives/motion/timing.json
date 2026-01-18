@@ -1,0 +1,196 @@
+{
+    "$description": "Pulwave Design System - Motion & Timing Tokens",
+    "$format": "dtcg",
+    "duration": {
+        "$description": "Animation durations (base: 100ms)",
+        "instant": {
+            "$value": "0ms",
+            "$type": "duration"
+        },
+        "immediate": {
+            "$value": "50ms",
+            "$type": "duration"
+        },
+        "fast": {
+            "$value": "150ms",
+            "$type": "duration"
+        },
+        "normal": {
+            "$value": "200ms",
+            "$type": "duration"
+        },
+        "comfortable": {
+            "$value": "300ms",
+            "$type": "duration"
+        },
+        "moderate": {
+            "$value": "400ms",
+            "$type": "duration"
+        },
+        "slow": {
+            "$value": "500ms",
+            "$type": "duration"
+        },
+        "slower": {
+            "$value": "750ms",
+            "$type": "duration"
+        },
+        "slowest": {
+            "$value": "1000ms",
+            "$type": "duration"
+        }
+    },
+    "easing": {
+        "$description": "Timing functions / easing curves",
+        "linear": {
+            "$value": "linear",
+            "$type": "cubicBezier"
+        },
+        "ease": {
+            "$value": "ease",
+            "$type": "cubicBezier"
+        },
+        "easeIn": {
+            "$value": "ease-in",
+            "$type": "cubicBezier"
+        },
+        "easeOut": {
+            "$value": "ease-out",
+            "$type": "cubicBezier"
+        },
+        "easeInOut": {
+            "$value": "ease-in-out",
+            "$type": "cubicBezier"
+        },
+        "standard": {
+            "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "cubicBezier",
+            "$description": "Material default"
+        },
+        "decelerate": {
+            "$value": "cubic-bezier(0, 0, 0.2, 1)",
+            "$type": "cubicBezier",
+            "$description": "Ease out - entrances"
+        },
+        "accelerate": {
+            "$value": "cubic-bezier(0.4, 0, 1, 1)",
+            "$type": "cubicBezier",
+            "$description": "Ease in - exits"
+        },
+        "sharp": {
+            "$value": "cubic-bezier(0.4, 0, 0.6, 1)",
+            "$type": "cubicBezier",
+            "$description": "Quick"
+        },
+        "smooth": {
+            "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "cubicBezier",
+            "$description": "Smooth motion"
+        },
+        "bounce": {
+            "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+            "$type": "cubicBezier",
+            "$description": "Bounce effect"
+        },
+        "gentle": {
+            "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            "$type": "cubicBezier",
+            "$description": "Gentle ease"
+        },
+        "spring": {
+            "$value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+            "$type": "cubicBezier",
+            "$description": "Spring effect"
+        }
+    },
+    "delay": {
+        "$description": "Animation delays for staggered effects",
+        "none": {
+            "$value": "0ms",
+            "$type": "duration"
+        },
+        "short": {
+            "$value": "50ms",
+            "$type": "duration"
+        },
+        "base": {
+            "$value": "100ms",
+            "$type": "duration"
+        },
+        "medium": {
+            "$value": "200ms",
+            "$type": "duration"
+        },
+        "long": {
+            "$value": "300ms",
+            "$type": "duration"
+        },
+        "longer": {
+            "$value": "500ms",
+            "$type": "duration"
+        }
+    },
+    "motion": {
+        "$description": "Motion presets combining duration + easing",
+        "enterScreen": {
+            "$value": "300ms cubic-bezier(0, 0, 0.2, 1)",
+            "$type": "transition"
+        },
+        "enterElement": {
+            "$value": "200ms cubic-bezier(0, 0, 0.2, 1)",
+            "$type": "transition"
+        },
+        "enterSubtle": {
+            "$value": "150ms ease-out",
+            "$type": "transition"
+        },
+        "exitScreen": {
+            "$value": "200ms cubic-bezier(0.4, 0, 1, 1)",
+            "$type": "transition"
+        },
+        "exitElement": {
+            "$value": "150ms cubic-bezier(0.4, 0, 1, 1)",
+            "$type": "transition"
+        },
+        "exitSubtle": {
+            "$value": "100ms ease-in",
+            "$type": "transition"
+        },
+        "transitionScreen": {
+            "$value": "400ms cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "transition"
+        },
+        "transitionElement": {
+            "$value": "250ms cubic-bezier(0.4, 0, 0.2, 1)",
+            "$type": "transition"
+        },
+        "hover": {
+            "$value": "150ms ease-out",
+            "$type": "transition"
+        },
+        "press": {
+            "$value": "100ms ease-in",
+            "$type": "transition"
+        },
+        "focus": {
+            "$value": "150ms ease-out",
+            "$type": "transition"
+        },
+        "expand": {
+            "$value": "300ms cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+            "$type": "transition"
+        },
+        "collapse": {
+            "$value": "250ms ease-in-out",
+            "$type": "transition"
+        },
+        "bounce": {
+            "$value": "600ms cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+            "$type": "transition"
+        },
+        "slowReveal": {
+            "$value": "800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            "$type": "transition"
+        }
+    }
+}

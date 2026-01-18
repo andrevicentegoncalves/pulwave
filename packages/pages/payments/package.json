@@ -1,0 +1,19 @@
+{
+    "name": "@pulwave/pages-payments",
+    "version": "0.0.1",
+    "description": "Payment and billing experience",
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/hooks": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/entity-infrastructure": "*",
+        "react": "*",
+        "react-dom": "*",
+        "react-router-dom": "*"
+    }
+}

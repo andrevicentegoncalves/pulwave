@@ -1,0 +1,28 @@
+// ============================================================================ //
+// BASE SIDEBAR LAYOUT - BASE
+// ============================================================================ //
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.base-sidebar-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-surface-default);
+
+    &__sidebar {
+        flex-shrink: 0;
+        height: 100%;
+        overflow: visible;
+    }
+
+    &__main {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+}

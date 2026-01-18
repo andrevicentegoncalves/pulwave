@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.time-picker {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--time-picker-gap);
+    // width: 100%; // or auto?
+}

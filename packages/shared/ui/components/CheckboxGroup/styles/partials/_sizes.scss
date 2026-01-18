@@ -1,0 +1,16 @@
+// CheckboxGroup doesn't strictly need a sizes partial as sizes are passed to children Checkboxes
+// But we might want to scale the label/gap.
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.checkbox-group {
+    &__label {
+        &--s {
+            font-size: var(--font-size-label-s);
+        }
+
+        &--l {
+            font-size: var(--font-size-body-l);
+            font-weight: var(--font-weight-m);
+        }
+    }
+}

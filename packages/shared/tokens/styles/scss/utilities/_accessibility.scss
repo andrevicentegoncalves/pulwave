@@ -1,0 +1,207 @@
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                      UTILITIES: ACCESSIBILITY                              */
+/* ========================================================================== */
+
+@include with-responsive {
+  @include with-states {
+
+    // SCREEN READER UTILITIES
+    .#{$utility-prefix}sr-only#{$utility-suffix} {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .#{$utility-prefix}not-sr-only#{$utility-suffix} {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
+
+    .#{$utility-prefix}sr-only-focusable#{$utility-suffix} {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+
+      &:focus,
+      &:focus-visible {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: var(--scale-2) var(--scale-4);
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+    }
+
+    // FOCUS UTILITIES
+    .#{$utility-prefix}focus-visible#{$utility-suffix}:focus-visible {
+      outline: 2px solid var(--color-focus-ring, currentColor);
+      outline-offset: 2px;
+    }
+
+    .#{$utility-prefix}focus-none#{$utility-suffix}:focus {
+      outline: none;
+    }
+
+    .#{$utility-prefix}focus-ring#{$utility-suffix}:focus {
+      outline: 2px solid var(--color-focus-ring, currentColor);
+      outline-offset: 2px;
+    }
+
+    .#{$utility-prefix}focus-within#{$utility-suffix}:focus-within {
+      outline: 2px solid var(--color-focus-ring, currentColor);
+      outline-offset: 2px;
+    }
+
+    // REDUCED MOTION
+    @media (prefers-reduced-motion: reduce) {
+      .#{$utility-prefix}motion-reduce#{$utility-suffix} {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .#{$utility-prefix}reduce-motion-all#{$utility-suffix},
+      .#{$utility-prefix}reduce-motion-all#{$utility-suffix} * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    .#{$utility-prefix}motion-safe#{$utility-suffix} {
+      @media (prefers-reduced-motion: no-preference) {
+        transition-duration: var(--duration-normal);
+        animation-duration: var(--duration-normal);
+      }
+    }
+
+    // FORCED COLORS
+    @media (forced-colors: active) {
+      .#{$utility-prefix}forced-color-adjust-auto#{$utility-suffix} {
+        forced-color-adjust: auto;
+      }
+
+      .#{$utility-prefix}forced-color-adjust-none#{$utility-suffix} {
+        forced-color-adjust: none;
+      }
+    }
+
+    // COLOR SCHEME
+    .#{$utility-prefix}color-scheme-light#{$utility-suffix} {
+      color-scheme: light;
+    }
+
+    .#{$utility-prefix}color-scheme-dark#{$utility-suffix} {
+      color-scheme: dark;
+    }
+
+    .#{$utility-prefix}color-scheme-normal#{$utility-suffix} {
+      color-scheme: light dark;
+    }
+
+    // TRANSPARENCY
+    @media (prefers-reduced-transparency: reduce) {
+      .#{$utility-prefix}reduce-transparency#{$utility-suffix} {
+        opacity: 1 !important;
+        backdrop-filter: none !important;
+      }
+    }
+
+    // CONTRAST
+    @media (prefers-contrast: more) {
+      .#{$utility-prefix}contrast-more#{$utility-suffix} {
+        --border-width-default: 2px;
+        outline-width: 2px;
+      }
+    }
+
+    @media (prefers-contrast: less) {
+      .#{$utility-prefix}contrast-less#{$utility-suffix} {
+        --border-width-default: 1px;
+      }
+    }
+
+    // ARIA
+    // [aria-hidden="true"] should not start hidden - it is for screenreaders only
+
+
+    [aria-disabled="true"],
+    .#{$utility-prefix}aria-disabled#{$utility-suffix} {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    [aria-busy="true"],
+    .#{$utility-prefix}aria-busy#{$utility-suffix} {
+      cursor: progress;
+    }
+
+    // PRINT
+    @media print {
+      .#{$utility-prefix}print-hidden#{$utility-suffix} {
+        display: none !important;
+      }
+
+      .#{$utility-prefix}print-only#{$utility-suffix} {
+        display: block !important;
+      }
+
+      .#{$utility-prefix}print-break-before#{$utility-suffix} {
+        break-before: page;
+      }
+
+      .#{$utility-prefix}print-break-after#{$utility-suffix} {
+        break-after: page;
+      }
+
+      .#{$utility-prefix}print-break-avoid#{$utility-suffix} {
+        break-inside: avoid;
+      }
+    }
+
+    // COLOR SCHEME
+    .#{$utility-prefix}scheme-light#{$utility-suffix} {
+      color-scheme: light;
+    }
+
+    .#{$utility-prefix}scheme-dark#{$utility-suffix} {
+      color-scheme: dark;
+    }
+
+    .#{$utility-prefix}scheme-light-dark#{$utility-suffix} {
+      color-scheme: light dark;
+    }
+
+    .#{$utility-prefix}screen-only#{$utility-suffix} {
+      @media print {
+        display: none !important;
+      }
+    }
+  }
+}

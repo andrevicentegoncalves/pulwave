@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.date-picker {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--date-picker-gap);
+    width: 100%; // Or auto?
+}

@@ -1,7 +1,0 @@
-@use '../abstracts/mixins/generators/aspect-ratio' as generator;
-
-/* ========================================================================== */
-/*                        UTILITIES: ASPECT RATIO                             */
-/* ========================================================================== */
-
-@include generator.generate-aspect-ratio-utilities();

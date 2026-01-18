@@ -1,0 +1,26 @@
+// Progress Component - Design Tokens
+// ==========================================================================
+
+.progress {
+    // Size tokens
+    --progress-height-s: var(--scale-1);
+    --progress-height-m: var(--scale-2);
+    --progress-height-l: var(--scale-3);
+
+    // Stroke tokens for circular
+    --progress-stroke-s: 3px; // Keep as px for SVG math alignment if matched in JS, or use scale
+    --progress-stroke-m: var(--scale-1);
+    --progress-stroke-l: var(--scale-1-5);
+
+    // Circular sizes
+    --progress-circular-size-s: var(--scale-16);
+    --progress-circular-size-m: var(--scale-24);
+    --progress-circular-size-l: var(--scale-32);
+
+    // Defaults
+    --progress-height: var(--scale-2);
+    --progress-radius: var(--border-radius-2xl);
+    --progress-gap: var(--scale-3);
+    --progress-fill-color: var(--color-brand-primary);
+    --progress-track-color: var(--color-surface-subtle);
+}

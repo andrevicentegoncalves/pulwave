@@ -1,0 +1,106 @@
+// ============================================================================ //
+// MENU - ITEM
+// ============================================================================ //
+// Menu item base styles, active state, and collapsed state
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+.menu__item {
+    // Layout
+    display: flex;
+    align-items: center;
+    gap: var(--scale-3);
+    position: relative;
+
+    // Spacing - explicit values for smooth transitions
+    padding: var(--scale-2) var(--scale-3);
+    margin: 0 var(--scale-2);
+    min-height: var(--scale-10); // Touch target
+
+    // Styling
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-2xl);
+    color: var(--color-on-primary);
+    font-size: var(--font-size-body-m);
+    font-weight: var(--font-weight-m);
+    line-height: var(--line-height-normal);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    // Animation - sync with sidebar for smooth collapse
+    // Gap uses faster timing to close quickly on collapse
+    transition:
+        background-color var(--duration-base) var(--easing-standard),
+        color var(--duration-base) var(--easing-standard),
+        padding var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+        margin var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+        min-height var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+        border-radius var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate)),
+        gap 220ms ease-in;
+
+    // Hover state
+    &:hover:not(.menu__item--active) {
+        background-color: var(--color-overlay-light-subtle);
+    }
+
+    // Focus state - keyboard navigation
+    &:focus-visible {
+        outline: var(--focus-width) solid var(--color-on-primary);
+        outline-offset: var(--focus-offset);
+    }
+
+    // Active/pressed state
+    &:active {
+        background-color: var(--color-overlay-light-default);
+    }
+}
+
+// Active state
+.menu__item--active {
+    background-color: var(--color-surface-default);
+    color: var(--color-brand-primary);
+    font-weight: var(--font-weight-semi-bold);
+
+    .menu__icon {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    &:hover {
+        background-color: var(--color-surface-default);
+    }
+}
+
+// Collapsed state - perfect circle for icon-only
+.menu__item--collapsed {
+    justify-content: center;
+    // Fixed square dimensions for perfect circle
+    min-height: var(--scale-12);
+    padding: var(--scale-3);
+    margin: var(--scale-1) auto; // Center in sidebar with vertical spacing
+    border-radius: var(--border-radius-round);
+    gap: 0; // Remove gap when collapsed
+
+    .menu__label {
+        // Use opacity + max-width instead of display:none for smooth transition
+        opacity: 0;
+        max-width: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    // Ensure active state also has circle shape
+    &.menu__item--active {
+        border-radius: var(--border-radius-round);
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .menu__item {
+        transition: background-color var(--duration-base) var(--easing-standard),
+            color var(--duration-base) var(--easing-standard);
+    }
+}

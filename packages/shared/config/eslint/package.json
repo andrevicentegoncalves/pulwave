@@ -1,0 +1,29 @@
+{
+    "name": "@pulwave/eslint-config",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "description": "Shared ESLint configurations for Pulwave monorepo",
+    "type": "module",
+    "main": "index.js",
+    "exports": {
+        ".": "./index.js",
+        "./react": "./react.js"
+    },
+    "files": [
+        "index.js",
+        "react.js"
+    ],
+    "peerDependencies": {
+        "eslint": "^9.0.0",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@eslint/js": "^9.39.1",
+        "globals": "^16.5.0",
+        "typescript-eslint": "^8.53.0"
+    },
+    "devDependencies": {
+        "eslint-plugin-boundaries": "^5.3.1"
+    }
+}

@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.link {
+    &__external-icon {
+        display: inline-flex;
+    }
+}

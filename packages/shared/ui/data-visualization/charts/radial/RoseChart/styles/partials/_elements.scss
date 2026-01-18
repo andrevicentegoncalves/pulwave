@@ -1,0 +1,43 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--rose {
+    &__container {
+        width: 100%;
+        min-height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--chart-spacing-m);
+        overflow: visible; // Allow legend to overflow if needed
+    }
+
+    &__svg {
+        display: block;
+        margin: 0 auto;
+        flex-shrink: 0; // Prevent SVG from shrinking
+    }
+
+    &__segment-group {
+        cursor: pointer;
+    }
+
+    &__segment-path {
+        stroke: var(--color-background-primary);
+        stroke-width: 2px;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__grid-circle {
+        fill: none;
+        stroke: var(--color-border-primary);
+        stroke-opacity: 0.3;
+        stroke-dasharray: 3 3;
+    }
+
+    &__label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-primary);
+        pointer-events: none;
+    }
+}

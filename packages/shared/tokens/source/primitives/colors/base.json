@@ -1,0 +1,17 @@
+{
+    "$description": "Base utility colors",
+    "color": {
+        "white": {
+            "$value": "hsl(0, 0%, 100%)",
+            "$type": "color"
+        },
+        "black": {
+            "$value": "hsl(0, 0%, 0%)",
+            "$type": "color"
+        },
+        "transparent": {
+            "$value": "transparent",
+            "$type": "color"
+        }
+    }
+}

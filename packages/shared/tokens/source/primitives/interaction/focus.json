@@ -1,0 +1,242 @@
+{
+    "$description": "Interaction tokens - focus states, cursors, gradients",
+    "focus": {
+        "$description": "Focus ring styles for accessibility",
+        "width": {
+            "hairline": {
+                "$value": "1px",
+                "$type": "dimension",
+                "$description": "Subtle focus"
+            },
+            "thin": {
+                "$value": "2px",
+                "$type": "dimension",
+                "$description": "WCAG minimum"
+            },
+            "medium": {
+                "$value": "3px",
+                "$type": "dimension",
+                "$description": "Recommended"
+            },
+            "thick": {
+                "$value": "4px",
+                "$type": "dimension",
+                "$description": "High visibility"
+            }
+        },
+        "offset": {
+            "none": {
+                "$value": "0px",
+                "$type": "dimension"
+            },
+            "s": {
+                "$value": "2px",
+                "$type": "dimension"
+            },
+            "base": {
+                "$value": "4px",
+                "$type": "dimension"
+            }
+        },
+        "style": {
+            "solid": {
+                "$value": "solid",
+                "$type": "string"
+            },
+            "dashed": {
+                "$value": "dashed",
+                "$type": "string"
+            },
+            "dotted": {
+                "$value": "dotted",
+                "$type": "string"
+            }
+        }
+    },
+    "cursor": {
+        "$description": "Cursor values for interactions",
+        "auto": {
+            "$value": "auto",
+            "$type": "string"
+        },
+        "default": {
+            "$value": "default",
+            "$type": "string"
+        },
+        "pointer": {
+            "$value": "pointer",
+            "$type": "string",
+            "$description": "Clickable"
+        },
+        "notAllowed": {
+            "$value": "not-allowed",
+            "$type": "string",
+            "$description": "Disabled"
+        },
+        "text": {
+            "$value": "text",
+            "$type": "string"
+        },
+        "move": {
+            "$value": "move",
+            "$type": "string"
+        },
+        "grab": {
+            "$value": "grab",
+            "$type": "string"
+        },
+        "grabbing": {
+            "$value": "grabbing",
+            "$type": "string"
+        },
+        "copy": {
+            "$value": "copy",
+            "$type": "string"
+        },
+        "colResize": {
+            "$value": "col-resize",
+            "$type": "string"
+        },
+        "rowResize": {
+            "$value": "row-resize",
+            "$type": "string"
+        },
+        "zoomIn": {
+            "$value": "zoom-in",
+            "$type": "string"
+        },
+        "zoomOut": {
+            "$value": "zoom-out",
+            "$type": "string"
+        },
+        "wait": {
+            "$value": "wait",
+            "$type": "string"
+        },
+        "progress": {
+            "$value": "progress",
+            "$type": "string"
+        },
+        "help": {
+            "$value": "help",
+            "$type": "string"
+        },
+        "crosshair": {
+            "$value": "crosshair",
+            "$type": "string"
+        },
+        "none": {
+            "$value": "none",
+            "$type": "string"
+        }
+    },
+    "gradient": {
+        "$description": "Gradient directions and patterns",
+        "direction": {
+            "toTop": {
+                "$value": "to top",
+                "$type": "string"
+            },
+            "toRight": {
+                "$value": "to right",
+                "$type": "string"
+            },
+            "toBottom": {
+                "$value": "to bottom",
+                "$type": "string"
+            },
+            "toLeft": {
+                "$value": "to left",
+                "$type": "string"
+            },
+            "toTopRight": {
+                "$value": "to top right",
+                "$type": "string"
+            },
+            "toTopLeft": {
+                "$value": "to top left",
+                "$type": "string"
+            },
+            "toBottomRight": {
+                "$value": "to bottom right",
+                "$type": "string"
+            },
+            "toBottomLeft": {
+                "$value": "to bottom left",
+                "$type": "string"
+            },
+            "45deg": {
+                "$value": "45deg",
+                "$type": "string"
+            },
+            "90deg": {
+                "$value": "90deg",
+                "$type": "string"
+            },
+            "135deg": {
+                "$value": "135deg",
+                "$type": "string"
+            },
+            "180deg": {
+                "$value": "180deg",
+                "$type": "string"
+            }
+        },
+        "radialPosition": {
+            "center": {
+                "$value": "center",
+                "$type": "string"
+            },
+            "top": {
+                "$value": "top",
+                "$type": "string"
+            },
+            "right": {
+                "$value": "right",
+                "$type": "string"
+            },
+            "bottom": {
+                "$value": "bottom",
+                "$type": "string"
+            },
+            "left": {
+                "$value": "left",
+                "$type": "string"
+            },
+            "topLeft": {
+                "$value": "top left",
+                "$type": "string"
+            },
+            "topRight": {
+                "$value": "top right",
+                "$type": "string"
+            },
+            "bottomLeft": {
+                "$value": "bottom left",
+                "$type": "string"
+            },
+            "bottomRight": {
+                "$value": "bottom right",
+                "$type": "string"
+            }
+        },
+        "radialSize": {
+            "closestSide": {
+                "$value": "closest-side",
+                "$type": "string"
+            },
+            "closestCorner": {
+                "$value": "closest-corner",
+                "$type": "string"
+            },
+            "farthestSide": {
+                "$value": "farthest-side",
+                "$type": "string"
+            },
+            "farthestCorner": {
+                "$value": "farthest-corner",
+                "$type": "string"
+            }
+        }
+    }
+}

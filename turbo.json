@@ -1,0 +1,97 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": [
+        "**/.env.*local",
+        ".env",
+        "tsconfig.packages.json"
+    ],
+    "globalPassThroughEnv": [
+        "NODE_ENV",
+        "CI"
+    ],
+    "tasks": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "inputs": [
+                "$TURBO_DEFAULT$",
+                "!**/*.test.{ts,tsx}",
+                "!**/*.spec.{ts,tsx}",
+                "!**/__tests__/**"
+            ],
+            "outputs": [
+                "dist/**",
+                ".next/**",
+                "!.next/cache/**"
+            ],
+            "env": [
+                "VITE_*"
+            ]
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true
+        },
+        "test": {
+            "dependsOn": [],
+            "outputs": [
+                "coverage/**"
+            ],
+            "env": [
+                "CI"
+            ]
+        },
+        "test:unit": {
+            "dependsOn": [],
+            "cache": true,
+            "outputs": [
+                "coverage/**"
+            ]
+        },
+        "lint": {
+            "dependsOn": [],
+            "inputs": [
+                "$TURBO_DEFAULT$",
+                "eslint.config.js",
+                ".eslintrc*"
+            ],
+            "outputs": []
+        },
+        "lint:fix": {
+            "cache": false
+        },
+        "typecheck": {
+            "dependsOn": [
+                "^typecheck"
+            ],
+            "inputs": [
+                "$TURBO_DEFAULT$",
+                "tsconfig.json",
+                "!**/*.test.{ts,tsx}",
+                "!**/*.spec.{ts,tsx}"
+            ],
+            "outputs": [
+                ".tsbuildinfo"
+            ]
+        },
+        "tokens": {
+            "cache": true,
+            "outputs": [
+                "tokens/generated/**"
+            ]
+        },
+        "tokens:themes": {
+            "dependsOn": [
+                "tokens"
+            ],
+            "outputs": [
+                "tokens/generated/theme-*.css"
+            ]
+        },
+        "clean": {
+            "cache": false
+        }
+    },
+    "ui": "stream"
+}

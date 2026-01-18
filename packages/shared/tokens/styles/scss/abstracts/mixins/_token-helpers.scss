@@ -1,0 +1,75 @@
+@use 'sass:string';
+
+// ========================================================================== //
+//                            MIXINS: TOKEN HELPERS                           //
+// ========================================================================== //
+// Reusable styling mixins for components accessing CSS Variables
+
+/// Apply text color from design token
+/// @param {String} $token-name - Design token name. If strictly "text-X", prepends --.
+/// @example @include text-color('text-default');
+@mixin text-color($token-name) {
+  color: var(--#{$token-name});
+}
+
+/// Apply border color from design token
+/// @param {String} $token-name - Design token name
+/// @param {Boolean} $important - Whether to add !important flag
+@mixin border-color($token-name, $important: false) {
+  @if $important {
+    border-color: var(--#{$token-name}) !important;
+  }
+
+  @else {
+    border-color: var(--#{$token-name});
+  }
+}
+
+/// Apply background color with opacity using pseudo-element
+@mixin bg-color-alpha($color-var, $opacity) {
+  & {
+    position: relative;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    // Handle if user passed var(--) or just name
+    $val: null;
+
+    @if string.slice($color-var, 1, 2)=='--' {
+      $val: var(#{$color-var});
+    }
+
+    @else {
+      $val: var(--#{$color-var});
+    }
+
+    background-color: $val;
+    opacity: $opacity;
+    z-index: -1;
+  }
+}
+
+/// Apply hover color
+@mixin hover-color($token-name) {
+  &:hover {
+    color: var(--#{$token-name});
+  }
+}
+
+/// Apply hover background
+@mixin hover-background($token-name) {
+  &:hover {
+    background-color: var(--#{$token-name});
+  }
+}
+
+/// Apply gradient background
+/// @param {String} $start-token - Start color token
+/// @param {String} $end-token - End color token
+/// @param {String} $direction - Gradient direction
+@mixin gradient-background($start-token, $end-token, $direction: 'to bottom') {
+  background: linear-gradient(#{$direction}, var(--#{$start-token}), var(--#{$end-token}));
+}

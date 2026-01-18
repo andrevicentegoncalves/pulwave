@@ -1,0 +1,118 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/* ────────────────────────────────────────────────────────────────────────────
+   TABS ELEMENTS
+   ──────────────────────────────────────────────────────────────────────────── */
+
+// ── Header (Tab List) ──
+.tabs__header {
+    display: flex;
+    align-items: stretch;
+    gap: var(--tabs-gap);
+    border-bottom: var(--tabs-border-width) solid var(--tabs-border-color);
+    margin-bottom: var(--scale-4);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &.has-scroll {
+        // mask-image removed
+    }
+
+    // Hide border when modifier class is present on root
+    .tabs--no-border & {
+        border-bottom: none;
+    }
+}
+
+// ── Tab Button ──
+.tabs__tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--scale-2);
+    padding: var(--tab-padding-y) var(--tab-padding-x);
+    background: transparent;
+    border: none;
+    border-bottom: none;
+    margin-bottom: calc(-1 * var(--tabs-border-width));
+    color: var(--tab-color);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        color var(--tab-transition),
+        background var(--tab-transition),
+        border-color var(--tab-transition),
+        box-shadow var(--tab-transition);
+
+    font-size: var(--font-size-body-m);
+    font-weight: var(--font-weight-m);
+    line-height: var(--line-height-normal);
+
+    // Rounded line indicator (pseudo-element)
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: var(--scale-2);
+        right: var(--scale-2);
+        height: var(--tab-border-width);
+        background: transparent;
+        border-radius: var(--tab-indicator-border-radius);
+        transition: background var(--tab-transition);
+    }
+
+    &:hover:not(&--active) {
+        color: var(--tab-color-hover);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-focus-ring);
+        outline-offset: var(--scale-0-5);
+    }
+
+    // Active state (line variant default)
+    &--active {
+        color: var(--tab-active-bg, var(--tab-color-active));
+
+        &::after {
+            background: var(--tab-active-bg, var(--color-brand-primary));
+        }
+    }
+}
+
+// ── Tab Icon ──
+.tabs__tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: currentColor;
+
+    svg {
+        width: 1.25em;
+        height: 1.25em;
+    }
+}
+
+// ── Tab Label ──
+.tabs__tab-label {
+    display: inline-flex;
+    align-items: center;
+}
+
+// ── Content Area ──
+.tabs__content {
+    width: 100%;
+}
+
+// ── Panel ──
+.tabs__panel {
+    padding: var(--scale-2) 0;
+}

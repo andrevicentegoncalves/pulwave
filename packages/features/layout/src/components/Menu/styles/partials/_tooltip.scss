@@ -1,0 +1,41 @@
+// ============================================================================ //
+// MENU - TOOLTIP
+// ============================================================================ //
+// Tooltip for collapsed menu items
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+.menu__item[title] {
+    position: relative;
+
+    &::after {
+        content: attr(title);
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: var(--scale-2);
+        padding: var(--scale-2) var(--scale-3);
+        background-color: var(--color-surface-default);
+        color: var(--color-text-primary);
+        font-size: var(--font-size-ui-m);
+        font-weight: var(--font-weight-m);
+        border-radius: var(--border-radius-s);
+        box-shadow: var(--shadow-m);
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration-fast) var(--easing-standard);
+        z-index: var(--z-index-tooltip);
+    }
+
+    // Show tooltip on hover when collapsed
+    &.menu__item--collapsed:hover::after {
+        opacity: 1;
+    }
+
+    // Don't show tooltip when expanded (label is visible)
+    &:not(.menu__item--collapsed)::after {
+        display: none;
+    }
+}

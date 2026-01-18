@@ -1,0 +1,6 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+// _index.scss
+@forward 'partials/base';
+@forward 'partials/variants';
+@forward 'partials/sizes'; // Padding variants

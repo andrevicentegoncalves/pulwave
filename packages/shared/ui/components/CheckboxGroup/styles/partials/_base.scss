@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-3);
+    width: 100%;
+
+    // ── LABEL ──
+    &__label {
+        font-size: var(--font-size-label-m);
+        color: var(--color-text-default);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+
+        // Helper for required asterisk
+        .checkbox-group__required {
+            color: var(--color-status-negative);
+            font-size: var(--font-size-body-m);
+            font-weight: var(--font-weight-m);
+        }
+    }
+
+    // ── OPTIONS WRAPPER ──
+    &__options {
+        display: flex;
+
+        &--vertical {
+            flex-direction: column;
+            gap: var(--scale-2);
+        }
+
+        &--horizontal {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: var(--scale-4);
+        }
+    }
+
+    // ── HELPER TEXT ──
+    &__helper {
+        font-size: var(--font-size-caption-m);
+        color: var(--color-text-secondary);
+        margin-top: var(--scale-1);
+
+        &--error {
+            color: var(--color-status-negative);
+        }
+    }
+}

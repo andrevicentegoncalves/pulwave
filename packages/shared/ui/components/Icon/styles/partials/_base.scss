@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+
+    // Default color inherit
+    color: currentColor;
+
+    svg {
+        width: 1em;
+        height: 1em;
+        display: block; // Removes descender space
+    }
+}

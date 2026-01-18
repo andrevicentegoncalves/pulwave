@@ -1,0 +1,12 @@
+/**
+ * ChartGrid Base Styles
+ */
+
+.recharts-cartesian-grid-bg {
+    fill: transparent;
+}
+
+.recharts-cartesian-grid-line {
+    stroke: var(--chart-grid-color);
+    stroke-opacity: 0.5;
+}

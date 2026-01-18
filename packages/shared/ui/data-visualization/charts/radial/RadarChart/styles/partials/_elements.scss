@@ -1,0 +1,32 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--radar {
+    // Ensure minimum height for proper spacing
+    min-height: 400px;
+
+    // Polar angle axis (outer labels)
+    &__angle-axis {
+        // Only style text elements, not the entire axis group
+        // This prevents the fill from applying to background polygons
+        text {
+            font-size: 10px;
+            fill: var(--color-text-primary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        // Hide tick lines to reduce clutter
+        line {
+            display: none;
+        }
+    }
+
+    // Polar radius axis (inner scale)
+    &__radius-axis {
+        // Only style text elements, not the entire axis group
+        text {
+            font-size: 9px;
+            fill: var(--color-text-secondary);
+            opacity: 0.7;
+        }
+    }
+}

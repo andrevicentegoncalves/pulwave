@@ -1,0 +1,2 @@
+export { SupabaseOrganizationProvider } from './SupabaseOrganizationProvider';
+

@@ -1,0 +1,159 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: SVG                                   */
+/* ========================================================================== */
+
+// SVG FILL COLORS
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}fill-#{$suffix}#{$utility-suffix} {
+                    fill: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// SVG STROKE COLORS
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}stroke-#{$suffix}#{$utility-suffix} {
+                    stroke: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+    @include with-states {
+
+        // SVG FILL COLORS (Keywords)
+        .#{$utility-prefix}fill-current#{$utility-suffix} {
+            fill: currentColor;
+        }
+
+        .#{$utility-prefix}fill-none#{$utility-suffix} {
+            fill: none;
+        }
+
+        .#{$utility-prefix}fill-inherit#{$utility-suffix} {
+            fill: inherit;
+        }
+
+        .#{$utility-prefix}fill-transparent#{$utility-suffix} {
+            fill: transparent;
+        }
+
+        // SVG STROKE COLORS (Keywords)
+        .#{$utility-prefix}stroke-current#{$utility-suffix} {
+            stroke: currentColor;
+        }
+
+        .#{$utility-prefix}stroke-none#{$utility-suffix} {
+            stroke: none;
+        }
+
+        .#{$utility-prefix}stroke-inherit#{$utility-suffix} {
+            stroke: inherit;
+        }
+
+        .#{$utility-prefix}stroke-transparent#{$utility-suffix} {
+            stroke: transparent;
+        }
+    }
+
+    // STROKE WIDTH
+    .#{$utility-prefix}stroke-0#{$utility-suffix} {
+        stroke-width: 0;
+    }
+
+    .#{$utility-prefix}stroke-1#{$utility-suffix} {
+        stroke-width: 1;
+    }
+
+    .#{$utility-prefix}stroke-2#{$utility-suffix} {
+        stroke-width: 2;
+    }
+
+    .#{$utility-prefix}stroke-3#{$utility-suffix} {
+        stroke-width: 3;
+    }
+
+    .#{$utility-prefix}stroke-4#{$utility-suffix} {
+        stroke-width: 4;
+    }
+
+    // STROKE LINE CAP
+    .#{$utility-prefix}stroke-cap-butt#{$utility-suffix} {
+        stroke-linecap: butt;
+    }
+
+    .#{$utility-prefix}stroke-cap-round#{$utility-suffix} {
+        stroke-linecap: round;
+    }
+
+    .#{$utility-prefix}stroke-cap-square#{$utility-suffix} {
+        stroke-linecap: square;
+    }
+
+    // STROKE LINE JOIN
+    .#{$utility-prefix}stroke-join-arcs#{$utility-suffix} {
+        stroke-linejoin: arcs;
+    }
+
+    .#{$utility-prefix}stroke-join-bevel#{$utility-suffix} {
+        stroke-linejoin: bevel;
+    }
+
+    .#{$utility-prefix}stroke-join-miter#{$utility-suffix} {
+        stroke-linejoin: miter;
+    }
+
+    .#{$utility-prefix}stroke-join-miter-clip#{$utility-suffix} {
+        stroke-linejoin: miter-clip;
+    }
+
+    .#{$utility-prefix}stroke-join-round#{$utility-suffix} {
+        stroke-linejoin: round;
+    }
+
+    // STROKE DASH ARRAY
+    .#{$utility-prefix}stroke-dash-0#{$utility-suffix} {
+        stroke-dasharray: 0;
+    }
+
+    .#{$utility-prefix}stroke-dash-2#{$utility-suffix} {
+        stroke-dasharray: 2;
+    }
+
+    .#{$utility-prefix}stroke-dash-4#{$utility-suffix} {
+        stroke-dasharray: 4;
+    }
+
+    .#{$utility-prefix}stroke-dash-6#{$utility-suffix} {
+        stroke-dasharray: 6;
+    }
+
+    .#{$utility-prefix}stroke-dash-8#{$utility-suffix} {
+        stroke-dasharray: 8;
+    }
+
+    // STROKE DASH OFFSET
+    .#{$utility-prefix}stroke-offset-0#{$utility-suffix} {
+        stroke-dashoffset: 0;
+    }
+}

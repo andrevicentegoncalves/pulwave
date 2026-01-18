@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.split-pane {
+    &--direction-horizontal {
+        flex-direction: row;
+    }
+
+    &--direction-vertical {
+        flex-direction: column;
+    }
+}

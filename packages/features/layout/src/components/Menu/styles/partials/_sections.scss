@@ -1,0 +1,36 @@
+// ============================================================================ //
+// MENU - SECTIONS
+// ============================================================================ //
+// Menu section grouping and titles
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as typography;
+
+.menu__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+
+    // Add spacing between sections
+    &+& {
+        margin-top: var(--scale-4);
+        padding-top: var(--scale-4);
+        border-top: 1px solid var(--color-overlay-light-subtle);
+    }
+}
+
+.menu__section-title {
+    // Spacing
+    padding: var(--scale-2) var(--scale-3);
+    margin-bottom: var(--scale-1);
+
+    // Typography
+    font-size: var(--font-size-ui-m);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-on-primary);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    // Animation
+    transition: opacity var(--duration-fast) var(--easing-standard);
+}

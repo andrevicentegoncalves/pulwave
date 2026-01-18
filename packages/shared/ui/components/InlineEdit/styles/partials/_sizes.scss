@@ -1,0 +1,36 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.inline-edit {
+    &--s {
+        .inline-edit__view {
+            min-height: var(--scale-8);
+            font-size: var(--font-size-body-s);
+            padding: var(--scale-1) var(--scale-2);
+        }
+
+        .inline-edit__label {
+            font-size: var(--font-size-body-xs);
+        }
+    }
+
+    &--m {
+
+        // Default
+        .inline-edit__view {
+            min-height: var(--scale-10);
+            font-size: var(--font-size-body-m);
+        }
+    }
+
+    &--l {
+        .inline-edit__view {
+            min-height: var(--scale-12);
+            font-size: var(--font-size-body-l);
+            padding: var(--scale-2) var(--scale-4);
+        }
+
+        .inline-edit__label {
+            font-size: var(--font-size-body-s);
+        }
+    }
+}

@@ -1,0 +1,130 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stepper {
+    &__step {
+        display: flex;
+        align-items: center;
+        position: relative;
+        flex: 1;
+
+        &:last-child {
+            flex: 0;
+
+            .stepper__connector {
+                display: none;
+            }
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        // Active State
+        &--state-active {
+            .stepper__circle {
+                border-color: var(--stepper-active-color);
+                color: var(--stepper-active-color);
+                background-color: var(--stepper-active-bg);
+            }
+
+            .stepper__title {
+                color: var(--stepper-active-color);
+            }
+        }
+
+        // Completed State
+        &--state-completed {
+            .stepper__circle {
+                background-color: var(--stepper-completed-bg);
+                border-color: var(--stepper-completed-border);
+                color: var(--stepper-completed-color);
+            }
+
+            .stepper__connector {
+                background-color: var(--stepper-completed-border);
+            }
+        }
+
+        // Error State
+        &--state-error {
+            .stepper__circle {
+                border-color: var(--stepper-error-border);
+                color: var(--stepper-error-color);
+                background-color: var(--stepper-error-bg);
+            }
+
+            .stepper__title {
+                color: var(--stepper-error-color);
+            }
+        }
+    }
+
+    &__indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: default;
+        position: relative;
+        z-index: var(--z-index-default);
+
+        &:focus-visible {
+            @include focus-ring;
+            border-radius: 50%;
+        }
+    }
+
+    // Clickable state
+    &__step--clickable .stepper__indicator {
+        cursor: pointer;
+
+        &:hover .stepper__circle {
+            background-color: var(--stepper-indicator-bg-hover);
+            border-color: var(--stepper-indicator-border-hover);
+        }
+    }
+
+    &__circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: var(--scale-0-5) solid var(--stepper-circle-border);
+        background-color: var(--stepper-circle-bg);
+        color: var(--stepper-circle-color);
+        transition: background-color var(--duration-fast) ease,
+            border-color var(--duration-fast) ease,
+            color var(--duration-fast) ease;
+        font-size: var(--font-size-body-s);
+        font-variant-numeric: tabular-nums;
+        text-align: center;
+        line-height: 1;
+    }
+
+    &__content {
+        margin-left: var(--stepper-gap);
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        color: var(--stepper-title-color);
+        font-size: var(--font-size-body-s);
+    }
+
+    &__description {
+        color: var(--stepper-description-color);
+        font-size: var(--font-size-body-xs);
+    }
+
+    &__connector {
+        flex: 1;
+        height: var(--scale-0-5);
+        background-color: var(--stepper-connector-color);
+        margin: 0 var(--scale-2);
+        transition: background-color var(--duration-fast) ease;
+    }
+}

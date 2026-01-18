@@ -1,0 +1,51 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.text-area {
+    &--full-width {
+        display: flex;
+        width: 100%;
+    }
+
+    &--error {
+        .text-area__container {
+            border-color: var(--color-status-error);
+
+            &:focus-within {
+                box-shadow: 0 0 0 var(--scale-0-5) var(--color-error-50);
+            }
+        }
+
+        .text-area__label,
+        .text-area__helper {
+            color: var(--color-status-error);
+        }
+    }
+
+    &--success {
+        .text-area__container {
+            border-color: var(--color-status-success);
+        }
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    // Resize variants
+    &--resize-none .text-area__field {
+        resize: none;
+    }
+
+    &--resize-vertical .text-area__field {
+        resize: vertical;
+    }
+
+    &--resize-horizontal .text-area__field {
+        resize: horizontal;
+    }
+
+    &--resize-both .text-area__field {
+        resize: both;
+    }
+}

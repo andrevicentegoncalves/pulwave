@@ -1,0 +1,39 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: CONTAINER QUERIES                      */
+/* ========================================================================== */
+
+@include with-responsive {
+
+    // CONTAINER TYPE
+    .#{$utility-prefix}container-type-normal#{$utility-suffix} {
+        container-type: normal;
+    }
+
+    .#{$utility-prefix}container-type-size#{$utility-suffix} {
+        container-type: size;
+    }
+
+    .#{$utility-prefix}container-type-inline-size#{$utility-suffix} {
+        container-type: inline-size;
+    }
+
+    // CONTAINER NAME (from Tokens or Static?)
+    // Assuming we want generic names or user defined?
+    // Let's provide some generic ones.
+
+    // We can allow arbitrary names via custom CSS usually, but utilities might need a few defaults.
+    // Or we loop if we had tokens. Since we don't have explicit container-name tokens in the standard set usually:
+
+    // .container-name-none
+    .#{$utility-prefix}container-name-none#{$utility-suffix} {
+        container-name: none;
+    }
+
+    // We could iterate over spacing scale to create unique names like 'p-4'? No that's confusing.
+    // Let's stick to the types for now as that's the main requirement.
+}

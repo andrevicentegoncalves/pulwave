@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--chart-spacing-s) var(--chart-legend-gap);
+    margin-top: var(--chart-spacing-m);
+    padding: 0 var(--chart-spacing-s);
+    max-width: 100%;
+    row-gap: var(--chart-spacing-s); // Vertical gap between wrapped rows
+}

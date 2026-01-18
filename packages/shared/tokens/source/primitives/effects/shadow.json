@@ -1,0 +1,38 @@
+{
+    "$description": "Shadow tokens for elevation",
+    "shadow": {
+        "none": {
+            "$value": "none",
+            "$type": "shadow"
+        },
+        "xs": {
+            "$value": "0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1)",
+            "$type": "shadow",
+            "$description": "Elevation 1"
+        },
+        "s": {
+            "$value": "0 0.125rem 0.5rem rgba(0, 0, 0, 0.12)",
+            "$type": "shadow",
+            "$description": "Elevation 2"
+        },
+        "m": {
+            "$value": "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+            "$type": "shadow",
+            "$description": "Elevation 3"
+        },
+        "l": {
+            "$value": "0 1rem 2rem rgba(0, 0, 0, 0.18)",
+            "$type": "shadow",
+            "$description": "Elevation 4"
+        },
+        "xl": {
+            "$value": "0 1.5rem 3rem rgba(0, 0, 0, 0.2)",
+            "$type": "shadow",
+            "$description": "Elevation 5"
+        },
+        "inner": {
+            "$value": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+            "$type": "shadow"
+        }
+    }
+}

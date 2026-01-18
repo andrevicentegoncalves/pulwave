@@ -1,0 +1,35 @@
+{
+    "$description": "Aspect Ratio primitives for media containers",
+    "aspectRatio": {
+        "square": {
+            "$value": "1/1",
+            "$type": "string",
+            "$description": "1:1 - Avatars, product thumbnails"
+        },
+        "landscape": {
+            "$value": "4/3",
+            "$type": "string",
+            "$description": "4:3 - Standard photography"
+        },
+        "portrait": {
+            "$value": "3/4",
+            "$type": "string",
+            "$description": "3:4 - Portraits"
+        },
+        "widescreen": {
+            "$value": "16/9",
+            "$type": "string",
+            "$description": "16:9 - Video standard"
+        },
+        "ultrawide": {
+            "$value": "21/9",
+            "$type": "string",
+            "$description": "21:9 - Cinematic"
+        },
+        "golden": {
+            "$value": "1.618/1",
+            "$type": "string",
+            "$description": "Golden Ratio"
+        }
+    }
+}

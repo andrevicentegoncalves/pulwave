@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.command {
+    --command-input-height: var(--scale-12); // var(--scale-12)
+    --command-list-max-height: 300px;
+    --command-padding: var(--scale-3);
+    --command-item-padding: var(--scale-2);
+    --command-radius: var(--border-radius-m);
+}

@@ -1,0 +1,96 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ============================================================================
+// AUTH LAYOUT STYLES
+// ============================================================================
+// Used with BaseBlankLayout to create auth pages with brand gradient background
+
+.auth-layout {
+    background: var(--color-brand-primary);
+
+    // Ensure full viewport height
+    min-height: 100vh;
+
+    // Override BaseBlankLayout main padding
+    .base-blank-layout__main {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// ============================================================================
+// AUTH CENTERING
+// ============================================================================
+
+.auth-centering-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    padding: var(--scale-6);
+
+    @include bp-down(s) {
+        padding: var(--scale-4);
+    }
+
+    @include bp-down(xs) {
+        padding: var(--scale-2);
+        align-items: flex-start;
+        padding-top: var(--scale-8);
+    }
+}
+
+// ============================================================================
+// AUTH CONTAINER (Card wrapper)
+// ============================================================================
+
+.auth-container {
+    width: 100%;
+    max-width: 440px;
+
+    // Card padding override for better spacing
+    padding: var(--scale-8);
+
+    @include bp-down(xs) {
+        padding: var(--scale-5);
+    }
+}
+
+// ============================================================================
+// AUTH HEADER
+// ============================================================================
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--scale-6);
+
+    h1 {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-title-l);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin: 0;
+        line-height: var(--line-height-tight);
+    }
+
+    p {
+        margin-top: var(--scale-2);
+        font-size: var(--font-size-body-m);
+        color: var(--color-text-secondary);
+        line-height: var(--line-height-base);
+    }
+}
+
+// ============================================================================
+// AUTH BUTTONS
+// ============================================================================
+
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-3);
+    margin-top: var(--scale-4);
+}

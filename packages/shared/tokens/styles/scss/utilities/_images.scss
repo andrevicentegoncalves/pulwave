@@ -1,0 +1,128 @@
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                            UTILITY CLASSES: IMAGES                        */
+/* ========================================================================== */
+
+@include with-responsive {
+
+  // RESPONSIVE
+  .#{$utility-prefix}img-responsive#{$utility-suffix} {
+    max-width: 100%;
+    height: auto;
+  }
+
+  // BACKGROUNDS
+  .#{$utility-prefix}bg-cover#{$utility-suffix} {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .#{$utility-prefix}bg-contain#{$utility-suffix} {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .#{$utility-prefix}bg-center#{$utility-suffix} {
+    background-position: center;
+  }
+
+  .#{$utility-prefix}bg-top#{$utility-suffix} {
+    background-position: top;
+  }
+
+  .#{$utility-prefix}bg-bottom#{$utility-suffix} {
+    background-position: bottom;
+  }
+
+  .#{$utility-prefix}bg-left#{$utility-suffix} {
+    background-position: left;
+  }
+
+  .#{$utility-prefix}bg-right#{$utility-suffix} {
+    background-position: right;
+  }
+
+  .#{$utility-prefix}bg-no-repeat#{$utility-suffix} {
+    background-repeat: no-repeat;
+  }
+
+  .#{$utility-prefix}bg-repeat#{$utility-suffix} {
+    background-repeat: repeat;
+  }
+
+  .#{$utility-prefix}bg-repeat-x#{$utility-suffix} {
+    background-repeat: repeat-x;
+  }
+
+  .#{$utility-prefix}bg-repeat-y#{$utility-suffix} {
+    background-repeat: repeat-y;
+  }
+
+  .#{$utility-prefix}bg-repeat-round#{$utility-suffix} {
+    background-repeat: round;
+  }
+
+  .#{$utility-prefix}bg-repeat-space#{$utility-suffix} {
+    background-repeat: space;
+  }
+
+  // BACKGROUND ATTACHMENT
+  .#{$utility-prefix}bg-fixed#{$utility-suffix} {
+    background-attachment: fixed;
+  }
+
+  .#{$utility-prefix}bg-local#{$utility-suffix} {
+    background-attachment: local;
+  }
+
+  .#{$utility-prefix}bg-scroll#{$utility-suffix} {
+    background-attachment: scroll;
+  }
+
+  // BACKGROUND CLIP
+  .#{$utility-prefix}bg-clip-border#{$utility-suffix} {
+    background-clip: border-box;
+  }
+
+  .#{$utility-prefix}bg-clip-padding#{$utility-suffix} {
+    background-clip: padding-box;
+  }
+
+  .#{$utility-prefix}bg-clip-content#{$utility-suffix} {
+    background-clip: content-box;
+  }
+
+  .#{$utility-prefix}bg-clip-text#{$utility-suffix} {
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  // BACKGROUND ORIGIN
+  .#{$utility-prefix}bg-origin-border#{$utility-suffix} {
+    background-origin: border-box;
+  }
+
+  .#{$utility-prefix}bg-origin-padding#{$utility-suffix} {
+    background-origin: padding-box;
+  }
+
+  .#{$utility-prefix}bg-origin-content#{$utility-suffix} {
+    background-origin: content-box;
+  }
+
+  // IMAGE RENDERING
+  .#{$utility-prefix}image-render-auto#{$utility-suffix} {
+    image-rendering: auto;
+  }
+
+  .#{$utility-prefix}image-render-pixel#{$utility-suffix} {
+    image-rendering: pixelated;
+  }
+
+  .#{$utility-prefix}image-render-crisp#{$utility-suffix} {
+    image-rendering: crisp-edges;
+  }
+}

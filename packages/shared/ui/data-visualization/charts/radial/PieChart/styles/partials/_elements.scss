@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--pie {
+    &__label {
+        font-size: var(--font-size-body-xs);
+        dominant-baseline: central;
+        transition: fill 0.2s ease, font-weight 0.2s ease;
+
+        &--active {
+            font-weight: var(--font-weight-bold);
+        }
+    }
+}

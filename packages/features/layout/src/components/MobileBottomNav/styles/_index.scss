@@ -1,0 +1,53 @@
+// ============================================================================ //
+// MOBILE SHELL - BOTTOM NAVIGATION
+// ============================================================================ //
+// Fixed bottom navigation with safe area support
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.mobile-shell__bottom-nav {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-index-sticky);
+    background-color: var(--color-surface-default);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.mobile-shell__bottom-nav-tabs {
+    display: flex;
+    justify-content: space-evenly;
+    padding: var(--scale-2) var(--scale-1);
+    gap: var(--scale-1);
+}
+
+.mobile-shell__bottom-nav-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target-min); // 44px
+    height: var(--touch-target-min);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-2xl);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard),
+        color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        background-color: var(--color-surface-subtle);
+        color: var(--color-text-primary);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-brand-primary);
+        outline-offset: var(--scale-0-5);
+    }
+
+    &--active {
+        background-color: var(--color-brand-primary-subtle);
+        color: var(--color-brand-primary);
+    }
+}

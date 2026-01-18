@@ -1,0 +1,65 @@
+﻿../foundation/analytics/interfaces/IAnalyticsRepository.ts(14,43): error TS2307: Cannot find module '../../../../interfaces' or its corresponding type declarations.
+components/Combobox/Combobox.tsx(4,10): error TS2305: Module '"@pulwave/foundation"' has no exported member 'classNames'.
+components/Combobox/Combobox.tsx(286,44): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(341,58): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(383,52): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(404,61): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(431,44): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(444,53): error TS2304: Cannot find name 'cn'.
+components/Combobox/Combobox.tsx(465,40): error TS2304: Cannot find name 'cn'.
+components/Drawer/Drawer.tsx(2,10): error TS2305: Module '"@pulwave/foundation"' has no exported member 'classNames'.
+components/Drawer/Drawer.tsx(57,32): error TS2304: Cannot find name 'cn'.
+components/Drawer/Drawer.tsx(88,24): error TS2304: Cannot find name 'cn'.
+components/Drawer/Drawer.tsx(93,21): error TS2304: Cannot find name 'cn'.
+components/Drawer/Drawer.tsx(98,24): error TS2304: Cannot find name 'cn'.
+components/Drawer/Drawer.tsx(103,38): error TS2304: Cannot find name 'cn'.
+data-visualization/charts/cartesian/AccumulatedLineChart/AccumulatedLineChart.tsx(68,27): error TS2304: Cannot find name 'accumulatedLineChartVariants'.
+data-visualization/charts/cartesian/AccumulatedLineChart/AccumulatedLineChart.tsx(84,21): error TS2322: Type '{ show: boolean; payload: { value: any; dataKey: any; color: any; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/AreaChart/AreaChart.tsx(83,27): error TS2304: Cannot find name 'areaChartVariants'.
+data-visualization/charts/cartesian/AreaChart/AreaChart.tsx(122,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; onClick: (payload: { dataKey?: string | undefined; }) => void; inactiveKeys: string[]; position: "top" | "bottom"; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/BarChart/BarChart.tsx(114,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; onClick: (payload: { dataKey?: string | undefined; }) => void; inactiveKeys: string[]; position: "top" | "bottom"; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/DualAxisChart/DualAxisChart.tsx(76,33): error TS7006: Parameter 'value' implicitly has an 'any' type.
+data-visualization/charts/cartesian/DualAxisChart/DualAxisChart.tsx(76,40): error TS7006: Parameter 'name' implicitly has an 'any' type.
+data-visualization/charts/cartesian/DualAxisChart/DualAxisChart.tsx(83,21): error TS2322: Type '{ show: boolean; payload: { value: string; dataKey: string; color: string; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/LineChart/LineChart.tsx(106,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; onClick: (payload: { dataKey?: string | undefined; }) => void; inactiveKeys: string[]; position: "top" | "bottom"; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/LollipopChart/LollipopChart.tsx(84,21): error TS2322: Type '"vertical" | "horizontal" | null' is not assignable to type '"vertical" | "horizontal" | undefined'.
+  Type 'null' is not assignable to type '"vertical" | "horizontal" | undefined'.
+data-visualization/charts/cartesian/ScatterChart/ScatterChart.tsx(119,21): error TS2322: Type '{ show: boolean; payload: { value: any; color: string; }[]; position: "top" | "bottom"; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/SplineLineChart/SplineLineChart.tsx(62,21): error TS2322: Type '{ show: boolean; payload: { value: string; dataKey: string; color: string; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/StackedBarChart/StackedBarChart.tsx(88,24): error TS2304: Cannot find name 'cn'.
+data-visualization/charts/cartesian/StackedBarChart/StackedBarChart.tsx(108,21): error TS2322: Type '"vertical" | "horizontal" | null' is not assignable to type '"vertical" | "horizontal" | undefined'.
+  Type 'null' is not assignable to type '"vertical" | "horizontal" | undefined'.
+data-visualization/charts/cartesian/StackedBarChart/StackedBarChart.tsx(125,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; position: "bottom"; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/StepAreaChart/StepAreaChart.tsx(68,21): error TS2322: Type '{ show: boolean; payload: { value: any; dataKey: any; color: any; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/cartesian/StepLineChart/StepLineChart.tsx(68,21): error TS2322: Type '{ show: boolean; payload: { value: any; dataKey: any; color: any; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/geo/CountryMapChart/CountryMapChart.tsx(17,10): error TS2322: Type '{ data: any[]; regionKey?: string | undefined; valueKey?: string | undefined; colorScale?: string | undefined; showLegend?: boolean | undefined; showLabels?: boolean | undefined; showTooltip?: boolean | undefined; ... 5 more ...; className: string; }' is not assignable to type 'GeoChartProps'.
+  Types of property 'colorScale' are incompatible.
+    Type 'string | undefined' is not assignable to type '"blue" | "green" | "orange" | "purple" | "red" | "teal" | null | undefined'.
+      Type 'string' is not assignable to type '"blue" | "green" | "orange" | "purple" | "red" | "teal" | null | undefined'.
+data-visualization/charts/geo/GeoChart/GeoChart.tsx(147,69): error TS2345: Argument of type '{ 'chart--geo__region--hovered': boolean; 'chart--geo__region--dimmed': boolean | "" | null; }' is not assignable to parameter of type 'ClassValue'.
+  Types of property ''chart--geo__region--dimmed'' are incompatible.
+    Type 'boolean | "" | null' is not assignable to type 'boolean | null | undefined'.
+      Type '""' is not assignable to type 'boolean | null | undefined'.
+data-visualization/charts/geo/WorldMapChart/WorldMapChart.tsx(197,76): error TS2345: Argument of type '{ 'chart--world-map__country--hovered': boolean; 'chart--world-map__country--dimmed': boolean | "" | null; }' is not assignable to parameter of type 'ClassValue'.
+  Types of property ''chart--world-map__country--dimmed'' are incompatible.
+    Type 'boolean | "" | null' is not assignable to type 'boolean | null | undefined'.
+      Type '""' is not assignable to type 'boolean | null | undefined'.
+data-visualization/charts/radial/CircularLineChart/CircularLineChart.tsx(74,21): error TS2322: Type '{ show: boolean; payload: { value: string; dataKey: string; color: string | undefined; }[]; iconType: string; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/radial/PieChart/PieChart.tsx(183,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; layout: "vertical" | "horizontal"; activeIndex: number | undefined; position: "top" | "bottom"; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/radial/RadarChart/RadarChart.tsx(89,21): error TS2322: Type '{ show: boolean; payload: LegendPayloadItem[]; onClick: (payload: { dataKey?: string | undefined; }) => void; inactiveKeys: string[]; position: "top" | "bottom"; }' is not assignable to type 'IntrinsicAttributes & ChartLegendLayerProps'.
+  Property 'payload' does not exist on type 'IntrinsicAttributes & ChartLegendLayerProps'.
+data-visualization/charts/statistical/PopulationPyramidChart/PopulationPyramidChart.tsx(113,33): error TS7006: Parameter 'v' implicitly has an 'any' type.
+data-visualization/primitives/ChartLegend/ChartLegendLayer.tsx(3,23): error TS2724: '"./ChartLegend"' has no exported member named 'ChartLegendProps'. Did you mean 'ChartLegend'?
+data-visualization/primitives/ChartTooltip/ChartTooltipLayer.tsx(3,24): error TS2724: '"./ChartTooltip"' has no exported member named 'ChartTooltipProps'. Did you mean 'ChartTooltip'?

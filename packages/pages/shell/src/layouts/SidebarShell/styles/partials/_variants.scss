@@ -1,0 +1,14 @@
+// ============================================================================ //
+// SIDEBAR SHELL - VARIANTS
+// ============================================================================ //
+
+.sidebar-shell {
+    &--collapsed {
+        width: var(--scale-20); // var(--scale-20) collapsed
+    }
+
+    &--floating {
+        height: calc(100% - var(--scale-5) * 2);
+        margin: var(--scale-5);
+    }
+}

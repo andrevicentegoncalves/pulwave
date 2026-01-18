@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.circle-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-round);
+    overflow: hidden;
+    border: var(--circle-flag-border);
+    background: var(--circle-flag-bg);
+    flex-shrink: 0;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

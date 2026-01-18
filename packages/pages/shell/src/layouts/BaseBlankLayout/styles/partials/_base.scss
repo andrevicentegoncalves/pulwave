@@ -1,0 +1,21 @@
+// ============================================================================ //
+// BASE BLANK LAYOUT
+// ============================================================================ //
+// Layout with mobile header only (no sidebar)
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.base-blank-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color-surface-default);
+
+    &__main {
+        flex: 1;
+        overflow-y: auto;
+        padding: var(--scale-6);
+    }
+}

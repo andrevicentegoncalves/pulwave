@@ -1,0 +1,10 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.section-header {
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-brand-primary); // Or make it configurable via CVA? Using Primary as default
+    }
+}

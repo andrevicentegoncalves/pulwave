@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.time-picker {
+    --time-picker-column-height: var(--scale-40); // 160px
+    --time-picker-option-width: var(--scale-12); // var(--scale-12)
+    --time-picker-option-height: var(--scale-8); // var(--scale-8)
+    --time-picker-arrow-width: var(--scale-8); // var(--scale-8)
+    --time-picker-arrow-height: var(--scale-6); // var(--scale-6)
+    --time-picker-gap: var(--scale-1);
+    --time-picker-padding: var(--scale-3);
+    // Min widths for sizes
+    --time-picker-min-width-xs: 100px;
+    --time-picker-min-width-s: 110px;
+    --time-picker-min-width-m: 140px;
+    --time-picker-min-width-l: 160px;
+    --time-picker-min-width-xl: 1var(--scale-20);
+}

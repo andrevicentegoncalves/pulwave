@@ -1,0 +1,9 @@
+// ============================================================================ //
+// SECTION LAYOUT - TOKENS
+// ============================================================================ //
+// CSS custom properties for section layout dimensions
+
+:root {
+    --section-sidebar-width-expanded: var(--scale-70); // var(--scale-70)
+    --section-sidebar-width-collapsed: var(--scale-16); // 64px
+}

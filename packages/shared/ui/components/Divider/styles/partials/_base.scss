@@ -1,0 +1,15 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.divider {
+    background: var(--color-border-subtle);
+
+    &--horizontal {
+        width: 100%;
+        height: 1px;
+    }
+
+    &--vertical {
+        height: 100%;
+        width: 1px;
+    }
+}

@@ -1,0 +1,66 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--org {
+    &__connector {
+        fill: none;
+        stroke: var(--color-border-default);
+        stroke-width: 2px;
+        opacity: 0.6;
+    }
+
+    &__node-group {
+        cursor: default;
+        transition: filter 0.2s ease;
+
+        &--expandable {
+            cursor: pointer;
+        }
+
+        &--hovered {
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+
+            .chart--org__node-rect {
+                stroke-width: 3px;
+            }
+        }
+    }
+
+    &__node-rect {
+        fill: var(--color-surface-default);
+        stroke-width: 2px;
+        transition: stroke-width 0.2s ease;
+    }
+
+    &__node-accent {
+        // Color accent bar
+    }
+
+    &__node-name {
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-semibold);
+        fill: var(--color-text-primary);
+        text-anchor: middle;
+    }
+
+    &__node-title {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+        text-anchor: middle;
+    }
+
+    &__toggle-group {
+        // Expand/collapse indicator
+    }
+
+    &__toggle-circle {
+        fill: var(--color-surface-default);
+        stroke-width: 2px;
+    }
+
+    &__toggle-text {
+        font-size: var(--font-size-body-m);
+        font-weight: var(--font-weight-bold);
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+}

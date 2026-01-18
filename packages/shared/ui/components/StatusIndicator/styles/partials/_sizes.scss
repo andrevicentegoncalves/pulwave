@@ -1,0 +1,18 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.status-indicator {
+    &--s &__dot {
+        width: var(--scale-2);
+        height: var(--scale-2);
+    }
+
+    &--m &__dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    &--l &__dot {
+        width: var(--scale-3);
+        height: var(--scale-3);
+    }
+}

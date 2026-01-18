@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stepper {
+    // Base
+    --stepper-font-family: var(--font-family-base);
+    --stepper-gap: var(--scale-3);
+    --stepper-connector-color: var(--color-border-default);
+
+    // Indicator (Button)
+    --stepper-indicator-bg-hover: var(--color-surface-hover);
+    --stepper-indicator-border-hover: var(--color-border-hover);
+
+    // Circle
+    --stepper-circle-bg: var(--color-surface-default);
+    --stepper-circle-border: var(--color-border-default);
+    --stepper-circle-color: var(--color-text-secondary);
+
+    // Text
+    --stepper-title-color: var(--color-text-default);
+    --stepper-description-color: var(--color-text-secondary);
+
+    // Active
+    --stepper-active-color: var(--color-brand-primary);
+    --stepper-active-bg: var(--color-action-selected);
+
+    // Completed
+    --stepper-completed-bg: var(--color-brand-primary);
+    --stepper-completed-border: var(--color-brand-primary);
+    --stepper-completed-color: var(--color-text-inverse-default);
+
+    // Error
+    --stepper-error-bg: var(--color-status-negative-subtle);
+    --stepper-error-border: var(--color-status-negative);
+    --stepper-error-color: var(--color-status-negative);
+}

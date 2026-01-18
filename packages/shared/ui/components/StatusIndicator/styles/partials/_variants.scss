@@ -1,0 +1,52 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.status-indicator {
+
+    // Status Colors
+    &--online &__dot {
+        background-color: var(--color-status-success);
+    }
+
+    &--offline &__dot {
+        background-color: var(--color-neutral-subtle);
+    }
+
+    &--busy &__dot {
+        background-color: var(--color-critical);
+    }
+
+    &--away &__dot {
+        background-color: var(--color-status-warning);
+    }
+
+    &--dnd &__dot {
+        background-color: var(--color-critical-dark);
+    }
+
+    &--invisible &__dot {
+        background-color: var(--color-neutral-light);
+        border: 1px solid var(--color-border-default);
+    }
+
+    // Pulse Animation
+    &--pulse &__dot {
+        animation: status-pulse 2s infinite;
+    }
+}
+
+@keyframes status-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(var(--color-success-rgb), 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(var(--color-success-rgb), 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(var(--color-success-rgb), 0);
+    }
+}

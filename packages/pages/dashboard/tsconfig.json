@@ -1,0 +1,16 @@
+{
+    "extends": "../../../tsconfig.packages.json",
+    "compilerOptions": {
+        "baseUrl": "../../..",
+        "outDir": "./dist",
+        "strict": true,
+        "noEmit": true
+    },
+    "include": [
+        "index.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

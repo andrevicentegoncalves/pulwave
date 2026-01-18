@@ -1,0 +1,28 @@
+// ==========================================================================
+// Structure Spec Component
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.structure-spec {
+    &__part {
+        font-weight: var(--font-weight-m);
+    }
+
+    &__token {
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-caption-s);
+        padding: var(--scale-1) var(--scale-2);
+        background: var(--color-surface-strong);
+        border-radius: var(--border-radius-xs);
+        color: var(--color-brand-primary);
+    }
+
+    &__value {
+        color: var(--color-text-tertiary);
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-caption-s);
+    }
+}
+
+

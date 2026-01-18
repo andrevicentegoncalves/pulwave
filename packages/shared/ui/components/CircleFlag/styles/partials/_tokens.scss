@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.circle-flag {
+    --circle-flag-border: 1px solid var(--color-border-subtle);
+    --circle-flag-bg: var(--color-surface-subtle);
+
+    // Sizes
+    --circle-flag-s: var(--scale-4); // var(--scale-4)
+    --circle-flag-m: var(--scale-6); // var(--scale-6)
+    --circle-flag-l: var(--scale-8); // var(--scale-8)
+}

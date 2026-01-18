@@ -1,0 +1,55 @@
+// ==========================================================================
+// BADGE ELEMENTS - Child components
+// ==========================================================================
+
+.badge {
+    &__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--badge-icon-size);
+        height: var(--badge-icon-size);
+        flex-shrink: 0;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--badge-close-size);
+        height: var(--badge-close-size);
+        margin-left: var(--scale-2);
+        padding: 0;
+        flex-shrink: 0;
+        background: transparent;
+        border: none;
+        border-radius: var(--border-radius-s);
+        cursor: pointer;
+        color: currentColor;
+        opacity: 0.6;
+        transition: var(--transition-smooth);
+
+        &:hover {
+            opacity: 1;
+            background-color: var(--color-surface-hover);
+        }
+
+        svg {
+            width: var(--scale-3);
+            height: var(--scale-3);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.form-grid {
+    --form-grid-gap: var(--scale-4);
+    --form-grid-gap-mobile: var(--scale-3);
+}

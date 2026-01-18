@@ -1,0 +1,112 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
+@use 'breakpoints' as bp;
+
+// Global variables for class generation
+$utility-prefix: '' !default;
+$utility-suffix: '' !default; // Used for pseudo-classes like :hover
+$is-in-responsive-loop: false !default; // Optimization flag
+
+// Breakpoints map (mirrored from breakpoints.scss to ensure availability)
+$local-breakpoints: (
+    'xs': 0,
+    's': 640px,
+    'm': 768px,
+    'l': 1024px,
+    'xl': 1280px,
+    '2xl': 1920px
+);
+
+// -------------------------------------------------------------------------- //
+// Responsive Variant Generator
+// -------------------------------------------------------------------------- //
+// NOTE: Responsive loop generation is currently disabled due to Sass compilation 
+// syntax errors with prefix interpolation (Expected identifier).
+// Base classes are generated.
+@mixin with-responsive {
+    // Output base content (no prefix)
+    @content;
+
+    // Optimization Logic (Blocked by syntax error):
+    // $original-prefix: $utility-prefix;
+    // $is-in-responsive-loop: true !global;
+    //
+    // @each $bp, $val in $local-breakpoints {
+    //    @if $val != 0 {
+    //        @include bp.bp-up($bp) {
+    //             // Common Issue: String interpolation of escaped colon fails in this Sass version
+    //             // $p: "#{$bp}\\:";
+    //             // $utility-prefix: $p !global;
+    //            @content;
+    //        }
+    //    }
+    // }
+    //
+    // $is-in-responsive-loop: false !global;
+    // $utility-prefix: $original-prefix !global;
+}
+
+// -------------------------------------------------------------------------- //
+// State Variant Generator
+// -------------------------------------------------------------------------- //
+@mixin with-states($supports: ('hover', 'focus', 'focus-visible', 'active', 'disabled', 'group-hover', 'peer-hover', 'dark')) {
+    // Output base content
+    @content;
+
+    // Logic prepared for when responsive loop is enabled
+    $original-suffix: $utility-suffix;
+    $states-to-generate: $supports;
+
+    @if $is-in-responsive-loop {
+        // Strict allowlist for responsive states
+        $allowed-responsive-states: (
+            'hover'
+        );
+
+    $filtered: (
+    );
+
+@each $s in $supports {
+    @if list.index($allowed-responsive-states, $s) {
+        $filtered: list.append($filtered, $s);
+    }
+}
+
+$states-to-generate: $filtered;
+}
+
+@each $state in $states-to-generate {
+    @if $state =='hover' {
+        $utility-suffix: '\\:hover:hover' !global;
+        @content;
+    }
+
+    @else if $state =='focus' {
+        $utility-suffix: '\\:focus:focus' !global;
+        @content;
+    }
+
+    @else if $state =='focus-visible' {
+        $utility-suffix: '\\:focus-visible:focus-visible' !global;
+        @content;
+    }
+
+    @else if $state =='active' {
+        $utility-suffix: '\\:active:active' !global;
+        @content;
+    }
+
+    @else if $state =='disabled' {
+        $utility-suffix: '\\:disabled:disabled' !global;
+        @content;
+    }
+
+    @else if $state =='visited' {
+        $utility-suffix: '\\:visited:visited' !global;
+        @content;
+    }
+}
+
+$utility-suffix: $original-suffix !global;
+}

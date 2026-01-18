@@ -1,0 +1,38 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--sankey {
+    &__links {
+        // Group for links
+    }
+
+    &__link {
+        fill-opacity: 0.4;
+        stroke: none;
+        cursor: default;
+
+        &--interactive {
+            cursor: pointer;
+        }
+
+        &--hovered {
+            fill-opacity: 0.8;
+        }
+    }
+
+    &__nodes {
+        // Group for nodes
+    }
+
+    &__node {
+        cursor: default;
+
+        &--interactive {
+            cursor: pointer;
+        }
+    }
+
+    &__node-label {
+        fill: var(--color-text-primary);
+        font-size: var(--font-size-body-s);
+    }
+}

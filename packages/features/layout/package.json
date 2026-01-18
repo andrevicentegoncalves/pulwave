@@ -1,0 +1,22 @@
+{
+    "name": "@pulwave/features-layout",
+    "version": "1.0.0",
+    "description": "Unified Layout & Navigation Feature Layer",
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/hooks": "*",
+        "@pulwave/ui": "*",
+        "react": "*",
+        "react-dom": "*",
+        "react-router-dom": "*",
+        "lucide-react": "*"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    }
+}

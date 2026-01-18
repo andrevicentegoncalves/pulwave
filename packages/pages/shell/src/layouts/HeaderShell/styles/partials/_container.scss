@@ -1,0 +1,32 @@
+// ============================================================================ //
+// HEADER SHELL - CONTAINER
+// ============================================================================ //
+// Structural layout for page headers
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.header-shell-wrapper {
+    flex-shrink: 0;
+
+    &--sticky {
+        position: sticky;
+        top: 0;
+        z-index: var(--z-index-sticky);
+        transition: background-color var(--duration-fast) var(--easing-standard);
+    }
+}
+
+.header-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--scale-2) var(--scale-6) var(--scale-2) var(--scale-6);
+    flex-shrink: 0;
+    background-color: var(--color-surface-default);
+    border-radius: var(--border-radius-2xl);
+    margin: var(--scale-5) var(--scale-6) var(--scale-2) var(--scale-6);
+
+    @include bp-down(s) {
+        padding: var(--scale-4);
+    }
+}

@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.avatar-upload {
+    --avatar-upload-border: var(--border-width-m) solid var(--color-surface-default);
+    --avatar-upload-overlay-bg: var(--color-overlay-strong);
+    --avatar-upload-overlay-text: var(--color-text-inverse-default);
+
+    // Sizes
+    --avatar-upload-s: var(--scale-10);
+    --avatar-upload-default: var(--scale-20);
+    --avatar-upload-m: var(--scale-32);
+    --avatar-upload-l: var(--scale-40);
+    --avatar-upload-xl: var(--scale-56);
+    --avatar-upload-2xl: var(--scale-64);
+}

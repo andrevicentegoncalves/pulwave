@@ -1,0 +1,34 @@
+// ============================================================================ //
+// SECTION LAYOUT - CONTENT
+// ============================================================================ //
+// Content area within section layout - fills available space responsively
+// Note: Background color is set in _main.scss
+
+.section-layout {
+    &__content {
+        min-width: 0; // Allow shrinking below content width
+        width: 100%;
+    }
+
+    // Notch - extends above content area for controls (toggles, buttons, etc.)
+    // Positioned relative to content-wrapper (which has position: relative)
+    &__notch {
+        position: absolute;
+        top: 0; // At top of wrapper (same as top of content)
+        right: var(--scale-6);
+        transform: translateY(-100%); // Move above the content
+        z-index: var(--z-index-content-raised); // Elevated above content within wrapper
+
+        // Flexbox for multiple items
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+
+        // Visual styling to match content area
+        background-color: var(--color-surface-default);
+        border: var(--border-width-s) solid var(--color-border-subtle);
+        border-bottom: none;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        padding: var(--scale-2) var(--scale-3);
+    }
+}

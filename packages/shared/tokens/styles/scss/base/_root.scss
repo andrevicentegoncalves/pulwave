@@ -1,0 +1,4 @@
+// Import pre-generated CSS custom properties from tokens.css
+// The build script generates tokens.css with all :root variables
+// No need to iterate $tokens here - that would duplicate the work
+@import '../../tokens/generated/tokens.css';

@@ -1,0 +1,96 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.time-picker {
+
+    // ── LABEL ──
+    &__label {
+        font-size: var(--font-size-label-m);
+        color: var(--color-text-default);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+
+        .time-picker__required {
+            color: var(--color-status-negative);
+        }
+    }
+
+    // ── TRIGGER ──
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-3);
+        border: var(--border-width-1) solid var(--color-border-default);
+        border-radius: var(--border-radius-m);
+        background-color: var(--color-surface-default);
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        text-align: left;
+
+        &:hover {
+            border-color: var(--color-border-hover);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    &--open &__trigger {
+        border-color: var(--color-brand-primary);
+        box-shadow: 0 0 0 3px var(--color-action-focus);
+    }
+
+    &__icon {
+        color: var(--color-icon-subtle);
+        flex-shrink: 0;
+    }
+
+    &__value {
+        flex: 1;
+        font-size: var(--font-size-body-m);
+        color: var(--color-text-default);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__placeholder {
+        color: var(--color-text-secondary);
+    }
+
+    &__clear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--scale-1);
+        border-radius: var(--border-radius-s);
+        cursor: pointer;
+        color: var(--color-icon-subtle);
+
+        &:hover {
+            color: var(--color-icon-default);
+            background-color: var(--color-action-ghost-hover);
+        }
+    }
+
+    &__error-message {
+        font-size: var(--font-size-caption-m);
+        color: var(--color-status-negative);
+    }
+
+    // ── DROPDOWN ──
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: var(--z-index-overlay-dropdown);
+        margin-top: var(--scale-1);
+        padding: var(--time-picker-padding);
+        background-color: var(--color-surface-default);
+        border: var(--border-width-1) solid var(--color-border-default);
+        border-radius: var(--border-radius-m);
+        box-shadow: var(--shadow-l);
+        min-width: max-content;
+    }
+}

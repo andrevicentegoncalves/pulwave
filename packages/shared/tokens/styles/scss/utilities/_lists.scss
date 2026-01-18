@@ -1,0 +1,77 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: LISTS                                 */
+/* ========================================================================== */
+
+@include with-responsive {
+
+    // LIST STYLE TYPE
+    .#{$utility-prefix}list-none#{$utility-suffix} {
+        list-style-type: none;
+    }
+
+    .#{$utility-prefix}list-disc#{$utility-suffix} {
+        list-style-type: disc;
+    }
+
+    .#{$utility-prefix}list-decimal#{$utility-suffix} {
+        list-style-type: decimal;
+    }
+
+    .#{$utility-prefix}list-circle#{$utility-suffix} {
+        list-style-type: circle;
+    }
+
+    .#{$utility-prefix}list-square#{$utility-suffix} {
+        list-style-type: square;
+    }
+
+    .#{$utility-prefix}list-roman#{$utility-suffix} {
+        list-style-type: upper-roman;
+    }
+
+    .#{$utility-prefix}list-alpha#{$utility-suffix} {
+        list-style-type: lower-alpha;
+    }
+
+    // LIST STYLE POSITION
+    .#{$utility-prefix}list-inside#{$utility-suffix} {
+        list-style-position: inside;
+    }
+
+    .#{$utility-prefix}list-outside#{$utility-suffix} {
+        list-style-position: outside;
+    }
+
+    // LIST STYLE IMAGE
+    .#{$utility-prefix}list-image-none#{$utility-suffix} {
+        list-style-image: none;
+    }
+
+    // MARKER COLOR (for list bullets)
+    @include with-states {
+        .#{$utility-prefix}marker-primary#{$utility-suffix}::marker {
+            color: var(--color-primary-500);
+        }
+
+        .#{$utility-prefix}marker-secondary#{$utility-suffix}::marker {
+            color: var(--color-secondary-500);
+        }
+
+        .#{$utility-prefix}marker-success#{$utility-suffix}::marker {
+            color: var(--color-success-500);
+        }
+
+        .#{$utility-prefix}marker-warning#{$utility-suffix}::marker {
+            color: var(--color-warning-500);
+        }
+
+        .#{$utility-prefix}marker-error#{$utility-suffix}::marker {
+            color: var(--color-error-500);
+        }
+    }
+}

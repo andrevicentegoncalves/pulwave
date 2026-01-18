@@ -1,0 +1,181 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "incremental": true,
+        "tsBuildInfoFile": "./.tsbuildinfo",
+        "baseUrl": ".",
+        "paths": {
+            "@ui": [
+                "packages/shared/ui/index.ts"
+            ],
+            "@ui/*": [
+                "packages/shared/ui/*"
+            ],
+            "@pulwave/foundation": [
+                "packages/shared/foundation/index.ts"
+            ],
+            "@pulwave/foundation/*": [
+                "packages/shared/foundation/*"
+            ],
+            "@pulwave/ui": [
+                "packages/shared/ui/index.ts"
+            ],
+            "@pulwave/ui/*": [
+                "packages/shared/ui/*"
+            ],
+            "@pulwave/feature-settings": [
+                "packages/features/settings/index.ts"
+            ],
+            "@pulwave/feature-settings/*": [
+                "packages/features/settings/*"
+            ],
+            "@pulwave/experience-admin": [
+                "packages/pages/backoffice/index.ts"
+            ],
+            "@pulwave/experience-admin/*": [
+                "packages/pages/backoffice/*"
+            ],
+            "@pulwave/experience-style-guide": [
+                "packages/pages/style-guide/index.ts"
+            ],
+            "@pulwave/experience-style-guide/*": [
+                "packages/pages/style-guide/*"
+            ],
+            "@pulwave/experience-subscription": [
+                "packages/features/subscriptions/index.ts"
+            ],
+            "@pulwave/experience-subscription/*": [
+                "packages/features/subscriptions/*"
+            ],
+            "@pulwave/features-admin": [
+                "packages/features/admin/index.ts"
+            ],
+            "@pulwave/features-admin/*": [
+                "packages/features/admin/*"
+            ],
+            "@pulwave/experience-admin-dashboard": [
+                "packages/pages/dashboard/index.ts"
+            ],
+            "@pulwave/experience-admin-dashboard/*": [
+                "packages/pages/dashboard/*"
+            ],
+            "@pulwave/pages-shell": [
+                "packages/pages/shell/index.ts"
+            ],
+            "@pulwave/pages-shell/*": [
+                "packages/pages/shell/*"
+            ],
+            "@pulwave/features-layout": [
+                "packages/features/layout/index.ts"
+            ],
+            "@pulwave/features-layout/*": [
+                "packages/features/layout/*"
+            ],
+            "@pulwave/features-auth": [
+                "packages/features/auth/index.ts"
+            ],
+            "@pulwave/features-auth/*": [
+                "packages/features/auth/*"
+            ],
+            "@pulwave/features-user": [
+                "packages/features/user/index.ts"
+            ],
+            "@pulwave/features-user/*": [
+                "packages/features/user/*"
+            ],
+            "@pulwave/features-style-guide": [
+                "packages/features/style-guide/index.ts"
+            ],
+            "@pulwave/features-style-guide/*": [
+                "packages/features/style-guide/*"
+            ],
+            "@pulwave/features-shared": [
+                "packages/features/shared/index.ts"
+            ],
+            "@pulwave/features-shared/*": [
+                "packages/features/shared/*"
+            ],
+            "@pulwave/security": [
+                "packages/shared/security/index.ts"
+            ],
+            "@pulwave/security/*": [
+                "packages/shared/security/*"
+            ],
+            "@pulwave/analytics": [
+                "packages/shared/analytics/index.ts"
+            ],
+            "@pulwave/analytics/*": [
+                "packages/shared/analytics/*"
+            ],
+            "@pulwave/experience-auth": [
+                "packages/pages/auth/index.ts"
+            ],
+            "@pulwave/experience-auth/*": [
+                "packages/pages/auth/*"
+            ],
+            "@pulwave/experience-settings": [
+                "packages/features/settings/index.ts"
+            ],
+            "@pulwave/experience-settings/*": [
+                "packages/features/settings/*"
+            ],
+            "@pulwave/features-dashboards": [
+                "packages/features/dashboard/index.ts"
+            ],
+            "@pulwave/features-dashboards/*": [
+                "packages/features/dashboard/*"
+            ],
+            "@pulwave/features-navigation": [
+                "packages/features/layout/index.ts"
+            ],
+            "@pulwave/features-navigation/*": [
+                "packages/features/layout/*"
+            ],
+            "@pulwave/foundation/utils": [
+                "packages/shared/utils/index.ts"
+            ],
+            "@pulwave/foundation/utils/*": [
+                "packages/shared/utils/*"
+            ],
+            "@pulwave/entities/*": [
+                "packages/entities/*"
+            ],
+            "@pulwave/hooks": [
+                "packages/shared/hooks/index.ts"
+            ],
+            "@pulwave/types": [
+                "packages/shared/types/index.ts"
+            ],
+            "@pulwave/tokens/*": [
+                "packages/shared/tokens/*"
+            ]
+        }
+    },
+    "include": [
+        "packages/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ]
+}

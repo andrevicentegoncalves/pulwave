@@ -1,0 +1,452 @@
+// ==========================================================================
+// Component Documentation - Section Styles
+// Additional section styles for component documentation
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    // ========================================================================
+    // LIVE DEMO SECTION
+    // ========================================================================
+
+    &__live-demo {
+        margin-bottom: var(--scale-8);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-l);
+        overflow: hidden;
+    }
+
+    &__live-demo-container {
+        padding: var(--scale-6);
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-4);
+    }
+
+    // ========================================================================
+    // ACCESSIBILITY STATUS BADGES
+    // ========================================================================
+
+    &__a11y-status {
+        margin-bottom: var(--scale-6);
+        padding: var(--scale-4);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+        border-left: var(--border-width-s) solid var(--color-brand-primary);
+    }
+
+    &__a11y-status-title {
+        font-size: var(--font-size-caption-m);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-semi-bold);
+        margin: 0 0 var(--scale-3);
+        color: var(--color-text-secondary);
+    }
+
+    &__a11y-status-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-3);
+    }
+
+    &__a11y-badge {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-3);
+        background: var(--color-surface-default);
+        border-radius: var(--border-radius-s);
+        border: var(--border-width-2xs) solid var(--color-border-subtle);
+
+        &--pass {
+            border-color: var(--color-status-success);
+        }
+
+        &--partial {
+            border-color: var(--color-status-warning);
+        }
+
+        &--fail {
+            border-color: var(--color-status-error);
+        }
+    }
+
+    &__a11y-badge-icon {
+        font-size: var(--font-size-body-l);
+        font-weight: var(--font-weight-bold);
+    }
+
+    &__a11y-badge-label {
+        font-size: var(--font-size-caption-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-m);
+        color: var(--color-text-secondary);
+        text-transform: capitalize;
+    }
+
+    // ========================================================================
+    // SECTION TITLES (Carbon-style with icons)
+    // ========================================================================
+
+    &__section-title {
+        font-size: var(--font-size-title-s);
+        line-height: var(--line-height-tight);
+        font-weight: var(--font-weight-semi-bold);
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        margin: var(--scale-6) 0 var(--scale-4);
+        padding-bottom: var(--scale-3);
+        border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
+        color: var(--color-text-primary);
+
+        svg {
+            color: var(--color-brand-primary);
+        }
+    }
+
+    // ========================================================================
+    // CONTENT GUIDELINES (Carbon-style)
+    // ========================================================================
+
+    &__content-guidelines {
+        margin: var(--scale-6) 0;
+        padding: var(--scale-5);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+    }
+
+    &__content-item {
+        margin-bottom: var(--scale-4);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+    }
+
+    &__further-guidance {
+        font-size: var(--font-size-body-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        font-style: italic;
+        margin-top: var(--scale-4);
+    }
+
+    // ========================================================================
+    // UNIVERSAL BEHAVIORS (Carbon-style)
+    // ========================================================================
+
+    &__behaviors {
+        margin: var(--scale-6) 0;
+    }
+
+    &__behavior-item {
+        margin-bottom: var(--scale-4);
+        padding-left: var(--scale-4);
+        border-left: var(--border-width-xs) solid var(--color-border-subtle);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        strong {
+            color: var(--color-text-primary);
+        }
+    }
+
+    // ========================================================================
+    // VARIANT DOCUMENTATION (Carbon-style)
+    // ========================================================================
+
+    &__variant-docs {
+        margin: var(--scale-6) 0;
+    }
+
+    &__best-practices {
+        h4 {
+            font-size: var(--font-size-caption-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-semi-bold);
+            margin: var(--scale-3) 0 var(--scale-2);
+            color: var(--color-text-primary);
+        }
+
+        ul {
+            margin: 0;
+            padding-left: var(--scale-5);
+            list-style: disc;
+        }
+
+        li {
+            font-size: var(--font-size-body-s);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--scale-1);
+        }
+    }
+
+    // ========================================================================
+    // MODIFIERS SECTION (Carbon-style)
+    // ========================================================================
+
+    &__modifiers {
+        margin: var(--scale-6) 0;
+    }
+
+    &__modifier {
+        margin-bottom: var(--scale-5);
+        padding-bottom: var(--scale-5);
+        border-bottom: var(--border-width-2xs) solid var(--color-border-subtle);
+
+        &:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        >p {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin: 0 0 var(--scale-4);
+        }
+    }
+
+    // ========================================================================
+    // SIZES (Carbon-style size comparison)
+    // ========================================================================
+
+    &__sizes {
+        margin: var(--scale-4) 0;
+    }
+
+    &__sizes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(1var(--scale-20), 1fr));
+        gap: var(--scale-4);
+    }
+
+    &__size-item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-2);
+        padding: var(--scale-4);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+
+        strong {
+            font-size: var(--font-size-caption-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-semi-bold);
+            color: var(--color-text-primary);
+        }
+
+        code {
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-caption-s);
+            padding: var(--scale-1) var(--scale-2);
+            background: var(--color-surface-strong);
+            border-radius: var(--border-radius-xs);
+            color: var(--color-brand-primary);
+        }
+
+        span {
+            font-size: var(--font-size-caption-s);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+        }
+    }
+
+    // ========================================================================
+    // FORMATTING TEXT SECTIONS
+    // ========================================================================
+
+    &__formatting-section {
+        margin: var(--scale-4) 0;
+    }
+
+    &__formatting-text {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--scale-4);
+        margin: var(--scale-4) 0;
+
+        @include bp-down(m) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__emphasis,
+    &__alignment {
+        padding: var(--scale-4);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+
+        p {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+    }
+
+    // ========================================================================
+    // STYLE TOKENS TABLE (Carbon-style Code tab)
+    // ========================================================================
+
+    &__style-tokens {
+        margin: var(--scale-6) 0;
+    }
+
+    &__token-variant {
+        margin-bottom: var(--scale-5);
+    }
+
+    &__token-table {
+        margin-top: var(--scale-3);
+    }
+
+    // ========================================================================
+    // STRUCTURE SPECS
+    // ========================================================================
+
+    &__structure {
+        margin: var(--scale-6) 0;
+    }
+
+    &__structure-table {
+        margin-top: var(--scale-3);
+    }
+
+    // ========================================================================
+    // A11Y RECOMMENDATIONS & CONSIDERATIONS
+    // ========================================================================
+
+    &__recommendations,
+    &__considerations {
+        margin: 0;
+        padding-left: var(--scale-5);
+        list-style: disc;
+
+        li {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--scale-2);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // ========================================================================
+    // REFERENCES SECTION
+    // ========================================================================
+
+    &__references {
+        margin-top: var(--scale-8);
+        padding-top: var(--scale-6);
+        border-top: var(--border-width-2xs) solid var(--color-border-subtle);
+    }
+
+    &__references-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            margin-bottom: var(--scale-3);
+            padding-left: var(--scale-4);
+            position: relative;
+
+            &::before {
+                content: '→';
+                position: absolute;
+                left: 0;
+                color: var(--color-brand-primary);
+            }
+
+            a {
+                font-size: var(--font-size-body-m);
+                line-height: var(--line-height-base);
+                font-weight: var(--font-weight-regular);
+                color: var(--color-link-default);
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__ref-author,
+    &__ref-source {
+        font-size: var(--font-size-caption-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+    }
+
+    // ========================================================================
+    // FEEDBACK SECTION
+    // ========================================================================
+
+    &__feedback {
+        margin-top: var(--scale-6);
+        padding: var(--scale-4);
+        background: var(--color-surface-subtle);
+        border-radius: var(--border-radius-m);
+
+        p {
+            font-size: var(--font-size-body-m);
+            line-height: var(--line-height-base);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-text-secondary);
+            margin: 0;
+
+            a {
+                color: var(--color-link-default);
+                font-weight: var(--font-weight-semi-bold);
+            }
+        }
+    }
+
+    // ========================================================================
+    // LAST UPDATED TIMESTAMP
+    // ========================================================================
+
+    &__last-updated {
+        font-size: var(--font-size-caption-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+        font-style: italic;
+    }
+}
+
+

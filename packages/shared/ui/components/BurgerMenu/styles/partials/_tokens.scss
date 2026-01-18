@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.burger-menu {
+    --burger-menu-width: var(--scale-6); // var(--scale-6)
+    --burger-menu-height: 18px; // Maintained as fixed for visual ratio
+    --burger-menu-line-height: var(--scale-0-5);
+    --burger-menu-color: var(--color-icon-default);
+    --burger-menu-hover-opacity: 0.8;
+    --burger-menu-anim-duration: var(--transition-smooth);
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@pulwave/tokens",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./styles": "./styles/scss/_index.scss",
+    "./styles/*": "./styles/scss/*.scss",
+    "./abstracts": "./styles/scss/abstracts/_index.scss",
+    "./base": "./styles/scss/base/_index.scss",
+    "./utilities": "./styles/scss/utilities/_index.scss",
+    "./css": "./generated/tokens.css",
+    "./themes/*": "./generated/theme-*.css"
+  },
+  "scripts": {
+    "tokens:build": "node scripts/tokens/build-tokens.cjs",
+    "tokens:themes": "node scripts/tokens/build-hsl-themes.cjs",
+    "audit:contrast": "node scripts/color/audit-contrast.cjs",
+    "lint:styles": "node scripts/styles/lint-styles.cjs"
+  }
+}

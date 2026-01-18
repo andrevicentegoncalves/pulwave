@@ -1,0 +1,342 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITY CLASSES: COLORS                          */
+/* ========================================================================== */
+
+// TEXT COLORS
+@each $key, $value in t.$color-tokens {
+    $class-name: null;
+
+    // Handle Semantic Text Tokens (color-text-*)
+    @if string.index($key, 'color-text-')==1 {
+        $suffix: string.slice($key, 12);
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus', 'group-hover', 'dark')) {
+                .#{$utility-prefix}text-#{$suffix}#{$utility-suffix} {
+                    color: var(--#{$key});
+                }
+            }
+        }
+    }
+
+    // Handle Semantic Status Text (color-status-*-text)
+    @else if string.index($key, 'color-status-')==1 and string.index($key, '-text') {
+        $mid: string.slice($key, 14, -6);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}text-status-#{$mid}#{$utility-suffix} {
+                    color: var(--#{$key});
+                }
+            }
+        }
+    }
+
+    // Handle Brand/Palette Colors
+    @else if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}text-#{$suffix}#{$utility-suffix} {
+                    color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// TEXT COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('hover', 'dark')) {
+            .#{$utility-prefix}text-#{$suffix}#{$utility-suffix} {
+                color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// BACKGROUND COLORS
+@each $key, $value in t.$color-tokens {
+
+    // Handle Surface Tokens
+    @if string.index($key, 'color-surface-')==1 {
+        $suffix: string.slice($key, 15);
+
+        @include with-responsive {
+            @include with-states(('hover', 'active', 'group-hover', 'dark')) {
+                .#{$utility-prefix}bg-surface-#{$suffix}#{$utility-suffix} {
+                    background-color: var(--#{$key});
+                }
+            }
+        }
+    }
+
+    // Handle Brand/Palette Colors
+    @else if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}bg-#{$suffix}#{$utility-suffix} {
+                    background-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// BACKGROUND COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('hover', 'dark')) {
+            .#{$utility-prefix}bg-#{$suffix}#{$utility-suffix} {
+                background-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// BORDER COLORS
+@each $key, $value in t.$color-tokens {
+
+    // Handle Border Tokens
+    @if string.index($key, 'color-border-')==1 {
+        $suffix: string.slice($key, 14);
+
+        @include with-responsive {
+            @include with-states(('hover', 'focus', 'group-hover', 'dark')) {
+                .#{$utility-prefix}border-#{$suffix}#{$utility-suffix} {
+                    border-color: var(--#{$key});
+                }
+            }
+        }
+    }
+
+    // Handle Palette Colors
+    @else if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}border-#{$suffix}#{$utility-suffix} {
+                    border-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// BORDER COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('hover', 'dark')) {
+            .#{$utility-prefix}border-#{$suffix}#{$utility-suffix} {
+                border-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// PLACEHOLDER COLORS
+@each $key, $value in t.$color-tokens {
+
+    // Handle Semantic Text Tokens for placeholder
+    @if string.index($key, 'color-text-')==1 {
+        $suffix: string.slice($key, 12);
+
+        @include with-responsive {
+            .#{$utility-prefix}placeholder-#{$suffix}#{$utility-suffix}::placeholder {
+                color: var(--#{$key});
+            }
+        }
+    }
+
+    // Handle Palette Colors for placeholder
+    @else if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            .#{$utility-prefix}placeholder-#{$suffix}#{$utility-suffix}::placeholder {
+                color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// PLACEHOLDER COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('focus', 'dark')) {
+            .#{$utility-prefix}placeholder-#{$suffix}#{$utility-suffix}::placeholder {
+                color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// RING COLORS
+@each $key, $value in t.$color-tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states(('focus', 'dark')) {
+                .#{$utility-prefix}ring-#{$suffix}#{$utility-suffix} {
+                    --ring-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// RING COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('focus', 'dark')) {
+            .#{$utility-prefix}ring-#{$suffix}#{$utility-suffix} {
+                --ring-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// SHADOW COLORS
+@each $key, $value in t.$color-tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states(('hover', 'dark')) {
+                .#{$utility-prefix}shadow-#{$suffix}#{$utility-suffix} {
+                    --shadow-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// SHADOW COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('hover', 'dark')) {
+            .#{$utility-prefix}shadow-#{$suffix}#{$utility-suffix} {
+                --shadow-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+// DECORATION COLORS
+@each $key, $value in t.$color-tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states(('hover', 'group-hover', 'dark')) {
+                .#{$utility-prefix}decoration-#{$suffix}#{$utility-suffix} {
+                    text-decoration-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// DECORATION COLORS (PRIMITIVES - Minimal States)
+@each $key, $value in t.$color-primitive-tokens {
+    $suffix: string.slice($key, 7);
+
+    @include with-responsive {
+        @include with-states(('hover', 'dark')) {
+            .#{$utility-prefix}decoration-#{$suffix}#{$utility-suffix} {
+                text-decoration-color: var(--#{$key});
+            }
+        }
+    }
+}
+
+
+// OPACITY MODIFIERS
+$opacity-scale: (
+    '0': 0,
+    '5': 0.05,
+    '10': 0.1,
+    '15': 0.15,
+    '20': 0.2,
+    '25': 0.25,
+    '30': 0.3,
+    '40': 0.4,
+    '50': 0.5,
+    '60': 0.6,
+    '70': 0.7,
+    '75': 0.75,
+    '80': 0.8,
+    '90': 0.9,
+    '95': 0.95,
+    '100': 1
+);
+
+@each $key, $value in $opacity-scale {
+    @include with-responsive {
+        @include with-states(('hover', 'focus', 'group-hover', 'active', 'disabled', 'dark')) {
+
+            // Text Opacity
+            .#{$utility-prefix}text-opacity-#{$key}#{$utility-suffix} {
+                --text-opacity: #{$value};
+            }
+
+            // Background Opacity
+            .#{$utility-prefix}bg-opacity-#{$key}#{$utility-suffix} {
+                --bg-opacity: #{$value};
+            }
+
+            // Border Opacity
+            .#{$utility-prefix}border-opacity-#{$key}#{$utility-suffix} {
+                --border-opacity: #{$value};
+            }
+
+            // Ring Opacity
+            .#{$utility-prefix}ring-opacity-#{$key}#{$utility-suffix} {
+                --ring-opacity: #{$value};
+            }
+
+            // Placeholder Opacity
+            .#{$utility-prefix}placeholder-opacity-#{$key}#{$utility-suffix}::placeholder {
+                --placeholder-opacity: #{$value};
+            }
+        }
+    }
+}
+
+// STATIC PLACEHOLDER UTILITIES
+@include with-responsive {
+    .#{$utility-prefix}placeholder-transparent#{$utility-suffix}::placeholder {
+        color: transparent;
+    }
+
+    .#{$utility-prefix}placeholder-current#{$utility-suffix}::placeholder {
+        color: currentColor;
+    }
+
+    .#{$utility-prefix}placeholder-inherit#{$utility-suffix}::placeholder {
+        color: inherit;
+    }
+}

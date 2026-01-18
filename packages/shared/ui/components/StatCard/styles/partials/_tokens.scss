@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.stat-card {
+    // Base
+    --stat-card-gap: var(--scale-4);
+
+    // Icon
+    --stat-card-icon-size-l: var(--scale-16); // 64px
+    --stat-card-icon-bg: var(--color-surface-subtle);
+    --stat-card-icon-color-primary: var(--color-brand-primary);
+    --stat-card-icon-color-success: var(--color-status-success);
+    --stat-card-icon-color-warning: var(--color-status-warning);
+    --stat-card-icon-color-critical: var(--color-critical);
+    --stat-card-icon-color-neutral: var(--color-icon-subtle);
+
+    // Text
+    --stat-card-value-color: var(--color-text-default);
+    --stat-card-label-color: var(--color-text-secondary);
+    --stat-card-subtext-color: var(--color-text-tertiary);
+}

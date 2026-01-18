@@ -1,0 +1,36 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--donut-wrapper {
+    &__center-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    &__center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+
+    &__value {
+        font-size: var(--font-size-display-s);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        line-height: var(--line-height-tight);
+    }
+
+    &__subtext {
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-text-secondary);
+    }
+}

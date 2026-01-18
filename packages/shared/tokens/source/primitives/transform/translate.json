@@ -1,0 +1,148 @@
+{
+    "$description": "Translate and position values",
+    "translate": {
+        "0": {
+            "$value": "0",
+            "$type": "dimension"
+        },
+        "1": {
+            "$value": "0.25rem",
+            "$type": "dimension",
+            "$description": "4px"
+        },
+        "2": {
+            "$value": "0.5rem",
+            "$type": "dimension",
+            "$description": "8px"
+        },
+        "3": {
+            "$value": "0.75rem",
+            "$type": "dimension",
+            "$description": "12px"
+        },
+        "4": {
+            "$value": "1rem",
+            "$type": "dimension",
+            "$description": "16px"
+        },
+        "6": {
+            "$value": "1.5rem",
+            "$type": "dimension",
+            "$description": "24px"
+        },
+        "8": {
+            "$value": "2rem",
+            "$type": "dimension",
+            "$description": "32px"
+        },
+        "12": {
+            "$value": "3rem",
+            "$type": "dimension",
+            "$description": "48px"
+        },
+        "16": {
+            "$value": "4rem",
+            "$type": "dimension",
+            "$description": "64px"
+        },
+        "24": {
+            "$value": "6rem",
+            "$type": "dimension",
+            "$description": "96px"
+        },
+        "quarter": {
+            "$value": "25%",
+            "$type": "dimension"
+        },
+        "half": {
+            "$value": "50%",
+            "$type": "dimension"
+        },
+        "full": {
+            "$value": "100%",
+            "$type": "dimension"
+        },
+        "-1": {
+            "$value": "-0.25rem",
+            "$type": "dimension"
+        },
+        "-2": {
+            "$value": "-0.5rem",
+            "$type": "dimension"
+        },
+        "-4": {
+            "$value": "-1rem",
+            "$type": "dimension"
+        },
+        "-half": {
+            "$value": "-50%",
+            "$type": "dimension"
+        },
+        "-full": {
+            "$value": "-100%",
+            "$type": "dimension"
+        }
+    },
+    "position": {
+        "0": {
+            "$value": "0",
+            "$type": "dimension"
+        },
+        "1": {
+            "$value": "0.25rem",
+            "$type": "dimension"
+        },
+        "2": {
+            "$value": "0.5rem",
+            "$type": "dimension"
+        },
+        "3": {
+            "$value": "0.75rem",
+            "$type": "dimension"
+        },
+        "4": {
+            "$value": "1rem",
+            "$type": "dimension"
+        },
+        "6": {
+            "$value": "1.5rem",
+            "$type": "dimension"
+        },
+        "8": {
+            "$value": "2rem",
+            "$type": "dimension"
+        },
+        "10": {
+            "$value": "2.5rem",
+            "$type": "dimension"
+        },
+        "12": {
+            "$value": "3rem",
+            "$type": "dimension"
+        },
+        "16": {
+            "$value": "4rem",
+            "$type": "dimension"
+        },
+        "20": {
+            "$value": "5rem",
+            "$type": "dimension"
+        },
+        "auto": {
+            "$value": "auto",
+            "$type": "string"
+        },
+        "25percent": {
+            "$value": "25%",
+            "$type": "dimension"
+        },
+        "50percent": {
+            "$value": "50%",
+            "$type": "dimension"
+        },
+        "100percent": {
+            "$value": "100%",
+            "$type": "dimension"
+        }
+    }
+}

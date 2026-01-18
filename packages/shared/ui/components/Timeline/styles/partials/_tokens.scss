@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.timeline {
+    --timeline-dot-size: var(--scale-3);
+    --timeline-connector-width: var(--scale-0-5);
+    --timeline-connector-color: var(--color-border-default);
+    --timeline-marker-gap: var(--scale-3);
+    --timeline-item-gap: var(--scale-4);
+}

@@ -1,0 +1,74 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.kpi-card {
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: var(--scale-2);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-ui-m);
+        font-weight: var(--font-weight-m);
+        color: var(--color-text-secondary);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: var(--icon-size-m);
+            height: var(--icon-size-m);
+        }
+    }
+
+    &__value {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-headline-m);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+    }
+
+    &__description {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body-s);
+        color: var(--color-text-secondary);
+        margin-top: auto;
+    }
+
+    &__trend {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-1);
+        font-size: var(--font-size-body-s);
+        font-weight: var(--font-weight-m);
+
+        &--positive {
+            color: var(--color-status-success);
+        }
+
+        &--negative {
+            color: var(--color-status-error);
+        }
+    }
+
+    &__trend-value {
+        margin-left: 2px;
+    }
+
+    &__trend-label {
+        margin-left: var(--scale-1);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-r);
+    }
+}

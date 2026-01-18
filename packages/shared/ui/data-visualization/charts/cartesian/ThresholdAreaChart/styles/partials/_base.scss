@@ -1,0 +1,12 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--threshold-area {
+    position: relative;
+    width: 100%;
+
+    &__threshold-label {
+        color: var(--color-error);
+        font-size: var(--font-size-body-xs);
+        margin-bottom: var(--spacing-xs);
+    }
+}

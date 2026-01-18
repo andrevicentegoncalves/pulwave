@@ -1,0 +1,80 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.breadcrumbs {
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--breadcrumbs-item-gap);
+        color: var(--breadcrumbs-link-color);
+
+        // Size variants logic handled in variants.scss or here via parent class
+        // Default size logic is moved to variants or default mixin
+
+        &:last-child {
+            color: var(--breadcrumbs-active-color);
+            font-weight: var(--font-weight-m);
+            pointer-events: none;
+        }
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--breadcrumbs-link-gap);
+        color: inherit;
+        text-decoration: none;
+        transition: color var(--duration-fast) ease;
+        border-radius: var(--border-radius-s);
+        cursor: pointer;
+
+        &:hover {
+            color: var(--breadcrumbs-link-hover-color);
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    &__separator {
+        display: flex;
+        align-items: center;
+        color: var(--breadcrumbs-separator-color);
+        user-select: none;
+    }
+
+    &__collapsed {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--breadcrumbs-collapsed-size);
+        height: var(--breadcrumbs-collapsed-size);
+        border-radius: var(--border-radius-m);
+        color: var(--breadcrumbs-collapsed-color);
+        cursor: pointer; // Ensure pointer on ellipsis if interactive
+
+        &:hover {
+            background-color: var(--breadcrumbs-collapsed-bg-hover);
+            color: var(--breadcrumbs-collapsed-color-hover);
+        }
+    }
+
+    &__icon {
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+        color: currentColor;
+
+        svg {
+            width: 1em;
+            height: 1em;
+        }
+    }
+
+    &__current {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--breadcrumbs-link-gap);
+    }
+}

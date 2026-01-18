@@ -1,0 +1,384 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITY CLASSES: SPACING                          */
+/* ========================================================================== */
+
+// MAIN SPACING LOOP - SCALE TOKENS
+@each $key, $value in t.$scale-tokens {
+    $suffix: string.slice($key, 7); // remove 'scale-'
+    $var: var(--#{$key});
+
+    @include with-responsive {
+
+        // MARGIN
+        .#{$utility-prefix}m-#{$suffix}#{$utility-suffix} {
+            margin: $var;
+        }
+
+        .#{$utility-prefix}mt-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+
+        .#{$utility-prefix}mb-#{$suffix}#{$utility-suffix} {
+            margin-bottom: $var;
+        }
+
+        .#{$utility-prefix}ml-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+        }
+
+        .#{$utility-prefix}mr-#{$suffix}#{$utility-suffix} {
+            margin-right: $var;
+        }
+
+        // MARGIN AXIS
+        .#{$utility-prefix}mx-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}my-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+            margin-bottom: $var;
+        }
+
+        // PADDING
+        .#{$utility-prefix}p-#{$suffix}#{$utility-suffix} {
+            padding: $var;
+        }
+
+        .#{$utility-prefix}pt-#{$suffix}#{$utility-suffix} {
+            padding-top: $var;
+        }
+
+        .#{$utility-prefix}pb-#{$suffix}#{$utility-suffix} {
+            padding-bottom: $var;
+        }
+
+        .#{$utility-prefix}pl-#{$suffix}#{$utility-suffix} {
+            padding-left: $var;
+        }
+
+        .#{$utility-prefix}pr-#{$suffix}#{$utility-suffix} {
+            padding-right: $var;
+        }
+
+        // PADDING AXIS
+        .#{$utility-prefix}px-#{$suffix}#{$utility-suffix} {
+            padding-left: $var;
+            padding-right: $var;
+        }
+
+        .#{$utility-prefix}py-#{$suffix}#{$utility-suffix} {
+            padding-top: $var;
+            padding-bottom: $var;
+        }
+
+        // LOGICAL MARGINS
+        .#{$utility-prefix}ms-#{$suffix}#{$utility-suffix} {
+            margin-inline-start: $var;
+        }
+
+        .#{$utility-prefix}me-#{$suffix}#{$utility-suffix} {
+            margin-inline-end: $var;
+        }
+
+        .#{$utility-prefix}m-inline-#{$suffix}#{$utility-suffix} {
+            margin-inline: $var;
+        }
+
+        .#{$utility-prefix}m-block-#{$suffix}#{$utility-suffix} {
+            margin-block: $var;
+        }
+
+        // LOGICAL PADDING
+        .#{$utility-prefix}ps-#{$suffix}#{$utility-suffix} {
+            padding-inline-start: $var;
+        }
+
+        .#{$utility-prefix}pe-#{$suffix}#{$utility-suffix} {
+            padding-inline-end: $var;
+        }
+
+        .#{$utility-prefix}p-inline-#{$suffix}#{$utility-suffix} {
+            padding-inline: $var;
+        }
+
+        .#{$utility-prefix}p-block-#{$suffix}#{$utility-suffix} {
+            padding-block: $var;
+        }
+    }
+}
+
+// MAIN SPACING LOOP - SEMANTIC SPACING TOKENS
+@each $key, $value in t.$spacing-tokens {
+    $suffix: string.slice($key, 9); // remove 'spacing-'
+    $var: var(--#{$key});
+
+    @include with-responsive {
+
+        // MARGIN
+        .#{$utility-prefix}m-#{$suffix}#{$utility-suffix} {
+            margin: $var;
+        }
+
+        .#{$utility-prefix}mt-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+
+        .#{$utility-prefix}mb-#{$suffix}#{$utility-suffix} {
+            margin-bottom: $var;
+        }
+
+        .#{$utility-prefix}ml-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+        }
+
+        .#{$utility-prefix}mr-#{$suffix}#{$utility-suffix} {
+            margin-right: $var;
+        }
+
+        // MARGIN AXIS
+        .#{$utility-prefix}mx-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}my-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+            margin-bottom: $var;
+        }
+
+        // PADDING
+        .#{$utility-prefix}p-#{$suffix}#{$utility-suffix} {
+            padding: $var;
+        }
+
+        .#{$utility-prefix}pt-#{$suffix}#{$utility-suffix} {
+            padding-top: $var;
+        }
+
+        .#{$utility-prefix}pb-#{$suffix}#{$utility-suffix} {
+            padding-bottom: $var;
+        }
+
+        .#{$utility-prefix}pl-#{$suffix}#{$utility-suffix} {
+            padding-left: $var;
+        }
+
+        .#{$utility-prefix}pr-#{$suffix}#{$utility-suffix} {
+            padding-right: $var;
+        }
+
+        // PADDING AXIS
+        .#{$utility-prefix}px-#{$suffix}#{$utility-suffix} {
+            padding-left: $var;
+            padding-right: $var;
+        }
+
+        .#{$utility-prefix}py-#{$suffix}#{$utility-suffix} {
+            padding-top: $var;
+            padding-bottom: $var;
+        }
+
+        // GAP
+        .#{$utility-prefix}gap-#{$suffix}#{$utility-suffix} {
+            gap: $var;
+        }
+
+        .#{$utility-prefix}gap-x-#{$suffix}#{$utility-suffix} {
+            column-gap: $var;
+        }
+
+        .#{$utility-prefix}gap-y-#{$suffix}#{$utility-suffix} {
+            row-gap: $var;
+        }
+
+        // LOGICAL MARGINS
+        .#{$utility-prefix}ms-#{$suffix}#{$utility-suffix} {
+            margin-inline-start: $var;
+        }
+
+        .#{$utility-prefix}me-#{$suffix}#{$utility-suffix} {
+            margin-inline-end: $var;
+        }
+
+        .#{$utility-prefix}m-inline-#{$suffix}#{$utility-suffix} {
+            margin-inline: $var;
+        }
+
+        .#{$utility-prefix}m-block-#{$suffix}#{$utility-suffix} {
+            margin-block: $var;
+        }
+
+        // LOGICAL PADDING
+        .#{$utility-prefix}ps-#{$suffix}#{$utility-suffix} {
+            padding-inline-start: $var;
+        }
+
+        .#{$utility-prefix}pe-#{$suffix}#{$utility-suffix} {
+            padding-inline-end: $var;
+        }
+
+        .#{$utility-prefix}p-inline-#{$suffix}#{$utility-suffix} {
+            padding-inline: $var;
+        }
+
+        .#{$utility-prefix}p-block-#{$suffix}#{$utility-suffix} {
+            padding-block: $var;
+        }
+    }
+}
+
+// NEGATIVE MARGINS - SCALE
+@each $key, $value in t.$scale-tokens {
+    $suffix: string.slice($key, 7);
+    $var: calc(-1 * var(--#{$key}));
+
+    @include with-responsive {
+        .#{$utility-prefix}-m-#{$suffix}#{$utility-suffix} {
+            margin: $var;
+        }
+
+        .#{$utility-prefix}-mt-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+
+        .#{$utility-prefix}-mb-#{$suffix}#{$utility-suffix} {
+            margin-bottom: $var;
+        }
+
+        .#{$utility-prefix}-ml-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+        }
+
+        .#{$utility-prefix}-mr-#{$suffix}#{$utility-suffix} {
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}-mx-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}-my-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+    }
+}
+
+// NEGATIVE MARGINS - SEMANTIC SPACING
+@each $key, $value in t.$spacing-tokens {
+    $suffix: string.slice($key, 9);
+    $var: calc(-1 * var(--#{$key}));
+
+    @include with-responsive {
+        .#{$utility-prefix}-m-#{$suffix}#{$utility-suffix} {
+            margin: $var;
+        }
+
+        .#{$utility-prefix}-mt-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+
+        .#{$utility-prefix}-mb-#{$suffix}#{$utility-suffix} {
+            margin-bottom: $var;
+        }
+
+        .#{$utility-prefix}-ml-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+        }
+
+        .#{$utility-prefix}-mr-#{$suffix}#{$utility-suffix} {
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}-mx-#{$suffix}#{$utility-suffix} {
+            margin-left: $var;
+            margin-right: $var;
+        }
+
+        .#{$utility-prefix}-my-#{$suffix}#{$utility-suffix} {
+            margin-top: $var;
+        }
+    }
+}
+
+
+// SPACE BETWEEN - SCALE
+@each $key, $value in t.$scale-tokens {
+    $suffix: string.slice($key, 7);
+    $var: var(--#{$key});
+
+    @include with-responsive {
+        .#{$utility-prefix}space-x-#{$suffix}#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+            --space-x-reverse: 0;
+            margin-right: calc($var * var(--space-x-reverse));
+            margin-left: calc($var * calc(1 - var(--space-x-reverse)));
+        }
+
+        .#{$utility-prefix}space-y-#{$suffix}#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+            --space-y-reverse: 0;
+            margin-bottom: calc($var * var(--space-y-reverse));
+            margin-top: calc($var * calc(1 - var(--space-y-reverse)));
+        }
+    }
+}
+
+// SPACE BETWEEN - SEMANTIC SPACING
+@each $key, $value in t.$spacing-tokens {
+    $suffix: string.slice($key, 9);
+    $var: var(--#{$key});
+
+    @include with-responsive {
+        .#{$utility-prefix}space-x-#{$suffix}#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+            --space-x-reverse: 0;
+            margin-right: calc($var * var(--space-x-reverse));
+            margin-left: calc($var * calc(1 - var(--space-x-reverse)));
+        }
+
+        .#{$utility-prefix}space-y-#{$suffix}#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+            --space-y-reverse: 0;
+            margin-bottom: calc($var * var(--space-y-reverse));
+            margin-top: calc($var * calc(1 - var(--space-y-reverse)));
+        }
+    }
+}
+
+
+// STATIC CLASSES
+@include with-responsive {
+    .#{$utility-prefix}m-auto#{$utility-suffix} {
+        margin: auto;
+    }
+
+    .#{$utility-prefix}mx-auto#{$utility-suffix} {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .#{$utility-prefix}my-auto#{$utility-suffix} {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .#{$utility-prefix}m-inline-auto#{$utility-suffix} {
+        margin-inline: auto;
+    }
+
+    .#{$utility-prefix}m-block-auto#{$utility-suffix} {
+        margin-block: auto;
+    }
+
+    .#{$utility-prefix}space-x-reverse#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --space-x-reverse: 1;
+    }
+
+    .#{$utility-prefix}space-y-reverse#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --space-y-reverse: 1;
+    }
+}

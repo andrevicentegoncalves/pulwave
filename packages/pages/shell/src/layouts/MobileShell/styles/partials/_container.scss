@@ -1,0 +1,30 @@
+// ============================================================================ //
+// MOBILE SHELL - CONTAINER
+// ============================================================================ //
+// Root container and responsive behavior
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.mobile-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh; // Dynamic viewport for mobile browsers
+    background-color: var(--color-surface-default);
+    overflow-x: hidden;
+    max-width: 100vw;
+
+    // Hide on desktop - pass through to children
+    @include bp-up(m) {
+        display: contents;
+    }
+}
+
+// Main content area
+.mobile-shell__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}

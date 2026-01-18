@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.rich-text-editor {
+    // Toolbar
+    --rte-toolbar-bg: var(--color-surface-subtle);
+    --rte-toolbar-border-color: var(--color-border-subtle);
+    --rte-toolbar-spacing: var(--scale-2);
+    --rte-toolbar-gap: var(--scale-1);
+
+    // Button
+    --rte-btn-size: var(--scale-7); // 28px
+    --rte-btn-radius: var(--border-radius-s);
+    --rte-btn-color: var(--color-icon-subtle);
+    --rte-btn-bg-hover: var(--color-action-ghost-hover); // More semantic
+    --rte-btn-color-hover: var(--color-icon-default);
+    --rte-btn-bg-active: var(--color-brand-primary-subtle); // Semantic
+    --rte-btn-color-active: var(--color-brand-primary);
+
+    // Content
+    --rte-content-padding: var(--scale-3);
+    --rte-content-color: var(--color-text-default);
+    --rte-content-min-height: 150px;
+}

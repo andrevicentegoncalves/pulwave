@@ -1,0 +1,9 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.rich-text-editor {
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+        background: var(--color-surface-subtle);
+    }
+}

@@ -1,0 +1,127 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.drawer {
+
+    // Positions & Animations & Sizes
+    &--left {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 0 var(--border-radius-l) var(--border-radius-l) 0;
+        animation: drawer-slide-in-left var(--duration-comfortable) var(--ease-out);
+
+        &.drawer--s {
+            width: var(--drawer-width-s);
+        }
+
+        &.drawer--m {
+            width: var(--drawer-width-m);
+        }
+
+        &.drawer--l {
+            width: var(--drawer-width-l);
+        }
+
+        &.drawer--full {
+            width: 100%;
+        }
+    }
+
+    &--right {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: var(--border-radius-l) 0 0 var(--border-radius-l);
+        animation: drawer-slide-in-right var(--duration-comfortable) var(--ease-out);
+
+        &.drawer--s {
+            width: var(--drawer-width-s);
+        }
+
+        &.drawer--m {
+            width: var(--drawer-width-m);
+        }
+
+        &.drawer--l {
+            width: var(--drawer-width-l);
+        }
+
+        &.drawer--full {
+            width: 100%;
+        }
+    }
+
+    &--bottom {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+        animation: drawer-slide-in-bottom var(--duration-comfortable) var(--ease-out);
+
+        &.drawer--s {
+            height: var(--drawer-height-s);
+        }
+
+        &.drawer--m {
+            height: var(--drawer-height-m);
+        }
+
+        &.drawer--l {
+            height: var(--drawer-height-l);
+        }
+
+        &.drawer--full {
+            height: 100%;
+        }
+    }
+
+    @include bp-down('s') {
+
+        &--left,
+        &--right {
+            width: 100% !important;
+            border-radius: 0;
+        }
+
+        &--bottom {
+            border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+        }
+    }
+}
+
+@keyframes drawer-slide-in-left {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes drawer-slide-in-right {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes drawer-slide-in-bottom {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .drawer {
+        animation: none;
+    }
+}

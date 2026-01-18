@@ -1,0 +1,171 @@
+// Motion Demo Animations
+// Uses design system motion tokens for consistent animations
+
+// Layout & Components
+.motion-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1var(--scale-20), 1fr));
+    gap: var(--scale-4);
+}
+
+.motion-demo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--scale-4);
+    min-height: 140px;
+    cursor: pointer;
+}
+
+.motion-demo-box {
+    width: var(--scale-12);
+    height: var(--scale-12);
+    background-color: var(--color-brand-primary);
+    border-radius: var(--border-radius-m);
+    margin-bottom: var(--scale-3);
+}
+
+.motion-demo-title {
+    margin-bottom: var(--scale-4);
+}
+
+.motion-demo-description {
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--scale-4);
+}
+
+.motion-demo-label {
+    margin-bottom: var(--scale-1);
+}
+
+.motion-demo-helper {
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+// Fade In
+.motion-demo-fade-in {
+    animation: demo-fade-in var(--duration-normal) var(--easing-standard) forwards;
+}
+
+// Slide Up
+.motion-demo-slide-up {
+    animation: demo-slide-up var(--duration-normal) var(--easing-decelerate) forwards;
+}
+
+// Scale In
+.motion-demo-scale-in {
+    animation: demo-scale-in var(--duration-fast) var(--easing-standard) forwards;
+}
+
+// Pulse
+.motion-demo-pulse {
+    animation: demo-pulse var(--duration-slow) var(--easing-standard) 2;
+}
+
+// Bounce
+.motion-demo-bounce {
+    animation: demo-bounce var(--duration-slow) var(--easing-bounce);
+}
+
+// Shake
+.motion-demo-shake {
+    animation: demo-shake var(--duration-fast) var(--easing-standard) 3;
+}
+
+// Duration demos
+.motion-demo-slow {
+    animation: demo-fade-in var(--duration-slow) var(--easing-standard) forwards;
+}
+
+.motion-demo-normal {
+    animation: demo-fade-in var(--duration-normal) var(--easing-standard) forwards;
+}
+
+.motion-demo-fast {
+    animation: demo-fade-in var(--duration-fast) var(--easing-standard) forwards;
+}
+
+// Keyframes
+@keyframes demo-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes demo-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(var(--scale-5));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes demo-scale-in {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes demo-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes demo-bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+
+    80% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes demo-shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}

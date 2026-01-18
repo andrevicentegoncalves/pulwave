@@ -1,0 +1,143 @@
+{
+    "$description": "Example Tenant Theme - ACME Corporation (Blue/Orange)",
+    "$format": "dtcg",
+    "theme": {
+        "name": "acme",
+        "primary": {
+            "$description": "Corporate blue",
+            "h": {
+                "$value": "220",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "90%",
+                "$type": "string"
+            },
+            "lightness": {
+                "50": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "90%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "80%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "68%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "55%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "50%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "42%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "35%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "25%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "15%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "8%",
+                    "$type": "string"
+                }
+            }
+        },
+        "secondary": {
+            "$description": "Accent orange",
+            "h": {
+                "$value": "25",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "95%",
+                "$type": "string"
+            },
+            "lightness": {
+                "50": {
+                    "$value": "95%",
+                    "$type": "string"
+                },
+                "100": {
+                    "$value": "90%",
+                    "$type": "string"
+                },
+                "200": {
+                    "$value": "80%",
+                    "$type": "string"
+                },
+                "300": {
+                    "$value": "68%",
+                    "$type": "string"
+                },
+                "400": {
+                    "$value": "55%",
+                    "$type": "string"
+                },
+                "500": {
+                    "$value": "50%",
+                    "$type": "string"
+                },
+                "600": {
+                    "$value": "42%",
+                    "$type": "string"
+                },
+                "700": {
+                    "$value": "35%",
+                    "$type": "string"
+                },
+                "800": {
+                    "$value": "25%",
+                    "$type": "string"
+                },
+                "900": {
+                    "$value": "15%",
+                    "$type": "string"
+                },
+                "950": {
+                    "$value": "8%",
+                    "$type": "string"
+                }
+            }
+        },
+        "tertiary": {
+            "$description": "Teal accent",
+            "h": {
+                "$value": "180",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "70%",
+                "$type": "string"
+            }
+        },
+        "neutral": {
+            "$description": "Cool gray (corporate feel)",
+            "h": {
+                "$value": "220",
+                "$type": "number"
+            },
+            "s": {
+                "$value": "10%",
+                "$type": "string"
+            }
+        }
+    }
+}

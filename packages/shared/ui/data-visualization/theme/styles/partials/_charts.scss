@@ -1,0 +1,74 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/**
+ * Chart Type Styles
+ * 
+ * Base chart wrapper and type modifiers.
+ */
+
+// ============================================================================
+// CHART WRAPPER - Base container
+// ============================================================================
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-family);
+
+    // Interactive state - prevent text selection during drag
+    &--interactive {
+        user-select: none;
+    }
+
+    // Loading state overlay
+    &--loading {
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--chart-background-color);
+            opacity: 0.5;
+        }
+    }
+}
+
+// ============================================================================
+// CHART TYPE MODIFIERS
+// ============================================================================
+
+.chart {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-family);
+
+    // Cartesian charts
+    &--area {}
+
+    &--bar {}
+
+    &--line {}
+
+    &--scatter {}
+
+    // Radial charts
+    &--pie {}
+
+    &--donut {}
+
+    &--radar {}
+
+    &--gauge {}
+
+    // Other chart types
+    &--funnel {}
+
+    &--heatmap {}
+
+    &--geo {}
+
+    &--treemap {}
+
+    &--sankey {}
+}

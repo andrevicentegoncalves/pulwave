@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.accordion {
+    // Defaults
+    --accordion-transition-duration: var(--transition-smooth);
+    --accordion-header-padding: var(--scale-3) var(--scale-4);
+    --accordion-content-padding: var(--scale-4);
+
+    // Theme Variables (can be overridden by variants)
+    --accordion-bg: transparent;
+    --accordion-header-bg: transparent;
+    --accordion-header-bg-hover: var(--color-action-ghost-hover);
+    --accordion-header-color: var(--color-text-default);
+    --accordion-content-bg: transparent;
+
+    // Primary Variant Defaults
+    --accordion-primary-header-bg: var(--color-surface-default);
+    --accordion-primary-header-bg-expanded: var(--color-surface-active);
+    --accordion-primary-content-bg: var(--color-surface-subtle);
+
+    // Neutral Variant Defaults
+    --accordion-neutral-header-bg-hover: var(--color-action-ghost-hover);
+}

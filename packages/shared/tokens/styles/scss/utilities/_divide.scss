@@ -1,0 +1,139 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: DIVIDE                                */
+/* ========================================================================== */
+
+:root {
+    --divide-x-reverse: 0;
+    --divide-y-reverse: 0;
+}
+
+// DIVIDE COLORS
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}divide-#{$suffix}#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+                    border-color: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+@include with-responsive {
+
+    // DIVIDE WIDTH (X-axis)
+    .#{$utility-prefix}divide-x#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 0;
+        border-right-width: calc(1px * var(--divide-x-reverse));
+        border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
+    }
+
+    .#{$utility-prefix}divide-x-0#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 0;
+        border-right-width: calc(0px * var(--divide-x-reverse));
+        border-left-width: calc(0px * calc(1 - var(--divide-x-reverse)));
+    }
+
+    .#{$utility-prefix}divide-x-2#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 0;
+        border-right-width: calc(2px * var(--divide-x-reverse));
+        border-left-width: calc(2px * calc(1 - var(--divide-x-reverse)));
+    }
+
+    .#{$utility-prefix}divide-x-4#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 0;
+        border-right-width: calc(4px * var(--divide-x-reverse));
+        border-left-width: calc(4px * calc(1 - var(--divide-x-reverse)));
+    }
+
+    .#{$utility-prefix}divide-x-8#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 0;
+        border-right-width: calc(8px * var(--divide-x-reverse));
+        border-left-width: calc(8px * calc(1 - var(--divide-x-reverse)));
+    }
+
+    .#{$utility-prefix}divide-x-reverse#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-x-reverse: 1;
+    }
+
+    // DIVIDE WIDTH (Y-axis)
+    .#{$utility-prefix}divide-y#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 0;
+        border-top-width: calc(1px * calc(1 - var(--divide-y-reverse)));
+        border-bottom-width: calc(1px * var(--divide-y-reverse));
+    }
+
+    .#{$utility-prefix}divide-y-0#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 0;
+        border-top-width: calc(0px * calc(1 - var(--divide-y-reverse)));
+        border-bottom-width: calc(0px * var(--divide-y-reverse));
+    }
+
+    .#{$utility-prefix}divide-y-2#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 0;
+        border-top-width: calc(2px * calc(1 - var(--divide-y-reverse)));
+        border-bottom-width: calc(2px * var(--divide-y-reverse));
+    }
+
+    .#{$utility-prefix}divide-y-4#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 0;
+        border-top-width: calc(4px * calc(1 - var(--divide-y-reverse)));
+        border-bottom-width: calc(4px * var(--divide-y-reverse));
+    }
+
+    .#{$utility-prefix}divide-y-8#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 0;
+        border-top-width: calc(8px * calc(1 - var(--divide-y-reverse)));
+        border-bottom-width: calc(8px * var(--divide-y-reverse));
+    }
+
+    .#{$utility-prefix}divide-y-reverse#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        --divide-y-reverse: 1;
+    }
+
+    // DIVIDE STYLE
+    .#{$utility-prefix}divide-solid#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-style: solid;
+    }
+
+    .#{$utility-prefix}divide-dashed#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-style: dashed;
+    }
+
+    .#{$utility-prefix}divide-dotted#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-style: dotted;
+    }
+
+    .#{$utility-prefix}divide-double#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-style: double;
+    }
+
+    .#{$utility-prefix}divide-none#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-style: none;
+    }
+
+    // DIVIDE COLORS (Static defaults)
+    .#{$utility-prefix}divide-default#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-color: var(--color-border-default);
+    }
+
+    .#{$utility-prefix}divide-subtle#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-color: var(--color-border-subtle);
+    }
+
+    .#{$utility-prefix}divide-strong#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-color: var(--color-border-strong);
+    }
+
+    .#{$utility-prefix}divide-transparent#{$utility-suffix}> :not([hidden])~ :not([hidden]) {
+        border-color: transparent;
+    }
+}

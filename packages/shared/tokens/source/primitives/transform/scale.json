@@ -1,0 +1,61 @@
+{
+    "$description": "Transform scale values",
+    "transformScale": {
+        "0": {
+            "$value": "0",
+            "$type": "number",
+            "$description": "Collapsed"
+        },
+        "25": {
+            "$value": "0.25",
+            "$type": "number"
+        },
+        "50": {
+            "$value": "0.5",
+            "$type": "number",
+            "$description": "Half size"
+        },
+        "75": {
+            "$value": "0.75",
+            "$type": "number"
+        },
+        "90": {
+            "$value": "0.9",
+            "$type": "number",
+            "$description": "Slightly smaller"
+        },
+        "95": {
+            "$value": "0.95",
+            "$type": "number",
+            "$description": "Subtle shrink"
+        },
+        "100": {
+            "$value": "1",
+            "$type": "number",
+            "$description": "Original size"
+        },
+        "105": {
+            "$value": "1.05",
+            "$type": "number",
+            "$description": "Subtle hover"
+        },
+        "110": {
+            "$value": "1.1",
+            "$type": "number",
+            "$description": "Hover effect"
+        },
+        "125": {
+            "$value": "1.25",
+            "$type": "number"
+        },
+        "150": {
+            "$value": "1.5",
+            "$type": "number"
+        },
+        "200": {
+            "$value": "2",
+            "$type": "number",
+            "$description": "Double size"
+        }
+    }
+}

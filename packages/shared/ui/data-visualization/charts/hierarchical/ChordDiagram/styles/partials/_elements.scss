@@ -1,0 +1,32 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--chord {
+    &__ribbon {
+        stroke-width: 0.5px;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__arc-group {
+        cursor: pointer;
+
+        &--legend-hovered {
+            .chart--chord__arc {
+                opacity: 1 !important;
+                filter: brightness(1.1);
+            }
+        }
+    }
+
+    &__arc {
+        fill: none;
+        stroke-linecap: butt;
+        transition: opacity 0.2s ease;
+    }
+
+    &__label {
+        font-size: var(--font-size-body-xs);
+        font-weight: var(--font-weight-medium);
+        fill: var(--color-text-primary);
+        pointer-events: none;
+    }
+}

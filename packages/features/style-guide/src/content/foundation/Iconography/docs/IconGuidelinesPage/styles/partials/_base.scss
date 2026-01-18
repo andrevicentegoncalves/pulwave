@@ -1,0 +1,33 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.iconography-guidelines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-12);
+    max-width: var(--scale-200);
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-4);
+    }
+
+    &__title {
+        margin-bottom: var(--scale-2);
+    }
+
+    &__subtitle {
+        margin-bottom: var(--scale-2);
+    }
+
+    &__description {
+        color: var(--color-neural-600);
+        margin-bottom: var(--scale-4);
+    }
+
+    &__card-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-6);
+    }
+}

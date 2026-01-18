@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.select {
+    // Sizes
+    --select-trigger-height-s: var(--scale-8);
+    --select-trigger-height-m: var(--scale-10);
+    --select-trigger-height-l: var(--scale-12);
+
+    // Spacing
+    --select-trigger-padding-s: var(--scale-1) var(--scale-3);
+    --select-trigger-padding-m: var(--scale-2) var(--scale-4);
+    --select-trigger-padding-l: var(--scale-3) var(--scale-5);
+
+    // Transitions
+    --select-transition-duration: var(--duration-fast);
+    --select-transition-easing: var(--easing-standard);
+
+    // Colors (defaults)
+    --select-bg: var(--color-surface-subtle);
+    --select-border-color: var(--color-border-default);
+    --select-border-color-hover: var(--color-border-hover);
+    --select-border-color-focus: var(--color-border-focus);
+    --select-text-color: var(--color-text-primary);
+    --select-placeholder-color: var(--color-text-secondary);
+
+    // Dropdown
+    --select-dropdown-bg: var(--color-surface-default);
+    --select-dropdown-shadow: var(--shadow-l);
+    --select-dropdown-max-height: var(--scale-75);
+}

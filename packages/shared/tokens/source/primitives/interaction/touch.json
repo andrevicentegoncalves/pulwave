@@ -1,0 +1,17 @@
+{
+    "$description": "Touch target size primitives for accessibility",
+    "touch": {
+        "target": {
+            "min": {
+                "$value": "44px",
+                "$type": "dimension",
+                "$description": "WCAG Minimum (44x44)"
+            },
+            "comfortable": {
+                "$value": "48px",
+                "$type": "dimension",
+                "$description": "Android/Material standard"
+            }
+        }
+    }
+}

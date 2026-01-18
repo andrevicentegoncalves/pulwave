@@ -1,0 +1,89 @@
+// ============================================================================ //
+// SECTION LAYOUT - MOBILE
+// ============================================================================ //
+// Mobile-specific styles: mobile header, toggle, backdrop
+
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/breakpoints' as *;
+
+.section-layout {
+
+    // Mobile Header (hidden on desktop)
+    &__mobile-header {
+        display: none;
+        align-items: center;
+        gap: var(--scale-3);
+        padding: var(--scale-3);
+        border-bottom: 1px solid var(--color-border-subtle);
+        background: var(--color-surface-default);
+    }
+
+    &__mobile-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-8);
+        height: var(--scale-8);
+        border: none;
+        background: transparent;
+        border-radius: var(--border-radius-m);
+        color: var(--color-text-primary);
+        cursor: pointer;
+
+        &:hover {
+            background: var(--color-surface-hover);
+        }
+    }
+
+    &__backdrop {
+        display: none;
+    }
+
+    &__content-inner {
+        flex: 1;
+        padding: var(--scale-4) var(--scale-6);
+    }
+
+    &__breadcrumbs {
+        padding: var(--scale-4) var(--scale-6) 0;
+    }
+}
+
+// Mobile breakpoint - show mobile UI
+@include bp-down('m') {
+    .section-layout {
+        &__mobile-header {
+            display: flex;
+        }
+
+        &__sidebar--open {
+            transform: translateX(0);
+        }
+
+        &__backdrop {
+            display: block;
+            position: fixed;
+            inset: 0;
+            background: var(--color-overlay-solid);
+            z-index: var(--z-index-sticky);
+            animation: sectionLayoutFadeIn 0.2s ease;
+        }
+
+        &__content-inner {
+            padding: var(--scale-4);
+        }
+
+        &__breadcrumbs {
+            display: none;
+        }
+    }
+}
+
+@keyframes sectionLayoutFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

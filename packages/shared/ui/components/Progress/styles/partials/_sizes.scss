@@ -1,0 +1,43 @@
+// Progress Component - Sizes (s, m, l)
+// ==========================================================================
+
+.progress {
+    &--s {
+        --progress-height: var(--progress-height-s);
+
+        .progress__step-indicator {
+            width: var(--scale-6); // var(--scale-6)
+            height: var(--scale-6);
+        }
+
+        .progress__step-connector {
+            top: var(--scale-3); // var(--scale-3)
+        }
+    }
+
+    &--m {
+        --progress-height: var(--progress-height-m);
+
+        .progress__step-indicator {
+            width: var(--scale-7); // 28px
+            height: var(--scale-7);
+        }
+
+        .progress__step-connector {
+            top: var(--scale-3-5); // 14px
+        }
+    }
+
+    &--l {
+        --progress-height: var(--progress-height-l);
+
+        .progress__step-indicator {
+            width: var(--scale-8); // var(--scale-8)
+            height: var(--scale-8);
+        }
+
+        .progress__step-connector {
+            top: var(--scale-4); // var(--scale-4)
+        }
+    }
+}

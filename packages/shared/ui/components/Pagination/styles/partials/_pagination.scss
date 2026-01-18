@@ -1,0 +1,69 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--scale-2);
+
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: var(--scale-8);
+        height: var(--scale-8);
+        padding: 0 var(--scale-2);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--border-radius-m);
+        background-color: var(--color-surface-default);
+        color: var(--color-text-primary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-label-m);
+        font-variant-numeric: tabular-nums;
+        cursor: pointer;
+        transition: background-color var(--duration-fast) var(--easing-standard),
+            color var(--duration-fast) var(--easing-standard),
+            border-color var(--duration-fast) var(--easing-standard);
+
+        &:hover:not(:disabled) {
+            background-color: var(--color-surface-hover);
+            border-color: var(--color-border-hover);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: var(--color-surface-disabled);
+        }
+
+        &--active {
+            background-color: var(--color-brand-primary-subtle);
+            color: var(--color-brand-primary);
+            border-color: var(--color-brand-primary);
+            font-weight: var(--font-weight-semi-bold);
+
+            &:hover:not(:disabled) {
+                background-color: var(--color-brand-primary-subtle);
+            }
+        }
+
+        &--icon {
+            padding: 0;
+            width: var(--scale-8);
+
+            svg {
+                width: var(--scale-4);
+                height: var(--scale-4);
+            }
+        }
+    }
+
+    &__ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--scale-8);
+        height: var(--scale-8);
+        color: var(--color-text-secondary);
+    }
+}

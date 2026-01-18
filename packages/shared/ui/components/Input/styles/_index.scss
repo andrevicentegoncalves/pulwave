@@ -1,0 +1,8 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+// Input Component Styles
+@forward 'partials/tokens';
+@forward 'partials/base';
+@forward 'partials/variants';
+@forward 'partials/sizes';
+@forward 'partials/states';

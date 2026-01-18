@@ -1,0 +1,25 @@
+// ============================================================================ //
+// HEADER - MAIN
+// ============================================================================ //
+// Mobile header container
+
+@use '../../../../../../../shared/tokens/styles/scss/abstracts' as *;
+
+.mobile-header {
+    display: none; // Hidden on desktop
+    position: fixed;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--scale-12);
+    padding: 0 var(--scale-4);
+    background-color: var(--color-surface-default);
+    z-index: var(--z-index-tooltip);
+    align-items: center;
+    box-shadow: var(--shadow-s);
+    border-bottom: var(--border-width-2) solid var(--color-border-subtle);
+    box-sizing: border-box;
+    overflow: hidden;
+    max-width: 100vw;
+}

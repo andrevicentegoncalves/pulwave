@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.split-pane {
+    --split-pane-handle-size: var(--scale-4);
+    --split-pane-handle-hit-area: var(--scale-4);
+    --split-pane-bar-size: var(--scale-1); // var(--scale-1)
+    --split-pane-bar-color: var(--color-border-subtle);
+    --split-pane-bar-color-active: var(--color-brand-primary);
+    --split-pane-icon-bg: var(--color-surface-default);
+}

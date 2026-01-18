@@ -1,0 +1,53 @@
+{
+    "$description": "Text style tokens - transform, decoration, style",
+    "textTransform": {
+        "none": {
+            "$value": "none",
+            "$type": "string"
+        },
+        "uppercase": {
+            "$value": "uppercase",
+            "$type": "string"
+        },
+        "lowercase": {
+            "$value": "lowercase",
+            "$type": "string"
+        },
+        "capitalize": {
+            "$value": "capitalize",
+            "$type": "string"
+        }
+    },
+    "fontStyle": {
+        "normal": {
+            "$value": "normal",
+            "$type": "string"
+        },
+        "italic": {
+            "$value": "italic",
+            "$type": "string"
+        },
+        "oblique": {
+            "$value": "oblique",
+            "$type": "string"
+        }
+    },
+    "textDecoration": {
+        "none": {
+            "$value": "none",
+            "$type": "string"
+        },
+        "underline": {
+            "$value": "underline",
+            "$type": "string"
+        },
+        "overline": {
+            "$value": "overline",
+            "$type": "string"
+        },
+        "lineThrough": {
+            "$value": "line-through",
+            "$type": "string"
+        }
+    }
+}

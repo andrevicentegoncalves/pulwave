@@ -1,0 +1,22 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart-legend {
+    &__item {
+        &--interactive {
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--chart-legend-hover-bg);
+            }
+        }
+
+        &--inactive {
+            opacity: 0.5;
+        }
+
+        &--active {
+            background-color: var(--chart-legend-hover-bg);
+            font-weight: var(--chart-font-weight-medium);
+        }
+    }
+}

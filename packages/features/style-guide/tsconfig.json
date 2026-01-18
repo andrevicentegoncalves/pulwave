@@ -1,0 +1,17 @@
+{
+    "extends": "../../../tsconfig.packages.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "strict": true,
+        "noEmit": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

@@ -1,0 +1,27 @@
+.library-toggle {
+    &__container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-3);
+        padding: var(--spacing-2) var(--spacing-3);
+        background: var(--color-surface-default);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-lg);
+    }
+
+    &__label {
+        color: var(--color-text-secondary);
+        transition: color var(--transition-colors), font-weight 0.2s ease;
+        user-select: none;
+        min-width: 4rem;
+        text-align: center;
+
+        &--active {
+            color: var(--color-text-primary);
+        }
+    }
+
+    &__switch {
+        // Additional switch styling if needed
+    }
+}

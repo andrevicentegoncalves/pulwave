@@ -1,0 +1,7 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// FileUpload variants are mostly state based (error, disabled) handled in elements.
+// Check if we need explicit variants file.
+// The monolithic file didn't have distinct size/color variants for the root.
+// Keeping empty for consistency or future use.
+.file-upload {}

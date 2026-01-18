@@ -1,0 +1,89 @@
+@use '../mixins/breakpoints' as bp;
+
+// ========================================================================== //
+//                              MIXINS: FLEXBOX                               //
+// ========================================================================== //
+
+/// Basic flex container
+/// @param {String} $direction - Flex direction (row, column)
+/// @param {String} $justify - Justify content alignment
+/// @param {String} $align - Align items alignment
+/// @param {String} $wrap - Flex wrap behavior
+/// @param {Number|String} $gap - Gap spacing key (e.g., 2, 4, 6)
+@mixin flex($direction: row,
+  $justify: flex-start,
+  $align: stretch,
+  $wrap: nowrap,
+  $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+
+  @if $gap {
+    gap: var(--spacing-#{$gap});
+  }
+}
+
+/// Centered flex container
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/// Space-between flex container
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/// Column flex with gap
+/// @param {Number|String} $gap - Gap spacing key (e.g., 2, 4, 6)
+@mixin flex-col($gap: null) {
+  display: flex;
+  flex-direction: column;
+
+  @if $gap {
+    gap: var(--spacing-#{$gap});
+  }
+}
+
+/// Responsive flex (row → column on mobile)
+/// @param {String} $breakpoint - Breakpoint to stack at
+/// @param {Number|String} $gap - Gap spacing key
+@mixin flex-stack($breakpoint: m, $gap: null) {
+  display: flex;
+  flex-direction: row;
+
+  @if $gap {
+    gap: var(--spacing-#{$gap});
+  }
+
+  @include bp.bp-down($breakpoint) {
+    flex-direction: column;
+  }
+}
+
+/// Flex with responsive direction
+/// @param {String} $desktop-direction - Direction on desktop
+/// @param {String} $mobile-direction - Direction on mobile
+/// @param {String} $breakpoint - Breakpoint to change at
+/// @param {Number|String} $gap - Gap spacing key
+@mixin flex-responsive($desktop-direction: row,
+  $mobile-direction: column,
+  $breakpoint: m,
+  $gap: null) {
+  display: flex;
+  flex-direction: $desktop-direction;
+
+  @if $gap {
+    gap: var(--spacing-#{$gap});
+  }
+
+  @include bp.bp-down($breakpoint) {
+    flex-direction: $mobile-direction;
+  }
+}

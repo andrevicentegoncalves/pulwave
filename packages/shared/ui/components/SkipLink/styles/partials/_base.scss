@@ -1,0 +1,23 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.skip-link {
+    font-size: var(--font-size-body-m);
+    position: absolute;
+    top: var(--scale-4);
+    left: var(--scale-4);
+    z-index: var(--z-index-overlay-modal); // Very high z-index for accessibility
+    padding: var(--scale-3) var(--scale-4);
+    background-color: var(--color-surface-default);
+    color: var(--color-brand-primary);
+    border-radius: var(--border-radius-m);
+    box-shadow: var(--shadow-m);
+    text-decoration: none;
+    transform: translateY(-150%);
+    transition: var(--transition-smooth);
+
+    &:focus {
+        transform: translateY(0);
+        @include interactive.focus-ring;
+    }
+}

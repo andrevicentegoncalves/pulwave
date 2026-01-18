@@ -1,0 +1,33 @@
+// ==========================================================================
+// Token Table Component
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.token-table {
+    &__variant {
+        margin-bottom: var(--scale-5);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__variant-title {
+        font-size: var(--font-size-ui-m);
+        font-weight: var(--font-weight-semi-bold);
+        margin: 0 0 var(--scale-3);
+        color: var(--color-text-primary);
+    }
+
+    &__token {
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-caption-s);
+        padding: var(--scale-1) var(--scale-2);
+        background: var(--color-surface-strong);
+        border-radius: var(--border-radius-xs);
+        color: var(--color-brand-primary);
+    }
+}
+
+

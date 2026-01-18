@@ -1,0 +1,26 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.label {
+    &--s {
+        .label__text {
+            font-size: var(--font-size-body-s);
+        }
+    }
+
+    &--m {
+        .label__text {
+            font-size: var(--font-size-body-m);
+        }
+    }
+
+    &--l {
+        .label__text {
+            font-size: var(--font-size-body-l);
+        }
+    }
+
+    &--disabled {
+        opacity: var(--opacity-action-disabled);
+        pointer-events: none;
+    }
+}

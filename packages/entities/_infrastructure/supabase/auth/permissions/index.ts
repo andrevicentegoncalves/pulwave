@@ -1,0 +1,2 @@
+export { SupabaseUserPermissionsProvider } from './SupabaseUserPermissionsProvider';
+

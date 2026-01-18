@@ -1,0 +1,11 @@
+// ============================================================================ //
+// MENU - CONTAINER
+// ============================================================================ //
+// Main menu container styles
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-2); // var(--scale-2) between items
+    width: 100%;
+}

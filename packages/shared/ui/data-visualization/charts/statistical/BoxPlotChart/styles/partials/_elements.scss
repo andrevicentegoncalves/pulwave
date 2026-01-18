@@ -1,0 +1,43 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--box-plot {
+    &__grid {
+        stroke: var(--color-border-secondary);
+        stroke-opacity: 0.3;
+        stroke-dasharray: 3 3;
+    }
+
+    &__axis-label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+    }
+
+    &__group {
+        cursor: pointer;
+        transition: filter 0.2s ease;
+
+        &--hovered {
+            filter: brightness(1.15);
+        }
+    }
+
+    &__whisker-line {
+        stroke: var(--color-text-secondary);
+        stroke-width: 2px;
+    }
+
+    &__box {
+        stroke-width: 2px;
+        fill-opacity: 0.7;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__median-line {
+        stroke: var(--color-white);
+        stroke-width: 2px;
+    }
+
+    &__outlier {
+        transition: r 0.2s ease;
+    }
+}

@@ -1,0 +1,14 @@
+/**
+ * ChartShell State Modifiers
+ */
+
+.chart-shell {
+
+    &--loading,
+    &--error,
+    &--empty {
+        .chart-shell__content {
+            min-height: 200px;
+        }
+    }
+}

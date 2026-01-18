@@ -1,0 +1,81 @@
+@use 'sass:string';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                           UTILITIES: TABLES                                */
+/* ========================================================================== */
+
+// BORDER SPACING LOOP
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'scale-')==1 {
+        // Escape dot if present (e.g. 0.5 -> 0\.5)
+        $suffix: string.slice($key, 7);
+        $dot-index: string.index($suffix, '.');
+
+        @if $dot-index {
+            $suffix: string.insert($suffix, '\\', $dot-index);
+        }
+
+        $var: var(--#{$key});
+
+        @include with-responsive {
+            .#{$utility-prefix}border-spacing-#{$suffix}#{$utility-suffix} {
+                border-spacing: $var;
+            }
+
+            .#{$utility-prefix}border-spacing-x-#{$suffix}#{$utility-suffix} {
+                border-spacing: $var 0;
+            }
+
+            .#{$utility-prefix}border-spacing-y-#{$suffix}#{$utility-suffix} {
+                border-spacing: 0 $var;
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+
+    // BORDER COLLAPSE
+    .#{$utility-prefix}border-collapse#{$utility-suffix} {
+        border-collapse: collapse;
+    }
+
+    .#{$utility-prefix}border-separate#{$utility-suffix} {
+        border-collapse: separate;
+    }
+
+    // BORDER SPACING (Static)
+    .#{$utility-prefix}border-spacing-0#{$utility-suffix} {
+        border-spacing: 0;
+    }
+
+    // TABLE LAYOUT
+    .#{$utility-prefix}table-auto#{$utility-suffix} {
+        table-layout: auto;
+    }
+
+    .#{$utility-prefix}table-fixed#{$utility-suffix} {
+        table-layout: fixed;
+    }
+
+    // CAPTION SIDE
+    .#{$utility-prefix}caption-top#{$utility-suffix} {
+        caption-side: top;
+    }
+
+    .#{$utility-prefix}caption-bottom#{$utility-suffix} {
+        caption-side: bottom;
+    }
+
+    // EMPTY CELLS
+    .#{$utility-prefix}empty-cells-show#{$utility-suffix} {
+        empty-cells: show;
+    }
+
+    .#{$utility-prefix}empty-cells-hide#{$utility-suffix} {
+        empty-cells: hide;
+    }
+}

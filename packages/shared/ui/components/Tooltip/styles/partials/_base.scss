@@ -1,0 +1,69 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.tooltip {
+    // Component Tokens (mapped to foundation)
+    --tooltip-z-index: var(--z-index-overlay-tooltip, 1000);
+    --tooltip-bg: var(--color-brand-tertiary);
+    /* User requested tertiary */
+    --tooltip-color: var(--color-text-on-primary);
+    /* Assuming on-tertiary is same as on-primary or needs explicit token */
+    --tooltip-padding-y: var(--scale-3);
+    /* More padding */
+    --tooltip-padding-x: var(--scale-4);
+    --tooltip-border-radius: var(--border-radius-2xl);
+    /* 2xl radius */
+    --tooltip-shadow: var(--shadow-m);
+    /* Slightly larger shadow */
+    --tooltip-max-width: 250px;
+    --tooltip-min-width: auto;
+
+    position: absolute;
+    z-index: var(--tooltip-z-index);
+    padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-color);
+    font-size: var(--font-size-body-s);
+    border-radius: var(--tooltip-border-radius);
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: max-content;
+    max-width: var(--tooltip-max-width);
+    min-width: var(--tooltip-min-width);
+    box-shadow: var(--tooltip-shadow);
+    pointer-events: none;
+    line-height: var(--line-height-relaxed);
+
+    // Animation
+    animation: tooltip-fade-in 0.15s ease-out;
+
+    // Portal positioning helper
+    &--fixed {
+        position: fixed;
+    }
+}
+
+// Wrapper for the trigger
+.tooltip-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+@keyframes tooltip-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(var(--scale-0-5));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .tooltip {
+        animation: none;
+    }
+}

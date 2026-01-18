@@ -1,0 +1,13 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--circular-line {
+    &__angle-axis {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-primary);
+    }
+
+    &__radius-axis {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-secondary);
+    }
+}

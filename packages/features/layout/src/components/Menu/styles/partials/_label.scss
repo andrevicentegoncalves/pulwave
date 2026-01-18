@@ -1,0 +1,32 @@
+// ============================================================================ //
+// MENU - LABEL
+// ============================================================================ //
+// Menu label styles
+
+.menu__label {
+    // Layout
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px; // Explicit max for transition
+
+    // Typography
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: var(--line-height-tight);
+    color: inherit;
+
+    // Animation - sync with sidebar for smooth collapse
+    // Use ease-in for opacity (fade out quickly on collapse)
+    // Use decelerate for max-width (smooth with sidebar width)
+    opacity: 1;
+    transition:
+        opacity 240ms ease-in,
+        max-width var(--sidebar-transition-duration, 280ms) var(--sidebar-transition-timing, var(--easing-decelerate));
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}

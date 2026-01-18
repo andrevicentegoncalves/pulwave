@@ -1,0 +1,11 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--heatmap {
+    &--sequential {
+        // Legend background handled via inline style for token support
+    }
+
+    &--diverging {
+        // Legend background handled via inline style for token support
+    }
+}

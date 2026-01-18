@@ -1,0 +1,38 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.content-layout {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: var(--scale-4);
+
+    @include bp-down('s') {
+        padding: var(--scale-3);
+    }
+
+    &__content {
+        width: 100%;
+        max-width: var(--content-max-width, 1200px); // Ideally use a token if available, essentially custom property for this layout
+    }
+
+    // Variants
+    &--dashboard {
+        --content-max-width: var(--container-xl); // 1200px ~ 1var(--scale-70) (xl) or dashboard token
+    }
+
+    &--wide {
+        --content-max-width: var(--container-xl);
+    }
+
+    &--xl {
+        --content-max-width: var(--container-2xl); // 1440px -> 1536px? Or custom
+    }
+
+    &--ultrawide {
+        --content-max-width: var(--container-2xl); // 1600px
+    }
+
+    &--fluid {
+        --content-max-width: 100%;
+    }
+}

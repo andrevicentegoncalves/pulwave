@@ -1,0 +1,70 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+@use '@pulwave/tokens/styles/scss/abstracts/mixins/helpers/interactive' as interactive;
+
+.mobile-header {
+
+    &__left,
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: var(--mobile-header-gap);
+    }
+
+    &__menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--mobile-header-btn-size);
+        height: var(--mobile-header-btn-size);
+        border: none;
+        background: transparent;
+        color: var(--mobile-header-btn-color);
+        border-radius: var(--border-radius-m);
+        cursor: pointer;
+        transition: var(--transition-fast);
+
+        &:hover {
+            background: var(--mobile-header-btn-bg-hover);
+        }
+
+        @include interactive.focus-ring;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: var(--mobile-header-gap);
+    }
+
+    &__avatar {
+        width: var(--mobile-header-avatar-size);
+        height: var(--mobile-header-avatar-size);
+        border-radius: var(--border-radius-round);
+        object-fit: cover;
+        cursor: pointer;
+        border: 1px solid var(--mobile-header-avatar-border);
+
+        @include interactive.focus-ring;
+    }
+
+    &__logout-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--mobile-header-logout-size);
+        height: var(--mobile-header-logout-size);
+        border: none;
+        background: transparent;
+        color: var(--mobile-header-logout-color);
+        border-radius: var(--border-radius-round);
+        cursor: pointer;
+        transition: var(--transition-fast);
+
+        &:hover {
+            background: var(--mobile-header-logout-bg-hover);
+            color: var(--mobile-header-logout-color-hover);
+        }
+
+        @include interactive.focus-ring;
+    }
+}

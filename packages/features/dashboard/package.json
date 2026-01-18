@@ -1,0 +1,21 @@
+{
+    "name": "@pulwave/features-dashboard",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "index.ts",
+    "types": "index.ts",
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/hooks": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/utils": "*",
+        "@pulwave/entity-infrastructure": "*"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    }
+}

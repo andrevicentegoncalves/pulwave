@@ -1,0 +1,48 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.color-picker {
+    &__label {
+        display: block;
+        color: var(--color-text-default);
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        min-width: var(--scale-30);
+        justify-content: flex-start;
+    }
+
+    &__swatch {
+        width: var(--color-picker-swatch-size);
+        height: var(--color-picker-swatch-size);
+        border-radius: var(--border-radius-s);
+        border: 1px solid var(--color-border-subtle);
+        flex-shrink: 0;
+    }
+
+    &__value {
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-body-s);
+    }
+
+    &__popover-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-3);
+        padding: var(--color-picker-popover-padding);
+        width: var(--color-picker-popover-width);
+    }
+
+    &__manual-input {
+        width: 100%;
+    }
+
+    &__input-swatch {
+        width: var(--color-picker-input-swatch-size);
+        height: var(--color-picker-input-swatch-size);
+        border-radius: var(--border-radius-xs);
+        border: 1px solid var(--color-border-subtle);
+    }
+}

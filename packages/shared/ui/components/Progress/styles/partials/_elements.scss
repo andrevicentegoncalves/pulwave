@@ -1,0 +1,93 @@
+// Progress Component - Elements (BEM)
+// ==========================================================================
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.progress {
+    &__track {
+        flex: 1;
+        height: var(--progress-height);
+        background: var(--progress-track-color);
+        border-radius: var(--progress-radius);
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__fill {
+        height: 100%;
+        width: 100%;
+        background: var(--progress-fill-color);
+        border-radius: var(--progress-radius);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    &__label {
+        @include typography-responsive('caption', 's');
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-m);
+        white-space: nowrap;
+    }
+
+    // Circular elements
+    &__circular-track {
+        fill: none;
+        stroke: var(--progress-track-color);
+    }
+
+    &__circular-fill {
+        fill: none;
+        stroke: var(--progress-fill-color);
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.3s ease;
+    }
+
+    // Steps elements
+    &__step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        flex: 1;
+    }
+
+    &__step-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: var(--scale-0-5) solid var(--color-border-default);
+        background-color: var(--color-surface-default);
+        @include typography-responsive('label', 's');
+        font-weight: var(--font-weight-m);
+        z-index: var(--z-index-default);
+    }
+
+    &__step-label {
+        @include typography-responsive('caption', 's');
+        color: var(--color-text-secondary);
+        margin-top: var(--scale-2);
+        text-align: center;
+    }
+
+    &__step-connector {
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        width: 100%;
+        height: var(--scale-0-5);
+        background-color: var(--color-border-default);
+    }
+
+    // Accessibility: Respect user's motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        &__fill {
+            transition: none;
+        }
+
+        &__circular-fill {
+            transition: none;
+        }
+    }
+}

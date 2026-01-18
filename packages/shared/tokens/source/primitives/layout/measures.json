@@ -1,0 +1,35 @@
+{
+    "$description": "Prose measure (line length) tokens for readability",
+    "measure": {
+        "xs": {
+            "$value": "20ch",
+            "$type": "dimension",
+            "$description": "Very narrow (sidebars)"
+        },
+        "s": {
+            "$value": "30ch",
+            "$type": "dimension",
+            "$description": "Narrow (captions)"
+        },
+        "m": {
+            "$value": "45ch",
+            "$type": "dimension",
+            "$description": "Ideal minimum reading width"
+        },
+        "l": {
+            "$value": "65ch",
+            "$type": "dimension",
+            "$description": "Ideal maximum reading width"
+        },
+        "xl": {
+            "$value": "75ch",
+            "$type": "dimension",
+            "$description": "Wide (long-form)"
+        },
+        "2xl": {
+            "$value": "85ch",
+            "$type": "dimension",
+            "$description": "Very wide"
+        }
+    }
+}

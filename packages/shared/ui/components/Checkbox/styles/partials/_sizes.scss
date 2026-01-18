@@ -1,0 +1,54 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ==========================================================================
+// CHECKBOX COMPONENT - SIZES
+// ==========================================================================
+
+// Small
+.checkbox__input--size-s {
+    width: var(--scale-5);
+    height: var(--scale-5);
+
+    &::after {
+        width: 5px;
+        height: var(--scale-2);
+        border-width: 0 var(--border-width-s) var(--border-width-s) 0;
+    }
+}
+
+// Medium (Default)
+.checkbox__input--size-m {
+    width: var(--scale-6);
+    height: var(--scale-6); // var(--scale-6)
+
+    &::after {
+        width: 6px;
+        height: 10px;
+        border-width: 0 var(--border-width-m) var(--border-width-m) 0;
+    }
+}
+
+// Large
+.checkbox__input--size-l {
+    width: var(--scale-8); // var(--scale-8)
+    height: var(--scale-8);
+
+    &::after {
+        width: var(--scale-2);
+        height: 14px;
+        border-width: 0 var(--border-width-l) var(--border-width-l) 0;
+    }
+}
+
+// Container gaps
+.checkbox__container--size-s {
+    gap: var(--scale-2);
+}
+
+.checkbox__container--size-m {
+    gap: var(--scale-3);
+}
+
+.checkbox__container--size-l {
+    gap: var(--scale-3);
+}

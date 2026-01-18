@@ -1,0 +1,2 @@
+export { SupabaseUITranslationProvider } from './SupabaseUITranslationProvider';
+

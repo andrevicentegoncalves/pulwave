@@ -1,0 +1,167 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.text {
+    // Categories & Sizes mapping would go here, often leveraging mixins or tokens
+    // For now, mapping to standard token vars assuming they exist
+
+    // Category: Display
+    &--display {
+        font-family: var(--font-family-display);
+        line-height: var(--line-height-display);
+        text-wrap: balance; // Better line distribution for headings
+
+        &.text--xl {
+            font-size: var(--font-size-display-l);
+        }
+
+        &.text--l {
+            font-size: var(--font-size-display-m);
+        }
+
+        &.text--m {
+            font-size: var(--font-size-display-s);
+        }
+
+        &.text--s {
+            font-size: var(--font-size-heading-xl);
+        }
+
+        // Fallback
+    }
+
+    // Category: Heading
+    &--heading {
+        font-weight: var(--font-weight-semi-bold);
+        line-height: var(--line-height-heading);
+        text-wrap: balance; // Better line distribution for headings
+
+        &.text--xl {
+            font-size: var(--font-size-heading-xl);
+        }
+
+        &.text--l {
+            font-size: var(--font-size-heading-l);
+        }
+
+        &.text--m {
+            font-size: var(--font-size-heading-m);
+        }
+
+        &.text--s {
+            font-size: var(--font-size-heading-s);
+        }
+
+        &.text--xs {
+            font-size: var(--font-size-heading-xs);
+        }
+    }
+
+    // Category: Title (often same as Heading but maybe different weight)
+    &--title {
+        font-weight: var(--font-weight-m);
+        text-wrap: balance; // Better line distribution for headings
+
+        &.text--l {
+            font-size: var(--font-size-title-l);
+        }
+
+        &.text--m {
+            font-size: var(--font-size-title-m);
+        }
+
+        &.text--s {
+            font-size: var(--font-size-title-s);
+        }
+    }
+
+    // Category: Body
+    &--body {
+        line-height: var(--line-height-body);
+        text-wrap: pretty; // Prevents orphans/widows in body text
+
+        &.text--l {
+            font-size: var(--font-size-body-l);
+        }
+
+        &.text--m {
+            font-size: var(--font-size-body-m);
+        }
+
+        &.text--s {
+            font-size: var(--font-size-body-s);
+        }
+    }
+
+    // Category: Label
+    &--label {
+        font-weight: var(--font-weight-m);
+        line-height: var(--line-height-label);
+        text-wrap: pretty; // Prevents orphans/widows in label text
+
+        &.text--l {
+            font-size: var(--font-size-label-l);
+        }
+
+        &.text--m {
+            font-size: var(--font-size-label-m);
+        }
+
+        &.text--s {
+            font-size: var(--font-size-label-s);
+        }
+    }
+
+    // Weights
+    &--regular {
+        font-weight: var(--font-weight-regular);
+    }
+
+    &--medium {
+        font-weight: var(--font-weight-m);
+    }
+
+    &--semibold {
+        font-weight: var(--font-weight-semi-bold);
+    }
+
+    &--bold {
+        font-weight: var(--font-weight-bold);
+    }
+
+    // Colors
+    &--default {
+        color: var(--color-text-primary);
+    }
+
+    &--muted {
+        color: var(--color-text-secondary);
+    }
+
+    &--primary {
+        color: var(--color-text-primary); // Assuming default text
+    }
+
+    &--brand {
+        color: var(--color-brand-primary);
+    }
+
+    &--success {
+        color: var(--color-status-success-text);
+    }
+
+    &--warning {
+        color: var(--color-status-warning-text);
+    }
+
+    &--error {
+        color: var(--color-status-error-text);
+    }
+
+    &--info {
+        color: var(--color-status-info-text);
+    }
+
+    &--inverted {
+        color: var(--color-text-inverse);
+    }
+}

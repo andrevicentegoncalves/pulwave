@@ -1,0 +1,2 @@
+export { SupabaseMasterDataProvider } from './SupabaseMasterDataProvider';
+

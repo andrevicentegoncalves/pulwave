@@ -1,0 +1,20 @@
+{
+    "name": "@pulwave/features-settings",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "index.ts",
+    "types": "index.ts",
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/hooks": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/utils": "*"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    }
+}

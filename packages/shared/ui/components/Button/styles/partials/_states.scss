@@ -1,0 +1,46 @@
+@use '@pulwave/tokens/styles/scss' as *;
+
+.button {
+    &:hover:not(:disabled) {
+        filter: brightness(0.95); // Simple hover effect
+        cursor: pointer;
+    }
+
+    // Specific variant hovers could go here if brightness isn't enough
+    &--primary:hover:not(:disabled) {
+        background: var(--color-brand-primary-hover);
+    }
+
+    &--ghost:hover:not(:disabled) {
+        background: var(--color-surface-strong);
+    }
+
+    &--text:hover:not(:disabled) {
+        background: var(--color-surface-strong);
+    }
+
+    &:focus-visible {
+        outline: var(--scale-0-5) solid var(--color-border-focus);
+        outline-offset: var(--scale-0-5);
+    }
+
+    &:disabled,
+    &--loading {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &--loading {
+        color: transparent !important; // Hide text but keep size
+
+        .button__spinner {
+            color: var(--color-text-primary);
+            // If primary, spinner should be on-primary.
+        }
+    }
+
+    &--primary.button--loading .button__spinner {
+        color: var(--color-text-on-primary);
+    }
+}

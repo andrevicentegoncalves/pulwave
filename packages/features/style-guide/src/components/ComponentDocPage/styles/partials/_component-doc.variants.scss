@@ -1,0 +1,31 @@
+// ==========================================================================
+// Component Documentation - Variants, Demos, Extensions
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.component-doc {
+    &__variants {
+        margin-bottom: var(--scale-4);
+    }
+
+    &__variant-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--scale-2);
+    }
+
+    &__extensions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scale-6);
+        margin-top: var(--scale-6);
+    }
+
+    &__demo-card {
+        border-radius: var(--border-radius-l);
+        overflow: hidden;
+    }
+}
+
+

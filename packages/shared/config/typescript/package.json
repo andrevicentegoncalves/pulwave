@@ -1,0 +1,12 @@
+{
+    "name": "@pulwave/typescript-config",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "description": "Shared TypeScript configurations for Pulwave monorepo",
+    "files": [
+        "base.json",
+        "react.json",
+        "node.json"
+    ]
+}

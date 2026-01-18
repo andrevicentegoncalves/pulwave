@@ -1,0 +1,200 @@
+// ==========================================================================
+// Demo Card Component
+// ==========================================================================
+
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.demo-card {
+    // border handled by Card component (outlined)
+    // border-radius handled by Card component
+    overflow: hidden;
+    transition: box-shadow var(--duration-normal) var(--easing-standard),
+        transform var(--duration-normal) var(--easing-standard);
+
+    &:hover {
+        box-shadow: var(--shadow-m);
+        transform: translateY(calc(var(--scale-1) * -0.3));
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--scale-4);
+        padding: var(--scale-4);
+        background: var(--color-surface-subtle);
+    }
+
+    &__info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        flex-shrink: 0;
+
+        // Action buttons
+        .demo-card__action-btn {
+            border: var(--border-width-2xs) solid transparent;
+            width: var(--scale-10) !important; // Size M (40px)
+            height: var(--scale-10) !important;
+            padding: 0 !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-shrink: 0;
+            background: var(--color-surface-strong); // User requested strong
+
+            &:hover {
+                background: var(--color-surface-heavy) !important; // User requested heavy
+            }
+
+            // Custom active state
+            &.btn--active {
+                background: var(--color-brand-primary);
+                color: var(--color-text-on-primary);
+
+                &:hover {
+                    background: var(--color-brand-primary-hover) !important;
+                }
+            }
+        }
+    }
+
+    &__title {
+        font-size: var(--font-size-title-s);
+        line-height: var(--line-height-tight);
+        font-weight: var(--font-weight-semi-bold);
+        margin: 0 0 var(--scale-1);
+        color: var(--color-text-primary);
+    }
+
+    &__description {
+        font-size: var(--font-size-body-s);
+        line-height: var(--line-height-base);
+        font-weight: var(--font-weight-regular);
+        margin: 0;
+        color: var(--color-text-secondary);
+    }
+
+    // Content wrapper - provides consistent padding around preview and source
+    &__content {
+        padding: var(--scale-3);
+    }
+
+    &__preview {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: var(--scale-4);
+        padding: var(--scale-5);
+        background: var(--color-surface-default);
+        border-radius: var(--border-radius-xl);
+        overflow: hidden; // Prevent content from overflowing
+
+        &--primary {
+            background: var(--color-primary-subtle);
+        }
+
+        &--transparent {
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+    }
+
+    &__source {
+        margin-top: var(--scale-4);
+        border: var(--border-width-2xs) solid var(--color-border-subtle);
+        border-radius: var(--border-radius-xl);
+        overflow: hidden; // Ensure code block respects radius
+    }
+
+    &__code {
+        margin: 0;
+        padding: var(--scale-4);
+        background: var(--color-surface-strong); // Changed to strong
+        max-width: 100%;
+        overflow-x: auto; // Allow horizontal scroll for long code lines
+
+        pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        // Standard (Firefox)
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-brand-primary) transparent;
+
+        // WebKit (Chrome, Edge, Safari)
+        &::-webkit-scrollbar {
+            height: var(--scale-1); // Horizontal scrollbar height
+            width: var(--scale-1); // Vertical scrollbar width
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-brand-primary); // Always primary
+            border-radius: var(--border-radius-pill);
+
+            &:hover {
+                background-color: var(--color-brand-primary-strong);
+            }
+        }
+
+        code {
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-code);
+            line-height: 1.5;
+        }
+    }
+
+    &__toggle {
+        display: flex;
+        align-items: center;
+        gap: var(--scale-2);
+        padding: var(--scale-2) var(--scale-4);
+        background: var(--color-surface-subtle);
+        border-top: var(--border-width-2xs) solid var(--color-border-subtle);
+        cursor: pointer;
+        color: var(--color-brand-primary);
+        font-size: var(--font-size-caption);
+
+        &:hover {
+            background: var(--color-surface-hover);
+        }
+    }
+}
+
+// Gap between demo cards in a list
+.foundation-doc__demos,
+.component-doc__demos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-6);
+
+    // Mobile: reduced padding
+    @include bp-down(m) {
+        padding: var(--scale-2);
+    }
+}
+
+// Individual demo card spacing
+.foundation-doc__demo,
+.demo-card {
+    margin-bottom: var(--scale-6);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

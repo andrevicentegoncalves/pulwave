@@ -1,0 +1,484 @@
+@use 'sass:string';
+@use 'sass:map';
+@use '../../tokens/generated/_tokens' as t;
+@use '../abstracts/mixins' as *;
+
+/* ========================================================================== */
+/*                          UTILITIES: GRADIENT                               */
+/* ========================================================================== */
+
+// CSS CUSTOM PROPERTIES FOR GRADIENTS
+:root {
+    --gradient-from-position: ;
+    --gradient-via-position: ;
+    --gradient-to-position: ;
+    --gradient-from: transparent;
+    --gradient-to: transparent;
+    --gradient-via: transparent;
+    --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+}
+
+// GRADIENT COLORS (FROM)
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}from-#{$suffix}#{$utility-suffix} {
+                    --gradient-from: var(--#{$key});
+                    --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+                }
+            }
+        }
+    }
+}
+
+// GRADIENT COLORS (VIA)
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}via-#{$suffix}#{$utility-suffix} {
+                    --gradient-via: var(--#{$key});
+                    --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-via) var(--gradient-via-position), var(--gradient-to) var(--gradient-to-position);
+                }
+            }
+        }
+    }
+}
+
+// GRADIENT COLORS (TO)
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'color-')==1 and not string.index($key, 'color-text') and not string.index($key, 'color-surface') and not string.index($key, 'color-border') and not string.index($key, 'color-background') {
+        $suffix: string.slice($key, 7);
+
+        @include with-responsive {
+            @include with-states {
+                .#{$utility-prefix}to-#{$suffix}#{$utility-suffix} {
+                    --gradient-to: var(--#{$key});
+                }
+            }
+        }
+    }
+}
+
+// BRAND GRADIENTS
+@each $key, $value in t.$tokens {
+    @if string.index($key, 'gradient-')==1 and not string.index($key, 'gradient-direction') and not string.index($key, 'gradient-radial') and not string.index($key, 'gradient-from') and not string.index($key, 'gradient-to') and not string.index($key, 'gradient-via') {
+        $suffix: string.slice($key, 10);
+
+        @include with-responsive {
+            .#{$utility-prefix}bg-gradient-#{$suffix}#{$utility-suffix} {
+                background-image: var(--#{$key});
+            }
+        }
+    }
+}
+
+
+@include with-responsive {
+
+    // GRADIENT DIRECTIONS
+    .#{$utility-prefix}bg-gradient-to-t#{$utility-suffix} {
+        background-image: linear-gradient(to top, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-tr#{$utility-suffix} {
+        background-image: linear-gradient(to top right, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-r#{$utility-suffix} {
+        background-image: linear-gradient(to right, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-br#{$utility-suffix} {
+        background-image: linear-gradient(to bottom right, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-b#{$utility-suffix} {
+        background-image: linear-gradient(to bottom, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-bl#{$utility-suffix} {
+        background-image: linear-gradient(to bottom left, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-l#{$utility-suffix} {
+        background-image: linear-gradient(to left, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-gradient-to-tl#{$utility-suffix} {
+        background-image: linear-gradient(to top left, var(--gradient-stops));
+    }
+
+    // RADIAL GRADIENTS
+    .#{$utility-prefix}bg-radial#{$utility-suffix} {
+        background-image: radial-gradient(var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-t#{$utility-suffix} {
+        background-image: radial-gradient(at top, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-b#{$utility-suffix} {
+        background-image: radial-gradient(at bottom, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-l#{$utility-suffix} {
+        background-image: radial-gradient(at left, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-r#{$utility-suffix} {
+        background-image: radial-gradient(at right, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-tl#{$utility-suffix} {
+        background-image: radial-gradient(at top left, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-tr#{$utility-suffix} {
+        background-image: radial-gradient(at top right, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-bl#{$utility-suffix} {
+        background-image: radial-gradient(at bottom left, var(--gradient-stops));
+    }
+
+    .#{$utility-prefix}bg-radial-at-br#{$utility-suffix} {
+        background-image: radial-gradient(at bottom right, var(--gradient-stops));
+    }
+
+    // CONIC GRADIENTS
+    .#{$utility-prefix}bg-conic#{$utility-suffix} {
+        background-image: conic-gradient(var(--gradient-stops));
+    }
+
+    // GRADIENT STOP POSITIONS (Using escaped percentage)
+    .#{$utility-prefix}from-0\%#{$utility-suffix} {
+        --gradient-from-position: 0%;
+    }
+
+    .#{$utility-prefix}from-5\%#{$utility-suffix} {
+        --gradient-from-position: 5%;
+    }
+
+    .#{$utility-prefix}from-10\%#{$utility-suffix} {
+        --gradient-from-position: 10%;
+    }
+
+    .#{$utility-prefix}from-15\%#{$utility-suffix} {
+        --gradient-from-position: 15%;
+    }
+
+    .#{$utility-prefix}from-20\%#{$utility-suffix} {
+        --gradient-from-position: 20%;
+    }
+
+    .#{$utility-prefix}from-25\%#{$utility-suffix} {
+        --gradient-from-position: 25%;
+    }
+
+    .#{$utility-prefix}from-30\%#{$utility-suffix} {
+        --gradient-from-position: 30%;
+    }
+
+    .#{$utility-prefix}from-35\%#{$utility-suffix} {
+        --gradient-from-position: 35%;
+    }
+
+    .#{$utility-prefix}from-40\%#{$utility-suffix} {
+        --gradient-from-position: 40%;
+    }
+
+    .#{$utility-prefix}from-45\%#{$utility-suffix} {
+        --gradient-from-position: 45%;
+    }
+
+    .#{$utility-prefix}from-50\%#{$utility-suffix} {
+        --gradient-from-position: 50%;
+    }
+
+    .#{$utility-prefix}from-55\%#{$utility-suffix} {
+        --gradient-from-position: 55%;
+    }
+
+    .#{$utility-prefix}from-60\%#{$utility-suffix} {
+        --gradient-from-position: 60%;
+    }
+
+    .#{$utility-prefix}from-65\%#{$utility-suffix} {
+        --gradient-from-position: 65%;
+    }
+
+    .#{$utility-prefix}from-70\%#{$utility-suffix} {
+        --gradient-from-position: 70%;
+    }
+
+    .#{$utility-prefix}from-75\%#{$utility-suffix} {
+        --gradient-from-position: 75%;
+    }
+
+    .#{$utility-prefix}from-80\%#{$utility-suffix} {
+        --gradient-from-position: 80%;
+    }
+
+    .#{$utility-prefix}from-85\%#{$utility-suffix} {
+        --gradient-from-position: 85%;
+    }
+
+    .#{$utility-prefix}from-90\%#{$utility-suffix} {
+        --gradient-from-position: 90%;
+    }
+
+    .#{$utility-prefix}from-95\%#{$utility-suffix} {
+        --gradient-from-position: 95%;
+    }
+
+    .#{$utility-prefix}from-100\%#{$utility-suffix} {
+        --gradient-from-position: 100%;
+    }
+
+    .#{$utility-prefix}via-0\%#{$utility-suffix} {
+        --gradient-via-position: 0%;
+    }
+
+    .#{$utility-prefix}via-5\%#{$utility-suffix} {
+        --gradient-via-position: 5%;
+    }
+
+    .#{$utility-prefix}via-10\%#{$utility-suffix} {
+        --gradient-via-position: 10%;
+    }
+
+    .#{$utility-prefix}via-15\%#{$utility-suffix} {
+        --gradient-via-position: 15%;
+    }
+
+    .#{$utility-prefix}via-20\%#{$utility-suffix} {
+        --gradient-via-position: 20%;
+    }
+
+    .#{$utility-prefix}via-25\%#{$utility-suffix} {
+        --gradient-via-position: 25%;
+    }
+
+    .#{$utility-prefix}via-30\%#{$utility-suffix} {
+        --gradient-via-position: 30%;
+    }
+
+    .#{$utility-prefix}via-35\%#{$utility-suffix} {
+        --gradient-via-position: 35%;
+    }
+
+    .#{$utility-prefix}via-40\%#{$utility-suffix} {
+        --gradient-via-position: 40%;
+    }
+
+    .#{$utility-prefix}via-45\%#{$utility-suffix} {
+        --gradient-via-position: 45%;
+    }
+
+    .#{$utility-prefix}via-50\%#{$utility-suffix} {
+        --gradient-via-position: 50%;
+    }
+
+    .#{$utility-prefix}via-55\%#{$utility-suffix} {
+        --gradient-via-position: 55%;
+    }
+
+    .#{$utility-prefix}via-60\%#{$utility-suffix} {
+        --gradient-via-position: 60%;
+    }
+
+    .#{$utility-prefix}via-65\%#{$utility-suffix} {
+        --gradient-via-position: 65%;
+    }
+
+    .#{$utility-prefix}via-70\%#{$utility-suffix} {
+        --gradient-via-position: 70%;
+    }
+
+    .#{$utility-prefix}via-75\%#{$utility-suffix} {
+        --gradient-via-position: 75%;
+    }
+
+    .#{$utility-prefix}via-80\%#{$utility-suffix} {
+        --gradient-via-position: 80%;
+    }
+
+    .#{$utility-prefix}via-85\%#{$utility-suffix} {
+        --gradient-via-position: 85%;
+    }
+
+    .#{$utility-prefix}via-90\%#{$utility-suffix} {
+        --gradient-via-position: 90%;
+    }
+
+    .#{$utility-prefix}via-95\%#{$utility-suffix} {
+        --gradient-via-position: 95%;
+    }
+
+    .#{$utility-prefix}via-100\%#{$utility-suffix} {
+        --gradient-via-position: 100%;
+    }
+
+    .#{$utility-prefix}to-0\%#{$utility-suffix} {
+        --gradient-to-position: 0%;
+    }
+
+    .#{$utility-prefix}to-5\%#{$utility-suffix} {
+        --gradient-to-position: 5%;
+    }
+
+    .#{$utility-prefix}to-10\%#{$utility-suffix} {
+        --gradient-to-position: 10%;
+    }
+
+    .#{$utility-prefix}to-15\%#{$utility-suffix} {
+        --gradient-to-position: 15%;
+    }
+
+    .#{$utility-prefix}to-20\%#{$utility-suffix} {
+        --gradient-to-position: 20%;
+    }
+
+    .#{$utility-prefix}to-25\%#{$utility-suffix} {
+        --gradient-to-position: 25%;
+    }
+
+    .#{$utility-prefix}to-30\%#{$utility-suffix} {
+        --gradient-to-position: 30%;
+    }
+
+    .#{$utility-prefix}to-35\%#{$utility-suffix} {
+        --gradient-to-position: 35%;
+    }
+
+    .#{$utility-prefix}to-40\%#{$utility-suffix} {
+        --gradient-to-position: 40%;
+    }
+
+    .#{$utility-prefix}to-45\%#{$utility-suffix} {
+        --gradient-to-position: 45%;
+    }
+
+    .#{$utility-prefix}to-50\%#{$utility-suffix} {
+        --gradient-to-position: 50%;
+    }
+
+    .#{$utility-prefix}to-55\%#{$utility-suffix} {
+        --gradient-to-position: 55%;
+    }
+
+    .#{$utility-prefix}to-60\%#{$utility-suffix} {
+        --gradient-to-position: 60%;
+    }
+
+    .#{$utility-prefix}to-65\%#{$utility-suffix} {
+        --gradient-to-position: 65%;
+    }
+
+    .#{$utility-prefix}to-70\%#{$utility-suffix} {
+        --gradient-to-position: 70%;
+    }
+
+    .#{$utility-prefix}to-75\%#{$utility-suffix} {
+        --gradient-to-position: 75%;
+    }
+
+    .#{$utility-prefix}to-80\%#{$utility-suffix} {
+        --gradient-to-position: 80%;
+    }
+
+    .#{$utility-prefix}to-85\%#{$utility-suffix} {
+        --gradient-to-position: 85%;
+    }
+
+    .#{$utility-prefix}to-90\%#{$utility-suffix} {
+        --gradient-to-position: 90%;
+    }
+
+    .#{$utility-prefix}to-95\%#{$utility-suffix} {
+        --gradient-to-position: 95%;
+    }
+
+    .#{$utility-prefix}to-100\%#{$utility-suffix} {
+        --gradient-to-position: 100%;
+    }
+
+
+    @include with-states {
+
+        // FROM Keywords
+        .#{$utility-prefix}from-transparent#{$utility-suffix} {
+            --gradient-from: transparent;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}from-current#{$utility-suffix} {
+            --gradient-from: currentColor;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}from-inherit#{$utility-suffix} {
+            --gradient-from: inherit;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}from-white#{$utility-suffix} {
+            --gradient-from: #fff;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}from-black#{$utility-suffix} {
+            --gradient-from: #000;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        // VIA Keywords
+        .#{$utility-prefix}via-transparent#{$utility-suffix} {
+            --gradient-via: transparent;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-via) var(--gradient-via-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}via-current#{$utility-suffix} {
+            --gradient-via: currentColor;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-via) var(--gradient-via-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}via-white#{$utility-suffix} {
+            --gradient-via: #fff;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-via) var(--gradient-via-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        .#{$utility-prefix}via-black#{$utility-suffix} {
+            --gradient-via: #000;
+            --gradient-stops: var(--gradient-from) var(--gradient-from-position), var(--gradient-via) var(--gradient-via-position), var(--gradient-to) var(--gradient-to-position);
+        }
+
+        // TO Keywords
+        .#{$utility-prefix}to-transparent#{$utility-suffix} {
+            --gradient-to: transparent;
+        }
+
+        .#{$utility-prefix}to-current#{$utility-suffix} {
+            --gradient-to: currentColor;
+        }
+
+        .#{$utility-prefix}to-white#{$utility-suffix} {
+            --gradient-to: #fff;
+        }
+
+        .#{$utility-prefix}to-black#{$utility-suffix} {
+            --gradient-to: #000;
+        }
+    }
+
+    // SPECIAL
+    .#{$utility-prefix}bg-none#{$utility-suffix} {
+        background-image: none;
+    }
+}

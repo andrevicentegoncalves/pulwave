@@ -1,0 +1,2 @@
+export { SupabaseActivityProvider } from './SupabaseActivityProvider';
+

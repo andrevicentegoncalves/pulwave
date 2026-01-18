@@ -1,0 +1,26 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--nested-pie {
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__segment {
+        cursor: pointer;
+        transition: fill-opacity 0.2s ease;
+    }
+
+    &__ring-label {
+        font-size: var(--font-size-body-xs);
+        fill: var(--color-text-primary);
+        pointer-events: none;
+    }
+
+    &__center-label {
+        font-size: var(--font-size-heading-s);
+        font-weight: var(--font-weight-bold);
+        fill: var(--color-text-primary);
+        pointer-events: none;
+    }
+}

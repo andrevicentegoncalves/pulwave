@@ -1,0 +1,26 @@
+{
+    "name": "@pulwave/pages-style-guide",
+    "version": "0.0.1",
+    "description": "V2 Style Guide - Design System Documentation",
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@pulwave/features-layout": "*",
+        "@pulwave/hooks": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/widgets": "*",
+        "@pulwave/features-auth": "*",
+        "@pulwave/features-user": "*",
+        "@pulwave/features-shared": "*",
+        "@pulwave/features-style-guide": "*"
+    },
+    "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
+        "react-router-dom": "^6.0.0 || ^7.0.0"
+    }
+}

@@ -1,0 +1,25 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+/* ────────────────────── VERIFICATION BADGE ────────────────────── */
+
+.verification-badge {
+    // Sizes are inherited from Badge component
+    // This file exists for any verification-specific overrides
+
+    &--verified {
+        // Uses Badge success styles
+    }
+
+    &--pending,
+    &--requires-action {
+        // Uses Badge warning styles
+    }
+
+    &--failed {
+        // Uses Badge error styles
+    }
+
+    &--unverified {
+        // Uses Badge neutral styles
+    }
+}

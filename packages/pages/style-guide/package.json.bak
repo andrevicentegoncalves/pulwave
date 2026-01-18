@@ -1,0 +1,21 @@
+{
+    "name": "@pulwave/experience-style-guide",
+    "version": "0.0.1",
+    "description": "V2 Style Guide - Design System Documentation",
+    "main": "index.ts",
+    "types": "index.ts",
+    "private": true,
+    "dependencies": {
+        "@pulwave/experience-shell": "*",
+        "@pulwave/features-navigation": "*",
+        "@pulwave/foundation": "*",
+        "@pulwave/ui": "*",
+        "@pulwave/features-auth": "*",
+        "@pulwave/features-user": "*",
+        "@pulwave/features-shared": "*",
+        "@pulwave/features-style-guide": "*",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.22.0"
+    }
+}

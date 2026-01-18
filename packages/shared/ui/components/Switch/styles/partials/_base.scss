@@ -1,0 +1,50 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+// ── BASE ──
+.switch-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-1);
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: var(--scale-2);
+    min-height: var(--scale-8);
+}
+
+.switch {
+    appearance: none;
+    position: relative;
+    border: none;
+    background-color: var(--color-surface-moderate); // Unchecked
+    border-radius: var(--border-radius-xl);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-out);
+    padding: 3px;
+    flex-shrink: 0;
+
+    // ── THUMB ──
+    &__thumb {
+        display: block;
+        background-color: var(--color-text-inverse-default);
+        border-radius: var(--border-radius-round);
+        box-shadow: var(--shadow-s);
+        transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    // ── LABEL ──
+    &__label {
+        font-size: var(--font-size-body-m);
+        color: var(--color-text-default);
+        cursor: pointer;
+    }
+
+    // ── HELPER TEXT ──
+    &__helper {
+        font-size: var(--font-size-body-s);
+        color: var(--color-text-secondary);
+        margin-left: 52px; // Default, overridden by sizes
+    }
+}

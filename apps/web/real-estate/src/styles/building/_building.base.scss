@@ -1,0 +1,8 @@
+@use '../../../../../../packages/foundation/styles/scss/abstracts' as *;
+
+.building-form__actions {
+    margin-top: var(--scale-6);
+    display: flex;
+    gap: var(--scale-3);
+    justify-content: flex-end;
+}

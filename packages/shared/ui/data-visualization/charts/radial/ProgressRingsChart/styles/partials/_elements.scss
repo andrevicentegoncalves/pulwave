@@ -1,0 +1,34 @@
+@use '@pulwave/tokens/styles/scss/abstracts' as *;
+
+.chart--progress-rings {
+    &__svg {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__ring-group {
+        cursor: pointer;
+    }
+
+    &__ring-track {
+        stroke: var(--color-border-primary);
+        stroke-opacity: 0.2;
+    }
+
+    &__ring-progress {
+        transition: stroke-dasharray 0.5s ease, stroke-width 0.2s ease, filter 0.2s ease;
+
+        &--hovered {
+            filter: brightness(1.15);
+        }
+    }
+
+    &__center-value {
+        fill: var(--color-text-primary);
+        font-weight: var(--font-weight-bold);
+    }
+
+    &__center-label {
+        fill: var(--color-text-secondary);
+    }
+}
