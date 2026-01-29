@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, type ChangeEvent } from 'react';
 
 import {
     useAdminTranslations,
@@ -29,6 +29,42 @@ import { LocaleSelect } from '@pulwave/features-shared';
 import GroupedTranslationList from './GroupedTranslationList'; // Assuming local export
 import AllTranslationsList from './AllTranslationsList';     // Assuming local export
 import TranslationFormModal from './TranslationFormModal';   // Assuming local export
+
+// Types
+interface TranslationItem {
+    id?: string;
+    source_type?: 'ui' | 'database' | 'enum' | 'content' | 'master_data';
+    translation_key?: string;
+    locale_code?: string;
+    translated_text?: string;
+    translated_label?: string;
+    translated_content?: string;
+    status?: string;
+    table_name?: string;
+    column_name?: string;
+    enum_name?: string;
+    enum_value?: string;
+    record_id?: string;
+    items?: TranslationItem[];
+    siblings?: TranslationItem[];
+    [key: string]: unknown;
+}
+
+interface Locale {
+    code: string;
+    name: string;
+}
+
+interface Category {
+    value_key: string;
+    value_label: string;
+    value_data?: { group?: string };
+}
+
+interface Setting {
+    setting_key: string;
+    setting_value: string | Record<string, unknown>;
+}
 
 const SOURCE_TYPES = [
     { value: '', label: 'All', icon: Languages },
@@ -83,18 +119,18 @@ const TranslationsEditor = () => {
     ];
 
     // Modals
-    const [editModal, setEditModal] = useState<{ isOpen: boolean; data: any }>({ isOpen: false, data: null });
-    const [deleteModal, setDeleteModal] = useState<{ isOpen: boolean; translation: any }>({ isOpen: false, translation: null });
+    const [editModal, setEditModal] = useState<{ isOpen: boolean; data: TranslationItem | null }>({ isOpen: false, data: null });
+    const [deleteModal, setDeleteModal] = useState<{ isOpen: boolean; translation: { id: string } | null }>({ isOpen: false, translation: null });
     const [regenerateModal, setRegenerateModal] = useState(false);
     const [errorModal, setErrorModal] = useState<{ isOpen: boolean; message: string }>({ isOpen: false, message: '' });
-    const [syncResultModal, setSyncResultModal] = useState<{ isOpen: boolean; result: any }>({ isOpen: false, result: null });
+    const [syncResultModal, setSyncResultModal] = useState<{ isOpen: boolean; result: unknown }>({ isOpen: false, result: null });
     const [isSyncing, setIsSyncing] = useState(false);
 
     // ================= DATA FETCHING =================
 
     // 1. Locales
     const { data: localesData, isLoading: localesLoading } = useAdminLocales();
-    const locales = localesData || [];
+    const locales: Locale[] = localesData || [];
 
     // 2. Translations
     const { data, isLoading, isFetching, refetch } = useAdminTranslations({
@@ -118,8 +154,8 @@ const TranslationsEditor = () => {
             await deleteTranslation.mutateAsync(deleteModal.translation.id);
             setDeleteModal({ isOpen: false, translation: null });
             refetch();
-        } catch (err: any) {
-            setErrorModal({ isOpen: true, message: err.message });
+        } catch (err) {
+            setErrorModal({ isOpen: true, message: err instanceof Error ? err.message : 'An error occurred' });
         }
     };
 
@@ -129,24 +165,24 @@ const TranslationsEditor = () => {
     const { data: configuredEnums = [] } = useTranslatableEnums();
 
     const configuredColumns = useMemo(() => {
-        const s = settings?.find((x: any) => x.setting_key === 'TRANSLATABLE_COLUMNS');
-        let val = s?.setting_value;
+        const s = (settings as Setting[] | undefined)?.find((x: Setting) => x.setting_key === 'TRANSLATABLE_COLUMNS');
+        let val: unknown = s?.setting_value;
         if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
-        return typeof val === 'object' && !Array.isArray(val) ? val : {};
+        return typeof val === 'object' && val !== null && !Array.isArray(val) ? val as Record<string, string[]> : {};
     }, [settings]);
 
     const userConfiguredTables = useMemo(() => {
-        const s = settings?.find((x: any) => x.setting_key === 'USER_TRANSLATABLE_TABLES');
-        let val = s?.setting_value;
+        const s = (settings as Setting[] | undefined)?.find((x: Setting) => x.setting_key === 'USER_TRANSLATABLE_TABLES');
+        let val: unknown = s?.setting_value;
         if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
-        return typeof val === 'object' && !Array.isArray(val) ? Object.keys(val) : [];
+        return typeof val === 'object' && val !== null && !Array.isArray(val) ? Object.keys(val) : [];
     }, [settings]);
 
     const userConfiguredColumns = useMemo(() => {
-        const s = settings?.find((x: any) => x.setting_key === 'USER_TRANSLATABLE_COLUMNS');
-        let val = s?.setting_value;
+        const s = (settings as Setting[] | undefined)?.find((x: Setting) => x.setting_key === 'USER_TRANSLATABLE_COLUMNS');
+        let val: unknown = s?.setting_value;
         if (typeof val === 'string') try { val = JSON.parse(val); } catch { val = {}; }
-        return typeof val === 'object' && !Array.isArray(val) ? val : {};
+        return typeof val === 'object' && val !== null && !Array.isArray(val) ? val as Record<string, string[]> : {};
     }, [settings]);
 
     const generateBundles = useGenerateTranslationBundles();
@@ -155,11 +191,11 @@ const TranslationsEditor = () => {
 
     // Categories
     const { data: categoriesData } = useAdminMasterDataValues('translation_categories');
-    const categories = categoriesData || [];
+    const categories: Category[] = categoriesData || [];
 
     const categoryOptions = [
         { value: '', label: 'All Categories' },
-        ...categories.map((c: any) => ({
+        ...categories.map((c: Category) => ({
             value: c.value_key,
             label: c.value_label,
             group: c.value_data?.group || null
@@ -168,7 +204,7 @@ const TranslationsEditor = () => {
 
     const localeOptions = [
         { value: '', label: 'All Locales' },
-        ...locales.map((l: any) => ({ value: l.code, label: l.name, countryCode: l.code.includes('-') ? l.code.split('-')[1] : null })),
+        ...locales.map((l: Locale) => ({ value: l.code, label: l.name, countryCode: l.code.includes('-') ? l.code.split('-')[1] : null })),
     ];
 
     const tableOptions = [
@@ -185,7 +221,7 @@ const TranslationsEditor = () => {
     // I'll use configuredEnums for the filter options.
     const enumOptions = [
         { value: '', label: 'Select Enum…' },
-        ...configuredEnums.map((e: any) => ({ value: e.enum_name || e, label: e.enum_name || e }))
+        ...configuredEnums.map((e: { enum_name?: string } | string) => ({ value: typeof e === 'string' ? e : e.enum_name || '', label: typeof e === 'string' ? e : e.enum_name || '' }))
     ];
 
     // For Edit Modal options, we might need actual values. Passing as prop.
@@ -208,7 +244,7 @@ const TranslationsEditor = () => {
         setEditModal({ isOpen: true, data: null });
     };
 
-    const openEditModal = (item: any) => {
+    const openEditModal = (item: TranslationItem) => {
         // Prepare data for modal (logic ported from legacy)
         let dataToEdit = { ...item };
         if (item.items && item.items.length > 0) {
@@ -216,11 +252,11 @@ const TranslationsEditor = () => {
             dataToEdit.siblings = item.items;
         } else {
             // Find siblings in current page (simplified)
-            let siblings = [];
+            let siblings: TranslationItem[] = [];
             if (item.source_type === 'ui') {
-                siblings = displayData.filter((t: any) => t.translation_key === item.translation_key) || [];
+                siblings = displayData.filter((t: TranslationItem) => t.translation_key === item.translation_key) || [];
             } else if (item.source_type === 'database') {
-                siblings = displayData.filter((t: any) => t.table_name === item.table_name && t.column_name === item.column_name) || [];
+                siblings = displayData.filter((t: TranslationItem) => t.table_name === item.table_name && t.column_name === item.column_name) || [];
             }
             if (siblings.length === 0) siblings = [item];
             dataToEdit.siblings = siblings;
@@ -233,9 +269,9 @@ const TranslationsEditor = () => {
         try {
             await generateBundles.mutateAsync(null);
             setRegenerateModal(false);
-        } catch (e: any) {
+        } catch (e) {
             setRegenerateModal(false);
-            setErrorModal({ isOpen: true, message: e.message });
+            setErrorModal({ isOpen: true, message: e instanceof Error ? e.message : 'An error occurred' });
         }
     };
 
@@ -261,8 +297,8 @@ const TranslationsEditor = () => {
             // If sync is distinct, I should add it.
             // I'll skip complex sync feedback UI for now to save space.
             await refetch();
-        } catch (err: any) {
-            setErrorModal({ isOpen: true, message: `Sync failed: ${err.message}` });
+        } catch (err) {
+            setErrorModal({ isOpen: true, message: `Sync failed: ${err instanceof Error ? err.message : 'Unknown error'}` });
         } finally {
             setIsSyncing(false);
         }
@@ -328,7 +364,7 @@ const TranslationsEditor = () => {
                 <div className="p-4 border-b border-neutral-100 flex justify-end items-center flex-wrap gap-4">
                     <div className="flex gap-3 flex-wrap">
                         <div className="w-64">
-                            <SearchInput value={search} onChange={(e: any) => setSearch(e.target.value)} placeholder="Search…" size="s" />
+                            <SearchInput value={search} onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search…" size="s" />
                         </div>
                         <div className="w-40">
                             <LocaleSelect

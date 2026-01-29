@@ -3,9 +3,14 @@ import { Badge, TextArea } from '@pulwave/ui';
 import { CircleFlag } from '../components/CircleFlag';
 import { LocaleSelect } from '@pulwave/features-shared';
 
+interface Locale {
+    code: string;
+    name: string;
+}
+
 interface TranslationsListProps {
-    locales: any[];
-    allLocales: any[];
+    locales: Locale[];
+    allLocales: Locale[];
     translations: Record<string, string>;
     onChange: (localeCode: string, value: string) => void;
     isTextArea?: boolean;

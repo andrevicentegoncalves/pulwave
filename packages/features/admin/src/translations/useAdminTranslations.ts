@@ -14,6 +14,38 @@ interface TranslationOptions {
     masterDataTarget?: string;
 }
 
+interface TranslationItem {
+    id?: string;
+    source_type?: 'ui' | 'database' | 'enum' | 'content' | 'master_data';
+    translation_key?: string;
+    locale_code?: string;
+    translated_text?: string;
+    translated_label?: string;
+    status?: string;
+    table_name?: string;
+    column_name?: string;
+    enum_name?: string;
+    enum_value?: string;
+    record_id?: string;
+    [key: string]: unknown;
+}
+
+interface TranslationResponse {
+    data: TranslationItem[];
+    count: number;
+}
+
+interface TableRecordOptions {
+    limit?: number;
+    offset?: number;
+    search?: string;
+}
+
+interface TableRecord {
+    id: string;
+    [key: string]: unknown;
+}
+
 /**
  * Hook for UI translations
  */
@@ -51,11 +83,11 @@ export const useAdminTranslations = (options: TranslationOptions = {}) => {
 
                 const totalCount = (ui.count || 0) + (schema.count || 0) + (enums.count || 0) + (content.count || 0) + (masterData.count || 0);
 
-                const uiItems = (ui.data || []).map((i: any) => ({ ...i, source_type: i.source_type || 'ui' }));
-                const schemaItems = (schema.data || []).map((i: any) => ({ ...i, source_type: 'database' }));
-                const enumItems = (enums.data || []).map((i: any) => ({ ...i, source_type: 'enum' }));
-                const contentItems = (content.data || []).map((i: any) => ({ ...i, source_type: 'content' }));
-                const masterDataItems = (masterData.data || []).map((i: any) => ({ ...i, source_type: 'master_data' }));
+                const uiItems = (ui.data || []).map((i: TranslationItem) => ({ ...i, source_type: i.source_type || 'ui' }));
+                const schemaItems = (schema.data || []).map((i: TranslationItem) => ({ ...i, source_type: 'database' as const }));
+                const enumItems = (enums.data || []).map((i: TranslationItem) => ({ ...i, source_type: 'enum' as const }));
+                const contentItems = (content.data || []).map((i: TranslationItem) => ({ ...i, source_type: 'content' as const }));
+                const masterDataItems = (masterData.data || []).map((i: TranslationItem) => ({ ...i, source_type: 'master_data' as const }));
 
                 const allItems = [...uiItems, ...schemaItems, ...enumItems, ...contentItems, ...masterDataItems];
 
@@ -69,7 +101,7 @@ export const useAdminTranslations = (options: TranslationOptions = {}) => {
                 return { data: pageItems, count: totalCount };
             }
         },
-        placeholderData: (previousData: any) => previousData,
+        placeholderData: (previousData: TranslationResponse | undefined) => previousData,
     });
 };
 
@@ -92,7 +124,7 @@ export const useSaveAdminTranslation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (translation: any) => service.saveUITranslation(translation),
+        mutationFn: (translation: Partial<TranslationItem>) => service.saveUITranslation(translation),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] });
         },
@@ -107,7 +139,7 @@ export const useSaveBatchAdminTranslations = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (translations: any) => service.upsertBatchUITranslations(translations),
+        mutationFn: (translations: Partial<TranslationItem>[]) => service.upsertBatchUITranslations(translations),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] });
         },
@@ -118,7 +150,7 @@ export const useSaveAdminSchemaTranslation = () => {
     const { service } = useAdminContext();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (translation: any) => service.saveSchemaTranslation(translation),
+        mutationFn: (translation: Partial<TranslationItem>) => service.saveSchemaTranslation(translation),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
     });
 };
@@ -127,7 +159,7 @@ export const useSaveAdminEnumTranslation = () => {
     const { service } = useAdminContext();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (translation: any) => service.saveEnumTranslation(translation),
+        mutationFn: (translation: Partial<TranslationItem>) => service.saveEnumTranslation(translation),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
     });
 };
@@ -136,7 +168,7 @@ export const useSaveAdminContentTranslation = () => {
     const { service } = useAdminContext();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (translation: any) => service.saveContentTranslation(translation),
+        mutationFn: (translation: Partial<TranslationItem>) => service.saveContentTranslation(translation),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
     });
 };
@@ -145,7 +177,7 @@ export const useSaveAdminMasterDataTranslation = () => {
     const { service } = useAdminContext();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (translation: any) => service.saveMasterDataTranslation(translation),
+        mutationFn: (translation: Partial<TranslationItem>) => service.saveMasterDataTranslation(translation),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'translations'] }),
     });
 };
@@ -227,7 +259,7 @@ export const useTranslatableEnums = () => {
     });
 };
 
-export const useAdminTableRecords = (table: string, options?: any) => {
+export const useAdminTableRecords = (table: string, options?: TableRecordOptions): ReturnType<typeof useQuery<TableRecord[]>> => {
     const { service } = useAdminContext();
     return useQuery({
         queryKey: ['admin', 'table-records', table, options],
